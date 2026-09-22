@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="apotheka — Storefront mosaic">
-<rect width="480" height="300" rx="20" fill="#11111b"/>
-<rect x="1" y="1" width="478" height="298" rx="19" fill="none" stroke="#bac2de" stroke-opacity="0.25"/>
-<text x="24" y="32" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="20" font-weight="700">apotheka</text>
-<text x="24" y="52" fill="#a6adc8" font-family="DM Sans,system-ui,sans-serif" font-size="12">Storefront mosaic</text>
-<rect x="40" y="50" width="120" height="100" rx="12" fill="#45475a" stroke="#cba6f7" stroke-width="1.5" stroke-opacity="0.35"/>
-<rect x="180" y="50" width="120" height="100" rx="12" fill="#313244" stroke="#cba6f7" stroke-width="1.5" stroke-opacity="0.35"/>
-<rect x="320" y="50" width="120" height="100" rx="12" fill="#45475a" stroke="#cba6f7" stroke-width="1.5" stroke-opacity="0.35"/>
-<rect x="40" y="170" width="120" height="100" rx="12" fill="#313244" stroke="#cba6f7" stroke-width="1.5" stroke-opacity="0.35"/>
-<rect x="180" y="170" width="120" height="100" rx="12" fill="#45475a" stroke="#cba6f7" stroke-width="1.5" stroke-opacity="0.35"/>
-<rect x="320" y="170" width="120" height="100" rx="12" fill="#313244" stroke="#cba6f7" stroke-width="1.5" stroke-opacity="0.35"/>
-<circle cx="100" cy="90" r="22" fill="#cba6f7" opacity="0.5"/>
-<circle cx="240" cy="90" r="22" fill="#b4befe" opacity="0.45"/>
-<circle cx="380" cy="90" r="22" fill="#fab387" opacity="0.55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="apotheka-site — Depop storefront lookbook">
+<rect width="480" height="300" fill="#0c0e12"/>
+<rect x="16" y="16" width="448" height="268" rx="10" fill="#141920" stroke="#2a3340"/>
+<text x="28" y="48" fill="#35c26e" font-family="ui-monospace,monospace" font-size="16" font-weight="700">APOTHEKA</text>
+<text x="28" y="70" fill="#8e9aab" font-family="ui-monospace,monospace" font-size="11">curated archive / deadstock vault · Depop</text>
+<rect x="28" y="90" width="260" height="120" rx="8" fill="#f4efe4"/>
+<text x="44" y="120" fill="#181c22" font-family="Syne,system-ui,sans-serif" font-size="16" font-weight="700">Archive drop 001</text>
+<text x="44" y="144" fill="#3a414c" font-family="DM Sans,system-ui,sans-serif" font-size="11">Y2K · cyber · grunge · gorp</text>
+<text x="44" y="168" fill="#181c22" font-family="ui-monospace,monospace" font-size="11">Shop on Depop →</text>
+<rect x="304" y="90" width="144" height="54" rx="6" fill="#1a202a" stroke="#2a3340"/>
+<text x="316" y="122" fill="#e8ecf2" font-family="ui-monospace,monospace" font-size="10">vault grid</text>
+<rect x="304" y="156" width="144" height="54" rx="6" fill="#1a202a" stroke="#2a3340"/>
+<text x="316" y="188" fill="#e8ecf2" font-family="ui-monospace,monospace" font-size="10">policies</text>
+<text x="28" y="250" fill="#8e9aab" font-family="ui-monospace,monospace" font-size="11">static site · not an e-commerce backend</text>
 </svg>

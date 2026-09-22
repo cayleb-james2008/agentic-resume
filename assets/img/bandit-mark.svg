@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Bandit mark">
+  <!-- Minimal sharp digital bandit monogram: geometric mask + brim -->
+  <rect x="2" y="2" width="60" height="60" rx="2" stroke="#cba6f7" stroke-width="1.5" opacity="0.35"/>
+  <path d="M14 28h36M18 28c0-8 6-14 14-14s14 6 14 14" stroke="#cba6f7" stroke-width="2" stroke-linecap="square"/>
+  <path d="M22 34h6M36 34h6" stroke="#cdd6f4" stroke-width="2.5" stroke-linecap="square"/>
+  <path d="M28 44h8" stroke="#cba6f7" stroke-width="2" stroke-linecap="square"/>
+  <path d="M12 22h40" stroke="#cba6f7" stroke-width="1.5" opacity="0.7"/>
+  <desc>PLACEHOLDER — replace with Cayleb ChatGPT image gen / Veo bandit still</desc>
+</svg>

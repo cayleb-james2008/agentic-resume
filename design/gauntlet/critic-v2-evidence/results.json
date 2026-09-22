@@ -1,0 +1,138 @@
+{
+  "checks": {
+    "overflow390": {
+      "clientW": 390,
+      "scrollW": 390,
+      "hasHOverflow": false,
+      "overflowCount": 0,
+      "top": []
+    },
+    "demos": {
+      "dotz": {
+        "before": "Agents: 0 () · Pipeline idle",
+        "after": "Agents: 1 (scout) · Pipeline running",
+        "logHasSpawn": true,
+        "changed": true
+      },
+      "sophos": {
+        "before": "No cards yet — run a query.",
+        "after": "3 sourced cards — verify or reject each.",
+        "cardCount": 3,
+        "changed": true
+      },
+      "solomon": {
+        "before": "Adjust weights, then weigh.",
+        "after": "CONDITIONAL — ship with guardrailsScenario: Ship feature behind a flag · impact 70% · risk 40% · score 30",
+        "changed": true
+      },
+      "pdm": {
+        "before": "WIP",
+        "after": "DesignReview",
+        "part": "PFV-100_revB",
+        "changed": true
+      },
+      "apotheka": {
+        "before": "Showing 6 items",
+        "after": "Showing 2 items · elixir",
+        "tilesBefore": 6,
+        "tilesAfter": 2,
+        "changed": true
+      }
+    },
+    "reducedMotion": {
+      "hero": {
+        "classes": "scroll-hero is-poster",
+        "isPoster": true,
+        "isLive": false,
+        "hint": "Reduced motion — static poster",
+        "posterOpacity": "1",
+        "canvasDisplay": "none",
+        "canvasOpacity": "0",
+        "animatedCount": 0,
+        "animatedSample": []
+      },
+      "afterScroll": {
+        "classes": "scroll-hero is-poster",
+        "hint": "Reduced motion — static poster",
+        "progressWidth": "0px"
+      }
+    },
+    "spot": {
+      "title": "Cayleb Alvarez-James — Portfolio",
+      "h1": {
+        "text": "Agents, tooling, and product surfaces — shipping now.",
+        "fontSize": "60.35px",
+        "fontWeight": "800",
+        "fontFamily": "Syne, system-ui, sans-serif"
+      },
+      "focus": {
+        "outline": "rgb(240, 201, 160) solid 2px",
+        "outlineOffset": "3px",
+        "outlineWidth": "2px",
+        "outlineStyle": "solid",
+        "outlineColor": "rgb(240, 201, 160)"
+      }
+    },
+    "imagery": {
+      "imgs": [
+        {
+          "src": "assets/img/hero-poster.svg",
+          "complete": true,
+          "naturalWidth": 267,
+          "naturalHeight": 150,
+          "alt": "Mocha workspace poster — agent console on a warm desk"
+        },
+        {
+          "src": "assets/img/mocha-mascot.svg",
+          "complete": true,
+          "naturalWidth": 129,
+          "naturalHeight": 150,
+          "alt": ""
+        },
+        {
+          "src": "assets/img/scene-dotz.svg",
+          "complete": true,
+          "naturalWidth": 240,
+          "naturalHeight": 150,
+          "alt": ""
+        },
+        {
+          "src": "assets/img/scene-sophos.svg",
+          "complete": true,
+          "naturalWidth": 240,
+          "naturalHeight": 150,
+          "alt": ""
+        },
+        {
+          "src": "assets/img/scene-solomon.svg",
+          "complete": true,
+          "naturalWidth": 240,
+          "naturalHeight": 150,
+          "alt": ""
+        },
+        {
+          "src": "assets/img/scene-pdm.svg",
+          "complete": true,
+          "naturalWidth": 240,
+          "naturalHeight": 150,
+          "alt": ""
+        },
+        {
+          "src": "assets/img/scene-apotheka.svg",
+          "complete": true,
+          "naturalWidth": 240,
+          "naturalHeight": 150,
+          "alt": ""
+        },
+        {
+          "src": "assets/img/mocha-mascot.svg",
+          "complete": true,
+          "naturalWidth": 129,
+          "naturalHeight": 150,
+          "alt": "Mocha mascot — steaming espresso cup character with a wink"
+        }
+      ],
+      "failedResponses": []
+    }
+  }
+}

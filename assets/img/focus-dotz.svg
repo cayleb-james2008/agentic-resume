@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <rect width="960" height="540" fill="#181825"/>
+  <rect x="48" y="48" width="864" height="444" rx="4" stroke="#313244" stroke-width="1"/>
+  <rect x="72" y="72" width="180" height="396" fill="#1e1e2e" stroke="#45475a" stroke-width="1"/>
+  <circle cx="100" cy="108" r="6" fill="#cba6f7"/>
+  <rect x="118" y="102" width="100" height="10" rx="2" fill="#45475a"/>
+  <circle cx="100" cy="148" r="6" fill="#b4befe"/>
+  <rect x="118" y="142" width="80" height="10" rx="2" fill="#45475a"/>
+  <circle cx="100" cy="188" r="6" fill="#a6adc8"/>
+  <rect x="118" y="182" width="90" height="10" rx="2" fill="#45475a"/>
+  <rect x="280" y="72" width="608" height="240" fill="#1e1e2e" stroke="#313244" stroke-width="1"/>
+  <text x="304" y="112" fill="#cba6f7" font-family="ui-monospace,monospace" font-size="14">agent · planner</text>
+  <rect x="304" y="132" width="420" height="8" rx="2" fill="#313244"/>
+  <rect x="304" y="152" width="360" height="8" rx="2" fill="#313244"/>
+  <rect x="304" y="172" width="390" height="8" rx="2" fill="#313244"/>
+  <rect x="280" y="336" width="296" height="132" fill="#1e1e2e" stroke="#313244" stroke-width="1"/>
+  <rect x="592" y="336" width="296" height="132" fill="#1e1e2e" stroke="#313244" stroke-width="1"/>
+  <text x="304" y="372" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="12">axum API</text>
+  <text x="616" y="372" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="12">Tauri shell</text>
+  <line x1="48" y1="48" x2="200" y2="48" stroke="#cba6f7" stroke-width="2"/>
+</svg>

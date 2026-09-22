@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <rect width="960" height="540" fill="#181825"/>
+  <rect x="80" y="60" width="800" height="420" stroke="#313244"/>
+  <text x="120" y="140" fill="#cdd6f4" font-family="system-ui,sans-serif" font-size="32" font-weight="600">apotheka</text>
+  <text x="120" y="180" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="14">static lookbook</text>
+  <rect x="120" y="220" width="200" height="200" fill="#1e1e2e" stroke="#45475a"/>
+  <rect x="340" y="220" width="200" height="200" fill="#1e1e2e" stroke="#45475a"/>
+  <rect x="560" y="220" width="200" height="200" fill="#1e1e2e" stroke="#45475a"/>
+  <line x1="80" y1="60" x2="240" y2="60" stroke="#cba6f7" stroke-width="2"/>
+</svg>

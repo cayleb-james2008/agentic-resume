@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PDM Forge case study: a governed vault-simulator pipeline with deterministic release gate, human approval, hash-chained ledger, and a real Linux-native CAD valve family — simulator throughout, every claim with a receipt." />
+  <title>PDM Forge case study — Cayleb Alvarez-James</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <meta name="theme-color" content="#11111b" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" />
+  <link rel="stylesheet" href="../styles.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="dock">
+    <div class="wrap dock__inner">
+      <a class="brand" href="../index.html">
+        <img class="brand__mark" src="../assets/img/brand/nomad-outline-logo.png" alt="" width="36" height="36" />
+        <span class="brand__text">Cayleb Alvarez-James</span>
+        <span class="brand__tag">NOMAD.LINK</span>
+      </a>
+      <button type="button" class="dock-toggle" id="dock-toggle" aria-expanded="false" aria-controls="mobile-drawer">Menu</button>
+      <nav class="dock__nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../projects.html" aria-current="page">Projects</a></li>
+          <li><a href="../principles.html">Principles</a></li>
+          <li><a href="../Cayleb-James-resume.pdf">Resume</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <sl-drawer id="mobile-drawer" label="Navigate" placement="end">
+    <ul class="drawer-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="../principles.html">Principles</a></li>
+      <li><a href="../Cayleb-James-resume.pdf">Resume PDF</a></li>
+    </ul>
+  </sl-drawer>
+  <main id="main" class="wrap">
+
+
+<section class="page-hero reveal">
+<p class="eyebrow">Case study · peer project</p>
+<h1>PDM Forge — governed vault-simulator pipeline.</h1>
+</section>
+
+<section class="banner" aria-label="Honesty header">
+<strong class="label">SIMULATOR — no SolidWorks execution, no vault connection claimed anywhere on this site.</strong>
+<p>PFV-100 originality note: the PFV-100 valve family is an original fictional design; it contains zero Lee Company CAD, drawings, part numbers, or product data.</p>
+</section>
+
+<section aria-labelledby="what-h">
+<h2 id="what-h"><span class="marker">§</span>What it is</h2>
+<p>PDM Forge is a governed engineering-change pipeline for a fictional valve family. A SIMULATOR vault handles check-in/out, versions, permissions, and a WIP → Released state machine. A CAD worker rebuilds the PFV-100 family as REAL Linux-native CAD (CadQuery/OCCT) — NOT SolidWorks — emitting STEP files and kernel-measured properties. A deterministic policy gate of 8 rules decides; a human approves; automation runs; a hash-chained ledger records. The commercial-PDM adapter is written to spec and NEVER CONNECTED — to spec only. Parity tests (<a href="../data/receipts/r3-b12-parity.log">receipt: r3-b12-parity.log</a>) exercise both adapters against the same contract.</p>
+</section>
+
+<section aria-labelledby="arch-h">
+<h2 id="arch-h"><span class="marker">§</span>Architecture (in tables, not images)</h2>
+<div class="table-scroll" role="region" aria-label="Architecture — what each pipeline component does and does not do" tabindex="0">
+<table>
+<caption>Architecture — what each pipeline component does and does not do</caption>
+<thead><tr><th scope="col">Component</th><th scope="col">Language</th><th scope="col">What it does</th><th scope="col">What it does NOT do</th></tr></thead>
+<tbody>
+<tr><td>Vault simulator</td><td>C# / .NET 9</td><td>File-backed check-in/out, versions, permission grants</td><td>NOT a real PDM system; SIMULATOR label throughout</td></tr>
+<tr><td>Real adapter-to-spec</td><td>C# / .NET 9</td><td>Implements the vault contract against the documented commercial API shape; refuses closed when unconnected</td><td>NEVER CONNECTED — no session, no login, no server touched</td></tr>
+<tr><td>Workflow state machine</td><td>C# / .NET 9</td><td>WIP → DesignReview → Validation → Approved → Released → Obsolete; illegal edges refused with reason</td><td>Does not self-release; release requires a human approval record</td></tr>
+<tr><td>CAD worker</td><td>Python / CadQuery / OCCT</td><td>Rebuilds PFV bodies + poppets on Linux, kernel-measures volume/area/centre of mass/mass, emits STEP + report</td><td>NOT SolidWorks; threads represented as plain bosses, not modelled</td></tr>
+<tr><td>Policy gate</td><td>C# / .NET 9</td><td>Evaluates 8 rules from GateEvidence only; verdict GATE PASS or refusal</td><td>Takes no AI-text field; a model cannot flip the verdict</td></tr>
+<tr><td>Ledger</td><td>C# / .NET 9</td><td>Hash-chained release records (previous_hash → hash per entry)</td><td>Not a database backup; tamper is detected, not prevented</td></tr>
+<tr><td>Fault suite</td><td>Scripts + harness</td><td>5 failure classes injected; each must recover safely with no partial state</td><td>Does not test Windows, SolidWorks, or any licensed host</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section aria-labelledby="gate-h">
+<h2 id="gate-h"><span class="marker">§</span>Gate rules</h2>
+<p>No release gate is ever decided by a model; a deterministic policy engine gives the verdict, a human approves, automation runs, the ledger records.</p>
+<div class="table-scroll" role="region" aria-label="Gate rules — decided by code, source data/verdict.txt" tabindex="0">
+<table>
+<caption>Gate rules — decided by code, source data/verdict.txt</caption>
+<thead><tr><th scope="col">Rule</th><th scope="col">Measured inputs</th><th scope="col">As decided by code</th></tr></thead>
+<tbody>
+<tr><td>ENVELOPE_WITHIN_SPEC</td><td>bodyVolume=3008.6222mm3, envelope=3214.9055mm3</td><td class="status-pass">PASS</td></tr>
+<tr><td>MASS_UNDER_MAX</td><td>mass=23.9185g, limit 100.0g (receipt: policy-limits.json)</td><td class="status-pass">PASS</td></tr>
+<tr><td>MATERIAL_IS_316L</td><td>material=316L stainless</td><td class="status-pass">PASS</td></tr>
+<tr><td>DRAWING_EXISTS</td><td>drawing PDF present on disk</td><td class="status-pass">PASS</td></tr>
+<tr><td>WORKFLOW_STATE_APPROVED</td><td>state=Approved</td><td class="status-pass">PASS</td></tr>
+<tr><td>REVISION_STEP_VALID</td><td>revision=A-&gt;B (single-letter step)</td><td class="status-pass">PASS</td></tr>
+<tr><td>APPROVER_AUTHORIZED</td><td>roles include EngineeringAdmin</td><td class="status-pass">PASS</td></tr>
+<tr><td>NO_STALE_CHECKOUT</td><td>checkedOutBy=none</td><td class="status-pass">PASS</td></tr>
+</tbody>
+</table>
+</div>
+<p class="sub">Verdict: GATE PASS. <a href="../data/verdict.txt">Open gate receipt</a>. AI-independence: the same GATE PASS verdict under two opposing AI notes (<a href="../data/receipts/r3-b10-gateproof.log">receipt: r3-b10-gateproof.log</a>). A denied approval refuses execution entirely (<a href="../data/receipts/r3-b8-denied.log">receipt: r3-b8-denied.log</a>).</p>
+</section>
+
+<section aria-labelledby="led-h">
+<h2 id="led-h"><span class="marker">§</span>Ledger</h2>
+<p>The hash chain proves ordering and intactness: the release ledger verifies CHAIN OK (<a href="../data/receipts/r3-b9-chain.log">receipt: r3-b9-chain.log</a>), while a one-byte-modified copy is caught as TAMPER DETECTED at entry 0 (<a href="../data/receipts/r3-b9-tamper.log">receipt: r3-b9-tamper.log</a>). Tamper source file: <a href="../data/ledger-tampered.jsonl">ledger-tampered.jsonl</a>.</p>
+<h3>Example entry (demo/ledger.jsonl, index 0)</h3>
+<div class="table-scroll" role="region" aria-label="Ledger example entry — source demo/ledger.jsonl" tabindex="0">
+<table>
+<caption>Ledger example entry — source demo/ledger.jsonl, index 0</caption>
+<thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead>
+<tbody>
+<tr><td>index / previous_hash</td><td>0 / GENESIS</td></tr>
+<tr><td>payload</td><td>governed-demo · PFV-100 · revision A-&gt;B · GATE PASS · 2026-09-17 fixed demo stamp</td></tr>
+<tr><td>hash</td><td class="receipt-id">2d5559d4b455208bc34738ae2e4eae9af3d8a3a72f48cb7bebecddeb35833154</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section aria-labelledby="cad-h">
+<h2 id="cad-h"><span class="marker">§</span>CAD figures with receipts</h2>
+<p>Base family, revision B, kernel-measured on Linux (<a href="../data/properties.tsv">receipt: properties.tsv</a>). STEP downloads ship beside the numbers.</p>
+<div class="table-scroll" role="region" aria-label="PFV-100 family properties — source properties.tsv" tabindex="0">
+<table>
+<caption>PFV-100 family properties — source properties.tsv</caption>
+<thead><tr><th scope="col">Variant</th><th scope="col">Volume mm³</th><th scope="col">Area mm²</th><th scope="col">Centre of mass (x, y, z) mm</th><th scope="col">Mass g</th><th scope="col">STEP files</th><th scope="col">Receipt ID</th></tr></thead>
+<tbody>
+<tr><td>PFV-100 B</td><td>3021.6284</td><td>1802.0663</td><td>0, 0, 10.5427</td><td>24.0219</td><td><a href="../data/PFV-100_revB_body.step" download>body</a> · <a href="../data/PFV-100_revB_poppet.step" download>poppet</a></td><td><a href="../data/properties.tsv">properties.tsv</a></td></tr>
+<tr><td>PFV-150 B</td><td>4112.4706</td><td>2250.0376</td><td>0, 0, 11.4417</td><td>32.6941</td><td><a href="../data/PFV-150_body.step" download>body</a> · <a href="../data/PFV-150_poppet.step" download>poppet</a></td><td><a href="../data/properties.tsv">properties.tsv</a></td></tr>
+<tr><td>PFV-200 B</td><td>6191.0406</td><td>3006.4662</td><td>0, 0, 12.864</td><td>49.2188</td><td><a href="../data/PFV-200_body.step" download>body</a> · <a href="../data/PFV-200_poppet.step" download>poppet</a></td><td><a href="../data/properties.tsv">properties.tsv</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Rev B rebuild with BodyOD 15.0 (a different revision state from the table above — kept separate on purpose): body volume 3055.7933 mm³, area 1852.3318 mm², COM (0, 0, 10.4332) mm, mass 24.2936 g; poppet 86.8043 mm³ / 0.6901 g; topology 21 faces / 39 edges / 26 vertices (<a href="../data/PFV-100_revB_report.json">receipt: PFV-100_revB_report.json</a>). Drawing provenance: <a href="../data/PFV-100_revB_drawing_provenance.log">PFV-100_revB_drawing_provenance.log</a>. Projected views from the real run:</p>
+<div class="figure-block">
+<img src="../data/PFV-100_front.png" alt="PFV-100 front projection rendered from the measured solid">
+<p class="cap">Front projection, OCCT solid → SVG → PNG. Source data: PFV-100_front.png.</p>
+</div>
+<div class="figure-block">
+<img src="../data/PFV-100_side.png" alt="PFV-100 side projection rendered from the measured solid">
+<p class="cap">Side projection, OCCT solid → SVG → PNG. Source data: PFV-100_side.png.</p>
+</div>
+</section>
+
+<section aria-labelledby="port-h">
+<h2 id="port-h"><span class="marker">§</span>Porting to a licensed environment</h2>
+<p>This system is <strong>designed to port</strong>: domain, policy, ledger, gate, and workflow sit behind narrow adapter seams (<span class="receipt-id">IPdmVault</span> / <span class="receipt-id">IPermissionProvider</span> / <span class="receipt-id">IEngineeringWorkflow</span>), and the commercial adapter is <strong>written against the documented SOLIDWORKS PDM Professional API</strong>. The rule is: <strong>swap the adapter, not the system — the seam is the only thing designed to change</strong>. Licenses were not purchased because this is self-funded work; the port is deliberately engineered and explicitly untested.</p>
+<h3>Files that change</h3>
+<ul class="plain">
+<li>The adapter implementation only (the commercial-PDM adapter project: connection, login, vault calls, mapped to the same contract the simulator satisfies).</li>
+</ul>
+<h3>Files that stay identical</h3>
+<ul class="plain">
+<li>Domain workflow table, policy limits (policy-limits.json) and gate evaluation, hash-chained ledger, control-plane orchestration, CAD worker outputs and their receipts.</li>
+</ul>
+<h3>What the real adapter already implements to spec</h3>
+<ul class="plain">
+<li>The full vault contract surface the simulator satisfies — add/get, checkout/checkin guards, illegal-edge refusal, role refusal, honest labelling — asserted by the same 6-case parity contract, 12/12 (receipt: receipts/r3-b12-parity.log). Unconnected calls refuse closed with NEVER CONNECTED — TO SPEC ONLY, never a silent pass.</li>
+</ul>
+<h3>What must be verified on a licensed Windows host</h3>
+<ul class="plain">
+<li>The <span class="receipt-id">EPDM.Interop.epdm</span> reference binding against the installed PDM client version.</li>
+<li>Vault login against a real vault view (credentials, vault name, working-folder mapping).</li>
+<li>Admin add-in permission behaviour (the add-in loads, permission denials surface as refusals, not silent skips).</li>
+<li>A full re-run of the parity contract plus the fault suite against the licensed host before any release claim.</li>
+</ul>
+<p><strong>This has NOT been executed against a licensed vault.</strong> WHAT REMAINS UNTESTED is listed below; the B12 parity result is seam evidence — the contract holds on both sides — not a claim about any company's systems, and compatibility with any company's systems is never claimed here.</p>
+</section>
+
+<section aria-labelledby="unt-h">
+<h2 id="unt-h"><span class="marker">§</span>What remains untested</h2>
+<ul class="plain">
+<li>No SolidWorks execution — all CAD is Linux-native CadQuery/OCCT.</li>
+<li>No execution against a production vault — the adapter never connected.</li>
+<li>No Windows-host verification — no licensed-client run, no vault login, no add-in load test.</li>
+</ul>
+</section>
+
+<p><a href="../index.html">← Home</a> · <a href="../projects.html">Browse all projects →</a></p>
+
+  
+  </main>
+  <footer class="site-foot">
+    <div class="wrap">
+      <p>Cayleb Alvarez-James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
+      <p class="meta">Open to full-time and contract roles.</p>
+    </div>
+  </footer>
+  <script src="../vendor/anime.min.js" defer></script>
+  <script src="../site.js" defer></script>
+</body>
+</html>

@@ -1,25 +1,17 @@
-# Agentic Resume
+# agentic-resume
 
-Personal portfolio site for [Cayleb Alvarez-James](https://github.com/cayleb-james2008).
+Hire-ready portfolio for **Cayleb Alvarez-James** (`cayleb-james2008`).
 
-- **Stack:** plain HTML, CSS, and JS — Shoelace CDN + vendored anime.js
-- **Look:** Catppuccin Mocha purple · Y2K / cyberpunk grit · cyber-nomad character
-- **Honesty rule:** simulator vs real is labelled; claims without receipts get cut
-
-## What works
-
-- Home lab console with five deep truthful demos (dotz, Sophos, Solomon, PDM simulator, apotheka lookbook)
-- Projects evidence board + Principles terminal dump
-- Real MP4 hero reel with poster + reduced-motion off-ramp
-- Resume PDF download from the dock
-
-## Local preview
+## Preview (local)
 
 ```bash
-python3 -m http.server 8080
-# open http://localhost:8080
+cd /workspace/agentic-resume
+python3 -m http.server 8765
+# open http://127.0.0.1:8765/
 ```
 
-## License
+v5 craft lives at repo root (`index.html`, `css/`, `js/`, `projects/`). Prior surfaces: `archive/pre-v5/`.
 
-MIT — see [LICENSE](LICENSE).
+Media slots: see `assets/PLACEHOLDERS.md` (ChatGPT image gen for stills; Veo for hero reel).
+
+Do not cut over the Vercel production alias without Cayleb’s explicit sign-off.

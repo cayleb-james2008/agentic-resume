@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#11111b"/>
+  <rect x="80" y="80" width="1120" height="560" stroke="#313244" stroke-width="1"/>
+  <g transform="translate(560 280)">
+    <path d="M20 60h120M32 60c0-28 22-48 48-48s48 20 48 48" stroke="#cba6f7" stroke-width="3" stroke-linecap="square"/>
+    <path d="M48 78h20M92 78h20" stroke="#cdd6f4" stroke-width="4" stroke-linecap="square"/>
+    <path d="M70 108h20" stroke="#cba6f7" stroke-width="3" stroke-linecap="square"/>
+    <path d="M16 42h128" stroke="#cba6f7" stroke-width="2" opacity="0.6"/>
+  </g>
+  <text x="640" y="480" text-anchor="middle" fill="#a6adc8" font-family="system-ui,sans-serif" font-size="18" letter-spacing="0.2em">BANDIT · PLACEHOLDER</text>
+  <desc>PLACEHOLDER — Hero Frame First still pending Cayleb ChatGPT image gen; Veo from approved still</desc>
+</svg>

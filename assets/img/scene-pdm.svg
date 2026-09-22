@@ -1,12 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="PDM Forge — Vault simulator">
-<rect width="480" height="300" rx="20" fill="#11111b"/>
-<rect x="1" y="1" width="478" height="298" rx="19" fill="none" stroke="#a6e3a1" stroke-opacity="0.25"/>
-<text x="24" y="32" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="20" font-weight="700">PDM Forge</text>
-<text x="24" y="52" fill="#a6adc8" font-family="DM Sans,system-ui,sans-serif" font-size="12">Vault simulator</text>
-<rect x="80" y="50" width="320" height="200" rx="18" fill="#181825" stroke="#cba6f7" stroke-width="2"/>
-<text x="110" y="95" fill="#b4befe" font-family="ui-monospace,monospace" font-size="14">SIMULATOR</text>
-<rect x="110" y="120" width="260" height="16" rx="4" fill="#45475a"/>
-<rect x="110" y="150" width="200" height="16" rx="4" fill="#45475a"/>
-<rect x="110" y="180" width="240" height="16" rx="4" fill="#45475a"/>
-<text x="110" y="230" fill="#a6e3a1" font-family="ui-monospace,monospace" font-size="14">ledger · hash chain intact</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="PDM Forge">
+  <defs>
+    <pattern id="scan-pdm" width="3" height="3" patternUnits="userSpaceOnUse">
+      <rect width="3" height="1.2" fill="#cba6f7" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="bg-pdm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#11111b"/>
+      <stop offset="100%" stop-color="#1e1e2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" rx="8" fill="url(#bg-pdm)"/>
+  <rect width="480" height="300" rx="8" fill="url(#scan-pdm)"/>
+  <rect x="1" y="1" width="478" height="298" rx="7" fill="none" stroke="#cba6f7" stroke-opacity="0.45" stroke-width="2"/>
+  <!-- chrome corners -->
+  <path d="M12 12h28M12 12v28" stroke="#f38ba8" stroke-width="2"/>
+  <path d="M468 12h-28M468 12v28" stroke="#89b4fa" stroke-width="2"/>
+  <path d="M12 288h28M12 288v-28" stroke="#89b4fa" stroke-width="2"/>
+  <path d="M468 288h-28M468 288v-28" stroke="#f38ba8" stroke-width="2"/>
+  <text x="24" y="36" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="22" font-weight="800">PDM Forge</text>
+  <text x="24" y="56" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="11">VAULT SIMULATOR · NOT LIVE</text>
+  <!-- sticker wear -->
+  <rect x="400" y="22" width="52" height="18" rx="2" fill="#f5c2e7" opacity="0.75" transform="rotate(6 426 31)"/>
+  <text x="408" y="35" fill="#11111b" font-size="9" font-family="monospace" font-weight="700" transform="rotate(6 426 31)">Y2K</text>
+  
+  <rect x="50" y="90" width="380" height="160" rx="6" fill="#0a0a12" stroke="#cba6f7" stroke-width="2"/>
+  <text x="70" y="120" fill="#cba6f7" font-family="ui-monospace,monospace" font-size="14">VAULT GATE</text>
+  <rect x="200" y="130" width="80" height="70" rx="4" fill="none" stroke="#cba6f7" stroke-width="3"/>
+  <circle cx="240" cy="165" r="14" fill="none" stroke="#f38ba8" stroke-width="3"/>
+  <text x="70" y="220" fill="#f38ba8" font-family="ui-monospace,monospace" font-size="14">ACCESS LOCKED ✕ · SIMULATOR</text>
+  <text x="70" y="242" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="11">checkout → mutate → gate → ledger hash</text>
+
+  <text x="420" y="280" fill="#cba6f7" font-size="14" font-family="serif" opacity="0.25">機</text>
 </svg>

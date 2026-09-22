@@ -1,40 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" role="img" aria-label="Mocha mascot — steaming espresso cup with a confident wink">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" role="img" aria-label="Cyber mocha mascot — chrome espresso cup with glitch eyes">
   <defs>
-    <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#b4befe"/>
-      <stop offset="55%" stop-color="#cba6f7"/>
-      <stop offset="100%" stop-color="#fab387"/>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5c2e7"/>
+      <stop offset="35%" stop-color="#cba6f7"/>
+      <stop offset="70%" stop-color="#b4befe"/>
+      <stop offset="100%" stop-color="#585b70"/>
     </linearGradient>
-    <linearGradient id="foam" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="cupBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#45475a"/>
+      <stop offset="40%" stop-color="#313244"/>
+      <stop offset="100%" stop-color="#1e1e2e"/>
+    </linearGradient>
+    <linearGradient id="foamG" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#cdd6f4"/>
-      <stop offset="100%" stop-color="#bac2de"/>
+      <stop offset="100%" stop-color="#a6adc8"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="40%" r="55%">
-      <stop offset="0%" stop-color="#b4befe" stop-opacity="0.55"/>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+    <filter id="rgbSplit">
+      <feOffset in="SourceGraphic" dx="-1.5" dy="0" result="r"/>
+      <feOffset in="SourceGraphic" dx="1.5" dy="0" result="b"/>
+      <feComponentTransfer in="r" result="r2"><feFuncR type="identity"/><feFuncG type="discrete" tableValues="0"/><feFuncB type="discrete" tableValues="0"/></feComponentTransfer>
+      <feComponentTransfer in="b" result="b2"><feFuncR type="discrete" tableValues="0"/><feFuncG type="discrete" tableValues="0"/><feFuncB type="identity"/></feComponentTransfer>
+      <feBlend in="r2" in2="b2" mode="screen" result="ab"/>
+      <feBlend in="SourceGraphic" in2="ab" mode="lightened"/>
+    </filter>
+    <radialGradient id="halo" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#cba6f7" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#11111b" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <circle cx="120" cy="140" r="110" fill="url(#glow)"/>
-  <!-- steam -->
-  <path d="M88 58c0-14 10-22 10-34" fill="none" stroke="#bac2de" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
-  <path d="M112 52c0-16 12-26 12-40" fill="none" stroke="#b4befe" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
-  <path d="M136 58c0-14 10-22 10-34" fill="none" stroke="#bac2de" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
-  <!-- cup body -->
-  <path d="M52 110h136c4 0 8 4 8 9v78c0 36-32 62-76 62s-76-26-76-62v-78c0-5 4-9 8-9z" fill="url(#cup)"/>
-  <ellipse cx="120" cy="110" rx="68" ry="18" fill="url(#foam)"/>
-  <!-- latte art swirl -->
-  <path d="M120 98c-18 6-28 16-28 26 0 14 14 22 28 22s28-8 28-22c0-10-10-20-28-26z" fill="#fab387" opacity="0.35"/>
-  <path d="M120 108c-8 4-12 10-12 15 0 8 6 12 12 12s12-4 12-12c0-5-4-11-12-15z" fill="#585b70" opacity="0.45"/>
-  <!-- handle -->
-  <path d="M196 128c28 4 40 28 28 52-8 16-28 24-44 20" fill="none" stroke="#cba6f7" stroke-width="14" stroke-linecap="round"/>
-  <path d="M196 128c28 4 40 28 28 52-8 16-28 24-44 20" fill="none" stroke="#cdd6f4" stroke-width="5" stroke-linecap="round" opacity="0.25"/>
-  <!-- face -->
-  <circle cx="98" cy="168" r="7" fill="#11111b"/>
-  <path d="M138 162c6 2 10 8 8 14" fill="none" stroke="#11111b" stroke-width="4" stroke-linecap="round"/>
-  <path d="M104 188c10 10 28 10 38 0" fill="none" stroke="#11111b" stroke-width="4" stroke-linecap="round"/>
-  <!-- cheek -->
-  <circle cx="86" cy="180" r="6" fill="#fab387" opacity="0.45"/>
+  <circle cx="120" cy="140" r="112" fill="url(#halo)"/>
+  <!-- sticker scars -->
+  <path d="M40 70l8-4 4 10-8 3z" fill="#f38ba8" opacity="0.55"/>
+  <path d="M190 95l10 2-2 8-9-1z" fill="#b4befe" opacity="0.5"/>
+  <!-- steam as signal spikes -->
+  <path d="M86 62c2-16 8-22 6-38" fill="none" stroke="#f5c2e7" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+  <path d="M112 54c0-18 10-28 8-44" fill="none" stroke="#cba6f7" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  <path d="M138 62c-1-14 9-24 7-36" fill="none" stroke="#b4befe" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <!-- cup -->
+  <path d="M54 108h132c5 0 9 5 9 10v76c0 38-34 66-75 66s-75-28-75-66v-76c0-5 4-10 9-10z" fill="url(#cupBody)" stroke="url(#chrome)" stroke-width="3"/>
+  <!-- chrome rim -->
+  <ellipse cx="120" cy="108" rx="66" ry="16" fill="url(#foamG)" stroke="#cba6f7" stroke-width="2"/>
+  <ellipse cx="120" cy="106" rx="40" ry="8" fill="#11111b" opacity="0.35"/>
+  <!-- scratched metal hatch -->
+  <g stroke="#cba6f7" stroke-opacity="0.18" stroke-width="1">
+    <path d="M70 140l100 8M68 158l104-6M72 176l96 10M74 196l92-4"/>
+  </g>
+  <!-- handle chrome -->
+  <path d="M195 126c30 6 42 30 28 54-9 16-30 24-46 18" fill="none" stroke="url(#chrome)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M195 126c30 6 42 30 28 54-9 16-30 24-46 18" fill="none" stroke="#cdd6f4" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+  <!-- glitch eyes -->
+  <g filter="url(#rgbSplit)">
+    <rect x="84" y="158" width="18" height="10" rx="1" fill="#11111b"/>
+    <rect x="86" y="160" width="14" height="6" fill="#cba6f7"/>
+    <rect x="138" y="156" width="20" height="12" rx="1" fill="#11111b"/>
+    <rect x="140" y="158" width="16" height="8" fill="#f38ba8"/>
+  </g>
+  <!-- smirk -->
+  <path d="M102 190c12 14 30 12 40-2" fill="none" stroke="#cdd6f4" stroke-width="3" stroke-linecap="round"/>
+  <path d="M102 190c12 14 30 12 40-2" fill="none" stroke="#f38ba8" stroke-width="1.5" stroke-linecap="round" opacity="0.6" transform="translate(1.5 0)"/>
+  <!-- cheek sticker -->
+  <circle cx="78" cy="182" r="7" fill="#f5c2e7" opacity="0.55"/>
+  <text x="74" y="185" fill="#11111b" font-size="8" font-family="monospace" font-weight="700">02</text>
+  <!-- kanji texture (decorative, not a logo) -->
+  <text x="152" y="214" fill="#cba6f7" font-size="11" font-family="serif" opacity="0.35">電</text>
   <!-- saucer -->
-  <ellipse cx="120" cy="258" rx="78" ry="12" fill="#585b70" opacity="0.55"/>
-  <ellipse cx="120" cy="254" rx="70" ry="8" fill="#fab387" opacity="0.4"/>
+  <ellipse cx="120" cy="256" rx="82" ry="11" fill="#11111b" stroke="#585b70" stroke-width="2"/>
+  <ellipse cx="120" cy="252" rx="70" ry="7" fill="#313244" stroke="#cba6f7" stroke-opacity="0.4"/>
+  <!-- barcode sticker -->
+  <g transform="translate(48 228)">
+    <rect width="36" height="14" rx="2" fill="#cdd6f4" opacity="0.85"/>
+    <g fill="#11111b"><rect x="3" y="2" width="2" height="10"/><rect x="7" y="2" width="1" height="10"/><rect x="10" y="2" width="3" height="10"/><rect x="15" y="2" width="1" height="10"/><rect x="18" y="2" width="2" height="10"/><rect x="22" y="2" width="1" height="10"/><rect x="25" y="2" width="4" height="10"/><rect x="31" y="2" width="2" height="10"/></g>
+  </g>
 </svg>

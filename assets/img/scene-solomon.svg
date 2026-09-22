@@ -1,23 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="solomon — RSI fleet control plane">
-<rect width="480" height="300" fill="#11111b"/>
-<rect x="16" y="16" width="448" height="268" rx="12" fill="#181825" stroke="#45475a"/>
-<text x="28" y="48" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="20" font-weight="700">solomon</text>
-<text x="28" y="70" fill="#a6adc8" font-family="DM Sans,system-ui,sans-serif" font-size="12">RSI control plane · fleet autopilot</text>
-<!-- lane cards -->
-<rect x="28" y="90" width="130" height="110" rx="8" fill="#1e1e2e" stroke="#cba6f7"/>
-<text x="40" y="112" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="13" font-weight="700">dotz</text>
-<text x="40" y="132" fill="#f38ba8" font-family="ui-monospace,monospace" font-size="10">GATE RED</text>
-<text x="40" y="152" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="9">cold_start 526ms</text>
-<text x="40" y="172" fill="#bac2de" font-family="DM Sans,system-ui,sans-serif" font-size="10">observe→implement</text>
-<rect x="174" y="90" width="130" height="110" rx="8" fill="#1e1e2e" stroke="#a6e3a1"/>
-<text x="186" y="112" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="13" font-weight="700">sophos</text>
-<text x="186" y="132" fill="#a6e3a1" font-family="ui-monospace,monospace" font-size="10">GATE GREEN</text>
-<text x="186" y="152" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="9">vitest 1116/1118</text>
-<text x="186" y="172" fill="#bac2de" font-family="DM Sans,system-ui,sans-serif" font-size="10">ship-or-revert</text>
-<rect x="320" y="90" width="128" height="110" rx="8" fill="#1e1e2e" stroke="#45475a"/>
-<text x="332" y="112" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="13" font-weight="700">self</text>
-<text x="332" y="132" fill="#f38ba8" font-family="ui-monospace,monospace" font-size="10">GATE RED</text>
-<text x="332" y="152" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="9">money_guard</text>
-<text x="332" y="172" fill="#f38ba8" font-family="ui-monospace,monospace" font-size="10">DENY money-out</text>
-<text x="28" y="240" fill="#a6adc8" font-family="DM Sans,system-ui,sans-serif" font-size="12">honest-green ship · fail-closed money · watchdog</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Solomon">
+  <defs>
+    <pattern id="scan-solomon" width="3" height="3" patternUnits="userSpaceOnUse">
+      <rect width="3" height="1.2" fill="#cba6f7" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="bg-solomon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#11111b"/>
+      <stop offset="100%" stop-color="#1e1e2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" rx="8" fill="url(#bg-solomon)"/>
+  <rect width="480" height="300" rx="8" fill="url(#scan-solomon)"/>
+  <rect x="1" y="1" width="478" height="298" rx="7" fill="none" stroke="#cba6f7" stroke-opacity="0.45" stroke-width="2"/>
+  <!-- chrome corners -->
+  <path d="M12 12h28M12 12v28" stroke="#f38ba8" stroke-width="2"/>
+  <path d="M468 12h-28M468 12v28" stroke="#89b4fa" stroke-width="2"/>
+  <path d="M12 288h28M12 288v-28" stroke="#89b4fa" stroke-width="2"/>
+  <path d="M468 288h-28M468 288v-28" stroke="#f38ba8" stroke-width="2"/>
+  <text x="24" y="36" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="22" font-weight="800">Solomon</text>
+  <text x="24" y="56" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="11">RSI FLEET CONTROL PLANE</text>
+  <!-- sticker wear -->
+  <rect x="400" y="22" width="52" height="18" rx="2" fill="#f5c2e7" opacity="0.75" transform="rotate(6 426 31)"/>
+  <text x="408" y="35" fill="#11111b" font-size="9" font-family="monospace" font-weight="700" transform="rotate(6 426 31)">Y2K</text>
+  
+  <g>
+    <rect x="40" y="90" width="120" height="150" rx="4" fill="#181825" stroke="#cba6f7"/>
+    <text x="52" y="114" fill="#cba6f7" font-size="11" font-family="monospace">LANE A</text>
+    <text x="52" y="140" fill="#a6e3a1" font-size="12" font-family="monospace">observe</text>
+    <text x="52" y="162" fill="#bac2de" font-size="12" font-family="monospace">implement</text>
+    <text x="52" y="184" fill="#b4befe" font-size="12" font-family="monospace">gate</text>
+    <text x="52" y="206" fill="#f5c2e7" font-size="12" font-family="monospace">ship/revert</text>
+    <rect x="180" y="90" width="120" height="150" rx="4" fill="#181825" stroke="#b4befe"/>
+    <text x="192" y="114" fill="#b4befe" font-size="11" font-family="monospace">LANE B</text>
+    <text x="192" y="160" fill="#a6adc8" font-size="12" font-family="monospace">watchdog</text>
+    <text x="192" y="190" fill="#a6e3a1" font-size="12" font-family="monospace">honest-green</text>
+    <rect x="320" y="90" width="120" height="150" rx="4" fill="#181825" stroke="#f38ba8"/>
+    <text x="332" y="114" fill="#f38ba8" font-size="11" font-family="monospace">MONEY</text>
+    <text x="332" y="170" fill="#f38ba8" font-size="16" font-family="monospace" font-weight="700">DENIED</text>
+    <text x="332" y="198" fill="#a6adc8" font-size="10" font-family="monospace">fail-closed</text>
+  </g>
+
+  <text x="420" y="280" fill="#cba6f7" font-size="14" font-family="serif" opacity="0.25">機</text>
 </svg>

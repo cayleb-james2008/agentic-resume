@@ -1,3 +1,8 @@
+/* demos.js — v4 lab bay
+ * Truthful product surfaces (see design/BUILD-NOTES-demos-v3.md).
+ * Markup lives in #lab tab panels; element IDs unchanged from v3.
+ * prefers-reduced-motion shortens timers via prefersReduce().
+ */
 (function () {
   "use strict";
 

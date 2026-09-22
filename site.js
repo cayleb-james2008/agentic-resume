@@ -1,155 +1,268 @@
 (function () {
   "use strict";
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Sticky header state
-  var topbar = document.querySelector(".topbar");
-  if (topbar) {
+  var reduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function $(sel, root) {
+    return (root || document).querySelector(sel);
+  }
+  function $all(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+
+  /* ---------- Mobile drawer (Shoelace) ---------- */
+  (function initDrawer() {
+    var toggle = $("#dock-toggle");
+    var drawer = $("#mobile-drawer");
+    if (!toggle || !drawer) return;
+    toggle.addEventListener("click", function () {
+      drawer.show();
+      toggle.setAttribute("aria-expanded", "true");
+    });
+    drawer.addEventListener("sl-after-hide", function () {
+      toggle.setAttribute("aria-expanded", "false");
+    });
+    $all(".drawer-links a", drawer).forEach(function (a) {
+      a.addEventListener("click", function () {
+        try { drawer.hide(); } catch (e) {}
+      });
+    });
+  })();
+
+  /* ---------- CRT hero: real <video> play/pause (NOT scroll scrub) ---------- */
+  (function initCrt() {
+    var crt = $("#hero-crt");
+    var video = $("#hero-video");
+    var btn = $("#crt-play");
+    var meta = $("#crt-meta");
+    if (!crt || !video) return;
+
+    function setPoster(msg) {
+      crt.classList.add("is-poster");
+      crt.classList.remove("is-playing");
+      try { video.pause(); } catch (e) {}
+      if (btn) {
+        btn.textContent = "Play reel";
+        btn.setAttribute("aria-pressed", "false");
+      }
+      if (meta) meta.textContent = msg || "SIGNAL STANDBY · poster only";
+    }
+
+    function setPlaying() {
+      crt.classList.remove("is-poster");
+      crt.classList.add("is-playing");
+      if (btn) {
+        btn.textContent = "Pause";
+        btn.setAttribute("aria-pressed", "true");
+      }
+      if (meta) meta.textContent = "LIVE · hero-reel.mp4 · muted loop";
+    }
+
+    if (reduce) {
+      setPoster("Reduced motion — static poster");
+      video.removeAttribute("autoplay");
+      video.removeAttribute("loop");
+      if (btn) btn.hidden = true;
+      return;
+    }
+
+    crt.classList.add("is-poster");
+    video.muted = true;
+    video.playsInline = true;
+    video.loop = true;
+
+    video.addEventListener("error", function () {
+      setPoster("Video unavailable — showing poster");
+      if (btn) btn.hidden = true;
+    });
+
+    if (btn) {
+      btn.addEventListener("click", function () {
+        if (video.paused) {
+          var p = video.play();
+          if (p && typeof p.then === "function") {
+            p.then(setPlaying).catch(function () {
+              setPoster("Playback blocked — tap again or check autoplay policy");
+            });
+          } else {
+            setPlaying();
+          }
+        } else {
+          video.pause();
+          crt.classList.remove("is-playing");
+          crt.classList.add("is-poster");
+          btn.textContent = "Play reel";
+          btn.setAttribute("aria-pressed", "false");
+          if (meta) meta.textContent = "PAUSED · press play";
+        }
+      });
+    }
+  })();
+
+  /* ---------- Channel dial → Shoelace tab ---------- */
+  function showLabChannel(name) {
+    var tabs = $("#lab-tabs");
+    if (!tabs || !name) return;
+    var show = function () {
+      try {
+        tabs.show(name);
+      } catch (e) {
+        var tab = tabs.querySelector('sl-tab[panel="' + name + '"]');
+        if (tab) tab.click();
+      }
+      var lab = $("#lab");
+      if (lab) lab.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    };
+    if (customElements.get("sl-tab-group")) {
+      show();
+    } else if (window.customElements && customElements.whenDefined) {
+      customElements.whenDefined("sl-tab-group").then(show);
+    } else {
+      setTimeout(show, 200);
+    }
+  }
+
+  $all("[data-channel]").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      var name = el.getAttribute("data-channel");
+      if (!name) return;
+      if (el.getAttribute("href") === "#lab" || (el.getAttribute("href") || "").indexOf("#lab") !== -1) {
+        e.preventDefault();
+        showLabChannel(name);
+      } else if (el.tagName === "A" && (el.getAttribute("href") || "").indexOf("index.html#lab") !== -1) {
+        // cross-page: stash channel for index boot
+        try { sessionStorage.setItem("lab-channel", name); } catch (err) {}
+      }
+    });
+  });
+
+  // Boot channel from hash or session
+  (function bootChannel() {
+    var fromStore = null;
+    try { fromStore = sessionStorage.getItem("lab-channel"); sessionStorage.removeItem("lab-channel"); } catch (e) {}
+    var hash = (location.hash || "").replace(/^#/, "");
+    var map = { "demo-dotz": "dotz", "demo-sophos": "sophos", "demo-solomon": "solomon", "demo-pdm": "pdm", "demo-apotheka": "apotheka" };
+    var name = fromStore || map[hash] || (["dotz","sophos","solomon","pdm","apotheka"].indexOf(hash) >= 0 ? hash : null);
+    if (name && $("#lab-tabs")) {
+      setTimeout(function () { showLabChannel(name); }, 50);
+    }
+  })();
+
+  /* ---------- Reveal + anime.js entrances ---------- */
+  (function initMotion() {
+    var nodes = $all(".reveal");
+    if (!nodes.length) return;
+
+    function markIn(el) {
+      el.classList.add("is-in");
+    }
+
+    if (reduce || !("IntersectionObserver" in window)) {
+      nodes.forEach(markIn);
+      return;
+    }
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          markIn(el);
+          if (typeof anime === "function") {
+            anime({
+              targets: el,
+              opacity: [0, 1],
+              translateY: [18, 0],
+              duration: 620,
+              easing: "easeOutCubic"
+            });
+          }
+          io.unobserve(el);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+
+    // Kick identity immediately
+    $all(".broadcast .reveal, .page-hero.reveal").forEach(function (el) {
+      requestAnimationFrame(function () {
+        markIn(el);
+        if (typeof anime === "function") {
+          anime({
+            targets: el.querySelectorAll("h1, .lede, .cta-row, .eyebrow, .status-row, .crt__bezel"),
+            opacity: [0, 1],
+            translateY: [12, 0],
+            delay: anime.stagger(70),
+            duration: 560,
+            easing: "easeOutCubic"
+          });
+        }
+      });
+    });
+
+    nodes.forEach(function (el) {
+      if (!el.classList.contains("is-in")) io.observe(el);
+    });
+
+    // Mascot float + occasional RGB glitch (cyber sticker)
+    var mascots = $all(".crt__mascot, .boot__mascot, .brand__mark");
+    if (mascots.length && typeof anime === "function") {
+      anime({
+        targets: mascots,
+        translateY: [0, -8],
+        rotate: ["6deg", "3deg"],
+        direction: "alternate",
+        loop: true,
+        duration: 2400,
+        easing: "easeInOutSine"
+      });
+      setInterval(function () {
+        if (document.hidden) return;
+        anime({
+          targets: mascots,
+          translateX: [
+            { value: -3, duration: 40 },
+            { value: 3, duration: 40 },
+            { value: -2, duration: 40 },
+            { value: 0, duration: 40 }
+          ],
+          filter: [
+            { value: "hue-rotate(22deg) saturate(1.4)", duration: 70 },
+            { value: "none", duration: 110 }
+          ],
+          easing: "linear"
+        });
+      }, 5200);
+    }
+
+    // CTA hover / press micro-interactions
+    if (typeof anime === "function") {
+      $all(".btn, .channel, .cta-row a").forEach(function (el) {
+        el.addEventListener("mouseenter", function () {
+          anime({ targets: el, scale: 1.04, duration: 180, easing: "easeOutQuad" });
+        });
+        el.addEventListener("mouseleave", function () {
+          anime({ targets: el, scale: 1, duration: 220, easing: "easeOutQuad" });
+        });
+        el.addEventListener("mousedown", function () {
+          anime({ targets: el, scale: 0.96, duration: 80, easing: "easeInQuad" });
+        });
+        el.addEventListener("mouseup", function () {
+          anime({ targets: el, scale: 1.02, duration: 120, easing: "easeOutQuad" });
+        });
+      });
+    }
+  })();
+
+  /* ---------- Dock scroll state ---------- */
+  var dock = $(".dock");
+  if (dock) {
     var onScroll = function () {
-      topbar.classList.toggle("is-scrolled", window.scrollY > 8);
+      dock.classList.toggle("is-scrolled", window.scrollY > 8);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
-
-  // Mobile nav
-  var toggle = document.querySelector(".nav-toggle");
-  var nav = document.querySelector("nav.main");
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-  }
-
-  // Mark hero children for staggered entrance
-  var heroes = document.querySelectorAll(".hero, .scroll-hero__overlay");
-  heroes.forEach(function (hero) {
-    Array.prototype.forEach.call(hero.children, function (child) {
-      child.classList.add("hero-line");
-    });
-  });
-
-  // Scroll reveal (+ immediate hero kick)
-  var nodes = document.querySelectorAll(".reveal");
-  if (nodes.length) {
-    if (reduce || !("IntersectionObserver" in window)) {
-      nodes.forEach(function (el) { el.classList.add("is-in"); });
-    } else {
-      document.querySelectorAll(".hero.reveal, .scroll-hero").forEach(function (hero) {
-        requestAnimationFrame(function () { hero.classList.add("is-in"); });
-      });
-      var io = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-in");
-              io.unobserve(entry.target);
-            }
-          });
-        },
-        { rootMargin: "0px 0px -6% 0px", threshold: 0.08 }
-      );
-      nodes.forEach(function (el) {
-        if (!el.classList.contains("is-in")) io.observe(el);
-      });
-    }
-  }
-
-  /* ---------- Scroll-linked cinematic hero (MP4 scrub) ---------- */
-  (function initScrollHero() {
-    var section = document.getElementById("scroll-hero");
-    var video = document.getElementById("hero-video");
-    var progressBar = document.getElementById("hero-progress");
-    var hint = document.getElementById("scroll-hint");
-    if (!section || !video) return;
-
-    var progress = 0;
-    var duration = 0;
-    var ready = false;
-
-    function setPosterMode(msg) {
-      section.classList.add("is-poster");
-      section.classList.remove("is-live");
-      try { video.pause(); } catch (e) {}
-      if (hint) hint.textContent = msg || "Reduced motion — static poster";
-    }
-
-    if (reduce) {
-      setPosterMode("Reduced motion — static poster");
-      video.removeAttribute("autoplay");
-      video.currentTime = 0;
-      return;
-    }
-
-    section.classList.add("is-live");
-    video.muted = true;
-    video.playsInline = true;
-    video.loop = false;
-    video.preload = "auto";
-
-    function measureProgress() {
-      var track = section.querySelector(".scroll-hero__track") || section;
-      var rect = track.getBoundingClientRect();
-      var total = track.offsetHeight - window.innerHeight;
-      if (total <= 0) return 0;
-      var scrolled = -rect.top;
-      return Math.max(0, Math.min(1, scrolled / total));
-    }
-
-    function scrub(p) {
-      if (!ready || !(duration > 0)) return;
-      // leave a tiny epsilon so we never fight ended state
-      var t = Math.min(duration * 0.999, Math.max(0, p * duration));
-      try {
-        if (Math.abs(video.currentTime - t) > 0.04) video.currentTime = t;
-      } catch (e) {}
-    }
-
-    var ticking = false;
-    function update() {
-      ticking = false;
-      progress = measureProgress();
-      scrub(progress);
-      if (progressBar) progressBar.style.width = (progress * 100).toFixed(1) + "%";
-      if (hint) {
-        if (progress < 0.02) hint.textContent = "Scroll to scrub the story →";
-        else if (progress > 0.96) hint.textContent = "Story complete — try a demo below";
-        else hint.textContent = "Beat " + (Math.min(5, Math.floor(progress * 5) + 1)) + " / 5";
-      }
-    }
-
-    function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    }
-
-    function onMeta() {
-      duration = video.duration || 0;
-      if (duration > 0 && isFinite(duration)) {
-        ready = true;
-        update();
-      }
-    }
-
-    video.addEventListener("loadedmetadata", onMeta);
-    video.addEventListener("durationchange", onMeta);
-    if (video.readyState >= 1) onMeta();
-
-    // Prefer scrub over autoplay; if metadata fails, fall back to muted loop
-    video.addEventListener("error", function () {
-      setPosterMode("Video unavailable — showing poster");
-    });
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", function () { update(); }, { passive: true });
-    update();
-
-    if (CSS && CSS.supports && CSS.supports("animation-timeline", "scroll()")) {
-      section.classList.add("has-scroll-timeline");
-    }
-  })();
-
 })();

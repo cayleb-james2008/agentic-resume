@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="sl-theme-dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,83 +9,104 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="topbar">
-    <div class="wrap">
-      <a class="site-name" href="index.html">Cayleb Alvarez-James</a>
-      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav class="main" id="site-nav" aria-label="Primary">
+  <header class="dock">
+    <div class="wrap dock__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/img/stickers/mascot.png" alt="" width="36" height="36" />
+        <span class="brand__text">Cayleb Alvarez-James</span>
+        <span class="brand__tag">DOSSIER</span>
+      </a>
+      <button type="button" class="dock-toggle" id="dock-toggle" aria-expanded="false" aria-controls="mobile-drawer">Menu</button>
+      <nav class="dock__nav" aria-label="Primary">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="projects.html" aria-current="page">Projects</a></li>
           <li><a href="principles.html">Principles</a></li>
-          <li><a href="Cayleb-James-resume.pdf">Resume PDF</a></li>
+          <li><a href="Cayleb-James-resume.pdf">Resume</a></li>
         </ul>
       </nav>
     </div>
   </header>
+  <sl-drawer id="mobile-drawer" label="Navigate" placement="end" class="drawer-nav">
+    <ul class="drawer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="principles.html">Principles</a></li>
+      <li><a href="Cayleb-James-resume.pdf">Resume PDF</a></li>
+    </ul>
+  </sl-drawer>
 
   <main id="main" class="wrap">
-    <section class="hero reveal">
+    <section class="page-hero reveal">
       <p class="eyebrow">Projects</p>
       <h1>Built. Shipped. Open the repos.</h1>
       <p class="lede">
-        Public repos and one written case study — copy matches the GitHub READMEs. In-page demos live on the <a href="index.html#demos">home page</a>.
+        Public repos and one written case study — copy matches the GitHub READMEs. Deep demos live in the
+        <a href="index.html#lab">lab console</a>.
       </p>
     </section>
 
-    <section class="reveal reveal-delay-1" aria-label="Project list">
+    <section class="reveal" aria-label="Project list">
       <div class="cards">
-        <article class="card reveal reveal-delay-1">
+        <article class="card">
           <span class="tag">Multi-agent coding · flagship</span>
-          <h3><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">dotz</a></h3>
+          <img class="ticket__art" src="assets/img/scene-dotz.svg" alt="" width="480" height="140" loading="lazy" />
+                    <h3><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">dotz</a></h3>
           <p>Native-Rust multi-agent coding dashboard (axum + Tauri). One prompt fans out to scout / planner / worker / reviewer on a live workflow graph; adversarial verify before land. Sandboxed web previews, on-device ONNX memory, Open Design workspace, multi-provider, Windows-first.</p>
-          <p class="meta">Rust · axum · Tauri 2 · ONNX · <a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#demo-dotz">Demo</a></p>
+          <p class="meta">Rust · axum · Tauri 2 · ONNX · <a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#lab" data-channel="dotz">Lab</a></p>
         </article>
-        <article class="card reveal reveal-delay-2">
+        <article class="card">
           <span class="tag">Windows coding agent · beta</span>
-          <h3><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Sophos</a></h3>
+          <img class="ticket__art" src="assets/img/scene-sophos.svg" alt="" width="480" height="140" loading="lazy" />
+                    <h3><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Sophos</a></h3>
           <p>Windows-native coding agent desktop — port of Prime Intellect’s prime-agent (credited). Tauri v2 + React + Node bridge. Chat sessions, agents fleet, inbox, skills, providers. Terminal-green / near-black PI aesthetic.</p>
-          <p class="meta">Tauri 2 · React · TypeScript · Node · <a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#demo-sophos">Demo</a></p>
+          <p class="meta">Tauri 2 · React · TypeScript · Node · <a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#lab" data-channel="sophos">Lab</a></p>
         </article>
-        <article class="card reveal reveal-delay-3">
+        <article class="card">
           <span class="tag">RSI control plane</span>
-          <h3><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Solomon</a></h3>
+          <img class="ticket__art" src="assets/img/scene-solomon.svg" alt="" width="480" height="140" loading="lazy" />
+                    <h3><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Solomon</a></h3>
           <p>Fleet autopilot for recursive self-improvement (Rust/Tauri). Manages repos with gated loops: observe → implement → project-native test gate → ship-or-revert. CEO planner, watchdog, honest-green ship gate, fail-closed money guard.</p>
-          <p class="meta">Rust · Tauri 2 · <a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#demo-solomon">Demo</a></p>
+          <p class="meta">Rust · Tauri 2 · <a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#lab" data-channel="solomon">Lab</a></p>
         </article>
-        <article class="card reveal reveal-delay-4">
+        <article class="card">
           <span class="tag">Depop / storefront</span>
-          <h3><a href="https://github.com/cayleb-james2008/apotheka-site" rel="noopener noreferrer" target="_blank">apotheka-site</a></h3>
+          <img class="ticket__art" src="assets/img/scene-apotheka.svg" alt="" width="480" height="140" loading="lazy" />
+                    <h3><a href="https://github.com/cayleb-james2008/apotheka-site" rel="noopener noreferrer" target="_blank">apotheka-site</a></h3>
           <p>Static Depop storefront + lookbook for Apotheka (curated archive / deadstock vault). Single-page HTML/CSS front door — shop checkout lives on Depop, not in this repo.</p>
-          <p class="meta">Static HTML/CSS · <a href="https://github.com/cayleb-james2008/apotheka-site" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#demo-apotheka">Demo</a></p>
+          <p class="meta">Static HTML/CSS · <a href="https://github.com/cayleb-james2008/apotheka-site" rel="noopener noreferrer" target="_blank">Repository</a> · <a href="index.html#lab" data-channel="apotheka">Lab</a></p>
         </article>
-        <article class="card reveal reveal-delay-1">
+        <article class="card">
           <span class="tag">Product / ops · SIMULATOR</span>
-          <h3><a href="projects/pdm-forge.html">PDM Forge</a></h3>
+          <img class="ticket__art" src="assets/img/scene-pdm-y2k.png" alt="" width="480" height="140" loading="lazy" />
+                    <h3><a href="projects/pdm-forge.html">PDM Forge</a></h3>
           <p>Written case study of a governed vault-simulator pipeline — constraints, checkout/mutate/gate/ledger, and what actually shipped. Honesty banner: not a live vault.</p>
-          <p class="meta"><a href="projects/pdm-forge.html">Case study</a> · <a href="index.html#demo-pdm">Demo</a></p>
+          <p class="meta"><a href="projects/pdm-forge.html">Case study</a> · <a href="index.html#lab" data-channel="pdm">Lab</a></p>
         </article>
-        <article class="card reveal reveal-delay-2">
-          <span class="tag">This site</span>
+        <article class="card">
+          <span class="tag">This site · v4</span>
           <h3>agentic-resume</h3>
-          <p>This portfolio — Catppuccin mocha/purple UI, light motion, mobile-first layout, zero npm dependencies. Demos map to real product surfaces.</p>
-          <p class="meta">Live on Vercel · <a href="https://github.com/cayleb-james2008/agentic-resume" rel="noopener noreferrer" target="_blank">source on GitHub</a></p>
+          <p>Greenfield Catppuccin mocha / Y2K cyberpunk portfolio. Shoelace UI kit, vendored anime.js, CRT video hero, tabbed lab console. Mobile-first 390px.</p>
+          <p class="meta"><a href="https://github.com/cayleb-james2008/agentic-resume" rel="noopener noreferrer" target="_blank">Source on GitHub</a></p>
         </article>
       </div>
     </section>
   </main>
 
-  <footer class="site">
+  <footer class="site-foot">
     <div class="wrap">
       <p>Cayleb Alvarez-James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
       <p class="meta">Open to full-time and contract roles.</p>
     </div>
   </footer>
+  <script src="vendor/anime.min.js" defer></script>
   <script src="site.js" defer></script>
 </body>
 </html>

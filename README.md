@@ -1,17 +1,16 @@
 # Agentic Resume
 
-Personal portfolio site for [Cayleb Alvarez-James](https://github.com/cayleb-james2008).
+Personal portfolio for [Cayleb Alvarez-James](https://github.com/cayleb-james2008).
 
-- **Live:** https://agentic-resume-nine.vercel.app/
-- **Stack:** plain HTML, CSS, and JS — zero npm dependencies
-- **Honesty rule:** simulator vs real is labelled; claims without receipts get cut
+- **Stack:** static HTML / CSS / JS · [Shoelace](https://shoelace.style/) (CDN) · vendored [anime.js](https://animejs.com/) · zero npm build
+- **Look:** Catppuccin Mocha dark purple · grungy Y2K / cyberpunk / anime (not soft kawaii)
+- **Honesty:** simulator vs real is labelled; claims without receipts get cut
 
-## What works
+## IA (v4 restart)
 
-- Home, Projects, and Principles pages with project cards
-- Warm mocha dark theme, Syne + DM Sans, motion that respects `prefers-reduced-motion`
-- Resume PDF download from the nav
-- Peer case study for PDM Forge
+Dock → Broadcast CRT (`<video>`) → Channel dial → Lab console (tabbed deep demos) → Contact.
+
+Not a sticky-scroll demo wall. Pre-v4 pages live under `archive/pre-v4/`.
 
 ## Local preview
 
@@ -19,10 +18,6 @@ Personal portfolio site for [Cayleb Alvarez-James](https://github.com/cayleb-jam
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
-
-## Deploy
-
-Hosted on Vercel as project `agentic-resume`. Push to `main` to update production when the project is linked to this repo.
 
 ## License
 

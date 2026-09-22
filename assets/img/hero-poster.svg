@@ -1,48 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Hero poster — mocha workspace with coding dashboard glow">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Hero poster — CRT broadcast offline">
   <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#181825"/>
-      <stop offset="50%" stop-color="#11111b"/>
-      <stop offset="100%" stop-color="#1e1e2e"/>
-    </linearGradient>
-    <radialGradient id="lamp" cx="70%" cy="20%" r="45%">
-      <stop offset="0%" stop-color="#b4befe" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#11111b" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#45475a"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#11111b"/>
+      <stop offset="55%" stop-color="#1e1e2e"/>
       <stop offset="100%" stop-color="#181825"/>
     </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cba6f7" stop-opacity=".15"/>
+      <stop offset="50%" stop-color="#f5c2e7" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#b4befe" stop-opacity=".2"/>
+    </linearGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000" opacity=".35"/>
+    </pattern>
   </defs>
-  <rect width="1200" height="675" fill="url(#sky)"/>
-  <rect width="1200" height="675" fill="url(#lamp)"/>
-  <!-- desk -->
-  <rect x="80" y="420" width="1040" height="180" rx="24" fill="#181825" stroke="#cba6f7" stroke-opacity="0.25" stroke-width="2"/>
-  <!-- monitor -->
-  <rect x="220" y="160" width="520" height="300" rx="18" fill="#11111b" stroke="#fab387" stroke-width="3"/>
-  <rect x="240" y="180" width="480" height="240" rx="8" fill="#181825"/>
-  <!-- console lines -->
-  <rect x="260" y="200" width="180" height="10" rx="4" fill="#cba6f7" opacity="0.85"/>
-  <rect x="260" y="224" width="320" height="8" rx="3" fill="#a6adc8" opacity="0.55"/>
-  <rect x="260" y="248" width="280" height="8" rx="3" fill="#a6adc8" opacity="0.4"/>
-  <rect x="260" y="280" width="140" height="48" rx="8" fill="#cba6f7" opacity="0.25" stroke="#cba6f7" stroke-width="1.5"/>
-  <rect x="420" y="280" width="140" height="48" rx="8" fill="#585b70" opacity="0.5" stroke="#fab387" stroke-width="1.5"/>
-  <text x="280" y="370" fill="#a6e3a1" font-family="ui-monospace,monospace" font-size="18">● agents: 3 ready</text>
-  <!-- side cards -->
-  <rect x="780" y="180" width="280" height="100" rx="14" fill="url(#panel)" stroke="#cba6f7" stroke-opacity="0.3"/>
-  <rect x="800" y="200" width="120" height="12" rx="4" fill="#b4befe"/>
-  <rect x="800" y="226" width="200" height="8" rx="3" fill="#a6adc8" opacity="0.6"/>
-  <rect x="800" y="246" width="160" height="8" rx="3" fill="#a6adc8" opacity="0.4"/>
-  <rect x="780" y="300" width="280" height="100" rx="14" fill="url(#panel)" stroke="#cba6f7" stroke-opacity="0.3"/>
-  <rect x="800" y="320" width="100" height="12" rx="4" fill="#b4befe"/>
-  <rect x="800" y="346" width="190" height="8" rx="3" fill="#a6adc8" opacity="0.6"/>
-  <rect x="800" y="366" width="150" height="8" rx="3" fill="#a6adc8" opacity="0.4"/>
-  <!-- coffee cup -->
-  <ellipse cx="160" cy="500" rx="36" ry="10" fill="#585b70" opacity="0.5"/>
-  <path d="M130 440h50v55c0 14-11 24-25 24s-25-10-25-24z" fill="#cba6f7"/>
-  <ellipse cx="155" cy="440" rx="25" ry="8" fill="#cdd6f4"/>
-  <path d="M180 455c16 2 22 16 14 28" fill="none" stroke="#cba6f7" stroke-width="6" stroke-linecap="round"/>
-  <!-- title plate -->
-  <text x="80" y="80" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="42" font-weight="800">Scroll the story</text>
-  <text x="80" y="120" fill="#cba6f7" font-family="DM Sans,system-ui,sans-serif" font-size="22">Agents · research · decisions · vault · storefront</text>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+  <rect width="1200" height="675" fill="url(#scan)" opacity=".5"/>
+  <g fill="none" stroke="#cba6f7" stroke-opacity=".45">
+    <rect x="48" y="48" width="1104" height="579" rx="8"/>
+    <rect x="64" y="64" width="1072" height="547" rx="4" stroke-opacity=".25"/>
+  </g>
+  <text x="96" y="140" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="22">CH-07 · NOMAD LINK</text>
+  <text x="96" y="220" fill="#cba6f7" font-family="ui-sans-serif,system-ui,sans-serif" font-size="64" font-weight="800">CYBER-NOMAD</text>
+  <text x="96" y="280" fill="#f5c2e7" font-family="ui-monospace,monospace" font-size="28">AGENTS · TOOLING · PRODUCT SURFACES</text>
+  <text x="96" y="560" fill="#6c7086" font-family="ui-monospace,monospace" font-size="18">SIGNAL STANDBY · PRESS PLAY</text>
+  <circle cx="1040" cy="160" r="48" fill="#cba6f7" opacity=".2"/>
+  <circle cx="1040" cy="160" r="28" fill="#f5c2e7" opacity=".55"/>
+  <polygon points="1030,145 1030,175 1058,160" fill="#11111b"/>
 </svg>

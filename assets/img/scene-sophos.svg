@@ -1,22 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="sophos — Windows coding agent">
-<rect width="480" height="300" fill="#0e0e0e"/>
-<rect x="16" y="16" width="448" height="268" fill="#121212" stroke="#2a2a2a"/>
-<text x="28" y="44" fill="#85ed75" font-family="ui-monospace,monospace" font-size="18" font-weight="700">Σ sophos</text>
-<text x="28" y="66" fill="#8a8a8a" font-family="DM Sans,system-ui,sans-serif" font-size="12">Windows coding agent · beta</text>
-<rect x="28" y="84" width="120" height="180" fill="#101010" stroke="#2a2a2a"/>
-<text x="38" y="108" fill="#666" font-family="ui-monospace,monospace" font-size="10">src/</text>
-<text x="38" y="128" fill="#85ed75" font-family="ui-monospace,monospace" font-size="10">middleware.ts</text>
-<text x="38" y="148" fill="#aaa" font-family="ui-monospace,monospace" font-size="10">session.ts</text>
-<text x="38" y="168" fill="#aaa" font-family="ui-monospace,monospace" font-size="10">auth.test.ts</text>
-<rect x="160" y="84" width="288" height="180" fill="#0e0e0e" stroke="#2a2a2a"/>
-<rect x="172" y="100" width="52" height="18" fill="#85ed75"/>
-<text x="180" y="113" fill="#0e0e0e" font-family="ui-monospace,monospace" font-size="10" font-weight="700">read</text>
-<text x="232" y="113" fill="#bbb" font-family="ui-monospace,monospace" font-size="10">src/auth/middleware.ts</text>
-<rect x="172" y="130" width="52" height="18" fill="#85ed75"/>
-<text x="180" y="143" fill="#0e0e0e" font-family="ui-monospace,monospace" font-size="10" font-weight="700">edit</text>
-<text x="232" y="143" fill="#bbb" font-family="ui-monospace,monospace" font-size="10">tighten JWT expiry</text>
-<rect x="172" y="160" width="70" height="18" fill="#85ed75"/>
-<text x="178" y="173" fill="#0e0e0e" font-family="ui-monospace,monospace" font-size="10" font-weight="700">terminal</text>
-<text x="250" y="173" fill="#bbb" font-family="ui-monospace,monospace" font-size="10">vitest → pass</text>
-<text x="172" y="210" fill="#666" font-family="ui-monospace,monospace" font-size="10">provider · openrouter · credits: prime-agent</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Sophos">
+  <defs>
+    <pattern id="scan-sophos" width="3" height="3" patternUnits="userSpaceOnUse">
+      <rect width="3" height="1.2" fill="#cba6f7" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="bg-sophos" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#11111b"/>
+      <stop offset="100%" stop-color="#1e1e2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" rx="8" fill="url(#bg-sophos)"/>
+  <rect width="480" height="300" rx="8" fill="url(#scan-sophos)"/>
+  <rect x="1" y="1" width="478" height="298" rx="7" fill="none" stroke="#cba6f7" stroke-opacity="0.45" stroke-width="2"/>
+  <!-- chrome corners -->
+  <path d="M12 12h28M12 12v28" stroke="#f38ba8" stroke-width="2"/>
+  <path d="M468 12h-28M468 12v28" stroke="#89b4fa" stroke-width="2"/>
+  <path d="M12 288h28M12 288v-28" stroke="#89b4fa" stroke-width="2"/>
+  <path d="M468 288h-28M468 288v-28" stroke="#f38ba8" stroke-width="2"/>
+  <text x="24" y="36" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="22" font-weight="800">Sophos</text>
+  <text x="24" y="56" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="11">WINDOWS CODING AGENT · BETA</text>
+  <!-- sticker wear -->
+  <rect x="400" y="22" width="52" height="18" rx="2" fill="#f5c2e7" opacity="0.75" transform="rotate(6 426 31)"/>
+  <text x="408" y="35" fill="#11111b" font-size="9" font-family="monospace" font-weight="700" transform="rotate(6 426 31)">Y2K</text>
+  
+  <rect x="36" y="78" width="120" height="190" rx="4" fill="#11111b" stroke="#585b70"/>
+  <rect x="44" y="92" width="90" height="8" fill="#a6e3a1" opacity="0.7"/>
+  <rect x="44" y="112" width="70" height="6" fill="#585b70"/>
+  <rect x="44" y="128" width="80" height="6" fill="#cba6f7" opacity="0.5"/>
+  <rect x="44" y="144" width="60" height="6" fill="#585b70"/>
+  <rect x="168" y="78" width="276" height="190" rx="4" fill="#0b0b12" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="184" y="108" fill="#a6e3a1" font-family="ui-monospace,monospace" font-size="13">Σ session · fix auth middleware</text>
+  <text x="184" y="136" fill="#cdd6f4" font-family="ui-monospace,monospace" font-size="12">tool: read_file …</text>
+  <text x="184" y="160" fill="#cdd6f4" font-family="ui-monospace,monospace" font-size="12">tool: apply_patch …</text>
+  <text x="184" y="184" fill="#a6e3a1" font-family="ui-monospace,monospace" font-size="12">tests: failing → green</text>
+  <rect x="184" y="220" width="200" height="28" rx="4" fill="#181825" stroke="#a6e3a1"/>
+  <text x="196" y="238" fill="#585b70" font-family="ui-monospace,monospace" font-size="11">Ask the coding agent…</text>
+
+  <text x="420" y="280" fill="#cba6f7" font-size="14" font-family="serif" opacity="0.25">機</text>
 </svg>

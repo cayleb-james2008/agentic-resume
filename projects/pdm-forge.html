@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="sl-theme-dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,29 +9,43 @@
   <meta name="theme-color" content="#11111b" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" />
   <link rel="stylesheet" href="../styles.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="topbar">
-    <div class="wrap">
-      <a class="site-name" href="../index.html">Cayleb Alvarez-James</a>
-      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav class="main" id="site-nav" aria-label="Primary">
+  <header class="dock">
+    <div class="wrap dock__inner">
+      <a class="brand" href="../index.html">
+        <img class="brand__mark" src="../assets/img/stickers/mascot.png" alt="" width="36" height="36" />
+        <span class="brand__text">Cayleb Alvarez-James</span>
+        <span class="brand__tag">NOMAD.LINK</span>
+      </a>
+      <button type="button" class="dock-toggle" id="dock-toggle" aria-expanded="false" aria-controls="mobile-drawer">Menu</button>
+      <nav class="dock__nav" aria-label="Primary">
         <ul>
           <li><a href="../index.html">Home</a></li>
           <li><a href="../projects.html" aria-current="page">Projects</a></li>
           <li><a href="../principles.html">Principles</a></li>
-          <li><a href="../Cayleb-James-resume.pdf">Resume PDF</a></li>
+          <li><a href="../Cayleb-James-resume.pdf">Resume</a></li>
         </ul>
       </nav>
     </div>
   </header>
-
+  <sl-drawer id="mobile-drawer" label="Navigate" placement="end">
+    <ul class="drawer-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="../principles.html">Principles</a></li>
+      <li><a href="../Cayleb-James-resume.pdf">Resume PDF</a></li>
+    </ul>
+  </sl-drawer>
   <main id="main" class="wrap">
 
-<section class="hero reveal">
+
+<section class="page-hero reveal">
 <p class="eyebrow">Case study · peer project</p>
 <h1>PDM Forge — governed vault-simulator pipeline.</h1>
 </section>
@@ -165,14 +179,15 @@
 
 <p><a href="../index.html">← Home</a> · <a href="../projects.html">Browse all projects →</a></p>
 
+  
   </main>
-
-  <footer class="site">
+  <footer class="site-foot">
     <div class="wrap">
       <p>Cayleb Alvarez-James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
       <p class="meta">Open to full-time and contract roles.</p>
     </div>
   </footer>
+  <script src="../vendor/anime.min.js" defer></script>
   <script src="../site.js" defer></script>
 </body>
 </html>

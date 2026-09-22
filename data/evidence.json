@@ -1,0 +1,15 @@
+{
+  "PartNumber": "PFV-100",
+  "RevisionFrom": "A",
+  "RevisionTo": "B",
+  "Material": "316L stainless",
+  "BodyMassG": 23.9185,
+  "BodyVolumeMm3": 3008.6222,
+  "EnvelopeMm3": 3214.9054978352824,
+  "DrawingPdfPath": "/home/cayleb/Work/session-artifacts/gauntlet-run-pdm-forge-20260917/pieces/P3/demo/cad/PFV-100_revB_drawing.pdf",
+  "WorkflowState": "Approved",
+  "ApproverRoles": [
+    "EngineeringAdmin"
+  ],
+  "CheckedOutBy": null
+}

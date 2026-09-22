@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cayleb James — Portfolio</title>
+  <meta name="description" content="Projects and writing from Cayleb James — software, agents, and systems that hold up under scrutiny." />
+  <meta name="theme-color" content="#1a1614" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="site-name" href="index.html">Cayleb James</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="main" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="principles.html">Principles</a></li>
+          <li><a href="Cayleb-James-resume.pdf">Resume PDF</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero reveal">
+      <p class="eyebrow">Portfolio</p>
+      <h1>Software that stays honest under pressure.</h1>
+      <p class="lede">
+        I’m Cayleb James — I build agents, tooling, and product surfaces with clear claims,
+        working demos, and docs a stranger can follow. Equal weight across the work below;
+        pick any project and dig in.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="projects.html">Browse projects</a>
+        <a class="btn" href="Cayleb-James-resume.pdf">Download resume</a>
+        <a class="btn" href="https://github.com/cayleb-james2008" rel="noopener noreferrer" target="_blank">GitHub</a>
+      </div>
+    </section>
+
+    <section class="reveal reveal-delay-1" aria-labelledby="featured-heading">
+      <h2 id="featured-heading"><span class="marker" aria-hidden="true">01</span> Selected work</h2>
+      <p class="sub">Same bar for every card: public repo or live site, honest scope, something you can try.</p>
+      <div class="cards" style="margin-top: 24px;">
+        <article class="card reveal reveal-delay-1">
+          <span class="tag">Agent runtime</span>
+          <h3><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">dotz</a></h3>
+          <p>Flagship agent runtime and workflow tooling — designed for reliability, clear interfaces, and a path from clone to first run.</p>
+          <p class="meta"><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/dotz</a></p>
+        </article>
+        <article class="card reveal reveal-delay-2">
+          <span class="tag">Research agent</span>
+          <h3><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">sophos</a></h3>
+          <p>Research-oriented agent stack with disciplined sourcing and verification habits built into the loop.</p>
+          <p class="meta"><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/sophos</a></p>
+        </article>
+        <article class="card reveal reveal-delay-3">
+          <span class="tag">Systems</span>
+          <h3><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">solomon</a></h3>
+          <p>Systems and decision tooling — structured judgment where vague automation usually fails.</p>
+          <p class="meta"><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/solomon</a></p>
+        </article>
+        <article class="card reveal reveal-delay-4">
+          <span class="tag">Product / ops</span>
+          <h3><a href="projects/pdm-forge.html">PDM Forge</a></h3>
+          <p>Operational product work around planning and delivery — documented case study with constraints, tradeoffs, and outcomes.</p>
+          <p class="meta"><a href="projects/pdm-forge.html">Case study</a></p>
+        </article>
+      </div>
+      <p style="margin-top: 20px;"><a href="projects.html">All projects →</a></p>
+    </section>
+
+    <section class="reveal reveal-delay-2" aria-labelledby="how-heading">
+      <h2 id="how-heading"><span class="marker" aria-hidden="true">02</span> How I work</h2>
+      <ul class="principles">
+        <li><strong>Claims stay labeled.</strong> Verified, unverified, or refuted — no quiet inflation.</li>
+        <li><strong>Strangers can try it.</strong> README, license, and a first-run path that doesn’t require a tour guide.</li>
+        <li><strong>CI tells the truth.</strong> Green means something; red gets fixed, not explained away.</li>
+      </ul>
+      <p style="margin-top: 16px;"><a href="principles.html">Full principles →</a></p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p>Cayleb James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
+      <p class="meta">Built for clarity. Deployed on Vercel.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

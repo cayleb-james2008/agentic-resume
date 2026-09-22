@@ -1,0 +1,11 @@
+{
+  "_why": "Every pass/fail threshold lives HERE as data, never as a literal buried in gate code. Change a limit by editing this file; the gate re-reads it each run.",
+  "maxBodyMassG": 100.0,
+  "_whyMaxBodyMassG": "PFV-100 body is ~23g of 316L (measured by the CAD worker). 100g caps the family with headroom while catching a wrong-density or runaway-geometry rebuild.",
+  "requiredMaterial": "316L stainless",
+  "_whyRequiredMaterial": "PFV family spec material, exact string from family.yaml (material: 316L stainless). Any other string fails the gate.",
+  "releaseFromState": "Approved",
+  "_whyReleaseFromState": "Release is legal only from the Approved workflow state (domain workflow table: Approved->Released).",
+  "requiredReleaseRole": "EngineeringAdmin",
+  "_whyRequiredReleaseRole": "Mirrors the domain workflow edge Approved->Released, which requires the EngineeringAdmin role."
+}

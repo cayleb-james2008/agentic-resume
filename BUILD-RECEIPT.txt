@@ -1,0 +1,13 @@
+BUILD-RECEIPT
+exit_code=0
+date_utc=2026-09-21
+content_sha256=51632d3407deed0f8df19fef7251cbd96efe91bb3caa6d0aac88fdccf1b795a7
+content_hash_short=51632d3407de
+checks: links=0-BROKEN placeholder=0-HITS banned=0-HITS labels=OK
+files:
+d266bfa4ca40742af6c9e0c6b3a304cef362fc4641e7c96794eddbddd6d4dc5a  index.html
+df58dabf0caedf5d090115d17db8e173036295118579dfd35585e0bbed1d9737  projects.html
+bae85efdc1f0599cab8a5e160523c9d52ceeec162df7b24f5b318f64b98f080d  principles.html
+200cd19484a1aecb53e3215cb5e919fc30da306ae496a78422dadb280e1b5bb4  projects/pdm-forge.html
+ec0a915deb0519daf1546b59e9a4d8bd5f31ea4be5ecbd3334e0de48047f80e0  styles.css
+d0e783dae9291ee4141c27bb760eab8993946df84c59dc533ef621b57b0b375c  site.js

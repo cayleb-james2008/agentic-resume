@@ -1,0 +1,6 @@
+VAULT DEMO — origin: SIMULATOR
+SIMULATOR: file-backed vault at /tmp/forge-vault-demo; no real PDM connection.
+DENIED WITHOUT PERMISSION: user 'ada' holds no write grant on 'pfv-100/body.sldprt'.
+PERMITTED AFTER GRANT: write grant issued to 'ada'.
+CHECK-IN OK: 'pfv-100/body.sldprt' checked in by 'ada'.
+VERSION INCREMENT: v1 -> v2.

@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="solomon — Decision bench">
-<rect width="480" height="300" rx="20" fill="#140f0c"/>
-<rect x="1" y="1" width="478" height="298" rx="19" fill="none" stroke="#b8895f" stroke-opacity="0.25"/>
-<text x="24" y="32" fill="#f7efe6" font-family="Syne,system-ui,sans-serif" font-size="20" font-weight="700">solomon</text>
-<text x="24" y="52" fill="#a89888" font-family="DM Sans,system-ui,sans-serif" font-size="12">Decision bench</text>
-<rect x="40" y="60" width="400" height="24" rx="8" fill="#2a221c"/>
-<rect x="40" y="60" width="280" height="24" rx="8" fill="#e0b48a"/>
-<text x="40" y="50" fill="#a89888" font-family="ui-monospace,monospace" font-size="12">impact 70%</text>
-<rect x="40" y="120" width="400" height="24" rx="8" fill="#2a221c"/>
-<rect x="40" y="120" width="200" height="24" rx="8" fill="#f0c9a0"/>
-<text x="40" y="110" fill="#a89888" font-family="ui-monospace,monospace" font-size="12">risk 50%</text>
-<rect x="40" y="180" width="400" height="70" rx="14" fill="#1a1410" stroke="#e0b48a" stroke-width="1.5"/>
-<text x="60" y="222" fill="#f7efe6" font-family="ui-monospace,monospace" font-size="20">VERDICT: ship with guardrails</text>
+<rect width="480" height="300" rx="20" fill="#11111b"/>
+<rect x="1" y="1" width="478" height="298" rx="19" fill="none" stroke="#fab387" stroke-opacity="0.25"/>
+<text x="24" y="32" fill="#cdd6f4" font-family="Syne,system-ui,sans-serif" font-size="20" font-weight="700">solomon</text>
+<text x="24" y="52" fill="#a6adc8" font-family="DM Sans,system-ui,sans-serif" font-size="12">Decision bench</text>
+<rect x="40" y="60" width="400" height="24" rx="8" fill="#1e1e2e"/>
+<rect x="40" y="60" width="280" height="24" rx="8" fill="#cba6f7"/>
+<text x="40" y="50" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="12">impact 70%</text>
+<rect x="40" y="120" width="400" height="24" rx="8" fill="#1e1e2e"/>
+<rect x="40" y="120" width="200" height="24" rx="8" fill="#b4befe"/>
+<text x="40" y="110" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="12">risk 50%</text>
+<rect x="40" y="180" width="400" height="70" rx="14" fill="#181825" stroke="#cba6f7" stroke-width="1.5"/>
+<text x="60" y="222" fill="#cdd6f4" font-family="ui-monospace,monospace" font-size="20">VERDICT: ship with guardrails</text>
 </svg>

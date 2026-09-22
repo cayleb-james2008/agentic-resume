@@ -253,12 +253,12 @@
     if (!mosaic) return;
 
     var items = [
-      { id: 1, name: "Dawn Elixir", cat: "elixir", tone: "#e0b48a" },
-      { id: 2, name: "Forge Kit", cat: "kit", tone: "#b8895f" },
-      { id: 3, name: "Caliper Tool", cat: "tool", tone: "#f0c9a0" },
-      { id: 4, name: "Night Tonic", cat: "elixir", tone: "#6b4a36" },
-      { id: 5, name: "Ledger Kit", cat: "kit", tone: "#8fb387" },
-      { id: 6, name: "Probe Tool", cat: "tool", tone: "#ead9c8" }
+      { id: 1, name: "Dawn Elixir", cat: "elixir", tone: "#cba6f7" },
+      { id: 2, name: "Forge Kit", cat: "kit", tone: "#fab387" },
+      { id: 3, name: "Caliper Tool", cat: "tool", tone: "#b4befe" },
+      { id: 4, name: "Night Tonic", cat: "elixir", tone: "#585b70" },
+      { id: 5, name: "Ledger Kit", cat: "kit", tone: "#a6e3a1" },
+      { id: 6, name: "Probe Tool", cat: "tool", tone: "#bac2de" }
     ];
     var filter = "all";
     var selected = null;

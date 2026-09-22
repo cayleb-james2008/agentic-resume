@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cayleb Alvarez-James — Portfolio</title>
   <meta name="description" content="Cayleb Alvarez-James — AI architect and engineer. Play in-page demos for agents, research, decisions, vault simulation, and storefront work." />
-  <meta name="theme-color" content="#140f0c" />
+  <meta name="theme-color" content="#11111b" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,8 +33,9 @@
   <section class="scroll-hero" id="scroll-hero" aria-label="Scroll story">
     <div class="scroll-hero__track">
       <div class="scroll-hero__sticky">
-        <canvas id="hero-canvas" class="scroll-hero__canvas" width="1200" height="675" aria-hidden="true"></canvas>
-        <img class="scroll-hero__poster" src="assets/img/hero-poster.svg" alt="Mocha workspace poster — agent console on a warm desk" width="1200" height="675" />
+        <video id="hero-video" class="scroll-hero__video" src="assets/video/hero-reel.mp4" muted playsinline preload="auto" poster="assets/img/hero-poster.svg" aria-hidden="true"></video>
+        <canvas id="hero-canvas" class="scroll-hero__canvas" width="1200" height="675" aria-hidden="true" hidden></canvas>
+        <img class="scroll-hero__poster" src="assets/img/hero-poster.svg" alt="Catppuccin mocha workspace poster — agent console with mauve glow" width="1200" height="675" />
         <div class="scroll-hero__overlay wrap">
           <p class="eyebrow hero-line">Available for work</p>
           <h1 class="hero-line">Agents, tooling, and product surfaces — shipping now.</h1>
@@ -55,7 +56,7 @@
   <main id="main" class="wrap">
     <section class="reveal" aria-labelledby="story-cap">
       <h2 id="story-cap"><span class="marker" aria-hidden="true">00</span> The scroll story</h2>
-      <p class="sub">Five beats: spawn agents → research → decide → vault gate → storefront. Motion is scroll-linked; under reduced-motion you get the static poster above.</p>
+      <p class="sub">Five beats: spawn agents → research → decide → vault gate → storefront. The hero is a real MP4 reel — scroll scrubs the timeline; reduced-motion keeps the poster and a paused first frame.</p>
     </section>
 
     <section class="reveal reveal-delay-1" id="demos" aria-labelledby="demos-heading">

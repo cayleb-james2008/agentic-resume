@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" role="img" aria-label="Mocha mascot — steaming espresso cup with a confident wink">
+  <defs>
+    <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0c9a0"/>
+      <stop offset="55%" stop-color="#e0b48a"/>
+      <stop offset="100%" stop-color="#b8895f"/>
+    </linearGradient>
+    <linearGradient id="foam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7efe6"/>
+      <stop offset="100%" stop-color="#ead9c8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#f0c9a0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#140f0c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="140" r="110" fill="url(#glow)"/>
+  <!-- steam -->
+  <path d="M88 58c0-14 10-22 10-34" fill="none" stroke="#ead9c8" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <path d="M112 52c0-16 12-26 12-40" fill="none" stroke="#f0c9a0" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+  <path d="M136 58c0-14 10-22 10-34" fill="none" stroke="#ead9c8" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <!-- cup body -->
+  <path d="M52 110h136c4 0 8 4 8 9v78c0 36-32 62-76 62s-76-26-76-62v-78c0-5 4-9 8-9z" fill="url(#cup)"/>
+  <ellipse cx="120" cy="110" rx="68" ry="18" fill="url(#foam)"/>
+  <!-- latte art swirl -->
+  <path d="M120 98c-18 6-28 16-28 26 0 14 14 22 28 22s28-8 28-22c0-10-10-20-28-26z" fill="#b8895f" opacity="0.35"/>
+  <path d="M120 108c-8 4-12 10-12 15 0 8 6 12 12 12s12-4 12-12c0-5-4-11-12-15z" fill="#6b4a36" opacity="0.45"/>
+  <!-- handle -->
+  <path d="M196 128c28 4 40 28 28 52-8 16-28 24-44 20" fill="none" stroke="#e0b48a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M196 128c28 4 40 28 28 52-8 16-28 24-44 20" fill="none" stroke="#f7efe6" stroke-width="5" stroke-linecap="round" opacity="0.25"/>
+  <!-- face -->
+  <circle cx="98" cy="168" r="7" fill="#140f0c"/>
+  <path d="M138 162c6 2 10 8 8 14" fill="none" stroke="#140f0c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M104 188c10 10 28 10 38 0" fill="none" stroke="#140f0c" stroke-width="4" stroke-linecap="round"/>
+  <!-- cheek -->
+  <circle cx="86" cy="180" r="6" fill="#c97a5a" opacity="0.45"/>
+  <!-- saucer -->
+  <ellipse cx="120" cy="258" rx="78" ry="12" fill="#6b4a36" opacity="0.55"/>
+  <ellipse cx="120" cy="254" rx="70" ry="8" fill="#b8895f" opacity="0.4"/>
+</svg>

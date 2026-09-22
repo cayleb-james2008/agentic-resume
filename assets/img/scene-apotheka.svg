@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="apotheka — Storefront mosaic">
+<rect width="480" height="300" rx="20" fill="#140f0c"/>
+<rect x="1" y="1" width="478" height="298" rx="19" fill="none" stroke="#ead9c8" stroke-opacity="0.25"/>
+<text x="24" y="32" fill="#f7efe6" font-family="Syne,system-ui,sans-serif" font-size="20" font-weight="700">apotheka</text>
+<text x="24" y="52" fill="#a89888" font-family="DM Sans,system-ui,sans-serif" font-size="12">Storefront mosaic</text>
+<rect x="40" y="50" width="120" height="100" rx="12" fill="#3a3027" stroke="#e0b48a" stroke-width="1.5" stroke-opacity="0.35"/>
+<rect x="180" y="50" width="120" height="100" rx="12" fill="#2e261f" stroke="#e0b48a" stroke-width="1.5" stroke-opacity="0.35"/>
+<rect x="320" y="50" width="120" height="100" rx="12" fill="#3a3027" stroke="#e0b48a" stroke-width="1.5" stroke-opacity="0.35"/>
+<rect x="40" y="170" width="120" height="100" rx="12" fill="#2e261f" stroke="#e0b48a" stroke-width="1.5" stroke-opacity="0.35"/>
+<rect x="180" y="170" width="120" height="100" rx="12" fill="#3a3027" stroke="#e0b48a" stroke-width="1.5" stroke-opacity="0.35"/>
+<rect x="320" y="170" width="120" height="100" rx="12" fill="#2e261f" stroke="#e0b48a" stroke-width="1.5" stroke-opacity="0.35"/>
+<circle cx="100" cy="90" r="22" fill="#e0b48a" opacity="0.5"/>
+<circle cx="240" cy="90" r="22" fill="#f0c9a0" opacity="0.45"/>
+<circle cx="380" cy="90" r="22" fill="#b8895f" opacity="0.55"/>
+</svg>

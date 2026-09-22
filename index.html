@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cayleb Alvarez-James — Portfolio</title>
-  <meta name="description" content="Cayleb Alvarez-James — AI architect and engineer. Agents, tooling, and product work ready for a team." />
+  <meta name="description" content="Cayleb Alvarez-James — AI architect and engineer. Play in-page demos for agents, research, decisions, vault simulation, and storefront work." />
   <meta name="theme-color" content="#140f0c" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,70 +29,229 @@
     </div>
   </header>
 
-  <main id="main" class="wrap">
-    <section class="hero reveal">
-      <p class="eyebrow">Available for work</p>
-      <h1>Agents, tooling, and product surfaces — shipping now.</h1>
-      <p class="lede">
-        I’m Cayleb Alvarez-James — AI architect and engineer. I build systems you can run,
-        read, and trust: clear interfaces, working demos, and docs that get a new teammate unblocked fast.
-      </p>
-      <div class="cta-row">
-        <a class="btn primary" href="projects.html">See the work</a>
-        <a class="btn" href="Cayleb-James-resume.pdf">Download resume</a>
-        <a class="btn" href="https://github.com/cayleb-james2008" rel="noopener noreferrer" target="_blank">GitHub</a>
+  <!-- Scroll-linked cinematic hero -->
+  <section class="scroll-hero" id="scroll-hero" aria-label="Scroll story">
+    <div class="scroll-hero__track">
+      <div class="scroll-hero__sticky">
+        <canvas id="hero-canvas" class="scroll-hero__canvas" width="1200" height="675" aria-hidden="true"></canvas>
+        <img class="scroll-hero__poster" src="assets/img/hero-poster.svg" alt="Mocha workspace poster — agent console on a warm desk" width="1200" height="675" />
+        <div class="scroll-hero__overlay wrap">
+          <p class="eyebrow hero-line">Available for work</p>
+          <h1 class="hero-line">Agents, tooling, and product surfaces — shipping now.</h1>
+          <p class="lede hero-line">I’m Cayleb Alvarez-James — AI architect and engineer. Scroll the story, then play a demo without leaving the page.</p>
+          <div class="cta-row hero-line">
+            <a class="btn primary" href="#demos">Try a demo</a>
+            <a class="btn" href="Cayleb-James-resume.pdf">Download resume</a>
+            <a class="btn" href="https://github.com/cayleb-james2008" rel="noopener noreferrer" target="_blank">GitHub</a>
+          </div>
+          <p class="scroll-hero__hint" id="scroll-hint" aria-live="polite">Scroll to scrub the story →</p>
+          <div class="scroll-hero__progress" aria-hidden="true"><span id="hero-progress"></span></div>
+        </div>
+        <img class="scroll-hero__mascot" src="assets/img/mocha-mascot.svg" alt="" width="120" height="140" />
       </div>
+    </div>
+  </section>
+
+  <main id="main" class="wrap">
+    <section class="reveal" aria-labelledby="story-cap">
+      <h2 id="story-cap"><span class="marker" aria-hidden="true">00</span> The scroll story</h2>
+      <p class="sub">Five beats: spawn agents → research → decide → vault gate → storefront. Motion is scroll-linked; under reduced-motion you get the static poster above.</p>
     </section>
 
-    <section class="reveal reveal-delay-1" aria-labelledby="featured-heading">
-      <h2 id="featured-heading"><span class="marker" aria-hidden="true">01</span> Selected work</h2>
-      <p class="sub">Recent builds — open the repo or case study and try it yourself.</p>
+    <section class="reveal reveal-delay-1" id="demos" aria-labelledby="demos-heading">
+      <h2 id="demos-heading"><span class="marker" aria-hidden="true">01</span> Play the work</h2>
+      <p class="sub">Real controls — state changes on this page. Touch-friendly at 390px. Demos are labeled; they are not live production systems.</p>
+
+      <!-- DOTZ -->
+      <article class="demo-panel reveal" id="demo-dotz" data-demo="dotz">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-dotz.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · agent runtime</span>
+            <h3>dotz — agent console</h3>
+            <p>Spawn agents, run a fake pipeline, watch the log. Flagship runtime energy in a pocket UI.</p>
+            <p class="meta"><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/dotz</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="demo-toolbar">
+            <button type="button" class="btn demo-btn" data-dotz-spawn="scout">Spawn scout</button>
+            <button type="button" class="btn demo-btn" data-dotz-spawn="builder">Spawn builder</button>
+            <button type="button" class="btn demo-btn" data-dotz-spawn="critic">Spawn critic</button>
+            <button type="button" class="btn primary demo-btn" data-dotz-run>Run pipeline</button>
+            <button type="button" class="btn demo-btn" data-dotz-clear>Clear</button>
+          </div>
+          <p class="demo-status" id="dotz-status" aria-live="polite">Agents: 0 · Pipeline idle</p>
+          <pre class="demo-log" id="dotz-log" tabindex="0" aria-label="dotz console log"><code>$ ready — spawn an agent to begin</code></pre>
+        </div>
+      </article>
+
+      <!-- SOPHOS -->
+      <article class="demo-panel reveal" id="demo-sophos" data-demo="sophos">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-sophos.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · research</span>
+            <h3>sophos — research desk</h3>
+            <p>Ask a query, get sourced cards, verify or reject each claim. Discipline over vibes.</p>
+            <p class="meta"><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/sophos</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <form class="demo-form" id="sophos-form">
+            <label class="sr-only" for="sophos-query">Research query</label>
+            <input id="sophos-query" class="demo-input" type="search" enterkeyhint="search" autocomplete="off" placeholder="e.g. agent memory patterns" value="agent memory patterns" />
+            <button type="submit" class="btn primary demo-btn">Run research</button>
+          </form>
+          <div class="source-grid" id="sophos-cards" aria-live="polite"></div>
+          <p class="demo-status" id="sophos-status">No cards yet — run a query.</p>
+        </div>
+      </article>
+
+      <!-- SOLOMON -->
+      <article class="demo-panel reveal" id="demo-solomon" data-demo="solomon">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-solomon.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · decisions</span>
+            <h3>solomon — decision bench</h3>
+            <p>Pick a scenario, weigh impact vs risk, get a structured verdict.</p>
+            <p class="meta"><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/solomon</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <label class="demo-label" for="solomon-scenario">Scenario</label>
+          <select id="solomon-scenario" class="demo-input">
+            <option value="ship">Ship feature behind a flag</option>
+            <option value="refactor">Big refactor before launch</option>
+            <option value="hire">Hire contractor vs wait</option>
+          </select>
+          <div class="slider-row">
+            <label for="solomon-impact">Impact <span id="solomon-impact-val">70</span>%</label>
+            <input type="range" id="solomon-impact" min="0" max="100" value="70" />
+          </div>
+          <div class="slider-row">
+            <label for="solomon-risk">Risk <span id="solomon-risk-val">40</span>%</label>
+            <input type="range" id="solomon-risk" min="0" max="100" value="40" />
+          </div>
+          <button type="button" class="btn primary demo-btn" id="solomon-judge">Weigh verdict</button>
+          <div class="verdict-box" id="solomon-verdict" aria-live="polite" role="status">Adjust weights, then weigh.</div>
+        </div>
+      </article>
+
+      <!-- PDM FORGE -->
+      <article class="demo-panel reveal" id="demo-pdm" data-demo="pdm">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-pdm.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · product / ops</span>
+            <h3>PDM Forge — vault simulator</h3>
+            <p>Toy check-in / gate / ledger. Explicitly a simulator — not a live vault.</p>
+            <p class="meta"><a href="projects/pdm-forge.html">Full case study</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="banner sim-banner" role="status">
+            <strong class="label">SIMULATOR</strong>
+            <p>No SolidWorks execution, no vault connection, no production users claimed. This toy mirrors the case-study honesty banner.</p>
+          </div>
+          <div class="demo-toolbar">
+            <button type="button" class="btn demo-btn" data-pdm="checkout">Check out part</button>
+            <button type="button" class="btn demo-btn" data-pdm="gate">Run gate</button>
+            <button type="button" class="btn primary demo-btn" data-pdm="release">Release (sim)</button>
+            <button type="button" class="btn demo-btn" data-pdm="tamper">Inject tamper</button>
+            <button type="button" class="btn demo-btn" data-pdm="reset">Reset</button>
+          </div>
+          <dl class="vault-stats" id="pdm-stats">
+            <div><dt>State</dt><dd id="pdm-state">WIP</dd></div>
+            <div><dt>Part</dt><dd id="pdm-part">—</dd></div>
+            <div><dt>Gate</dt><dd id="pdm-gate">idle</dd></div>
+            <div><dt>Ledger</dt><dd id="pdm-ledger">empty</dd></div>
+          </dl>
+          <pre class="demo-log" id="pdm-log" tabindex="0" aria-label="vault simulator log"><code>$ SIMULATOR ready</code></pre>
+        </div>
+      </article>
+
+      <!-- APOTHEKA -->
+      <article class="demo-panel reveal" id="demo-apotheka" data-demo="apotheka">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-apotheka.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · storefront</span>
+            <h3>apotheka-site — storefront mosaic</h3>
+            <p>Filter and browse a miniature catalog mosaic. Product-surface craft, not a live shop.</p>
+            <p class="meta"><a href="https://github.com/cayleb-james2008/apotheka-site" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/apotheka-site</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="filter-chips" role="group" aria-label="Catalog filters">
+            <button type="button" class="chip is-active demo-btn" data-filter="all">All</button>
+            <button type="button" class="chip demo-btn" data-filter="elixir">Elixirs</button>
+            <button type="button" class="chip demo-btn" data-filter="tool">Tools</button>
+            <button type="button" class="chip demo-btn" data-filter="kit">Kits</button>
+          </div>
+          <div class="mosaic" id="apotheka-mosaic" aria-live="polite"></div>
+          <p class="demo-status" id="apotheka-status">Showing all items</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="reveal reveal-delay-2" aria-labelledby="featured-heading">
+      <h2 id="featured-heading"><span class="marker" aria-hidden="true">02</span> Selected work</h2>
+      <p class="sub">Repos and case study — equal card weight, unequal ambition. Open anything you want to verify.</p>
       <div class="cards" style="margin-top: 24px;">
         <article class="card reveal reveal-delay-1">
           <span class="tag">Agent runtime</span>
           <h3><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">dotz</a></h3>
-          <p>Flagship agent runtime and workflow tooling — designed for reliability, clear interfaces, and a path from clone to first run.</p>
-          <p class="meta"><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/dotz</a></p>
+          <p>Flagship agent runtime and workflow tooling — reliability, clear interfaces, clone-to-first-run path.</p>
+          <p class="meta"><a href="#demo-dotz">Play demo</a> · <a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">Repo</a></p>
         </article>
         <article class="card reveal reveal-delay-2">
           <span class="tag">Research agent</span>
           <h3><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">sophos</a></h3>
-          <p>Research-oriented agent stack with disciplined sourcing and verification habits built into the loop.</p>
-          <p class="meta"><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/sophos</a></p>
+          <p>Research-oriented agent stack with sourcing and verification built into the loop.</p>
+          <p class="meta"><a href="#demo-sophos">Play demo</a> · <a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Repo</a></p>
         </article>
         <article class="card reveal reveal-delay-3">
           <span class="tag">Systems</span>
           <h3><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">solomon</a></h3>
           <p>Systems and decision tooling — structured judgment where vague automation usually fails.</p>
-          <p class="meta"><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/solomon</a></p>
+          <p class="meta"><a href="#demo-solomon">Play demo</a> · <a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Repo</a></p>
         </article>
         <article class="card reveal reveal-delay-4">
           <span class="tag">Product / ops</span>
           <h3><a href="projects/pdm-forge.html">PDM Forge</a></h3>
-          <p>Operational product work around planning and delivery — documented case study with constraints, tradeoffs, and outcomes.</p>
-          <p class="meta"><a href="projects/pdm-forge.html">Case study</a></p>
+          <p>Governed vault-simulator pipeline — constraints, gate, ledger, and a written case study.</p>
+          <p class="meta"><a href="#demo-pdm">Play demo</a> · <a href="projects/pdm-forge.html">Case study</a></p>
         </article>
       </div>
       <p style="margin-top: 20px;"><a href="projects.html">All projects →</a></p>
     </section>
 
-    <section class="reveal reveal-delay-2" aria-labelledby="how-heading">
-      <h2 id="how-heading"><span class="marker" aria-hidden="true">02</span> How I work</h2>
-      <ul class="principles">
-        <li><strong>Ship something runnable.</strong> Clone, install, first success — without a private walkthrough.</li>
-        <li><strong>Say what it does.</strong> Scope and limits in the README, not buried in a footnote.</li>
-        <li><strong>Keep the checks honest.</strong> Green CI means the gate passed; red gets fixed.</li>
-      </ul>
-      <p style="margin-top: 16px;"><a href="principles.html">Full principles →</a></p>
+    <section class="reveal reveal-delay-2 about-mascot" aria-labelledby="how-heading">
+      <div class="about-mascot__text">
+        <h2 id="how-heading"><span class="marker" aria-hidden="true">03</span> How I work</h2>
+        <ul class="principles">
+          <li><strong>Ship something runnable.</strong> Clone, install, first success — without a private walkthrough.</li>
+          <li><strong>Say what it does.</strong> Scope and limits in the README, not buried in a footnote.</li>
+          <li><strong>Keep the checks honest.</strong> Green CI means the gate passed; red gets fixed.</li>
+        </ul>
+        <p style="margin-top: 16px;"><a href="principles.html">Full principles →</a></p>
+      </div>
+      <figure class="about-mascot__fig">
+        <img src="assets/img/mocha-mascot.svg" alt="Mocha mascot — steaming espresso cup character with a wink" width="200" height="233" />
+        <figcaption class="meta">House mascot — mocha energy, not generic AI purple.</figcaption>
+      </figure>
     </section>
   </main>
 
   <footer class="site">
     <div class="wrap">
       <p>Cayleb Alvarez-James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
-      <p class="meta">Open to full-time and contract roles.</p>
+      <p class="meta">Open to full-time and contract roles · <a href="https://github.com/cayleb-james2008" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008</a></p>
     </div>
   </footer>
   <script src="site.js" defer></script>
+  <script src="demos.js" defer></script>
 </body>
 </html>

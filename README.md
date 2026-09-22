@@ -1,16 +1,17 @@
 # Agentic Resume
 
-Personal portfolio for [Cayleb Alvarez-James](https://github.com/cayleb-james2008).
+Personal portfolio site for [Cayleb Alvarez-James](https://github.com/cayleb-james2008).
 
-- **Stack:** static HTML / CSS / JS · [Shoelace](https://shoelace.style/) (CDN) · vendored [anime.js](https://animejs.com/) · zero npm build
-- **Look:** Catppuccin Mocha dark purple · grungy Y2K / cyberpunk / anime (not soft kawaii)
-- **Honesty:** simulator vs real is labelled; claims without receipts get cut
+- **Stack:** plain HTML, CSS, and JS — Shoelace CDN + vendored anime.js
+- **Look:** Catppuccin Mocha purple · Y2K / cyberpunk grit · cyber-nomad character
+- **Honesty rule:** simulator vs real is labelled; claims without receipts get cut
 
-## IA (v4 restart)
+## What works
 
-Dock → Broadcast CRT (`<video>`) → Channel dial → Lab console (tabbed deep demos) → Contact.
-
-Not a sticky-scroll demo wall. Pre-v4 pages live under `archive/pre-v4/`.
+- Home lab console with five deep truthful demos (dotz, Sophos, Solomon, PDM simulator, apotheka lookbook)
+- Projects evidence board + Principles terminal dump
+- Real MP4 hero reel with poster + reduced-motion off-ramp
+- Resume PDF download from the dock
 
 ## Local preview
 

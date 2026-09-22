@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Principles — Cayleb Alvarez-James</title>
+  <meta name="description" content="How Cayleb Alvarez-James builds and ships software." />
+  <meta name="theme-color" content="#11111b" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="site-name" href="index.html">Cayleb Alvarez-James</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="main" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="principles.html" aria-current="page">Principles</a></li>
+          <li><a href="Cayleb-James-resume.pdf">Resume PDF</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero reveal">
+      <p class="eyebrow">Principles</p>
+      <h1>How I show up on a team.</h1>
+      <p class="lede">
+        Simple habits I bring to shipping software — clear status, runnable work, and reviews that stay useful.
+      </p>
+    </section>
+
+    <section class="reveal reveal-delay-1">
+      <ul class="principles">
+        <li>
+          <strong>Start with a runnable path.</strong>
+          Clone, install, run — or open a live URL — before anyone has to ask for a walkthrough.
+        </li>
+        <li>
+          <strong>Write the real scope.</strong>
+          What’s done, what’s next, and what isn’t claimed yet belong in the README.
+        </li>
+        <li>
+          <strong>Let CI speak.</strong>
+          Green on the default branch is the bar. Red means fix it, then move on.
+        </li>
+        <li>
+          <strong>Prefer boring interfaces.</strong>
+          Clear inputs and outputs beat clever abstractions when a teammate has to pick up the work.
+        </li>
+        <li>
+          <strong>Keep the UI out of the way.</strong>
+          Motion can help; it never blocks reading. <code>prefers-reduced-motion</code> is respected.
+        </li>
+        <li>
+          <strong>Ship for phones too.</strong>
+          Primary paths work on a narrow viewport without sideways scrolling.
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p>Cayleb Alvarez-James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
+      <p class="meta">Open to full-time and contract roles.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

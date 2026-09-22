@@ -1,79 +1,76 @@
-# BUILD-NOTES — v4 complete site restart
+# Build notes — v4 complete site restart (2026-09-22)
 
-**When:** 2026-09-22 (America/New_York)  
-**Author:** Builder (executor)  
-**Brief:** `design/BRIEF-v4-restart.md` (authoritative — goals not rewritten)  
-**Deploy:** not in this pass (no Vercel). **PASS claim:** none.
+Builder pass against `design/BRIEF-v4-restart.md`. Greenfield IA + layout; not a patch of the sticky-demo-wall.
 
-## Why / what changed
+## What changed (IA)
 
-Cayleb rejected the sticky-scroll hero + stacked demo wall. This pass is a **greenfield IA**, not a patch.
-
-| Before (pre-v4) | After (v4) |
+| Before (rejected) | After (v4) |
 |---|---|
-| Sticky scroll-scrub hero | CRT **broadcast** panel with real `<video>` + Play control |
-| Stacked demo walls | **One lab console** — Shoelace `sl-tab-group` (one surface at a time) |
-| Soft mocha / latte risk | Catppuccin Mocha purple + grungy Y2K / cyberpunk stickers |
-| Custom-only controls | **Shoelace** dark theme (picked over Pico) for drawer + tabs |
-| — | Channel dial jumps the console |
+| Sticky scroll-scrub hero + stacked demo wall | CRT **broadcast** hero with play/pause `<video>` |
+| Soft mocha cup mascot | **Cyber-nomad** sticker (`assets/img/y2k/mascot-cyber-nomad.png`) |
+| Classic topbar + card grid demos | Dock chrome + **channel dial** + **one Shoelace lab console** (tabbed) |
+| Principles as plain list | Terminal / manifesto dump |
+| Projects as equal cards | Asymmetric **zine / evidence board** |
 
-Pre-v4 HTML/CSS/JS archived under `archive/pre-v4/`.
-
-## IA
-
-1. **Dock** — sticky chrome + Shoelace drawer on narrow viewports  
-2. **Broadcast** — identity + CRT video (`assets/video/hero-reel.mp4`, honest placeholder label)  
-3. **Channel dial** — five project punches → lab tab  
-4. **Lab console** — deep demos (dotz / Sophos / Solomon / PDM / apotheka)  
-5. **Boot / contact** — email, resume, projects, principles  
-
-Also: `projects.html`, `principles.html` restyled to the same dock language.
+Old HTML/CSS/JS kept under `archive/pre-v4/` for reference.
 
 ## Stack
 
-- Static HTML / CSS / JS  
-- `vendor/anime.min.js` (v3.2.2, vendored)  
-- Shoelace 2.20.1 via CDN (theme + autoloader)  
-- No React build, no npm app toolchain  
+- Static HTML / CSS / JS
+- `vendor/anime.min.js` (v3.2.2) — entrances + mascot bob; gated by `prefers-reduced-motion`
+- Shoelace 2.20.1 CDN — tabs, drawer, dark theme tokens remapped to Catppuccin Mocha
+- Fonts: Syne + DM Sans + IBM Plex Mono
 
-## Truthful copy / demos
+## Hero video
 
-Content truth remains `design/BUILD-NOTES-demos-v3.md`:
+- Real `<video src="assets/video/hero-reel.mp4">` with `poster="assets/img/hero-poster.svg"`
+- Default: poster visible until user hits **Play reel** (muted loop)
+- `prefers-reduced-motion: reduce` → poster only, play control hidden
+- **Not** scroll-linked scrub (that pattern was rejected)
 
-- **dotz** — axum+Tauri multi-agent coding dashboard; scout/planner/worker/reviewer; adversarial verify  
-- **Sophos** — Windows coding agent; prime-agent credit; beta; panel-scoped terminal green  
-- **Solomon** — RSI loop; ship-or-revert; fail-closed money_guard  
-- **PDM Forge** — SIMULATOR only (banner kept)  
-- **apotheka-site** — static Depop lookbook (STOREFRONT banner)  
+## Character system
 
-Demo element IDs unchanged so `demos.js` logic ports; UI chrome rebuilt for the console layout.
+- Primary mark: cyber-nomad (hooded wanderer, pack, handheld terminal, Y2K grit)
+- Symlink: `assets/img/stickers/mascot.png` → `../y2k/mascot-cyber-nomad.png`
+- Coffee-cup / CAFFEINE.EXE mascot **scrapped** per Cayleb art change mid-build
+- Brand chip: `NOMAD.LINK`
 
-## Motion / a11y
+## Truthful demos (preserved from HEAD 6c72a55 copy)
 
-- anime.js entrances, mascot float, tab panel mounts, CTA micro-press  
-- `prefers-reduced-motion: reduce` → `motion-off`, no anime timelines, CRT stays on **poster**, timers in demos shortened  
-- Tap targets ≥44px; mobile-first ~390px; no sticky-scroll scrub  
+| Channel | Claim |
+|---|---|
+| **dotz** | Multi-agent coding dashboard (axum+Tauri); scout/planner/worker/reviewer; adversarial verify; Windows-first |
+| **Sophos** | Windows coding agent; Prime Intellect prime-agent port (credit); Tauri+React; beta |
+| **Solomon** | RSI control plane; observe→implement→gate→ship-or-revert; fail-closed money |
+| **PDM** | SIMULATOR case study only — honesty banner |
+| **apotheka** | Static Depop/storefront lookbook — not a cart backend |
 
-## Assets
+`demos.js` keeps the deep interactive surfaces; markup IDs unchanged so logic ports cleanly into the tab panels.
 
-- Mascot: `assets/img/y2k/mascot-cyberpunk.png` (+ `assets/img/stickers/mascot.png` symlink)  
-- Vault art: `assets/img/y2k/vault-gate-cyber.png` (PDM intro)  
-- Soft / wrong-shot art quarantined under `assets/img/y2k/_rejected-*`  
-- Hero reel placeholder MP4 kept until Cayleb swaps model-generated file  
+## Mobile-first
 
-## Files
+- Layout authored around ~390px; tap targets ≥44px; horizontal overflow avoided (tables scroll inside `.table-scroll`)
+- Channel dial is a horizontal snap strip on narrow viewports
+- Shoelace drawer for nav &lt; 860px
 
-- New / replaced: `index.html`, `projects.html`, `principles.html`, `styles.css`, `site.js`, `demos.js`, `favicon.svg`, `README.md`  
-- Added: `vendor/anime.min.js`, `design/BUILD-NOTES-v4-restart.md`, `archive/pre-v4/*`  
-- Case study `projects/pdm-forge.html` kept (legacy topbar aliases in CSS)
+## Out of scope / honesty
 
-## Out of scope
+- No Vercel deploy in this pass
+- No PASS claim
+- Hero MP4 may still be a placeholder reel until Cayleb swaps a model-generated file — UI does not claim otherwise
+- Soft kawaii `assets/img/mocha-mascot.svg` left on disk unused
 
-- Vercel deploy / promotion  
-- Gauntlet PASS claim  
-- Claiming the hero MP4 is model-generated  
-- Fake shop backends / live vaults / live money  
+## Local preview
 
-## Done bar
+```bash
+cd /workspace/agentic-resume
+python3 -m http.server 8080
+# open http://localhost:8080
+```
 
-Stranger at 390 + 1280 should see a **different website** (broadcast CRT + dial + single lab console) vs the old sticky-scroll demo wall; demos still deep + honest; pushed to `origin/main`.
+## Files touched (primary)
+
+- `index.html`, `projects.html`, `principles.html`, `projects/pdm-forge.html`
+- `styles.css`, `site.js`, `demos.js` (IDs preserved)
+- `assets/img/hero-poster.svg`, `favicon.svg`, `assets/img/stickers/*`, `assets/img/y2k/mascot-cyber-nomad.png`
+- `design/BUILD-NOTES-v4-restart.md`, `archive/pre-v4/*`

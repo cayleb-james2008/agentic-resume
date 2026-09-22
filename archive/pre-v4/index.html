@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cayleb Alvarez-James — Portfolio</title>
+  <meta name="description" content="Cayleb Alvarez-James — AI architect and engineer. Multi-agent coding dashboard (dotz), Windows coding agent (Sophos), RSI fleet control plane (Solomon), and honest case studies." />
+  <meta name="theme-color" content="#11111b" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="site-name" href="index.html">Cayleb Alvarez-James</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="main" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="principles.html">Principles</a></li>
+          <li><a href="Cayleb-James-resume.pdf">Resume PDF</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Scroll-linked cinematic hero -->
+  <section class="scroll-hero" id="scroll-hero" aria-label="Scroll story">
+    <div class="scroll-hero__track">
+      <div class="scroll-hero__sticky">
+        <video id="hero-video" class="scroll-hero__video" src="assets/video/hero-reel.mp4" muted playsinline preload="auto" poster="assets/img/hero-poster.svg" aria-hidden="true"></video>
+        <canvas id="hero-canvas" class="scroll-hero__canvas" width="1200" height="675" aria-hidden="true" hidden></canvas>
+        <img class="scroll-hero__poster" src="assets/img/hero-poster.svg" alt="Catppuccin mocha workspace poster — coding dashboard with mauve glow" width="1200" height="675" />
+        <div class="scroll-hero__overlay wrap">
+          <p class="eyebrow hero-line">Available for work</p>
+          <h1 class="hero-line">Agents, tooling, and product surfaces — shipping now.</h1>
+          <p class="lede hero-line">I’m Cayleb Alvarez-James — AI architect and engineer. Scroll the story, then play a demo grounded in the real repos.</p>
+          <div class="cta-row hero-line">
+            <a class="btn primary" href="#demos">Try a demo</a>
+            <a class="btn" href="Cayleb-James-resume.pdf">Download resume</a>
+            <a class="btn" href="https://github.com/cayleb-james2008" rel="noopener noreferrer" target="_blank">GitHub</a>
+          </div>
+          <p class="scroll-hero__hint" id="scroll-hint" aria-live="polite">Scroll to scrub the story →</p>
+          <div class="scroll-hero__progress" aria-hidden="true"><span id="hero-progress"></span></div>
+        </div>
+        <img class="scroll-hero__mascot" src="assets/img/mocha-mascot.svg" alt="" width="120" height="140" />
+      </div>
+    </div>
+  </section>
+
+  <main id="main" class="wrap">
+    <section class="reveal" aria-labelledby="story-cap">
+      <h2 id="story-cap"><span class="marker" aria-hidden="true">00</span> The scroll story</h2>
+      <p class="sub">Five beats from the real stack: multi-agent coding → Windows coding agent → RSI fleet loop → vault gate → Depop storefront. Hero is a real MP4 reel — scroll scrubs the timeline; reduced-motion keeps the poster.</p>
+    </section>
+
+    <section class="reveal reveal-delay-1" id="demos" aria-labelledby="demos-heading">
+      <h2 id="demos-heading"><span class="marker" aria-hidden="true">01</span> Play the work</h2>
+      <p class="sub">Mini product surfaces — state changes on this page. Labeled demos, not live production systems. Touch-friendly at 390px.</p>
+
+      <!-- DOTZ -->
+      <article class="demo-panel reveal" id="demo-dotz" data-demo="dotz">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-dotz.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · multi-agent coding</span>
+            <h3>dotz — coding dashboard</h3>
+            <p>Native-Rust (axum + Tauri) multi-agent coding dashboard. One prompt → scout / planner / worker / reviewer on a live workflow graph, adversarial verify before land. Windows-first desktop.</p>
+            <p class="meta">Stack: Rust · axum · Tauri 2 · ONNX memory · Open Design · <a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/dotz</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="demo-toolbar">
+            <button type="button" class="btn primary demo-btn" id="dotz-run">Run pipeline</button>
+            <button type="button" class="btn demo-btn" id="dotz-reset">Reset graph</button>
+            <span class="chip chip-static" id="dotz-phase" aria-live="polite">idle</span>
+          </div>
+          <div class="wf-layout">
+            <div class="wf-graph" id="dotz-graph" role="img" aria-label="Live workflow graph with scout, planner, worker, reviewer nodes">
+              <svg class="wf-edges" viewBox="0 0 400 160" aria-hidden="true" preserveAspectRatio="none">
+                <path d="M70 40 L200 80" class="wf-edge" data-edge="scout" />
+                <path d="M70 120 L200 80" class="wf-edge" data-edge="planner" />
+                <path d="M200 80 L330 40" class="wf-edge" data-edge="worker" />
+                <path d="M200 80 L330 120" class="wf-edge" data-edge="reviewer" />
+              </svg>
+              <div class="wf-node" data-role="scout" style="--nx:12%;--ny:8%">
+                <span class="wf-role">scout</span>
+                <span class="wf-state" data-state>pending</span>
+                <div class="wf-chips" data-chips></div>
+              </div>
+              <div class="wf-node" data-role="planner" style="--nx:12%;--ny:58%">
+                <span class="wf-role">planner</span>
+                <span class="wf-state" data-state>pending</span>
+                <div class="wf-chips" data-chips></div>
+              </div>
+              <div class="wf-node wf-node--lead" data-role="lead" style="--nx:42%;--ny:34%">
+                <span class="wf-role">lead</span>
+                <span class="wf-state" data-state>ready</span>
+                <div class="wf-chips" data-chips></div>
+              </div>
+              <div class="wf-node" data-role="worker" style="--nx:72%;--ny:8%">
+                <span class="wf-role">worker</span>
+                <span class="wf-state" data-state>pending</span>
+                <div class="wf-chips" data-chips></div>
+              </div>
+              <div class="wf-node" data-role="reviewer" style="--nx:72%;--ny:58%">
+                <span class="wf-role">reviewer</span>
+                <span class="wf-state" data-state>pending</span>
+                <div class="wf-chips" data-chips></div>
+              </div>
+            </div>
+            <div class="wf-side">
+              <p class="demo-label">Session log</p>
+              <pre class="demo-log" id="dotz-log" tabindex="0" aria-label="dotz session log"><code>$ ready — run pipeline to disperse scout / planner / worker / reviewer</code></pre>
+              <p class="demo-status" id="dotz-status" aria-live="polite">Graph idle · verify gate closed</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SOPHOS -->
+      <article class="demo-panel demo-panel--sophos reveal" id="demo-sophos" data-demo="sophos">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-sophos.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · Windows coding agent</span>
+            <h3>Sophos — coding agent desktop</h3>
+            <p>Windows-native coding agent — Tauri v2 + React + Node bridge. Port of Prime Intellect prime-agent (credited). Chat sessions, agents fleet, inbox, skills, providers. Beta.</p>
+            <p class="meta">Stack: Tauri 2 · React · TypeScript · Node bridge · <a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/sophos</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body sophos-shell">
+          <div class="sophos-bar">
+            <span class="sophos-mark" aria-hidden="true">Σ</span>
+            <span class="sophos-title">Session · fix auth middleware</span>
+            <span class="sophos-provider" id="sophos-provider">provider · openrouter</span>
+          </div>
+          <div class="sophos-layout">
+            <aside class="sophos-tree" aria-label="File tree stub">
+              <p class="demo-label">Workspace</p>
+              <ul class="file-tree" id="sophos-tree">
+                <li class="is-dir">src/</li>
+                <li class="is-file is-active" data-file="src/auth/middleware.ts">·· middleware.ts</li>
+                <li class="is-file" data-file="src/auth/session.ts">·· session.ts</li>
+                <li class="is-file" data-file="tests/auth.test.ts">tests/auth.test.ts</li>
+                <li class="is-file" data-file="package.json">package.json</li>
+              </ul>
+            </aside>
+            <div class="sophos-main">
+              <div class="sophos-stream" id="sophos-stream" aria-live="polite" tabindex="0"></div>
+              <form class="sophos-composer" id="sophos-form">
+                <label class="sr-only" for="sophos-input">Message</label>
+                <input id="sophos-input" class="demo-input" type="text" autocomplete="off" placeholder="Ask the coding agent…" value="Tighten JWT expiry check and add a failing test first" />
+                <button type="submit" class="btn primary demo-btn">Send</button>
+              </form>
+              <p class="demo-status" id="sophos-status">Idle — send a prompt to stream tool calls.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SOLOMON -->
+      <article class="demo-panel reveal" id="demo-solomon" data-demo="solomon">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-solomon.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · RSI control plane</span>
+            <h3>Solomon — fleet autopilot</h3>
+            <p>Rust/Tauri RSI control plane. Per-repo lanes: observe → implement → project-native test gate → ship-or-revert. CEO planner, watchdog, honest-green ship gate, fail-closed money guard.</p>
+            <p class="meta">Stack: Rust · Tauri 2 · gated PR loops · <a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/solomon</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="demo-toolbar">
+            <button type="button" class="btn demo-btn" data-sol-step="observe">Observe</button>
+            <button type="button" class="btn demo-btn" data-sol-step="implement">Implement</button>
+            <button type="button" class="btn demo-btn" data-sol-step="gate">Run gate</button>
+            <button type="button" class="btn primary demo-btn" data-sol-step="ship">Ship / revert</button>
+            <button type="button" class="btn demo-btn" data-sol-step="money">Try money-out</button>
+            <button type="button" class="btn demo-btn" id="sol-reset">Reset lanes</button>
+          </div>
+          <div class="lane-board" id="sol-lanes" aria-live="polite"></div>
+          <div class="supervisor-box" id="sol-notes" role="status">Supervisor: waiting for a loop step.</div>
+          <p class="demo-status" id="sol-status">Pick a step — money-out is always denied (fail-closed).</p>
+        </div>
+      </article>
+
+      <!-- PDM FORGE -->
+      <article class="demo-panel reveal" id="demo-pdm" data-demo="pdm">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-pdm.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · product / ops · case study</span>
+            <h3>PDM Forge — vault simulator</h3>
+            <p>Case-study SIMULATOR of a governed vault pipeline — checkout → mutate → policy gate → ledger hash. Not a live vault.</p>
+            <p class="meta"><a href="projects/pdm-forge.html">Full case study</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="banner sim-banner" role="status">
+            <strong class="label">SIMULATOR</strong>
+            <p>No SolidWorks execution, no vault connection, no production users claimed. Honesty banner stays.</p>
+          </div>
+          <div class="demo-toolbar">
+            <button type="button" class="btn demo-btn" data-pdm="checkout">1 · Checkout</button>
+            <button type="button" class="btn demo-btn" data-pdm="mutate">2 · Mutate</button>
+            <button type="button" class="btn demo-btn" data-pdm="gate">3 · Gate</button>
+            <button type="button" class="btn primary demo-btn" data-pdm="release">4 · Ledger hash</button>
+            <button type="button" class="btn demo-btn" data-pdm="tamper">Inject tamper</button>
+            <button type="button" class="btn demo-btn" data-pdm="reset">Reset</button>
+          </div>
+          <dl class="vault-stats" id="pdm-stats">
+            <div><dt>State</dt><dd id="pdm-state">WIP</dd></div>
+            <div><dt>Part</dt><dd id="pdm-part">—</dd></div>
+            <div><dt>Revision</dt><dd id="pdm-rev">—</dd></div>
+            <div><dt>Gate</dt><dd id="pdm-gate">idle</dd></div>
+            <div><dt>Mutations</dt><dd id="pdm-muts">0</dd></div>
+            <div><dt>Ledger</dt><dd id="pdm-ledger">empty</dd></div>
+          </dl>
+          <p class="demo-label">Receipts</p>
+          <ul class="receipt-list" id="pdm-receipts" aria-live="polite"></ul>
+          <pre class="demo-log" id="pdm-log" tabindex="0" aria-label="vault simulator log"><code>$ SIMULATOR ready — checkout → mutate → gate → ledger</code></pre>
+        </div>
+      </article>
+
+      <!-- APOTHEKA -->
+      <article class="demo-panel reveal" id="demo-apotheka" data-demo="apotheka">
+        <div class="demo-panel__head">
+          <img class="demo-panel__art" src="assets/img/scene-apotheka.svg" alt="" width="480" height="300" />
+          <div>
+            <span class="tag">Demo · Depop storefront</span>
+            <h3>apotheka-site — archive storefront</h3>
+            <p>Static Depop/storefront lookbook for Apotheka (curated archive / deadstock vault). Single-page site — not an e-commerce backend.</p>
+            <p class="meta">Stack: static HTML/CSS · <a href="https://github.com/cayleb-james2008/apotheka-site" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008/apotheka-site</a></p>
+          </div>
+        </div>
+        <div class="demo-panel__body">
+          <div class="banner sim-banner" role="status">
+            <strong class="label">STOREFRONT</strong>
+            <p>Honest gallery of pages from the real static site. Checkout lives on Depop — this repo is the front door + lookbook.</p>
+          </div>
+          <div class="filter-chips" role="tablist" aria-label="Site pages">
+            <button type="button" class="chip is-active demo-btn" role="tab" aria-selected="true" data-apo="hero">01 · Hero</button>
+            <button type="button" class="chip demo-btn" role="tab" aria-selected="false" data-apo="vault">02 · Vault grid</button>
+            <button type="button" class="chip demo-btn" role="tab" aria-selected="false" data-apo="policies">03 · Policies</button>
+            <button type="button" class="chip demo-btn" role="tab" aria-selected="false" data-apo="footer">Footer / cluster</button>
+          </div>
+          <div class="apo-gallery" id="apo-gallery" aria-live="polite"></div>
+          <p class="demo-status" id="apo-status">Viewing hero — links out to Depop @apotheka.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="reveal reveal-delay-2" aria-labelledby="featured-heading">
+      <h2 id="featured-heading"><span class="marker" aria-hidden="true">02</span> Selected work</h2>
+      <p class="sub">Repos and case study — equal card weight, unequal ambition. Open anything you want to verify.</p>
+      <div class="cards" style="margin-top: 24px;">
+        <article class="card reveal reveal-delay-1">
+          <span class="tag">Multi-agent coding</span>
+          <h3><a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">dotz</a></h3>
+          <p>Native-Rust multi-agent coding dashboard (axum + Tauri). One prompt → team of coding agents on a live workflow graph; adversarial verify before land.</p>
+          <p class="meta">Rust · axum · Tauri · ONNX · <a href="#demo-dotz">Play demo</a> · <a href="https://github.com/cayleb-james2008/dotz" rel="noopener noreferrer" target="_blank">Repo</a></p>
+        </article>
+        <article class="card reveal reveal-delay-2">
+          <span class="tag">Windows coding agent</span>
+          <h3><a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Sophos</a></h3>
+          <p>Windows-native coding agent desktop — port of Prime Intellect prime-agent. Tauri v2 + React + Node bridge. Chat, agents, inbox, skills, providers. Beta.</p>
+          <p class="meta">Tauri · React · Node · <a href="#demo-sophos">Play demo</a> · <a href="https://github.com/cayleb-james2008/sophos" rel="noopener noreferrer" target="_blank">Repo</a></p>
+        </article>
+        <article class="card reveal reveal-delay-3">
+          <span class="tag">RSI control plane</span>
+          <h3><a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Solomon</a></h3>
+          <p>Fleet autopilot for recursive self-improvement. Gated loops: observe → implement → test gate → ship-or-revert. Fail-closed money guard.</p>
+          <p class="meta">Rust · Tauri · <a href="#demo-solomon">Play demo</a> · <a href="https://github.com/cayleb-james2008/solomon" rel="noopener noreferrer" target="_blank">Repo</a></p>
+        </article>
+        <article class="card reveal reveal-delay-4">
+          <span class="tag">Product / ops · SIMULATOR</span>
+          <h3><a href="projects/pdm-forge.html">PDM Forge</a></h3>
+          <p>Governed vault-simulator case study — checkout, mutate, policy gate, ledger receipts. Explicitly not a live vault.</p>
+          <p class="meta"><a href="#demo-pdm">Play demo</a> · <a href="projects/pdm-forge.html">Case study</a></p>
+        </article>
+      </div>
+      <p style="margin-top: 20px;"><a href="projects.html">All projects →</a></p>
+    </section>
+
+    <section class="reveal reveal-delay-2 about-mascot" aria-labelledby="how-heading">
+      <div class="about-mascot__text">
+        <h2 id="how-heading"><span class="marker" aria-hidden="true">03</span> How I work</h2>
+        <ul class="principles">
+          <li><strong>Ship something runnable.</strong> Clone, install, first success — without a private walkthrough.</li>
+          <li><strong>Say what it does.</strong> Scope and limits in the README, not buried in a footnote.</li>
+          <li><strong>Keep the checks honest.</strong> Green CI means the gate passed; red gets fixed.</li>
+        </ul>
+        <p style="margin-top: 16px;"><a href="principles.html">Full principles →</a></p>
+      </div>
+      <figure class="about-mascot__fig">
+        <img src="assets/img/mocha-mascot.svg" alt="Mocha mascot — steaming espresso cup character with a wink" width="200" height="233" />
+        <figcaption class="meta">House mascot — Catppuccin mocha energy.</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p>Cayleb Alvarez-James · <a href="mailto:cayleb.james2008@gmail.com">cayleb.james2008@gmail.com</a></p>
+      <p class="meta">Open to full-time and contract roles · <a href="https://github.com/cayleb-james2008" rel="noopener noreferrer" target="_blank">github.com/cayleb-james2008</a></p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+  <script src="demos.js" defer></script>
+</body>
+</html>

@@ -32,3 +32,8 @@ Canonical live URL for item 1 is the production alias actually serving the proje
 14. Hero scroll animation — scroll-linked; static under prefers-reduced-motion.
 15. In-page demos — landing has interactive demos for dotz, sophos, solomon, + PDM or apotheka; each changes on-page state.
 16. Character/imagery — original mascot + project imagery present and loadable.
+
+## Adversary amendments 2026-09-22c (restart)
+17. **Layout restart** — Site IA/layout must be a greenfield structure (not incremental CSS on the rejected layout). Verify: lead screenshot compare vs prior sticky-demo-wall pattern; distinct nav/hero/work rhythm.
+18. **Art system match** — Mascot + project marks share Y2K/cyberpunk grit with hero video poster/reel. Verify: side-by-side asset check.
+19. **anime.js + UI kit** — anime.js loaded; primary interactive controls use the chosen UI library primitives. Verify: network/script tags + DOM.

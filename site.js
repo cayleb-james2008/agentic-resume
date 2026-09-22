@@ -21,13 +21,31 @@
     });
   }
 
-  // Scroll reveal
+  // Mark hero children for staggered entrance
+  var heroes = document.querySelectorAll(".hero");
+  heroes.forEach(function (hero) {
+    Array.prototype.forEach.call(hero.children, function (child) {
+      child.classList.add("hero-line");
+    });
+  });
+
+  // Scroll reveal (+ immediate hero kick so it feels alive <1s)
   var nodes = document.querySelectorAll(".reveal");
   if (!nodes.length) return;
   if (reduce || !("IntersectionObserver" in window)) {
     nodes.forEach(function (el) { el.classList.add("is-in"); });
     return;
   }
+
+  // Hero reveals immediately on load for kinetic first impression
+  heroes.forEach(function (hero) {
+    if (hero.classList.contains("reveal")) {
+      requestAnimationFrame(function () {
+        hero.classList.add("is-in");
+      });
+    }
+  });
+
   var io = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
@@ -37,7 +55,11 @@
         }
       });
     },
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    { rootMargin: "0px 0px -6% 0px", threshold: 0.1 }
   );
-  nodes.forEach(function (el) { io.observe(el); });
+  nodes.forEach(function (el) {
+    if (!(el.classList.contains("hero") && el.classList.contains("is-in"))) {
+      io.observe(el);
+    }
+  });
 })();

@@ -3,15 +3,15 @@
 Personal portfolio site for [Cayleb Alvarez-James](https://github.com/cayleb-james2008).
 
 - **Live:** https://agentic-resume-nine.vercel.app/
-- **Stack:** plain HTML, CSS, and JS — zero dependencies
+- **Stack:** plain HTML, CSS, and JS — zero npm dependencies
 - **Honesty rule:** simulator vs real is labelled; claims without receipts get cut
 
 ## What works
 
-- Home, Projects, and Principles pages with equal-weight project cards
-- Calm mocha dark theme with motion that respects `prefers-reduced-motion`
+- Home, Projects, and Principles pages with project cards
+- Warm mocha dark theme, Syne + DM Sans, motion that respects `prefers-reduced-motion`
 - Resume PDF download from the nav
-- Peer case study for PDM Forge (not a homepage spotlight)
+- Peer case study for PDM Forge
 
 ## Local preview
 

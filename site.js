@@ -206,54 +206,20 @@
       if (!el.classList.contains("is-in")) io.observe(el);
     });
 
-    // Mascot float + occasional RGB glitch (cyber sticker)
-    var mascots = $all(".crt__mascot, .boot__mascot, .brand__mark");
-    if (mascots.length && typeof anime === "function") {
+    // Outline mark — no sticker bob/glitch (prefers calm brand)
+    var marks = $all(".brand__mark, .boot__mascot");
+    if (marks.length && typeof anime === "function" && !reduce) {
       anime({
-        targets: mascots,
-        translateY: [0, -8],
-        rotate: ["6deg", "3deg"],
+        targets: marks,
+        opacity: [0.85, 1],
+        duration: 1800,
         direction: "alternate",
         loop: true,
-        duration: 2400,
         easing: "easeInOutSine"
       });
-      setInterval(function () {
-        if (document.hidden) return;
-        anime({
-          targets: mascots,
-          translateX: [
-            { value: -3, duration: 40 },
-            { value: 3, duration: 40 },
-            { value: -2, duration: 40 },
-            { value: 0, duration: 40 }
-          ],
-          filter: [
-            { value: "hue-rotate(22deg) saturate(1.4)", duration: 70 },
-            { value: "none", duration: 110 }
-          ],
-          easing: "linear"
-        });
-      }, 5200);
     }
 
-    // CTA hover / press micro-interactions
-    if (typeof anime === "function") {
-      $all(".btn, .channel, .cta-row a").forEach(function (el) {
-        el.addEventListener("mouseenter", function () {
-          anime({ targets: el, scale: 1.04, duration: 180, easing: "easeOutQuad" });
-        });
-        el.addEventListener("mouseleave", function () {
-          anime({ targets: el, scale: 1, duration: 220, easing: "easeOutQuad" });
-        });
-        el.addEventListener("mousedown", function () {
-          anime({ targets: el, scale: 0.96, duration: 80, easing: "easeInQuad" });
-        });
-        el.addEventListener("mouseup", function () {
-          anime({ targets: el, scale: 1.02, duration: 120, easing: "easeOutQuad" });
-        });
-      });
-    }
+
   })();
 
   /* ---------- Dock scroll state ---------- */

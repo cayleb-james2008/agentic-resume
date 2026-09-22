@@ -74,3 +74,7 @@ python3 -m http.server 8080
 - `styles.css`, `site.js`, `demos.js` (IDs preserved)
 - `assets/img/hero-poster.svg`, `favicon.svg`, `assets/img/stickers/*`, `assets/img/y2k/mascot-cyber-nomad.png`
 - `design/BUILD-NOTES-v4-restart.md`, `archive/pre-v4/*`
+
+## Art follow-up (same day) — outline logo
+
+Cayleb direction mid-pass: drop heavy Y2K grit for hero/logo. Primary brand is now the **clean nomad outline** (`assets/img/logo/nomad-mark.svg`) — mauve strokes on dark Mocha, negative space. Painted sticker PNG demoted; CRT overlay sticker removed; global scanline/halftone wash removed.

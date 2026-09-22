@@ -1,31 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Hero poster — CRT broadcast offline">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#11111b"/>
-      <stop offset="55%" stop-color="#1e1e2e"/>
-      <stop offset="100%" stop-color="#181825"/>
-    </linearGradient>
-    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#cba6f7" stop-opacity=".15"/>
-      <stop offset="50%" stop-color="#f5c2e7" stop-opacity=".35"/>
-      <stop offset="100%" stop-color="#b4befe" stop-opacity=".2"/>
-    </linearGradient>
-    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect width="4" height="2" fill="#000" opacity=".35"/>
-    </pattern>
-  </defs>
-  <rect width="1200" height="675" fill="url(#bg)"/>
-  <rect width="1200" height="675" fill="url(#glow)"/>
-  <rect width="1200" height="675" fill="url(#scan)" opacity=".5"/>
-  <g fill="none" stroke="#cba6f7" stroke-opacity=".45">
-    <rect x="48" y="48" width="1104" height="579" rx="8"/>
-    <rect x="64" y="64" width="1072" height="547" rx="4" stroke-opacity=".25"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Hero poster — nomad broadcast">
+  <rect width="1200" height="675" fill="#11111b"/>
+  <rect x="48" y="48" width="1104" height="579" rx="12" fill="none" stroke="#313244" stroke-width="1"/>
+  <!-- outline mark -->
+  <g transform="translate(96,120) scale(2.2)" fill="none">
+    <path d="M22 26c0-8 4.5-14 10-14s10 6 10 14c0 3-1 5.5-2.5 7.5" stroke="#cba6f7" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M26 28c1.5 4 4 6 6 6s4.5-2 6-6" stroke="#b4befe" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="29.2" cy="27.2" r="1.1" fill="#cba6f7" stroke="none"/>
+    <circle cx="34.8" cy="27.2" r="1.1" fill="#cba6f7" stroke="none"/>
+    <path d="M24 36.5c2 8 5.5 14 8 14s6-6 8-14" stroke="#cba6f7" stroke-width="1.75" stroke-linecap="round"/>
+    <path d="M40 34c4 .5 7 3 7 7.5S44 48 40 48.5" stroke="#b4befe" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M45.5 34.5l2-5" stroke="#f5c2e7" stroke-width="1.25" stroke-linecap="round"/>
+    <circle cx="47.8" cy="28.8" r="1.2" fill="#f5c2e7" stroke="none"/>
+    <rect x="17" y="38" width="9" height="12" rx="1.4" stroke="#cba6f7" stroke-width="1.5"/>
   </g>
-  <text x="96" y="140" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="22">CH-07 · NOMAD LINK</text>
-  <text x="96" y="220" fill="#cba6f7" font-family="ui-sans-serif,system-ui,sans-serif" font-size="64" font-weight="800">CYBER-NOMAD</text>
-  <text x="96" y="280" fill="#f5c2e7" font-family="ui-monospace,monospace" font-size="28">AGENTS · TOOLING · PRODUCT SURFACES</text>
-  <text x="96" y="560" fill="#6c7086" font-family="ui-monospace,monospace" font-size="18">SIGNAL STANDBY · PRESS PLAY</text>
-  <circle cx="1040" cy="160" r="48" fill="#cba6f7" opacity=".2"/>
-  <circle cx="1040" cy="160" r="28" fill="#f5c2e7" opacity=".55"/>
-  <polygon points="1030,145 1030,175 1058,160" fill="#11111b"/>
+  <text x="280" y="200" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="18" letter-spacing="4">CH-07 · NOMAD</text>
+  <text x="280" y="270" fill="#cdd6f4" font-family="ui-sans-serif,system-ui,sans-serif" font-size="56" font-weight="700">Clean signal.</text>
+  <text x="280" y="330" fill="#a6adc8" font-family="ui-monospace,monospace" font-size="22">Agents · tooling · product surfaces</text>
+  <text x="96" y="580" fill="#585b70" font-family="ui-monospace,monospace" font-size="16">STANDBY · PRESS PLAY</text>
 </svg>

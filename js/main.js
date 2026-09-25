@@ -1,4 +1,4 @@
-/* One local decorative dotz stamp reveal; primary content is never hidden. */
+/* The static portfolio only uses JavaScript for the year and mobile navigation. */
 (function () {
   "use strict";
 
@@ -71,20 +71,4 @@
     });
   }
 
-  var signatureCard = document.querySelector(".work-card--flagship");
-  // CSS limits both signature states to the aria-hidden stamp; content stays visible.
-  var motionAllowed = window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
-  if (!signatureCard || !motionAllowed || !("IntersectionObserver" in window)) return;
-
-  signatureCard.classList.add("signature-pending");
-  var reveal = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      signatureCard.classList.remove("signature-pending");
-      signatureCard.classList.add("signature-visible");
-      reveal.disconnect();
-    });
-  }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
-  reveal.observe(signatureCard);
 })();

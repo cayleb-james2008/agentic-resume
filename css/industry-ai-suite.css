@@ -1,4 +1,4 @@
-/* Industry AI suite additions — inherits the locked v5 Catppuccin tokens. */
+/* Shared project, evidence, and status grammar on the civic works-record tokens. */
 .work-card__actions {
   display: flex;
   flex-wrap: wrap;
@@ -92,7 +92,7 @@
   border: 1px solid var(--color-surface-1);
   color: var(--color-accent);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   line-height: 1.4;
   letter-spacing: 0.04em;
 }
@@ -176,10 +176,8 @@
   display: block;
   margin-bottom: 0.25rem;
   color: var(--color-accent);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--text-small);
+  font-weight: 700;
 }
 
 .craft-section { background: var(--color-crust); }
@@ -223,10 +221,8 @@
 .evidence-case__index {
   margin: 0;
   color: var(--color-accent);
-  font-family: var(--font-mono);
-  font-size: var(--text-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--text-small);
+  font-weight: 700;
 }
 
 .evidence-case__head h3 {
@@ -242,7 +238,7 @@
   margin: 0;
   color: var(--color-subtext);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
 }
 
 .evidence-facts {
@@ -261,10 +257,8 @@
 .evidence-facts dt {
   margin-bottom: var(--space-1);
   color: var(--color-accent);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: var(--text-small);
+  font-weight: 700;
 }
 
 .evidence-facts dd {
@@ -353,7 +347,7 @@
   .workflow-heading { grid-column: auto; }
 }
 
-/* P3 portfolio refinements: keep the inherited Catppuccin Mocha system. */
+/* Shared navigation and home composition refinements. */
 .brand { min-height: 44px; }
 .nav a:not(.btn) {
   display: inline-flex;
@@ -372,10 +366,8 @@
   align-items: center;
   min-height: 44px;
 }
-.hero__media,
 .work-card__visual,
 .case-hero__visual { margin: 0; }
-.hero__media-cap,
 .work-card__meta { color: var(--color-subtext); }
 .suite-lead,
 .evidence-lead {
@@ -430,7 +422,7 @@
   margin: var(--space-2) 0 0;
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   line-height: 1.55;
 }
 .suite-repository { margin: var(--space-5) 0 0; }
@@ -441,37 +433,56 @@
 .resume-section code { overflow-wrap: anywhere; }
 
 .project-hero {
-  padding: var(--space-7) 0 var(--space-5);
-  background: var(--color-crust);
+  padding: clamp(2.5rem, 5vw, 4rem) 0 var(--space-5);
+  background: var(--page);
+  border-top: 4px solid var(--signal);
   border-bottom: 1px solid var(--color-surface-0);
 }
-.project-hero .case-hero__title { max-width: 18ch; }
-.project-hero .case-hero__out { max-width: 56ch; }
+.project-hero .case-hero__meta {
+  color: var(--signal);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.project-hero .case-hero__title {
+  max-width: 22ch;
+  margin-bottom: var(--space-3);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  line-height: 1.05;
+}
+.project-hero .case-hero__out {
+  max-width: 58ch;
+  margin-bottom: var(--space-3);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
 .project-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: var(--space-4) 0 0;
   padding: 0;
   list-style: none;
+  border-block: 1px solid var(--rule);
 }
 .project-status li {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  min-width: 0;
   min-height: 44px;
   max-width: 100%;
-  padding: 0.4rem 0.7rem;
-  border: 1px solid var(--color-surface-1);
-  color: var(--color-text);
+  padding: var(--space-2) var(--space-3) var(--space-2) 0;
+  border-right: 1px solid var(--rule);
+  color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 1.4;
+  font-size: var(--text-small);
+  line-height: 1.45;
   overflow-wrap: anywhere;
 }
+.project-status li:first-child { color: var(--signal); font-weight: 700; }
+.project-status li:last-child { border-right: 0; }
 .project-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(15rem, 0.8fr);
-  gap: var(--space-6);
+  gap: clamp(var(--space-4), 5vw, var(--space-6));
   align-items: start;
   padding-block: var(--space-6);
 }
@@ -483,6 +494,10 @@
   border-top: 1px solid var(--color-surface-0);
 }
 .project-content section:first-child { padding-top: 0; border-top: 0; }
+.project-content section > h2 {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--signal);
+}
 .project-content h2,
 .project-rail h2 {
   margin: 0 0 var(--space-2);
@@ -504,18 +519,22 @@
 .project-rail p:last-child { margin-bottom: 0; }
 .project-limit {
   padding-left: var(--space-3);
-  border-left: 2px solid var(--color-accent);
+  border-left: 2px solid var(--signal);
 }
 .project-limit strong { color: var(--color-text); }
 .project-rail {
   padding-left: var(--space-4);
-  border-left: 2px solid var(--color-accent);
+  border-left: 1px solid var(--color-surface-0);
 }
 .project-rail section {
   padding-block: var(--space-3);
   border-top: 1px solid var(--color-surface-0);
 }
 .project-rail section:first-child { padding-top: 0; border-top: 0; }
+.project-rail section > h2 {
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+}
 .source-links {
   display: grid;
   gap: var(--space-1);
@@ -598,15 +617,20 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0 var(--space-5);
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding: 0 0 0 2rem;
+  list-style: decimal-leading-zero;
   border-top: 1px solid var(--color-surface-1);
 }
 .resume-project-list > li {
   min-width: 0;
-  padding: var(--space-3) 0;
+  padding: var(--space-3) var(--space-1);
   border-bottom: 1px solid var(--color-surface-0);
   overflow-wrap: anywhere;
+}
+.resume-project-list > li::marker {
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
 }
 .resume-project-list h3 a {
   display: inline-flex;
@@ -617,7 +641,7 @@
 .resume-status {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   line-height: 1.55;
 }
 .resume-evidence-list {
@@ -672,6 +696,10 @@
   .skill-list--wide { grid-template-columns: 1fr; }
   .suite-index__group:last-child { grid-column: auto; }
   .project-layout { gap: var(--space-5); }
-  .project-rail { padding: var(--space-4) 0 0; border-left: 0; border-top: 2px solid var(--color-accent); }
-  .project-hero { padding-block: var(--space-5); }
+  .project-rail { padding: var(--space-4) 0 0; border-left: 0; border-top: 1px solid var(--color-surface-0); }
+  .project-status { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-status li { border-bottom: 1px solid var(--rule); }
+  .project-status li:nth-child(2n) { border-right: 0; }
+  .project-status li:nth-child(n+3) { border-bottom: 0; }
+  .resume-project-list { padding-inline-start: 1.75rem; }
 }

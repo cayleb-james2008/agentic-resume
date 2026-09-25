@@ -1,0 +1,68 @@
+{
+  "name": "Civic works-record field guide",
+  "status": "candidate pending operator grading",
+  "candidate_fingerprint_sha256": "eabd85f161341c0c268038ad47ac20bba61648f26939e1900c2c5f3a54d81c33",
+  "direction": {
+    "thesis": "A portfolio that routes a reviewer from inspectable public work to ten plainly marked WIP workflows. Refuse the dark bandit/reel shell, generic SaaS cards, and any visual that makes a source slice look like a completed job.",
+    "own_world": "Municipal works-order inspection-record grammar: cool-light ground, deep blue-charcoal text, one vermilion signal, system sans typography, labeled evidence/limit/handoff fields. Abstract the record structure; do not impersonate a government form or invent ticket data.",
+    "story": "The visitor sees two public case studies, then the ten in-progress workflows and their evidence boundaries, then the project résumé or GitHub contact. Source verification never stands in for job or AI verification.",
+    "first_viewport": "At 1440px, a compact header and 7/5 split: vermilion portfolio field with headline and inspection/résumé actions at left; divided dotz/Sophos proof and ten-WIP status index at right. At 390px, stack in that order without hiding links or status.",
+    "form": {
+      "grammar": "Municipal works-order inspection-tag; an evidence/navigation structure, not a municipal-service claim.",
+      "seed": "a8dcc35e",
+      "ranked_index": 3,
+      "ranked_count": 7,
+      "challengers": "No named challenger wins both audience identification and truthful proof clarity; keep only useful disciplines, not their visual treatments."
+    },
+    "finish": "unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance"
+  },
+  "tokens": {
+    "--page": "#F3F6F8",
+    "--surface": "#FFFFFF",
+    "--soft": "#E7EEF2",
+    "--ink": "#172B3A",
+    "--muted": "#4B5D69",
+    "--rule": "#C5D0D8",
+    "--signal": "#B6422A",
+    "--signal-ink": "#FFFFFF",
+    "--focus": "#123F70"
+  },
+  "typography": {
+    "display_and_body": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "metadata": "ui-monospace, \"JetBrains Mono Nerd Font\", \"DejaVu Sans Mono\", monospace",
+    "hero": "clamp(3rem, 6vw, 5rem)",
+    "h2": "clamp(2rem, 3vw, 2.75rem)",
+    "body": "1.0625rem",
+    "metadata_minimum": "0.8125rem",
+    "remote_fonts": false
+  },
+  "geometry": {
+    "layout": "12-column 7/5 split on wide viewports; ordered stack on phone",
+    "spacing_px": [4, 8, 16, 24, 40, 64, 96],
+    "corner_style": "square",
+    "minimum_control_target_px": 44,
+    "nested_cards": false
+  },
+  "motion": {
+    "automatic_motion": false,
+    "nonessential_feedback": "brief underline/border only",
+    "reduced_motion": "remove nonessential movement; keep all content visible"
+  },
+  "content_boundaries": {
+    "public_case_studies": ["dotz", "Sophos"],
+    "workflow_count": 10,
+    "workflow_status": "WIP · INCOMPLETE",
+    "full_job_status": "UNVERIFIED",
+    "ai_status": "UNVERIFIED",
+    "source_status_is_separate": true,
+    "invented_work_orders_or_approval_marks": false,
+    "new_unverified_biography_or_outcome_claims": false
+  },
+  "publication": {
+    "current_public_pages": "still show the old look",
+    "replacement_approved": false,
+    "replacement_published": false,
+    "review_choices_authorize_publication": false
+  },
+  "accessibility_claim": "Design intent only; no WCAG conformance claim or independent accessibility result is included."
+}

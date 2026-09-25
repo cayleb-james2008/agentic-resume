@@ -1,3 +1,5 @@
+> **HISTORICAL / SUPERSEDED VISUAL DIRECTION — 2026-09-25:** This document records the former bandit/Catppuccin direction; the current local proposal (not yet operator-approved or live) is in [root `DESIGN.md`](../DESIGN.md). The original body and image/video files remain unchanged for historical provenance and are not displayed as the replacement identity. This notice changes no licence or factual claim.
+
 > **Operator model:** The reader is a non-technical goal-bringer. Plain English, no unexplained jargon.
 
 # P3 DESIGN record — résumé / portfolio site

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cayleb Alvarez-James — applied AI and systems work</title>
   <meta name="description" content="Security-first applied AI and systems engineering, shown through public projects and source-linked evidence with clear limits." />
-  <meta name="theme-color" content="#11111b" />
+  <meta name="theme-color" content="#F3F6F8" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/industry-ai-suite.css" />
@@ -16,7 +16,6 @@
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="brand" href="index.html">
-        <img class="brand__mark" src="assets/img/bandit-mark.png" width="28" height="28" alt="" />
         <span class="brand__name">Cayleb Alvarez-James</span>
       </a>
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -34,33 +33,52 @@
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__grid">
-        <div class="hero__copy">
-          <p class="hero__eyebrow">Selected project work</p>
-          <h1 id="hero-title" class="hero__title">Security-first applied AI</h1>
-          <p class="hero__lede">Systems engineering shown through public projects and source-linked evidence, with clear limits on what each slice proves.</p>
+        <div class="hero__field">
+          <p class="hero__eyebrow">Portfolio · public work</p>
+          <h1 id="hero-title" class="hero__title"><span>Security-first</span><span>systems work.</span></h1>
+          <p class="hero__lede">Applied AI and systems engineering, shown through public projects and source-linked evidence, with clear limits on what each slice proves.</p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="https://github.com/cayleb-james2008" target="_blank" rel="noopener noreferrer">Contact via GitHub</a>
-            <a class="btn btn--ghost" href="Cayleb-James-resume.pdf" download>Download project résumé</a>
+            <a class="btn btn--primary" href="#work">Inspect public work</a>
+            <a class="btn btn--ghost" href="resume.html">Project résumé</a>
           </div>
-          <hr class="hero__rule" />
         </div>
-        <figure class="hero__media">
-          <img class="hero-poster" src="assets/img/hero-poster-bandit.png" alt="" width="1280" height="720" fetchpriority="high" />
-          <figcaption class="hero__media-cap">Bandit poster · static illustration</figcaption>
-        </figure>
+        <aside class="hero__index" aria-label="Public work and workflow status">
+          <section aria-labelledby="hero-public-title">
+            <h2 id="hero-public-title">Established public work</h2>
+            <ul class="hero-proof-list">
+              <li>
+                <h3><a href="projects/dotz.html">dotz</a></h3>
+                <p>Local-first multi-agent coding dashboard spanning a Rust/axum API and Tauri shell.</p>
+                <p class="hero-proof__links"><a href="projects/dotz.html">Case study</a><a href="https://github.com/cayleb-james2008/dotz" target="_blank" rel="noopener noreferrer">Public repository</a></p>
+              </li>
+              <li>
+                <h3><a href="projects/sophos.html">Sophos</a></h3>
+                <p>Windows coding-agent project described as a port of Prime Intellect’s Prime Agent; upstream runtime, daemon, and bridge are credited.</p>
+                <p class="hero-proof__links"><a href="projects/sophos.html">Case study</a><a href="https://github.com/cayleb-james2008/sophos" target="_blank" rel="noopener noreferrer">Public repository</a></p>
+              </li>
+            </ul>
+          </section>
+          <section aria-labelledby="hero-suite-title">
+            <h2 id="hero-suite-title">Industry AI Suite</h2>
+            <p class="hero-status-count">10 workflows · WIP · INCOMPLETE</p>
+            <dl class="hero-status-grid">
+              <div><dt>Full job</dt><dd>UNVERIFIED</dd></div>
+              <div><dt>AI</dt><dd>UNVERIFIED</dd></div>
+            </dl>
+            <p class="hero-status-note">Source status is recorded separately from job and AI status.</p>
+          </section>
+        </aside>
       </div>
     </section>
 
     <section class="section" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <p class="section__label">Established public work</p>
         <h2 id="work-title" class="section__title">Two projects, open to inspection</h2>
         <div class="work-list">
-          <article class="work-card work-card--flagship">
+          <article class="work-card">
             <div class="work-card__body">
               <p class="work-card__meta">Public repository · axum + Tauri</p>
               <h3 class="work-card__title">dotz — multi-agent coding dashboard</h3>
-              <span class="work-card__stamp" aria-hidden="true"></span>
               <p class="work-card__out">A local-first control surface for coordinating coding agents. The public repository and case study are the proof.</p>
               <div class="work-card__actions">
                 <a class="work-card__link" href="projects/dotz.html">Read the dotz case study</a>
@@ -95,7 +113,6 @@
 
     <section class="section section--mantle suite-section" id="suite" aria-labelledby="suite-title">
       <div class="wrap">
-        <p class="section__label">Industry AI Suite</p>
         <h2 id="suite-title" class="section__title">Ten distinct workflows. All still in progress.</h2>
         <p class="suite-lead">Each project page separates its need, recorded source slice, full-job status, AI status, evidence limits, and human handoff. Public code visibility does not establish workflow completion.</p>
         <div class="suite-index">
@@ -173,7 +190,7 @@
 
     <section class="section evidence-section" id="evidence" aria-labelledby="evidence-title">
       <div class="wrap">
-        <p class="section__label">Recorded evidence · retrieved 23–24 September 2026 (see each item’s UTC time below)</p>
+        <p class="evidence__date">Recorded evidence · retrieved 23–24 September 2026 (see each item’s UTC time below)</p>
         <h2 id="evidence-title" class="section__title">Public records, narrow claims</h2>
         <p class="evidence-lead">These are dated records from earlier runs, not live widgets or current freshness claims. Source status is separate from each workflow’s full-job and AI status.</p>
 
@@ -281,8 +298,7 @@
     <section class="section" id="resume-preview" aria-labelledby="resume-preview-title">
       <div class="wrap resume-preview">
         <div>
-          <p class="section__label">Project résumé</p>
-          <h2 id="resume-preview-title" class="section__title">Selected project work, not a career-history record</h2>
+          <h2 id="resume-preview-title" class="section__title">Project résumé: selected work, not a career-history record</h2>
           <p>Review the established public projects, dated data slices, their limits, and the skills visible in the code and evidence.</p>
         </div>
         <ul class="skill-list" aria-label="Skills evidenced in public projects">
@@ -300,7 +316,6 @@
 
     <section class="section section--mantle" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-block">
-        <p class="section__label">Contact</p>
         <h2 id="contact-title" class="section__title">Contact via GitHub</h2>
         <p>The public GitHub profile is the contact route.</p>
         <a class="btn btn--primary" href="https://github.com/cayleb-james2008" target="_blank" rel="noopener noreferrer">Contact via GitHub</a>

@@ -57,6 +57,8 @@ These values document the candidate direction. They are not a measured WCAG resu
 
 - The public case studies are dotz and Sophos. Their public repository evidence and credit limits stay explicit.
 - All ten Industry AI Suite workflows remain `WIP · INCOMPLETE`; every full job remains `UNVERIFIED`; AI remains `UNVERIFIED`. Source status is kept separate from job and AI status.
+- The public Industry AI Suite code reference is pinned to published commit `1122d8a615b70a7225ac0993577817c1d05c91a6`: [reviewed suite source](https://github.com/cayleb-james2008/industry-ai-suite/tree/1122d8a615b70a7225ac0993577817c1d05c91a6). Public code visibility does not change any workflow status.
+- SearchLift has a bounded, read-only current Pages read (`clean-clone-live.json`, retrieved `2026-09-25T19:43:45Z`; source SHA-256 `b4ed4de9f785a5059acde72c7660d6c20351d8409915c6323a252836b3001c88`): one captured page contained 10/10 approved workflow names. This is not SEO, ranking, traffic, or whole-site evidence, and does not verify workflow completion or a full job; AI was not run and remains unverified.
 - No new biography, employment, education, customer, income, adoption, deployment, or AI-completion claim is introduced.
 - The local grading surface is a separate offline artifact. Its Approve/Redo controls record local review choices only; they do not authorize a release or publish anything.
 - The existing public site still has the old look. This candidate remains local, unapproved, and unpublished until the operator reviews this exact revision.

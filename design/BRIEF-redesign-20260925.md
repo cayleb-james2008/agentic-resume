@@ -31,6 +31,10 @@ Use local system sans faces and a short metadata-only mono stack. Type: hero `cl
 
 The visitor sees two public case studies, then ten in-progress workflows and their evidence boundaries, then the project résumé or GitHub contact. Source verification never stands in for job or AI verification. Keep all existing source records, dates, links, limits, and project descriptions unchanged.
 
+**Current source boundary:** The public Industry AI Suite code reference is pinned to published commit `1122d8a615b70a7225ac0993577817c1d05c91a6`: [reviewed suite source](https://github.com/cayleb-james2008/industry-ai-suite/tree/1122d8a615b70a7225ac0993577817c1d05c91a6). Public code visibility does not imply workflow completion.
+
+**SearchLift evidence boundary:** A bounded, read-only current Pages read (`clean-clone-live.json`, retrieved `2026-09-25T19:43:45Z`; source SHA-256 `b4ed4de9f785a5059acde72c7660d6c20351d8409915c6323a252836b3001c88`) found 10/10 approved workflow names on one captured page. This is structural name coverage only—not SEO performance, rankings, traffic, or whole-site coverage. AI was not run; SearchLift remains WIP, with the full job and AI unverified.
+
 ## FIRST VIEWPORT
 
 At 1440px, use a compact single-line header and asymmetrical 12-column 7/5 split. The left is a large vermilion portfolio field with “Security-first systems work.”, concise evidence-led copy, “Inspect public work” and “Project résumé” actions. The right is a cool-light, divided text index: dotz and Sophos public case-study/repository proof, then “10 workflows · WIP · INCOMPLETE”, “Full job · UNVERIFIED”, and “AI · UNVERIFIED”. Keep source status distinct from job and AI status. At 390px, stack in that order without hiding links or status.

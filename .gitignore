@@ -4,6 +4,3 @@
 .env
 .env.*
 node_modules/
-
-# soft-kawaii / screenshot rejects (not shipped)
-assets/img/y2k/_rejected-*/

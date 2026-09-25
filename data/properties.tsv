@@ -1,4 +1,0 @@
-partNumber	revision	volume_mm3	area_mm2	com_x	com_y	com_z	mass_g	faces	step_file
-PFV-100	B	3021.6284	1802.0663	-0.0	0.0	10.5427	24.0219	21	PFV-100_body.step
-PFV-150	B	4112.4706	2250.0376	0.0	0.0	11.4417	32.6941	21	PFV-150_body.step
-PFV-200	B	6191.0406	3006.4662	-0.0	0.0	12.864	49.2188	21	PFV-200_body.step

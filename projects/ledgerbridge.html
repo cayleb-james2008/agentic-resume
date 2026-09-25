@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LedgerBridge — project evidence</title>
+  <meta name="description" content="LedgerBridge finance reconciliation: a recorded public Treasury slice, its limits, and human handoff." />
+  <meta name="theme-color" content="#11111b" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/industry-ai-suite.css" />
+</head>
+<body class="project-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap site-header__inner">
+    <a class="brand" href="../index.html"><img class="brand__mark" src="../assets/img/bandit-mark.png" width="28" height="28" alt="" /><span class="brand__name">Cayleb Alvarez-James</span></a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary"><ul><li><a href="../index.html#work">Work</a></li><li><a href="../index.html#suite">Suite</a></li><li><a href="../resume.html">Résumé</a></li><li><a href="../index.html#contact">Contact via GitHub</a></li></ul></nav>
+  </div></header>
+  <main id="main">
+    <header class="project-hero"><div class="wrap">
+      <p class="case-hero__meta">Industry AI Suite · finance reconciliation</p>
+      <h1 class="case-hero__title">LedgerBridge</h1>
+      <p class="case-hero__out">Reconcile records and route exceptions for review. The recorded source is federal cash data, not company books.</p>
+      <ul class="project-status" aria-label="LedgerBridge status"><li>WIP · INCOMPLETE</li><li>Source · VERIFIED</li><li>Full job · UNVERIFIED</li><li>AI UNVERIFIED</li></ul>
+    </div></header>
+    <div class="wrap project-layout">
+      <article class="project-content">
+        <section><h2>Business need</h2><p>A finance reviewer needs to reconcile authorized company records, trace exceptions to their source rows and dates, and decide what requires follow-up.</p></section>
+        <section><h2>Recorded real-data slice</h2><p>LedgerBridge accounted for 10 U.S. Treasury Daily Treasury Statement deposit/withdrawal rows exactly once and flagged single-sided activity for review. The recorded IDs are <code>2026-09-21:II:1</code> through <code>2026-09-21:II:10</code>. This public federal dataset is not a company accounting result.</p></section>
+        <section><h2>Evidence date and source</h2><p>Source as-of <time datetime="2026-09-21">2026-09-21</time> (day precision); retrieved <time datetime="2026-09-23T16:21:57Z">2026-09-23 16:21:57 UTC</time>. Recorded response status: HTTP 200. Response SHA-256: <code>bde7791b9c12c297dd1c05af620f3618951e5c02b8d20e66a087bb0768f059af</code>.</p><p class="project-limit"><strong>What this does not show:</strong> private company books, a bank statement, an expected balance, or a completed company close. An authorized company ledger and bank source are absent.</p></section>
+        <section><h2>AI status</h2><p><strong>AI UNVERIFIED.</strong> AI remains UNVERIFIED pending independent witness. A recorded source slice alone does not show an independently verified AI contribution.</p></section>
+      </article>
+      <aside class="project-rail" aria-label="LedgerBridge references and handoff">
+        <section><h2>Source and terms</h2><ul class="source-links"><li><a href="https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page%5Bsize%5D=10&amp;sort=-record_date" target="_blank" rel="noopener noreferrer">Exact Treasury DTS query</a></li><li><a href="https://fiscaldata.treasury.gov/api-documentation/" target="_blank" rel="noopener noreferrer">Treasury API documentation and terms</a></li></ul></section>
+        <section><h2>Human handoff</h2><p>Role: <code>public-treasury-cash-reviewer</code> (not an assigned person). Obtain authorized company books and the matching bank statement before company-close work. No posting action is represented.</p></section>
+        <section><h2>Public code</h2><a class="project-code-link" href="https://github.com/cayleb-james2008/industry-ai-suite/tree/a4c1bd3125dce543e75e0d140c487ecb1e4df37f/apps/ledgerbridge" target="_blank" rel="noopener noreferrer">Inspect LedgerBridge WIP source</a></section>
+      </aside>
+    </div>
+    <footer class="case-footer"><div class="wrap case-footer__links"><a class="btn btn--ghost" href="../index.html#suite">Return to all ten projects</a><a class="btn btn--ghost" href="../resume.html">Read the project résumé</a></div></footer>
+  </main>
+  <footer class="site-footer"><div class="wrap site-footer__inner"><span>© <span id="y"></span> Cayleb Alvarez-James</span><a href="../index.html">Portfolio home</a></div></footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

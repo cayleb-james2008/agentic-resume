@@ -1,0 +1,27 @@
+# Project résumé / selected verified work
+Cayleb Alvarez-James · Security-first applied AI and systems engineering
+
+[GitHub profile](https://github.com/cayleb-james2008)
+
+This is a project résumé of selected verified work, not a complete career-history record.
+
+## Established public work
+- **dotz:** local-first multi-agent coding dashboard in Rust/axum and Tauri. [Public repository](https://github.com/cayleb-james2008/dotz)
+- **Sophos:** public Windows coding-agent project; its README describes a port of Prime Intellect's Prime Agent and credits the upstream runtime, daemon, and bridge to that team. No sole-author claim is made. [Public repository](https://github.com/cayleb-james2008/sophos)
+
+## Dated public-data slices
+- **Treasury / LedgerBridge:** 10 public DTS rows accounted exactly once; IDs `2026-09-21:II:1`–`2026-09-21:II:10`, as-of 2026-09-21 (day), retrieved 2026-09-23 16:21:57 UTC. [Exact query](https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page%5Bsize%5D=10&sort=-record_date) · [Treasury terms](https://fiscaldata.treasury.gov/api-documentation/). Public federal cash, not company books.
+- **World Bank / MarketBrief + BacktestGuard:** 15 annual U.S. GDP records; 5.02% nominal 2024–2025 change and a 2020 chronology split; records retrieved 2026-09-23 18:51:34 UTC. [Exact series](https://api.worldbank.org/v2/country/USA/indicator/NY.GDP.MKTP.CD?format=json&per_page=15) · [Official indicator/license proof](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD): HTTP 200, exact label “License : CC BY-4.0,” checked 2026-09-23 17:15:50 UTC. Broad macro context only; no real external experiment log or source-release timing is verified.
+- **CISA / SentinelDesk:** 1,721 public KEV entries; example `CVE-2026-93952`, as-of 2026-09-22 (day), retrieved 2026-09-24 09:29:57 UTC. [Feed](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) · [CC0 terms](https://creativecommons.org/publicdomain/zero/1.0/). Public threat context, not company alerts/assets.
+- **GitHub / PipelineRelay:** `pytest-dev/pytest`, repository ID `37489525`, `updated_at` 2026-09-23 11:49:07 UTC; metadata retrieved 2026-09-23 16:21:57 UTC. [Metadata](https://api.github.com/repos/pytest-dev/pytest) · [MIT license record](https://api.github.com/licenses/mit). Public repository research, not CRM, customer or consent data.
+- **OPM / HandoffHub + OnboardPath:** 10 public metadata records; matching GovInfo text for `2026-19222`, published 2026-09-18. The P1b workflow reads were retrieved 2026-09-24 16:03:29 UTC. [Exact query](https://www.federalregister.gov/api/v1/documents.json?conditions%5Bagency_ids%5D%5B%5D=406&per_page=10&order=newest) · [Official GovInfo text](https://www.govinfo.gov/content/pkg/FR-2026-09-18/html/2026-19222.htm) · [GovInfo public-domain policy](https://www.govinfo.gov/about/policies#copyright). Narrow public-document discovery/text only—not internal knowledge, permissions, employer policy, or employee records.
+- **ReplyCraft:** a clearly labeled synthetic public-policy question about the comment deadline uses the GovInfo DATES text read on 2026-09-24 16:03:29 UTC; the draft is for human review. [GovInfo DATES text](https://www.govinfo.gov/content/pkg/FR-2026-09-18/html/2026-19222.htm#DATES). This is not a customer case or approved support policy.
+- **SearchLift before-state:** a source read retrieved 2026-09-24 10:17:49 UTC returned an earlier revision with 0/10 approved workflow names; that page's `Last-Modified` was 2026-09-22 12:49:24 UTC. Historical evidence only, not current-page or performance evidence. [Public source repository](https://github.com/cayleb-james2008/agentic-resume) · [MIT terms](https://api.github.com/licenses/mit).
+
+## Industry AI Suite · PUBLIC · WIP / INCOMPLETE
+- **Full job · UNVERIFIED for all ten:** LedgerBridge, MarketBrief, ChainWatch, BacktestGuard, ReplyCraft, HandoffHub, PipelineRelay, OnboardPath, SentinelDesk, and SearchLift. **AI UNVERIFIED for all ten.** [Public suite code repository](https://github.com/cayleb-james2008/industry-ai-suite). The local candidate revision is WIP and unpublished.
+- Five local model calls were independently witnessed by the lead on 2026-09-24. This verifies call execution only, not answer quality, complete workflows, or public AI claims. ChainWatch has no admitted public-data slice; ReplyCraft has only the labeled public-policy sample above. No revenue, customer, adoption, or company-deployment outcome is claimed.
+- No trades, transfers, outreach, message sends, containment, hiring/disciplinary decisions, or automatic publishing. Consequential actions remain human-gated.
+
+## Systems practice
+Python · Rust · axum · Tauri · HTML · CSS · JavaScript · local-first design · permission boundaries · source-linked evidence · human approval gates · audit trails · fail-safe workflow tests.

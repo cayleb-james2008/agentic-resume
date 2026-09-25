@@ -1,11 +1,5 @@
 [
   {
-   "description": "",
-   "name": "apotheka-site",
-   "url": "https://github.com/cayleb-james2008/apotheka-site",
-   "visibility": "PUBLIC"
-  },
-  {
   "description": "One prompt becomes a team of AI coding agents \u2014 a native-Rust (axum + Tauri) coding dashboard with a live workflow graph, sandboxed web previews, on-device memory, and a native Open Design workspace.",
   "name": "dotz",
   "url": "https://github.com/cayleb-james2008/dotz",
@@ -16,11 +10,5 @@
   "name": "sophos",
   "url": "https://github.com/cayleb-james2008/sophos",
   "visibility": "PUBLIC"
- },
- {
-  "description": "Solomon \u2014 autonomous AI-tools business experiment. A fleet autopilot for recursive self-improvement with experimental profit-engine scaffolding; the current app has no checkout, payout, or sales surface.",
-  "name": "solomon",
-  "url": "https://github.com/cayleb-james2008/solomon",
-  "visibility": "PUBLIC"
- }
+  }
 ]

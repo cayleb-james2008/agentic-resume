@@ -1,7 +1,7 @@
 # DESIGN v5 — Visual Gate Brief
 **Role:** Visual Gate Brief Author (web-design-pipeline) · **Not** the UI builder  
 **Date:** 2026-09-22 (America/New_York)  
-**Authority:** `BRIEF-v5-breathtaking.md` + `gauntlet/FROZEN-BAR-v5-breathtaking.md` (SITE craft)  
+**Authority:** `BRIEF-industry-ai-real-data.md` + `SITE-CRAFT-EVIDENCE-industry-ai-suite.md`
 **Brand pivot (Cayleb, immediate):** **dark digital bandit** — clean, high-craft, premium. **Abandon** outline cyber-nomad / NOMAD.LINK as primary identity. Swiss negative space + typography-led hierarchy remain mandatory.
 
 **Design read:** Hire-ready personal portfolio for technical hiring managers, with a Swiss-editorial + dark digital bandit language — mauve accent on Catppuccin-dark base; one concept, one signature moment; case-study depth over widgets.
@@ -52,9 +52,9 @@ Two primary roles above the fold only (display + body). Mono is tertiary (labels
 
 | Token | Suggested face (direction) | Role |
 | --- | --- | --- |
-| `--font-display` | Sharp geometric sans with editorial weight (e.g. Syne / Outfit / similar — **not** Inter as the personality) | Hero H1, section openers |
-| `--font-body` | Clean readable sans (distinct from display; e.g. Source Sans 3 / IBM Plex Sans / similar) | Continuous prose, nav, UI |
-| `--font-mono` | Humanist mono (IBM Plex Mono / JetBrains Mono) | Meta, paths, short code cues |
+| `--font-display` | Local/system sans with editorial weight (Liberation Sans, then system fallback) | Hero H1, section openers |
+| `--font-body` | Local/system sans for readable continuous prose | Continuous prose, nav, UI |
+| `--font-mono` | Local/system monospace (JetBrains Mono Nerd Font, then generic fallback) | Meta, paths, short code cues |
 
 **Scale (fluid; hero floor locked to bar):**
 
@@ -106,11 +106,11 @@ Motion serves story and navigation — brief, soft, transform/opacity only. Exac
 | `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` (editorial settle) |
 | `--ease-in-out` | `cubic-bezier(0.45, 0, 0.55, 1)` |
 
-**ONE signature moment (prose — not code):** On first scroll into the Work band, the flagship case (dotz) does a single choreographed reveal: the impact title and one focused visual ease from a slight vertical offset and soft fade into their final Swiss lockup, while a thin mauve rule draws once beneath the title — a “bandit stamp” of arrival, not a carnival. No second competing wow (no parallel WebGL hero, no infinite logo loop, no CRT boot sequence). Scroll linkage may scrub or play-once; it must feel like editorial punctuation, not a product demo.
+**ONE signature moment (prose — not code):** On first scroll into the Work band, the flagship case (dotz) does a single choreographed reveal: the impact title and one focused visual ease from a slight vertical offset and soft fade into their final Swiss lockup, while a thin mauve rule draws once beneath the title — a “bandit stamp” of arrival, not a carnival. No second competing wow (no parallel WebGL hero, no infinite logo loop, no CRT boot sequence). A local browser observer may trigger this once; without observer support, the page remains static.
 
 **Reduced motion:** Under `prefers-reduced-motion: reduce`, the signature lands at its **static final state** (no scrub, no continuous/infinite animation on hero/nav). Decorative motion duration → 0 / disabled; hover opacity shifts may remain instantaneous. No auto-playing motion on hero/nav.
 
-**Higgsfield motion-asset pipeline (LOCKED — see `design/research/HIGGSFIELD-CREATIVE-METHODS.md`):** Identity video/stills are produced outside the page craft loop: (1) Hero Frame First — approve bandit still before any video; (2) DP-style rig (camera/lens/focal/aperture); (3) shot list, not one lucky clip; (4) cinema vocabulary over mood words; (5) Cinema Studio 4.0 Director’s Panel look-lock; (6) Elements/Soul Cast for bandit consistency; (7) grid/storyboard + inspect failure modes; (8) site ships muted loop + poster, `prefers-reduced-motion` → poster only. **Do not** invent CRT reels or multi-video showreels as primary craft. **Do not** spend Higgsfield credits without Cayleb’s OK. Until an approved MP4 exists, static typography + one GSAP signature beat meet the bar.
+**Local media behavior:** the existing local hero loop is muted and has a local poster fallback; `prefers-reduced-motion` shows the poster. No third-party media runtime is loaded by the page. Do not invent screenshots or add remote media.
 
 ---
 
@@ -122,31 +122,27 @@ Motion serves story and navigation — brief, soft, transform/opacity only. Exac
 | Mauve-on-dark restraint; thin borders; sharp minimal mark | Sticker-grunge / painted grit as dominant identity; neon glow stacks |
 | Typography-led hero; negative space ≤60% occupancy floor | Sticky demo wall / equal-weight gadget gallery above the fold |
 | Exactly one signature beat; `prefers-reduced-motion` honored | Multiple competing “wow” systems; infinite hero animation under reduce |
-| ≥3 deep case studies (problem → role → craft → outcome) | Equal-weight waffle; volume theater (more projects = quality) |
+| Two established public case studies (problem → role → craft → outcome) | Treating incomplete workflow entries as completed case studies or using volume as quality |
 | One focused visual per project; impact-forward titles | Fake research-desk / cosplay demos substituting for real copy |
 | Transform/opacity motion only; usable scroll on mid-phone | WebGL/3D jank that blocks reading; CRT/scanline overload as main look |
-| PDM Forge labeled **simulator / case study**; honest outbound GitHub links | Untruthful production users/revenue claims without cited public source |
+| Every new suite workflow visibly labeled **WIP · INCOMPLETE** | Untruthful production users/revenue claims or presenting fixture behavior as AI completion |
 | Minimal nav + visible Hire/Contact CTA; keyboard focus visible | Link farm nav; invisible focus; keyboard traps on graded path |
 | **Bandit** mark — minimal, sharp, outlaw-digital | **Nomad outline / NOMAD.LINK** as primary brand; coffee-cup imagery |
 
 ---
 
-## 7. Content truth list
+## 7. Current content truth list
 
 | Lock | Truth |
 | --- | --- |
-| Name | **Cayleb Alvarez-James** (site header/footer + `<title>`; matches GitHub display name) |
-| GitHub | `https://github.com/cayleb-james2008` |
-| Positioning (who / specialty / outcome) | AI/agentic systems + systems engineering — hire-ready proof for technical leads evaluating agentic craft and fail-closed systems thinking |
-| Primary CTA | Reach out / hire (contact); secondary: open flagship case study **dotz** |
-| **dotz** | Multi-agent coding dashboard (axum + Tauri); no inflated “production SaaS users” without cited public source; outbound `github.com/cayleb-james2008/dotz` |
-| **Sophos** | Windows coding agent / Prime Intellect credit — credit stated where claim appears |
-| **Solomon** | RSI fleet control, fail-closed money — do not soft-wash into generic “AI trading” |
-| **apotheka-site** | Static lookbook — not a dynamic product platform |
-| **PDM Forge** | **Simulator case study only** — copy must say simulator/case study; no live production users/revenue/customers without cited public source |
-| Secondary projects | Allowed only as visually subordinate; inventing equal-weight filler = FAIL |
-| Brand identity | **Dark digital bandit** (clean, high-craft, premium) — **not** outline cyber-nomad / NOMAD.LINK |
-| Publish | Draft + screenshots for grading; live Vercel alias only after Cayleb’s explicit sign-off |
+| Name | **Cayleb Alvarez-James** (site header/footer and page title) |
+| Contact | Public GitHub profile only; no email address is published. |
+| Positioning | Security-first applied AI and systems engineering across finance, support, security, marketing, and operations. |
+| Established public proof | **dotz** is a multi-agent coding dashboard (axum + Tauri); **Sophos** is a Windows coding agent, with Prime Intellect credit stated. |
+| New suite | LedgerBridge, MarketBrief, ChainWatch, BacktestGuard, ReplyCraft, HandoffHub, SentinelDesk, SearchLift, PipelineRelay, and OnboardPath are each `WIP · INCOMPLETE`; all ten full jobs remain `UNVERIFIED`. Seven bounded public-data slices are recorded, including a historical SearchLift before-state. On 2026-09-24 the lead independently verified five local model calls; this verifies execution only, not answer quality, workflow completion, or AI status. All ten AI labels remain `AI UNVERIFIED`; no AI-complete workflow is claimed. |
+| Outcomes | No verified customers, revenue, adoption, company deployment, independent AI contribution, approvals, or performance results are claimed. |
+| Brand identity | **Dark digital bandit** with Catppuccin Mocha/mauve tokens and Swiss editorial hierarchy. |
+| Publishing | The `industry-ai-suite` repository is PUBLIC, but the current local suite candidate is WIP and unpublished. Do not present local site or suite bytes as released. Leave all ten mutable `tree/main/apps/...` links unchanged until the lead pins an approved suite release commit. |
 
 ---
 
@@ -155,6 +151,6 @@ Motion serves story and navigation — brief, soft, transform/opacity only. Exac
 - No HTML/CSS/JS implementation.
 - No long component-library shopping list.
 - No stack/file-tree as a quality signal (builder chooses means; bar judges outcomes).
-- Higgsfield generations (paid) wait for Cayleb; wire approved assets per §5 methods.
+- New media generation is outside this site-sanitization piece; reuse only the locked local assets.
 
 *End of DESIGN-v5.md*

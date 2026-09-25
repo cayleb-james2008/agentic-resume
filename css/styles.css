@@ -371,7 +371,7 @@ main[id], section[id] { scroll-margin-top: 5rem; }
   background: transparent;
 }
 .work-card--flagship {
-  /* The local observer adds one transform/opacity reveal when supported. */
+  /* The local observer reveals only the decorative signature stamp. */
 }
 .work-card__body { max-width: 36ch; }
 .work-card__meta {
@@ -401,19 +401,7 @@ main[id], section[id] { scroll-margin-top: 5rem; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .work-card--flagship.signature-pending .work-card__title,
-  .work-card--flagship.signature-pending .work-card__out,
-  .work-card--flagship.signature-pending .work-card__visual {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  .work-card--flagship.signature-visible .work-card__title,
-  .work-card--flagship.signature-visible .work-card__out,
-  .work-card--flagship.signature-visible .work-card__visual {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity var(--motion-slow) var(--ease-out), transform var(--motion-slow) var(--ease-out);
-  }
+  /* Keep the dotz title, summary and illustration visible in every JS state. */
   .work-card--flagship.signature-pending .work-card__stamp { width: 0; }
   .work-card--flagship.signature-visible .work-card__stamp {
     width: 3rem;

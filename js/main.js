@@ -1,4 +1,4 @@
-/* One local dotz reveal; navigation and content remain usable without motion. */
+/* One local decorative dotz stamp reveal; primary content is never hidden. */
 (function () {
   "use strict";
 
@@ -72,6 +72,7 @@
   }
 
   var signatureCard = document.querySelector(".work-card--flagship");
+  // CSS limits both signature states to the aria-hidden stamp; content stays visible.
   var motionAllowed = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
   if (!signatureCard || !motionAllowed || !("IntersectionObserver" in window)) return;

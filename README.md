@@ -1,6 +1,6 @@
 # agentic-resume
 
-Selected-work portfolio for **Cayleb Alvarez-James** (`cayleb-james2008`).
+Selected-work portfolio for **Cayleb Alvarez-James** (`cayleb-james2008`), focused on remote-only software engineering and applied AI roles.
 
 ## Current public portfolio (GitHub Pages)
 

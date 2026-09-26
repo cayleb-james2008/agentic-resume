@@ -1,6 +1,8 @@
 # Project résumé / selected public work
 Cayleb Alvarez-James · Applied AI and systems projects
 
+Seeking remote-only software engineering and applied AI roles.
+
 [GitHub profile](https://github.com/cayleb-james2008) · [Interactive project lab](https://cayleb-james2008.github.io/agentic-resume/lab/)
 
 This is a project résumé of selected public work, not a complete career-history record.

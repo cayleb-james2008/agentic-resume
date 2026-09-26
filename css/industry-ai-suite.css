@@ -1,4 +1,39 @@
 /* Shared project, evidence, and status grammar on the civic works-record tokens. */
+.lab-feature {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  background: #102a38;
+  color: #f3f6f8;
+}
+
+.lab-feature__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.lab-feature .section__label { color: #f3a68e; }
+.lab-feature h2 {
+  max-width: 15ch;
+  margin: 0 0 1.5rem;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.2vw, 4.9rem);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+.lab-feature p:not(.section__label) { max-width: 58ch; line-height: 1.65; }
+.lab-feature .btn { margin-top: 1rem; }
+.lab-feature__facts { margin: 0; border-top: 1px solid #607480; }
+.lab-feature__facts div { padding: 1.35rem 0; border-bottom: 1px solid #607480; }
+.lab-feature__facts dt { margin-bottom: .45rem; color: #f3a68e; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em; }
+.lab-feature__facts dd { margin: 0; color: #f3f6f8; font-size: 1.2rem; line-height: 1.3; }
+
+@media (max-width: 760px) {
+  .lab-feature__grid { grid-template-columns: 1fr; }
+  .lab-feature h2 { max-width: 18ch; }
+}
+
 .work-card__actions {
   display: flex;
   flex-wrap: wrap;

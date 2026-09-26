@@ -14,21 +14,30 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
+import reportlab
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Paragraph
 
 
 HERE = Path(__file__).resolve().parent
 SOURCE = HERE / "resume.md"
 OUTPUT = HERE.parent / "Cayleb-James-resume.pdf"
+FONT_DIR = Path(reportlab.__file__).resolve().parent / "fonts"
+pdfmetrics.registerFont(TTFont("ResumeSans", str(FONT_DIR / "Vera.ttf")))
+pdfmetrics.registerFont(TTFont("ResumeSans-Bold", str(FONT_DIR / "VeraBd.ttf")))
+pdfmetrics.registerFontFamily("ResumeSans", normal="ResumeSans", bold="ResumeSans-Bold")
 ALLOWED_LINKS = {
     "https://github.com/cayleb-james2008",
     "https://github.com/cayleb-james2008/dotz",
     "https://github.com/cayleb-james2008/sophos",
     "https://github.com/cayleb-james2008/agentic-resume",
     "https://github.com/cayleb-james2008/industry-ai-suite",
+    "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
+    "https://cayleb-james2008.github.io/agentic-resume/lab/",
     "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page%5Bsize%5D=10&sort=-record_date",
     "https://fiscaldata.treasury.gov/api-documentation/",
     "https://api.worldbank.org/v2/country/USA/indicator/NY.GDP.MKTP.CD?format=json&per_page=15",
@@ -56,6 +65,7 @@ FORBIDDEN_HISTORY_MARKERS = (
 )
 ALLOWED_HOSTS = {
     "github.com",
+    "cayleb-james2008.github.io",
     "api.fiscaldata.treasury.gov",
     "fiscaldata.treasury.gov",
     "api.worldbank.org",
@@ -71,20 +81,20 @@ LINK_OR_BOLD = re.compile(r"(\[[^\]]+\]\(https?://[^)\s]+\)|\*\*[^*]+\*\*)")
 LINK = re.compile(r"^\[([^\]]+)\]\((https?://[^)\s]+)\)$")
 
 TITLE = ParagraphStyle(
-    "title", fontName="Helvetica-Bold", fontSize=15, leading=17,
-    spaceAfter=2, textColor="#17171f",
+    "title", fontName="ResumeSans-Bold", fontSize=17, leading=21,
+    spaceAfter=4, textColor="#17171f",
 )
 H2 = ParagraphStyle(
-    "h2", fontName="Helvetica-Bold", fontSize=8.4, leading=10,
-    spaceBefore=5, spaceAfter=1.5, textColor="#282832",
+    "h2", fontName="ResumeSans-Bold", fontSize=9.6, leading=12,
+    spaceBefore=8, spaceAfter=3, textColor="#282832",
 )
 BODY = ParagraphStyle(
-    "body", fontName="Helvetica", fontSize=8.5, leading=10,
-    spaceAfter=0.8, textColor="#202027",
+    "body", fontName="ResumeSans", fontSize=9.4, leading=11.6,
+    spaceAfter=1.5, textColor="#202027",
 )
 BULLET = ParagraphStyle(
     "bullet", parent=BODY, leftIndent=10, firstLineIndent=0,
-    bulletIndent=1, spaceAfter=1.2,
+    bulletIndent=1, spaceAfter=2,
 )
 
 
@@ -157,7 +167,8 @@ def verify_pdf_text(path: Path) -> None:
         "GovInfo", "public-policy question", "DATES",
         "SearchLift before-state", "0/10 approved workflow names",
         "License : CC BY-4.0", "17:15:50 UTC",
-        "AI UNVERIFIED", "all 10 AI statuses: UNVERIFIED",
+        "AI NOT RUN", "Full enterprise job", "Five local model samples",
+        "independent witness verified",
     )
     for phrase in required:
         if phrase.casefold() not in normalized_content:
@@ -220,12 +231,12 @@ def main() -> int:
         canvas.setSubject("Selected verified public projects and evidence-backed public-data work")
         canvas.setKeywords("project resume, selected verified work, WIP workflows")
         canvas.setCreator("agentic-resume offline PDF builder")
-        canvas.setFont("Helvetica", 6.5)
+        canvas.setFont("ResumeSans", 6.5)
         canvas.setFillColor("#55555d")
         canvas.drawCentredString(
             4.25 * inch,
             0.28 * inch,
-            "All 10 full jobs: UNVERIFIED · All 10 AI statuses: UNVERIFIED.",
+            "All 10 full enterprise jobs: UNVERIFIED · 5 cited local model samples witnessed.",
         )
 
     doc = BaseDocTemplate(

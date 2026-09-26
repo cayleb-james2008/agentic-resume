@@ -1,16 +1,14 @@
-> **Operator model:** plain English; this design proposal is not operator approval.
+> **Operator model:** plain English. This file describes the current visual system; Cayleb's final visual preference remains his choice.
 
 # Portfolio design — civic works-record field guide
 
-**Status:** Local design candidate, pending operator grading. The current public site still shows the old look. This replacement is **not approved and not published**. This document records a design direction; it does not claim accessibility conformance or user approval.
-
-**Candidate fingerprint:** `eabd85f161341c0c268038ad47ac20bba61648f26939e1900c2c5f3a54d81c33` (local candidate diff + brief identity used by the review surface).
+**Status:** Implemented portfolio design with an interactive recorded lab. A visual review package accompanies the release; this document does not claim accessibility conformance or personal approval.
 
 ## Six-block direction
 
 ### THESIS
 
-A portfolio that routes a reviewer from inspectable public work to ten plainly marked WIP workflows. Refuse the dark bandit/reel shell, generic SaaS cards, and any visual that makes a source slice look like a completed job.
+A portfolio that takes a reviewer from a working ten-journey lab to established public projects, dated evidence, and a project résumé. Each bounded result keeps its source and full-job limit visible.
 
 ### OWN-WORLD
 
@@ -18,11 +16,11 @@ Municipal works-order inspection-record grammar: cool-light ground, deep blue-ch
 
 ### STORY
 
-The visitor sees two public case studies, then the ten in-progress workflows and their evidence boundaries, then the project résumé or GitHub contact. Source verification never stands in for job or AI verification.
+The visitor reaches the recorded lab from the first viewport, then the two public case studies, ten project pages, dated evidence, and a project résumé or GitHub contact. Source verification and model-call verification remain separate from full-job completion.
 
 ### FIRST VIEWPORT
 
-At 1440px, use a compact single-line header and asymmetrical 12-column 7/5 split. The left is a large vermilion portfolio field with “Security-first systems work.”, concise evidence-led copy, “Inspect public work” and “Project résumé” actions. The right is a cool-light, divided text index: dotz and Sophos public case-study/repository proof, then “10 workflows · WIP · INCOMPLETE”, “Full job · UNVERIFIED”, and “AI · UNVERIFIED”. Keep source status distinct from job and AI status. At 390px, stack in that order without hiding links or status.
+At 1440px, the compact header leads into an asymmetrical 7/5 split. The vermilion field says “Built to work. Open to scrutiny.” and links to the recorded lab and project résumé. The cool-light right side indexes dotz, Sophos, and the suite's evidence boundary. At phone widths, the same content stacks without hiding links or status.
 
 ### FORM
 
@@ -51,14 +49,12 @@ Use the assigned municipal works-order inspection-tag world, seed `a8dcc35e`, in
 - **Motion:** content stays static. Only brief underline/border feedback is needed; reduce nonessential motion when requested.
 - **Layout:** asymmetrical 7/5 split at wide viewports, then a single reading order on phone. Public proof and WIP status remain separate, with text labels rather than color alone.
 
-These values document the candidate direction. They are not a measured WCAG result or a conformance claim.
+These values document the implemented direction. They are not a measured WCAG result or a conformance claim.
 
 ## Truth and review boundaries
 
 - The public case studies are dotz and Sophos. Their public repository evidence and credit limits stay explicit.
-- All ten Industry AI Suite workflows remain `WIP · INCOMPLETE`; every full job remains `UNVERIFIED`; AI remains `UNVERIFIED`. Source status is kept separate from job and AI status.
-- The public Industry AI Suite code reference is pinned to published commit `1122d8a615b70a7225ac0993577817c1d05c91a6`: [reviewed suite source](https://github.com/cayleb-james2008/industry-ai-suite/tree/1122d8a615b70a7225ac0993577817c1d05c91a6). Public code visibility does not change any workflow status.
-- SearchLift has a bounded, read-only current Pages read (`clean-clone-live.json`, retrieved `2026-09-25T19:43:45Z`; source SHA-256 `b4ed4de9f785a5059acde72c7660d6c20351d8409915c6323a252836b3001c88`): one captured page contained 10/10 approved workflow names. This is not SEO, ranking, traffic, or whole-site evidence, and does not verify workflow completion or a full job; AI was not run and remains unverified.
+- All ten full enterprise jobs remain `UNVERIFIED`. Five bounded local model sentences have independent transport witnesses, citations, and human public-source review. The [witness bundle](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926) keeps that scope explicit.
+- SearchLift has a bounded, read-only **dated** Pages read (`clean-clone-live.json`, retrieved `2026-09-25T19:43:45Z`; source SHA-256 `b4ed4de9f785a5059acde72c7660d6c20351d8409915c6323a252836b3001c88`): one captured page contained 10/10 approved workflow names. This is not SEO, ranking, traffic, or whole-site evidence.
 - No new biography, employment, education, customer, income, adoption, deployment, or AI-completion claim is introduced.
-- The local grading surface is a separate offline artifact. Its Approve/Redo controls record local review choices only; they do not authorize a release or publish anything.
-- The existing public site still has the old look. This candidate remains local, unapproved, and unpublished until the operator reviews this exact revision.
+- The local grading surface is a separate offline artifact. Its Approve/Redo controls record Cayleb's visual choices and do not submit a job application.

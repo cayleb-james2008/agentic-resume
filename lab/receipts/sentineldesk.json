@@ -1,0 +1,435 @@
+{
+  "ai_output": "The CISA KEV record for CVE-2026-93952 describes an improper input validation vulnerability in Arista VeloCloud Orchestrator (VCO) on-prem that could allow a remote attacker to access privileged internal functionality and impact the VCO host, potentially compromising confidentiality, integrity, and availability of the orchestrator and its managed data [evidence:CVE-2026-93952].",
+  "ai_proof": {
+    "evidence_ids": [
+      "CVE-2026-93952"
+    ],
+    "model": "suite-local-proof",
+    "proof_url": "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
+    "provider_id": "chatcmpl-LYxDEspRAQ9ZnK3XG6z4FZnDBMaLyjS3",
+    "review_note": "The sentence matches the cited CISA KEV shortDescription and makes no organization-exposure claim."
+  },
+  "ai_status": "WITNESSED LOCAL MODEL / CITED OUTPUT",
+  "app_slug": "sentineldesk",
+  "evidence": [
+    {
+      "as_of": "2026-09-22",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2026-93952",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21017",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1782",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1870",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1871",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1879",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-20090",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1497",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1498",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2020-15999",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21166",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21148",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21206",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21224",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21193",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21220",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1647",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1732",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1675",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-1906",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-20021",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-20022",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-20023",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-20016",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21972",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "as_of": "2021-11-03",
+      "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+      "retrieved_at_utc": "2026-09-26T21:10:46Z",
+      "source_id": "CVE-2021-21985",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  ],
+  "handoff": {
+    "containment_or_account_change": "not available",
+    "next_action": "Compare cited CVEs with an authorized asset inventory and alert source, then validate product/version applicability before deciding on a response.",
+    "owner": "security-defender-review"
+  },
+  "policy_text_status": null,
+  "preview_limit": "Dated public-source snapshot. Re-run the local workbench for fresh data; no private enterprise workflow or AI verification is implied.",
+  "project": null,
+  "recorded_at_utc": "2026-09-26T21:34:57Z",
+  "request_url": null,
+  "source": {
+    "request_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "response_sha256": "8a41e76a385f304a9f436f33640ed6bec1ca94d9dee699a4e9ecb908c9d51395",
+    "retrieved_at_utc": "2026-09-26T21:10:46Z",
+    "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "source_hash": null,
+  "source_metadata": {},
+  "source_status": "VERIFIED_SOURCE",
+  "status": "UNVERIFIED",
+  "task_result": {
+    "catalog_record_count": 1726,
+    "human_review_summary": "The CISA KEV record for CVE-2026-93952 describes an improper input validation vulnerability in Arista VeloCloud Orchestrator (VCO) on-prem that could allow a remote attacker to access privileged internal functionality and impact the VCO host, potentially compromising confidentiality, integrity, and availability of the orchestrator and its managed data [evidence:CVE-2026-93952].",
+    "priority_method": "earliest actual dueDate first; then actual dateAdded and CVE ID; records without dueDate sort after dated records",
+    "product_group_count": 666,
+    "review_queue": [
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-65fe4d259f37d2dd78e645e80f87556c0b5eb86edd52c2528a6da56eb738310d",
+        "public_summary": "[REDACTED] uses FreeType, an open-source software library to render fonts, which contains a heap buffer overflow vulnerability in the function Load_SBit_Png when processing PNG images embedded into fonts. This vulnerability is part of an exploit chain with CVE-2020-17087 on Windows and CVE-2020-16010 on Android.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2020-15999",
+        "vendor_project_id": "vendor-902c730707a760fb10b9d09f8414fad0e3e0e22467108201fbc1a2692e72aa85"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-92e901df59dd235056cc3ea2fd4de814f5041358c32d59ac222c4194d9e24183",
+        "public_summary": "Cisco HyperFlex HX [REDACTED] contains an insufficient input validation vulnerability which could allow an attacker to execute commands on an affected device as the root user.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1497",
+        "vendor_project_id": "vendor-1883a471a65b49106d9439f724cd111c6dc491329809be6e3b54de656be7224b"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-92e901df59dd235056cc3ea2fd4de814f5041358c32d59ac222c4194d9e24183",
+        "public_summary": "Cisco HyperFlex HX [REDACTED] contains an insufficient input validation vulnerability which could allow an attacker to execute commands on an affected device as the tomcat8 user.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1498",
+        "vendor_project_id": "vendor-1883a471a65b49106d9439f724cd111c6dc491329809be6e3b54de656be7224b"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-94187110cac54af9d39186619b97c883c45e669e61914a4c76ee201214595168",
+        "public_summary": "[REDACTED] contains an unspecified vulnerability that allows for remote code execution.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1647",
+        "vendor_project_id": "vendor-c1fbf797521ce3feb1ecc023f95f97415970234806caab3e7f8696676adf6686"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-8a9b5e08b2602af2c2b546aaef78727768d100a7ee3fcf88fc812929a45ce5af",
+        "public_summary": "[REDACTED] Spooler contains an unspecified vulnerability that allows for remote code execution.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1675",
+        "vendor_project_id": "vendor-c1fbf797521ce3feb1ecc023f95f97415970234806caab3e7f8696676adf6686"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-fd06111d79e3a37aca5d209dbed65ca27e3ae2017f0d0e6c93f08660a0b360a1",
+        "public_summary": "Microsoft Win32k contains an unspecified vulnerability that allows for privilege escalation.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1732",
+        "vendor_project_id": "vendor-c1fbf797521ce3feb1ecc023f95f97415970234806caab3e7f8696676adf6686"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-e67fd97c469a3092717f27e2d6dc9155e8561f19fc51c6ecffa1895fcec79201",
+        "public_summary": "Apple iOS, iPadOs, macOS, watchOS, and tvOS contain a race condition vulnerability that may allow a malicious application to elevate privileges.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1782",
+        "vendor_project_id": "vendor-f74d98cbe6542671346cb6ebf84fc1d19822dbf06891ea71f084afbaf0510671"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-0c8d77a8a23dae0b47bf82f629731fe9a6e64c7ba8ec65cb74906779529c2857",
+        "public_summary": "Apple iOS, iPadOS, and macOS WebKit contain an unspecified logic vulnerability that allows a remote attacker to execute code. This vulnerability could impact HTML parsers that use WebKit, including but not limited to [REDACTED] and non-Apple products which rely on WebKit for HTML processing.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1870",
+        "vendor_project_id": "vendor-f74d98cbe6542671346cb6ebf84fc1d19822dbf06891ea71f084afbaf0510671"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-0c8d77a8a23dae0b47bf82f629731fe9a6e64c7ba8ec65cb74906779529c2857",
+        "public_summary": "Apple iOS, iPadOS, and macOS WebKit contain an unspecified logic vulnerability that allows a remote attacker to execute code. This vulnerability could impact HTML parsers that use WebKit, including but not limited to [REDACTED] and non-Apple products which rely on WebKit for HTML processing.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1871",
+        "vendor_project_id": "vendor-f74d98cbe6542671346cb6ebf84fc1d19822dbf06891ea71f084afbaf0510671"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-8ab31ed417f154b31108db4f993f73d7b8e11d4a5a99a8a472033ff44c332f47",
+        "public_summary": "Apple iOS, iPadOS, and watchOS WebKit contain an unspecified vulnerability that allows for universal cross-site scripting (XSS) when processing maliciously crafted web content. This vulnerability could impact HTML parsers that use WebKit, including but not limited to [REDACTED] and non-Apple products which rely on WebKit for HTML processing.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1879",
+        "vendor_project_id": "vendor-f74d98cbe6542671346cb6ebf84fc1d19822dbf06891ea71f084afbaf0510671"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-4d77233ea2b65e20cb23741d762e4e9cacc7e8519fbb4e71a70cd92a4fcb649a",
+        "public_summary": "[REDACTED] chipsets contain a detection of error condition without action vulnerability when improper handling of address deregistration on failure can lead to new GPU address allocation failure.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-1906",
+        "vendor_project_id": "vendor-a982da1be59a5ca1c9b447ee3a178785f543d2c27f17bac552315802a79647be"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-b192ea1431398ae6065d143090e8bdb61c758cbaeeb4a8bf9c07973a13ebf227",
+        "public_summary": "SonicWall SSLVPN SMA100 contains a SQL injection vulnerability that allows remote exploitation for credential access by an unauthenticated attacker.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-20016",
+        "vendor_project_id": "vendor-06a99926aecd33a90bbe72f7d70957c0b908238f2a1b6a6d69790e90e877549c"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-a724153244f153af50b1bf5f66e656d1773fc74073f0e84fd25978791cdcf435",
+        "public_summary": "SonicWall [REDACTED] contains an improper privilege management vulnerability that allows an attacker to create an administrative account by sending a crafted HTTP request to the remote host. This vulnerability has known usage in a SonicWall [REDACTED] exploit chain along with CVE-2021-20022 and CVE-2021-20023 to achieve privilege escalation.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-20021",
+        "vendor_project_id": "vendor-06a99926aecd33a90bbe72f7d70957c0b908238f2a1b6a6d69790e90e877549c"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-a724153244f153af50b1bf5f66e656d1773fc74073f0e84fd25978791cdcf435",
+        "public_summary": "SonicWall [REDACTED] contains an unrestricted upload of file with dangerous type vulnerability that allows a post-authenticated attacker to upload a file to the remote host. This vulnerability has known usage in a SonicWall [REDACTED] exploit chain along with CVE-2021-20021 and CVE-2021-20023 to achieve privilege escalation.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-20022",
+        "vendor_project_id": "vendor-06a99926aecd33a90bbe72f7d70957c0b908238f2a1b6a6d69790e90e877549c"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-a724153244f153af50b1bf5f66e656d1773fc74073f0e84fd25978791cdcf435",
+        "public_summary": "SonicWall [REDACTED] contains a path traversal vulnerability that allows a post-authenticated attacker to read files on the remote host. This vulnerability has known usage in a SonicWall [REDACTED] exploit chain along with CVE-2021-20021 and CVE-2021-20022 to achieve privilege escalation.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-20023",
+        "vendor_project_id": "vendor-06a99926aecd33a90bbe72f7d70957c0b908238f2a1b6a6d69790e90e877549c"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-612ebda4fb0efb2fa6f5fe39894e3916d39bfa8f196ea17a3e00e428d279029d",
+        "public_summary": "[REDACTED] firmware contains a path traversal vulnerability that could allow unauthenticated, remote attackers to bypass authentication and access sensitive information. This vulnerability affects multiple routers across several different vendors.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-20090",
+        "vendor_project_id": "vendor-612ebda4fb0efb2fa6f5fe39894e3916d39bfa8f196ea17a3e00e428d279029d"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-c1e9f1878d9647059962a8cc2016d7d8abc3f04e8cbfd08ae3557fe9e389b942",
+        "public_summary": "[REDACTED] and Reader contain a heap-based buffer overflow vulnerability that could allow an unauthenticated attacker to achieve code execution in the context of the current user.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-21017",
+        "vendor_project_id": "vendor-11b792bdeb931a499a4f15ed1fc83dc1e96638512c823ff2f28e9685e68d3b15"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-483f142f8734318e3cb73437b766bd55a8987a306263cb2a228616a873304504",
+        "public_summary": "[REDACTED] V8 Engine contains a heap buffer overflow vulnerability that allows a remote attacker to potentially exploit heap corruption via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, [REDACTED], [REDACTED], and Opera.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-21148",
+        "vendor_project_id": "vendor-902c730707a760fb10b9d09f8414fad0e3e0e22467108201fbc1a2692e72aa85"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-eb715df7958fdff0618d43f7e4d93ff54626281a4fe9a2f47573484a32720ba4",
+        "public_summary": "[REDACTED] contains a race condition vulnerability that allows a remote attacker to potentially exploit heap corruption via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, [REDACTED], [REDACTED], and Opera.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-21166",
+        "vendor_project_id": "vendor-902c730707a760fb10b9d09f8414fad0e3e0e22467108201fbc1a2692e72aa85"
+      },
+      {
+        "date_added": "2021-11-03",
+        "due_date": "2021-11-17",
+        "product_id": "product-7aa3eb21634a443832cbc4857b339f582c4ae324b9c56f50717f93de167e85ca",
+        "public_summary": "[REDACTED] contains a use-after-free vulnerability that allows a remote attacker to potentially exploit heap corruption via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, [REDACTED], [REDACTED], and Opera.",
+        "public_summary_truncated": false,
+        "source_id": "CVE-2021-21193",
+        "vendor_project_id": "vendor-902c730707a760fb10b9d09f8414fad0e3e0e22467108201fbc1a2692e72aa85"
+      }
+    ]
+  },
+  "uncertainty": null,
+  "workflow_status": "UNVERIFIED"
+}

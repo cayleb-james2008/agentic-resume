@@ -1,0 +1,75 @@
+{
+  "ai_status": "NOT RUN / DETERMINISTIC STRUCTURAL REVIEW",
+  "app_slug": "searchlift",
+  "evidence": [
+    {
+      "evidence_id": "SL-SRC-823863169a",
+      "retrieved_at_utc": "2026-09-26T21:11:12Z",
+      "source_id": "cayleb-james2008.github.io:/agentic-resume/",
+      "source_url": "https://cayleb-james2008.github.io/agentic-resume/",
+      "terms_url": "https://api.github.com/licenses/mit"
+    }
+  ],
+  "handoff": {
+    "next_action": "Review the source-linked findings and drafts; any content change requires a separate human publishing decision.",
+    "owner": "portfolio-content-owner"
+  },
+  "policy_text_status": null,
+  "preview_limit": "Dated public-source snapshot. Re-run the local workbench for fresh data; no private enterprise workflow or AI verification is implied.",
+  "project": null,
+  "recorded_at_utc": "2026-09-26T21:34:57Z",
+  "request_url": null,
+  "source": {
+    "as_of": "2026-09-26T14:58:18Z",
+    "response_sha256": "1514751db10a769be87fafd920a75a430770b6e37f7f440fb64c9b2f1e5ba47b",
+    "retrieved_at_utc": "2026-09-26T21:11:12Z",
+    "source_id": "cayleb-james2008.github.io:/agentic-resume/",
+    "source_url": "https://cayleb-james2008.github.io/agentic-resume/",
+    "terms_url": "https://api.github.com/licenses/mit"
+  },
+  "source_hash": null,
+  "source_metadata": {},
+  "source_status": "VERIFIED_SOURCE",
+  "status": "UNVERIFIED",
+  "task_result": {
+    "draft_notice": "Drafts are suggestions for human review; no file was edited or published.",
+    "issue_count": 0,
+    "issues": [],
+    "name_coverage": {
+      "count": "10/10",
+      "coverage_note": "Counts distinct approved names in the bounded parser projection only; omitted or truncated page content was not assessed.",
+      "fields_checked": [
+        "title",
+        "meta description",
+        "heading text",
+        "paragraph text"
+      ],
+      "limits": {
+        "maximum_characters_per_captured_item": 1000,
+        "maximum_headings": 20,
+        "maximum_paragraphs": 30
+      },
+      "names_observed": [
+        "LedgerBridge",
+        "MarketBrief",
+        "ChainWatch",
+        "BacktestGuard",
+        "ReplyCraft",
+        "HandoffHub",
+        "PipelineRelay",
+        "OnboardPath",
+        "SentinelDesk",
+        "SearchLift"
+      ],
+      "verdict": "PASS"
+    },
+    "pages_reviewed": 1,
+    "priority_counts": {
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    }
+  },
+  "uncertainty": null,
+  "workflow_status": "UNVERIFIED"
+}

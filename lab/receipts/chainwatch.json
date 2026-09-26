@@ -1,0 +1,61 @@
+{
+  "ai_invoked": false,
+  "ai_status": "NON-AI / DETERMINISTIC REVIEW",
+  "app_slug": "chainwatch",
+  "evidence_ids": [
+    "EXAMPLE-1",
+    "EXAMPLE-2"
+  ],
+  "human_handoff": {
+    "next_action": "Check source records and each exception before any external action.",
+    "owner": "local reviewer"
+  },
+  "input_sha256": "dace47d099d0e5a8eae60feb8cb731572af734736e587864584afdf28aa41c63",
+  "integration_adapter": "in-memory user input; no file, account, or network write",
+  "preview_limit": "Synthetic calculation example; the hosted Mempool API remains unadmitted. The local workbench accepts authorized user-supplied observations.",
+  "project": "ChainWatch",
+  "recorded_at_utc": "2026-09-26T21:34:57Z",
+  "side_effect_count": 0,
+  "source_status": "EXAMPLE INPUT / NO LIVE CHAIN",
+  "status": "USER_SUPPLIED_REVIEW",
+  "task_result": {
+    "alerts": [
+      {
+        "event_id": "EXAMPLE-1",
+        "owner": "example-only",
+        "rate_to_baseline": 4.0,
+        "reason": "rate exceeds configured baseline threshold",
+        "uncertainty": "medium"
+      }
+    ],
+    "observations": [
+      {
+        "address": "0x1111111111111111111111111111111111111111",
+        "anomaly": true,
+        "baseline_units_per_hour": 2,
+        "chain": "ethereum",
+        "event_id": "EXAMPLE-1",
+        "owner": "example-only",
+        "rate_to_baseline": 4.0,
+        "rate_units_per_hour": 8,
+        "sample_hours": 12,
+        "uncertainty": "medium"
+      },
+      {
+        "address": "0x2222222222222222222222222222222222222222",
+        "anomaly": false,
+        "baseline_units_per_hour": 2,
+        "chain": "base",
+        "event_id": "EXAMPLE-2",
+        "owner": "example-only",
+        "rate_to_baseline": 0.5,
+        "rate_units_per_hour": 1,
+        "sample_hours": 24,
+        "uncertainty": "low"
+      }
+    ],
+    "threshold_multiple": 3.0
+  },
+  "uncertainty": "These two observations and addresses are invented to demonstrate the calculation. They are not chain records, ownership evidence, company exposure, or a live API result.",
+  "workflow_status": "LOCAL CALCULATION EXAMPLE ONLY"
+}

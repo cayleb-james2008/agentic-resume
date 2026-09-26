@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<title>Portfolio — brag</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  body { margin: 0; background: #F3F6F8; color: #172B3A; font-family: system-ui, sans-serif; }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .clip { position: absolute; inset: 0; display: grid; place-items: center; }
+  .inner { width: 100%; height: 100%; position: relative; display: grid; place-items: center; }
+  .bg { position: absolute; inset:0; background: #F3F6F8; }
+  .toprule { position: absolute; left: 160px; right: 160px; top: 110px; height: 2px; background: #C5D0D8; }
+  .veil { position: absolute; inset: 0; background: #F3F6F8; opacity: 0; }
+  .hook1 { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 130px; font-weight: 900; letter-spacing: 2px; opacity: 0; }
+  .hook2 { position: absolute; left: 0; right: 0; top: 540px; text-align: center; font-size: 44px; font-weight: 500; color: #4B5D69; opacity: 0; }
+  .pcard { width: 980px; background: #FFFFFF; border: 1px solid #C5D0D8; border-radius: 14px; padding: 26px 36px; margin: 14px auto; opacity: 0; }
+  .pname { font-size: 34px; font-weight: 800; }
+  .psub { font-size: 24px; color: #4B5D69; margin-top: 6px; }
+  .cite { width: 1240px; text-align: center; }
+  .citerule { width: 90px; height: 3px; background: #123F70; margin: 0 auto 26px; opacity: 0; }
+  .citetext { font-family: ui-monospace, monospace; font-size: 25px; color: #123F70; opacity: 0; }
+  .citecap { margin-top: 26px; font-size: 26px; font-style: italic; color: #4B5D69; opacity: 0; }
+  .badges { position: absolute; left: 0; right: 0; top: 400px; display: flex; justify-content: center; gap: 26px; }
+  .badge { font-size: 27px; font-weight: 800; letter-spacing: 2px; border-radius: 999px; padding: 12px 30px; border: 2.5px solid; opacity: 0; }
+  .b-v { color: #123F70; border-color: #123F70; }
+  .b-u { color: #B6422A; border-color: #B6422A; }
+  .b-w { color: #4B5D69; border-color: #4B5D69; }
+  .close1 { position: absolute; left: 0; right: 0; top: 540px; text-align: center; font-size: 84px; font-weight: 900; opacity: 0; }
+  .close2 { position: absolute; left: 0; right: 0; top: 680px; text-align: center; font-size: 30px; font-weight: 600; color: #123F70; letter-spacing: 1px; opacity: 0; }
+  .closerule { position: absolute; left: 50%; top: 750px; width: 380px; height: 3px; margin-left: -190px; background: #B6422A; transform: scaleX(0); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="portfolio-brag" data-start="0" data-width="1920" data-height="1080" data-duration="18">
+
+  <div class="bg" data-start="0" data-duration="18"><div class="toprule"></div></div>
+
+  <section id="scene-hook" class="clip" data-start="0" data-duration="4">
+    <div class="inner">
+      <div class="hook1" id="h1">A PORTFOLIO</div>
+      <div class="hook2" id="h2">where every claim has a receipt.</div>
+    </div>
+  </section>
+
+  <section id="scene-projects" class="clip" data-start="4" data-duration="6">
+    <div class="inner">
+      <div>
+        <div class="pcard" id="p1">
+          <div class="pname">dotz</div>
+          <div class="psub">local-first multi-agent coding dashboard · Rust/axum/Tauri</div>
+        </div>
+        <div class="pcard" id="p2">
+          <div class="pname">Sophos</div>
+          <div class="psub">Windows coding-agent project · credits Prime Intellect's Prime Agent</div>
+        </div>
+        <div class="pcard" id="p3">
+          <div class="pname">Industry AI Suite</div>
+          <div class="psub">ten workflow apps · receipts on every claim</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scene-cite" class="clip" data-start="10" data-duration="4.5">
+    <div class="inner">
+      <div class="cite">
+        <div class="citerule" id="crule"></div>
+        <div class="citetext" id="ctext"></div>
+        <div class="citecap" id="ccap">this line links its own proof.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scene-close" class="clip" data-start="14.5" data-duration="3.5">
+    <div class="inner">
+      <div class="badges">
+        <div class="badge b-v" id="b1">VERIFIED</div>
+        <div class="badge b-u" id="b2">UNVERIFIED</div>
+        <div class="badge b-w" id="b3">WIP · INCOMPLETE</div>
+      </div>
+      <div class="close1" id="c1">Work you can audit.</div>
+      <div class="close2" id="c2">cayleb-james2008.github.io</div>
+      <div class="closerule" id="crule2"></div>
+    </div>
+  </section>
+
+  <div class="veil" id="veil" data-start="0" data-duration="18"></div>
+
+  <audio id="bg-music" data-start="0" data-duration="18" data-track-index="10" data-volume="0.24" src="assets/music/happy-beats-business-moves-vol-11-by-ende-dot-app.mp3"></audio>
+  <audio id="sfx-drop-1" data-start="4.45" data-duration="0.11" data-track-index="11" data-volume="0.45" src="assets/sfx/interface/drop_001.ogg"></audio>
+  <audio id="sfx-drop-2" data-start="5.45" data-duration="0.11" data-track-index="12" data-volume="0.42" src="assets/sfx/interface/drop_001.ogg"></audio>
+  <audio id="sfx-drop-3" data-start="6.45" data-duration="0.11" data-track-index="13" data-volume="0.45" src="assets/sfx/interface/drop_001.ogg"></audio>
+  <audio id="sfx-key-1" data-start="10.75" data-duration="0.25" data-track-index="14" data-volume="0.3" src="assets/sfx/keypress-004.wav"></audio>
+  <audio id="sfx-key-2" data-start="10.93" data-duration="0.25" data-track-index="15" data-volume="0.28" src="assets/sfx/keypress-011.wav"></audio>
+  <audio id="sfx-key-3" data-start="11.11" data-duration="0.25" data-track-index="16" data-volume="0.3" src="assets/sfx/keypress-019.wav"></audio>
+  <audio id="sfx-key-4" data-start="11.29" data-duration="0.25" data-track-index="17" data-volume="0.26" src="assets/sfx/keypress-004.wav"></audio>
+  <audio id="sfx-close" data-start="17.86" data-duration="0.11" data-track-index="18" data-volume="0.5" src="assets/sfx/interface/drop_001.ogg"></audio>
+
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+
+/* Scene 1 — hook */
+tl.fromTo("#h1", { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.4);
+tl.fromTo("#h2", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 1.3);
+tl.to("#scene-hook .inner", { opacity: 0, duration: 0.35, ease: "power2.inOut" }, 3.6);
+
+/* Scene 2 — projects, one at a time, full set holds */
+tl.fromTo("#p1", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 4.45);
+tl.fromTo("#p2", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 5.45);
+tl.fromTo("#p3", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 6.45);
+tl.to("#scene-projects .inner", { opacity: 0, duration: 0.35, ease: "power2.inOut" }, 9.6);
+
+/* Scene 3 — the citation (typing via textContent) */
+(function () {
+  const cite = "SearchLift · evidence SL-SRC-823863169a · sha256 b4ed4de9\u202601c88 · 0 issues · 0 side effects";
+  for (let i = 0; i < cite.length; i++) {
+    tl.set("#ctext", { textContent: cite.slice(0, i + 1) }, 10.7 + i * 0.024);
+  }
+})();
+tl.fromTo("#crule", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 10.3);
+tl.fromTo("#ctext", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 10.7);
+tl.fromTo("#ccap", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 13.3);
+tl.to("#scene-cite .inner", { opacity: 0, duration: 0.3, ease: "power2.inOut" }, 14.2);
+
+/* Scene 4 — badges + close. beat-locked: 17.86s (vol-11 strong cue 17.91) on the rule draw */
+tl.fromTo("#b1", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, ease: "power2.out" }, 14.75);
+tl.fromTo("#b2", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, ease: "power2.out" }, 15.0);
+tl.fromTo("#b3", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, ease: "power2.out" }, 15.25);
+tl.fromTo("#c1", { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 16.1);
+tl.fromTo("#c2", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 17.0);
+tl.to("#crule2", { scaleX: 1, duration: 0.45, ease: "power3.inOut" }, 17.86);
+tl.to("#veil", { opacity: 1, duration: 0.5, ease: "power2.in" }, 17.5);
+
+window.__timelines["portfolio-brag"] = tl;
+</script>
+</body>
+</html>

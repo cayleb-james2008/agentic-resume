@@ -1,0 +1,2 @@
+A portfolio where every claim has a receipt: dated evidence, source links, SHA-256 hashes, and honest WIP/UNVERIFIED badges.
+Work you can audit - cayleb-james2008.github.io

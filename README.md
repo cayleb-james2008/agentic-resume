@@ -19,7 +19,7 @@ python3 -m http.server 8765
 # open the local loopback preview on port 8765
 ```
 
-The portfolio lives at repo root (`index.html`, `resume.html`, `css/`, `js/`, `projects/`, `lab/`). Its established public case-study pages are dotz and Sophos; ten separate Industry AI Suite project pages describe the workflows and their evidence. The hosted lab replays dated receipts and performs no fresh source request. Its dark stylesheet is exported from the suite repository, so future receipt exports preserve the visual system. The suite repository contains a local workbench for fresh public data and authorized user input.
+The portfolio lives at repo root (`index.html`, `resume.html`, `css/`, `js/`, `projects/`, `lab/`). Its established public case-study pages are dotz and Sophos; ten separate Industry AI Suite project pages describe the workflows and their evidence. The hosted lab replays dated receipts and performs no fresh source request. Its dark stylesheet is exported from the suite repository, so future receipt exports preserve the visual system. The suite repository contains a local workbench for fresh public data and permitted, de-identified input.
 
 ## Resume and evidence status
 

@@ -1,4 +1,4 @@
-# Project résumé / selected verified work
+# Project résumé / selected public work
 Cayleb Alvarez-James · Applied AI and systems projects
 
 [GitHub profile](https://github.com/cayleb-james2008) · [Interactive project lab](https://cayleb-james2008.github.io/agentic-resume/lab/)

@@ -1,55 +1,35 @@
 > **Operator model:** plain English. This file describes the current visual system; Cayleb's final visual preference remains his choice.
 
-# Portfolio design — civic works-record field guide
+# Portfolio design — monochrome evidence dossier
 
-**Status:** Implemented portfolio design with an interactive recorded lab. A visual review package accompanies the release; this document does not claim accessibility conformance or personal approval.
+**Status:** Implemented dark redesign of the public portfolio, case pages, résumé site, and recorded lab. Screenshots and a local review sheet accompany the release; this document does not claim personal approval or complete WCAG conformance.
 
-## Six-block direction
+## Direction
 
-### THESIS
+The work is presented as a technical dossier for hiring reviewers. A near-black canvas, white reading type, cool-gray evidence panels, and a restrained ice-blue edge give it a holographic feel while keeping source trails and status words legible. The former cool-light vermilion inspection-record look is superseded.
 
-A portfolio that takes a reviewer from a working ten-journey lab to established public projects, dated evidence, and a project résumé. Each bounded result keeps its source and full-job limit visible.
+The home page retains its useful order: first-viewport lab access and proof index, established dotz and Sophos work, ten bounded suite journeys, dated public-source evidence, project résumé, and GitHub contact. Case pages keep a document-like rhythm. The lab keeps its workflow rail and source→result→human handoff. A reviewer should not have to decode color to distinguish verified sources, witnessed model samples, and unverified full jobs.
 
-### OWN-WORLD
-
-Municipal works-order inspection-record grammar: cool-light ground, deep blue-charcoal text, one vermilion signal, system sans typography, labeled evidence/limit/handoff fields. Abstract the record structure; do not impersonate a government form or invent ticket data.
-
-### STORY
-
-The visitor reaches the recorded lab from the first viewport, then the two public case studies, ten project pages, dated evidence, and a project résumé or GitHub contact. Source verification and model-call verification remain separate from full-job completion.
-
-### FIRST VIEWPORT
-
-At 1440px, the compact header leads into an asymmetrical 7/5 split. The vermilion field says “Built to work. Open to scrutiny.” and links to the recorded lab and project résumé. The cool-light right side indexes dotz, Sophos, and the suite's evidence boundary. At phone widths, the same content stacks without hiding links or status.
-
-### FORM
-
-Use the assigned municipal works-order inspection-tag world, seed `a8dcc35e`, index 3 of the director’s ranked seven. None of the six named challengers wins on both audience identification and truthful proof clarity; retain their useful disciplines only, not their visual treatments. The inspection-record grammar is a navigation and evidence structure, not a claim that this is a municipal service.
-
-### FINISH
-
-“unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance”
-
-## Implemented visual system
+## Implemented system
 
 | Token | Value | Role |
 |---|---|---|
-| `--page` | `#F3F6F8` | Cool-light page ground |
-| `--surface` | `#FFFFFF` | Reading surface |
-| `--soft` | `#E7EEF2` | Secondary section field |
-| `--ink` | `#172B3A` | Main text |
-| `--muted` | `#4B5D69` | Supporting text |
-| `--rule` | `#C5D0D8` | Dividers |
-| `--signal` | `#B6422A` | Single vermilion field, links, and markers |
-| `--signal-ink` | `#FFFFFF` | Text on vermilion |
-| `--focus` | `#123F70` | Focus on light ground; white outline on vermilion |
+| `--page` | `#090C10` | Near-black canvas |
+| `--surface` | `#141A21` | Reading surface |
+| `--soft` | `#1A222B` | Raised fields |
+| `--ink` | `#F4F7FA` | Primary text |
+| `--muted` | `#B5C0CA` | Supporting text |
+| `--rule` | `#46515D` | Boundaries and dividers |
+| `--signal` | `#A9DCEC` | Links, focus-adjacent highlights, evidence edge |
+| `--focus` | `#E8EFF4` | Keyboard focus |
 
-- **Type:** local system sans stack for display/body; metadata-only monospace stack. Hero `clamp(3rem, 6vw, 5rem)`, H2 `clamp(2rem, 3vw, 2.75rem)`, body `1.0625rem`, metadata minimum `0.8125rem`; no serif or remote font.
-- **Rhythm and shape:** `4, 8, 16, 24, 40, 64, 96px`; square corners; one level of evidence fields rather than nested cards; controls target at least 44px.
-- **Motion:** content stays static. Only brief underline/border feedback is needed; reduce nonessential motion when requested.
-- **Layout:** asymmetrical 7/5 split at wide viewports, then a single reading order on phone. Public proof and WIP status remain separate, with text labels rather than color alone.
+- **Type:** locally available sans stack for display/body and monospace only for source IDs and status. The original content metrics stay readable; no remote font request is added.
+- **Layout:** asymmetrical wide hero, stacked phone reading order, 44px controls, no hidden evidence status. Existing illustrations are shown in grayscale and remain explicitly editorial illustrations rather than product screenshots.
+- **Depth:** a faint technical grid and restrained spectral border in the hero, quiet lifted lab panels, and cool gray rules. No new raster or external design library is needed.
+- **Motion:** one short hero/header edge reveal and 150ms control feedback. `prefers-reduced-motion` removes these effects. No continuous animation.
+- **PDF:** a white print companion with charcoal type and monochrome underlined links. It stays one page with extractable text and avoids an ink-heavy dark résumé for employer forms.
 
-These values document the implemented direction. They are not a measured WCAG result or a conformance claim.
+Measured base contrast ratios are recorded in `design/jobs/agentic-resume-dark-20260926/01-art-direction/direction.md` under `/home/cayleb/Work`. The palette ratios are design checks, not a blanket accessibility certification.
 
 ## Truth and review boundaries
 

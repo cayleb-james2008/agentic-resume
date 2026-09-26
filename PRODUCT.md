@@ -22,7 +22,7 @@ The portfolio pairs public case studies and repository links with dated evidence
 
 ## Operating Context
 
-- The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The 2026-09-25 Pages commit `91082127649451e4bd57f75f91cbe89a0e0929a1` is a historical baseline, not the current release claim.
+- The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The 2026-09-26 Pages commit `709d04d02c35c3ab572aee8ee0d072d1e9f42851` is the prior verified release baseline; any later design release requires a fresh live check.
 - Its fifteen main page routes are:
   1. `/agentic-resume/` — portfolio home (`index.html`)
   2. `/agentic-resume/resume.html` — project-only résumé
@@ -68,7 +68,7 @@ The portfolio pairs public case studies and repository links with dated evidence
 
 ## Brand Commitments
 
-On 2026-09-25 the operator rejected the former portfolio look. The current cool-light, vermilion inspection-record direction is implemented and available for visual review; this document does not claim Cayleb approved its final taste.
+On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/holographic/professional application portfolio. The implemented near-monochrome evidence dossier replaces the cool-light vermilion direction. Its final taste awaits Cayleb's visual review.
 
 ## Evidence on Hand
 

@@ -82,15 +82,15 @@ LINK = re.compile(r"^\[([^\]]+)\]\((https?://[^)\s]+)\)$")
 
 TITLE = ParagraphStyle(
     "title", fontName="ResumeSans-Bold", fontSize=17, leading=21,
-    spaceAfter=4, textColor="#17171f",
+    spaceAfter=4, textColor="#101820",
 )
 H2 = ParagraphStyle(
     "h2", fontName="ResumeSans-Bold", fontSize=9.6, leading=12,
-    spaceBefore=8, spaceAfter=3, textColor="#282832",
+    spaceBefore=8, spaceAfter=3, textColor="#24313A",
 )
 BODY = ParagraphStyle(
     "body", fontName="ResumeSans", fontSize=9.4, leading=11.6,
-    spaceAfter=1.5, textColor="#202027",
+    spaceAfter=1.5, textColor="#202A32",
 )
 BULLET = ParagraphStyle(
     "bullet", parent=BODY, leftIndent=10, firstLineIndent=0,
@@ -111,7 +111,7 @@ def inline_markup(text: str) -> str:
             if target not in ALLOWED_LINKS or parsed.scheme != "https" or parsed.netloc not in ALLOWED_HOSTS:
                 raise ValueError(f"Resume link is not in the verified public allowlist: {target}")
             output.append(
-                f'<link href="{html.escape(target, quote=True)}" color="#51406b">'
+                f'<link href="{html.escape(target, quote=True)}" color="#24343E">'
                 f"<u>{html.escape(label)}</u></link>"
             )
         elif part.startswith("**") and part.endswith("**"):
@@ -161,7 +161,7 @@ def verify_pdf_text(path: Path) -> None:
         raise RuntimeError("Generated PDF contains no extractable text")
     normalized_content = re.sub(r"\s+", " ", content).casefold()
     required = (
-        "Project résumé / selected verified work", "Cayleb Alvarez-James",
+        "Project résumé / selected public work", "Cayleb Alvarez-James",
         "LedgerBridge", "SearchLift", "UNVERIFIED",
         "Treasury", "World Bank", "CISA", "pytest-dev/pytest", "2026-19222",
         "GovInfo", "public-policy question", "DATES",
@@ -200,7 +200,7 @@ def verify_pdf_metadata(path: Path) -> None:
     )
     metadata = json.dumps(json.loads(result.stdout), ensure_ascii=False).casefold()
     required = (
-        "project résumé / selected verified work",
+        "project résumé / selected public work",
         "cayleb alvarez-james",
         "https://github.com/cayleb-james2008/industry-ai-suite",
     )
@@ -215,8 +215,8 @@ def main() -> int:
     if "TO BE SUPPLIED" in source_text:
         print("FAIL: placeholder gate — unresolved resume text remains", file=sys.stderr)
         return 1
-    if not source_text.startswith("# Project résumé / selected verified work\n"):
-        print("FAIL: résumé must be explicitly titled as selected verified project work", file=sys.stderr)
+    if not source_text.startswith("# Project résumé / selected public work\n"):
+        print("FAIL: résumé must be explicitly titled as selected public project work", file=sys.stderr)
         return 1
     if any(marker in source_text.casefold() for marker in FORBIDDEN_HISTORY_MARKERS):
         print("FAIL: unverified personal-history claims remain in the public résumé source", file=sys.stderr)
@@ -226,13 +226,16 @@ def main() -> int:
 
     def on_page(canvas, _doc) -> None:
         page_count[0] += 1
-        canvas.setTitle("Project résumé / selected verified work")
+        canvas.setTitle("Project résumé / selected public work")
         canvas.setAuthor("Cayleb Alvarez-James")
-        canvas.setSubject("Selected verified public projects and evidence-backed public-data work")
-        canvas.setKeywords("project resume, selected verified work, WIP workflows")
+        canvas.setSubject("Selected public projects and evidence-backed public-data work")
+        canvas.setKeywords("project resume, selected public work, WIP workflows")
         canvas.setCreator("agentic-resume offline PDF builder")
         canvas.setFont("ResumeSans", 6.5)
-        canvas.setFillColor("#55555d")
+        canvas.setStrokeColorRGB(.30, .38, .43)
+        canvas.setLineWidth(.5)
+        canvas.line(.55 * inch, 10.72 * inch, 7.95 * inch, 10.72 * inch)
+        canvas.setFillColor("#4A5862")
         canvas.drawCentredString(
             4.25 * inch,
             0.28 * inch,

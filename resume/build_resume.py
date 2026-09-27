@@ -39,6 +39,7 @@ ALLOWED_LINKS = {
     "https://github.com/cayleb-james2008/sophos",
     "https://github.com/cayleb-james2008/agentic-resume",
     "https://github.com/cayleb-james2008/industry-ai-suite",
+    "https://github.com/cayleb-james2008/industry-ai-suite/tree/244f6dc979abe678e90532cd7e53692443ee81dd/apps/chainwatch",
     "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
     "https://cayleb-james2008.github.io/agentic-resume/lab/",
     "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page%5Bsize%5D=10&sort=-record_date",
@@ -66,6 +67,7 @@ FORBIDDEN_HISTORY_MARKERS = (
     "cybersecurity",
     "ap computer science",
 )
+STALE_STATUS_MARKERS = re.compile(r"\b(?:UNVERIFIED|WIP|INCOMPLETE)\b", re.IGNORECASE)
 ALLOWED_HOSTS = {
     "github.com",
     "cayleb-james2008.github.io",
@@ -167,19 +169,23 @@ def verify_pdf_text(path: Path) -> None:
     normalized_content = re.sub(r"\s+", " ", content).casefold()
     required = (
         "Project résumé / selected public work", "Cayleb Alvarez-James",
-        "LedgerBridge", "SearchLift", "UNVERIFIED",
+        "LedgerBridge", "SearchLift", "ChainWatch",
         "Treasury", "World Bank", "CISA", "pytest-dev/pytest", "2026-19222",
         "GovInfo", "public-policy question", "DATES",
         "SearchLift before-state", "0/10 approved workflow names",
         "License : CC BY-4.0", "17:15:50 UTC",
-        "AI NOT RUN", "Full enterprise job", "Five local model samples",
-        "independent witness verified", "remote-only", CONTACT_EMAIL,
+        "structural check did not invoke a model", "no live chain feed",
+        "Five local model samples", "independent witness verified",
+        "No organization deployment or business outcome is claimed",
+        "remote-only", CONTACT_EMAIL,
     )
     for phrase in required:
         if phrase.casefold() not in normalized_content:
             raise RuntimeError(f"Generated PDF is missing required text: {phrase}")
     if "TO BE SUPPLIED" in content:
         raise RuntimeError("Generated PDF contains unresolved placeholder text")
+    if STALE_STATUS_MARKERS.search(content):
+        raise RuntimeError("Generated PDF contains stale visitor-facing status labels")
     email_addresses = re.findall(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", content)
     if email_addresses != [CONTACT_EMAIL]:
         raise RuntimeError("Generated PDF must contain only the approved recruiter email once")
@@ -228,6 +234,9 @@ def main() -> int:
     if any(marker in source_text.casefold() for marker in FORBIDDEN_HISTORY_MARKERS):
         print("FAIL: unverified personal-history claims remain in the public résumé source", file=sys.stderr)
         return 1
+    if STALE_STATUS_MARKERS.search(source_text):
+        print("FAIL: résumé source contains stale visitor-facing status labels", file=sys.stderr)
+        return 1
     if source_text.count(CONTACT_MAILTO) != 1:
         print("FAIL: résumé must link the approved recruiter email exactly once", file=sys.stderr)
         return 1
@@ -239,7 +248,7 @@ def main() -> int:
         canvas.setTitle("Project résumé / selected public work")
         canvas.setAuthor("Cayleb Alvarez-James")
         canvas.setSubject("Selected public projects and evidence-backed public-data work")
-        canvas.setKeywords("project resume, selected public work, WIP workflows")
+        canvas.setKeywords("project resume, selected public work, local workflows")
         canvas.setCreator("agentic-resume offline PDF builder")
         canvas.setFont("ResumeSans", 6.5)
         canvas.setStrokeColorRGB(.30, .38, .43)
@@ -249,7 +258,7 @@ def main() -> int:
         canvas.drawCentredString(
             4.25 * inch,
             0.28 * inch,
-            "All 10 full enterprise jobs: UNVERIFIED · 5 cited local model samples witnessed.",
+            "10 local workflows · 5 cited model samples · no company deployment claimed.",
         )
 
     doc = BaseDocTemplate(

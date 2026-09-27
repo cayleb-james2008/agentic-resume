@@ -11,7 +11,7 @@ Recruiter contact: [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmai
 - [One-page PDF](https://cayleb-james2008.github.io/agentic-resume/Cayleb-James-resume.pdf)
 - [Interactive recorded lab](https://cayleb-james2008.github.io/agentic-resume/lab/)
 
-GitHub Pages is the public destination for this dark, near-monochrome application portfolio. All ten full enterprise jobs remain UNVERIFIED. The recorded lab demonstrates bounded results from all ten workflows; five include source-cited local model samples with independently witnessed calls. The older Vercel deployment is stale and is not the current portfolio link.
+GitHub Pages is the public destination for this dark, near-monochrome application portfolio. The suite offers ten working local review paths, and the hosted lab replays bounded results from all ten. Five include source-cited local model samples with independently witnessed calls. Company deployments and customer outcomes are not claimed. The older Vercel deployment is stale and is not the current portfolio link.
 
 ## Preview (local)
 
@@ -23,12 +23,12 @@ python3 -m http.server 8765
 
 The portfolio lives at repo root (`index.html`, `resume.html`, `css/`, `js/`, `projects/`, `lab/`). Its established public case-study pages are dotz and Sophos; ten separate Industry AI Suite project pages describe the workflows and their evidence. The hosted lab replays dated receipts and performs no fresh source request. Its dark stylesheet is exported from the suite repository, so future receipt exports preserve the visual system. The suite repository contains a local workbench for fresh public data and permitted, de-identified input.
 
-## Resume and evidence status
+## Résumé and evidence
 
 - Source: `resume/resume.md`. The PDF keeps a white print ground with monochrome type and links; the web résumé uses the dark site theme.
 - Build: install `resume/requirements.txt`, then run `PYTHON=python3 bash resume/build.sh` with that interpreter. The script writes the one-page `Cayleb-James-resume.pdf` at the repository root and fails if text, links, or page count do not meet its checks.
 - Seven dated public-data slices are documented with source identity, source-as-of value, retrieval time, terms, evidence links, and limits. The labeled synthetic ReplyCraft public-policy question reuses the GovInfo text and is not an additional source record; these are dated records, not live widgets.
-- All ten full enterprise workflows remain UNVERIFIED. Five source-cited local model samples have independently witnessed request/response exchanges. The witness proves execution, the app validator checks citations, and human review checked these five narrow public-source statements. No revenue, customer, adoption, or company-deployment result is claimed.
+- The ten local workflows accept public-source or permitted, de-identified input; ChainWatch's local EVM review uses supplied observations, while its hosted result is a labelled example with no live chain feed. Five source-cited local model samples have independently witnessed request/response exchanges. The witness proves execution, the app validator checks citations, and human review checked these five narrow public-source statements. No revenue, customer, adoption, or company-deployment result is claimed.
 - The [public suite repository](https://github.com/cayleb-james2008/industry-ai-suite) and [witness bundle](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926) are linked from the site and project résumé.
 
 Historical local asset record (superseded visual direction): see `assets/BRAND-LOCK.md`.

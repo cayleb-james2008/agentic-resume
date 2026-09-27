@@ -10,19 +10,19 @@ web
 
 ## Users
 
-**Inferred audience, pending operator review—not an approved audience decision:** hiring managers and technical hiring reviewers looking at Cayleb Alvarez-James's publicly inspectable engineering work. Their job is to understand what is evidenced, inspect the relevant public project or source, and find the public contact route. This inference comes from the résumé-oriented content and the current redesign brief.
+Recruiters, hiring managers, and technical reviewers considering Cayleb Alvarez-James for remote software engineering or applied AI roles. They need to see what works, inspect its evidence, and find a direct contact route.
 
 ## Product Purpose
 
-This is Cayleb Alvarez-James's static public portfolio, recorded ten-journey lab, and project résumé. It presents selected public engineering projects, dated source-backed examples, five witnessed local model samples, and clear limits on what each item proves. A useful result lets a reviewer inspect a working result without mistaking a public source slice or model call for a completed private workflow.
+This is Cayleb Alvarez-James's static public portfolio, recorded ten-workflow lab, and project résumé. It presents selected public engineering projects, working local review paths, dated source-backed examples, five witnessed local model samples, and clear limits on what each item proves. A reviewer can inspect working results without mistaking a public example for a company deployment.
 
 ## Positioning
 
-The portfolio pairs public case studies and repository links with dated evidence and explicit limits. It distinguishes public code, verified source records, independently witnessed local model calls, and full enterprise jobs. It does not infer employment, customer, adoption, revenue, or company-deployment outcomes from project work.
+The portfolio pairs public case studies and repository links with dated evidence and explicit limits. It distinguishes public-source results, local-input reviews, and independently witnessed model samples. It does not infer employment, customers, adoption, revenue, or company deployment from project work.
 
 ## Operating Context
 
-- The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The 2026-09-26 Pages commit `709d04d02c35c3ab572aee8ee0d072d1e9f42851` is the prior verified release baseline; any later design release requires a fresh live check.
+- The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The 2026-09-27 contact commit `ac8b5c0ba9fb3e5a74dd76c8d5b1ddd6fb39cc13` is the prior verified release baseline; each later release requires a fresh live check.
 - Its fifteen main page routes are:
   1. `/agentic-resume/` — portfolio home (`index.html`)
   2. `/agentic-resume/resume.html` — project-only résumé
@@ -39,41 +39,41 @@ The portfolio pairs public case studies and repository links with dated evidence
   13. `/agentic-resume/projects/dotz.html` — dotz case study
   14. `/agentic-resume/projects/sophos.html` — Sophos case study
   15. `/agentic-resume/lab/` — recorded interactive suite journeys
-- The hiring-review audience above is inferred, not recorded as operator-approved. The review and route list describe the current product, not a chosen page layout or presentation strategy.
+- The review and route list describe the current product; the dark visual direction remains in place.
 
 ## Capabilities and Constraints
 
 - Preserve the existing static stack, fifteen routes, `/agentic-resume/` base path, and working relative assets. The one-page PDF `Cayleb-James-resume.pdf` is a project résumé, not a complete career-history record.
-- The ten Industry AI Suite pages and lab keep **Full job · UNVERIFIED** visible. Five have independently witnessed local model samples: LedgerBridge, MarketBrief, BacktestGuard, SentinelDesk, and OnboardPath. Source/evidence, AI, and full-job status remain separate:
+- The ten Industry AI Suite pages lead with demonstrated results and state material limits in ordinary language. The dated receipts retain technical status fields. Five workflows have independently witnessed, source-cited local model samples: LedgerBridge, MarketBrief, BacktestGuard, SentinelDesk, and OnboardPath.
 
-  | Workflow | Source/evidence distinction |
+  | Workflow | Demonstrated result and boundary |
   |---|---|
-  | LedgerBridge | Source VERIFIED: a limited public U.S. Treasury cash-data slice; it is not company books. |
-  | MarketBrief | Source VERIFIED: public World Bank GDP macro data; it is not company or securities research. |
-  | ChainWatch | Source UNVERIFIED: no admitted chain source or authorized company address is recorded. |
-  | BacktestGuard | Source VERIFIED: a public-data chronology slice; it is not a completed backtest. |
-  | ReplyCraft | Source VERIFIED: a deterministic sample based on public GovInfo text; it is not a customer case or verified AI contribution. |
-  | HandoffHub | Source VERIFIED: cited public proposed-rule text; it does not establish internal knowledge or permission scope. |
-  | PipelineRelay | Source VERIFIED: public repository metadata; it is not CRM, customer, consent, or contact-permission evidence. |
-  | OnboardPath | Source VERIFIED: public proposed-rule text; it is not employer policy or an employee record. |
-  | SentinelDesk | Source VERIFIED: public CISA KEV threat context; it is not an organization alert or asset finding. |
-  | SearchLift | Current Pages content: a bounded one-page check found 10/10 approved workflow names; this is not SearchLift workflow-source, SEO, or whole-site evidence. |
+  | LedgerBridge | A dated public Treasury cash-data slice and local finance import; public cash is not company books. |
+  | MarketBrief | A cited World Bank GDP macro brief and local research import; no company or securities conclusion is shown. |
+  | ChainWatch | A local watch-only EVM CSV/JSON processor and labelled hosted calculation example; no live EVM feed or company address is connected. |
+  | BacktestGuard | A public-data chronology check and local experiment review; the GDP slice is not a completed backtest. |
+  | ReplyCraft | A deterministic sample based on public GovInfo text and a local case/policy path; no customer case or message send is shown. |
+  | HandoffHub | A cited public-document handoff and local knowledge import; workplace permissions and records are not shown. |
+  | PipelineRelay | A public repository-metadata review and local consent-gated import; no CRM record or outreach is shown. |
+  | OnboardPath | A cited public-document review and local HR policy path; no employee record or answer is shown. |
+  | SentinelDesk | A public CISA KEV review queue and local alert/asset path; no organization incident is shown. |
+  | SearchLift | A dated one-page read found 10/10 approved workflow names, and the local path audits supplied HTML; no SEO performance is measured. |
 
 - The established public dotz work is documented at `projects/dotz.html` and [its public repository](https://github.com/cayleb-james2008/dotz): a local-first multi-agent coding dashboard spanning a Rust/axum API and Tauri shell. The record does not claim sole authorship, production-SaaS users, or adoption.
 - The established public Sophos work is documented at `projects/sophos.html` and [its public repository](https://github.com/cayleb-james2008/sophos): a Windows coding-agent project described as a port of Prime Intellect's Prime Agent. The repository credits Prime Intellect for the upstream runtime, daemon, and bridge; the portfolio makes no sole-author or employment claim.
-- The public Industry AI Suite repository exposes the local workbench, recorded-lab exporter, and [model witness bundle](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926). Code visibility and a witnessed model call do not change the ten full-job statuses above.
-- The public contact route is the [GitHub profile](https://github.com/cayleb-james2008). The project-only résumé is available as `resume.html`, with source in `resume/resume.md` and the existing PDF linked from the site.
-- Do not add unverified employment or education history, private contact details, customers, income, adoption, company deployment, or AI completion claims. No customer, revenue, adoption, or company-deployment outcome is established by the current public record; unknown outcomes are not evidence of zero outcomes.
+- The public Industry AI Suite repository exposes the local workbench, recorded-lab exporter, and [model witness bundle](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926). Code visibility and a witnessed model call do not establish company deployment.
+- Recruiter contact is [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmail.com) on the portfolio, résumé, PDF, and [GitHub profile](https://github.com/cayleb-james2008). The project résumé is available as `resume.html`, with source in `resume/resume.md`.
+- Do not add unsupported employment or education history, customers, income, adoption, company deployment, or AI completion claims. No customer, revenue, adoption, or company-deployment outcome is established by the current public record; unknown outcomes are not evidence of zero outcomes.
 - Accessibility and viewport needs are requirements for changes: usable desktop and phone layouts, keyboard-operable controls with visible focus, and respect for reduced-motion preferences. This product record does not certify current accessibility conformance.
 
 ## Brand Commitments
 
-On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/holographic/professional application portfolio. The implemented near-monochrome evidence dossier replaces the cool-light vermilion direction. Its final taste awaits Cayleb's visual review.
+On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/holographic/professional application portfolio. The approved near-monochrome evidence dossier replaces the cool-light vermilion direction.
 
 ## Evidence on Hand
 
 - Historical public site source checked 2026-09-25: Pages commit `91082127649451e4bd57f75f91cbe89a0e0929a1`; that check does not certify a later release.
-- Ten separate WIP workflow explanations and source/evidence limits: `projects/ledgerbridge.html`, `projects/marketbrief.html`, `projects/chainwatch.html`, `projects/backtestguard.html`, `projects/replycraft.html`, `projects/handoffhub.html`, `projects/pipelinerelay.html`, `projects/onboardpath.html`, `projects/sentineldesk.html`, and `projects/searchlift.html`.
+- Ten separate workflow explanations and source/evidence limits: `projects/ledgerbridge.html`, `projects/marketbrief.html`, `projects/chainwatch.html`, `projects/backtestguard.html`, `projects/replycraft.html`, `projects/handoffhub.html`, `projects/pipelinerelay.html`, `projects/onboardpath.html`, `projects/sentineldesk.html`, and `projects/searchlift.html`.
 - SearchLift dated Pages read (`clean-clone-live.json`, retrieved `2026-09-25T19:43:45Z`; source SHA-256 `b4ed4de9f785a5059acde72c7660d6c20351d8409915c6323a252836b3001c88`): a bounded, read-only review of one page found 10/10 approved workflow names in captured fields. This is structural name coverage only, not SEO performance or a current full-site audit.
 - The 2026-09-26 witness bundle verifies six local model exchanges; five accepted, source-cited samples are exposed in the recorded lab.
 - dotz and Sophos case studies and their public repositories: `projects/dotz.html`, `projects/sophos.html`, and the repository links recorded above.
@@ -82,10 +82,10 @@ On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/hologra
 
 ## Product Principles
 
-1. Keep source facts, workflow status, and AI status distinct.
+1. Keep public-source results, local-input reviews, and model evidence distinct; retain machine statuses in the dated receipts.
 2. Make each proof's scope and limits explicit; a public source slice is not a full-workflow result.
 3. Do not claim authorship, employment, customer or business outcomes beyond the linked evidence.
-4. Preserve the public routes and project-only résumé while keeping the lab's recorded status explicit.
+4. Preserve the public routes and project résumé while making the lab's dated replay explicit.
 
 ## Accessibility & Inclusion
 
@@ -93,7 +93,7 @@ Future changes must keep the web experience usable at desktop and phone sizes, a
 
 ## Open Facts
 
-- The hiring-review audience is an inference from the current site and run brief, not explicit operator approval.
+- Recruiter contact and remote role focus are explicit operator decisions.
 - Work history and education beyond what is evidenced in the public project record remain unconfirmed and are intentionally not supplied here.
 - Private-company outcomes—including any customers, revenue, adoption, or deployment—remain unknown from this public evidence and must not be asserted without verification.
-- The implemented visual direction awaits Cayleb's personal taste review.
+- The approved dark visual direction is preserved across the site and lab.

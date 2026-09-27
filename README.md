@@ -2,6 +2,8 @@
 
 Selected-work portfolio for **Cayleb Alvarez-James** (`cayleb-james2008`), focused on remote-only software engineering and applied AI roles.
 
+Recruiter contact: [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmail.com).
+
 ## Current public portfolio (GitHub Pages)
 
 - [Live home](https://cayleb-james2008.github.io/agentic-resume/)

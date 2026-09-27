@@ -606,6 +606,12 @@
   margin: 0 0 var(--space-4);
   color: var(--color-subtext);
 }
+.resume-hero .resume-contact {
+  margin: 0 0 var(--space-3);
+  max-width: 62ch;
+  color: var(--color-subtext);
+  overflow-wrap: anywhere;
+}
 .resume-download,
 .resume-preview__links {
   display: flex;

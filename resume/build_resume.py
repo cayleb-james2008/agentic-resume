@@ -26,11 +26,14 @@ from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Paragraph
 HERE = Path(__file__).resolve().parent
 SOURCE = HERE / "resume.md"
 OUTPUT = HERE.parent / "Cayleb-James-resume.pdf"
+CONTACT_EMAIL = "caylebalvarezjames@gmail.com"
+CONTACT_MAILTO = f"mailto:{CONTACT_EMAIL}"
 FONT_DIR = Path(reportlab.__file__).resolve().parent / "fonts"
 pdfmetrics.registerFont(TTFont("ResumeSans", str(FONT_DIR / "Vera.ttf")))
 pdfmetrics.registerFont(TTFont("ResumeSans-Bold", str(FONT_DIR / "VeraBd.ttf")))
 pdfmetrics.registerFontFamily("ResumeSans", normal="ResumeSans", bold="ResumeSans-Bold")
 ALLOWED_LINKS = {
+    CONTACT_MAILTO,
     "https://github.com/cayleb-james2008",
     "https://github.com/cayleb-james2008/dotz",
     "https://github.com/cayleb-james2008/sophos",
@@ -77,8 +80,8 @@ ALLOWED_HOSTS = {
     "www.federalregister.gov",
     "www.govinfo.gov",
 }
-LINK_OR_BOLD = re.compile(r"(\[[^\]]+\]\(https?://[^)\s]+\)|\*\*[^*]+\*\*)")
-LINK = re.compile(r"^\[([^\]]+)\]\((https?://[^)\s]+)\)$")
+LINK_OR_BOLD = re.compile(r"(\[[^\]]+\]\((?:https?://|mailto:)[^)\s]+\)|\*\*[^*]+\*\*)")
+LINK = re.compile(r"^\[([^\]]+)\]\(((?:https?://|mailto:)[^)\s]+)\)$")
 
 TITLE = ParagraphStyle(
     "title", fontName="ResumeSans-Bold", fontSize=17, leading=21,
@@ -108,7 +111,9 @@ def inline_markup(text: str) -> str:
         if match:
             label, target = match.groups()
             parsed = urlparse(target)
-            if target not in ALLOWED_LINKS or parsed.scheme != "https" or parsed.netloc not in ALLOWED_HOSTS:
+            allowed_mailto = target == CONTACT_MAILTO and label == CONTACT_EMAIL
+            allowed_https = parsed.scheme == "https" and parsed.netloc in ALLOWED_HOSTS
+            if target not in ALLOWED_LINKS or not (allowed_mailto or allowed_https):
                 raise ValueError(f"Resume link is not in the verified public allowlist: {target}")
             output.append(
                 f'<link href="{html.escape(target, quote=True)}" color="#24343E">'
@@ -168,15 +173,16 @@ def verify_pdf_text(path: Path) -> None:
         "SearchLift before-state", "0/10 approved workflow names",
         "License : CC BY-4.0", "17:15:50 UTC",
         "AI NOT RUN", "Full enterprise job", "Five local model samples",
-        "independent witness verified",
+        "independent witness verified", "remote-only", CONTACT_EMAIL,
     )
     for phrase in required:
         if phrase.casefold() not in normalized_content:
             raise RuntimeError(f"Generated PDF is missing required text: {phrase}")
     if "TO BE SUPPLIED" in content:
         raise RuntimeError("Generated PDF contains unresolved placeholder text")
-    if "@" in content:
-        raise RuntimeError("Generated PDF contains an email address or unverified contact marker")
+    email_addresses = re.findall(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", content)
+    if email_addresses != [CONTACT_EMAIL]:
+        raise RuntimeError("Generated PDF must contain only the approved recruiter email once")
     phone_pattern = re.compile(r"(?<!\d)(?:\+?1[ .-]?)?(?:\(\d{3}\)|\d{3})[ .-]?\d{3}[ .-]?\d{4}(?!\d)")
     if phone_pattern.search(content):
         raise RuntimeError("Generated PDF contains a phone-number pattern")
@@ -203,6 +209,7 @@ def verify_pdf_metadata(path: Path) -> None:
         "project résumé / selected public work",
         "cayleb alvarez-james",
         "https://github.com/cayleb-james2008/industry-ai-suite",
+        CONTACT_MAILTO,
     )
     if any(value not in metadata for value in required):
         raise RuntimeError("PDF metadata is missing the selected-work title or author")
@@ -220,6 +227,9 @@ def main() -> int:
         return 1
     if any(marker in source_text.casefold() for marker in FORBIDDEN_HISTORY_MARKERS):
         print("FAIL: unverified personal-history claims remain in the public résumé source", file=sys.stderr)
+        return 1
+    if source_text.count(CONTACT_MAILTO) != 1:
+        print("FAIL: résumé must link the approved recruiter email exactly once", file=sys.stderr)
         return 1
 
     page_count = [0]

@@ -22,7 +22,7 @@ The portfolio pairs public case studies and repository links with dated evidence
 
 ## Operating Context
 
-- The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The 2026-09-27 contact commit `ac8b5c0ba9fb3e5a74dd76c8d5b1ddd6fb39cc13` is the prior verified release baseline; each later release requires a fresh live check.
+- The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The prior verified release baseline is `af666a16fea106c7a9769d8da60ddf15fba2697d`; each later release requires a fresh live check.
 - Its fifteen main page routes are:
   1. `/agentic-resume/` — portfolio home (`index.html`)
   2. `/agentic-resume/resume.html` — project-only résumé

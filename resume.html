@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="wa-dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +9,8 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=contact-20260927" />
   <link rel="stylesheet" href="css/industry-ai-suite.css?v=contact-20260927" />
+  <link rel="stylesheet" href="js/build/ui.css?v=design-20260927" />
+  <link rel="stylesheet" href="css/portfolio-v2.css?v=design-20260927" />
 </head>
 <body class="resume-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -32,16 +34,22 @@
 
   <main id="main">
     <header class="project-hero resume-hero">
-      <div class="wrap">
-        <p class="case-hero__meta">Selected public work</p>
-        <h1 class="case-hero__title">Project résumé</h1>
-        <p class="case-hero__out">Cayleb Alvarez-James · security-first applied AI and systems engineering. Seeking remote-only software engineering and applied AI roles.</p>
-        <p class="resume-contact">Recruiter contact: <a href="mailto:caylebalvarezjames@gmail.com">caylebalvarezjames@gmail.com</a></p>
-        <p class="resume-scope-note">This project résumé summarizes selected public projects and dated evidence; it is not a complete biography.</p>
-        <div class="resume-download">
-          <a class="btn btn--primary" href="Cayleb-James-resume.pdf" download>Download the one-page PDF</a>
-          <a class="btn btn--ghost" href="mailto:caylebalvarezjames@gmail.com">Email Cayleb</a>
+      <div class="wrap resume-hero__grid">
+        <div class="resume-hero__copy">
+          <p class="case-hero__meta">Selected public work</p>
+          <h1 class="case-hero__title">Project résumé</h1>
+          <p class="case-hero__out">Cayleb Alvarez-James · security-first applied AI and systems engineering. Seeking remote-only software engineering and applied AI roles.</p>
+          <p class="resume-contact">Recruiter contact: <a href="mailto:caylebalvarezjames@gmail.com">caylebalvarezjames@gmail.com</a></p>
+          <p class="resume-scope-note">This project résumé summarizes selected public projects and dated evidence; it is not a complete biography.</p>
+          <div class="resume-download">
+            <a class="btn btn--primary" href="Cayleb-James-resume.pdf" download>Download the one-page PDF</a>
+            <a class="btn btn--ghost" href="mailto:caylebalvarezjames@gmail.com">Email Cayleb</a>
+          </div>
         </div>
+        <figure class="resume-hero__preview">
+          <a href="Cayleb-James-resume.pdf" aria-label="Open the one-page PDF résumé"><img src="assets/img/resume-preview.webp" alt="Preview of the actual one-page project résumé PDF" width="700" height="906" /></a>
+          <figcaption>Preview of the one-page PDF</figcaption>
+        </figure>
       </div>
     </header>
 
@@ -159,5 +167,7 @@
     </div>
   </footer>
   <script src="js/main.js"></script>
+  <script type="module" src="js/build/motion.js?v=design-20260927"></script>
+  <script type="module" src="js/build/ui.js?v=design-20260927"></script>
 </body>
 </html>

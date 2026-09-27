@@ -1,1 +1,4 @@
 *.pdf binary
+# Generated bundles contain literal whitespace inside dependency template strings.
+# Review the source modules and rebuild script; keep the shipped bundles byte exact.
+js/build/*.js -diff

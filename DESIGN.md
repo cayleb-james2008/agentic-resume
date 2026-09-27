@@ -2,7 +2,7 @@
 
 # Portfolio design — monochrome evidence dossier
 
-**Status:** Approved dark redesign of the public portfolio, case pages, résumé site, and recorded lab. This document does not claim complete WCAG conformance.
+**Status:** Approved dark direction with a September 2026 typography and component refinement across the portfolio, case pages, and web résumé. The recorded lab retains its established styling. This document does not claim complete WCAG conformance.
 
 ## Direction
 
@@ -10,24 +10,25 @@ The work is presented as a technical dossier for hiring reviewers. A near-black 
 
 The home page retains its useful order: first-viewport lab access and proof index, established dotz and Sophos work, ten local suite workflows, dated public-source evidence, project résumé, and direct email contact. Case pages keep a document-like rhythm. The lab keeps its workflow rail and source→result→human handoff. Visitor-facing copy names what works and states what private data or approval is still needed; dated receipts retain technical status fields.
 
-## Implemented system
+## Implemented portfolio and résumé layer
 
 | Token | Value | Role |
 |---|---|---|
-| `--page` | `#090C10` | Near-black canvas |
-| `--surface` | `#141A21` | Reading surface |
-| `--soft` | `#1A222B` | Raised fields |
-| `--ink` | `#F4F7FA` | Primary text |
-| `--muted` | `#B5C0CA` | Supporting text |
-| `--rule` | `#46515D` | Boundaries and dividers |
-| `--signal` | `#A9DCEC` | Links, focus-adjacent highlights, evidence edge |
+| `--page` | `#080D12` | Near-black canvas |
+| `--surface` | `#111B24` | Reading surface |
+| `--soft` | `#18242D` | Raised fields |
+| `--ink` | `#F2F7F9` | Primary text |
+| `--muted` | `#BCCAD0` | Supporting text |
+| `--rule` | `#405663` | Boundaries and dividers |
+| `--signal` | `#A9DDEC` | Links, focus-adjacent highlights, evidence edge |
 | `--focus` | `#E8EFF4` | Keyboard focus |
 
-- **Type:** locally available sans stack for display/body and monospace for source IDs and compact evidence facts. The original content metrics stay readable; no remote font request is added.
-- **Layout:** asymmetrical wide hero, stacked phone reading order, 44px controls, and visible evidence boundaries. Existing illustrations are shown in grayscale and remain explicitly editorial illustrations rather than product screenshots.
-- **Depth:** a faint technical grid and restrained spectral border in the hero, quiet lifted lab panels, and cool gray rules. No new raster or external design library is needed.
-- **Motion:** one short hero/header edge reveal and 150ms control feedback. `prefers-reduced-motion` removes these effects. No continuous animation.
-- **PDF:** a white print companion with charcoal type and monochrome underlined links. It stays one page with extractable text and avoids an ink-heavy dark résumé for employer forms.
+- **Type:** self-hosted IBM Plex Sans for headlines and reading, IBM Plex Mono for source IDs and compact evidence facts. No remote font request is added.
+- **Layout:** a shorter asymmetrical hero puts the proof index and next section closer to the first screen; the phone layout stacks the same reading order. Existing illustrations remain grayscale and explicitly labeled as editorial rather than product screenshots.
+- **Depth:** graphite reading planes, fine cool-gray rules, and one pale-blue accent line. The site does not simulate a dashboard or invent product imagery.
+- **Components:** Web Awesome 3.14.0 supplies keyboard-operable disclosures for the web résumé's six dated source notes and a copy-email control. Both components are bundled locally. The original source notes remain in HTML if scripts fail.
+- **Motion:** Anime.js 4.5.0 adds a brief title and proof-index entrance. A timed finish prevents a paused browser animation from leaving content dimmed. `prefers-reduced-motion` skips the entrance, and disclosures open without a transition under that preference.
+- **PDF:** the original white, one-page print companion remains the authoritative downloadable file. The web résumé shows a small preview rendered from that PDF; it must be regenerated when the PDF changes.
 
 Measured base contrast ratios are recorded in `design/jobs/agentic-resume-dark-20260926/01-art-direction/direction.md` under `/home/cayleb/Work`. The palette ratios are design checks, not a blanket accessibility certification.
 

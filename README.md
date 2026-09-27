@@ -17,9 +17,15 @@ GitHub Pages is the public destination for this dark, near-monochrome applicatio
 
 ```bash
 # Run from the repository root.
+npm ci
+npm run build:assets
 python3 -m http.server 8765
 # open the local loopback preview on port 8765
 ```
+
+The visual layer uses self-hosted IBM Plex fonts, Anime.js 4.5.0 for brief entrance motion, and Web Awesome 3.14.0 for the résumé evidence disclosures and email-copy control. The build copies license notices into `assets/licenses/`; it needs no CDN or hosted font service. `index.html`, `resume.html`, and the case studies still contain their reading content if JavaScript fails. The recorded lab keeps its existing rendering and evidence behavior.
+
+If the one-page PDF changes, run `bash scripts/build-resume-preview.sh` after rebuilding the PDF. The résumé page displays this image as a preview of the actual PDF. Its PDF links and the document itself remain the authoritative copy.
 
 The portfolio lives at repo root (`index.html`, `resume.html`, `css/`, `js/`, `projects/`, `lab/`). Its established public case-study pages are dotz and Sophos; ten separate Industry AI Suite project pages describe the workflows and their evidence. The hosted lab replays dated receipts and performs no fresh source request. Its dark stylesheet is exported from the suite repository, so future receipt exports preserve the visual system. The suite repository contains a local workbench for fresh public data and permitted, de-identified input.
 

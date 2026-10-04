@@ -430,6 +430,6 @@
       }
     ]
   },
-  "uncertainty": null,
+  "uncertainty": "This is a dated CISA KEV catalog snapshot retrieved 2026-09-26. No organization alerts or asset inventory were connected. The public queue does not establish whether any listed CVE applies to an organization, whether an incident exists, or response priority. A responder must validate alert provenance, source freshness, product/version applicability, and authorized asset context before acting.",
   "workflow_status": "UNVERIFIED"
 }

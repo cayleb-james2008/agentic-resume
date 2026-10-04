@@ -70,6 +70,6 @@
       "P3": 0
     }
   },
-  "uncertainty": null,
+  "uncertainty": "This is a dated 2026-09-26 snapshot of one public portfolio page. SearchLift inspected title, meta description, heading text, and paragraph text in a bounded parser projection only (at most 1,000 characters per captured item, 20 headings, and 30 paragraphs). It did not inspect analytics, traffic, search rankings, the complete page source, or other pages; 10/10 name coverage applies only to those captured fields.",
   "workflow_status": "UNVERIFIED"
 }

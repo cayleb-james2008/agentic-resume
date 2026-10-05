@@ -2,13 +2,13 @@
 
 # Portfolio design — monochrome evidence dossier
 
-**Status:** Approved dark direction with a September 2026 typography and component refinement across the portfolio, case pages, and web résumé. The recorded lab retains its established styling. This document does not claim complete WCAG conformance.
+**Status:** Approved dark direction with a September 2026 typography and component refinement across the portfolio, case pages, suite overview, and web résumé. The recorded lab retains its established styling. This document does not claim complete WCAG conformance.
 
 ## Direction
 
 The work is presented as a technical dossier for hiring reviewers. A near-black canvas, white reading type, cool-gray evidence panels, and a restrained ice-blue edge give it a holographic feel while keeping source trails and scope notes legible. The former cool-light vermilion inspection-record look is superseded.
 
-The home page retains its useful order: first-viewport lab access and proof index, established dotz and Sophos work, ten local suite workflows, dated public-source evidence, project résumé, and direct email contact. Case pages keep a document-like rhythm. The lab keeps its workflow rail and source→result→human handoff. Visitor-facing copy names what works and states what private data or approval is still needed; dated receipts retain technical status fields.
+The home page retains its useful order: first-viewport lab access and proof index, featured dotz and Sophos work, the Industry AI Suite overview and ten local workflows, dated public-source evidence, project résumé, and direct email contact. Homepage evidence details are collapsed until requested; every date, source link, and response hash remains in the page, while all ten lab receipts remain untouched. Case pages keep a document-like rhythm. The lab keeps its workflow rail and source→result→human handoff. Visitor-facing copy names what works and states what private data or approval is still needed; dated receipts retain technical status fields.
 
 ## Implemented portfolio and résumé layer
 
@@ -26,7 +26,7 @@ The home page retains its useful order: first-viewport lab access and proof inde
 - **Type:** self-hosted IBM Plex Sans for headlines and reading, IBM Plex Mono for source IDs and compact evidence facts. No remote font request is added.
 - **Layout:** a shorter asymmetrical hero puts the proof index and next section closer to the first screen; the phone layout stacks the same reading order. Existing illustrations remain grayscale and explicitly labeled as editorial rather than product screenshots.
 - **Depth:** graphite reading planes, fine cool-gray rules, and one pale-blue accent line. The site does not simulate a dashboard or invent product imagery.
-- **Components:** Web Awesome 3.14.0 supplies keyboard-operable disclosures for the web résumé's six dated source notes and a copy-email control. Both components are bundled locally. The original source notes remain in HTML if scripts fail.
+- **Components:** Web Awesome 3.14.0 supplies keyboard-operable disclosures for the web résumé's six dated source notes and a copy-email control. Both components are bundled locally. The home page uses native keyboard-operable disclosures for long-form public-source records. The original source notes remain in HTML if scripts fail.
 - **Motion:** Anime.js 4.5.0 adds a brief title and proof-index entrance. A timed finish prevents a paused browser animation from leaving content dimmed. `prefers-reduced-motion` skips the entrance, and disclosures open without a transition under that preference.
 - **PDF:** the original white, one-page print companion remains the authoritative downloadable file. The web résumé shows a small preview rendered from that PDF; it must be regenerated when the PDF changes.
 

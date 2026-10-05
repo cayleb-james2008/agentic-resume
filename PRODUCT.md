@@ -14,7 +14,7 @@ Recruiters, hiring managers, and technical reviewers considering Cayleb Alvarez-
 
 ## Product Purpose
 
-This is Cayleb Alvarez-James's static public portfolio, recorded ten-workflow lab, and project résumé. It presents selected public engineering projects, working local review paths, dated source-backed examples, five witnessed local model samples, and clear limits on what each item proves. A reviewer can inspect working results without mistaking a public example for a company deployment.
+This is Cayleb Alvarez-James's static public portfolio, recorded ten-workflow lab, and project résumé. It presents selected public engineering projects, bounded local review paths, dated source-backed examples, five witnessed local model samples, and clear limits on what each item proves. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. A reviewer can inspect bounded results without mistaking a public example for a company deployment.
 
 ## Positioning
 
@@ -23,9 +23,9 @@ The portfolio pairs public case studies and repository links with dated evidence
 ## Operating Context
 
 - The product is a static HTML, CSS, and JavaScript website served under the `/agentic-resume/` base path with relative assets. The prior verified release baseline is `af666a16fea106c7a9769d8da60ddf15fba2697d`; each later release requires a fresh live check.
-- Its fifteen main page routes are:
+- Its sixteen main page routes are:
   1. `/agentic-resume/` — portfolio home (`index.html`)
-  2. `/agentic-resume/resume.html` — project-only résumé
+  2. `/agentic-resume/resume.html` — reviewed résumé
   3. `/agentic-resume/projects/ledgerbridge.html` — LedgerBridge
   4. `/agentic-resume/projects/marketbrief.html` — MarketBrief
   5. `/agentic-resume/projects/chainwatch.html` — ChainWatch
@@ -38,12 +38,13 @@ The portfolio pairs public case studies and repository links with dated evidence
   12. `/agentic-resume/projects/searchlift.html` — SearchLift
   13. `/agentic-resume/projects/dotz.html` — dotz case study
   14. `/agentic-resume/projects/sophos.html` — Sophos case study
-  15. `/agentic-resume/lab/` — recorded interactive suite journeys
+  15. `/agentic-resume/projects/industry-ai-suite.html` — Industry AI Suite overview
+  16. `/agentic-resume/lab/` — recorded interactive suite journeys
 - The review and route list describe the current product; the dark visual direction remains in place.
 
 ## Capabilities and Constraints
 
-- Preserve the existing static stack, fifteen routes, `/agentic-resume/` base path, and working relative assets. The one-page PDF `Cayleb-James-resume.pdf` is a project résumé, not a complete career-history record.
+- Preserve the existing static stack, sixteen routes, `/agentic-resume/` base path, and working relative assets. The one-page PDF `Cayleb-James-resume.pdf` contains the independently reviewed résumé, including self-reported additional work history and education.
 - The ten Industry AI Suite pages lead with demonstrated results and state material limits in ordinary language. The dated receipts retain technical status fields. Five workflows have independently witnessed, source-cited local model samples: LedgerBridge, MarketBrief, BacktestGuard, SentinelDesk, and OnboardPath.
 
   | Workflow | Demonstrated result and boundary |
@@ -59,16 +60,24 @@ The portfolio pairs public case studies and repository links with dated evidence
   | SentinelDesk | A public CISA KEV review queue and local alert/asset path; no organization incident is shown. |
   | SearchLift | A dated one-page read found 10/10 approved workflow names, and the local path audits supplied HTML; no SEO performance is measured. |
 
-- The established public dotz work is documented at `projects/dotz.html` and [its public repository](https://github.com/cayleb-james2008/dotz): a local-first multi-agent coding dashboard spanning a Rust/axum API and Tauri shell. The record does not claim sole authorship, production-SaaS users, or adoption.
+- The established public dotz work is documented at `projects/dotz.html` and [its public repository](https://github.com/cayleb-james2008/dotz): a local-first multi-agent coding dashboard spanning a Rust/axum API and Tauri desktop shell. The record does not claim sole authorship, production-SaaS users, or adoption.
 - The established public Sophos work is documented at `projects/sophos.html` and [its public repository](https://github.com/cayleb-james2008/sophos): a Windows coding-agent project described as a port of Prime Intellect's Prime Agent. The repository credits Prime Intellect for the upstream runtime, daemon, and bridge; the portfolio makes no sole-author or employment claim.
+- `projects/industry-ai-suite.html` is the concise recruiter overview for the ten workflow paths; the dated journeys, exact receipt details, source attribution, and five model witnesses remain available through the recorded lab and linked evidence.
 - The public Industry AI Suite repository exposes the local workbench, recorded-lab exporter, and [model witness bundle](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926). Code visibility and a witnessed model call do not establish company deployment.
-- Recruiter contact is [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmail.com) on the portfolio, résumé, PDF, and [GitHub profile](https://github.com/cayleb-james2008). The project résumé is available as `resume.html`, with source in `resume/resume.md`.
+- Recruiter contact is [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmail.com) on the portfolio, résumé, PDF, and [GitHub profile](https://github.com/cayleb-james2008). The reviewed résumé is available as `resume.html`, with structured source in `resume/resume-content.json` and matching `resume/resume.md` and `resume/resume-fragment.html`.
 - Do not add unsupported employment or education history, customers, income, adoption, company deployment, or AI completion claims. No customer, revenue, adoption, or company-deployment outcome is established by the current public record; unknown outcomes are not evidence of zero outcomes.
 - Accessibility and viewport needs are requirements for changes: usable desktop and phone layouts, keyboard-operable controls with visible focus, and respect for reduced-motion preferences. This product record does not certify current accessibility conformance.
 
 ## Brand Commitments
 
 On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/holographic/professional application portfolio. The approved near-monochrome evidence dossier replaces the cool-light vermilion direction.
+
+## PDF synchronization boundary
+
+- Parent supplied the independently reviewed résumé PDF, SHA-256 `6683e120435fcdccddd64aeda300b2e11a932622514235c418746f72af32913f`. Keep the stable `Cayleb-James-resume.pdf` download path synchronized with the reviewed JSON, web fragment, and generated preview. Never describe a candidate as published without a live byte readback.
+- Preserve the stable download path `/agentic-resume/Cayleb-James-resume.pdf`. Once approved, replace only the root PDF bytes and regenerate `assets/img/resume-preview.webp` with `scripts/build-resume-preview.sh`; inspect the rendered preview against the exact replacement file.
+- Recheck every HTML PDF `href` before delivery: `index.html` (hero and résumé-preview actions), `resume.html` (download action and preview-image link), `projects/dotz.html`, `projects/sophos.html`, and `projects/industry-ai-suite.html` (one action each). There are seven HTML references, all to the same stable filename.
+- `README.md` repeats the public absolute download URL. Verify it still targets the stable PDF path after a replacement. Do not imply that the separate parent artifact is published until live deployment and download bytes are read back.
 
 ## Evidence on Hand
 
@@ -78,7 +87,7 @@ On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/hologra
 - The 2026-09-26 witness bundle verifies six local model exchanges; five accepted, source-cited samples are exposed in the recorded lab.
 - dotz and Sophos case studies and their public repositories: `projects/dotz.html`, `projects/sophos.html`, and the repository links recorded above.
 - Project résumé and existing one-page PDF: `resume.html`, `resume/resume.md`, and `Cayleb-James-resume.pdf`.
-- No public evidence of private employment history, education history, customer outcomes, revenue, adoption, or company deployment is recorded here; none should be invented.
+- Additional work history and education are self-reported in the reviewed résumé. No customer outcomes, revenue, adoption, or company deployment is established; none should be invented.
 
 ## Product Principles
 
@@ -94,6 +103,6 @@ Future changes must keep the web experience usable at desktop and phone sizes, a
 ## Open Facts
 
 - Recruiter contact and remote role focus are explicit operator decisions.
-- Work history and education beyond what is evidenced in the public project record remain unconfirmed and are intentionally not supplied here.
+- The reviewed résumé includes user-supplied work history and education. These were checked against supplied materials, not independently verified by employers or the school.
 - Private-company outcomes—including any customers, revenue, adoption, or deployment—remain unknown from this public evidence and must not be asserted without verification.
 - The approved dark visual direction is preserved across the site and lab.

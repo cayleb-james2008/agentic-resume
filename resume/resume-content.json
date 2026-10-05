@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "full_name": "Cayleb Alvarez-James",
+  "headline": "Applied AI & Developer Tools | Workflow Evaluation",
+  "location": "Connecticut, USA",
+  "work_preference": "Remote-only",
+  "email": "caylebalvarezjames@gmail.com",
+  "links": {
+    "github_profile": {"label": "github.com/cayleb-james2008", "url": "https://github.com/cayleb-james2008"},
+    "portfolio": {"label": "cayleb-james2008.github.io/agentic-resume/", "url": "https://cayleb-james2008.github.io/agentic-resume/"}
+  },
+  "summary": "Independent, AI-assisted project developer working across coding-agent workflows, desktop interfaces, APIs, and source-grounded AI evaluation. Builds and tests local tools, translating bounded needs into traceable workflows with explicit uncertainty and useful human handoffs.",
+  "experience": {
+    "title": "Independent Project Development — AI-Assisted Software & Evaluation",
+    "dates": "2026",
+    "intro": "Direct coding-agent work through implementation, debugging, testing, and review across developer tools and local-source review workflows."
+  },
+  "projects": [
+    {
+      "name": "dotz — Multi-Agent Coding Dashboard",
+      "stack": "Rust, axum, Tauri, JavaScript, SQLite",
+      "links": [
+        {"label": "github.com/cayleb-james2008/dotz", "url": "https://github.com/cayleb-james2008/dotz"},
+        {"label": "Open draft PR #218", "url": "https://github.com/cayleb-james2008/dotz/pull/218"}
+      ],
+      "bullets": [
+        "Integrated a local-first dashboard with a Rust/axum API, parallel coding-agent workflows, an inspectable workflow graph, local memory, and REST/WebSocket endpoints.",
+        "Fresh isolated local Linux dotz-core run passed 824/824; 5/5 monitor-unit and 5/5 platform-regression tests passed. Current work remains in open draft PR #218."
+      ]
+    },
+    {
+      "name": "Sophos — Windows Coding-Agent Desktop Integration",
+      "stack": "TypeScript, React, Tauri, Rust, Node.js",
+      "links": [
+        {"label": "github.com/cayleb-james2008/sophos", "url": "https://github.com/cayleb-james2008/sophos"},
+        {"label": "Open draft PR #10", "url": "https://github.com/cayleb-james2008/sophos/pull/10"},
+        {"label": "PR #10 push CI", "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468"},
+        {"label": "PR #10 pull-request CI", "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668"},
+        {"label": "Open draft PR #9 (baseline)", "url": "https://github.com/cayleb-james2008/sophos/pull/9"},
+        {"label": "PR #9 runtime/MSI baseline", "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024"}
+      ],
+      "bullets": [
+        "Verified Inbox read-state plus theme/profile persistence after restart in the native Windows UI over demo IPC, not live provider inference. At the exact head of open draft PR #10, both Windows CI runs passed: eight suites, 57 case results without skip markers, and two skipped interaction branches.",
+        "Integrated a Windows/Tauri desktop and React/TypeScript views for Prime Intellect’s open-source Prime Agent; Prime Intellect is credited for the upstream runtime, daemon, and bridge.",
+        "Separate open draft PR #9 baseline: 1,122 frontend tests and 47/47 Windows named-pipe checks passed; Windows x64 native-module loading and guarded MSI packaging were verified."
+      ]
+    },
+    {
+      "name": "Industry AI Suite — Source-Grounded Review Workflows",
+      "stack": "Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript",
+      "links": [
+        {"label": "github.com/cayleb-james2008/industry-ai-suite", "url": "https://github.com/cayleb-james2008/industry-ai-suite"},
+        {"label": "Merged PR #1", "url": "https://github.com/cayleb-james2008/industry-ai-suite/pull/1"},
+        {"label": "September 26 evidence pack", "url": "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926"},
+        {"label": "Recorded workflow lab", "url": "https://cayleb-james2008.github.io/agentic-resume/lab/"}
+      ],
+      "bullets": [
+        "Built 10 bounded local review workflows using public or permitted inputs—including Treasury-row reconciliation, cited research checks, CISA vulnerability triage, and public-policy review—with dated source receipts and human handoffs.",
+        "Ran the full post-merge test suite locally on public main: 370 tests and 178 subtests passed.",
+        "September 26, 2026 witness record: 6 local-model exchanges; 5 cited outputs passed citation-ID checks and narrow source review. A privacy-filter/citation failure and documented corrected retry were retained."
+      ]
+    }
+  ],
+  "skills": [
+    ["Languages", "Python, Rust, TypeScript, JavaScript, HTML/CSS"],
+    ["Frameworks & data", "React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite"],
+    ["AI & verification", "Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest, Cargo, Git/GitHub, Linux"]
+  ],
+  "additional_experience": [
+    {"organization": "Dunkin'", "dates": "2024–2026"},
+    {"organization": "Robert H. Lord Company — Moving Crew", "dates": "Summers 2025 & 2026"},
+    {"organization": "Tommy's Pizza", "dates": "Summer 2024"},
+    {"organization": "David Cooke Plaster Co. — Plaster Work", "dates": "Summer 2026"}
+  ],
+  "education": {
+    "school": "Portland High School",
+    "location": "Portland, Connecticut",
+    "status": "Graduated 2026",
+    "coursework": "Cybersecurity; AP Computer Science"
+  },
+  "evidence_notes": {
+    "official_mercor_upload_guidance": {
+      "source": "https://talent.docs.mercor.com/how-to/apply",
+      "retrieved": "2026-10-05",
+      "requirements": ["PDF only; OCR-friendly and text-based, not scanned", "1–2 pages and under 2 MB", "simple standardized layout; avoid images, tables, and complex design", "clear headings such as Education, Experience, Skills, and Certifications"]
+    },
+    "remote_state_snapshot": {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json",
+      "captured_at": "2026-10-05T14:31:17-04:00",
+      "method": "GitHub public REST API, unauthenticated read-only GET",
+      "notes": "Read-only live recheck confirmed current PR heads/states and check conclusions: Sophos #10 and #9 are unmerged drafts with passing current checks, #11 is an unmerged draft with failed Windows test checks and 27/48 runtime at exact head, dotz #218 remains draft with failed Ubuntu core CI, suite #1 is merged, and suite #2 remains a draft candidate."
+    },
+    "dotz": {
+      "public_pull_request": "https://github.com/cayleb-james2008/dotz/pull/218",
+      "head_sha": "51a94560247da0b1ef7deb4eacd492d446541834",
+      "state": "OPEN_DRAFT",
+      "fresh_isolated_core_tests": "824 passed, 0 failed",
+      "monitor_unit_tests": "5 passed, 0 failed",
+      "platform_regression_tests": "5 passed, 0 failed",
+      "local_evidence_report": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/dotz-ubuntu-ci-repair/REPORT.md",
+      "hosted_ci": {
+        "run_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859",
+        "head_sha": "51a94560247da0b1ef7deb4eacd492d446541834",
+        "core_jobs": {
+          "macOS": {"tests_passed": 824, "state": "SUCCESS", "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261240"},
+          "Windows": {"tests_passed": 822, "state": "SUCCESS", "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261302"},
+          "Ubuntu": {"state": "FAILURE", "reported_failure": "communication loss", "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261478", "job_log_http_status": 404, "artifacts": "none", "acceptance": "not established"}
+        },
+        "dependency_policy_jobs": [
+          {"platform": "macOS", "state": "SUCCESS", "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261404"},
+          {"platform": "Windows", "state": "SUCCESS", "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261125"},
+          {"platform": "Ubuntu", "state": "SUCCESS", "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261414"}
+        ]
+      },
+      "scope": "dotz-core and focused CI/process-tree candidate; not whole-app acceptance, merge, or release"
+    },
+    "sophos": {
+      "public_pull_request": "https://github.com/cayleb-james2008/sophos/pull/10",
+      "head_sha": "ad168c7b41c7caf011081379218ab3cbfa0ff134",
+      "state": "OPEN_DRAFT",
+      "ui_check_runs": {
+        "push_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+        "push_test_job": {"url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468/job/111728741187", "state": "SUCCESS"},
+        "push_cua_job": {"url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468/job/111728740820", "state": "SUCCESS"},
+        "pull_request_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668",
+        "pull_request_test_job": {"url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668/job/111728754937", "state": "SUCCESS"},
+        "pull_request_cua_job": {"url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668/job/111728755266", "state": "SUCCESS"}
+      },
+      "native_ui": {
+        "primary_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+        "suite_cases": {"Smoke": 6, "Sessions": 8, "Agents": 6, "Chat": 11, "Inbox": 5, "Settings": 10, "Shell": 6, "Profile Studio": 7},
+        "suite_count": 8,
+        "suite_reported_passes": 59,
+        "case_results_without_skip_marker": 57,
+        "explicit_skipped_branches": 2,
+        "skipped_interactions": ["chat steering while busy", "keyboard shortcut overlay open/close"],
+        "failed_cases": 0,
+        "case_counts_are_not_assertion_counts": true,
+        "verified_behaviors": ["Inbox message read state; target unread label count 1-to-0; header unread count 2-to-1", "theme change and persistence after restart", "profile selection persistence after restart"],
+        "ui_scope": "native Windows app exercised with demo/mock IPC; not live provider authentication, inference, or model generation",
+        "visual_caveat": "Inbox screenshot header shows 1 unread while the sidebar badge still shows 2; not all counter surfaces were shown in sync",
+        "parent_readback": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/PARENT-FINAL-UI-READBACK.md",
+        "evidence_report": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/REPORT.md",
+        "screenshots": [
+          "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/evidence/current-head-ad168c7/selected-screenshots/inbox-mark-read.png",
+          "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/evidence/current-head-ad168c7/selected-screenshots/studio-restart-persisted.png"
+        ]
+      },
+      "baseline_pr9": {
+        "public_pull_request": "https://github.com/cayleb-james2008/sophos/pull/9",
+        "head_sha": "cdc0fddb0c6aacea4ef1d05d634dbd4a87b49f97",
+        "state": "OPEN_DRAFT",
+        "proof_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040",
+        "verified_baseline": "1,122 frontend tests; 47/47 Windows named-pipe daemon/bridge checks; actual Windows x64 native-module loads; guarded Tauri MSI and included notice verified",
+        "acceptance_boundary": "PR #9 runtime/MSI baseline only; not PR #10 UI evidence, not merged, and not a release"
+      },
+      "security_candidate_pr11": {
+        "public_pull_request": "https://github.com/cayleb-james2008/sophos/pull/11",
+        "state": "OPEN_DRAFT",
+        "published_head": "7d0b30cdcc174d77ae0b7828120736069cc8aaa5",
+        "current_runs": [37347304278, 37347310000],
+        "failed_windows_runtime_job": "https://github.com/cayleb-james2008/sophos/actions/runs/37347310000/job/111889016097",
+        "current_blocker": "At exact draft head 7d0b30cdcc174d77ae0b7828120736069cc8aaa5, Windows runtime check 37347310000 failed at 27/48; source review identified named-pipe replacement-supervisor launch path misuse. A regression is in progress; no native Windows retest has accepted the repair.",
+        "release_limits_source": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-security-integration/REPORT.md",
+        "acceptance_boundary_source": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-security-final-review/evidence/acceptance-boundary-evidence.json",
+        "acceptance": "Windows runtime 27/48 and failing check; native/MSI, security signoff, and release acceptance not established; active continuation remains separate from PR #10 UI evidence"
+      }
+    },
+    "industry_ai_suite": {
+      "public_pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/1",
+      "state": "MERGED",
+      "merge_commit": "6ecc433b9b3d7f2a96f9baca6393605c13e5fbe0",
+      "tests_after_merge": "Local full-suite execution on public main after the merge: 370 tests and 178 subtests passed",
+      "historical_model_evidence_date": "2026-09-26",
+      "historical_model_evidence": "6 witnessed local-model exchanges; 5 citation-bearing outputs passed ID checks and narrow source review; one privacy-filter/citation failure and corrected retry retained",
+      "workflow_scope": "10 bounded local workflows using public sources or permitted local inputs; not completed enterprise workflows or provider/model accuracy",
+      "draft_pr2_candidate": {
+        "public_pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/2",
+        "state": "OPEN_DRAFT",
+        "head_sha": "2c8b163b7ae490e02ea990df978b59d0d0768455",
+        "candidate_test_result_as_provided": "372 tests and 178 subtests; draft-candidate result, separate from the post-merge public-main baseline of 370 tests and 178 subtests used in the résumé",
+        "state_source": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json"
+      }
+    },
+    "personal_information": "Contact email, Connecticut location, and remote-only preference match the prior source résumé/profile materials. Education and coursework match the prior résumé extract. Employer names and date ranges match the prior résumé's self-report and are not employer-verified. The current full name follows the user-provided profile context (Cayleb Alvarez-James); the older source résumé header used the shorter form Cayleb James, so confirm preferred display/legal name before submission if the profile has since changed.",
+    "nonclaims": ["No paid engineering role or employer relationship is asserted", "No sole-authorship, revenue, adoption, production deployment, degree, model-training, whole-app, release-readiness, or live provider-inference achievement is asserted; Suite PR #1 is explicitly labeled merged, while Sophos #9/#10/#11 and dotz #218 remain open drafts"]
+  }
+}

@@ -1,87 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sophos — Cayleb Alvarez-James</title>
-  <meta name="description" content="A Windows-native coding agent built under Prime Intellect credit — scoped honestly to the credit and platform." />
+  <meta name="description" content="A Windows-native desktop port of Prime Intellect's Prime Agent, with upstream credit and scope made explicit." />
   <meta name="theme-color" content="#090C10" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/styles.css?v=dark-20260926" />
   <link rel="stylesheet" href="../css/industry-ai-suite.css?v=dark-20260926" />
   <link rel="stylesheet" href="../css/portfolio-v2.css?v=design-20260927" />
 </head>
-<body>
+<body class="project-page">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap site-header__inner">
-      <a class="brand" href="../index.html">
-        <span class="brand__name">Cayleb Alvarez-James</span>
-      </a>
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav class="nav" id="site-nav" aria-label="Primary">
-        <ul>
-          <li><a href="../index.html#work">Work</a></li>
-          <li><a href="../index.html#suite">Suite</a></li>
-          <li><a href="../resume.html">Résumé</a></li>
-          <li><a href="../index.html#contact">Contact via GitHub</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="wrap site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__name">Cayleb Alvarez-James</span></a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary"><ul>
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#suite">Suite</a></li>
+      <li><a href="../resume.html">Résumé</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul></nav>
+  </div></header>
 
   <main id="main">
-    <header class="case-hero">
-      <div class="wrap">
-        <p class="case-hero__meta">Windows coding agent · Prime Intellect credit</p>
-        <h1 class="case-hero__title">Sophos</h1>
-        <hr class="case-hero__rule" />
-        <p class="case-hero__out">A public Windows coding-agent project documented as a port of Prime Intellect's open-source Prime Agent.</p>
-        <figure class="case-hero__visual">
-          <img src="../assets/img/focus-sophos.svg" alt="Editorial illustration for Sophos, not a product screenshot" width="960" height="540" />
-          <figcaption class="work-card__caption">Editorial illustration · not a product screenshot</figcaption>
-        </figure>
-      </div>
-    </header>
+    <header class="project-hero"><div class="wrap">
+      <p class="case-hero__meta">Public codebase · Windows-native coding agent · Prime Intellect credit</p>
+      <h1 class="case-hero__title">Sophos</h1>
+      <p class="case-hero__out">A Windows desktop port of Prime Intellect's open-source Prime Agent, presented with the upstream runtime credit intact.</p>
+      <ul class="project-status" aria-label="Sophos project highlights">
+        <li>Windows 10 / 11</li>
+        <li>Tauri 2 + Rust</li>
+        <li>Node bridge + React UI</li>
+        <li>Prime Agent upstream</li>
+      </ul>
+      <figure class="case-hero__visual">
+        <img src="../assets/img/focus-sophos.svg" alt="Editorial illustration for Sophos, not a product screenshot" width="960" height="540" />
+        <figcaption class="work-card__caption">Editorial illustration · the repository README links project screenshots</figcaption>
+      </figure>
+    </div></header>
 
-    <section class="case-beats" aria-label="Case study beats">
-      <div class="wrap">
-        <article class="beat">
-          <h2 class="beat__label">Problem</h2>
-          <p class="beat__body">Most coding-agent demos assume a Unix-first world. Windows workflows still need an agent that respects the platform instead of papering over it.</p>
-        </article>
-        <article class="beat">
-          <h2 class="beat__label">Role</h2>
-          <p class="beat__body">The public README credits Prime Intellect for the upstream agent runtime, daemon, and bridge. This case study makes no sole-author or employment claim.</p>
-        </article>
-        <article class="beat">
-          <h2 class="beat__label">Craft</h2>
-          <p class="beat__body">The repository documents a Windows workspace with a Tauri shell, Node bridge sidecar, and React frontend, and keeps the upstream credit boundary explicit.</p>
-        </article>
-        <article class="beat">
-          <h2 class="beat__label">Outcome</h2>
-          <p class="beat__body">The public Sophos repository demonstrates a Windows port of Prime Intellect's open-source agent; no product-launch or production-use claim is made.</p>
-        </article>
-        
-      </div>
-    </section>
+    <div class="wrap project-layout">
+      <article class="project-content">
+        <section>
+          <h2>What it does</h2>
+          <p>Sophos packages Prime Intellect's open-source coding agent as a Windows desktop app. Its public README describes a Tauri 2 shell, Node bridge sidecar, and React frontend; the upstream daemon performs the agent work.</p>
+        </section>
+        <section>
+          <h2>How to try it</h2>
+          <p>Follow the repository's <a href="https://github.com/cayleb-james2008/sophos/blob/master/README.md" target="_blank" rel="noopener noreferrer">Quick Start and download instructions</a>. The public <a href="https://gitlab.com/caylebalvarez-james/sophos/-/releases/v0.6.0" target="_blank" rel="noopener noreferrer">release page</a> currently lists Sophos v0.6.0 (Beta), released 2026-08-16, with a Windows x64 installer. Review its beta note and release details before installing; this portfolio has not run the installer.</p>
+          <p>The agent can call tools, edit files, and run shell commands. Use a disposable workspace and review permissions before trying it.</p>
+        </section>
+        <section>
+          <h2>Source proof</h2>
+          <p><strong>October 2026 candidate verification:</strong> at revision <code>ad168c7</code> of <a href="https://github.com/cayleb-james2008/sophos/pull/10">open draft PR #10</a>, two native Windows CI runs passed eight UI suites: 57 case results without skip markers and two skipped interaction branches. Inbox read-state and theme/profile persistence after restart were exercised over demo IPC, not live provider inference. Read the <a href="https://github.com/cayleb-james2008/sophos/actions/runs/37299547468">push run</a> and <a href="https://github.com/cayleb-james2008/sophos/actions/runs/37299551668">pull-request run</a>.</p>
+          <p>The separate <a href="https://github.com/cayleb-james2008/sophos/pull/9">open draft PR #9 baseline</a> passed 1,122 frontend tests and 47 Windows named-pipe checks, with native-module loading and guarded MSI packaging. These candidate results do not validate the older released installer or the newer dependency-hardening branch, whose Windows acceptance remains pending.</p>
+          <p>The public repository and README document the Windows port, architecture, quick start, and screenshots. The repository links to the original <a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener noreferrer">Prime Intellect Prime Agent source</a>.</p>
+          <p><a href="https://github.com/cayleb-james2008/sophos" target="_blank" rel="noopener noreferrer">Inspect the Sophos repository ↗</a> · <a href="https://gitlab.com/caylebalvarez-james/sophos/-/releases" target="_blank" rel="noopener noreferrer">Check current releases ↗</a></p>
+        </section>
+        <section>
+          <h2>Credit and limits</h2>
+          <p>The Sophos README assigns Prime Intellect credit for the upstream agent runtime, daemon, and bridge. This page makes no sole-author or employment claim. The README describes the project as Windows-only and marks pre-v1 versions as beta; no company deployment, customer use, or commercial outcome is asserted.</p>
+        </section>
+      </article>
 
-    <footer class="case-footer">
-      <div class="wrap case-footer__links">
-        <a class="btn btn--ghost" href="../index.html#work">← All work</a>
-        <a href="https://github.com/cayleb-james2008/sophos" target="_blank" rel="noopener noreferrer">Inspect the public Sophos repository</a>
-        <a class="btn btn--primary" href="https://github.com/cayleb-james2008" target="_blank" rel="noopener noreferrer">Contact via GitHub</a>
-      </div>
-    </footer>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap site-footer__inner">
-      <span>Cayleb Alvarez-James</span>
-      <a href="https://github.com/cayleb-james2008" target="_blank" rel="noopener noreferrer">Public GitHub profile</a>
+      <aside class="project-rail" aria-label="Sophos links and upstream credit">
+        <section>
+          <h2>Open the source</h2>
+          <ul class="source-links">
+            <li><a href="https://github.com/cayleb-james2008/sophos" target="_blank" rel="noopener noreferrer">Public Sophos repository</a></li>
+            <li><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener noreferrer">Prime Agent upstream source</a></li>
+            <li><a href="https://gitlab.com/caylebalvarez-james/sophos/-/releases" target="_blank" rel="noopener noreferrer">GitLab releases</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Try safely</h2>
+          <p>Windows 10/11 only per the project README. Review each release's beta status and permissions before using the agent on real files.</p>
+        </section>
+        <section>
+          <h2>Next steps</h2>
+          <p><a class="btn btn--primary" href="../Cayleb-James-resume.pdf" download>Download résumé (PDF)</a></p>
+          <p><a href="mailto:caylebalvarezjames@gmail.com">Email Cayleb about remote-only roles</a></p>
+        </section>
+      </aside>
     </div>
-  </footer>
-  <script src="../js/main.js"></script>
+
+    <footer class="case-footer"><div class="wrap case-footer__links">
+      <a class="btn btn--ghost" href="../index.html#work">← All projects</a>
+      <a href="https://github.com/cayleb-james2008/sophos" target="_blank" rel="noopener noreferrer">Inspect the public Sophos repository</a>
+      <a class="btn btn--primary" href="mailto:caylebalvarezjames@gmail.com">Contact Cayleb</a>
+    </div></footer>
+  </main>
+  <footer class="site-footer"><div class="wrap site-footer__inner">
+    <span>© <span id="y"></span> Cayleb Alvarez-James</span>
+    <a href="../index.html">Portfolio home</a>
+  </div></footer>
+  <script src="../js/main.js?v=recruiter-portfolio-20261005"></script>
   <script type="module" src="../js/build/motion.js?v=design-20260927"></script>
 </body>
 </html>

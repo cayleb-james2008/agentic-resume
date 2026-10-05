@@ -1,0 +1,13 @@
+.reviewed-cv { max-width: 58rem; }
+.reviewed-cv .resume { overflow-wrap: anywhere; }
+.reviewed-cv .resume-header { margin-bottom: 2rem; }
+.reviewed-cv h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.2; margin: 0 0 .7rem; }
+.reviewed-cv h2 { font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; border-top: 1px solid var(--border, #30363d); padding-top: 1.25rem; margin: 2.5rem 0 1rem; }
+.reviewed-cv h3 { font-size: 1.1rem; line-height: 1.5; margin: 1.75rem 0 .6rem; }
+.reviewed-cv p, .reviewed-cv li { font-size: 1rem; line-height: 1.7; }
+.reviewed-cv p { margin: .7rem 0; }
+.reviewed-cv ul { padding-left: 1.3rem; }
+.reviewed-cv li { padding-left: .2rem; margin-bottom: .75rem; }
+.reviewed-cv .resume-proof { font-size: .85rem; line-height: 1.85; }
+.reviewed-cv a { text-decoration: underline; text-underline-offset: .2em; }
+.reviewed-cv .resume-headline, .reviewed-cv .resume-stack { color: var(--muted, #b4bbc4); }

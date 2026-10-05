@@ -32,7 +32,10 @@
     }
 
     function focusDestination(destination) {
-      window.requestAnimationFrame(function () {
+      var focusApplied = false;
+      function applyFocus() {
+        if (focusApplied) return;
+        focusApplied = true;
         var addedTabindex = false;
         if (!destination.hasAttribute("tabindex")) {
           destination.setAttribute("tabindex", "-1");
@@ -48,7 +51,9 @@
             destination.removeAttribute("tabindex");
           }, { once: true });
         }
-      });
+      }
+      window.requestAnimationFrame(applyFocus);
+      window.setTimeout(applyFocus, 80);
     }
 
     toggle.addEventListener("click", function () {
@@ -60,6 +65,12 @@
         var destination = samePageFragmentDestination(link);
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
+        if (destination) focusDestination(destination);
+      });
+    });
+    document.querySelectorAll("a.skip-link").forEach(function (link) {
+      link.addEventListener("click", function () {
+        var destination = samePageFragmentDestination(link);
         if (destination) focusDestination(destination);
       });
     });

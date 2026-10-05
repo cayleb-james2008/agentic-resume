@@ -7,11 +7,11 @@ Recruiter contact: [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmai
 ## Current public portfolio (GitHub Pages)
 
 - [Live home](https://cayleb-james2008.github.io/agentic-resume/)
-- [Project résumé](https://cayleb-james2008.github.io/agentic-resume/resume.html)
+- [Résumé](https://cayleb-james2008.github.io/agentic-resume/resume.html)
 - [One-page PDF](https://cayleb-james2008.github.io/agentic-resume/Cayleb-James-resume.pdf)
 - [Interactive recorded lab](https://cayleb-james2008.github.io/agentic-resume/lab/)
 
-GitHub Pages is the public destination for this dark, near-monochrome application portfolio. The suite offers ten working local review paths, and the hosted lab replays bounded results from all ten. Five include source-cited local model samples with independently witnessed calls. Company deployments and customer outcomes are not claimed. The older Vercel deployment is stale and is not the current portfolio link.
+GitHub Pages is the public destination for this dark, near-monochrome application portfolio. The suite offers ten bounded local review paths, and the hosted lab replays bounded results from all ten. Five include source-cited local model samples with independently witnessed calls. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. Company deployments and customer outcomes are not claimed. The older Vercel deployment is stale and is not the current portfolio link.
 
 ## Preview (local)
 
@@ -31,8 +31,8 @@ The portfolio lives at repo root (`index.html`, `resume.html`, `css/`, `js/`, `p
 
 ## Résumé and evidence
 
-- Source: `resume/resume.md`. The PDF keeps a white print ground with monochrome type and links; the web résumé uses the dark site theme.
-- Build: install `resume/requirements.txt`, then run `PYTHON=python3 bash resume/build.sh` with that interpreter. The script writes the one-page `Cayleb-James-resume.pdf` at the repository root and fails if text, links, or page count do not meet its checks.
+- Source: `resume/resume-content.json`; matching Markdown and HTML are in `resume/resume.md` and `resume/resume-fragment.html`. The independently reviewed PDF is available at the stable root download path; the web résumé embeds the matching reviewed fragment. Work history is self-reported, not employer-verified.
+- The existing `resume/build.sh` is retained for the historical project-only résumé, not for the current reviewed document. Do not run it to replace the current PDF. `resume/reviewed-verification.json` records checks for the reviewed PDF/DOCX; `node --test` checks its pinned PDF hash and web-fragment synchronization.
 - Seven dated public-data slices are documented with source identity, source-as-of value, retrieval time, terms, evidence links, and limits. The labeled synthetic ReplyCraft public-policy question reuses the GovInfo text and is not an additional source record; these are dated records, not live widgets.
 - The ten local workflows accept public-source or permitted, de-identified input; ChainWatch's local EVM review uses supplied observations, while its hosted result is a labelled example with no live chain feed. Five source-cited local model samples have independently witnessed request/response exchanges. The witness proves execution, the app validator checks citations, and human review checked these five narrow public-source statements. No revenue, customer, adoption, or company-deployment result is claimed.
 - The [public suite repository](https://github.com/cayleb-james2008/industry-ai-suite) and [witness bundle](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926) are linked from the site and project résumé.

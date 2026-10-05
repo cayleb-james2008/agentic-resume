@@ -1,0 +1,692 @@
+{
+  "resume": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/Cayleb-Alvarez-James-Mercor-Resume.pdf",
+  "docx": {
+    "bytes": 39676,
+    "paragraphs": 38,
+    "table_count": 0,
+    "external_hyperlinks": [
+      "https://cayleb-james2008.github.io/agentic-resume/",
+      "https://cayleb-james2008.github.io/agentic-resume/lab/",
+      "https://github.com/cayleb-james2008",
+      "https://github.com/cayleb-james2008/dotz",
+      "https://github.com/cayleb-james2008/dotz/pull/218",
+      "https://github.com/cayleb-james2008/industry-ai-suite",
+      "https://github.com/cayleb-james2008/industry-ai-suite/pull/1",
+      "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
+      "https://github.com/cayleb-james2008/sophos",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668",
+      "https://github.com/cayleb-james2008/sophos/pull/10",
+      "https://github.com/cayleb-james2008/sophos/pull/9",
+      "mailto:caylebalvarezjames@gmail.com"
+    ],
+    "missing_expected_text": [],
+    "missing_expected_links": [],
+    "package_zip_corrupt_member": null,
+    "missing_package_parts": [],
+    "libreoffice_command": [
+      "soffice",
+      "--headless",
+      "-env:UserInstallation=file:///home/cayleb/.hermes/cache/scratch/mercor-finish-20261005/resume-final-review/libreoffice-profile",
+      "--convert-to",
+      "pdf",
+      "--outdir",
+      "/home/cayleb/.hermes/cache/scratch/mercor-finish-20261005/resume-final-review/docx-render",
+      "/home/cayleb/.hermes/cache/scratch/mercor-finish-20261005/resume-final-review/Cayleb-Alvarez-James-Mercor-Resume.docx"
+    ],
+    "libreoffice_exit_code": 0,
+    "libreoffice_stdout": "convert /home/cayleb/.hermes/cache/scratch/mercor-finish-20261005/resume-final-review/Cayleb-Alvarez-James-Mercor-Resume.docx as a Writer document -> /home/cayleb/.hermes/cache/scratch/mercor-finish-20261005/resume-final-review/docx-render/Cayleb-Alvarez-James-Mercor-Resume.pdf using filter : writer_pdf_Export",
+    "libreoffice_stderr": "",
+    "libreoffice_render_pdf": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/docx-render/Cayleb-Alvarez-James-Mercor-Resume.pdf",
+    "libreoffice_render_page_count": 1,
+    "libreoffice_render_missing_expected_text": [],
+    "layout": {
+      "page_count": 1,
+      "pages": [
+        {
+          "page": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0,
+          "text_bounds_pt": {
+            "left": 39.7,
+            "top": 27.27,
+            "right": 572.51,
+            "bottom": 646.64
+          },
+          "text_overflow": false,
+          "render_image": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/render-images/docx-render-page-1.png",
+          "render_pixels": [
+            1010,
+            1307
+          ],
+          "text": "Cayleb Alvarez-James\nApplied AI & Developer Tools | Workflow Evaluation\nConnecticut, USA | Remote-only | caylebalvarezjames@gmail.com\ngithub.com/cayleb-james2008 | cayleb-james2008.github.io/agentic-resume/\nSUMMARY\nIndependent, AI-assisted project developer working across coding-agent workflows, desktop interfaces, APIs, and source-grounded \nAI evaluation. Builds and tests local tools, translating bounded needs into traceable workflows with explicit uncertainty and useful \nhuman handoffs.\nEXPERIENCE\nIndependent Project Development — AI-Assisted Software & Evaluation | 2026\nDirect coding-agent work through implementation, debugging, testing, and review across developer tools and local-source review \nworkflows.\ndotz — Multi-Agent Coding Dashboard\nRust, axum, Tauri, JavaScript, SQLite\ngithub.com/cayleb-james2008/dotz  |  Open draft PR #218\n• Integrated a local-first dashboard with a Rust/axum API, parallel coding-agent workflows, an inspectable workflow graph, local \nmemory, and REST/WebSocket endpoints.\n• Fresh isolated local Linux dotz-core run passed 824/824; 5/5 monitor-unit and 5/5 platform-regression tests passed. Current work \nremains in open draft PR #218.\nSophos — Windows Coding-Agent Desktop Integration\nTypeScript, React, Tauri, Rust, Node.js\ngithub.com/cayleb-james2008/sophos  |  Open draft PR #10  |  PR #10 push CI  |  PR #10 pull-request CI  |  Open draft PR #9 (baseline)  |  PR \n#9 runtime/MSI baseline\n• Verified Inbox read-state plus theme/profile persistence after restart in the native Windows UI over demo IPC, not live provider \ninference. At the exact head of open draft PR #10, both Windows CI runs passed: eight suites, 57 case results without skip markers, \nand two skipped interaction branches.\n• Integrated a Windows/Tauri desktop and React/TypeScript views for Prime Intellect’s open-source Prime Agent; Prime Intellect is \ncredited for the upstream runtime, daemon, and bridge.\n• Separate open draft PR #9 baseline: 1,122 frontend tests and 47/47 Windows named-pipe checks passed; Windows x64 native-\nmodule loading and guarded MSI packaging were verified.\nIndustry AI Suite — Source-Grounded Review Workflows\nPython, HTTP APIs, Local LLMs, HTML/CSS/JavaScript\ngithub.com/cayleb-james2008/industry-ai-suite  |  Merged PR #1  |  September 26 evidence pack  |  Recorded workflow lab\n• Built 10 bounded local review workflows using public or permitted inputs—including Treasury-row reconciliation, cited research \nchecks, CISA vulnerability triage, and public-policy review—with dated source receipts and human handoffs.\n• Ran the full post-merge test suite locally on public main: 370 tests and 178 subtests passed.\n• September 26, 2026 witness record: 6 local-model exchanges; 5 cited outputs passed citation-ID checks and narrow source review. \nA privacy-filter/citation failure and documented corrected retry were retained.\nTECHNICAL SKILLS\nLanguages: Python, Rust, TypeScript, JavaScript, HTML/CSS\nFrameworks & data: React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite\nAI & verification: Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest, Cargo, \nGit/GitHub, Linux\nADDITIONAL EXPERIENCE\nDunkin' | 2024–2026\nRobert H. Lord Company — Moving Crew | Summers 2025 & 2026\nTommy's Pizza | Summer 2024\nDavid Cooke Plaster Co. — Plaster Work | Summer 2026\nEDUCATION\nPortland High School — Portland, Connecticut | Graduated 2026\nCoursework: Cybersecurity; AP Computer Science\n",
+          "links": [
+            {
+              "uri": "https://cayleb-james2008.github.io/agentic-resume/lab/",
+              "rect": [
+                413.0929870605469,
+                413.70001220703125,
+                499.2569885253906,
+                423.0
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
+              "rect": [
+                293.4930114746094,
+                413.70001220703125,
+                401.2569885253906,
+                423.0
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/industry-ai-suite/pull/1",
+              "rect": [
+                228.4929962158203,
+                413.70001220703125,
+                281.6570129394531,
+                423.0
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/industry-ai-suite",
+              "rect": [
+                39.59299850463867,
+                413.70001220703125,
+                216.65699768066406,
+                423.0
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+              "rect": [
+                39.59299850463867,
+                304.54998779296875,
+                132.35699462890625,
+                313.8500061035156
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+              "rect": [
+                555.0430297851562,
+                295.25,
+                572.4569702148438,
+                304.54998779296875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/pull/9",
+              "rect": [
+                440.1929931640625,
+                295.25,
+                543.2069702148438,
+                304.54998779296875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668",
+              "rect": [
+                344.6929931640625,
+                295.25,
+                428.35699462890625,
+                304.54998779296875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+              "rect": [
+                276.0429992675781,
+                295.25,
+                332.85699462890625,
+                304.54998779296875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/pull/10",
+              "rect": [
+                194.79299926757812,
+                295.25,
+                264.2070007324219,
+                304.54998779296875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos",
+              "rect": [
+                39.59299850463867,
+                295.25,
+                182.95700073242188,
+                304.54998779296875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/dotz/pull/218",
+              "rect": [
+                183.9929962158203,
+                218.70001220703125,
+                257.9570007324219,
+                228.0
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/dotz",
+              "rect": [
+                39.59299850463867,
+                218.70001220703125,
+                172.15699768066406,
+                228.0
+              ]
+            },
+            {
+              "uri": "https://cayleb-james2008.github.io/agentic-resume/",
+              "rect": [
+                160.6929931640625,
+                76.45001220703125,
+                328.5069885253906,
+                85.95001220703125
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008",
+              "rect": [
+                39.59299850463867,
+                76.45001220703125,
+                152.7570037841797,
+                85.95001220703125
+              ]
+            },
+            {
+              "uri": "mailto:caylebalvarezjames@gmail.com",
+              "rect": [
+                168.7429962158203,
+                66.54998779296875,
+                288.2569885253906,
+                76.25
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "source": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/resume-content.json",
+  "official_mercor_guidance": {
+    "source": "https://talent.docs.mercor.com/how-to/apply",
+    "retrieved": "2026-10-05",
+    "requirements": [
+      "PDF only; OCR-friendly and text-based, not scanned",
+      "1–2 pages and under 2 MB",
+      "simple standardized layout; avoid images, tables, and complex design",
+      "clear headings such as Education, Experience, Skills, and Certifications"
+    ]
+  },
+  "pdf": {
+    "page_count": 1,
+    "bytes": 36117,
+    "word_count": 461,
+    "encrypted": false,
+    "image_count": 0,
+    "missing_expected_text": [],
+    "link_targets": [
+      "mailto:caylebalvarezjames@gmail.com",
+      "https://github.com/cayleb-james2008",
+      "https://cayleb-james2008.github.io/agentic-resume/",
+      "https://github.com/cayleb-james2008/dotz",
+      "https://github.com/cayleb-james2008/dotz/pull/218",
+      "https://github.com/cayleb-james2008/sophos",
+      "https://github.com/cayleb-james2008/sophos/pull/10",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668",
+      "https://github.com/cayleb-james2008/sophos/pull/9",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+      "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+      "https://github.com/cayleb-james2008/industry-ai-suite",
+      "https://github.com/cayleb-james2008/industry-ai-suite/pull/1",
+      "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
+      "https://cayleb-james2008.github.io/agentic-resume/lab/"
+    ],
+    "missing_expected_links": [],
+    "metadata": {
+      "/Author": "Cayleb Alvarez-James",
+      "/CreationDate": "D:20261005144147-04'00'",
+      "/Creator": "(unspecified)",
+      "/Keywords": "Applied AI, developer tools, Python, Rust, TypeScript, software testing, workflow evaluation",
+      "/ModDate": "D:20261005144147-04'00'",
+      "/Producer": "ReportLab PDF Library - (opensource)",
+      "/Subject": "Independent project development and verified software work",
+      "/Title": "Cayleb Alvarez-James — Applied AI & Developer Tools",
+      "/Trapped": "/False"
+    },
+    "layout": {
+      "page_count": 1,
+      "pages": [
+        {
+          "page": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0,
+          "text_bounds_pt": {
+            "left": 45.0,
+            "top": 35.59,
+            "right": 566.69,
+            "bottom": 643.2
+          },
+          "text_overflow": false,
+          "render_image": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/render-images/resume-page-1.png",
+          "render_pixels": [
+            1010,
+            1307
+          ],
+          "text": "Cayleb Alvarez-James\nApplied AI & Developer Tools | Workflow Evaluation\nConnecticut, USA | Remote-only | caylebalvarezjames@gmail.com\ngithub.com/cayleb-james2008 | cayleb-james2008.github.io/agentic-resume/\nSUMMARY\nIndependent, AI-assisted project developer working across coding-agent workflows, desktop interfaces, APIs, and\nsource-grounded AI evaluation. Builds and tests local tools, translating bounded needs into traceable workflows with explicit\nuncertainty and useful human handoffs.\nEXPERIENCE\nIndependent Project Development — AI-Assisted Software & Evaluation | 2026\nDirect coding-agent work through implementation, debugging, testing, and review across developer tools and local-source review\nworkflows.\ndotz — Multi-Agent Coding Dashboard\nRust, axum, Tauri, JavaScript, SQLite\ngithub.com/cayleb-james2008/dotz | Open draft PR #218\n• Integrated a local-first dashboard with a Rust/axum API, parallel coding-agent workflows, an inspectable workflow graph, local\nmemory, and REST/WebSocket endpoints.\n• Fresh isolated local Linux dotz-core run passed 824/824; 5/5 monitor-unit and 5/5 platform-regression tests passed. Current\nwork remains in open draft PR #218.\nSophos — Windows Coding-Agent Desktop Integration\nTypeScript, React, Tauri, Rust, Node.js\ngithub.com/cayleb-james2008/sophos | Open draft PR #10 | PR #10 push CI | PR #10 pull-request CI | Open draft PR #9 (baseline) | PR #9\nruntime/MSI baseline\n• Verified Inbox read-state plus theme/profile persistence after restart in the native Windows UI over demo IPC, not live provider\ninference. At the exact head of open draft PR #10, both Windows CI runs passed: eight suites, 57 case results without skip\nmarkers, and two skipped interaction branches.\n• Integrated a Windows/Tauri desktop and React/TypeScript views for Prime Intellect’s open-source Prime Agent; Prime Intellect is\ncredited for the upstream runtime, daemon, and bridge.\n• Separate open draft PR #9 baseline: 1,122 frontend tests and 47/47 Windows named-pipe checks passed; Windows x64\nnative-module loading and guarded MSI packaging were verified.\nIndustry AI Suite — Source-Grounded Review Workflows\nPython, HTTP APIs, Local LLMs, HTML/CSS/JavaScript\ngithub.com/cayleb-james2008/industry-ai-suite | Merged PR #1 | September 26 evidence pack | Recorded workflow lab\n• Built 10 bounded local review workflows using public or permitted inputs—including Treasury-row reconciliation, cited research\nchecks, CISA vulnerability triage, and public-policy review—with dated source receipts and human handoffs.\n• Ran the full post-merge test suite locally on public main: 370 tests and 178 subtests passed.\n• September 26, 2026 witness record: 6 local-model exchanges; 5 cited outputs passed citation-ID checks and narrow source\nreview. A privacy-filter/citation failure and documented corrected retry were retained.\nTECHNICAL SKILLS\nLanguages: Python, Rust, TypeScript, JavaScript, HTML/CSS\nFrameworks & data: React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite\nAI & verification: Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest,\nCargo, Git/GitHub, Linux\nADDITIONAL EXPERIENCE\nDunkin' | 2024–2026\nRobert H. Lord Company — Moving Crew | Summers 2025 & 2026\nTommy's Pizza | Summer 2024\nDavid Cooke Plaster Co. — Plaster Work | Summer 2026\nEDUCATION\nPortland High School — Portland, Connecticut | Graduated 2026\nCoursework: Cybersecurity; AP Computer Science\n",
+          "links": [
+            {
+              "uri": "mailto:caylebalvarezjames@gmail.com",
+              "rect": [
+                174.1840057373047,
+                73.79998779296875,
+                293.656005859375,
+                83.4000244140625
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008",
+              "rect": [
+                45.0,
+                83.70001220703125,
+                155.99899291992188,
+                93.1199951171875
+              ]
+            },
+            {
+              "uri": "https://cayleb-james2008.github.io/agentic-resume/",
+              "rect": [
+                164.4062957763672,
+                83.70001220703125,
+                329.0600891113281,
+                93.1199951171875
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/dotz",
+              "rect": [
+                45.0,
+                220.79998779296875,
+                174.19140625,
+                230.15997314453125
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/dotz/pull/218",
+              "rect": [
+                182.54519653320312,
+                220.79998779296875,
+                254.625,
+                230.15997314453125
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos",
+              "rect": [
+                45.0,
+                297.20001220703125,
+                184.72140502929688,
+                306.55999755859375
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/pull/10",
+              "rect": [
+                193.0751953125,
+                297.20001220703125,
+                260.6933898925781,
+                306.55999755859375
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+              "rect": [
+                269.0472106933594,
+                297.20001220703125,
+                324.4115905761719,
+                306.55999755859375
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668",
+              "rect": [
+                332.7654113769531,
+                297.20001220703125,
+                414.2987976074219,
+                306.55999755859375
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/pull/9",
+              "rect": [
+                422.652587890625,
+                297.20001220703125,
+                523.06982421875,
+                306.55999755859375
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+              "rect": [
+                531.423583984375,
+                297.20001220703125,
+                552.5225830078125,
+                306.55999755859375
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024",
+              "rect": [
+                45.0,
+                306.5,
+                123.86579895019531,
+                315.8599853515625
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/industry-ai-suite",
+              "rect": [
+                45.0,
+                415.5,
+                217.59060668945312,
+                424.8599853515625
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/industry-ai-suite/pull/1",
+              "rect": [
+                225.94439697265625,
+                415.5,
+                277.7597961425781,
+                424.8599853515625
+              ]
+            },
+            {
+              "uri": "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
+              "rect": [
+                286.11358642578125,
+                415.5,
+                391.1405944824219,
+                424.8599853515625
+              ]
+            },
+            {
+              "uri": "https://cayleb-james2008.github.io/agentic-resume/lab/",
+              "rect": [
+                399.494384765625,
+                415.5,
+                483.44580078125,
+                424.8599853515625
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "content_source": {
+    "markdown_fragment": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/resume.md",
+    "html_fragment": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/resume.html",
+    "work_history_not_employer_verified": true,
+    "project_scope_boundaries": [
+      "No paid engineering role or employer relationship is asserted",
+      "No sole-authorship, revenue, adoption, production deployment, degree, model-training, whole-app, release-readiness, or live provider-inference achievement is asserted; Suite PR #1 is explicitly labeled merged, while Sophos #9/#10/#11 and dotz #218 remain open drafts"
+    ]
+  },
+  "public_project_evidence": {
+    "dotz": {
+      "public_pull_request": "https://github.com/cayleb-james2008/dotz/pull/218",
+      "head_sha": "51a94560247da0b1ef7deb4eacd492d446541834",
+      "state": "OPEN_DRAFT",
+      "fresh_isolated_core_tests": "824 passed, 0 failed",
+      "monitor_unit_tests": "5 passed, 0 failed",
+      "platform_regression_tests": "5 passed, 0 failed",
+      "local_evidence_report": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/dotz-ubuntu-ci-repair/REPORT.md",
+      "hosted_ci": {
+        "run_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859",
+        "head_sha": "51a94560247da0b1ef7deb4eacd492d446541834",
+        "core_jobs": {
+          "macOS": {
+            "tests_passed": 824,
+            "state": "SUCCESS",
+            "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261240"
+          },
+          "Windows": {
+            "tests_passed": 822,
+            "state": "SUCCESS",
+            "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261302"
+          },
+          "Ubuntu": {
+            "state": "FAILURE",
+            "reported_failure": "communication loss",
+            "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261478",
+            "job_log_http_status": 404,
+            "artifacts": "none",
+            "acceptance": "not established"
+          }
+        },
+        "dependency_policy_jobs": [
+          {
+            "platform": "macOS",
+            "state": "SUCCESS",
+            "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261404"
+          },
+          {
+            "platform": "Windows",
+            "state": "SUCCESS",
+            "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261125"
+          },
+          {
+            "platform": "Ubuntu",
+            "state": "SUCCESS",
+            "job_url": "https://github.com/cayleb-james2008/dotz/actions/runs/37285797859/job/111684261414"
+          }
+        ]
+      },
+      "scope": "dotz-core and focused CI/process-tree candidate; not whole-app acceptance, merge, or release"
+    },
+    "sophos": {
+      "public_pull_request": "https://github.com/cayleb-james2008/sophos/pull/10",
+      "head_sha": "ad168c7b41c7caf011081379218ab3cbfa0ff134",
+      "state": "OPEN_DRAFT",
+      "ui_check_runs": {
+        "push_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+        "push_test_job": {
+          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468/job/111728741187",
+          "state": "SUCCESS"
+        },
+        "push_cua_job": {
+          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468/job/111728740820",
+          "state": "SUCCESS"
+        },
+        "pull_request_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668",
+        "pull_request_test_job": {
+          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668/job/111728754937",
+          "state": "SUCCESS"
+        },
+        "pull_request_cua_job": {
+          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668/job/111728755266",
+          "state": "SUCCESS"
+        }
+      },
+      "native_ui": {
+        "primary_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468",
+        "suite_cases": {
+          "Smoke": 6,
+          "Sessions": 8,
+          "Agents": 6,
+          "Chat": 11,
+          "Inbox": 5,
+          "Settings": 10,
+          "Shell": 6,
+          "Profile Studio": 7
+        },
+        "suite_count": 8,
+        "suite_reported_passes": 59,
+        "case_results_without_skip_marker": 57,
+        "explicit_skipped_branches": 2,
+        "skipped_interactions": [
+          "chat steering while busy",
+          "keyboard shortcut overlay open/close"
+        ],
+        "failed_cases": 0,
+        "case_counts_are_not_assertion_counts": true,
+        "verified_behaviors": [
+          "Inbox message read state; target unread label count 1-to-0; header unread count 2-to-1",
+          "theme change and persistence after restart",
+          "profile selection persistence after restart"
+        ],
+        "ui_scope": "native Windows app exercised with demo/mock IPC; not live provider authentication, inference, or model generation",
+        "visual_caveat": "Inbox screenshot header shows 1 unread while the sidebar badge still shows 2; not all counter surfaces were shown in sync",
+        "parent_readback": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/PARENT-FINAL-UI-READBACK.md",
+        "evidence_report": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/REPORT.md",
+        "screenshots": [
+          "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/evidence/current-head-ad168c7/selected-screenshots/inbox-mark-read.png",
+          "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-windows-ui-correction/evidence/current-head-ad168c7/selected-screenshots/studio-restart-persisted.png"
+        ]
+      },
+      "baseline_pr9": {
+        "public_pull_request": "https://github.com/cayleb-james2008/sophos/pull/9",
+        "head_sha": "cdc0fddb0c6aacea4ef1d05d634dbd4a87b49f97",
+        "state": "OPEN_DRAFT",
+        "proof_run": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040",
+        "verified_baseline": "1,122 frontend tests; 47/47 Windows named-pipe daemon/bridge checks; actual Windows x64 native-module loads; guarded Tauri MSI and included notice verified",
+        "acceptance_boundary": "PR #9 runtime/MSI baseline only; not PR #10 UI evidence, not merged, and not a release"
+      },
+      "security_candidate_pr11": {
+        "public_pull_request": "https://github.com/cayleb-james2008/sophos/pull/11",
+        "state": "OPEN_DRAFT",
+        "published_head": "7d0b30cdcc174d77ae0b7828120736069cc8aaa5",
+        "current_runs": [
+          37347304278,
+          37347310000
+        ],
+        "failed_windows_runtime_job": "https://github.com/cayleb-james2008/sophos/actions/runs/37347310000/job/111889016097",
+        "current_blocker": "At exact draft head 7d0b30cdcc174d77ae0b7828120736069cc8aaa5, Windows runtime check 37347310000 failed at 27/48; source review identified named-pipe replacement-supervisor launch path misuse. A regression is in progress; no native Windows retest has accepted the repair.",
+        "release_limits_source": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-security-integration/REPORT.md",
+        "acceptance_boundary_source": "/home/cayleb/Work/session-artifacts/mercor-project-repair-20261004/sophos-security-final-review/evidence/acceptance-boundary-evidence.json",
+        "acceptance": "Windows runtime 27/48 and failing check; native/MSI, security signoff, and release acceptance not established; active continuation remains separate from PR #10 UI evidence"
+      }
+    },
+    "industry_ai_suite": {
+      "public_pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/1",
+      "state": "MERGED",
+      "merge_commit": "6ecc433b9b3d7f2a96f9baca6393605c13e5fbe0",
+      "tests_after_merge": "Local full-suite execution on public main after the merge: 370 tests and 178 subtests passed",
+      "historical_model_evidence_date": "2026-09-26",
+      "historical_model_evidence": "6 witnessed local-model exchanges; 5 citation-bearing outputs passed ID checks and narrow source review; one privacy-filter/citation failure and corrected retry retained",
+      "workflow_scope": "10 bounded local workflows using public sources or permitted local inputs; not completed enterprise workflows or provider/model accuracy",
+      "draft_pr2_candidate": {
+        "public_pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/2",
+        "state": "OPEN_DRAFT",
+        "head_sha": "2c8b163b7ae490e02ea990df978b59d0d0768455",
+        "candidate_test_result_as_provided": "372 tests and 178 subtests; draft-candidate result, separate from the post-merge public-main baseline of 370 tests and 178 subtests used in the résumé",
+        "state_source": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json"
+      }
+    }
+  },
+  "artifact_manifest": [
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/Cayleb-Alvarez-James-Mercor-Resume.pdf",
+      "bytes": 36117,
+      "sha256": "6683e120435fcdccddd64aeda300b2e11a932622514235c418746f72af32913f"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/Cayleb-Alvarez-James-Mercor-Resume.docx",
+      "bytes": 39676,
+      "sha256": "24aa09ea7fd6153ffe1d078da264dac1363fead2424c7fdd747fda59166f4e51"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/Cayleb-Alvarez-James-Mercor-Resume.txt",
+      "bytes": 3501,
+      "sha256": "76df7997834fca386e46ef60b78184f54eaa43446afe717e4539cad8babf22e4"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/resume.md",
+      "bytes": 4450,
+      "sha256": "8b88a77e4eac115800d91a692daca51b3046b974bee15c25d3dd2092c96ad068"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/resume.html",
+      "bytes": 6402,
+      "sha256": "c9f004aebb67e9edefcebee36aa48133a7ac1bcfe45536bcf820bf58acf12363"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/resume-content.json",
+      "bytes": 15401,
+      "sha256": "0cfee98920e16a10b9d930bc66c8e823c63be48ab75a543b370e9028e73f4fd3"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/docx-render/Cayleb-Alvarez-James-Mercor-Resume.pdf",
+      "bytes": 89160,
+      "sha256": "2be30e4191e18a4fff07eaa3e85a536886b13fe1a8361c826a2acf91c729d49d"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/render-images/resume-page-1.png",
+      "bytes": 233309,
+      "sha256": "2832e677a1853c20ce091962187bb4b46cb5848282780e38352fe684c0dfc577"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/render-images/docx-render-page-1.png",
+      "bytes": 229845,
+      "sha256": "c4aa031ab930a2e017e3dcbfbadb046256dfb222d32ca23fec79e842b16891a0"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/REPORT.md",
+      "bytes": 6260,
+      "sha256": "b5caea4260c0e2739e2321143af0ab58ea8b4bcf25126ee424ac7c16fe33a7c9"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/SOURCES.md",
+      "bytes": 5910,
+      "sha256": "b574fa6ecee115143ba168941de415fe40c45c5544be917fc3a59e17bf753ca5"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/verdict.json",
+      "bytes": 1431,
+      "sha256": "46bf241a2224cb4233e38e95913da9f10f7686737acfa9501c759e3af09162f5"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json",
+      "bytes": 7606,
+      "sha256": "33c84e4d266253365108b62856efa381fef0d3cd96658d694ca49371ee1d3fe2"
+    },
+    {
+      "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/build_resume.py",
+      "bytes": 35788,
+      "sha256": "1a85f978947662049703b431cf95b7ba7d9d74b71f8ee8414865138b02123907"
+    }
+  ],
+  "checks": {
+    "pdf_page_count_one": true,
+    "pdf_under_2mb": true,
+    "pdf_unencrypted": true,
+    "pdf_text_based_no_images": true,
+    "pdf_expected_text_complete": true,
+    "pdf_all_expected_links_embedded": true,
+    "docx_package_zip_ok": true,
+    "docx_expected_text_complete": true,
+    "docx_all_expected_links_embedded": true,
+    "docx_has_no_tables": true,
+    "libreoffice_docx_render_one_page": true,
+    "libreoffice_docx_render_expected_text_complete": true,
+    "pdf_page_text_not_clipped": true,
+    "docx_page_text_not_clipped": true,
+    "official_mercor_pdf_guidance_met": true
+  },
+  "all_checks_pass": true,
+  "pending_independent_factual_review": false,
+  "independent_factual_review": {
+    "verdict": "APPROVABLE_WITH_PROJECT_GATES_PENDING",
+    "reviewed_on": "2026-10-05",
+    "report": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/REPORT.md",
+    "sources": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/SOURCES.md",
+    "scope": "Personal, work-history, and education assertions compared with the current and prior source résumé materials; project claims reconciled against current exact-head evidence and separate historical baselines."
+  },
+  "remote_submission_or_upload_performed": false
+}

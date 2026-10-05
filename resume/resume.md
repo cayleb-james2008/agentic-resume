@@ -1,29 +1,52 @@
-# Project résumé / selected public work
-Cayleb Alvarez-James · Applied AI and systems projects
+# Cayleb Alvarez-James
+**Applied AI & Developer Tools | Workflow Evaluation**
+Connecticut, USA | Remote-only | [caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmail.com)
+[github.com/cayleb-james2008](https://github.com/cayleb-james2008) | [cayleb-james2008.github.io/agentic-resume/](https://cayleb-james2008.github.io/agentic-resume/)
 
-Seeking remote-only software engineering and applied AI roles.
+## Summary
+Independent, AI-assisted project developer working across coding-agent workflows, desktop interfaces, APIs, and source-grounded AI evaluation. Builds and tests local tools, translating bounded needs into traceable workflows with explicit uncertainty and useful human handoffs.
 
-[caylebalvarezjames@gmail.com](mailto:caylebalvarezjames@gmail.com) · [GitHub profile](https://github.com/cayleb-james2008) · [Interactive project lab](https://cayleb-james2008.github.io/agentic-resume/lab/)
+## Experience
+**Independent Project Development — AI-Assisted Software & Evaluation | 2026**
+Direct coding-agent work through implementation, debugging, testing, and review across developer tools and local-source review workflows.
 
-This is a project résumé of selected public work, not a complete career-history record.
+### dotz — Multi-Agent Coding Dashboard
+*Rust, axum, Tauri, JavaScript, SQLite*
 
-## Public systems
-- **Industry AI Suite:** ten working local review paths and a hosted replay of dated results. Each shows the input, a bounded result, and the next decision for a person. [Public code](https://github.com/cayleb-james2008/industry-ai-suite) · [Recorded lab](https://cayleb-james2008.github.io/agentic-resume/lab/).
-- **dotz:** local-first multi-agent coding dashboard with a Rust/axum API and Tauri shell. [Public repository](https://github.com/cayleb-james2008/dotz).
-- **Sophos:** Windows coding-agent project described as a port of Prime Intellect's Prime Agent; its README credits the upstream runtime, daemon, and bridge. [Public repository](https://github.com/cayleb-james2008/sophos).
+[github.com/cayleb-james2008/dotz](https://github.com/cayleb-james2008/dotz) | [Open draft PR #218](https://github.com/cayleb-james2008/dotz/pull/218)
+- Integrated a local-first dashboard with a Rust/axum API, parallel coding-agent workflows, an inspectable workflow graph, local memory, and REST/WebSocket endpoints.
+- Fresh isolated local Linux dotz-core run passed 824/824; 5/5 monitor-unit and 5/5 platform-regression tests passed. Current work remains in open draft PR #218.
 
-## Public-source and local examples
-- **Treasury / LedgerBridge:** 10 Daily Treasury Statement rows accounted once, with exceptions routed for review. Public federal cash is not company books. [Exact query](https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page%5Bsize%5D=10&sort=-record_date).
-- **World Bank / MarketBrief + BacktestGuard:** 15 annual U.S. GDP observations supported a 5.02% nominal 2024–2025 comparison and an observation-year chronology check, not a securities conclusion or completed backtest. [Indicator and license](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD): “License : CC BY-4.0” checked 2026-09-23 17:15:50 UTC.
-- **CISA / SentinelDesk:** public KEV records become a CVE-linked review queue, not an organization alert or asset finding. [Official feed](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json).
-- **GovInfo / HandoffHub + OnboardPath + ReplyCraft:** official OPM proposed-rule document `2026-19222` supports a cited public-document handoff and a synthetic public-policy question about its DATES section. It is not employer policy, an employee record, or a customer case. [Official text](https://www.govinfo.gov/content/pkg/FR-2026-09-18/html/2026-19222.htm).
-- **GitHub / PipelineRelay:** public `pytest-dev/pytest` metadata supports a source-linked research handoff, not CRM, lead, or consent evidence. [Exact metadata](https://api.github.com/repos/pytest-dev/pytest).
-- **Local EVM / ChainWatch:** a watch-only processor checks supplied Base or Ethereum observations against a rate baseline and flags short windows. The hosted example uses invented values; no live chain feed or company address is connected. [Public code](https://github.com/cayleb-james2008/industry-ai-suite/tree/244f6dc979abe678e90532cd7e53692443ee81dd/apps/chainwatch).
-- **SearchLift:** a dated, bounded read of one portfolio page found 10/10 approved workflow names; the structural check did not invoke a model. SearchLift before-state: an older capture found 0/10 approved workflow names. Neither read measures rankings, traffic, or whole-site SEO. [Public source](https://github.com/cayleb-james2008/agentic-resume).
+### Sophos — Windows Coding-Agent Desktop Integration
+*TypeScript, React, Tauri, Rust, Node.js*
 
-## AI proof and limits
-- **Five local model samples:** LedgerBridge, MarketBrief, BacktestGuard, SentinelDesk, and OnboardPath produced cited public-source sentences. An independent witness verified the model exchanges on 2026-09-26; the app checked citation IDs, and the narrow statements were reviewed against their sources. [Witness and review notes](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926).
-- **Scope:** these are public-source and local-input demonstrations. Private company, customer, employee, CRM, and organization-asset records and permissions are not included. No organization deployment or business outcome is claimed; there is no trade, transfer, message send, or automated consequential decision.
+[github.com/cayleb-james2008/sophos](https://github.com/cayleb-james2008/sophos) | [Open draft PR #10](https://github.com/cayleb-james2008/sophos/pull/10) | [PR #10 push CI](https://github.com/cayleb-james2008/sophos/actions/runs/37299547468) | [PR #10 pull-request CI](https://github.com/cayleb-james2008/sophos/actions/runs/37299551668) | [Open draft PR #9 (baseline)](https://github.com/cayleb-james2008/sophos/pull/9) | [PR #9 runtime/MSI baseline](https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024)
+- Verified Inbox read-state plus theme/profile persistence after restart in the native Windows UI over demo IPC, not live provider inference. At the exact head of open draft PR #10, both Windows CI runs passed: eight suites, 57 case results without skip markers, and two skipped interaction branches.
+- Integrated a Windows/Tauri desktop and React/TypeScript views for Prime Intellect’s open-source Prime Agent; Prime Intellect is credited for the upstream runtime, daemon, and bridge.
+- Separate open draft PR #9 baseline: 1,122 frontend tests and 47/47 Windows named-pipe checks passed; Windows x64 native-module loading and guarded MSI packaging were verified.
 
-## Systems practice
-Python · Rust · axum · Tauri · HTML · CSS · JavaScript · local-first interfaces · source provenance · permission boundaries · human approval gates · audit trails · fail-safe tests.
+### Industry AI Suite — Source-Grounded Review Workflows
+*Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript*
+
+[github.com/cayleb-james2008/industry-ai-suite](https://github.com/cayleb-james2008/industry-ai-suite) | [Merged PR #1](https://github.com/cayleb-james2008/industry-ai-suite/pull/1) | [September 26 evidence pack](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926) | [Recorded workflow lab](https://cayleb-james2008.github.io/agentic-resume/lab/)
+- Built 10 bounded local review workflows using public or permitted inputs—including Treasury-row reconciliation, cited research checks, CISA vulnerability triage, and public-policy review—with dated source receipts and human handoffs.
+- Ran the full post-merge test suite locally on public main: 370 tests and 178 subtests passed.
+- September 26, 2026 witness record: 6 local-model exchanges; 5 cited outputs passed citation-ID checks and narrow source review. A privacy-filter/citation failure and documented corrected retry were retained.
+
+## Technical Skills
+
+**Languages:** Python, Rust, TypeScript, JavaScript, HTML/CSS
+**Frameworks & data:** React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite
+**AI & verification:** Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest, Cargo, Git/GitHub, Linux
+
+## Additional Experience
+
+**Dunkin'** | 2024–2026
+**Robert H. Lord Company — Moving Crew** | Summers 2025 & 2026
+**Tommy's Pizza** | Summer 2024
+**David Cooke Plaster Co. — Plaster Work** | Summer 2026
+
+## Education
+
+**Portland High School** — Portland, Connecticut | Graduated 2026
+Coursework: Cybersecurity; AP Computer Science

@@ -6,6 +6,13 @@
 ## The outcome Cayleb wants (unchanged)
 Pure professionalism through proof: a polished, truthful résumé and live portfolio backed by projects that work after a fresh download and test. Show capability through inspectable evidence, never adjectives. Describe project work as independent/AI-assisted where appropriate; credit Prime Intellect for the upstream Sophos runtime/daemon/bridge and its MIT license; keep demo, local, hosted, provider-generated, and production claims distinct. **The résumé has not been submitted to Mercor. Do not submit it and do not describe all projects as complete while acceptance remains open.**
 
+## Voice and the end state Cayleb wants (added 2026-10-06 evening)
+The finished body of work should read as Cayleb, not as an AI:
+- **First person, professional but casual.** Confident, plain-spoken, warm — a strong engineer explaining their work to a friendly peer. Concrete over grandiose; zero corporate filler; zero hype words (no "cutting-edge", "seamless", "revolutionary"). A little personality is welcome; swagger is fine when a fact backs it.
+- **Applies to every public surface:** the résumé (web page, PDF, DOCX), the portfolio site and case studies, and the READMEs/docs of `dotz`, `sophos`, and `industry-ai-suite`. Humanize summaries and intros; keep technical precision in the details.
+- **"Merged and beautified" is the END STATE, not a shortcut:** the open draft PRs (dotz #218; Sophos #9/#10/#11) are meant to land on their main branches once their acceptance gates pass. Merge deliberately, then polish the merged state — tidy docs, consistent tone, clean presentation. Humanization never outruns evidence: tone may be casual, but every claim stays scoped, dated, and honest. **Do not merge to "finish"; merge what is proven.**
+- **Full repo control is the expectation:** the next agent is meant to operate across all four repos (`agentic-resume`, `dotz`, `sophos`, `industry-ai-suite`) — branches, PRs, merges, and releases. If any push is still 403, fix that access first (see Blocker); never work around it with manual credentials.
+
 ## What this session verified (evidence classes kept separate)
 
 ### Hosted (GitHub / live site, 2026-10-06)
@@ -69,7 +76,9 @@ git am /path/to/patches/0001-fix-sandbox-escaped-descendant-containment-and-tree
 2. Push `fix/linux-pidns-containment-20261006` (or `git am` the patch per above and push the result), then read the exact-head CI across Windows/macOS/Linux. Success criteria: the Ubuntu lane completes **without a runner-death**, containment tests pass on Linux, and the platform-skip marker appears on the other lanes. If the Ubuntu lane still dies, the kill(0) hypothesis is incomplete — capture the run id/annotations and keep the failure visible.
 3. If green, request independent review of the candidate per handoff-1 rule 3 before proposing integration into PR #218. Escaped-descendant cleanup on the **browser** path remains an open design problem (daemon lifetime vs containment) — do not paper over it.
 4. For Sophos, read the failed shutdown diagnostic's artifacts (`37505376509`) before picking the next instrumented run; keep push-event and pull-request runtime paths distinct; fix the Composition CUA case only with causal, reproducible evidence.
-5. Only after acceptance gates pass, sync the résumé/site with the new verified facts. Mercor submission remains Cayleb's call after the agreed completion gate.
+5. Only after acceptance gates pass, sync the résumé/site with the new verified facts and **merge the proven PRs** onto their main branches (dotz #218, Sophos #9/#10/#11 as each becomes genuinely green), then polish the merged state.
+6. **Humanize and beautify pass:** rewrite résumé copy, site intros, case-study prose, and the three project READMEs in Cayleb's voice — first person, professional-but-casual, approachable — without loosening any evidence claim. Verify published bytes/links after each site change.
+7. Mercor submission remains Cayleb's call after the agreed completion gate.
 
 ## Durable versus non-durable work
 Everything in this repo (this file + the patch) is durable. The local clone, commit `a883df5`, strace logs, and probe scripts from this session are **not** on GitHub and must not be cited as reproducible remote artifacts — the patch is the reproducible representation. Recreate anything else from public source in a new isolated branch and publish the exact test evidence needed for review.

@@ -1,0 +1,5 @@
+{
+  "operation": "preserve main generated silhouette, remove detached alpha specks and clear transparent RGB",
+  "components_before": 1,
+  "detached_pixels_removed": 86761
+}

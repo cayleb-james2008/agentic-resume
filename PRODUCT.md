@@ -1,3 +1,13 @@
+# Current canonical résumé
+
+The approved v8 Explore and Professional views share `index.html`. `resume.html` redirects to the Professional view. Both current PDF downloads are linked there. GitHub Pages publishes `main` at https://cayleb-james2008.github.io/agentic-resume/. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED.
+
+The earlier public résumé and site are recoverable at Git commit `476bb5623ef8b438028031faf86c55ff4520c090`. `resume/reviewed-verification.json` is explicitly historical; current download integrity is recorded in `resume/approved-verification.json`.
+
+---
+
+## Historical product notes
+
 > **Operator model:** the reader is a non-technical goal-bringer; plain English, no unexplained jargon or technical questions; professional output in an operator-accessible voice
 
 # Product

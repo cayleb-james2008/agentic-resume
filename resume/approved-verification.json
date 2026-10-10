@@ -1,0 +1,13 @@
+{
+  "scope": "Exact PDF bytes supplied with the user-approved v8 website. Hashes and PDF structure verified for publication; no new independent employment or factual verification is claimed.",
+  "artifacts": {
+    "Cayleb-James-resume.pdf": {
+      "sha256": "3f8cdc99e31604b8a2230b44fdf60590d07901df5b8e460dd1ff3be5437fba44",
+      "pages": 2
+    },
+    "Cayleb-James-one-page-resume.pdf": {
+      "sha256": "06c881ed0bdacff3255cd843c98000c02f5ac354c90f8989d362b5fa3419913e",
+      "pages": 1
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "wise-catfish-5",
+  "title": "Prism Orb Loader",
+  "source_url": "https://uiverse.io/uiverse-astronaut/wise-catfish-5",
+  "collection_url": "https://uiverse.io/ui-kits/aether",
+  "author_username": "uiverse-astronaut",
+  "author_display_name": "Astronaut",
+  "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+  "license": "MIT",
+  "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+  "captured_at": "2026-10-09T09:39:41.391Z",
+  "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+  "status": "acquired",
+  "files": {
+    "component.html": {
+      "bytes": 455,
+      "sha256": "41214f4c5775c324a13ec7a6b25598e0784666b19da07dc3c6bb75aebbd27861"
+    },
+    "component.css": {
+      "bytes": 2061,
+      "sha256": "1862a79cec814f24f2042efb2dfb2baaae34065504b809b84e8ffb8382c92922"
+    },
+    "LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+    }
+  },
+  "page_description_and_attribution": "Prism Orb Loader\n\nEditorial dark status loader featuring a rotating chromatic conic prism ring around a near-black core, paired with a monospace title and tabular frame counter.\n\nloader\nspinner\ndark\nprism\neditorial\nJun 6, 2026\nReport\nuiverse-astronaut\n\nAstronaut\n\n✨ Just floating around"
+}

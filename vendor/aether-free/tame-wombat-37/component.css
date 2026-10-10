@@ -1,0 +1,118 @@
+.aether-toast {
+  --aether-ink: #f2f1ee;
+  --aether-stratum: #0e1014;
+  --aether-strata: #14171d;
+  --aether-vapor: #8a8e97;
+  --aether-hairline: #1f232b;
+  --aether-positive: #7ce0b0;
+  --aether-grad: linear-gradient(90deg, #4ed8ff 0%, #ff4fa3 52%, #ff8a2a 100%);
+  --aether-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 14px;
+  width: 380px;
+  max-width: 100%;
+  padding: 18px 16px 16px 18px;
+  background: var(--aether-stratum);
+  border: 1px solid var(--aether-hairline);
+  border-radius: 6px;
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.7),
+    0 2px 6px rgba(0, 0, 0, 0.45);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--aether-ink);
+  overflow: hidden;
+}
+.aether-toast__ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--aether-grad);
+}
+.aether-toast__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: var(--aether-strata);
+  border: 1px solid var(--aether-hairline);
+  color: var(--aether-ink);
+}
+.aether-toast__icon svg {
+  stroke-width: 1.5;
+}
+.aether-toast__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.aether-toast__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--aether-ink);
+}
+.aether-toast__title em {
+  font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1em;
+  margin-left: 2px;
+}
+.aether-toast__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--aether-vapor);
+}
+.aether-toast__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-vapor);
+  font-variant-numeric: tabular-nums;
+}
+.aether-toast__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--aether-positive);
+  box-shadow: 0 0 0 3px rgba(124, 224, 176, 0.2);
+}
+.aether-toast__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: var(--aether-vapor);
+  cursor: pointer;
+  transition:
+    color 120ms var(--aether-ease),
+    border-color 120ms var(--aether-ease);
+}
+.aether-toast__close:hover {
+  color: var(--aether-ink);
+  border-color: var(--aether-hairline);
+}
+.aether-toast__close svg {
+  stroke-width: 1.5;
+}

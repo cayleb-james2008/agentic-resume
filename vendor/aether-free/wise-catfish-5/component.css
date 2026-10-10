@@ -1,0 +1,94 @@
+.aether-loader {
+  --aether-ink: #f2f1ee;
+  --aether-void: #06070a;
+  --aether-stratum: #0e1014;
+  --aether-vapor: #8a8e97;
+  --aether-hairline: #1f232b;
+  --aether-cyan: #4ed8ff;
+  --aether-magenta: #ff4fa3;
+  --aether-amber: #ff8a2a;
+  --aether-conic: conic-gradient(
+    from 210deg at 50% 50%,
+    var(--aether-cyan),
+    var(--aether-magenta),
+    var(--aether-amber),
+    var(--aether-cyan)
+  );
+
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  background: var(--aether-stratum);
+  border: 1px solid var(--aether-hairline);
+  border-radius: 6px;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--aether-ink);
+}
+.aether-loader__orb {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.aether-loader__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--aether-conic);
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent 9px,
+    #000 10px,
+    #000 17px,
+    transparent 18px
+  );
+  mask: radial-gradient(
+    circle,
+    transparent 9px,
+    #000 10px,
+    #000 17px,
+    transparent 18px
+  );
+  animation: aether-loader-spin 1.6s linear infinite;
+}
+.aether-loader__core {
+  position: absolute;
+  inset: 12px;
+  border-radius: 999px;
+  background: var(--aether-void);
+  box-shadow: 0 0 24px rgba(255, 79, 163, 0.35);
+}
+.aether-loader__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.aether-loader__title {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-ink);
+}
+.aether-loader__caption {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--aether-vapor);
+  font-variant-numeric: tabular-nums;
+}
+.aether-loader__count {
+  color: var(--aether-ink);
+}
+@keyframes aether-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aether-loader__ring {
+    animation-duration: 6s;
+  }
+}

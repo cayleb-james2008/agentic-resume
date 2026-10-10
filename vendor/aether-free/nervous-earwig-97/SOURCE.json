@@ -1,0 +1,29 @@
+{
+  "slug": "nervous-earwig-97",
+  "title": "Intelligence Brief Card",
+  "source_url": "https://uiverse.io/uiverse-astronaut/nervous-earwig-97",
+  "collection_url": "https://uiverse.io/ui-kits/aether",
+  "author_username": "uiverse-astronaut",
+  "author_display_name": "Astronaut",
+  "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+  "license": "MIT",
+  "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+  "captured_at": "2026-10-09T09:39:31.362Z",
+  "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+  "status": "acquired",
+  "files": {
+    "component.html": {
+      "bytes": 1286,
+      "sha256": "1016b6b78f39024548b560c01e2e7b264e36c5f9d9ce72c3a9f0bd92beb7353e"
+    },
+    "component.css": {
+      "bytes": 3720,
+      "sha256": "e83c89fe062576ee2b49c57ad2fd8f01118393e3086024b38eae82dddec263da"
+    },
+    "LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+    }
+  },
+  "page_description_and_attribution": "Intelligence Brief Card\n\nDark editorial intelligence card with a chromatic prism ribbon along the top edge, monospace index marker, live status chip, italic serif headline accent, and a prism-underlined link.\n\ncard\ndark\nbrutalist\neditorial\nintelligence\nJun 6, 2026\nReport\nuiverse-astronaut\n\nAstronaut\n\n✨ Just floating around"
+}

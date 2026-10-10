@@ -1,0 +1,29 @@
+{
+  "slug": "quick-lionfish-21",
+  "title": "Editorial Query Field",
+  "source_url": "https://uiverse.io/uiverse-astronaut/quick-lionfish-21",
+  "collection_url": "https://uiverse.io/ui-kits/aether",
+  "author_username": "uiverse-astronaut",
+  "author_display_name": "Astronaut",
+  "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+  "license": "MIT",
+  "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+  "captured_at": "2026-10-09T09:39:30.308Z",
+  "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+  "status": "acquired",
+  "files": {
+    "component.html": {
+      "bytes": 846,
+      "sha256": "73393422796a47a383b3d18ac4081a892f3a5a1c377bd0d78310b5c6e81eb268"
+    },
+    "component.css": {
+      "bytes": 2092,
+      "sha256": "6a5a209df835c6e14ab16054b18f202be88e127594abcea027192da427a83192"
+    },
+    "LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+    }
+  },
+  "page_description_and_attribution": "Editorial Query Field\n\nHairline-underlined dark search input that lights up with a chromatic cyan to magenta to amber prism gradient on focus. Includes monospace label, Tabler search glyph, and a kbd shortcut chip.\n\ninput\ndark\nsearch\nfield\neditorial\nJun 6, 2026\nReport\nuiverse-astronaut\n\nAstronaut\n\n✨ Just floating around"
+}

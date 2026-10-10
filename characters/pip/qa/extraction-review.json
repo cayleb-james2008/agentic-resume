@@ -1,0 +1,331 @@
+{
+  "idle": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        34,
+        196,
+        524,
+        506,
+        1
+      ],
+      [
+        582,
+        197,
+        1072,
+        506,
+        4
+      ],
+      [
+        1128,
+        196,
+        1620,
+        506,
+        2
+      ],
+      [
+        1672,
+        196,
+        2163,
+        506,
+        3
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.45528455284552843,
+    "target_baseline": 300,
+    "source_size": [
+      2197,
+      716
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  },
+  "greeting": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        30,
+        210,
+        531,
+        515,
+        2
+      ],
+      [
+        594,
+        204,
+        1085,
+        515,
+        1
+      ],
+      [
+        1127,
+        210,
+        1618,
+        515,
+        3
+      ],
+      [
+        1673,
+        211,
+        2178,
+        515,
+        4
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.44356435643564357,
+    "target_baseline": 300,
+    "source_size": [
+      2204,
+      713
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  },
+  "working": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        38,
+        211,
+        516,
+        519,
+        4
+      ],
+      [
+        579,
+        210,
+        1057,
+        519,
+        1
+      ],
+      [
+        1116,
+        210,
+        1596,
+        520,
+        2
+      ],
+      [
+        1654,
+        210,
+        2133,
+        519,
+        3
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.4666666666666667,
+    "target_baseline": 300,
+    "source_size": [
+      2172,
+      724
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  },
+  "waiting": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        26,
+        197,
+        530,
+        527,
+        1
+      ],
+      [
+        573,
+        197,
+        1077,
+        527,
+        2
+      ],
+      [
+        1122,
+        197,
+        1627,
+        526,
+        3
+      ],
+      [
+        1672,
+        197,
+        2177,
+        527,
+        4
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.44356435643564357,
+    "target_baseline": 300,
+    "source_size": [
+      2202,
+      714
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  },
+  "review": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        27,
+        211,
+        501,
+        514,
+        1
+      ],
+      [
+        575,
+        211,
+        1051,
+        515,
+        2
+      ],
+      [
+        1124,
+        211,
+        1599,
+        515,
+        3
+      ],
+      [
+        1673,
+        211,
+        2149,
+        515,
+        4
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.47058823529411764,
+    "target_baseline": 300,
+    "source_size": [
+      2175,
+      723
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  },
+  "error": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        41,
+        190,
+        526,
+        536,
+        1
+      ],
+      [
+        577,
+        207,
+        1071,
+        536,
+        4
+      ],
+      [
+        1103,
+        206,
+        1596,
+        536,
+        3
+      ],
+      [
+        1638,
+        199,
+        2130,
+        536,
+        2
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.4534412955465587,
+    "target_baseline": 300,
+    "source_size": [
+      2170,
+      725
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  },
+  "complete": {
+    "detected_groups": 4,
+    "source_bounds": [
+      [
+        30,
+        197,
+        501,
+        516,
+        1
+      ],
+      [
+        574,
+        197,
+        1048,
+        516,
+        2
+      ],
+      [
+        1118,
+        197,
+        1592,
+        516,
+        3
+      ],
+      [
+        1661,
+        197,
+        2136,
+        516,
+        4
+      ]
+    ],
+    "alpha_cutoff": 96,
+    "shared_row_scale": 0.47157894736842104,
+    "target_baseline": 300,
+    "source_size": [
+      2161,
+      728
+    ],
+    "dimensions": [
+      256,
+      320
+    ],
+    "all_frames_present": true,
+    "alpha_preserved": true,
+    "source_clipping": false
+  }
+}

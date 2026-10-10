@@ -1,0 +1,12 @@
+[
+  {
+    "source": "aero-glass-runtime-1-mofu-pip.zip",
+    "sha256": "5f426a2a25c637c4a0ce070ae8f12088693833dd85b23fece33070346669e27f",
+    "bytes": 7818695
+  },
+  {
+    "source": "aero-glass-runtime-2-folio-loam.zip",
+    "sha256": "c895d8ea61bd035ae96906058c2dcbce378fdab48e8d9b6752fa9263feed0c7f",
+    "bytes": 10182686
+  }
+]

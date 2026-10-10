@@ -1,0 +1,89 @@
+.aether-query {
+  --aether-ink: #f2f1ee;
+  --aether-vapor: #8a8e97;
+  --aether-hairline: #1f232b;
+  --aether-grad: linear-gradient(90deg, #4ed8ff 0%, #ff4fa3 52%, #ff8a2a 100%);
+  --aether-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 360px;
+  max-width: 100%;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--aether-ink);
+}
+.aether-query__label {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-vapor);
+}
+.aether-query__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 14px;
+}
+.aether-query__control::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--aether-hairline);
+  transition:
+    background 220ms var(--aether-ease),
+    height 120ms var(--aether-ease);
+}
+.aether-query__control:focus-within::after {
+  height: 2px;
+  background: var(--aether-grad);
+}
+.aether-query__icon {
+  color: var(--aether-vapor);
+  stroke-width: 1.5;
+  transition: color 220ms var(--aether-ease);
+  flex-shrink: 0;
+}
+.aether-query__control:focus-within .aether-query__icon {
+  color: var(--aether-ink);
+}
+.aether-query__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--aether-ink);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.aether-query__input::placeholder {
+  color: var(--aether-vapor);
+  opacity: 1;
+}
+.aether-query__kbd {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--aether-vapor);
+  padding: 3px 7px 2px;
+  border: 1px solid var(--aether-hairline);
+  border-radius: 3px;
+  background: transparent;
+  flex-shrink: 0;
+}
+.aether-query__hint {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--aether-vapor);
+}

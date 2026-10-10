@@ -1,0 +1,226 @@
+[
+  {
+    "slug": "black-octopus-6",
+    "title": "Prism Ribbon Button",
+    "source_url": "https://uiverse.io/uiverse-astronaut/black-octopus-6",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:12.807Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 508,
+        "sha256": "51bb88d7ba54890b6df9bd0c18a710ea86c8dc3fd1caf85548268c7760bdc57e"
+      },
+      "component.css": {
+        "bytes": 1484,
+        "sha256": "9b6adea18193a0eaa16e1104d80fa6d5c2731c85dc6fca79c88cd4b4d8e12f72"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "quick-lionfish-21",
+    "title": "Editorial Query Field",
+    "source_url": "https://uiverse.io/uiverse-astronaut/quick-lionfish-21",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:30.308Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 846,
+        "sha256": "73393422796a47a383b3d18ac4081a892f3a5a1c377bd0d78310b5c6e81eb268"
+      },
+      "component.css": {
+        "bytes": 2092,
+        "sha256": "6a5a209df835c6e14ab16054b18f202be88e127594abcea027192da427a83192"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "nervous-earwig-97",
+    "title": "Intelligence Brief Card",
+    "source_url": "https://uiverse.io/uiverse-astronaut/nervous-earwig-97",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:31.362Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 1286,
+        "sha256": "1016b6b78f39024548b560c01e2e7b264e36c5f9d9ce72c3a9f0bd92beb7353e"
+      },
+      "component.css": {
+        "bytes": 3720,
+        "sha256": "e83c89fe062576ee2b49c57ad2fd8f01118393e3086024b38eae82dddec263da"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "perfect-goat-47",
+    "title": "Prism-Fill Checkbox Stack",
+    "source_url": "https://uiverse.io/uiverse-astronaut/perfect-goat-47",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:32.421Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 2040,
+        "sha256": "bbc70b8de3272f45797428338d539fdd2063fdbaaf050cee8ff48ba5d2b19a9a"
+      },
+      "component.css": {
+        "bytes": 2872,
+        "sha256": "49f95e079a2b6fe3071a57395801ec2dde92fedcc297905d11825130536cafeb"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "green-bird-70",
+    "title": "Prism Overlay Switch",
+    "source_url": "https://uiverse.io/uiverse-astronaut/green-bird-70",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:39.997Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 563,
+        "sha256": "7543422574ffdc2d8bf15485fa65e524b1d56e485f8b8cedb58faf5749e63d72"
+      },
+      "component.css": {
+        "bytes": 2895,
+        "sha256": "0b86b9b1dc663e9ab31f5283ef02fba574043b1d534c8ba7f265fa5624d01164"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "wise-catfish-5",
+    "title": "Prism Orb Loader",
+    "source_url": "https://uiverse.io/uiverse-astronaut/wise-catfish-5",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:41.391Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 455,
+        "sha256": "41214f4c5775c324a13ec7a6b25598e0784666b19da07dc3c6bb75aebbd27861"
+      },
+      "component.css": {
+        "bytes": 2061,
+        "sha256": "1862a79cec814f24f2042efb2dfb2baaae34065504b809b84e8ffb8382c92922"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "fresh-pug-43",
+    "title": "Editorial Prism Tooltip",
+    "source_url": "https://uiverse.io/uiverse-astronaut/fresh-pug-43",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:42.379Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 1064,
+        "sha256": "194b8c4a16ac48cb7550f0dd001f23c36b57add2d2b0b5b282c632f7b02dba9a"
+      },
+      "component.css": {
+        "bytes": 3096,
+        "sha256": "40b49d7ee58cf10d7e55ac591fa25c621ff94551443ce7ef20ac761f8c87fbd3"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  },
+  {
+    "slug": "tame-wombat-37",
+    "title": "Signal Acquired Notification",
+    "source_url": "https://uiverse.io/uiverse-astronaut/tame-wombat-37",
+    "collection_url": "https://uiverse.io/ui-kits/aether",
+    "author_username": "uiverse-astronaut",
+    "author_display_name": "Astronaut",
+    "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+    "license": "MIT",
+    "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+    "captured_at": "2026-10-09T09:39:44.007Z",
+    "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+    "status": "acquired",
+    "files": {
+      "component.html": {
+        "bytes": 1341,
+        "sha256": "908643f93bb1c222f468dfc96f5a3731af598b0a170480c1fbec8a413d1bf930"
+      },
+      "component.css": {
+        "bytes": 2730,
+        "sha256": "904af5c890da0ae857a620fe8f3f376023d06724ad402c6a82a5e51c9814c5fc"
+      },
+      "LICENSE.txt": {
+        "bytes": 1073,
+        "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+      }
+    }
+  }
+]

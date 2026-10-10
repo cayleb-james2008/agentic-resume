@@ -1,0 +1,32 @@
+{
+  "react": {
+    "version": "19.3.0",
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/react/-/react-19.3.0.tgz",
+    "sha256": "5a4024110c49476e1538a70fd65b9e59d038fcc280b78eb933c24e10453afbf9"
+  },
+  "react-dom": {
+    "version": "19.3.0",
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/react-dom/-/react-dom-19.3.0.tgz",
+    "sha256": "dbeffb1e6cdbbbba07f799da4635333d0e20c210a32278dded85441ec4cb6a17"
+  },
+  "scheduler": {
+    "version": "0.28.0",
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/scheduler/-/scheduler-0.28.0.tgz",
+    "sha256": "302995d590e3c0a11eeb40d1d0f299c1df1800135d599d85cdd5faeb614f32d6"
+  },
+  "lenis": {
+    "version": "1.3.26",
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/lenis/-/lenis-1.3.26.tgz",
+    "sha256": "f8930e6b3e26a88f7ccd9ec45f1a11c85d2118cd14673b304204d59e49a68415"
+  },
+  "react-bits": {
+    "commit": "d86fccbd477786f94ca7eb891fbe0ec039d3cd3b",
+    "component": "GlassSurface JS-CSS",
+    "license": "MIT + Commons Clause",
+    "source": "https://github.com/DavidHDev/react-bits"
+  }
+}

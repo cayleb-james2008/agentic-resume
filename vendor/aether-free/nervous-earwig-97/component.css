@@ -1,0 +1,156 @@
+.aether-brief {
+  --aether-ink: #f2f1ee;
+  --aether-stratum: #0e1014;
+  --aether-strata: #14171d;
+  --aether-vapor: #8a8e97;
+  --aether-hairline: #1f232b;
+  --aether-hairline-strong: #2a2f38;
+  --aether-positive: #7ce0b0;
+  --aether-magenta: #ff4fa3;
+  --aether-grad: linear-gradient(90deg, #4ed8ff 0%, #ff4fa3 52%, #ff8a2a 100%);
+  --aether-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 360px;
+  max-width: 100%;
+  padding: 28px 28px 24px;
+  background: var(--aether-stratum);
+  border: 1px solid var(--aether-hairline);
+  border-radius: 6px;
+  color: var(--aether-ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  overflow: hidden;
+  transition:
+    border-color 220ms var(--aether-ease),
+    transform 220ms var(--aether-ease);
+}
+.aether-brief:hover {
+  border-color: var(--aether-hairline-strong);
+  transform: translateY(-1px);
+}
+.aether-brief__ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--aether-grad);
+}
+.aether-brief__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.aether-brief__index {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-vapor);
+}
+.aether-brief__sym {
+  margin-right: 0.4em;
+  color: var(--aether-magenta);
+  font-style: normal;
+}
+.aether-brief__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 4px;
+  background: var(--aether-strata);
+  border: 1px solid var(--aether-hairline);
+  border-radius: 999px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-ink);
+}
+.aether-brief__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--aether-positive);
+  box-shadow: 0 0 0 3px rgba(124, 224, 176, 0.18);
+}
+.aether-brief__title {
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--aether-ink);
+}
+.aether-brief__title em {
+  font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.08em;
+}
+.aether-brief__body {
+  margin: 0;
+  color: var(--aether-vapor);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.aether-brief__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--aether-hairline);
+}
+.aether-brief__meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-vapor);
+}
+.aether-brief__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--aether-ink);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+}
+.aether-brief__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 22px;
+  bottom: -3px;
+  height: 1px;
+  background: var(--aether-grad);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--aether-ease);
+}
+.aether-brief__link:hover::after {
+  transform: scaleX(1);
+}
+.aether-brief__link svg {
+  stroke-width: 1.5;
+  transition: transform 220ms var(--aether-ease);
+}
+.aether-brief__link:hover svg {
+  transform: translateX(3px);
+}

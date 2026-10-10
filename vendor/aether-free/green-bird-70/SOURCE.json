@@ -1,0 +1,29 @@
+{
+  "slug": "green-bird-70",
+  "title": "Prism Overlay Switch",
+  "source_url": "https://uiverse.io/uiverse-astronaut/green-bird-70",
+  "collection_url": "https://uiverse.io/ui-kits/aether",
+  "author_username": "uiverse-astronaut",
+  "author_display_name": "Astronaut",
+  "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+  "license": "MIT",
+  "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+  "captured_at": "2026-10-09T09:39:39.997Z",
+  "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+  "status": "acquired",
+  "files": {
+    "component.html": {
+      "bytes": 563,
+      "sha256": "7543422574ffdc2d8bf15485fa65e524b1d56e485f8b8cedb58faf5749e63d72"
+    },
+    "component.css": {
+      "bytes": 2895,
+      "sha256": "0b86b9b1dc663e9ab31f5283ef02fba574043b1d534c8ba7f265fa5624d01164"
+    },
+    "LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+    }
+  },
+  "page_description_and_attribution": "Prism Overlay Switch\n\nEditorial dark settings row with a hairline pill toggle. Track shifts to a chromatic cyan to magenta to amber gradient when on, with monospace ON / OFF state markers.\n\ngradient\nswitch\ndark\ntoggle\neditorial\nJun 6, 2026\nReport\nuiverse-astronaut\n\nAstronaut\n\n✨ Just floating around"
+}

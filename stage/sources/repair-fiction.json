@@ -1,0 +1,15 @@
+{
+  "kind": "fictional local illustration",
+  "person": "Tessa Rowan",
+  "company": "Brackenvale Workshop",
+  "assistant": "Pip",
+  "item": "TrailBeam desk lamp",
+  "missing_part": "SW-17",
+  "supplier_note": {
+    "expected_delivery": "Thursday 15 October, 10:00",
+    "status": "forecast, not confirmed receipt"
+  },
+  "proposed_plan": "Hold Thursday provisionally. Confirm only after part receipt and repair testing.",
+  "approval_owner": "Tessa Rowan",
+  "external_actions": "None. Nothing sent."
+}

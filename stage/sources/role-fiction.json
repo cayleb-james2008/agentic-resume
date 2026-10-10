@@ -1,0 +1,689 @@
+{
+  "classification": "Fictional local scenarios, no external action",
+  "larkspur": {
+    "slug": "larkspur",
+    "name": "Larkspur Field Guides",
+    "employee": "Mina Solis",
+    "assistant": "Folio",
+    "role": "Editorial production",
+    "context": [
+      "Mina maintains version order, gathers editor approvals, reconciles print specifications, assembles release packs and tracks supplier handoffs. Each morning she checks the approval register; at noon she updates the production calendar; before any release she verifies the exact proof, page count, trim, quantity, deadline and approving owner. Weekly she archives superseded versions and reviews recurring preflight errors.",
+      "Conceptual tools: manuscript/proof register, task list, print-spec sheet, approval ledger and a release-pack checklist. These are all local synthetic views. Folio may compare records, flag contradictions, draft an editor question and assemble a pack manifest. It cannot approve editorial changes, silently choose the newest version, send files to a printer or claim a proof file exists as a downloadable PDF when only a record is supplied.",
+      "Relationships: editor Anika Frost owns proof approval; designer Luis Vale owns layout corrections; production lead Rowan Pike authorizes external release; Mina owns pack preparation; fictional printer Twin Willow Press supplies the specification request. No real email, customer or manuscript content appears."
+    ],
+    "workload": [
+      [
+        "Field Notes No. 7",
+        "Final proof approval absent",
+        "Pack for Rowan by 15 Oct 12:00; printer window 15 Oct 14:00"
+      ],
+      [
+        "Trail Notes mini-guide",
+        "Index corrections",
+        "Luis review 14 Oct 13:00"
+      ],
+      [
+        "Seasonal catalogue",
+        "Text proof approved, layout pending",
+        "Mina checks version at 14 Oct 16:00"
+      ],
+      [
+        "Archive batch",
+        "Two superseded proofs unmarked",
+        "Mina cleanup after current release"
+      ],
+      [
+        "Reprint enquiry",
+        "Quantity not confirmed",
+        "Rowan clarification due 15 Oct 10:00"
+      ]
+    ],
+    "records": [
+      {
+        "id": "LF-JOB7",
+        "title": "Job card, Mina, 12 Oct 10:00.",
+        "full": "Field Notes No. 7. Sample quantity 400. Trim 105×148 mm. Bound page count must be a multiple of four. Internal pack due 15 Oct 12:00; external release window 15 Oct 14:00. These are fictional production requirements, not general printing advice.",
+        "branch": ""
+      },
+      {
+        "id": "LF-V4",
+        "title": "Proof register, Luis, 12 Oct 16:30.",
+        "full": "Version 4: 48 pages. Status: text approved; layout superseded. Logical asset key `fn7-proof-v4`. This is a source record only, not a link to an actual proof PDF.",
+        "branch": ""
+      },
+      {
+        "id": "LF-A4",
+        "title": "Approval ledger, Anika, 13 Oct 09:00.",
+        "full": "Text of version 4 approved. Approval scope: text only. It does not approve later layouts or a 52-page release.",
+        "branch": ""
+      },
+      {
+        "id": "LF-V5",
+        "title": "Proof register, Luis, 13 Oct 17:10.",
+        "full": "Version 5: 52 pages after a four-page index addition. Cover folio corrected. Status: awaiting full editor approval. Logical asset key `fn7-proof-v5`. Difference from v4: +4 index pages and cover folio correction. No substantive guide text is reproduced in the demo.",
+        "branch": ""
+      },
+      {
+        "id": "LF-PRINTER",
+        "title": "Supplier request, Twin Willow Press, 14 Oct 08:20.",
+        "full": "Requests a 48-page proof for the 15 Oct release window, referring to v4. It conflicts with the latest 52-page layout. A supplier request is not editor approval.",
+        "branch": ""
+      },
+      {
+        "id": "LF-POL",
+        "title": "Release policy, Rowan, version 4.",
+        "full": "A release pack must reference one exact fully approved proof, matching pagination/trim/quantity, current approval ID and unresolved-issue list. Newest does not mean approved. Text-only approval does not authorize a changed layout. Mina may assemble a pack; Rowan alone performs external release. A hold/clarification pack is allowed when approval is missing.",
+        "branch": ""
+      },
+      {
+        "id": "LF-CHECK",
+        "title": "Required pack checklist, Mina, version 2.",
+        "full": "Fields: issue, exact proof key/version, page count, trim, quantity, approval source, change summary, conflicting supplier request, unresolved items, external-release owner and deadline. “No unresolved items” is permitted only when records actually resolve them.",
+        "branch": ""
+      },
+      {
+        "id": "LF-UP-APPROVED",
+        "title": "Synthetic scenario update A, Anika, 14 Oct 09:05.",
+        "full": "“Full proof v5, 52 pages, approved including index and corrected cover folio.” Approval scope is explicitly whole proof v5. Available only after the visitor applies scenario A.",
+        "branch": "approved"
+      },
+      {
+        "id": "LF-UP-HOLD",
+        "title": "Synthetic scenario update B, Anika, 14 Oct 09:05.",
+        "full": "“Do not release v5; the index cross-reference on the final spread still needs review. Luis owns the correction; next review 14 Oct 15:00.” This is a hold, not approval. Available only after scenario B.",
+        "branch": "hold"
+      }
+    ],
+    "cases": {
+      "approved": {
+        "case_id": "larkspur-approved",
+        "classification": "Illustrative demo — fictional company and employee; local simulation only.",
+        "fixture_only": true,
+        "artifact_type": "Versioned release-pack manifest for lead review",
+        "state_before_review": "draft",
+        "approved": false,
+        "outbound_action": false,
+        "claims": [
+          {
+            "text": "The current layout is v5 with 52 pages; v4 had 48.",
+            "source_ids": [
+              "LF-V4",
+              "LF-V5"
+            ]
+          },
+          {
+            "text": "The selected update fully approves v5, including index and cover correction.",
+            "source_ids": [
+              "LF-UP-APPROVED"
+            ]
+          },
+          {
+            "text": "The supplier request is stale because it references the 48-page version.",
+            "source_ids": [
+              "LF-PRINTER",
+              "LF-V5"
+            ]
+          },
+          {
+            "text": "Mina may assemble the pack; Rowan owns external release.",
+            "source_ids": [
+              "LF-POL"
+            ]
+          },
+          {
+            "text": "Quantity 400 and trim 105×148 mm remain the job requirements.",
+            "source_ids": [
+              "LF-JOB7"
+            ]
+          }
+        ],
+        "output": {
+          "issue": "Field Notes No. 7",
+          "manifest": {
+            "proof_key": "fn7-proof-v5",
+            "proof_version": 5,
+            "pages": 52,
+            "quantity": 400,
+            "trim_mm": [
+              105,
+              148
+            ],
+            "full_approval_source": "LF-UP-APPROVED",
+            "change_summary": [
+              "Four-page index added",
+              "Cover folio corrected"
+            ],
+            "proof_reference_kind": "Synthetic source record; no PDF file supplied",
+            "unresolved_editorial_items": [],
+            "external_release_owner": "Rowan Pike"
+          },
+          "supplier_correction_draft": "The reviewed pack references v5 at 52 pages. The earlier 48-page request is superseded. Please use the pack specifications after Rowan authorizes release.",
+          "handoff_due": "2026-10-15T12:00:00Z",
+          "external_release_window": "2026-10-15T14:00:00Z"
+        },
+        "review_required": [
+          "Exact proof matches approval scope",
+          "52 pages is a multiple of four",
+          "Quantity and trim unchanged",
+          "Flag obsolete supplier specification",
+          "Rowan still owns external release"
+        ],
+        "expected_after_local_approval": {
+          "status": "ready-for-lead-review",
+          "local_effects": [
+            "Save manifest",
+            "Save supplier correction draft",
+            "Mark ready for lead review; never submitted or published"
+          ],
+          "audit_events": [
+            "Scenario selection recorded",
+            "Draft prepared from cited records",
+            "Employee approved local save"
+          ],
+          "external_action_performed": false
+        }
+      },
+      "hold": {
+        "case_id": "larkspur-hold",
+        "classification": "Illustrative demo — fictional company and employee; local simulation only.",
+        "fixture_only": true,
+        "artifact_type": "Hold pack and editor/designer handoff",
+        "state_before_review": "draft",
+        "approved": false,
+        "outbound_action": false,
+        "claims": [
+          {
+            "text": "V5 remains blocked by an index cross-reference review.",
+            "source_ids": [
+              "LF-UP-HOLD"
+            ]
+          },
+          {
+            "text": "Luis owns the correction and Anika reviews at 15:00 on 14 October.",
+            "source_ids": [
+              "LF-UP-HOLD"
+            ]
+          },
+          {
+            "text": "V4 text approval does not authorize the later v5 layout.",
+            "source_ids": [
+              "LF-A4",
+              "LF-POL"
+            ]
+          },
+          {
+            "text": "The 48 vs 52 page conflict remains visible.",
+            "source_ids": [
+              "LF-PRINTER",
+              "LF-V5"
+            ]
+          }
+        ],
+        "output": {
+          "issue": "Field Notes No. 7",
+          "proof_under_review": {
+            "key": "fn7-proof-v5",
+            "pages": 52,
+            "approved_for_release": false
+          },
+          "hold_reason": "Index cross-reference on final spread requires review.",
+          "next_handoff": {
+            "correction_owner": "Luis Vale",
+            "reviewer": "Anika Frost",
+            "review_at": "2026-10-14T15:00:00Z"
+          },
+          "clarification_draft": "Retain the release hold for Field Notes No. 7. V5 has 52 pages and an open index review. Luis owns the correction; Anika reviews at 15:00. The printer request still references 48 pages, so the approved version and specification must be confirmed before release.",
+          "unresolved": [
+            "Index review",
+            "Full v5 approval",
+            "Supplier pagination correction"
+          ]
+        },
+        "review_required": [
+          "Hold remains explicit",
+          "Text approval is not layout approval",
+          "Keep correction owner and reviewer visible"
+        ],
+        "expected_after_local_approval": {
+          "status": "hold-for-index-review",
+          "local_effects": [
+            "Save hold pack",
+            "Save clarification draft",
+            "Keep release blocked"
+          ],
+          "audit_events": [
+            "Scenario selection recorded",
+            "Draft prepared from cited records",
+            "Employee approved local save"
+          ],
+          "external_action_performed": false
+        }
+      },
+      "none": {
+        "case_id": "larkspur-unknown",
+        "classification": "Illustrative demo — fictional company and employee; local simulation only.",
+        "fixture_only": true,
+        "artifact_type": "Full-proof approval request and blocked manifest",
+        "state_before_review": "draft",
+        "approved": false,
+        "outbound_action": false,
+        "claims": [
+          {
+            "text": "No full approval for the 52-page v5 is available.",
+            "source_ids": [
+              "LF-V5",
+              "LF-A4"
+            ]
+          },
+          {
+            "text": "Newest proof is not automatically approved.",
+            "source_ids": [
+              "LF-POL"
+            ]
+          },
+          {
+            "text": "The supplier request still references 48 pages.",
+            "source_ids": [
+              "LF-PRINTER"
+            ]
+          }
+        ],
+        "output": {
+          "issue": "Field Notes No. 7",
+          "proof_under_review": {
+            "key": "fn7-proof-v5",
+            "pages": 52
+          },
+          "approval_request_draft": "Anika, please confirm whether the complete 52-page v5 proof is approved, including the added index and corrected cover folio. The existing approval covers only v4 text. We will keep the release pack blocked until exact full-proof approval is recorded.",
+          "unresolved": [
+            "Full v5 approval",
+            "Corrected supplier specification"
+          ],
+          "release_ready": false
+        },
+        "review_required": [
+          "Ask for exact v5 full-proof approval",
+          "Keep pack blocked",
+          "Do not reuse LF-A4 as full approval"
+        ],
+        "expected_after_local_approval": {
+          "status": "awaiting-editor-approval",
+          "local_effects": [
+            "Save approval request",
+            "Save blocked manifest",
+            "Keep release blocked"
+          ],
+          "audit_events": [
+            "Scenario selection recorded",
+            "Draft prepared from cited records",
+            "Employee approved local save"
+          ],
+          "external_action_performed": false
+        }
+      }
+    }
+  },
+  "copper-finch": {
+    "slug": "copper-finch",
+    "name": "Copper Finch Supply",
+    "employee": "Dev Ellis",
+    "assistant": "Loam",
+    "role": "Stock coordination",
+    "context": [
+      "Dev checks counts, protects existing reservations, prepares allocations by promised dispatch deadline, flags shortages and hands reviewed pick plans to warehouse staff. Daily checkpoints: 09:00 count discrepancies, 10:30 allocation review, 13:00 warehouse handoff and 15:30 courier cutoff. Weekly, Dev reviews recurring discrepancies and unconfirmed inbound records.",
+      "Conceptual tools: stock ledger, cycle-count register, order queue, supplier ETA board and allocation journal. Loam may reconcile quantities, explain policy constraints and prepare a source-linked plan. It cannot invent inbound stock, release existing reservations, approve customer substitutions, change orders or issue real pick instructions. Local approval changes only the synthetic ledger/journal.",
+      "Relationships: warehouse lead Sam Alder verifies counts; sales coordinator Iris Bell owns customer-consent questions; operations lead Theo Marsh owns allocation exceptions; Dev reviews plans; fictional supplier Mossbank Paper sends inbound estimates. Customers are anonymous synthetic order labels A/B/C, with no personal details."
+    ],
+    "workload": [
+      [
+        "GN-A5 discrepancy",
+        "Ledger 36 vs preliminary shelf note 32",
+        "Sam's signed count missing; Dev allocation review 10:30"
+      ],
+      [
+        "Orders CF-204/205/206",
+        "Waiting for verified GN-A5 availability",
+        "Deadline order shown below"
+      ],
+      [
+        "Envelopes EV-C6",
+        "Count agreed; routine plan prepared",
+        "Warehouse handoff 13:00"
+      ],
+      [
+        "Inbound carton IB-61",
+        "ETA unconfirmed",
+        "Iris supplier follow-up 11:00"
+      ],
+      [
+        "Damaged-stock batch",
+        "Quarantined; no saleable quantity",
+        "Theo review 14:00"
+      ]
+    ],
+    "records": [
+      {
+        "id": "CF-LEDGER",
+        "title": "Stock ledger, Dev, 14 Oct 08:30.",
+        "full": "GN-A5 book quantity: 36. Locked existing reservations: 10, from already-reviewed orders outside this episode. Book quantity is disputed and cannot be treated as verified physical stock. Existing reservations must not be reused.",
+        "branch": ""
+      },
+      {
+        "id": "CF-SHELF",
+        "title": "Preliminary note, warehouse, 14 Oct 08:45.",
+        "full": "“Shelf appears to hold 32; recount needed.” Unsigned estimate, not a verified cycle count. No assistant may silently pick 32 or 36.",
+        "branch": ""
+      },
+      {
+        "id": "CF-O204",
+        "title": "Order A.",
+        "full": "14 GN-A5 units. Dispatch deadline 15 Oct 10:00. Partial shipment not permitted. Order open, no allocation yet.",
+        "branch": ""
+      },
+      {
+        "id": "CF-O205",
+        "title": "Order B.",
+        "full": "9 units. Dispatch deadline 15 Oct 14:00. Partial shipment not permitted. Order open, no allocation yet. Iris owns any request to change that constraint; no such consent exists in this exercise.",
+        "branch": ""
+      },
+      {
+        "id": "CF-O206",
+        "title": "Order C.",
+        "full": "7 units. Dispatch deadline 16 Oct 11:00. Partial shipment explicitly permitted by the synthetic order record. Order open, no allocation yet.",
+        "branch": ""
+      },
+      {
+        "id": "CF-INBOUND",
+        "title": "Inbound board, Iris, 14 Oct 08:50.",
+        "full": "IB-61 contains 24 GN-A5 units; supplier has suggested 16 Oct 09:00 but has not confirmed it. None are received. Exclude all 24 from allocatable stock. The possible arrival also falls after the first two dispatch deadlines.",
+        "branch": ""
+      },
+      {
+        "id": "CF-POL",
+        "title": "Allocation policy, Theo, version 5.",
+        "full": "Use a signed physical count. Subtract the 10 locked existing reservations first. Review new orders in deadline order. Fully allocate whole-only orders or block them; do not make unauthorized partials. If stock cannot fill the next whole-only order, earmark the remaining stock for it pending review and stop; do not skip it to satisfy a later order. Partial allocation is allowed only when the order explicitly permits it. Never count an ETA as stock or promise arrival.",
+        "branch": ""
+      },
+      {
+        "id": "CF-HANDOFF",
+        "title": "Warehouse handoff schema, Sam, version 2.",
+        "full": "Required fields: verified count ID, physical total, locked prior reservations, new allocations by order, earmarked units, free units, remaining demand, excluded inbound amount, exceptions and reviewer. Earmarked stock is not a pick instruction and not a fulfilled order.",
+        "branch": ""
+      },
+      {
+        "id": "CF-COUNT36",
+        "title": "Synthetic scenario update A, Sam, 14 Oct 09:05.",
+        "full": "Signed cycle count: 36 saleable units; locked existing reservations remain 10. This record becomes available only when the visitor applies scenario A.",
+        "branch": "count36"
+      },
+      {
+        "id": "CF-COUNT32",
+        "title": "Synthetic scenario update B, Sam, 14 Oct 09:05.",
+        "full": "Signed cycle count: 32 saleable units; locked existing reservations remain 10. This record becomes available only when scenario B is selected.",
+        "branch": "count32"
+      }
+    ],
+    "cases": {
+      "count36": {
+        "case_id": "copper-count36",
+        "classification": "Illustrative demo — fictional company and employee; local simulation only.",
+        "fixture_only": true,
+        "artifact_type": "Quantity-reconciled allocation journal",
+        "state_before_review": "draft",
+        "approved": false,
+        "outbound_action": false,
+        "claims": [
+          {
+            "text": "The applied signed count is 36; prior locked reservations remain 10.",
+            "source_ids": [
+              "CF-COUNT36",
+              "CF-LEDGER"
+            ]
+          },
+          {
+            "text": "Deadline order is CF-O204, CF-O205, then CF-O206.",
+            "source_ids": [
+              "CF-O204",
+              "CF-O205",
+              "CF-O206"
+            ]
+          },
+          {
+            "text": "CF-O204 and CF-O205 prohibit partials; CF-O206 permits them.",
+            "source_ids": [
+              "CF-O204",
+              "CF-O205",
+              "CF-O206"
+            ]
+          },
+          {
+            "text": "The 24 unconfirmed inbound units are excluded from availability.",
+            "source_ids": [
+              "CF-INBOUND",
+              "CF-POL"
+            ]
+          }
+        ],
+        "output": {
+          "sku": "GN-A5",
+          "verified_count_source": "CF-COUNT36",
+          "physical": 36,
+          "prior_reserved": 10,
+          "new_available": 26,
+          "allocations": {
+            "CF-O204": 14,
+            "CF-O205": 9,
+            "CF-O206": 3
+          },
+          "new_allocated": 26,
+          "earmarked": 0,
+          "earmarked_for": null,
+          "free": 0,
+          "remaining_order_demand": 4,
+          "additional_supply_needed": 4,
+          "excluded_inbound": 24,
+          "equations": {
+            "physical": "36 = 10 + 26 + 0 + 0",
+            "new_available": "26 = 26 + 0 + 0"
+          },
+          "exceptions": [
+            "CF-O206 has four units unallocated; arrival is unconfirmed."
+          ],
+          "handoff": "Dev reviews the plan; Sam receives only the reviewed local allocation record. Earmarked units are not a pick instruction."
+        },
+        "review_required": [
+          "Signed count applied",
+          "Locked ten protected",
+          "Whole/partial constraints respected",
+          "Inbound excluded",
+          "Allocated/earmarked/free quantities reconcile",
+          "Outstanding demand shown separately"
+        ],
+        "expected_after_local_approval": {
+          "status": "reviewed-allocation-with-balance",
+          "local_effects": [
+            "Save allocation journal",
+            "Save exception handoff",
+            "Update synthetic allocations only; no order marked shipped"
+          ],
+          "audit_events": [
+            "Scenario selection recorded",
+            "Draft prepared from cited records",
+            "Employee approved local save"
+          ],
+          "external_action_performed": false
+        }
+      },
+      "count32": {
+        "case_id": "copper-count32",
+        "classification": "Illustrative demo — fictional company and employee; local simulation only.",
+        "fixture_only": true,
+        "artifact_type": "Quantity-reconciled allocation journal",
+        "state_before_review": "draft",
+        "approved": false,
+        "outbound_action": false,
+        "claims": [
+          {
+            "text": "The applied signed count is 32; prior locked reservations remain 10.",
+            "source_ids": [
+              "CF-COUNT32",
+              "CF-LEDGER"
+            ]
+          },
+          {
+            "text": "Deadline order is CF-O204, CF-O205, then CF-O206.",
+            "source_ids": [
+              "CF-O204",
+              "CF-O205",
+              "CF-O206"
+            ]
+          },
+          {
+            "text": "CF-O204 and CF-O205 prohibit partials; CF-O206 permits them.",
+            "source_ids": [
+              "CF-O204",
+              "CF-O205",
+              "CF-O206"
+            ]
+          },
+          {
+            "text": "The 24 unconfirmed inbound units are excluded from availability.",
+            "source_ids": [
+              "CF-INBOUND",
+              "CF-POL"
+            ]
+          },
+          {
+            "text": "After allocating 14, the remaining eight cannot fill the whole-only nine-unit order; earmark eight and stop.",
+            "source_ids": [
+              "CF-POL",
+              "CF-O205",
+              "CF-COUNT32"
+            ]
+          }
+        ],
+        "output": {
+          "sku": "GN-A5",
+          "verified_count_source": "CF-COUNT32",
+          "physical": 32,
+          "prior_reserved": 10,
+          "new_available": 22,
+          "allocations": {
+            "CF-O204": 14,
+            "CF-O205": 0,
+            "CF-O206": 0
+          },
+          "new_allocated": 14,
+          "earmarked": 8,
+          "earmarked_for": "CF-O205",
+          "free": 0,
+          "remaining_order_demand": 16,
+          "additional_supply_needed": 8,
+          "excluded_inbound": 24,
+          "equations": {
+            "physical": "32 = 10 + 14 + 8 + 0",
+            "new_available": "22 = 14 + 8 + 0"
+          },
+          "exceptions": [
+            "CF-O205 has zero allocated and eight earmarked. One more unit is needed before its whole order can be allocated.",
+            "CF-O206 has zero allocated; do not skip the blocked higher-priority order.",
+            "Remaining order demand is 16, but eight is earmarked, so additional supply needed is eight."
+          ],
+          "handoff": "Dev reviews the plan; Sam receives only the reviewed local allocation record. Earmarked units are not a pick instruction."
+        },
+        "review_required": [
+          "Signed count applied",
+          "Locked ten protected",
+          "Whole/partial constraints respected",
+          "Inbound excluded",
+          "Allocated/earmarked/free quantities reconcile",
+          "Outstanding demand shown separately"
+        ],
+        "expected_after_local_approval": {
+          "status": "reviewed-partial-plan-with-exception",
+          "local_effects": [
+            "Save allocation journal",
+            "Save exception handoff",
+            "Update synthetic allocations only; no order marked shipped"
+          ],
+          "audit_events": [
+            "Scenario selection recorded",
+            "Draft prepared from cited records",
+            "Employee approved local save"
+          ],
+          "external_action_performed": false
+        }
+      },
+      "none": {
+        "case_id": "copper-unknown",
+        "classification": "Illustrative demo — fictional company and employee; local simulation only.",
+        "fixture_only": true,
+        "artifact_type": "Cycle-count request and blocked allocation note",
+        "state_before_review": "draft",
+        "approved": false,
+        "outbound_action": false,
+        "claims": [
+          {
+            "text": "Book quantity 36 disagrees with an unsigned shelf estimate of 32.",
+            "source_ids": [
+              "CF-LEDGER",
+              "CF-SHELF"
+            ]
+          },
+          {
+            "text": "A signed count is required before new availability can be used.",
+            "source_ids": [
+              "CF-POL"
+            ]
+          },
+          {
+            "text": "Existing locked reservations total ten; new order demand totals 30.",
+            "source_ids": [
+              "CF-LEDGER",
+              "CF-O204",
+              "CF-O205",
+              "CF-O206"
+            ]
+          },
+          {
+            "text": "The 24 inbound units are unconfirmed and unavailable.",
+            "source_ids": [
+              "CF-INBOUND"
+            ]
+          }
+        ],
+        "output": {
+          "sku": "GN-A5",
+          "physical": null,
+          "new_available": null,
+          "allocations": null,
+          "prior_reserved": 10,
+          "new_order_demand": 30,
+          "excluded_inbound": 24,
+          "count_request_draft": "Sam, please provide a signed saleable count for GN-A5. The ledger shows 36 and the preliminary shelf note 32. Existing reservations of ten must remain protected. New allocations are blocked until the discrepancy is resolved.",
+          "next_owner": "Sam Alder",
+          "allocation_approval_enabled": false
+        },
+        "review_required": [
+          "No default count chosen",
+          "No allocation from disputed values",
+          "Clarification save does not approve an inventory action"
+        ],
+        "expected_after_local_approval": {
+          "status": "awaiting-signed-count",
+          "local_effects": [
+            "Save count-request draft",
+            "Save blocked allocation note",
+            "Keep allocation approval disabled"
+          ],
+          "audit_events": [
+            "Scenario selection recorded",
+            "Draft prepared from cited records",
+            "Employee approved local save"
+          ],
+          "external_action_performed": false
+        }
+      }
+    }
+  }
+}

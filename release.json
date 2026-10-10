@@ -1,0 +1,32 @@
+{
+  "candidate": "approved fullscreen v8",
+  "canonical": "https://cayleb-james2008.github.io/agentic-resume/",
+  "previousPublicCommit": "476bb5623ef8b438028031faf86c55ff4520c090",
+  "assets": {
+    "index.html": "214edd33a7f2f652d9e96ee924f668e227b86c2f5ac2e24abe819e9bc3ff6821",
+    "remake/site.css": "ada50f01f1abfb9f95f57215bb1fa8b6fa1fd81d2c34eff7e381d55ec8cae8cf",
+    "remake/site.js": "34031b568f4a847f1d4b8d67045904086ff660a1c8a8fa5f94f0a3b1bf2646c0",
+    "remake/state.js": "d39e5ea1803f7976b95557ba6b7f12ee938210284a3747d5def773f104bc9e1d",
+    "remake/aether.css": "9417f30d79d5b58e780382c8559bb035ae0bcb410a2db025a08c3170f685d7f4",
+    "remake/vendor/guide-glass.js": "260eec5368e0e812113d808748d836d7c917aa7b7e85d2de780bad96cb54579d",
+    "remake/vendor/lenis.mjs": "b7a2f6896b9ce086d8192ff17c91aad457447976764971fe5011c42169602e9e",
+    "Cayleb-James-one-page-resume.pdf": "06c881ed0bdacff3255cd843c98000c02f5ac354c90f8989d362b5fa3419913e",
+    "Cayleb-James-resume.pdf": "3f8cdc99e31604b8a2230b44fdf60590d07901df5b8e460dd1ff3be5437fba44"
+  },
+  "verification": {
+    "nodeTests": 11,
+    "stateAndReceiptCases": 83,
+    "timingBoundaries": 256,
+    "approvedPngFrames": 114,
+    "pdfPages": [
+      1,
+      2
+    ],
+    "reproducibleBuild": true,
+    "visualSourceUnchanged": true
+  },
+  "limits": [
+    "Actual 200% browser zoom and physical-device testing were not repeated for this publication.",
+    "Employment is self-reported; no new factual verification or production deployment claims for portfolio projects."
+  ]
+}

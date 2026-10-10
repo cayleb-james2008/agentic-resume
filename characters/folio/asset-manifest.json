@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "character": {
+    "slug": "folio-custom-glass",
+    "displayName": "Folio",
+    "roleContext": "Mina Solis, editorial production at fictional Larkspur Field Guides: proof versions, approval scope and print specs.",
+    "shape": "folded four-corner cushion"
+  },
+  "canvas": {
+    "frameWidth": 256,
+    "frameHeight": 320,
+    "format": "png",
+    "alpha": true
+  },
+  "states": {
+    "idle": {
+      "meaning": "calm attentive rest and blink",
+      "playback": "loop",
+      "reducedMotionFrame": "frames/idle/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/idle/frame-000.png",
+          "durationMs": 1800,
+          "sha256": "8c9daec877028ae0d2d61e219411e47327d940edbc4149a4fb671996397819fc"
+        },
+        {
+          "file": "frames/idle/frame-001.png",
+          "durationMs": 100,
+          "sha256": "f141b9e426545d92c135b6e5f3febb6d04afb7b5a4e51ccc2a086ee6c3671df3"
+        },
+        {
+          "file": "frames/idle/frame-002.png",
+          "durationMs": 100,
+          "sha256": "e330c6535e5bbd1fa057fd18053706d2a6a6709a218060a86f6908c879727111"
+        },
+        {
+          "file": "frames/idle/frame-003.png",
+          "durationMs": 1400,
+          "sha256": "b76ba1830115da21d6b6782598a594a1961d1234eaf8d95b2226f2f8136839f5"
+        }
+      ]
+    },
+    "greeting": {
+      "meaning": "polite greeting initiated by the experience",
+      "playback": "once",
+      "reducedMotionFrame": "frames/greeting/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/greeting/frame-000.png",
+          "durationMs": 500,
+          "sha256": "45cf1d8e7751707ea05551ef854dad5534b53148b2348895bbf08c08da71c3e1"
+        },
+        {
+          "file": "frames/greeting/frame-001.png",
+          "durationMs": 240,
+          "sha256": "4cbbd1ca1ddec0d04978d4a25d7f6142d0838a74dbb026c39ae3fd3b5241367a"
+        },
+        {
+          "file": "frames/greeting/frame-002.png",
+          "durationMs": 400,
+          "sha256": "4797b4f5fc52397f575a9f8e90f571f29446cac0749f22f42d823a0373ca1558"
+        },
+        {
+          "file": "frames/greeting/frame-003.png",
+          "durationMs": 800,
+          "sha256": "a400d04d99f64513099af5b0cd0a6b95b840196f2a12215fdc05f92977b3888d"
+        }
+      ]
+    },
+    "working": {
+      "meaning": "actual task processing in progress",
+      "playback": "loop",
+      "reducedMotionFrame": "frames/working/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/working/frame-000.png",
+          "durationMs": 700,
+          "sha256": "31bd9f65b3f002c319aa7cdc942cb14f854b1e9093eca039359840ed3d69b311"
+        },
+        {
+          "file": "frames/working/frame-001.png",
+          "durationMs": 350,
+          "sha256": "27d6553f6648f49634cc147a83a45dfced3a0552526ef308e02ed89f8b9fff57"
+        },
+        {
+          "file": "frames/working/frame-002.png",
+          "durationMs": 350,
+          "sha256": "15893518f09f523a0e24759e58421fd64412612ea5e3387f94fe1a56c4c6a580"
+        },
+        {
+          "file": "frames/working/frame-003.png",
+          "durationMs": 800,
+          "sha256": "97c8ba81f0ac803497fc890b01fc2bcfc3db2e893cc55e4ad484a97e942fea82"
+        }
+      ]
+    },
+    "waiting": {
+      "meaning": "actual input or approval needed",
+      "playback": "once-hold",
+      "reducedMotionFrame": "frames/waiting/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/waiting/frame-000.png",
+          "durationMs": 600,
+          "sha256": "c929cb52a5166c3d04163c76aa5afcfe4eff0867f2ed543082300a0fc5cb3a17"
+        },
+        {
+          "file": "frames/waiting/frame-001.png",
+          "durationMs": 350,
+          "sha256": "a9bc0584e6ba37f916b997a6dcced498f46c5c826cf33249ae25453659ace852"
+        },
+        {
+          "file": "frames/waiting/frame-002.png",
+          "durationMs": 1000,
+          "sha256": "5da39440f9d8693fcd20efeaf510565f2e27506ef93f94a2f2b76757e065323d"
+        },
+        {
+          "file": "frames/waiting/frame-003.png",
+          "durationMs": 700,
+          "sha256": "0d8688bbf9f55940655cbfec76a284e42c8cd44ed600bf6ca226a65ffd4ed218"
+        }
+      ]
+    },
+    "review": {
+      "meaning": "inspection of actual output",
+      "playback": "once-hold",
+      "reducedMotionFrame": "frames/review/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/review/frame-000.png",
+          "durationMs": 450,
+          "sha256": "21709da85f3092226aab8a3ac100259ad76dacee39e413059dca6dddc5515c43"
+        },
+        {
+          "file": "frames/review/frame-001.png",
+          "durationMs": 300,
+          "sha256": "ffce61ad1b79eae3a87ce060c4153aaf75858411c926ba5a2f5679be234c3767"
+        },
+        {
+          "file": "frames/review/frame-002.png",
+          "durationMs": 450,
+          "sha256": "243a53afb6b53baf5ca68c03c4d8fb2e8649bd78270a9e77e8b422cf4cef57ac"
+        },
+        {
+          "file": "frames/review/frame-003.png",
+          "durationMs": 700,
+          "sha256": "939fe1b375aea7553b6c6e3fc9104cf2b6543416c36db0f0bbec0f615455ed9c"
+        }
+      ]
+    },
+    "error": {
+      "meaning": "confirmed blocked or failed operation",
+      "playback": "once-hold",
+      "reducedMotionFrame": "frames/error/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/error/frame-000.png",
+          "durationMs": 450,
+          "sha256": "32bc34ccaa6fee6d434cde83cf7c52ee9668dbfbb0aa40be20face90b50a0d16"
+        },
+        {
+          "file": "frames/error/frame-001.png",
+          "durationMs": 300,
+          "sha256": "a82c5675c5fe1ab12837128e6a2a0a6ded5303e347966c05c5828988bf224ee4"
+        },
+        {
+          "file": "frames/error/frame-002.png",
+          "durationMs": 400,
+          "sha256": "2c04077e52dd1f5a80167db93ee2cea841014a8d8aacc4122cae4afdbbe616d3"
+        },
+        {
+          "file": "frames/error/frame-003.png",
+          "durationMs": 1000,
+          "sha256": "b441febfe7b5e13797ae15c74d1ea571f8fe51e871622e8ebbebf5146def3248"
+        }
+      ]
+    },
+    "complete": {
+      "meaning": "confirmed successful completion",
+      "playback": "once",
+      "reducedMotionFrame": "frames/complete/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/complete/frame-000.png",
+          "durationMs": 450,
+          "sha256": "99f442336ec3291cc25d07b24f9c52dbb003271262d1d9833b8e3ec962a8f7fc"
+        },
+        {
+          "file": "frames/complete/frame-001.png",
+          "durationMs": 300,
+          "sha256": "b66991484e3e7860ea13a32fc589a679926f6e35e5d1e33788d7b85900b68392"
+        },
+        {
+          "file": "frames/complete/frame-002.png",
+          "durationMs": 350,
+          "sha256": "1377996e91c5ff3be9485ef6f02de70230ca458ff52d101944ebb5fa1dbaef66"
+        },
+        {
+          "file": "frames/complete/frame-003.png",
+          "durationMs": 900,
+          "sha256": "eadd562d9cd8118d36d5021ded1722c543f4c4f71017e272f5ec4b12b500b9bc"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "canonicalReference": "canonical.png",
+    "generator": "ImageGen",
+    "createdAt": "2026-10-09",
+    "transformations": [
+      {
+        "operation": "connected-alpha extraction; remove low-alpha background bridges; shared row scale and baseline",
+        "tool": "Pillow + scipy.ndimage",
+        "report": "qa/extraction-review.json"
+      }
+    ]
+  },
+  "status": "Seven-state portable artwork pack; actual browser playback acceptance remains pending.",
+  "qa": {
+    "motionReview": "qa/motion-review.md",
+    "checksPerformed": [
+      "Exact source pose count",
+      "Connected-alpha extraction and shared state transform",
+      "All referenced PNGs opened with transparent alpha, dimensions, positive durations and SHA-256 verified",
+      "Ordered state contact review and canonical tiny-size Mocha check"
+    ],
+    "remainingIssues": [
+      "Discrete 2D generated keyframes; not 3D or continuous simulation",
+      "Subtle gestures require accessible application status text",
+      "Actual browser playback review at integration size still required"
+    ]
+  },
+  "optionalMaterialsNotIncluded": {
+    "description": "Review previews and raw source materials are retained in the full production packs, but omitted from this compact runtime download. They are not runtime dependencies.",
+    "paths": [
+      "source/brief.md",
+      "previews/contact-sheet.png",
+      {
+        "gif": "previews/idle.gif",
+        "mp4": "previews/idle.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/greeting.gif",
+        "mp4": "previews/greeting.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/working.gif",
+        "mp4": "previews/working.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/waiting.gif",
+        "mp4": "previews/waiting.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/review.gif",
+        "mp4": "previews/review.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/error.gif",
+        "mp4": "previews/error.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/complete.gif",
+        "mp4": "previews/complete.mp4",
+        "background": "#1e1e2e"
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "scope": "Reviewed r\u00e9sum\u00e9 artifact checks, not project release acceptance. Work history and education are user-supplied; no employer verification is claimed. Full local rendering receipts are retained by the operator; private filesystem paths are omitted here.",
+  "scope": "Historical verification at commit 476bb5623ef8b438028031faf86c55ff4520c090. Artifact hashes and checks below apply to that version, not the current root PDFs. Work history is self-reported.",
   "resume": "../Cayleb-James-resume.pdf",
   "structured_source": "resume-content.json",
   "web_fragment": "resume-fragment.html",
@@ -82,5 +82,7 @@
     "resume/resume-content.json": "0cfee98920e16a10b9d930bc66c8e823c63be48ab75a543b370e9028e73f4fd3",
     "resume/resume-fragment.html": "c9f004aebb67e9edefcebee36aa48133a7ac1bcfe45536bcf820bf58acf12363",
     "resume/resume.md": "8b88a77e4eac115800d91a692daca51b3046b974bee15c25d3dd2092c96ad068"
-  }
+  },
+  "verified_commit": "476bb5623ef8b438028031faf86c55ff4520c090",
+  "superseded_by": "approved-verification.json"
 }

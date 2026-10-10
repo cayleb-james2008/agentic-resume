@@ -1,0 +1,426 @@
+{
+  "ok": true,
+  "checked_frames": 30,
+  "frames": [
+    {
+      "file": "frames/idle/frame-000.png",
+      "bounds": [
+        40,
+        43,
+        215,
+        298
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/idle/frame-001.png",
+      "bounds": [
+        40,
+        42,
+        215,
+        298
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/idle/frame-002.png",
+      "bounds": [
+        40,
+        44,
+        216,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/idle/frame-003.png",
+      "bounds": [
+        41,
+        43,
+        215,
+        299
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/idle/frame-004.png",
+      "bounds": [
+        41,
+        44,
+        214,
+        299
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/idle/frame-005.png",
+      "bounds": [
+        41,
+        42,
+        214,
+        298
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/greeting/frame-000.png",
+      "bounds": [
+        36,
+        44,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/greeting/frame-001.png",
+      "bounds": [
+        36,
+        54,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/greeting/frame-002.png",
+      "bounds": [
+        35,
+        71,
+        220,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/greeting/frame-003.png",
+      "bounds": [
+        37,
+        44,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/working/frame-000.png",
+      "bounds": [
+        41,
+        44,
+        215,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/working/frame-001.png",
+      "bounds": [
+        41,
+        44,
+        215,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/working/frame-002.png",
+      "bounds": [
+        41,
+        44,
+        215,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/working/frame-003.png",
+      "bounds": [
+        41,
+        44,
+        215,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/waiting/frame-000.png",
+      "bounds": [
+        36,
+        44,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/waiting/frame-001.png",
+      "bounds": [
+        36,
+        44,
+        220,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/waiting/frame-002.png",
+      "bounds": [
+        34,
+        47,
+        222,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/waiting/frame-003.png",
+      "bounds": [
+        36,
+        47,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/review/frame-000.png",
+      "bounds": [
+        37,
+        44,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/review/frame-001.png",
+      "bounds": [
+        36,
+        45,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/review/frame-002.png",
+      "bounds": [
+        37,
+        57,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/review/frame-003.png",
+      "bounds": [
+        37,
+        58,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/error/frame-000.png",
+      "bounds": [
+        37,
+        44,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/error/frame-001.png",
+      "bounds": [
+        38,
+        45,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/error/frame-002.png",
+      "bounds": [
+        37,
+        55,
+        219,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/error/frame-003.png",
+      "bounds": [
+        37,
+        55,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/complete/frame-000.png",
+      "bounds": [
+        38,
+        44,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/complete/frame-001.png",
+      "bounds": [
+        37,
+        61,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/complete/frame-002.png",
+      "bounds": [
+        38,
+        44,
+        217,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    },
+    {
+      "file": "frames/complete/frame-003.png",
+      "bounds": [
+        38,
+        44,
+        218,
+        300
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "alpha": true
+    }
+  ]
+}

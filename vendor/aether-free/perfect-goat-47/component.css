@@ -1,0 +1,119 @@
+.aether-checkset {
+  --aether-ink: #f2f1ee;
+  --aether-void: #06070a;
+  --aether-stratum: #0e1014;
+  --aether-vapor: #8a8e97;
+  --aether-hairline: #1f232b;
+  --aether-hairline-strong: #2a2f38;
+  --aether-magenta: #ff4fa3;
+  --aether-grad: linear-gradient(90deg, #4ed8ff 0%, #ff4fa3 52%, #ff8a2a 100%);
+  --aether-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 320px;
+  max-width: 100%;
+  padding: 22px 24px;
+  margin: 0;
+  background: var(--aether-stratum);
+  border: 1px solid var(--aether-hairline);
+  border-radius: 6px;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--aether-ink);
+}
+.aether-checkset__legend {
+  padding: 0 8px;
+  margin-left: -8px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aether-vapor);
+}
+.aether-check {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.aether-check__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.aether-check__box {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--aether-hairline-strong);
+  border-radius: 3px;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 120ms var(--aether-ease);
+  flex-shrink: 0;
+}
+.aether-check__box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--aether-grad);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 160ms var(--aether-ease),
+    transform 160ms var(--aether-ease);
+}
+.aether-check__mark {
+  position: relative;
+  z-index: 1;
+  color: var(--aether-void);
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 160ms var(--aether-ease) 60ms,
+    transform 160ms var(--aether-ease) 60ms;
+  stroke-width: 3;
+}
+.aether-check__input:checked + .aether-check__box {
+  border-color: transparent;
+}
+.aether-check__input:checked + .aether-check__box::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.aether-check__input:checked + .aether-check__box .aether-check__mark {
+  opacity: 1;
+  transform: scale(1);
+}
+.aether-check__input:focus-visible + .aether-check__box {
+  box-shadow:
+    0 0 0 2px var(--aether-void),
+    0 0 0 3px var(--aether-magenta);
+}
+.aether-check:hover .aether-check__box {
+  border-color: var(--aether-ink);
+}
+.aether-check__label {
+  font-size: 14px;
+  color: var(--aether-ink);
+}
+.aether-check__meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--aether-vapor);
+  font-variant-numeric: tabular-nums;
+}

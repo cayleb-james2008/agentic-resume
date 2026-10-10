@@ -1,0 +1,29 @@
+{
+  "slug": "perfect-goat-47",
+  "title": "Prism-Fill Checkbox Stack",
+  "source_url": "https://uiverse.io/uiverse-astronaut/perfect-goat-47",
+  "collection_url": "https://uiverse.io/ui-kits/aether",
+  "author_username": "uiverse-astronaut",
+  "author_display_name": "Astronaut",
+  "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+  "license": "MIT",
+  "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+  "captured_at": "2026-10-09T09:39:32.421Z",
+  "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+  "status": "acquired",
+  "files": {
+    "component.html": {
+      "bytes": 2040,
+      "sha256": "bbc70b8de3272f45797428338d539fdd2063fdbaaf050cee8ff48ba5d2b19a9a"
+    },
+    "component.css": {
+      "bytes": 2872,
+      "sha256": "49f95e079a2b6fe3071a57395801ec2dde92fedcc297905d11825130536cafeb"
+    },
+    "LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+    }
+  },
+  "page_description_and_attribution": "Prism-Fill Checkbox Stack\n\nDark checkbox set on a hairline editorial card. Boxes fill with a chromatic cyan to magenta to amber gradient when checked. Includes monospace metadata counts.\n\ngradient\nform\ncheckbox\ndark\neditorial\nJun 6, 2026\nReport\nuiverse-astronaut\n\nAstronaut\n\n✨ Just floating around"
+}

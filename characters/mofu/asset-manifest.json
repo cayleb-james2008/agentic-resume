@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 1,
+  "character": {
+    "slug": "mofu-approved-glass-droplet",
+    "displayName": "Mofu"
+  },
+  "canvas": {
+    "frameWidth": 256,
+    "frameHeight": 320,
+    "format": "png",
+    "alpha": true
+  },
+  "states": {
+    "idle": {
+      "meaning": "calm attentive rest and blink",
+      "playback": "loop",
+      "reducedMotionFrame": "frames/idle/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/idle/frame-000.png",
+          "durationMs": 1500,
+          "sha256": "8cc44d0a43e8c0e94ad6f9e42eb6620a87428004722581bd540d7fc0180ae3d1"
+        },
+        {
+          "file": "frames/idle/frame-001.png",
+          "durationMs": 220,
+          "sha256": "d06aa95291c35434cc55e829891d496e3919a67b9ac7ef58aa147672d7338a7a"
+        },
+        {
+          "file": "frames/idle/frame-002.png",
+          "durationMs": 100,
+          "sha256": "2cbcce363018ff1901cc9c0dd343ec68552d73e5d8e623cb725e9443a74e9afd"
+        },
+        {
+          "file": "frames/idle/frame-003.png",
+          "durationMs": 450,
+          "sha256": "1dfe45ae43827b3241b9b66f8b13c6f538c451c59c47f5af55b726144274c0b8"
+        },
+        {
+          "file": "frames/idle/frame-004.png",
+          "durationMs": 240,
+          "sha256": "0c9f00b4974ef6f25e6dd13065d17f091095728e7481af7199173e11242e42f7"
+        },
+        {
+          "file": "frames/idle/frame-005.png",
+          "durationMs": 1000,
+          "sha256": "e9f4ef480d42b5e3938655ec84a4ff7ff19001ff5423ca4364e4e690555f220b"
+        }
+      ]
+    },
+    "greeting": {
+      "meaning": "polite greeting initiated by the experience",
+      "playback": "once",
+      "reducedMotionFrame": "frames/greeting/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/greeting/frame-000.png",
+          "durationMs": 500,
+          "sha256": "4c65eaab99980ac7c66ac26bb1b8aa92fe3dbf6c18f800f0870e9260115c9b40"
+        },
+        {
+          "file": "frames/greeting/frame-001.png",
+          "durationMs": 240,
+          "sha256": "2c93e080362ddd3d9662ecb5e51a5362c9ae01366ec79c41a646912581164dac"
+        },
+        {
+          "file": "frames/greeting/frame-002.png",
+          "durationMs": 400,
+          "sha256": "0790d386520271f8fddb4fd5dedd46bcf53dc46a200282b30c89978ef252e780"
+        },
+        {
+          "file": "frames/greeting/frame-003.png",
+          "durationMs": 800,
+          "sha256": "eb54fe3202acccfa99b5b221f77a0dc1f7a28edceaa68718adff4c65d9b019b0"
+        }
+      ]
+    },
+    "working": {
+      "meaning": "actual task processing in progress",
+      "playback": "loop",
+      "reducedMotionFrame": "frames/working/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/working/frame-000.png",
+          "durationMs": 700,
+          "sha256": "80dea8fb3f5e7fdf174488d6b83eafb4371abb4b1fbb082292d20e4709201c14"
+        },
+        {
+          "file": "frames/working/frame-001.png",
+          "durationMs": 350,
+          "sha256": "0b4255fa2a968de60466666c52fbd1a061b373c2d218dccbdc07dc9f2a6640cc"
+        },
+        {
+          "file": "frames/working/frame-002.png",
+          "durationMs": 350,
+          "sha256": "d42027c85341b8bbdcef4bbaacdf018f90c4757058e9f29fc6191e83d179fce5"
+        },
+        {
+          "file": "frames/working/frame-003.png",
+          "durationMs": 800,
+          "sha256": "f319a8f290020c0a41c57cf24aec06d1f8785b9b39fa09ff84cf23e74d98f24c"
+        }
+      ]
+    },
+    "waiting": {
+      "meaning": "actual input or approval needed",
+      "playback": "once-hold",
+      "reducedMotionFrame": "frames/waiting/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/waiting/frame-000.png",
+          "durationMs": 600,
+          "sha256": "ee75298f8f63222092f18723cef90af036b39679420f3fa8106af6973f22423f"
+        },
+        {
+          "file": "frames/waiting/frame-001.png",
+          "durationMs": 350,
+          "sha256": "76d6882c0c8f7e32587e11b1ddd308066ac6dea45f4ea8f1f2b993760bf37c27"
+        },
+        {
+          "file": "frames/waiting/frame-002.png",
+          "durationMs": 1000,
+          "sha256": "4ca696e3c32463c36562415443e255c2caffdd51bf344fd9e83b0bd9b62c4313"
+        },
+        {
+          "file": "frames/waiting/frame-003.png",
+          "durationMs": 700,
+          "sha256": "02a856ace6d18a1f1ca10f20b1ad7efcfe64f479bd998133668c07f6859309c5"
+        }
+      ]
+    },
+    "review": {
+      "meaning": "inspection of actual output",
+      "playback": "once-hold",
+      "reducedMotionFrame": "frames/review/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/review/frame-000.png",
+          "durationMs": 450,
+          "sha256": "8759528f03fd607e051e578ee0213d36093a2e1566a9018b56c6a3a706a00ae4"
+        },
+        {
+          "file": "frames/review/frame-001.png",
+          "durationMs": 300,
+          "sha256": "c9ee0b437f5ff20971f752b88847d3e1d167c9434537d46c85ec7e029dc84961"
+        },
+        {
+          "file": "frames/review/frame-002.png",
+          "durationMs": 450,
+          "sha256": "f377da7d62364b9e0e5b98f41ceb08deec5f6d859a81245485be00bafb2b283b"
+        },
+        {
+          "file": "frames/review/frame-003.png",
+          "durationMs": 700,
+          "sha256": "43252c6e2eb1efeb7da353c9d62ae8adf3d233672232f49e43b7fc54e7d37615"
+        }
+      ]
+    },
+    "error": {
+      "meaning": "confirmed blocked or failed operation",
+      "playback": "once-hold",
+      "reducedMotionFrame": "frames/error/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/error/frame-000.png",
+          "durationMs": 450,
+          "sha256": "d6a9215aa5fbfe199a225a355fe54d4b9b8a24b6ddde879b36b6ca0a8e944d9a"
+        },
+        {
+          "file": "frames/error/frame-001.png",
+          "durationMs": 300,
+          "sha256": "9187af0c4d583e44b2cafe05f0cf65ba0bcc06faba9a1fd91f6cc8a149bf0410"
+        },
+        {
+          "file": "frames/error/frame-002.png",
+          "durationMs": 400,
+          "sha256": "3070cbb4ae5445d0d71589de1cf230ec5036bd3214d3d18907c9dc8cdb37b249"
+        },
+        {
+          "file": "frames/error/frame-003.png",
+          "durationMs": 1000,
+          "sha256": "c4a3ce314568574d215d3605d28a0ed81fccafeee648986a55c8d7e8102cdfad"
+        }
+      ]
+    },
+    "complete": {
+      "meaning": "confirmed successful completion",
+      "playback": "once",
+      "reducedMotionFrame": "frames/complete/frame-000.png",
+      "frames": [
+        {
+          "file": "frames/complete/frame-000.png",
+          "durationMs": 450,
+          "sha256": "fb33115d365b3dc6140d0d6669c6d81835d474a0b95ec87431fae86ecafa6b4a"
+        },
+        {
+          "file": "frames/complete/frame-001.png",
+          "durationMs": 300,
+          "sha256": "6a87e51b0cf43478947e3167cfe0c8cf69147fd6e971ebb12ef2871a9e328eda"
+        },
+        {
+          "file": "frames/complete/frame-002.png",
+          "durationMs": 350,
+          "sha256": "31ebc1de9f3968b03b99166935fb099076df695a04e1300282eb9f72b1b88951"
+        },
+        {
+          "file": "frames/complete/frame-003.png",
+          "durationMs": 900,
+          "sha256": "21f37820f05f77a29ec06f5f940fed20c90a9abceb1723a209271f6f03d2b82f"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "canonicalReference": "mofu-glass-droplet-concept.png",
+    "generator": "ImageGen",
+    "createdAt": "2026-10-09T10:19:00Z",
+    "transformations": [
+      {
+        "operation": "connected-alpha extraction; remove low-alpha background bridges; shared row scale and baseline",
+        "tool": "Pillow + scipy.ndimage",
+        "report": "qa/extraction-review.json"
+      }
+    ]
+  },
+  "status": "Complete seven-state artwork pack; browser integration and playback acceptance remain with integration owner.",
+  "qa": {
+    "motionReview": "qa/motion-review.md",
+    "checksPerformed": [
+      "30 referenced PNG frames opened; transparent alpha, dimensions, bounds, timings and SHA-256 verified",
+      "Connected-pose extraction with exact frame counts and shared per-state transform",
+      "All states inspected as ordered frame strips at display size",
+      "Canonical dark/light tiny-size inspection; no robot/chibi assets included"
+    ],
+    "remainingIssues": [
+      "Subtle states need accessible status text rather than relying on gesture alone",
+      "Generated 2D keyframes are discrete; not a rigged fluid simulation or 3D model",
+      "Actual website/runtime playback review required before final integration acceptance"
+    ]
+  },
+  "optionalMaterialsNotIncluded": {
+    "description": "Review previews and raw source materials are retained in the full production packs, but omitted from this compact runtime download. They are not runtime dependencies.",
+    "paths": [
+      "source/approved-brief.md",
+      "previews/contact-sheet.png",
+      {
+        "gif": "previews/idle.gif",
+        "mp4": "previews/idle.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/greeting.gif",
+        "mp4": "previews/greeting.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/working.gif",
+        "mp4": "previews/working.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/waiting.gif",
+        "mp4": "previews/waiting.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/review.gif",
+        "mp4": "previews/review.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/error.gif",
+        "mp4": "previews/error.mp4",
+        "background": "#1e1e2e"
+      },
+      {
+        "gif": "previews/complete.gif",
+        "mp4": "previews/complete.mp4",
+        "background": "#1e1e2e"
+      }
+    ]
+  }
+}

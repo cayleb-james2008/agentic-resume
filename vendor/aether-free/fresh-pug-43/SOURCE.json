@@ -1,0 +1,29 @@
+{
+  "slug": "fresh-pug-43",
+  "title": "Editorial Prism Tooltip",
+  "source_url": "https://uiverse.io/uiverse-astronaut/fresh-pug-43",
+  "collection_url": "https://uiverse.io/ui-kits/aether",
+  "author_username": "uiverse-astronaut",
+  "author_display_name": "Astronaut",
+  "author_profile_url": "https://uiverse.io/profile/uiverse-astronaut",
+  "license": "MIT",
+  "copyright": "Copyright - 2026 uiverse-astronaut (Astronaut) ",
+  "captured_at": "2026-10-09T09:39:42.379Z",
+  "method": "Exact values read from the public HTML/CSS code editor tabs and per-component license textbox through the supported browser DOM interface. No code transformations.",
+  "status": "acquired",
+  "files": {
+    "component.html": {
+      "bytes": 1064,
+      "sha256": "194b8c4a16ac48cb7550f0dd001f23c36b57add2d2b0b5b282c632f7b02dba9a"
+    },
+    "component.css": {
+      "bytes": 3096,
+      "sha256": "40b49d7ee58cf10d7e55ac591fa25c621ff94551443ce7ef20ac761f8c87fbd3"
+    },
+    "LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "e9d045ee2438673fc41c69b66f56c6c5c8d27f34bf5b5be04b2f8d8596fa667e"
+    }
+  },
+  "page_description_and_attribution": "Editorial Prism Tooltip\n\nDark hairline tooltip with a chromatic prism ribbon at the top, italic serif accent, monospace label, and a meta footer. Reveals on hover or focus of the target chip.\n\ntooltip\ndark\neditorial\nintelligence\noverlay\nJun 6, 2026\nReport\nuiverse-astronaut\n\nAstronaut\n\n✨ Just floating around"
+}

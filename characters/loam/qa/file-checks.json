@@ -1,0 +1,258 @@
+{
+  "ok": true,
+  "checkedFrames": 28,
+  "frames": [
+    {
+      "file": "frames/idle/frame-000.png",
+      "bounds": [
+        16,
+        101,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/idle/frame-001.png",
+      "bounds": [
+        16,
+        101,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/idle/frame-002.png",
+      "bounds": [
+        16,
+        101,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/idle/frame-003.png",
+      "bounds": [
+        16,
+        101,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/greeting/frame-000.png",
+      "bounds": [
+        16,
+        101,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/greeting/frame-001.png",
+      "bounds": [
+        17,
+        101,
+        238,
+        298
+      ]
+    },
+    {
+      "file": "frames/greeting/frame-002.png",
+      "bounds": [
+        16,
+        100,
+        239,
+        299
+      ]
+    },
+    {
+      "file": "frames/greeting/frame-003.png",
+      "bounds": [
+        16,
+        101,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/working/frame-000.png",
+      "bounds": [
+        16,
+        90,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/working/frame-001.png",
+      "bounds": [
+        16,
+        90,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/working/frame-002.png",
+      "bounds": [
+        16,
+        90,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/working/frame-003.png",
+      "bounds": [
+        16,
+        90,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/waiting/frame-000.png",
+      "bounds": [
+        16,
+        93,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/waiting/frame-001.png",
+      "bounds": [
+        16,
+        93,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/waiting/frame-002.png",
+      "bounds": [
+        17,
+        93,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/waiting/frame-003.png",
+      "bounds": [
+        17,
+        93,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/review/frame-000.png",
+      "bounds": [
+        17,
+        98,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/review/frame-001.png",
+      "bounds": [
+        16,
+        97,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/review/frame-002.png",
+      "bounds": [
+        16,
+        96,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/review/frame-003.png",
+      "bounds": [
+        16,
+        97,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/error/frame-000.png",
+      "bounds": [
+        16,
+        102,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/error/frame-001.png",
+      "bounds": [
+        16,
+        102,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/error/frame-002.png",
+      "bounds": [
+        16,
+        102,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/error/frame-003.png",
+      "bounds": [
+        16,
+        102,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/complete/frame-000.png",
+      "bounds": [
+        16,
+        101,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/complete/frame-001.png",
+      "bounds": [
+        16,
+        100,
+        240,
+        300
+      ]
+    },
+    {
+      "file": "frames/complete/frame-002.png",
+      "bounds": [
+        16,
+        101,
+        239,
+        300
+      ]
+    },
+    {
+      "file": "frames/complete/frame-003.png",
+      "bounds": [
+        16,
+        101,
+        239,
+        300
+      ]
+    }
+  ]
+}

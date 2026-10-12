@@ -28,3 +28,13 @@ The reviewed project/story inputs stay in `remake/project-source.html` and `rema
 ## Candidate and rollback boundary
 
 No push or deployment is authorized for this candidate. `release.json` describes the historical approved v8 release, not these edits. The historical PDFs `Cayleb-James-one-page-resume.pdf` and `Cayleb-James-resume.pdf`, their `resume/approved-verification.json` manifest, and the historical DOCX remain unchanged. Release validation checks those approved hashes as well as the separate candidate outputs. The approved original checkout and frozen source remain available outside this worktree.
+
+## Refraction motion pass (2026-10-12)
+
+Branch `design/refraction-motion-20261012` layers decorative motion on the approved homepage without changing copy, evidence, routes or character frames. Mofu is treated as a glass lens: a dotted light path runs from "Your work" into Mofu, leaves as a sky/mauve/peach spectrum toward "A useful draft", and arcs under Mofu to "Your decision". Pulses ride the existing 8-second ambient clock, so pause, reduced motion, offscreen pausing and Professional mode behave as before.
+
+- `remake/refraction.js` and `remake/refraction.css` hold the pass; `scripts/enhance-refraction.py` injects its aria-hidden layers during `python3 scripts/build-remake.py`.
+- Page load: the headline resolves into focus, Mofu settles, then the path and chips appear. Skipped for reduced motion, Professional mode, paused motion and deep links; a CSS failsafe reveals everything if the script never runs.
+- Story: records turn over like glass cards, the check beat sweeps light across them, the decision pill fills, approval glows once, a single thumb slides between steps, and each assistant's aura shifts colour.
+- Projects: one highlight follows the hovered or focused row.
+- Optional Higgsfield plate: `assets/motion/higgsfield-clips.json` and `design/HIGGSFIELD-SHOTS.md`. No clip is installed; the page is unchanged until one is.

@@ -43,3 +43,7 @@ User-workflow follow-up references: official awwwards-animations SKILL.md read; 
 CUA initialization failed twice with kernel-asset quota errors. Parent confirmed UID 1000 /tmp quota nearly exhausted. No browser screenshots, recording, keyboard, zoom, print, playback, performance or rendered critique was completed. Static Impeccable detection exited 2 with 122 findings; source corrections made, rendered findings remain open. This candidate is not ready for visual acceptance. Full QA matrix and source evidence: /home/cayleb/Documents/Codex/2026-10-09/task-5/evidence/QA.md.
 
 Existing routes retain their prior styles; this direction governs the authorized homepage remake.
+
+## Refraction pass (2026-10-12)
+
+Direction: the approved glass characters already refract light, so motion follows that physics instead of adding new decoration. One ambient moment lives in the hero (work → lens → spectrum → decision, sky → mauve/peach → green, matching the existing meaning of green as a prepared review). Everything else answers a visitor's action and shows what changed. Character frames are never redrawn or non-uniformly scaled; entrances use translate and uniform scale only. Generated video, if added, is environmental light only (see `design/HIGGSFIELD-SHOTS.md`).

@@ -14,7 +14,17 @@ import { ticker } from '../engine/ticker.js';
 import { readToken } from '../engine/tokens.js';
 import { fitSubjectToBox } from './fit.js';
 
-export const VEIL = Object.freeze({ CREEP: 0.7, CLEAR_MS: 430, PAUSE_MS: 240, LIFT_TIMEOUT_MS: 3000, GONE_AT: 0.004 });
+export const VEIL = Object.freeze({ CREEP: 0.7, CLEAR_MS: 430, PAUSE_MS: 240, LIFT_TIMEOUT_MS: 3000, GONE_AT: 0.004, MAX_WAIT_MS: 8000 });
+
+/**
+ * The veil waits for the scene, but never forever: a GPU that stalls on
+ * compile, or a texture request that hangs without failing, would otherwise
+ * leave a full-screen cover over the whole page. By the deadline the veil
+ * lifts and the scene appears whenever it is ready. `ready()` is idempotent,
+ * so a scene that makes it in time simply wins the race.
+ */
+export const liftByDeadline = (veil, ms = VEIL.MAX_WAIT_MS, setTimer = globalThis.setTimeout) =>
+  setTimer(() => veil.ready(), ms);
 export const ENTRANCE = Object.freeze({ nav: 0, identity: 180, panels: 900, actions: 1500 });
 /** The hero is sticky; past this many viewport heights it is covered. */
 export const COVERED_AFTER = 1.15;
@@ -168,6 +178,7 @@ export async function mount(section) {
     scene?.beginRise();
   };
   const veil = veilEl ? createVeil(veilEl, begin) : { ready: begin, skip: begin };
+  if (veilEl) liftByDeadline(veil);
 
   if (!webglAvailable()) {
     mountFallback(section, container);

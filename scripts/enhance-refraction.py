@@ -19,8 +19,8 @@ def once(old, new, count=1):
 
 # Styles and the cache-busted controller.
 once('<link rel="stylesheet" href="remake/site.css?v=9">',
-     '<link rel="stylesheet" href="remake/site.css?v=9"><link rel="stylesheet" href="remake/refraction.css?v=1">')
-once('remake/site.js?v=9', 'remake/site.js?v=10')
+     '<link rel="stylesheet" href="remake/site.css?v=9"><link rel="stylesheet" href="remake/refraction.css?v=1"><link rel="stylesheet" href="remake/polish.css?v=1">')
+once('remake/site.js?v=9', 'remake/site.js?v=11')
 
 # Hide the hero only when the page-load sequence will actually run. The CSS failsafe
 # reveals everything after 2.8s if the module never executes.
@@ -32,6 +32,11 @@ once('<script src="vendor/gsap-3.14.2.min.js" defer></script>', intro + '<script
 # Headline lines become independently animatable without changing the text.
 once('<h1 id="home-title" tabindex="-1">AI that fits<br>your work.</h1>',
      '<h1 id="home-title" tabindex="-1"><span class="hl">AI that fits</span><br><span class="hl">your work.</span></h1>')
+
+# Expose the existing pause state without requiring the guide to be opened.
+once('<span class="mofu-caption">Your work. A useful draft. Your decision.</span>',
+     '<div class="hero-caption"><span class="mofu-caption">Your work. A useful draft. Your decision.</span>'
+     '<button id="hero-motion-toggle" type="button" aria-pressed="false">Pause motion</button></div>')
 
 # The light path: work enters Mofu, leaves as a spectrum, settles as a decision.
 beams = ['in', 'fan-a', 'fan-b', 'fan-c', 'out']
@@ -47,7 +52,9 @@ clips = json.loads((R / 'assets/motion/higgsfield-clips.json').read_text())['cli
 plate = clips.get('hero-plate')
 sources = [f for f in (plate or {}).get('files', []) if (R / f).is_file()]
 if sources:
-    poster = f' poster="{plate["poster"]}"' if (R / plate['poster']).is_file() else ''
+    # A CSS fallback supplies static light without downloading video or poster bytes
+    # for reduced motion, Professional mode, no-JS, or an offscreen initial view.
+    poster = ''
     kinds = {'.webm': 'video/webm', '.mp4': 'video/mp4'}
     tags = ''.join(f'<source data-src="{f}" type="{kinds[Path(f).suffix]}">' for f in sources)
     video = (f'<video class="hero-plate" data-plate{poster} muted loop playsinline '

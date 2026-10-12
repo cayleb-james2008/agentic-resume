@@ -1,5 +1,27 @@
 # Higgsfield shot list — refraction pass
 
+## Installed optical loop · 2026-10-12
+
+The hero now includes an 8-second, 24 fps environmental light loop rendered with
+Python/NumPy and FFmpeg in Higgsfield `sandbox_exec`, exported through its media
+upload/confirm tools. It is a procedural ray-density simulation, not AI-generated
+video. Both model submissions were rejected before generation: Seedance 2.5
+required Plus; GPT Image 2.5 required Basic. No generation job was created.
+
+The delivered assets are 960×540, silent, and loop through periodic wave phases.
+The WebM is 26,632 bytes; the MP4 fallback is 67,106 bytes. The reproducible source
+is `scripts/render-caustics.py`; hashes and method are in
+`assets/motion/higgsfield-clips.json`. Character images were not used by the
+renderer and remain unchanged. Reduced-motion and Professional views do not load
+the clip. Explore loads it only when the hero enters view, and pauses it when
+offscreen, hidden, or paused with either motion control.
+
+### Earlier optional model-generation brief
+
+The notes below record the earlier proposed shot, not the provenance of the
+installed procedural loop. Current model availability and pricing supersede
+those earlier catalog observations.
+
 Checked 2026-10-12 through the Higgsfield connector: private workspace, free plan, 10 credits, no earlier generations. The connector can read the model catalog but cannot generate, so these shots run in the Higgsfield web app. Per-generation credit cost is not exposed through the connector; check the cost the app shows before you press generate.
 
 The site is complete without any of this. The hero light path, story motion and indicators are code. A plate only adds depth behind Mofu.

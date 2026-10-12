@@ -1,0 +1,158 @@
+/* Optical polish. A quieter surface hierarchy keeps the approved glass artwork
+   and the person's decisions in focus. No character pixels are modified. */
+
+@media screen {
+  :root { --ink: #e0e6fa; --muted: #b9c1d9; }
+
+  .masthead { background: #1e1e2ee8; border-bottom-color: #cdd6f414; }
+  .masthead .name { line-height: 1.3; }
+  .guide-toggle { border-color: #cdd6f438; box-shadow: inset 0 1px 1px #ffffff38, 0 5px 18px #11111b55; }
+  .guide-toggle span { color: #d4dcef; }
+
+  .opening { padding-top: 44px; padding-bottom: 36px; gap: 20px 34px; }
+  .opening h1 { color: #edf1ff; font-size: clamp(54px, 6.7vw, 90px); line-height: 1.06; letter-spacing: -.052em; }
+  .opening .lead { color: #c4ccdf; font-size: 18px; line-height: 1.65; margin-top: 27px; }
+  .opening-actions { margin-top: 28px; }
+  .opening-actions > a:not(.primary) { color: #a5e6f0; }
+
+  .opening-art { height: 408px; }
+  .opening-art::before {
+    content: ''; position: absolute; inset: -12% -7% -2%; z-index: -2;
+    background: radial-gradient(ellipse at 53% 69%, #89dceb10, transparent 53%),
+      radial-gradient(ellipse at 70% 45%, #cba6f70c, transparent 49%);
+    pointer-events: none;
+  }
+  .hero-mofu, .hero-mofu img { width: 292px; }
+  .hero-mofu { left: 24%; bottom: 43px; }
+  .loop-chip { padding: 13px 20px; color: #e0e6fa; border-color: #bccbe44a; background: linear-gradient(145deg, #59627a9e, #303447ed 60%, #282b3e); font-size: 13px; }
+  .chip-work { left: 1%; top: 42px; }
+  .chip-draft { right: 0; top: 174px; }
+  .chip-review { left: 6%; bottom: 31px; }
+  .beam-base path { opacity: .64; stroke-width: 1.7; }
+  .beam-pulse path { stroke-width: 2.6; }
+  .hero-plate { z-index: -1; width: 146%; height: 132%; top: 48%; opacity: .88; }
+
+  .hero-caption { position: absolute; display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: flex-end; align-items: center; left: 0; right: 0; bottom: -22px; }
+  .hero-caption .mofu-caption { position: static; color: #b9c1d9; font-size: 12px; }
+  #hero-motion-toggle { display: none; align-items: center; gap: 8px; padding: 0 12px; min-height: 44px; border: 1px solid #a6b4d32e; border-radius: 23px; background: #242638; color: #c6d6ee; font-size: 12px; box-shadow: none; cursor: pointer; }
+  .js #hero-motion-toggle { display: inline-flex; }
+  #hero-motion-toggle::before { content: ''; width: 7px; height: 10px; border-left: 2px solid currentColor; border-right: 2px solid currentColor; }
+  #hero-motion-toggle[aria-pressed=true]::before { border: 0; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid currentColor; }
+  #hero-motion-toggle:disabled { cursor: default; }
+  #hero-motion-toggle:disabled::before { border: 0; width: 8px; height: 8px; background: currentColor; }
+
+  /* Reading and choosing never depend on a delayed entrance. */
+  .intro .opening h1 .hl, .intro .opening .lead, .intro .opening-actions,
+  .intro .hero-mofu, .intro .mofu-caption, .intro .question-choices > button { opacity: 1; animation: none; }
+  .intro .loop-chip { opacity: 1; }
+
+  .question-choices { gap: 18px; margin-top: 38px; }
+  .question-choices button { position: relative; min-height: 108px; padding: 10px 18px 10px 10px; gap: 12px; border-radius: 24px; border-color: #a7bad03b; background: linear-gradient(135deg, #42465b73, #2c2f4266); box-shadow: inset 0 1px 0 #eef4ff20, 0 10px 28px #11111b24; transition: background .22s, border-color .22s, translate .22s; }
+  .question-choices img { width: 64px; flex-shrink: 0; }
+  .question-choices small { color: #b9c1d9; font-size: 12px; margin-bottom: 7px; }
+  .question-choices strong { color: #e1e8fa; font-size: 15px; line-height: 1.4; font-weight: 500; }
+  .question-choices button > span { flex: 1; min-width: 0; }
+  .question-choices b { color: #a2dfeb; font-size: 18px; font-weight: 400; }
+  .question-choices button:hover { translate: 0 -3px; border-color: #89dceb83; background: linear-gradient(135deg, #45566b9e, #2e334680); }
+  .question-choices button:focus-visible { border-color: #89dceb; outline: 3px solid #89dceb; outline-offset: 4px; }
+
+  .section-shell { border-top-color: #bdc8e124; }
+  .section-shell > summary { color: #dce4f8; font-size: 18px; }
+  .section-shell > summary:hover { color: #a5e6f0; }
+  .story-top { padding-bottom: 18px; border-bottom: 1px solid #cdd6f414; }
+  .fiction-label { color: #b9c1d9; }
+  .story-heading h2 { color: #edf1ff; line-height: 1.15; }
+  .story-heading #role-label { color: #b9c1d9; }
+  .glass-record { border-color: #cfddf25e; background: radial-gradient(ellipse at 6% -25%, #cdd6f42a, transparent 62%), linear-gradient(145deg, #43495f, #34394d 55%, #292e42); box-shadow: inset 0 1px 1px #f0f6ff4d, 0 13px 32px #11111b4d; }
+  .glass-record strong { display: block; color: #f0f3ff; }
+  .glass-record span, .glass-record small { color: #d0d9ee; }
+  .review-pill { color: #d2efce; border-color: #a6e3a159; }
+  .assistant-picker button { box-shadow: inset 0 1px 1px #eff5ff42, 0 4px 13px #11111b44; }
+  .assistant-picker button[aria-pressed=true] { background: linear-gradient(145deg, #4662779c, #303447e6); }
+  .story-controls { padding-top: 16px; border-top: 1px solid #cdd6f414; }
+  .step-picker button { color: #bdc8df; }
+  .step-picker button[aria-pressed=true] { color: #e6f4ff; }
+
+  .projects { padding-block: 28px 34px; }
+  .projects h2 { color: #edf1ff; }
+  .projects-intro { color: #b9c1d9; }
+  .project-picker button { min-height: 83px; padding-block: 21px; border-bottom-color: #cdd6f41f; }
+  .project-picker strong { color: #e0e6fa; font-size: 24px; }
+  .project-picker button[aria-pressed=true] strong { color: #a5e6f0; }
+  .project-picker span { color: #b9c1d9; }
+  .project-panel { border-color: #a7bad02e; background: linear-gradient(145deg, #34394ca1, #262a3bea); box-shadow: inset 0 1px 0 #eff5ff18, 0 18px 32px #11111b22; }
+  .project-panel > header { padding-bottom: 20px; border-bottom: 1px solid #cdd6f418; margin-bottom: 24px; }
+  .receipt-object { border-color: #cedaf24d; box-shadow: inset 0 1px 1px #f0f6ff38, 0 12px 26px #11111b38; }
+  .graph-map path { transition: stroke .24s; }
+  .graph-map[data-step="1"] path, .graph-map[data-step="2"] path { stroke: #89dceb; }
+  .graph-map[data-step="3"] path { stroke: #a6e3a1; }
+  .graph-map button[aria-pressed=true] { box-shadow: 0 0 0 1px #89dceb44, 0 8px 22px #89dceb14; }
+  .resume-sheet { border-color: #a7bad02e; background: linear-gradient(145deg, #34394ca1, #292d40); box-shadow: inset 0 1px 0 #eff5ff18, 0 18px 32px #11111b22; }
+  .resume-sheet h1, .resume-sheet h2 { color: #edf1ff; }
+  .resume-sheet p { color: #cbd4e9; }
+  .js[data-mode=professional] .resume-sheet { box-shadow: inset 0 1px 0 #eff5ff18, 0 18px 32px #11111b22; }
+  .site-footer { border-top: 1px solid #cdd6f418; padding-top: 30px; }
+}
+
+@media screen and (min-width: 761px) and (max-width: 1100px) {
+  .opening { gap: 18px; }
+  .opening h1 { font-size: clamp(56px, 7vw, 74px); }
+  .hero-mofu, .hero-mofu img { width: 252px; }
+  .hero-mofu { left: 18%; }
+  .opening-art { height: 380px; }
+  .loop-chip { padding: 12px 16px; }
+  .chip-draft { top: 20px; }
+  .chip-review { left: 1%; bottom: 15px; }
+  .hero-caption { bottom: -58px; justify-content: center; gap: 3px 8px; }
+  .question-choices { margin-top: 60px; gap: 12px; }
+  .question-choices button { padding: 10px; gap: 7px; }
+  .question-choices img { width: 52px; }
+  .question-choices strong { font-size: 14px; }
+}
+
+@media screen and (max-width: 760px) {
+  .opening { padding-top: 38px; padding-bottom: 24px; gap: 14px; }
+  .opening h1 { font-size: clamp(48px, 11.6vw, 72px); line-height: 1.07; }
+  .opening .lead { font-size: 16px; margin-top: 22px; line-height: 1.6; }
+  .opening-actions { margin-top: 24px; }
+  .opening-art { height: 340px; margin-top: 16px; margin-bottom: 40px; }
+  .hero-mofu, .hero-mofu img { width: 225px; }
+  .hero-mofu { left: 24%; bottom: 46px; }
+  .chip-work { top: 10px; left: 0; }
+  .chip-draft { top: 34px; right: 0; }
+  .chip-review { left: 4%; bottom: 15px; }
+  .loop-chip { padding: 11px 15px; font-size: 12px; }
+  .hero-caption { bottom: -48px; justify-content: center; gap: 2px 10px; }
+  .hero-caption .mofu-caption { font-size: 11px; }
+  #hero-motion-toggle { font-size: 11px; min-height: 44px; }
+  .hero-plate { width: 144%; height: 128%; }
+  .question-choices { margin-top: 12px; gap: 12px; }
+  .question-choices button { min-height: 92px; padding: 9px 16px 9px 8px; border-radius: 22px; gap: 12px; }
+  .question-choices img { width: 62px; }
+  .question-choices strong { font-size: 16px; }
+  .question-choices small { margin-bottom: 4px; }
+  .story-top { align-items: flex-start; flex-wrap: wrap; gap: 14px; padding-bottom: 15px; }
+  .fiction-label { font-size: 12px; }
+  .story-controls { gap: 12px; padding-top: 20px; }
+  .project-picker strong { font-size: 22px; }
+  .project-picker button { min-height: 90px; padding-block: 18px; }
+  .project-panel { border-radius: 22px; }
+}
+
+@media screen and (max-width: 350px) {
+  .opening h1 { font-size: 48px; }
+  .opening .lead { font-size: 15px; }
+  .hero-mofu, .hero-mofu img { width: 204px; }
+  .hero-mofu { left: 22%; }
+  .loop-chip { padding-inline: 12px; }
+  .question-choices strong { font-size: 15px; }
+  .question-choices img { width: 56px; }
+}
+
+.motion-paused .question-choices button, .motion-paused .graph-map path { transition: none; }
+.motion-paused .question-choices button:hover { translate: none; }
+@media (prefers-reduced-motion: reduce) {
+  .question-choices button, .graph-map path, .section-shell > summary > b { transition: none; }
+  .question-choices button:hover { translate: none; }
+}
+@media print { .hero-caption { display: none !important; } }

@@ -1,7 +1,7 @@
 import {WORKFLOWS} from '../stage/workflows.js';
 import {chapters,beats,stories,parse,serialize,receipt,moment,clamp,frameAt,isApproved,toggleApproval} from './state.js';
 import Lenis from './vendor/lenis.mjs';
-import * as refraction from './refraction.js';
+import * as refraction from './refraction.js?v=2';
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)');
@@ -26,7 +26,7 @@ function setPose(img,name,pose){
  if(p.name!==name||p.pose!==pose){Object.assign(p,{name,pose,elapsed:0,index:-1});}
  img.dataset.character=name;img.dataset.pose=pose;
  const fallback=`characters/${name}/frames/idle/frame-000.png`;
- if(reduce.matches||state.paused){img.src=fallback;p.index=-1;return;}
+ if(reduce.matches||state.paused||state.mode==='professional'){img.src=fallback;p.index=-1;return;}
  const frame=manifests.get(name)?.states[pose]?.frames[0];
  img.src=frame?`characters/${name}/${frame.file}`:fallback;
  warmFrames(name,pose);
@@ -62,7 +62,7 @@ function tick(time){
  syncMotionPreference();
  lenis?.raf(time);
  const dt=lastTime===null?0:Math.min(time-lastTime,80);lastTime=time;
- const enabled=!reduce.matches&&!state.paused&&!document.hidden;
+ const enabled=state.mode==='explore'&&!reduce.matches&&!state.paused&&!document.hidden;
  if(enabled){
   if(state.mode==='explore'&&openingVisible){ambientTime=(ambientTime+dt)%8000;ambient?.time(ambientTime/1000,true);}
   for(const [img,p] of players){
@@ -74,7 +74,7 @@ function tick(time){
     if(decoded.get(url)?.ready){img.src=url;p.index=index;}}
   }
  }
- refraction.plate(enabled&&state.mode==='explore'&&openingVisible);
+ refraction.plate(enabled&&openingVisible);
  requestAnimationFrame(tick);
 }
 document.addEventListener('visibilitychange',()=>{lastTime=null;});
@@ -147,7 +147,15 @@ function stopSceneMotion(){
  refraction.clearScene();
 }
 const arrow='<svg class="aether-prism-btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+let lastProjectScene=null,projectMotion=null;
+function stopProjectMotion(){
+ projectMotion?.kill();projectMotion=null;
+ window.gsap?.set('.project-panel,.receipt-object,.inbox-object,.graph-map li,.graph-map path',{clearProps:'opacity,transform,strokeDashoffset'});
+}
 function paintProjects(){
+ const previous=lastProjectScene;
+ const next={project:state.project,workflow:state.workflow,trace:state.trace,graph:state.graph,read:state.read,opened:state.opened,details:state.details};
+ stopProjectMotion();
  const w=receipt(state);
  $$('[data-project]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.project===state.project)));
  $$('[data-project-panel]').forEach(el=>el.hidden=el.dataset.projectPanel!==state.project);
@@ -166,12 +174,31 @@ function paintProjects(){
  $('#profile-select').value=state.profile;setText('profile-note',`${state.profile==='build'?'Build':'Review'} profile selected in this page’s simulation.`);
  $('#project-playground').open=state.details;
  refraction.paintIndicators();
+ if(previous&&state.details&&motionAllowed()){
+  const panel=$(`[data-project-panel="${state.project}"]`);
+  if(previous.project!==next.project||!previous.details){
+   projectMotion=window.gsap.fromTo(panel,{y:10,opacity:.75},{y:0,opacity:1,duration:.3,ease:'power2.out',clearProps:'transform,opacity'});
+  }else if(state.project==='suite'&&(previous.workflow!==next.workflow||previous.trace!==next.trace)){
+   projectMotion=window.gsap.fromTo('.receipt-object',{y:5,opacity:.78},{y:0,opacity:1,duration:.24,ease:'power2.out',clearProps:'transform,opacity'});
+  }else if(state.project==='sophos'&&(previous.read!==next.read||previous.opened!==next.opened)){
+   projectMotion=window.gsap.fromTo('.inbox-object',{opacity:.78},{opacity:1,duration:.2,clearProps:'opacity'});
+  }else if(state.project==='dotz'&&previous.graph!==next.graph){
+   projectMotion=window.gsap.fromTo($$('.graph-map li')[state.graph],{y:4},{y:0,duration:.25,ease:'power2.out',clearProps:'transform'});
+  }
+ }
+ lastProjectScene=next;
 }
 function paintMotion(){
- if(!motionAllowed()){stopSceneMotion();stopGuideMotion();refraction.resetPointer();}
- root.classList.toggle('motion-paused',state.paused||reduce.matches);
+ if(!motionAllowed()){stopSceneMotion();stopProjectMotion();stopGuideMotion();refraction.finishIntro();refraction.resetPointer();}
+ root.classList.toggle('motion-paused',state.paused||reduce.matches||state.mode==='professional');
  $('#motion-toggle').setAttribute('aria-pressed',String(state.paused));
  setText('motion-toggle',state.paused?'Resume ambient motion':'Pause ambient motion');
+ const heroToggle=$('#hero-motion-toggle');
+ if(heroToggle){
+  heroToggle.setAttribute('aria-pressed',String(state.paused));
+  heroToggle.disabled=reduce.matches;
+  heroToggle.textContent=reduce.matches?'Reduced motion':state.paused?'Play motion':'Pause motion';
+ }
  setText('motion-status',reduce.matches?'System reduced motion: static approved artwork.':state.paused?'Motion paused. The workday still uses direct steps.':'Motion follows the workday. Offscreen artwork pauses.');
  for(const [img,p] of players){setPose(img,p.name,p.pose);}
  if(state.paused||reduce.matches||state.mode==='professional')ambient?.time(0,true);
@@ -311,7 +338,9 @@ $('.guide-toggle').addEventListener('click',e=>$('#guide').hidden?openGuide(e.cu
 $('.hero-mofu').addEventListener('click',e=>openGuide(e.currentTarget));$('.close-guide').addEventListener('click',()=>closeGuide());
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#guide').hidden){e.preventDefault();closeGuide();}});
 document.addEventListener('pointerdown',e=>{if(!$('#guide').hidden&&!e.target.closest('#guide,.guide-toggle,.hero-mofu'))closeGuide(false);});
-$('#motion-toggle').addEventListener('click',()=>{const y=scrollY;state.paused=!state.paused;paintMotion();layoutJourney();persist(true);scrollPageTo(y);});
+function toggleMotion(){const y=scrollY;state.paused=!state.paused;paintMotion();layoutJourney();persist(true);scrollPageTo(y);}
+$('#motion-toggle').addEventListener('click',toggleMotion);
+$('#hero-motion-toggle')?.addEventListener('click',toggleMotion);
 function syncMotionPreference(){
  if(motionPreference===reduce.matches)return;
  motionPreference=reduce.matches;

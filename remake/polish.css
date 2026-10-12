@@ -30,7 +30,8 @@
   .chip-review { left: 6%; bottom: 31px; }
   .beam-base path { opacity: .64; stroke-width: 1.7; }
   .beam-pulse path { stroke-width: 2.6; }
-  .hero-plate { z-index: -1; width: 146%; height: 132%; top: 48%; opacity: .88; }
+  .hero-atmosphere { position: absolute; z-index: -1; left: 50%; top: 48%; width: 146%; height: 132%; translate: -50% -50%; isolation: isolate; background: var(--base); pointer-events: none; -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent); mask-image: radial-gradient(closest-side, #000 40%, transparent); }
+  .hero-atmosphere .hero-plate { inset: 0; width: 100%; height: 100%; translate: none; z-index: 0; opacity: .88; -webkit-mask-image: none; mask-image: none; }
 
   .hero-caption { position: absolute; display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: flex-end; align-items: center; left: 0; right: 0; bottom: -22px; }
   .hero-caption .mofu-caption { position: static; color: #b9c1d9; font-size: 12px; }
@@ -125,7 +126,7 @@
   .hero-caption { bottom: -48px; justify-content: center; gap: 2px 10px; }
   .hero-caption .mofu-caption { font-size: 11px; }
   #hero-motion-toggle { font-size: 11px; min-height: 44px; }
-  .hero-plate { width: 144%; height: 128%; }
+  .hero-atmosphere { width: 144%; height: 128%; }
   .question-choices { margin-top: 12px; gap: 12px; }
   .question-choices button { min-height: 92px; padding: 9px 16px 9px 8px; border-radius: 22px; gap: 12px; }
   .question-choices img { width: 62px; }
@@ -152,7 +153,8 @@
 .motion-paused .question-choices button, .motion-paused .graph-map path { transition: none; }
 .motion-paused .question-choices button:hover { translate: none; }
 @media (prefers-reduced-motion: reduce) {
+  .hero-atmosphere { display: none; }
   .question-choices button, .graph-map path, .section-shell > summary > b { transition: none; }
   .question-choices button:hover { translate: none; }
 }
-@media print { .hero-caption { display: none !important; } }
+@media print { .hero-caption, .hero-atmosphere { display: none !important; } }

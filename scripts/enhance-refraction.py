@@ -57,8 +57,8 @@ if sources:
     poster = ''
     kinds = {'.webm': 'video/webm', '.mp4': 'video/mp4'}
     tags = ''.join(f'<source data-src="{f}" type="{kinds[Path(f).suffix]}">' for f in sources)
-    video = (f'<video class="hero-plate" data-plate{poster} muted loop playsinline '
-             f'preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1">{tags}</video>')
+    video = (f'<div class="hero-atmosphere" aria-hidden="true"><video class="hero-plate" data-plate{poster} muted loop playsinline '
+             f'preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1">{tags}</video></div>')
     once('<div class="light-pool light-pool--lens" aria-hidden="true"></div>',
          '<div class="light-pool light-pool--lens" aria-hidden="true"></div>' + video)
 

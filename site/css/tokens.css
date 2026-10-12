@@ -37,7 +37,7 @@
   --raw-color-white: #ffffff;
   --raw-color-orange-500: #ff6b00;    /* error/warning only — never on the page */
 
-  --raw-font-size-96: 6rem;      /* "kimi antonelli" */
+  --raw-font-size-96: 6rem;      /* the hero name */
   --raw-font-size-70: 4.375rem;  /* the name on phones */
   --raw-font-size-52: 3.25rem;   /* the headline below 1024 */
   --raw-font-size-38: 2.375rem;  /* stat figures */

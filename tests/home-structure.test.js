@@ -68,3 +68,17 @@ test('build is reproducible', () => {
   };
   assert.equal(build(), build());
 });
+
+test('served code carries no names from the layout reference', async () => {
+  const { readdirSync, statSync } = await import('node:fs');
+  const walk = (dir) => readdirSync(dir).flatMap((name) => {
+    const path = `${dir}/${name}`;
+    return statSync(path).isDirectory() ? walk(path) : [path];
+  });
+  const root = new URL('../', import.meta.url).pathname;
+  const files = walk(`${root}site`).filter((f) => /\.(js|css|json)$/.test(f));
+  assert.ok(files.length > 20);
+  for (const file of files) {
+    assert.doesNotMatch(readFileSync(file, 'utf8'), /kimi|antonelli|mercedes|grid0?1\b|getlayers/i, file);
+  }
+});

@@ -247,3 +247,9 @@
 @media (prefers-reduced-motion: reduce) {
   .projects .corner, .strip-card a { transition: none; }
 }
+
+/* short: on a landscape phone the tablet composition needs a tablet's height; the block grows
+   to it and scrolls rather than stacking heading, panels and copy on one 390px screen. */
+@media (max-height: 500px) and (min-width: 640px) {
+  .projects { --block-h: max(100lvh, 88vw); }
+}

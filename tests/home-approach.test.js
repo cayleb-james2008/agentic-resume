@@ -60,3 +60,18 @@ test('approach easing', () => {
 test('lit dots stay a pixel grid, never a solid block', () => {
   assert.ok(CHEQUER_FILL < 1);
 });
+
+test('on a short landscape screen the loop sits right of the copy column, inside the block', async () => {
+  const { stageFit, TRACK_BOX } = await import('../site/js/approach/approach.js');
+  const w = 844, h = 640;
+  const { s, tx, ty } = stageFit(w, h);
+  const left = tx + (TRACK_BOX.cx - TRACK_BOX.width / 2) * s;
+  const right = tx + (TRACK_BOX.cx + TRACK_BOX.width / 2) * s;
+  const top = ty + (TRACK_BOX.cy - TRACK_BOX.height / 2) * s;
+  const bottom = ty + (TRACK_BOX.cy + TRACK_BOX.height / 2) * s;
+  assert.ok(left >= w * 0.3, `loop starts at ${left.toFixed(0)}`);
+  assert.ok(right <= w + 1 && top >= -1 && bottom <= h + 1, 'loop inside the block');
+  // A tablet in portrait keeps the full-width loop.
+  const tall = stageFit(768, 1024);
+  assert.ok(Math.abs(tall.s - 768 / TRACK_BOX.width) < 1e-9);
+});

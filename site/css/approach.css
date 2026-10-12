@@ -103,3 +103,9 @@
 .plate-row { display: flex; gap: 0.35em; }
 .plate-row dt { color: var(--accent); }
 .plate-row dd { flex: 1; white-space: nowrap; color: var(--foreground-on-dark); }
+
+/* short: a landscape phone cannot hold the loop and the copy in one 390px screen — the block
+   keeps the phone's own minimum height instead and scrolls. */
+@media (max-height: 500px) {
+  .approach { --season-h: max(100lvh, 640px); }
+}

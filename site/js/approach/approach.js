@@ -33,15 +33,39 @@ const el = (name, attrs = {}, parent = null) => {
 };
 
 /** The loop's bounding box, padded — what the stage fits below 1024. */
-const TRACK_BOX = (() => {
+export const TRACK_BOX = (() => {
   const xs = LOOP_PATH.map(([x]) => x);
   const ys = LOOP_PATH.map(([, y]) => y);
   const x0 = Math.min(...xs) - TRACK_PAD;
   const x1 = Math.max(...xs) + TRACK_PAD;
   const y0 = Math.min(...ys) - TRACK_PAD;
   const y1 = Math.max(...ys) + TRACK_PAD;
-  return { width: x1 - x0, cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 };
+  return { width: x1 - x0, height: y1 - y0, cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 };
 })();
+
+/** Where the loop's share of the right side of a short landscape block begins. */
+const SIDE_START = 0.34;
+
+/**
+ * The stage's scale and offset for a frame of w×h. From 1024 the 1440×800
+ * artboard covers the block; below it the loop alone is fitted — full width on
+ * a tablet or phone, and on a landscape screen too short to stack copy over a
+ * full-width loop, into the right two-thirds beside the copy column.
+ */
+export function stageFit(w, h) {
+  if (w >= 1024) {
+    const s = Math.max(w / 1440, h / 800);
+    return { s, tx: (w - 1440 * s) / 2, ty: (h - 800 * s) / 2 };
+  }
+  if (w > h && w >= 640) {
+    const room = w * (1 - SIDE_START);
+    const s = Math.min((room * 0.94) / TRACK_BOX.width, (h * 0.86) / TRACK_BOX.height);
+    return { s, tx: w * SIDE_START + room / 2 - TRACK_BOX.cx * s, ty: h / 2 - TRACK_BOX.cy * s };
+  }
+  const s = w / TRACK_BOX.width;
+  // On a phone the copy fills the top of the block, so the loop sits lower.
+  return { s, tx: w / 2 - TRACK_BOX.cx * s, ty: h * (w < 640 ? PHONE_CENTRE : 0.5) - TRACK_BOX.cy * s };
+}
 
 function buildMap(stage) {
   const svg = el('svg', { viewBox: `0 0 ${MAP_VIEW.width} ${MAP_VIEW.height}`, class: 'approach-svg', 'aria-hidden': 'true', focusable: 'false' });
@@ -111,19 +135,7 @@ export function mount(section) {
   const halftone = new Halftone(dotsCanvas, { dot: rgbOf(readToken('--map-dot')), accent: palette.accent, maxRatio: coarse ? 1 : 2 });
 
   const fit = () => {
-    const w = frame.clientWidth;
-    const h = frame.clientHeight;
-    let s, tx, ty;
-    if (w >= 1024) {
-      s = Math.max(w / 1440, h / 800);
-      tx = (w - 1440 * s) / 2;
-      ty = (h - 800 * s) / 2;
-    } else {
-      s = w / TRACK_BOX.width;
-      tx = w / 2 - TRACK_BOX.cx * s;
-      // On a phone the copy fills the top of the block, so the loop sits lower.
-      ty = h * (w < 640 ? PHONE_CENTRE : 0.5) - TRACK_BOX.cy * s;
-    }
+    const { s, tx, ty } = stageFit(frame.clientWidth, frame.clientHeight);
     stage.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
     // Station labels never drop under 11px on screen, however small the stage.
     const mapUnitsPerPixel = MAP_VIEW.width / MAP_PLACEMENT.width / s;

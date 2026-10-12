@@ -1,4 +1,4 @@
-"""Render index.html from site/content.json.
+"""Render index.html (and resume.html) from site/content.json.
 
     python3 scripts/build-home.py
 
@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
 
-from templates import approach, contact, experience, hero, projects, shell  # noqa: E402
+from templates import approach, contact, experience, hero, projects, resume, shell  # noqa: E402
 
 CENTRE_COPY_MAX = 190
 STAT_LABELS_MAX = 22
@@ -72,6 +72,12 @@ def build() -> str:
     return shell.render(content, blocks)
 
 
+def build_resume() -> str:
+    content = json.loads((ROOT / "site/content.json").read_text())
+    return resume.render(content, (ROOT / "resume/candidate-fragment.html").read_text())
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build())
-    print("Built index.html from site/content.json")
+    (ROOT / "resume.html").write_text(build_resume())
+    print("Built index.html and resume.html from site/content.json")

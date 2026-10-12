@@ -80,7 +80,7 @@ def detailed_fragment(rows):
 
 
 def short_fragment(data):
-    template = (ROOT / 'stage/incumbent-resume-source.html').read_text()
+    template = (ROOT / 'resume/fragment-template.html').read_text()
     template = template.replace('Cayleb Alvarez-James', html.escape(data['full_name'])).replace('caylebalvarezjames@gmail.com', data['email'])
     def replace(pattern, value):
         nonlocal template

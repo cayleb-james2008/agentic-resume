@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {existsSync,readFileSync} from 'node:fs';
 import test from 'node:test';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
 const source=JSON.parse(read('resume/resume-content.json'));
@@ -28,4 +28,14 @@ test('headline is integrator',()=>{
  assert.equal(source.headline,'AI workflow integrator');
  assert.equal(source.summary,'AI workflow integrator. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.');
  assert.doesNotMatch(source.summary,/clients?|customers?|deployed/i);
+});
+test('the résumé page is a real page carrying the candidate fragment, and its links resolve',()=>{
+ const page=read('resume.html');
+ assert.doesNotMatch(page,/http-equiv="refresh"/);
+ assert.ok(page.includes(read('resume/candidate-fragment.html').trim()));
+ assert.ok(page.includes('href="site/css/resume.css"'));
+ assert.ok(page.includes('href="./"'));
+ const local=[...page.matchAll(/(?:href|src)="([^"#:?]+)"/g)].map(m=>m[1]).filter(h=>h!=='./');
+ assert.ok(local.length>3);
+ for(const href of local)assert.ok(existsSync(new URL('../'+href,import.meta.url)),href);
 });

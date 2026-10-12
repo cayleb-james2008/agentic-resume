@@ -34,3 +34,11 @@ test('the figure rides back into place by the end of the page', () => {
   assert.deepEqual(FIGURE_WINDOW, { start: 'top bottom', end: 'bottom bottom', from: px(PARALLAX_FIGURE), to: '0cqw' });
   assert.equal(FIGURE_WINDOW.from, '4.1667cqw');
 });
+
+test('the hollow button keeps a dark ground so its label reads over the figure', () => {
+  const css = readFileSync(new URL('../site/css/contact.css', import.meta.url), 'utf8');
+  const rule = css.match(/\.cta-frame--hollow \.cta-body\s*\{([^}]*)\}/);
+  assert.ok(rule);
+  assert.doesNotMatch(rule[1], /fill:\s*none/);
+  assert.match(rule[1], /fill:\s*rgb\(9 10 11 \/ 0\.\d+\)/);
+});

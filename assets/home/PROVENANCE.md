@@ -1,38 +1,43 @@
 # Homepage imagery: provenance
 
-Every image on the homepage is an illustration. Each one's `alt` starts with "Illustration:", and the footer credits the AI-generated character art. No image contains logos, brand marks, racing imagery or material from the layout reference.
+Every image on the homepage is an AI-generated illustration of Cayleb as a Pixar-style 3D character: brown hair, glasses, a black button shirt and jeans. Every `alt` starts with "Illustration:", and the footer reads "Illustrations generated with AI". The style example Cayleb shared in chat (a different person in a mint jacket) is not him, and nothing on the site uses it.
 
-## Character frames: pending
+## Source (2026-10-12)
 
-The hero portrait and its maps, the projects figure and the contact figure are still placeholders, listed in `PLACEHOLDERS.json`. `check_assets.py --strict` fails until they are replaced.
+Cayleb generated seven scenes of his character in ChatGPT and supplied them in chat. Each is 1536×1024. The originals are not stored in the repo.
 
-They will come from a Pixar-style 3D render of Cayleb, generated in ChatGPT from a photo of him, in casual clothes (a baggy black t-shirt and sweatpants). The path from that render to the frames:
-1. Remove the background with rembg (ISNet, no alpha matting).
-2. Run `scripts/home/derive_character.py`, after re-measuring its face and eye-line constants on the new render.
-3. Run `import_images.py`, then `person_maps.py`.
+| Plate (`experience/`) | Scene | Timeline entry |
+|---|---|---|
+| `2024-dunkin.webp` | handing a coffee across a Dunkin' counter | Dunkin', 2024–2026 |
+| `2024-pizza.webp` | sliding a pizza out of a brick oven | Tommy's Pizza, 2024 |
+| `2025-moving.webp` | assembling a desk in a warehouse | Robert H. Lord Company, 2025 & 2026 |
+| `2026-plaster.webp` | breaking up old pool plaster with a sledgehammer | David Cooke Plaster Co., 2026 |
+| `2026-school.webp` | coding at a classroom computer | Portland High School, 2026 |
+| `2026-builds.webp` | at a desk with two monitors and his glass-droplet AI agent | dotz · Sophos · AI Suite, 2026 |
+| `2026-integrator.webp` | beside a coworker, taking notes, the agent between them | AI workflow integration, 2026 |
 
-The style example Cayleb shared in chat is not him and is not used anywhere on the site.
+The café scene shows Dunkin' branding and the pizzeria has a "TOMMY PIZZA" sign. Cayleb chose to keep both as generated. Each plate is centre-cropped to 1431×1024 by `scripts/home/import_images.py --kind plate`.
 
-## Work-experience plates (2026-10-12)
+## Character frames
 
-The seven timeline plates are line drawings, one per job, made by `scripts/home/make_plates.py`. No AI is involved in these. Each plate layers:
-- the hero's contour field, frozen;
-- a cyan halftone bloom;
-- the drawing itself, at the lower left.
+All three character frames are cut from three of those scenes.
 
-The plate's middle stays clear for the year and title. Each alt reads "Illustration: line drawing of …". These plates stand in for generated scenes of Cayleb's character, which haven't been made yet. To replace any plate, run `python3 scripts/home/import_images.py --kind plate SRC.png assets/home/experience/<name>.webp`, then update that entry's alt in `site/content.json`.
+1. The background is removed with rembg 2.0.85, using the ISNet `isnet-general-use` model. Alpha matting is left off because it produced blocky edges.
+2. `scripts/home/derive_scenes.py` frames each cut-out. It uses the helpers in `derive_character.py`:
+   - keep the largest matte component;
+   - clear props the matte kept: the agent droplet, chair backs and the coworker;
+   - decontaminate the soft edge against the local backdrop;
+   - crop and scale.
+3. `import_images.py` encodes the frames. `person_maps.py` derives the hero's diffuse, alpha, depth, normal and veil maps from the portrait.
 
-The generated scenes are meant to be made in ChatGPT from the same character render, in a single chat, using this style paragraph:
+| File | From | Frame |
+|---|---|---|
+| `hero/person-*.webp`, `hero/veil-mask.png` | classroom | 1024² portrait. Face on the centre line, eye-line 60% down, head about a third of the square, matching the hero scene's framing so the headset fills the headroom. The chest fades out over the last 90 px. |
+| `projects/figure.webp` | two monitors | 1186×1024. Head to hands, typing, height-filling, pinned left so he clears the right-hand panels. His hands melt into the dark band. |
+| `contact/figure.webp` | coworker | 1536×1024. Him alone with the tablet, filling the bottom edge, centred. |
 
-> Use the attached image as the character reference for every image in this chat. Keep the exact same person: same face shape, skin tone, curly black hair and dark rectangular glasses. Render him as a 3D animated-feature-film character with soft global illumination, subtle subsurface skin and clean modern materials. Use a slightly desaturated palette with near-white and near-black, and one cyan accent (#02D2E3) somewhere in the scene. Put no text, logos, brand names or signage anywhere. Use an editorial composition with the subject in the left or centre third. Landscape 1536×1024.
+`hero/noise.webp` is procedural (`scripts/home/make_noise.py`).
 
-The seven scenes are:
-1. café counter (2024–2026)
-2. pizzeria oven (2024)
-3. moving crew (2025–2026)
-4. plaster wall (2026)
-5. classroom coding (2026)
-6. two-monitor desk with the glass-droplet agent (2026)
-7. sitting beside a coworker taking notes, with the agent (2026)
+## Fallback drawings
 
-The footer credit reads "Character art generated with AI", because only the character frames are AI-generated.
+`scripts/home/make_plates.py` draws a line-art plate for each job, using the site's contour field and a cyan halftone. These plates are not used on the site now. They stay available as a no-AI fallback.

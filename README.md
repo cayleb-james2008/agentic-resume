@@ -6,7 +6,7 @@ Cayleb is an AI workflow integrator: he shadows people for a couple of days to l
 
 ## What's here
 
-- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, a 3D-styled character of Cayleb with a headset), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
+- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, and Cayleb as a Pixar-style 3D character wearing an AI headset), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
 - `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
 - `projects/*.html` and `lab/`: the project write-ups and the local workflow lab. These are unchanged.
 - `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source and artifact hashes. It is not a user approval or an ATS score.
@@ -33,7 +33,7 @@ python3 scripts/check-release.py
 
 `python3 scripts/home/check_assets.py --strict` is the ship gate for imagery. It fails while any placeholder listed in `assets/home/PLACEHOLDERS.json` is still on the page.
 
-Imagery lives under `assets/home/`. Every generated illustration has an `alt` beginning "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`.
+Imagery lives under `assets/home/`. Every image is an AI-generated illustration of Cayleb, its `alt` begins "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. `scripts/home/derive_scenes.py` cuts the hero, projects and contact frames out of his scenes. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`.
 
 To rebuild the candidate PDFs: `bash resume/build.sh`. It uses ReportLab; `PYTHON` can select another interpreter.
 

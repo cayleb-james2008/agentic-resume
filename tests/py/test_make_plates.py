@@ -9,12 +9,10 @@ from make_plates import PLATES, plate  # noqa: E402
 
 
 class MakePlatesTest(unittest.TestCase):
-    def test_every_timeline_entry_has_a_plate_and_an_alt_that_describes_it(self):
+    def test_every_timeline_entry_has_a_fallback_drawing(self):
         entries = json.loads((ROOT / "site/content.json").read_text())["experience"]["entries"]
         for entry in entries:
-            name = Path(entry["image"]).stem
-            self.assertIn(name, PLATES)
-            self.assertEqual(entry["alt"], "Illustration: line drawing of " + PLATES[name][2])
+            self.assertIn(Path(entry["image"]).stem, PLATES)
 
     def test_a_plate_is_the_plate_frame_with_the_cyan_accent(self):
         img = plate("2024-dunkin")

@@ -3,8 +3,8 @@ import {existsSync,readFileSync} from 'node:fs';
 import test from 'node:test';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
 const home=read('index.html');
-test('canonical website retains a direct reading résumé and both downloads',()=>{
- for(const name of ['Cayleb-James-one-page-resume.pdf','Cayleb-James-resume.pdf']){
+test('candidate website retains a direct reading résumé and sequential PDF/text downloads',()=>{
+ for(const name of ['Cayleb-James-polished-one-page.pdf','Cayleb-James-polished-resume.pdf','Cayleb-James-polished-one-page.txt','Cayleb-James-polished-resume.txt']){
   assert.ok(home.includes(`href="${name}" download`));
   assert.ok(existsSync(new URL('../'+name,import.meta.url)));
  }

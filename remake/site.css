@@ -132,3 +132,6 @@
  .mode .aether-switch__track{width:158px}
  .mode .mode-surface>span{font-size:11px;padding:0}
 }
+
+/* Contain the approved character canvas without horizontal viewport scrolling. */
+html{overflow-x:clip}

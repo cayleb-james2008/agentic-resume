@@ -29,5 +29,21 @@ for file,record in json.loads((R/'resume/approved-verification.json').read_text(
  info=subprocess.check_output(['pdfinfo',str(R/file)],text=True)
  assert int(re.search(r'Pages:\s+(\d+)',info).group(1))==record['pages']
  assert re.search(r'Encrypted:\s+no',info)
+import runpy
+builder=runpy.run_path(str(R/'resume/build_resume.py'))
+source=json.loads((R/'resume/resume-content.json').read_text())
+candidate=json.loads((R/'resume/candidate-verification.json').read_text())
+assert candidate['source_sha256']==hashlib.sha256((R/candidate['source']).read_bytes()).hexdigest()
+for file,record in candidate['artifacts'].items():
+ assert hashlib.sha256((R/file).read_bytes()).hexdigest()==record['sha256'],file
+ if file.endswith('.pdf'):
+  short='one-page' in file
+  actual=builder['check_pdf'](R/file,builder['records'](source,short),1 if short else 2,1 if short else None)
+  assert actual==record
+for short,stem,md in [(True,'Cayleb-James-polished-one-page','one-page.md'),(False,'Cayleb-James-polished-resume','resume.md')]:
+ rows=builder['records'](source,short)
+ assert (R/(stem+'.txt')).read_text()==builder['text_export'](rows)
+ assert (R/'resume'/md).read_text()==builder['markdown_export'](rows)
+assert (R/'resume/candidate-fragment.html').read_text()==builder['short_fragment'](source)
 assert 'id="journey-progress"' not in (R/'index.html').read_text()
-print(json.dumps({'passed':True,'uniqueIds':len(p.ids),'references':len(p.refs),'approvedPngFrames':frames,'pdfPages':[1,2],'deploymentPath':'/agentic-resume/'}))
+print(json.dumps({'passed':True,'uniqueIds':len(p.ids),'references':len(p.refs),'approvedPngFrames':frames,'approvedPdfPages':[1,2],'candidatePdfPages':[1,2],'candidateTextAndExtraction':True,'deploymentPath':'/agentic-resume/'}))

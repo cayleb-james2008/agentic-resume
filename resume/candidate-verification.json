@@ -1,0 +1,36 @@
+{
+  "status": "Unpublished candidate, not user-approved or deployed",
+  "source": "resume/resume-content.json",
+  "source_sha256": "9972a3c90c8dd4b7a15980be36b6dec0846633af7541c0707fc814cefc71a18e",
+  "body_font_pt": {
+    "one_page": 10,
+    "detailed": 10.5
+  },
+  "checks": [
+    "Sequential default and layout PDF extraction matched all source records",
+    "One-page PDF exactly one page; detailed PDF at most two pages",
+    "Approved PDF hashes unchanged"
+  ],
+  "limits": [
+    "No ATS score, hiring prediction, new project execution or employment verification",
+    "Project evidence and PR states: October 5, 2026 snapshot; not rechecked for this revision. Work history and education are self-reported."
+  ],
+  "artifacts": {
+    "Cayleb-James-polished-one-page.txt": {
+      "sha256": "d094cd0f7bbb86d4c736cabb977ea0c83aaad9f1f184503be5b3d5910d26bf36"
+    },
+    "Cayleb-James-polished-one-page.pdf": {
+      "sha256": "83970cbdf8f2d44851680a380b08984eed7f88fa06744c92e68b348c1e3c5951",
+      "pages": 1,
+      "bytes": 4421
+    },
+    "Cayleb-James-polished-resume.txt": {
+      "sha256": "7faf5eab3f17ad32ae6b499a65bbb159220049350a2b85a28f9baa84942fcaeb"
+    },
+    "Cayleb-James-polished-resume.pdf": {
+      "sha256": "f8136a885e22a731eb65fceb386376e5fc8019ba03ec8c74f7a53a8aabb83177",
+      "pages": 2,
+      "bytes": 9172
+    }
+  }
+}

@@ -234,7 +234,14 @@ function scrollView(focus=false){
  else scrollElementTo($('#'+state.view));
  if(focus){const el=state.view==='reading'?$('#reading summary'):$('#'+state.view+'-title');el?.focus({preventScroll:true});}
 }
-function navigate(view){state.view=view;persist(true);closeGuide(false);scrollView(true);}
+function navigate(view){
+ if(view==='resume'){
+  restoring=true;modeViews[state.mode]=state.view;lenis?.stop();
+  state.mode='professional';state.view=view;paint();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{restoring=false;}));
+ }
+ state.view=view;persist(true);closeGuide(false);scrollView(true);
+}
 function select(chapter,beat,options={}){
  Object.assign(state,{chapter,beat});if(!options.preserveView)state.view='story';openFor('story');paintStory();
  // Native scrolling updates the scene only; direct controls may seek explicitly.

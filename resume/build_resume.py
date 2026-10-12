@@ -1,283 +1,185 @@
-"""Build the repository's one-page resume PDF from resume/resume.md.
-
-Uses the prior verified resume builder's offline ReportLab workflow, with a
-strict one-page gate, selectable text, and an allowlist for public links.
-"""
+"""Build unpublished candidate exports from resume-content.json; never overwrite approved PDFs."""
 from __future__ import annotations
-
+import argparse
+import hashlib
 import html
 import json
 import re
-import shutil
 import subprocess
-import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-import reportlab
-from reportlab.lib.pagesizes import LETTER
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.units import inch
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Paragraph
-
-
 HERE = Path(__file__).resolve().parent
-SOURCE = HERE / "resume.md"
-OUTPUT = HERE.parent / "Cayleb-James-resume.pdf"
-CONTACT_EMAIL = "caylebalvarezjames@gmail.com"
-CONTACT_MAILTO = f"mailto:{CONTACT_EMAIL}"
-FONT_DIR = Path(reportlab.__file__).resolve().parent / "fonts"
-pdfmetrics.registerFont(TTFont("ResumeSans", str(FONT_DIR / "Vera.ttf")))
-pdfmetrics.registerFont(TTFont("ResumeSans-Bold", str(FONT_DIR / "VeraBd.ttf")))
-pdfmetrics.registerFontFamily("ResumeSans", normal="ResumeSans", bold="ResumeSans-Bold")
-ALLOWED_LINKS = {
-    CONTACT_MAILTO,
-    "https://github.com/cayleb-james2008",
-    "https://github.com/cayleb-james2008/dotz",
-    "https://github.com/cayleb-james2008/sophos",
-    "https://github.com/cayleb-james2008/agentic-resume",
-    "https://github.com/cayleb-james2008/industry-ai-suite",
-    "https://github.com/cayleb-james2008/industry-ai-suite/tree/244f6dc979abe678e90532cd7e53692443ee81dd/apps/chainwatch",
-    "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926",
-    "https://cayleb-james2008.github.io/agentic-resume/lab/",
-    "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page%5Bsize%5D=10&sort=-record_date",
-    "https://fiscaldata.treasury.gov/api-documentation/",
-    "https://api.worldbank.org/v2/country/USA/indicator/NY.GDP.MKTP.CD?format=json&per_page=15",
-    "https://datacatalog.worldbank.org/public-licenses",
-    "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD",
-    "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-    "https://creativecommons.org/publicdomain/zero/1.0/",
-    "https://api.github.com/repos/pytest-dev/pytest",
-    "https://api.github.com/licenses/mit",
-    "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bagency_ids%5D%5B%5D=406&per_page=10&order=newest",
-    "https://www.govinfo.gov/content/pkg/FR-2026-09-18/html/2026-19222.htm",
-    "https://www.govinfo.gov/content/pkg/FR-2026-09-18/html/2026-19222.htm#DATES",
-    "https://www.govinfo.gov/about/policies#copyright",
-}
-FORBIDDEN_HISTORY_MARKERS = (
-    "tommy's pizza",
-    "dunkin",
-    "robert h. lord",
-    "rhl",
-    "david cooke plaster",
-    "dcpc",
-    "portland high school",
-    "cybersecurity",
-    "ap computer science",
-)
-STALE_STATUS_MARKERS = re.compile(r"\b(?:UNVERIFIED|WIP|INCOMPLETE)\b", re.IGNORECASE)
-ALLOWED_HOSTS = {
-    "github.com",
-    "cayleb-james2008.github.io",
-    "api.fiscaldata.treasury.gov",
-    "fiscaldata.treasury.gov",
-    "api.worldbank.org",
-    "datacatalog.worldbank.org",
-    "data.worldbank.org",
-    "www.cisa.gov",
-    "creativecommons.org",
-    "api.github.com",
-    "www.federalregister.gov",
-    "www.govinfo.gov",
-}
-LINK_OR_BOLD = re.compile(r"(\[[^\]]+\]\((?:https?://|mailto:)[^)\s]+\)|\*\*[^*]+\*\*)")
-LINK = re.compile(r"^\[([^\]]+)\]\(((?:https?://|mailto:)[^)\s]+)\)$")
-
-TITLE = ParagraphStyle(
-    "title", fontName="ResumeSans-Bold", fontSize=17, leading=21,
-    spaceAfter=4, textColor="#101820",
-)
-H2 = ParagraphStyle(
-    "h2", fontName="ResumeSans-Bold", fontSize=9.6, leading=12,
-    spaceBefore=8, spaceAfter=3, textColor="#24313A",
-)
-BODY = ParagraphStyle(
-    "body", fontName="ResumeSans", fontSize=9.4, leading=11.6,
-    spaceAfter=1.5, textColor="#202A32",
-)
-BULLET = ParagraphStyle(
-    "bullet", parent=BODY, leftIndent=10, firstLineIndent=0,
-    bulletIndent=1, spaceAfter=2,
-)
+ROOT = HERE.parent
+SOURCE = HERE / 'resume-content.json'
 
 
-def inline_markup(text: str) -> str:
-    """Escape plain text and render only allowlisted Markdown links/bold."""
-    output: list[str] = []
-    for part in LINK_OR_BOLD.split(text):
-        if not part:
-            continue
-        match = LINK.fullmatch(part)
-        if match:
-            label, target = match.groups()
-            parsed = urlparse(target)
-            allowed_mailto = target == CONTACT_MAILTO and label == CONTACT_EMAIL
-            allowed_https = parsed.scheme == "https" and parsed.netloc in ALLOWED_HOSTS
-            if target not in ALLOWED_LINKS or not (allowed_mailto or allowed_https):
-                raise ValueError(f"Resume link is not in the verified public allowlist: {target}")
-            output.append(
-                f'<link href="{html.escape(target, quote=True)}" color="#24343E">'
-                f"<u>{html.escape(label)}</u></link>"
-            )
-        elif part.startswith("**") and part.endswith("**"):
-            output.append(f"<b>{html.escape(part[2:-2])}</b>")
+def plain(value):
+    # PDF fonts and exported text use ordinary hyphens/apostrophes for reliable extraction.
+    return value.translate(str.maketrans({'—': '-', '–': '-', '’': "'", '·': '|'}))
+
+
+def records(data, short=False):
+    rows = [('title', data['full_name']), ('body', data['headline']),
+            ('body', f"{data['location']} | {data['work_preference']} | {data['email']}"),
+            ('links', list(data['links'].values())), ('h2', 'Summary'), ('body', data['summary']),
+            ('h2', 'Experience'), ('h3', f"{data['experience']['title']} | {data['experience']['dates']}"),
+            ('body', data['experience']['intro']), ('h2', 'Selected Projects')]
+    for project in data['projects']:
+        rows.append(('h3', project['short_name'] if short else project['name']))
+        if short:
+            rows.append(('links', project['links'][:1]))
         else:
-            output.append(html.escape(part))
-    return "".join(output)
+            rows += [('body', project['stack']), ('links', project['links'])]
+        rows += [('bullet', b) for b in ([project['short']] if short else project['bullets'])]
+    rows.append(('h2', 'Skills'))
+    rows += [('body', value) for value in data['short_skills']] if short else [('body', f'{label}: {value}') for label, value in data['skills']]
+    rows.append(('h2', 'Additional Experience'))
+    rows += [('body', f"{job['organization']} | {job['dates']}") for job in data['additional_experience']]
+    school = data['education']
+    rows += [('h2', 'Education'), ('body', f"{school['school']} | {school['location']} | {school['status']}"),
+             ('body', f"Coursework: {school['coursework']}"), ('body', data['snapshot_note'])]
+    return rows
 
 
-def parse_markdown(path: Path) -> list[Paragraph]:
-    story: list[Paragraph] = []
-    pending: list[str] = []
+def validate_source(data):
+    assert data['headline'] == 'AI workflow developer'
+    assert [p['slug'] for p in data['projects']] == ['suite', 'sophos', 'dotz']
+    assert 'proposed use case' in data['summary'] and 'employee onboarding' in data['summary']
+    assert len(data['additional_experience']) == 4
+    assert data['education']['school'] == 'Portland High School'
+    for link in [*data['links'].values(), *(l for p in data['projects'] for l in p['links'])]:
+        parsed = urlparse(link['url'])
+        assert parsed.scheme == 'https' and parsed.netloc in {'github.com', 'cayleb-james2008.github.io'}
+    assert not re.search(r'TO BE SUPPLIED|PLACEHOLDER', json.dumps(data))
 
-    def flush() -> None:
-        if pending:
-            story.append(Paragraph(inline_markup(" ".join(pending)), BODY))
-            pending.clear()
 
-    for raw in path.read_text(encoding="utf-8").splitlines():
-        line = raw.strip()
-        if not line:
-            flush()
-        elif line.startswith("# "):
-            flush()
-            story.append(Paragraph(inline_markup(line[2:].strip()), TITLE))
-        elif line.startswith("## "):
-            flush()
-            story.append(Paragraph(inline_markup(line[3:].strip()).upper(), H2))
-        elif line.startswith("- "):
-            flush()
-            story.append(Paragraph(inline_markup(line[2:].strip()), BULLET, bulletText="•"))
+def text_export(rows):
+    return '\n\n'.join(plain(' | '.join(f"{l['label']}: {l['url']}" for l in value) if kind == 'links'
+                                  else ('- ' if kind == 'bullet' else '') + value)
+                        for kind, value in rows) + '\n'
+
+
+def markdown_export(rows):
+    prefix = {'title': '# ', 'h2': '## ', 'h3': '### ', 'bullet': '- ', 'body': ''}
+    return '\n\n'.join(' | '.join(f"[{l['label']}]({l['url']})" for l in value) if kind == 'links'
+                        else prefix[kind] + value for kind, value in rows) + '\n'
+
+
+def detailed_fragment(rows):
+    tags = {'title': 'h1', 'h2': 'h2', 'h3': 'h3', 'body': 'p', 'bullet': 'p'}
+    parts = ['<article class="resume" id="resume">']
+    for kind, value in rows:
+        if kind == 'links':
+            parts.append('<p>' + ' | '.join(f'<a href="{html.escape(l["url"], quote=True)}">{html.escape(l["label"])}</a>' for l in value) + '</p>')
         else:
-            pending.append(line)
-    flush()
-    return story
+            tag = tags[kind]
+            parts.append(f'<{tag}>' + html.escape(value) + f'</{tag}>')
+    return '\n'.join(parts + ['</article>', ''])
 
 
-def verify_pdf_text(path: Path) -> None:
-    pdftotext = shutil.which("pdftotext")
-    if not pdftotext:
-        raise RuntimeError("pdftotext is required to confirm selectable PDF text")
-    result = subprocess.run(
-        [pdftotext, str(path), "-"], capture_output=True, text=True, timeout=30, check=True
-    )
-    content = result.stdout
-    if not content.strip():
-        raise RuntimeError("Generated PDF contains no extractable text")
-    normalized_content = re.sub(r"\s+", " ", content).casefold()
-    required = (
-        "Project résumé / selected public work", "Cayleb Alvarez-James",
-        "LedgerBridge", "SearchLift", "ChainWatch",
-        "Treasury", "World Bank", "CISA", "pytest-dev/pytest", "2026-19222",
-        "GovInfo", "public-policy question", "DATES",
-        "SearchLift before-state", "0/10 approved workflow names",
-        "License : CC BY-4.0", "17:15:50 UTC",
-        "structural check did not invoke a model", "no live chain feed",
-        "Five local model samples", "independent witness verified",
-        "No organization deployment or business outcome is claimed",
-        "remote-only", CONTACT_EMAIL,
-    )
-    for phrase in required:
-        if phrase.casefold() not in normalized_content:
-            raise RuntimeError(f"Generated PDF is missing required text: {phrase}")
-    if "TO BE SUPPLIED" in content:
-        raise RuntimeError("Generated PDF contains unresolved placeholder text")
-    if STALE_STATUS_MARKERS.search(content):
-        raise RuntimeError("Generated PDF contains stale visitor-facing status labels")
-    email_addresses = re.findall(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", content)
-    if email_addresses != [CONTACT_EMAIL]:
-        raise RuntimeError("Generated PDF must contain only the approved recruiter email once")
-    phone_pattern = re.compile(r"(?<!\d)(?:\+?1[ .-]?)?(?:\(\d{3}\)|\d{3})[ .-]?\d{3}[ .-]?\d{4}(?!\d)")
-    if phone_pattern.search(content):
-        raise RuntimeError("Generated PDF contains a phone-number pattern")
-    forbidden = [marker for marker in FORBIDDEN_HISTORY_MARKERS if marker in normalized_content]
-    if forbidden:
-        raise RuntimeError("Generated PDF contains unverified personal-history claims")
-    stale_ai_claim = "all ten package ai outputs were rejected"
-    if stale_ai_claim in content.casefold():
-        raise RuntimeError("Generated PDF repeats a superseded AI-status claim")
-    forbidden_no_call_claims = ("no ai route was invoked", "no independent ai route run")
-    if any(claim in normalized_content for claim in forbidden_no_call_claims):
-        raise RuntimeError("Generated PDF makes an absolute AI no-call claim")
+def short_fragment(data):
+    template = (ROOT / 'stage/incumbent-resume-source.html').read_text()
+    template = template.replace('Cayleb Alvarez-James', html.escape(data['full_name'])).replace('caylebalvarezjames@gmail.com', data['email'])
+    def replace(pattern, value):
+        nonlocal template
+        template, count = re.subn(pattern, lambda _: value, template, count=1)
+        assert count == 1, pattern
+    replace(r'<p>AI workflow developer · Connecticut</p>', f'<p>{html.escape(data["headline"])} · Connecticut · {data["work_preference"]}</p>')
+    replace(r'(<div class="resume-summary"><h2>Summary</h2>)<p>.*?</p>', '<div class="resume-summary"><h2>Summary</h2><p>' + html.escape(data['summary']) + '</p>')
+    replace(r'(<p class="resume-date">2026</p>)<p>.*?</p>', '<p class="resume-date">' + data['experience']['dates'] + '</p><p>' + html.escape(data['experience']['intro']) + '</p>')
+    jobs = '<div class="resume-jobs">' + ''.join('<p><strong>' + html.escape(j['organization'].replace("'", '’').replace(' — ', ' · ')) + '</strong><span>' + html.escape(j['dates']) + '</span></p>' for j in data['additional_experience']) + '</div>'
+    replace(r'<div class="resume-jobs">.*?</div>', jobs)
+    school = data['education']
+    replace(r'<h3>Portland High School</h3><p>.*?</p>', '<h3>' + html.escape(school['school']) + '</h3><p>' + html.escape(school['location'] + ' · ' + school['status']) + '<br>' + html.escape(school['coursework']) + '</p>')
+    projects = '<div class="resume-selected">' + ''.join(f'<h3><a href="{p["links"][0]["url"]}" data-goto-project="{p["slug"]}">{p["short_name"]} ↗</a></h3><p>{html.escape(p["short"])}</p>' for p in data['projects']) + '</div>'
+    replace(r'<div class="resume-selected">.*?</div>', projects)
+    replace(r'<section><h2>Skills</h2><p>.*?</p></section>', '<section><h2>Skills</h2><p>' + '<br>'.join(html.escape(value) for value in data['short_skills']) + '</p></section>')
+    actions = '<footer class="resume-actions"><a class="button primary" href="Cayleb-James-polished-one-page.pdf" download>One-page résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-resume.pdf" download>Detailed résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-one-page.txt" download>One-page text ↓</a><a class="quiet" href="Cayleb-James-polished-resume.txt" download>Detailed text ↓</a><a class="quiet" href="mailto:' + data['email'] + '">Let’s talk ↗</a><p>' + html.escape(data['snapshot_note']) + '</p></footer>'
+    replace(r'<footer class="resume-actions">.*?</footer>', actions)
+    return template
 
 
-def verify_pdf_metadata(path: Path) -> None:
-    qpdf = shutil.which("qpdf")
-    if not qpdf:
-        raise RuntimeError("qpdf is required to confirm PDF metadata and link annotations")
-    result = subprocess.run(
-        [qpdf, "--json", str(path)], capture_output=True, text=True, timeout=30, check=True
-    )
-    metadata = json.dumps(json.loads(result.stdout), ensure_ascii=False).casefold()
-    required = (
-        "project résumé / selected public work",
-        "cayleb alvarez-james",
-        "https://github.com/cayleb-james2008/industry-ai-suite",
-        CONTACT_MAILTO,
-    )
-    if any(value not in metadata for value in required):
-        raise RuntimeError("PDF metadata is missing the selected-work title or author")
-    if any(marker in metadata for marker in FORBIDDEN_HISTORY_MARKERS):
-        raise RuntimeError("PDF metadata contains unverified personal-history claims")
+def normalized(value):
+    return re.sub(r'\s+', ' ', plain(value)).strip()
 
 
-def main() -> int:
-    source_text = SOURCE.read_text(encoding="utf-8")
-    if "TO BE SUPPLIED" in source_text:
-        print("FAIL: placeholder gate — unresolved resume text remains", file=sys.stderr)
-        return 1
-    if not source_text.startswith("# Project résumé / selected public work\n"):
-        print("FAIL: résumé must be explicitly titled as selected public project work", file=sys.stderr)
-        return 1
-    if any(marker in source_text.casefold() for marker in FORBIDDEN_HISTORY_MARKERS):
-        print("FAIL: unverified personal-history claims remain in the public résumé source", file=sys.stderr)
-        return 1
-    if STALE_STATUS_MARKERS.search(source_text):
-        print("FAIL: résumé source contains stale visitor-facing status labels", file=sys.stderr)
-        return 1
-    if source_text.count(CONTACT_MAILTO) != 1:
-        print("FAIL: résumé must link the approved recruiter email exactly once", file=sys.stderr)
-        return 1
-
-    page_count = [0]
-
-    def on_page(canvas, _doc) -> None:
-        page_count[0] += 1
-        canvas.setTitle("Project résumé / selected public work")
-        canvas.setAuthor("Cayleb Alvarez-James")
-        canvas.setSubject("Selected public projects and evidence-backed public-data work")
-        canvas.setKeywords("project resume, selected public work, local workflows")
-        canvas.setCreator("agentic-resume offline PDF builder")
-        canvas.setFont("ResumeSans", 6.5)
-        canvas.setStrokeColorRGB(.30, .38, .43)
-        canvas.setLineWidth(.5)
-        canvas.line(.55 * inch, 10.72 * inch, 7.95 * inch, 10.72 * inch)
-        canvas.setFillColor("#4A5862")
-        canvas.drawCentredString(
-            4.25 * inch,
-            0.28 * inch,
-            "10 local workflows · 5 cited model samples · no company deployment claimed.",
-        )
-
-    doc = BaseDocTemplate(
-        str(OUTPUT), pagesize=LETTER,
-        leftMargin=0.55 * inch, rightMargin=0.55 * inch,
-        topMargin=0.42 * inch, bottomMargin=0.43 * inch,
-    )
-    frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="resume")
-    doc.addPageTemplates([PageTemplate(id="one-page", frames=[frame], onPage=on_page)])
-    doc.build(parse_markdown(SOURCE))
-
-    if page_count[0] != 1:
-        print(f"FAIL: generated resume is {page_count[0]} pages, expected exactly 1", file=sys.stderr)
-        return 1
-    verify_pdf_text(OUTPUT)
-    verify_pdf_metadata(OUTPUT)
-    print(f"OK: {OUTPUT.name} built as one page with extractable text and allowlisted public links")
-    return 0
+def check_pdf(path, rows, max_pages, exact_pages=None):
+    info = subprocess.check_output(['pdfinfo', str(path)], text=True)
+    pages = int(re.search(r'Pages:\s+(\d+)', info).group(1))
+    assert 1 <= pages <= max_pages and (exact_pages is None or pages == exact_pages), (path, pages)
+    assert path.stat().st_size < 2_000_000 and re.search(r'Encrypted:\s+no', info)
+    expected = [plain(l['label']) for k, v in rows for l in v if k == 'links']
+    expected += [plain(v) for k, v in rows if k != 'links']
+    for layout in ([], ['-layout']):
+        output = subprocess.check_output(['pdftotext', *layout, str(path), '-'], text=True)
+        content = normalized(output)
+        for value in expected:
+            assert normalized(value) in content, (path.name, value)
+        # All source records, including dates and project boundaries, extract in reading order.
+        cursor = 0
+        for kind, value in rows:
+            values = [l['label'] for l in value] if kind == 'links' else [value]
+            for item in values:
+                position = content.find(normalized(item), cursor)
+                assert position >= cursor, (path.name, item, 'extraction order')
+                cursor = position + len(normalized(item))
+        assert not re.search(r'\*\*|TO BE SUPPLIED|\[[^\]]+\]\(https', output)
+    return {'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'pages': pages, 'bytes': path.stat().st_size}
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
+def build_pdf(path, rows, short):
+    from reportlab.lib.pagesizes import LETTER
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, PageBreak
+    body = ParagraphStyle('body', fontName='Helvetica', fontSize=10 if short else 10.5, leading=12 if short else 13, spaceAfter=3)
+    styles = {'body': body, 'links': ParagraphStyle('links', parent=body),
+              'title': ParagraphStyle('title', parent=body, fontName='Helvetica-Bold', fontSize=18, leading=21, spaceAfter=4),
+              'h2': ParagraphStyle('h2', parent=body, fontName='Helvetica-Bold', fontSize=11, leading=14, spaceBefore=7, spaceAfter=3, keepWithNext=True),
+              'h3': ParagraphStyle('h3', parent=body, fontName='Helvetica-Bold', spaceBefore=4, keepWithNext=True),
+              'bullet': ParagraphStyle('bullet', parent=body, leftIndent=10, bulletIndent=0)}
+    story = []
+    for kind, value in rows:
+        if not short and kind == 'h3' and value.startswith('dotz -'):
+            story.append(PageBreak())
+        if kind == 'links':
+            value = ' | '.join(f'<link href="{html.escape(l["url"], quote=True)}"><u>{html.escape(plain(l["label"]))}</u></link>' for l in value)
+        else:
+            value = html.escape(plain(value))
+        story.append(Paragraph(value, styles[kind], bulletText='-' if kind == 'bullet' else None))
+    doc = SimpleDocTemplate(str(path), pagesize=LETTER, leftMargin=36, rightMargin=36, topMargin=30, bottomMargin=30,
+                            title='Cayleb Alvarez-James - AI workflow developer', author='Cayleb Alvarez-James',
+                            subject='Unpublished resume polish candidate; October 5, 2026 project snapshot', invariant=1)
+    doc.build(story)
+    return check_pdf(path, rows, 1 if short else 2, 1 if short else None)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--content-only', action='store_true', help='Generate text/HTML/Markdown without ReportLab')
+    args = parser.parse_args()
+    data = json.loads(SOURCE.read_text()); validate_source(data)
+    approved = json.loads((HERE / 'approved-verification.json').read_text())
+    for name, record in approved['artifacts'].items():
+        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == record['sha256']
+    exports = {}
+    for short, stem, mdname in [(True, 'Cayleb-James-polished-one-page', 'one-page.md'), (False, 'Cayleb-James-polished-resume', 'resume.md')]:
+        rows = records(data, short)
+        (HERE / mdname).write_text(markdown_export(rows), encoding='utf-8')
+        path = ROOT / (stem + '.txt'); path.write_text(text_export(rows), encoding='utf-8')
+        exports[path.name] = {'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        if not args.content_only:
+            exports[stem + '.pdf'] = build_pdf(ROOT / (stem + '.pdf'), rows, short)
+    (HERE / 'resume-fragment.html').write_text(detailed_fragment(records(data)))
+    (HERE / 'candidate-fragment.html').write_text(short_fragment(data))
+    if not args.content_only:
+        manifest = {'status': 'Unpublished candidate, not user-approved or deployed', 'source': 'resume/resume-content.json',
+                    'source_sha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(), 'body_font_pt': {'one_page': 10, 'detailed': 10.5},
+                    'checks': ['Sequential default and layout PDF extraction matched all source records', 'One-page PDF exactly one page; detailed PDF at most two pages', 'Approved PDF hashes unchanged'],
+                    'limits': ['No ATS score, hiring prediction, new project execution or employment verification', data['snapshot_note']], 'artifacts': exports}
+        (HERE / 'candidate-verification.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    print('Generated candidate text, Markdown and fragments' + ('' if args.content_only else '; PDFs passed extraction/order/page checks'))
+
+
+if __name__ == '__main__':
+    main()

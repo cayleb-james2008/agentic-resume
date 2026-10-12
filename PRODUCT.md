@@ -82,12 +82,13 @@ The portfolio pairs public case studies and repository links with dated evidence
 
 On 2026-09-26 Cayleb requested a dark, black-and-white, modern cyberpunk/holographic/professional application portfolio. The approved near-monochrome evidence dossier replaces the cool-light vermilion direction.
 
-## PDF synchronization boundary
+## Candidate PDF and rollback boundary
 
-- Parent supplied the independently reviewed résumé PDF, SHA-256 `6683e120435fcdccddd64aeda300b2e11a932622514235c418746f72af32913f`. Keep the stable `Cayleb-James-resume.pdf` download path synchronized with the reviewed JSON, web fragment, and generated preview. Never describe a candidate as published without a live byte readback.
-- Preserve the stable download path `/agentic-resume/Cayleb-James-resume.pdf`. Once approved, replace only the root PDF bytes and regenerate `assets/img/resume-preview.webp` with `scripts/build-resume-preview.sh`; inspect the rendered preview against the exact replacement file.
-- Recheck every HTML PDF `href` before delivery: `index.html` (hero and résumé-preview actions), `resume.html` (download action and preview-image link), `projects/dotz.html`, `projects/sophos.html`, and `projects/industry-ai-suite.html` (one action each). There are seven HTML references, all to the same stable filename.
-- `README.md` repeats the public absolute download URL. Verify it still targets the stable PDF path after a replacement. Do not imply that the separate parent artifact is published until live deployment and download bytes are read back.
+- This worktree contains an unpublished résumé polish candidate, not a replacement approved release. `release.json` and `resume/approved-verification.json` describe historical artifacts.
+- Preserve the approved `Cayleb-James-resume.pdf`, `Cayleb-James-one-page-resume.pdf` and approved manifest bytes. The historical DOCX and preview also remain unchanged.
+- Candidate filenames are `Cayleb-James-polished-one-page.pdf`, `Cayleb-James-polished-resume.pdf` and corresponding UTF-8 text files. Candidate copy is generated from `resume/resume-content.json`; the short website fragment uses the approved layout with shared summary and project fields.
+- `resume/candidate-verification.json` records source hashes and sequential extraction/page checks, with no ATS score or new factual verification. Project evidence remains the October 5, 2026 snapshot; work and education are self-reported.
+- Proposed assistant implementation, business support and employee onboarding use cases are future focus, not demonstrated delivery. No push or deployment is authorized. Existing project-page PDF links continue to the unchanged historical PDF; the candidate Professional view offers the revised downloads.
 
 ## Evidence on Hand
 

@@ -1,24 +1,30 @@
-# Cayleb’s résumé
+# Cayleb’s résumé polish candidate
 
 Canonical website: https://cayleb-james2008.github.io/agentic-resume/
 
-The approved character-led résumé has an Explore view with three explicitly fictional workdays and a Professional view with a one-page résumé. Mofu, Pip, Folio and Loam use the approved, unchanged transparent frame packs. The desktop stories follow scrolling; mobile, short screens, paused motion and system reduced motion use native reading and direct controls.
+This checkout is an unpublished candidate on `polish/hiring-panel-20261012`. It preserves the approved character-led design, projects, story records, artwork and layout. A single root overflow rule contains the existing mobile character canvas. Small copy changes distinguish documented independent development from proposed assistant implementation, workflow automation and business support. Employee onboarding is a proposed use case.
 
-`resume.html` opens the Professional view of this same website. The current PDF downloads are `Cayleb-James-one-page-resume.pdf` and `Cayleb-James-resume.pdf`. Work history is self-reported. Project evidence is dated; local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. No production customer outcome or ROI is claimed.
+Explore retains three explicitly fictional workdays. Professional presents the concise résumé. Direct résumé links and `resume.html` select Professional when JavaScript is available; ordinary `#resume` anchors remain usable without JavaScript. Mofu, Pip, Folio and Loam keep the approved frame packs and interactions.
+
+The candidate downloads are `Cayleb-James-polished-one-page.pdf`, `Cayleb-James-polished-resume.pdf` and their UTF-8 `.txt` equivalents. Both PDFs use a single reading column and body type of at least 10 points. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragments. `resume/candidate-verification.json` records source/artifact hashes and extraction checks; it is not user approval or a predictive ATS score.
+
+Project evidence and PR statuses remain the October 5, 2026 snapshot. No project checks were rerun for this polish. Work history and education are self-reported. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. No production customer outcome, onboarding delivery or ROI is claimed.
 
 ## Build and validate
 
-No dependency download is required for the public static site. Its fonts, character assets and motion libraries are served locally.
+No installation is required. Fonts, character assets and motion libraries are local. The candidate PDF builder defaults to the installed bundled Python with ReportLab; `PYTHON` can select another existing interpreter.
 
 ```sh
+bash resume/build.sh
 python3 scripts/build-remake.py
 node --test tests/*.test.js
 python3 scripts/check-release.py
-python3 -m http.server 18412 --bind 127.0.0.1
 ```
 
-The builder preserves the reviewed reading content in `remake/project-source.html`, `remake/reading-source.html` and `stage/incumbent-resume-source.html`. GSAP, Lenis, React/ReactDOM, React Bits GlassSurface and free Aether source/license notices are retained under `vendor/`, `remake/vendor/` and `assets/licenses/`. React is loaded only when Mofu’s guide opens.
+The website builder generates candidate fragments with system Python without importing ReportLab. `--content-only` is available for text/HTML generation. Full PDF generation validates all source records in both default and layout text extraction, section and job/date ordering, size and page counts. The detailed PDF is at most two pages; the short PDF is exactly one page.
 
-## Publish and rollback
+The reviewed project/story inputs stay in `remake/project-source.html` and `remake/reading-source.html`. `stage/incumbent-resume-source.html` remains the historical layout/copy template; the site embeds generated `resume/candidate-fragment.html`. GSAP, Lenis, React/ReactDOM, React Bits GlassSurface and Aether source/license notices remain in place. React loads only when Mofu’s guide opens.
 
-GitHub Pages publishes `main` from the repository root. Release validation checks the exact deployed commit and compares live assets to source hashes. The previous public release is commit `476bb5623ef8b438028031faf86c55ff4520c090`; its source and previous PDFs remain recoverable in Git. Local development candidates are preserved separately and are not deployment entrypoints.
+## Candidate and rollback boundary
+
+No push or deployment is authorized for this candidate. `release.json` describes the historical approved v8 release, not these edits. The historical PDFs `Cayleb-James-one-page-resume.pdf` and `Cayleb-James-resume.pdf`, their `resume/approved-verification.json` manifest, and the historical DOCX remain unchanged. Release validation checks those approved hashes as well as the separate candidate outputs. The approved original checkout and frozen source remain available outside this worktree.

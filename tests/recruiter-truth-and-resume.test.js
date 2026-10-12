@@ -19,8 +19,8 @@ test('public PDFs match the exact user-approved release bytes',()=>{
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.sha256);
  }
 });
-test('professional résumé embeds the approved reading source without invented employment',()=>{
+test('professional résumé embeds the shared candidate source without invented employment',()=>{
  const page=read('index.html');
- assert.ok(page.replaceAll(' aether-prism-btn','').includes(read('stage/incumbent-resume-source.html').trim()));
+ assert.ok(page.replaceAll(' aether-prism-btn','').includes(read('resume/candidate-fragment.html').trim()));
  for(const phrase of ['Portland High School','Dunkin','Robert H. Lord Company','Tommy’s Pizza','David Cooke Plaster'])assert.ok(page.includes(phrase));
 });

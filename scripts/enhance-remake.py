@@ -2,7 +2,7 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 html=(R/'index.html').read_text()
 arrow='<svg class="aether-prism-btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
-html=html.replace('<link rel="stylesheet" href="remake/site.css?v=1">','<link rel="stylesheet" href="remake/vendor/lenis.css"><link rel="stylesheet" href="remake/vendor/guide-glass.css"><link rel="stylesheet" href="remake/aether.css?v=8"><link rel="stylesheet" href="remake/site.css?v=8">').replace('remake/site.js?v=1','remake/site.js?v=8')
+html=html.replace('<link rel="stylesheet" href="remake/site.css?v=1">','<link rel="stylesheet" href="remake/vendor/lenis.css"><link rel="stylesheet" href="remake/vendor/guide-glass.css"><link rel="stylesheet" href="remake/aether.css?v=8"><link rel="stylesheet" href="remake/site.css?v=9">').replace('remake/site.js?v=1','remake/site.js?v=9')
 html=html.replace('<aside id="guide" hidden aria-label="Mofu guide">','<aside id="guide" hidden aria-label="Mofu guide" data-lenis-prevent><div id="guide-material" aria-hidden="true"></div>')
 html=html.replace('class="primary"','class="primary aether-prism-btn"').replace('class="button primary"','class="button primary aether-prism-btn"')
 html=html.replace('<span>↗</span>',arrow).replace('<span>→</span>',arrow)

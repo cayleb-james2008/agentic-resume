@@ -10,8 +10,9 @@ OUT_DIR/contact.png (1536×1024); import_images.py then encodes them in place.
 
 Steps: keep the figure's largest alpha component, decontaminate the soft edge
 against the estimated backdrop (so no mauve haze rides along the hair), then
-crop and scale into each frame. The frame numbers are measured on the
-2026-10-12 render (face centre x≈410, eye-line y≈270) — see PROVENANCE.md.
+crop and scale into each frame. FACE_X and EYE_Y are measured on the render
+in use (face centre and eye-line, in its pixels); re-measure them for a new
+render — see PROVENANCE.md.
 """
 import sys
 from pathlib import Path
@@ -74,7 +75,7 @@ def place(img: Image.Image, size: tuple[int, int], left: int, top: int, height: 
     return canvas
 
 
-# Measured on the 2026-10-12 render.
+# Measured per render (these values are a 1024×1300 trial render's) — re-measure for a new one.
 FACE_X, EYE_Y = 410, 270
 PORTRAIT_SPAN, PORTRAIT_EYE_LINE = 985, 0.60
 PROJECTS_LEFT, PROJECTS_HEIGHT = 150, 1000

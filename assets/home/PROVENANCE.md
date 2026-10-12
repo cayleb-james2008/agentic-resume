@@ -2,22 +2,16 @@
 
 Every image on the homepage is an illustration. Each one's `alt` starts with "Illustration:", and the footer credits the AI-generated character art. No image contains logos, brand marks, racing imagery or material from the layout reference.
 
-## Character frames (2026-10-12)
+## Character frames: pending
 
-**Source.** One character render that Cayleb supplied in chat on 2026-10-12. It is an AI-generated 3D animated-style image of him: crouching, mint jacket, checked shirt, glasses, plain mauve backdrop, 1024×1300. The generator was not recorded. The render itself is not stored in the repo (sha256 `07d751db1e7aac2ac84f293f7c9abe431f7481e782f54e5c8fe7d1d1989edd96`).
+The hero portrait and its maps, the projects figure and the contact figure are still placeholders, listed in `PLACEHOLDERS.json`. `check_assets.py --strict` fails until they are replaced.
 
-**Process.**
-1. Background removed with rembg 2.0.85 using the ISNet `isnet-general-use` model. Alpha matting was left off because it produced blocky edges.
-2. `scripts/home/derive_character.py` keeps the largest matte component and decontaminates the soft edge against the estimated backdrop. It then frames the three images below.
-3. `scripts/home/import_images.py` encodes each one. `scripts/home/person_maps.py` derives the hero's diffuse, alpha, depth, normal and veil maps from the portrait.
+They will come from a Pixar-style 3D render of Cayleb, generated in ChatGPT from a photo of him, in casual clothes (a baggy black t-shirt and sweatpants). The path from that render to the frames:
+1. Remove the background with rembg (ISNet, no alpha matting).
+2. Run `scripts/home/derive_character.py`, after re-measuring its face and eye-line constants on the new render.
+3. Run `import_images.py`, then `person_maps.py`.
 
-| File | Frame |
-|---|---|
-| `hero/person-*.webp`, `hero/veil-mask.png` | 1024² portrait. Face on the centre line and eye-line 60% down the square, matching the hero scene's subject framing, so the headset fills the headroom. The window cuts his right arm, which fades out over 60 source px. |
-| `projects/figure.webp` | 1186×1024. The whole crouched figure, 1000 px tall, standing on the foot, with its left edge at x 150 so it clears the right-hand panels. |
-| `contact/figure.webp` | 1536×1024. Head to knees, filling the bottom edge, centred. |
-
-`hero/noise.webp` is procedural (`scripts/home/make_noise.py`).
+The style example Cayleb shared in chat is not him and is not used anywhere on the site.
 
 ## Work-experience plates (2026-10-12)
 

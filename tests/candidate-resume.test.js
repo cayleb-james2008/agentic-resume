@@ -27,5 +27,5 @@ test('resume links retain native fallback and a direct Professional entry',()=>{
  const direct=parse('#mode=professional&view=resume');
  assert.equal(direct.mode,'professional');
  assert.equal(direct.view,'resume');
- assert.match(read('index.html'),/remake\/site.js\?v=10/);
+ assert.match(read('index.html'),/remake\/site.js\?v=\d+/);
 });

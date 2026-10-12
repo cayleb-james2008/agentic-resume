@@ -51,6 +51,13 @@ export function extendAmbient(tl){
 }
 
 // ---------- One page-load moment ----------
+let introTimeline=null, introTargets=[];
+export function finishIntro(){
+ introTimeline?.kill();introTimeline=null;
+ document.documentElement.classList.remove('intro');
+ if(introTargets.length)gsap()?.set(introTargets,{clearProps:'opacity,transform,filter,fontWeight'});
+ introTargets=[];
+}
 export function intro(allowed){
  const root=document.documentElement;
  if(!root.classList.contains('intro'))return;
@@ -58,20 +65,18 @@ export function intro(allowed){
  if(!allowed||!g){root.classList.remove('intro');return;}
  const lines=$$('.opening h1 .hl'),chips=$$('.loop-chip'),cards=$$('.question-choices>button');
  const hidden=[...lines,$('.opening .lead'),$('.opening-actions'),$('.hero-mofu'),$('.opening-art>.light-pool:not(.light-pool--lens)'),$('.light-path'),$('.mofu-caption'),...chips,...cards].filter(Boolean);
- g.set(hidden,{opacity:0});root.classList.remove('intro');
- const tl=g.timeline({defaults:{ease:'power3.out'},onComplete:()=>g.set(hidden,{clearProps:'opacity'})});
+ introTargets=[...hidden,$('.hero-mofu img')];
+ root.classList.remove('intro');
+ const tl=g.timeline({defaults:{ease:'power3.out'},onComplete:()=>{g.set(hidden,{clearProps:'opacity'});introTimeline=null;introTargets=[];}});
+ introTimeline=tl;
  // The headline comes into focus the way light resolves through glass.
- tl.fromTo(lines,{opacity:0,y:20,filter:'blur(14px)',fontWeight:280},{opacity:1,y:0,filter:'blur(0px)',fontWeight:650,duration:1,stagger:.14,clearProps:'transform,filter,fontWeight'},0)
-  .to(['.opening .lead','.opening-actions'],{opacity:1,duration:.7,stagger:.1},.5)
-  .fromTo('.opening .lead,.opening-actions',{y:12},{y:0,duration:.7,stagger:.1,clearProps:'transform'},.5)
-  .to('.hero-mofu',{opacity:1,duration:.35},.35)
-  .fromTo('.hero-mofu img',{y:-52,scale:.9},{y:0,scale:1,duration:1.05,ease:'back.out(1.6)',clearProps:'transform'},.35)
-  .fromTo('.opening-art>.light-pool:not(.light-pool--lens)',{opacity:0,scaleX:.25},{opacity:1,scaleX:1,duration:.9,clearProps:'transform'},.7)
-  .to('.light-path',{opacity:1,duration:.9},1.0)
-  .to(chips,{opacity:1,duration:.5,stagger:.14},.95)
-  .to('.mofu-caption',{opacity:1,duration:.6},1.3)
-  .to(cards,{opacity:1,duration:.5,stagger:.08},1.15)
-  .fromTo(cards,{y:14},{y:0,duration:.6,stagger:.08,clearProps:'transform'},1.15);
+ tl.fromTo(lines,{y:16,filter:'blur(3px)'},{y:0,filter:'blur(0px)',duration:.75,stagger:.08,clearProps:'transform,filter'},0)
+  .fromTo('.opening .lead,.opening-actions',{y:8},{y:0,duration:.55,stagger:.06,clearProps:'transform'},.08)
+  .fromTo('.hero-mofu img',{y:-24,scale:.96},{y:0,scale:1,duration:.9,ease:'power3.out',clearProps:'transform'},0)
+  .fromTo('.opening-art>.light-pool:not(.light-pool--lens)',{scaleX:.65},{scaleX:1,duration:.8,clearProps:'transform'},.1)
+  .fromTo('.light-path',{opacity:.2},{opacity:1,duration:.7},.1)
+  .fromTo(chips,{opacity:.68},{opacity:1,duration:.4,stagger:.07},.15)
+  .fromTo(cards,{y:9},{y:0,duration:.45,stagger:.06,clearProps:'transform'},.15);
 }
 
 // ---------- Pointer depth (fine pointers only) ----------
@@ -94,7 +99,7 @@ export function bindPointer(allowed){
 export function resetPointer(){pointer?.reset();}
 
 // ---------- Story: the objects show what changed ----------
-const sceneTargets='#story-title,.glass-record,.review-pill,.story-character,.scan-sweep,.stock-unit,.order-bar span,.calendar-hold,.repair-checks i';
+const sceneTargets='#story-title,.glass-record,.glass-record strong,.review-pill,.story-character,.scan-sweep,.stock-unit,.order-bar span,.calendar-hold,.repair-checks i';
 export function clearScene(){
  const g=gsap();if(!g)return;
  g.set(sceneTargets,{clearProps:'transform,opacity,left,filter'});
@@ -109,10 +114,14 @@ export function sceneTweens(tl,from,to){
   tl.fromTo('.story-character',{y:-34,scale:.92},{y:0,scale:1,duration:.8,ease:'back.out(1.7)',clearProps:'transform'},0);
  }
  if(moved){
-  // Records turn over like glass cards rather than swapping text in place.
-  tl.fromTo('#story-title',{opacity:.15,y:8,filter:'blur(8px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.5,ease:'power3.out',clearProps:'opacity,transform,filter'},0);
-  tl.fromTo('.glass-record',{rotationX:-74,y:-10},{rotationX:0,y:0,duration:.55,ease:'back.out(1.35)',stagger:.08,clearProps:'transform'},0)
-   .fromTo('.review-pill',{y:10},{y:0,duration:.45,ease:'power3.out',clearProps:'transform'},.14);
+  // Keep the record locations stable while the evidence changes between steps.
+  tl.fromTo('#story-title',{y:6},{y:0,duration:.3,ease:'power3.out',clearProps:'transform'},0);
+  if(from&&from.chapter!==to.chapter){
+   tl.fromTo('.glass-record',{rotationX:-12,y:8},{rotationX:0,y:0,duration:.45,ease:'power3.out',stagger:.06,clearProps:'transform'},0);
+  }else{
+   tl.fromTo('.glass-record strong',{y:5},{y:0,duration:.24,ease:'power2.out',clearProps:'transform'},0);
+  }
+  tl.fromTo('.review-pill',{y:5},{y:0,duration:.3,ease:'power3.out',clearProps:'transform'},.08);
  }
  if(entered(1)){
   // The check: one sweep of light across the records.
@@ -173,8 +182,14 @@ export function plate(on){
  const v=$('video[data-plate]');
  if(!v||on===plateOn)return;plateOn=on;
  if(on){
-  if(!v.dataset.loaded){v.dataset.loaded='1';for(const s of v.querySelectorAll('source[data-src]'))s.src=s.dataset.src;v.preload='auto';v.load();}
-  v.play().catch(()=>{});
+  if(!v.dataset.loaded){
+   v.dataset.loaded='1';
+   v.muted=true;
+   for(const s of v.querySelectorAll('source[data-src]'))s.src=s.dataset.src;
+   v.preload='auto';v.load();
+   v.addEventListener('error',()=>{v.classList.remove('is-playing');},{once:true});
+  }
+  v.play().then(()=>{if(plateOn)v.classList.add('is-playing');else v.pause();}).catch(()=>{v.classList.remove('is-playing');});
  }
- else v.pause();
+ else {v.pause();v.classList.remove('is-playing');}
 }

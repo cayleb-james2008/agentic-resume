@@ -287,9 +287,9 @@ export const DEFAULT_PARAMS = {
     headY: 0.58,
     headParallax: 0.005,
     headRelight: 0.32,
-    helmetScale: 0.69,
-    helmetX: -0.08,
-    helmetY: 0.45,
+    helmetScale: 0.54,
+    helmetX: 0.02,
+    helmetY: -0.08,
     helmetZ: 0,
     helmetFollow: 0.01,
     // The owner's pass on the degree sliders (2026-09-08, second tune of the

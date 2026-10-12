@@ -75,6 +75,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 @media (max-width: 639px) { .seam { z-index: 0; } }
 
+/* --- Contour backdrops (projects, contact) ----------------------------- */
+.contours { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
 /* --- Bracket corners, drawn as one path four ways ----------------------- */
 .corner { position: absolute; width: 0.625rem; height: 0.625rem; overflow: visible; }
 .corner--tr { top: 0; right: 0; }

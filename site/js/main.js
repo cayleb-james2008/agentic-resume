@@ -15,12 +15,14 @@ import { mount as mountApproach } from './approach/approach.js';
 import { mount as mountExperience } from './experience/timeline.js';
 import { mount as mountHero } from './hero/hero.js';
 import { mountMenu } from './hero/menu.js';
+import { mount as mountProjects } from './projects/projects.js';
 
 /** Each block's mount, added as the block is built. */
 const MOUNTS = [
   ['[data-hero]', mountHero],
   ['[data-approach]', mountApproach],
   ['[data-experience]', mountExperience],
+  ['[data-projects]', mountProjects],
 ];
 
 function sizeRoot() {

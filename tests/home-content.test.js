@@ -50,8 +50,9 @@ test('computed stats match', () => {
   assert.equal(stat('Projects'), String(content.projects.cards.length));
   const languages = resume.skills.find(([name]) => name === 'Languages')[1].split(',');
   assert.equal(stat('Languages'), String(languages.length));
-  assert.equal(stat('Workflows'), '10');
+  assert.equal(stat('Demos'), '10');
   assert.match(resume.projects[0].bullets[0], /\b10\b/);
+  assert.match(content.hero.lab.sub, /^10 recorded demos$/);
 });
 
 test('name renders as three words', () => {
@@ -79,6 +80,8 @@ test('content lengths stay inside their frames', () => {
       assert.ok(length <= max, `${path} is ${length} characters; its frame allows ${max}`);
     }
   }
+  const labels = content.hero.glance.stats.map((s) => [...s.label].length).reduce((a, b) => a + b, 0);
+  assert.ok(labels <= 22, `the three stat labels total ${labels} characters; their row allows 22`);
   for (const entry of content.experience.entries.filter((e) => e.frame === 'centre')) {
     const length = [...`${entry.lead} ${entry.body}`].length;
     assert.ok(length <= 190, `centre copy "${entry.lead}" is ${length} characters; its column allows 190`);

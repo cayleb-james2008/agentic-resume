@@ -87,12 +87,15 @@ export function runWhileVisible(el, callback, getFramerate = () => 0) {
 export function scrubTrigger(el, { start, end, from = 0, to = 1, apply, smooth = false }) {
   const spring = smooth ? new Spring({ ...CONFIGS.TRIGGER, precision: 0.0005 }) : null;
   let last = null;
-  return runWhileVisible(el, () => {
+  let lastTime = null;
+  return runWhileVisible(el, (time) => {
+    const dt = lastTime === null ? 16 : time - lastTime;
+    lastTime = time;
     const progress = triggerProgress(el.getBoundingClientRect(), window.innerHeight, start, end);
     let p = progress;
     if (spring) {
       spring.set(progress);
-      spring.step(16);
+      spring.step(dt);
       p = spring.value;
     }
     if (p === last) return;

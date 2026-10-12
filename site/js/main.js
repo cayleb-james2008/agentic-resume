@@ -11,10 +11,13 @@ import { mountReveals } from './engine/reveal.js';
 import { prefersReducedMotion } from './engine/scroll.js';
 import { initStack } from './engine/stack.js';
 import { ticker } from './engine/ticker.js';
+import { mount as mountHero } from './hero/hero.js';
 import { mountMenu } from './hero/menu.js';
 
 /** Each block's mount, added as the block is built. */
-const MOUNTS = [];
+const MOUNTS = [
+  ['[data-hero]', mountHero],
+];
 
 function sizeRoot() {
   const root = document.documentElement;

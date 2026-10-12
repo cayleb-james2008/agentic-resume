@@ -52,10 +52,13 @@ export function mountDissolve(band, carry = 'light') {
   let drawn = null;
   const observer = new ResizeObserver(() => { size = fitCanvas(band); drawn = null; });
   observer.observe(band);
-  const render = () => {
+  let last = null;
+  const render = (time) => {
+    const dt = last === null ? 16 : time - last;
+    last = time;
     const target = triggerProgress(band.getBoundingClientRect(), window.innerHeight, 'top bottom', 'top top');
     spring.set(target);
-    spring.step(16);
+    spring.step(dt);
     const progress = spring.value;
     if (progress === drawn) return;
     drawn = progress;

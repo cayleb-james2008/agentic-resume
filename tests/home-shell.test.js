@@ -56,7 +56,7 @@ test('hidden states only apply under .js', () => {
   for (const [file, text] of Object.entries(css)) {
     const rules = text.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([^{}]+)\{([^{}]*)\}/g);
     for (const [, selector, body] of rules) {
-      if (!/opacity:\s*0(?![.\d])|visibility:\s*hidden/.test(body)) continue;
+      if (!/(^|[;\s{])(opacity:\s*0(?![.\d])|visibility:\s*hidden)/.test(body)) continue;
       for (const part of selector.split(',').map((s) => s.trim())) {
         if (allowed.test(part)) continue;
         assert.match(part, /^\.js:not\(\.reveal-failsafe\)/, `${file}: "${part}" hides content without the .js guard`);

@@ -56,12 +56,15 @@ export function mountMenu(header, { lenis = null } = {}) {
   let openedAt = 0;
   let unsubscribe = null;
 
+  let last = null;
   const draw = (time) => {
+    const dt = last === null || !Number.isFinite(time) ? 16 : time - last;
+    last = Number.isFinite(time) ? time : null;
     const elapsed = time - openedAt;
-    let moving = fade.step(16);
+    let moving = fade.step(dt);
     sheet.style.opacity = String(fade.value);
     rises.forEach((spring, i) => {
-      if (!open || elapsed >= ITEM_BASE + i * ITEM_STEP) moving = spring.step(16) || moving;
+      if (!open || elapsed >= ITEM_BASE + i * ITEM_STEP) moving = spring.step(dt) || moving;
       else moving = true;
       items[i].style.opacity = String(spring.value);
       items[i].style.transform = `translateY(${((1 - spring.value) * 0.75).toFixed(4)}rem)`;
@@ -69,6 +72,7 @@ export function mountMenu(header, { lenis = null } = {}) {
     if (!moving) {
       unsubscribe?.();
       unsubscribe = null;
+      last = null;
       if (!open) finishClose();
     }
   };

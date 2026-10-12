@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "scripts" / "home"))
 from templates import approach, contact, experience, hero, projects, shell  # noqa: E402
 
 CENTRE_COPY_MAX = 190
+STAT_LABELS_MAX = 22
 
 
 def select(value, pattern: str):
@@ -44,6 +45,9 @@ def check_limits(content: dict, limits: dict) -> list[str]:
         for value, path in select(content, pattern):
             if len(str(value)) > limit:
                 problems.append(f"{path} is {len(str(value))} characters; its frame allows {limit}")
+    labels = sum(len(s["label"]) for s in content["hero"]["glance"]["stats"])
+    if labels > STAT_LABELS_MAX:
+        problems.append(f"hero.glance.stats labels total {labels} characters; their row allows {STAT_LABELS_MAX}")
     for i, entry in enumerate(content["experience"]["entries"]):
         if entry["frame"] == "centre":
             length = len(f"{entry['lead']} {entry['body']}")

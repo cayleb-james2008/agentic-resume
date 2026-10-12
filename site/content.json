@@ -27,7 +27,7 @@
     "now": {"eyebrow": "Now building", "title": "EvoHedge", "lines": ["Autonomous trading research", "Private · in development"]},
     "glance": {"eyebrow": "At a glance", "stats": [
       {"label": "Projects", "value": "5"},
-      {"label": "Workflows", "value": "10"},
+      {"label": "Demos", "value": "10"},
       {"label": "Languages", "value": "5"}
     ]},
     "lab": {"label": "See the workflow lab", "sub": "10 recorded demos", "href": "lab/"},

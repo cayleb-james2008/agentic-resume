@@ -9,12 +9,12 @@ IMPORT_MAP = (
     '"lenis":"./vendor/lenis-1.3.26/lenis.mjs"}}'
 )
 
-# Marks the page as scripted, opens it at the top, and un-hides everything if
+# Marks the page as scripted, opens it at the top unless a deep link names a section, and un-hides everything if
 # the module graph never finishes booting (see Review Focus 3).
 HEAD_SCRIPT = (
     'document.documentElement.classList.add("js");'
     'if("scrollRestoration" in history)history.scrollRestoration="manual";'
-    "scrollTo(0,0);"
+    "if(!location.hash)scrollTo(0,0);"
     'setTimeout(function(){if(!window.__homeBooted)document.documentElement.classList.add("reveal-failsafe")},4000);'
 )
 

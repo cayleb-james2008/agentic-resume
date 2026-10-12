@@ -1,1 +1,30 @@
-/* hero — filled in by its task. */
+/* Hero block — spec §L333–501. The masthead lives here; the rest of the
+   block's layout is added with the hero task. */
+
+.masthead {
+  position: relative; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.wordmark {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.5rem;
+  line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; color: var(--foreground);
+}
+.masthead-nav { display: none; }
+.masthead-action { display: none; }
+.masthead-nav a, .masthead-action {
+  font-size: var(--type-label); text-transform: uppercase; line-height: 0.9;
+  color: var(--foreground);
+  transition: color var(--duration-fast) var(--ease-entrance);
+}
+.masthead-nav a:hover, .masthead-nav a:focus-visible,
+.masthead-action:hover, .masthead-action:focus-visible { color: var(--accent); }
+.masthead-action { font-weight: 700; }
+.burger { padding: 0.5rem; margin-right: -0.5rem; display: flex; flex-direction: column; gap: 0.3125rem; }
+.burger span { display: block; width: 1.5rem; height: 1px; background: var(--foreground); }
+
+@media (min-width: 1280px) {
+  .masthead-nav { display: block; position: absolute; left: 50%; transform: translateX(-50%); }
+  .masthead-nav ul { display: flex; gap: 4rem; }
+  .masthead-action { display: inline; }
+  .burger { display: none; }
+}

@@ -4,8 +4,7 @@ import test from 'node:test';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
 const source=JSON.parse(read('resume/resume-content.json'));
 test('candidate copy preserves factual scope, attribution and dated boundaries',()=>{
- assert.equal(source.headline,'AI workflow developer');
- assert.match(source.summary,/employee onboarding as a proposed use case/);
+ assert.match(source.summary,/^AI workflow integrator\. Focus: /);
  assert.match(source.summary,/AI-assisted/);
  assert.deepEqual(source.projects.map(p=>p.slug),['suite','sophos','dotz']);
  for(const [slug,pattern] of [['suite',/all ten full workflows remain UNVERIFIED/],['sophos',/Prime Intellect.*demo IPC; draft PR #10/],['dotz',/Draft PR #218.*Ubuntu acceptance not established/]]){
@@ -24,4 +23,9 @@ test('the homepage reaches the résumé page and both candidate PDFs',()=>{
  const home=read('index.html');
  assert.ok(home.includes('href="resume.html"'));
  for(const pdf of ['Cayleb-James-polished-resume.pdf','Cayleb-James-polished-one-page.pdf'])assert.ok(home.includes(`href="${pdf}" download`),pdf);
+});
+test('headline is integrator',()=>{
+ assert.equal(source.headline,'AI workflow integrator');
+ assert.equal(source.summary,'AI workflow integrator. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.');
+ assert.doesNotMatch(source.summary,/clients?|customers?|deployed/i);
 });

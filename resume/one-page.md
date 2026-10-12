@@ -1,6 +1,6 @@
 # Cayleb Alvarez-James
 
-AI workflow developer
+AI workflow integrator
 
 Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
 
@@ -8,7 +8,7 @@ Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
 
 ## Summary
 
-Independent, AI-assisted developer building and testing local workflow tools, desktop interfaces and source-grounded review workflows. Intended focus: personal assistant implementation, workflow automation and ongoing business support, including employee onboarding as a proposed use case. Background includes service and hands-on work.
+AI workflow integrator. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.
 
 ## Experience
 

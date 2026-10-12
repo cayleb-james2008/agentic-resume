@@ -78,3 +78,41 @@ test('named configs are the reference values', () => {
   assert.deepEqual(CONFIGS.YEAR_SETTLE, { tension: 32, friction: 26 });
   assert.deepEqual(CONFIGS.TRIGGER, { tension: 140, friction: 30 });
 });
+
+import { interpolate, triggerProgress } from '../site/js/engine/scroll.js';
+import { splitUnits } from '../site/js/engine/reveal.js';
+import { recede } from '../site/js/engine/stack.js';
+
+test('triggerProgress endpoints', () => {
+  const vh = 800;
+  const rect = (top) => ({ top, height: 400, bottom: top + 400 });
+  assert.equal(triggerProgress(rect(vh), vh, 'top bottom', 'top top'), 0);
+  assert.equal(triggerProgress(rect(0), vh, 'top bottom', 'top top'), 1);
+  assert.equal(triggerProgress(rect(vh / 2), vh, 'top bottom', 'top top'), 0.5);
+});
+
+test('interpolate units', () => {
+  assert.equal(interpolate('0cqw', '-3.3334cqw', 0.5), '-1.6667cqw');
+  assert.equal(interpolate('translateY(0.75rem)', 'translateY(0rem)', 0.5), 'translateY(0.375rem)');
+  assert.equal(interpolate(0, 10, 0.25), 2.5);
+});
+
+test('splitUnits', () => {
+  assert.deepEqual(splitUnits('next race', 'letter'), [['n', 'e', 'x', 't'], ['r', 'a', 'c', 'e']]);
+  assert.deepEqual(splitUnits('a b', 'word'), [['a'], ['b']]);
+});
+
+test('recede', () => {
+  const vh = 800;
+  assert.deepEqual(
+    (({ transform, shade, visible }) => ({ transform, shade, visible }))(recede(vh, vh, false)),
+    { transform: '', shade: 0, visible: true },
+  );
+  assert.deepEqual(
+    (({ transform, shade, visible }) => ({ transform, shade, visible }))(recede(0, vh, false)),
+    { transform: 'scale(0.9)', shade: 0.55, visible: false },
+  );
+  const phone = recede(vh / 2, vh, true);
+  assert.equal(phone.transform, '');
+  assert.equal(phone.shade, 0.275);
+});

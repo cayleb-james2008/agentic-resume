@@ -30,7 +30,7 @@ def row(index: int, entry: dict) -> str:
     if frame == "centre":
         copy = (
             f'<div class="row-layer row-layer--copy" data-layer="copy">'
-            f'<p class="row-copy" data-row-copy style="--copy-w:{px(entry["copyWidth"])}">'
+            f'<p class="row-copy" data-row-copy data-rise data-delay="220" data-config="COPY" style="--copy-w:{px(entry["copyWidth"])}">'
             f'<strong>{text(entry["lead"])}</strong> {text(entry["body"])}</p></div>'
         )
     return (

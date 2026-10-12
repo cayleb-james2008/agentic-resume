@@ -12,6 +12,7 @@ import { prefersReducedMotion } from './engine/scroll.js';
 import { initStack } from './engine/stack.js';
 import { ticker } from './engine/ticker.js';
 import { mount as mountApproach } from './approach/approach.js';
+import { mount as mountExperience } from './experience/timeline.js';
 import { mount as mountHero } from './hero/hero.js';
 import { mountMenu } from './hero/menu.js';
 
@@ -19,6 +20,7 @@ import { mountMenu } from './hero/menu.js';
 const MOUNTS = [
   ['[data-hero]', mountHero],
   ['[data-approach]', mountApproach],
+  ['[data-experience]', mountExperience],
 ];
 
 function sizeRoot() {

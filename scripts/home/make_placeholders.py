@@ -17,6 +17,8 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from targets import PLACEHOLDERS, ROOT, TARGETS, content_images  # noqa: E402
+import person_maps  # noqa: E402
+import tempfile  # noqa: E402
 
 INK = (27, 29, 36)
 INK_LIGHT = (42, 45, 54)
@@ -67,6 +69,13 @@ def main(root: Path = ROOT) -> dict[str, str]:
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
         record[path] = hashlib.sha256(data).hexdigest()
+    # The hero's maps, derived from a placeholder portrait the same way the
+    # real one will be.
+    with tempfile.TemporaryDirectory() as tmp:
+        portrait = Path(tmp) / "portrait.png"
+        silhouette(TARGETS["portrait"]["size"]).save(portrait)
+        for written in person_maps.main(portrait, root / "assets/home/hero"):
+            record[str(written.relative_to(root))] = hashlib.sha256(written.read_bytes()).hexdigest()
     existing = json.loads(PLACEHOLDERS.read_text()) if PLACEHOLDERS.exists() else {}
     existing.update(record)
     PLACEHOLDERS.write_text(json.dumps(dict(sorted(existing.items())), indent=2) + "\n")

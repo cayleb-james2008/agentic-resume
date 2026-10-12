@@ -5,6 +5,8 @@
  * head script's 4s failsafe stands ready to un-hide the page.
  */
 import Lenis from 'lenis';
+import { mountContours } from './engine/contours.js';
+import { mountDissolve } from './engine/dissolve.js';
 import { mountReveals } from './engine/reveal.js';
 import { prefersReducedMotion } from './engine/scroll.js';
 import { initStack } from './engine/stack.js';
@@ -36,6 +38,8 @@ function boot() {
   const header = document.querySelector('[data-masthead]');
   if (header) mountMenu(header, { lenis });
   mountReveals(document.body);
+  document.querySelectorAll('canvas[data-seam]').forEach((band) => mountDissolve(band, band.dataset.seam));
+  document.querySelectorAll('canvas[data-contours]').forEach((canvas) => mountContours(canvas, canvas.dataset.contours));
   for (const [selector, mount] of MOUNTS) {
     const el = document.querySelector(selector);
     if (el) mount(el, { lenis });

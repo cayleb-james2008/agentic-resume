@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
-import {parse} from '../remake/state.js';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
 const source=JSON.parse(read('resume/resume-content.json'));
 test('candidate copy preserves factual scope, attribution and dated boundaries',()=>{
@@ -21,11 +20,8 @@ test('candidate copy preserves factual scope, attribution and dated boundaries',
  assert.match(source.snapshot_note,/October 5, 2026.*not rechecked/);
  assert.equal(source.additional_experience.length,4);
 });
-test('resume links retain native fallback and a direct Professional entry',()=>{
- assert.match(read('index.html'),/href="#resume" data-nav="resume"/);
- assert.match(read('resume.html'),/url=\.\/#mode=professional&amp;view=resume/);
- const direct=parse('#mode=professional&view=resume');
- assert.equal(direct.mode,'professional');
- assert.equal(direct.view,'resume');
- assert.match(read('index.html'),/remake\/site.js\?v=\d+/);
+test('the homepage reaches the résumé page and both candidate PDFs',()=>{
+ const home=read('index.html');
+ assert.ok(home.includes('href="resume.html"'));
+ for(const pdf of ['Cayleb-James-polished-resume.pdf','Cayleb-James-polished-one-page.pdf'])assert.ok(home.includes(`href="${pdf}" download`),pdf);
 });

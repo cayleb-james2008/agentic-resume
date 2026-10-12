@@ -4,12 +4,9 @@ import test from 'node:test';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
 const home=read('index.html');
 test('candidate website retains a direct reading résumé and sequential PDF/text downloads',()=>{
- for(const name of ['Cayleb-James-polished-one-page.pdf','Cayleb-James-polished-resume.pdf','Cayleb-James-polished-one-page.txt','Cayleb-James-polished-resume.txt']){
-  assert.ok(home.includes(`href="${name}" download`));
-  assert.ok(existsSync(new URL('../'+name,import.meta.url)));
- }
- assert.ok(home.includes('href="#resume" data-nav="resume"'));
- assert.match(read('resume.html'),/url=\.\/#mode=professional&amp;view=resume/);
+ for(const name of ['Cayleb-James-polished-one-page.pdf','Cayleb-James-polished-resume.pdf'])assert.ok(home.includes(`href="${name}" download`),name);
+ for(const name of ['Cayleb-James-polished-one-page.pdf','Cayleb-James-polished-resume.pdf','Cayleb-James-polished-one-page.txt','Cayleb-James-polished-resume.txt'])assert.ok(existsSync(new URL('../'+name,import.meta.url)),name);
+ assert.ok(home.includes('href="resume.html"'));
 });
 test('all three portfolio projects retain their source and evidence destinations',()=>{
  for(const name of ['industry-ai-suite','sophos','dotz']){
@@ -18,12 +15,11 @@ test('all three portfolio projects retain their source and evidence destinations
   for(const heading of ['What it does','How to try it','Source proof','Credit and limits'])assert.ok(page.includes(`<h2>${heading}</h2>`));
  }
 });
-test('all ten dated receipts remain directly readable behind the project disclosure',()=>{
+test('all ten dated receipts remain readable from the linked lab',()=>{
  for(const name of ['ledgerbridge','marketbrief','backtestguard','sentineldesk','onboardpath','handoffhub','replycraft','pipelinerelay','searchlift','chainwatch']){
-  assert.ok(home.includes('lab/receipts/'+name+'.json'));
   assert.ok(existsSync(new URL('../lab/receipts/'+name+'.json',import.meta.url)));
  }
- assert.match(home,/<details class="project-playground"/);
+ assert.ok(home.includes('href="lab/"'));
 });
 test('suite overview retains source, witness evidence and explicit limits',()=>{
  const page=read('projects/industry-ai-suite.html');

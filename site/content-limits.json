@@ -1,0 +1,13 @@
+{
+  "nav[].label": 12,
+  "hero.glance.stats[].label": 9,
+  "hero.cta.label": 12,
+  "approach.rows[].text": 20,
+  "experience.entries[].title": 26,
+  "projects.cta.label": 12,
+  "projects.stats[].label": 15,
+  "projects.cards[].name": 9,
+  "projects.cards[].kicker": 16,
+  "projects.cards[].status": 14,
+  "contact.cta.label": 16
+}

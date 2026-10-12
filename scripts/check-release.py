@@ -13,7 +13,8 @@ p=Page();p.feed((R/'index.html').read_text());assert len(p.ids)==len(set(p.ids))
 for ref in p.refs:
  u=urlparse(ref)
  if u.scheme or ref.startswith('#'):continue
- assert (R/unquote(u.path)).is_file(),ref
+ target=R/unquote(u.path)
+ assert (target/'index.html' if ref.endswith('/') else target).is_file(),ref
  assert not u.path.startswith('/'),ref
 for f in (R/'remake').glob('*.css'):
  for url in re.findall(r'url\([\"\']?([^\)\"\']+)',f.read_text()):

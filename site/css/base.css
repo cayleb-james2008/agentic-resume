@@ -54,6 +54,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .reveal-word { display: inline-flex; white-space: nowrap; }
 .reveal-unit { display: inline-block; }
 .heading-line { display: block; }
+.heading-line .reveal { display: inline; }
+.heading-stop { display: inline-block; }
 
 /* Initial states — only for a scripted page, never after the failsafe. */
 .js:not(.reveal-failsafe) .reveal-unit { opacity: 0; transform: translateY(0.35em); }

@@ -22,14 +22,13 @@ PLATE_FRAME = (
 
 
 def heading(lines: list[str], title_id: str, cls: str, stop_cls: str) -> str:
+    stop = f'<span class="heading-stop {stop_cls}" data-fade data-delay="{STOP}" aria-hidden="true">.</span>'
     spans = "".join(
-        f'<span class="heading-line">{reveal(line, "word", stagger=110, delay=i * LINE_STEP)}</span>'
+        f'<span class="heading-line">{reveal(line, "word", stagger=110, delay=i * LINE_STEP)}'
+        f'{stop if i == len(lines) - 1 else ""}</span>'
         for i, line in enumerate(lines)
     )
-    return (
-        f'<h2 class="{cls}" id="{title_id}">{spans}'
-        f'<span class="heading-stop {stop_cls}" data-fade data-delay="{STOP}" aria-hidden="true">.</span></h2>'
-    )
+    return f'<h2 class="{cls}" id="{title_id}">{spans}</h2>'
 
 
 def render(content: dict) -> str:

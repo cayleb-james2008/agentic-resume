@@ -1,3 +1,34 @@
+# Personalized homepage (2026-10-12)
+
+**Source of the layout.** The layout, motion and engine are rebuilt from a third-party "recreate this site" spec, kept locally at `docs/superpowers/specs/` and git-ignored. Only the format is kept: page structure, animations and engine. All of the spec's racing imagery, names and assets are replaced. The plan is `docs/superpowers/plans/2026-10-12-personalized-homepage.md`, and its Personalization map records every substitution.
+
+**Structure.** One light/dark sticky stack (hero → how I work), then the experience timeline, the projects block and the cyan-edged contact footer. Pixel-dissolve seams join the dark and light blocks.
+
+**Type and colour.** Oswald 700 for display, Space Grotesk for body. The palette is near-black ink, a pale surface and one cyan accent. Tokens, the type scale and the root font bands follow the spec verbatim (`site/css/tokens.css`).
+
+**Motion.**
+- One rAF ticker drives every spring and tween, with react-spring-equivalent solver scaling and real elapsed time.
+- Text reveals are pre-split at build time into an sr-only copy plus aria-hidden units.
+- Lenis provides smooth scroll.
+- There are no CSS keyframes. CSS transitions are reserved for hover colour, the plate inset and button floods.
+- With reduced motion, nothing moves. With JavaScript off, everything is visible. A 4-second failsafe un-hides the page if the module graph fails.
+
+**Hero.** A WebGL scene (three 0.185.0, vendored) puts a procedural headset on the illustrated portrait of Cayleb. It uses depth, normal and veil maps derived from the portrait by `scripts/home/person_maps.py`, and falls back to a contour field when WebGL is unavailable.
+
+**How I work.** A Catmull-Rom loop through four stations (Shadow, Understand, Build, Teach) to the finish, "Whole company". A halftone dot field is drawn over the same contour field.
+
+**Imagery.** Every image is Cayleb as a Pixar-style 3D character: brown hair, glasses, a black shirt and jeans. The seven timeline plates are scenes he generated in ChatGPT, one per job. The hero portrait, projects figure and contact figure are cut from three of those scenes by `scripts/home/derive_scenes.py`. Every image is labelled "Illustration:" in its alt and credited in the footer. Provenance is in `assets/home/PROVENANCE.md`.
+
+**Claim limits.** These match PRODUCT.md:
+- Recorded demos only.
+- No clients, pilots, returns or revenue.
+- RHL appears only as a moving-crew job.
+- EvoHedge and Maki are private and in development.
+
+The classic character-led homepage described below is recoverable at commit `2732c2f`.
+
+---
+
 # Character-led résumé remake
 
 Sole implementer and self-review. The user's no-subagent instruction overrides local delegation defaults. Scope is the specified candidate homepage; the rejected 18409 preview and older services remain intact. No publishing, purchases, installs, local model downloads or private RHL material.

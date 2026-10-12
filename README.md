@@ -1,40 +1,42 @@
-# Cayleb’s résumé polish candidate
+# Cayleb Alvarez-James — résumé site
 
 Canonical website: https://cayleb-james2008.github.io/agentic-resume/
 
-This checkout is an unpublished candidate on `polish/hiring-panel-20261012`. It preserves the approved character-led design, projects, story records, artwork and layout. A single root overflow rule contains the existing mobile character canvas. Small copy changes distinguish documented independent development from proposed assistant implementation, workflow automation and business support. Employee onboarding is a proposed use case.
+Cayleb is an AI workflow integrator: he shadows people for a couple of days to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, and then does the same across the whole company.
 
-Explore retains three explicitly fictional workdays. Professional presents the concise résumé. Direct résumé links and `resume.html` select Professional when JavaScript is available; ordinary `#resume` anchors remain usable without JavaScript. Mofu, Pip, Folio and Loam keep the approved frame packs and interactions.
+## What's here
 
-The candidate downloads are `Cayleb-James-polished-one-page.pdf`, `Cayleb-James-polished-resume.pdf` and their UTF-8 `.txt` equivalents. Both PDFs use a single reading column and body type of at least 10 points. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragments. `resume/candidate-verification.json` records source/artifact hashes and extraction checks; it is not user approval or a predictive ATS score.
+- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, and Cayleb as a Pixar-style 3D character wearing an AI headset), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
+- `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
+- `projects/*.html` and `lab/`: the project write-ups and the local workflow lab. These are unchanged.
+- `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source and artifact hashes. It is not a user approval or an ATS score.
 
-Project evidence and PR statuses remain the October 5, 2026 snapshot. No project checks were rerun for this polish. Work history and education are self-reported. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. No production customer outcome, onboarding delivery or ROI is claimed.
+Project evidence and PR statuses are an October 5, 2026 snapshot. Work history and education are self-reported. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. The Industry AI Suite workflows are always called recorded demos, never "working" workflows. No production customer outcome, onboarding delivery or ROI is claimed. EvoHedge and Maki are private and still in development.
 
 ## Build and validate
 
-No installation is required. Fonts, character assets and motion libraries are local. The candidate PDF builder defaults to the installed bundled Python with ReportLab; `PYTHON` can select another existing interpreter.
+No install is needed to view the site. three.js 0.185.0, Lenis 1.3.26, Oswald and Space Grotesk are all vendored, so the page makes no third-party requests.
 
 ```sh
-bash resume/build.sh
-python3 scripts/build-remake.py
+python3 scripts/build-home.py           # index.html + resume.html from site/content.json
 node --test tests/*.test.js
+python3 -m unittest discover -s tests/py
 python3 scripts/check-release.py
 ```
 
-The website builder generates candidate fragments with system Python without importing ReportLab. `--content-only` is available for text/HTML generation. Full PDF generation validates all source records in both default and layout text extraction, section and job/date ordering, size and page counts. The detailed PDF is at most two pages; the short PDF is exactly one page.
+`build-home.py` refuses to build if a string in `content.json` is longer than the frame it sits in (`site/content-limits.json`).
 
-The reviewed project/story inputs stay in `remake/project-source.html` and `remake/reading-source.html`. `stage/incumbent-resume-source.html` remains the historical layout/copy template; the site embeds generated `resume/candidate-fragment.html`. GSAP, Lenis, React/ReactDOM, React Bits GlassSurface and Aether source/license notices remain in place. React loads only when Mofu’s guide opens.
+`check-release.py` does three things:
+- checks every local link on both pages;
+- runs `scripts/home/check_assets.py` in its non-strict mode;
+- re-verifies the PDF and text outputs against `resume/build_resume.py`.
 
-## Candidate and rollback boundary
+`python3 scripts/home/check_assets.py --strict` is the ship gate for imagery. It fails while any placeholder listed in `assets/home/PLACEHOLDERS.json` is still on the page.
 
-No push or deployment is authorized for this candidate. `release.json` describes the historical approved v8 release, not these edits. The historical PDFs `Cayleb-James-one-page-resume.pdf` and `Cayleb-James-resume.pdf`, their `resume/approved-verification.json` manifest, and the historical DOCX remain unchanged. Release validation checks those approved hashes as well as the separate candidate outputs. The approved original checkout and frozen source remain available outside this worktree.
+Imagery lives under `assets/home/`. Every image is an AI-generated illustration of Cayleb, its `alt` begins "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. `scripts/home/derive_scenes.py` cuts the hero, projects and contact frames out of his scenes. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`.
 
-## Refraction motion pass (2026-10-12)
+To rebuild the candidate PDFs: `bash resume/build.sh`. It uses ReportLab; `PYTHON` can select another interpreter.
 
-Branch `design/refraction-motion-20261012` layers decorative motion on the approved homepage without changing copy, evidence, routes or character frames. Mofu is treated as a glass lens: a dotted light path runs from "Your work" into Mofu, leaves as a sky/mauve/peach spectrum toward "A useful draft", and arcs under Mofu to "Your decision". Pulses ride the existing 8-second ambient clock, so pause, reduced motion, offscreen pausing and Professional mode behave as before.
+## History
 
-- `remake/refraction.js` and `remake/refraction.css` hold the pass; `scripts/enhance-refraction.py` injects its aria-hidden layers during `python3 scripts/build-remake.py`.
-- Page load: the headline resolves into focus, Mofu settles, then the path and chips appear. Skipped for reduced motion, Professional mode, paused motion and deep links; a CSS failsafe reveals everything if the script never runs.
-- Story: records turn over like glass cards, the check beat sweeps light across them, the decision pill fills, approval glows once, a single thumb slides between steps, and each assistant's aura shifts colour.
-- Projects: one highlight follows the hovered or focused row.
-- Optional Higgsfield plate: `assets/motion/higgsfield-clips.json` and `design/HIGGSFIELD-SHOTS.md`. No clip is installed; the page is unchanged until one is.
+The layout, motion and engine are adapted from a third-party "recreate this site" spec. That spec is kept locally and git-ignored. None of its racing imagery, names or assets are used. The classic character-led homepage (Mofu, Pip, Folio, Loam) is recoverable at commit `2732c2f`. The earlier public résumé is recoverable at `476bb5623ef8b438028031faf86c55ff4520c090`. `release.json` describes that historical v8 release, and the historical PDFs and `resume/approved-verification.json` remain unchanged.

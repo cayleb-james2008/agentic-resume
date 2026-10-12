@@ -1,0 +1,255 @@
+/* Selected projects — the reference's paddock block (spec §L4717–4894). The
+   1440×800 frame at 1:1 in cqw: contours, the dark band, the portrait on a
+   parallax layer melting into the band, the intro, two bracketed panels and
+   the project strip. Below 640 it becomes a stack that grows to fit. */
+
+.projects {
+  container-type: inline-size; position: relative; isolation: isolate;
+  min-height: var(--block-h, 100lvh); width: 100%; overflow: hidden;
+  background: var(--background); color: var(--foreground);
+  --band-h: calc(11.7361cqw * var(--band-scale, 1));
+  --gut: 2.2222cqw;
+  --u: var(--panel-u, calc(100cqw / 1440));
+  --cta-h: 3.4722cqw;
+}
+
+/* Narrow variables (spec "The narrow variables"). */
+@media (max-width: 1023px) {
+  .projects { --type-min: 13px; --copy-min-size: 17px; --cta-h: 50px; --panel-u: 1px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .projects {
+    --stats-row-min: 42px; --fig-cap: 118.75cqw; --fig-x-override: 65.7%;
+    --band-scale: 1.75; --cal-spread: 1.75; --cal-mark-drop: 8cqw; --cal-card-drop: 1.3cqw;
+    --stats-rule-top: 16px; --stats-rule-bottom: 11px; --stats-frame-drop: 0px;
+    --stats-drop: 2.86cqw; --stats-col-w: 170px; --intro-min-w: 280px;
+    /* The panels trade places: stats down the left, the feature top right. */
+    --stats-left: calc(var(--gut) + 13px);
+    --stats-frame-left: var(--gut);
+    --stats-frame-right: calc(var(--gut) + 195px);
+    --stats-stretch: calc(var(--u) * -62);
+    --meet-frame-left: calc(100% - var(--gut) - 184px);
+    --meet-frame-right: calc(100% - var(--gut));
+    --meet-frame-top: 2.8646cqw;
+    --meet-frame-bottom: calc(2.8646cqw + 73px);
+    --meet-left: calc(100% - var(--gut) - 171px);
+    --meet-top: calc(2.8646cqw + 11px);
+    --meet-w: 160px;
+    --bracket-drop: 1.7cqw; --live-stretch: 5.9cqw;
+  }
+}
+@media (max-width: 639px) {
+  .projects {
+    --block-h: 1062px; --intro-bottom: 139px; --head-left: 24px; --intro-left: 24px;
+    --head-top: 24px; --intro-min-w: 320px; --intro-gap: 24px; --band-fade: 60px;
+    --fig-cap: 599px; --fig-x-override: 48.5%; --fig-lift: 328px; --band-scale: 8.48;
+    --cal-card-w: 100%; --head-min: 40px;
+  }
+}
+
+/* --- Backdrop, band, portrait, melt ------------------------------------ */
+.projects-band {
+  position: absolute; left: 0; right: 0; bottom: 0; height: var(--band-h);
+  background: var(--surface-black);
+}
+
+/* The layer is the block's own height and only its `top` moves (projects.js). */
+.projects-figure-layer {
+  position: absolute; left: 0; right: 0; top: 0; height: 100%; z-index: 10;
+  pointer-events: none;
+}
+.projects-figure {
+  position: absolute; bottom: var(--fig-lift, 0px); left: var(--fig-x-override, 65.6917%);
+  transform: translateX(-50%);
+  height: min(calc(102.0363% * var(--fig-fit, 1)), var(--fig-cap, 100000px));
+  width: auto; max-width: none; aspect-ratio: 1.15881; object-fit: cover;
+  user-select: none; -webkit-user-select: none;
+}
+
+.projects-melt {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 10; height: var(--band-h);
+  background: linear-gradient(to bottom, rgb(9 10 11 / 0) 0%, var(--surface-black) var(--band-fade, 38.685%));
+  pointer-events: none;
+}
+
+.projects .seam { z-index: 30; }
+@media (max-width: 639px) { .projects .seam { z-index: 0; } }
+
+/* --- The intro (left rail) --------------------------------------------- */
+.projects-title {
+  position: absolute; z-index: 20; left: var(--head-left, var(--gut)); top: var(--head-top, var(--gut));
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  line-height: 0.95; color: var(--foreground);
+  font-size: max(max(6.6667cqw, var(--type-min, 0px)), var(--head-min, 0px));
+}
+
+.projects-intro {
+  position: absolute; z-index: 20; left: var(--intro-left, var(--gut));
+  bottom: var(--intro-bottom, calc(var(--band-h) + var(--gut)));
+  width: max(23.4722cqw, var(--intro-min-w, 0px));
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--intro-gap, 2.7778cqw);
+}
+.projects-report {
+  text-transform: uppercase; line-height: 1.1;
+  font-size: max(1.25cqw, var(--copy-min-size, 0px));
+}
+@media (max-width: 639px) { .projects-report { color: var(--foreground-on-dark); } }
+
+/* The slab button: every length a ratio of its height. */
+.cta--slab {
+  height: var(--cta-h); width: calc(var(--cta-h) * 4.34);
+  justify-content: flex-start;
+  padding-left: calc(var(--cta-h) * 24 / 50); gap: calc(var(--cta-h) * 32 / 50);
+  font-size: calc(var(--cta-h) * 20 / 50);
+}
+.cta--slab .cta-arrow { width: calc(var(--cta-h) * 13.71 / 50); height: calc(var(--cta-h) * 10.71 / 50); }
+.cta-frame--slab .cta-body { fill: var(--surface-black); }
+.cta-frame--slab .cta-line { fill: none; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+/* --- The two panels (right rail) — hidden below sm --------------------- */
+.projects-panels { display: none; }
+@media (min-width: 640px) { .projects-panels { display: block; } }
+
+.panel-frame, .strip-bracket {
+  position: absolute; z-index: 20; pointer-events: none;
+}
+.panel-frame { color: var(--foreground); }
+.projects .corner {
+  width: calc(10 * var(--u)); height: calc(10 * var(--u));
+  transition: top 700ms var(--ease-plate), left 700ms var(--ease-plate),
+    right 700ms var(--ease-plate), bottom 700ms var(--ease-plate);
+}
+.projects .corner path { vector-effect: non-scaling-stroke; }
+.projects .corner--tl { top: calc(-1 * var(--bracket-spread, 0px)); left: calc(-1 * var(--bracket-spread, 0px)); }
+.projects .corner--tr { top: calc(-1 * var(--bracket-spread, 0px)); right: calc(-1 * var(--bracket-spread, 0px)); }
+.projects .corner--bl {
+  bottom: calc(-1 * var(--bracket-spread, 0px) - var(--bracket-stretch, 0px));
+  left: calc(-1 * var(--bracket-spread, 0px));
+}
+.projects .corner--br {
+  bottom: calc(-1 * var(--bracket-spread, 0px) - var(--bracket-stretch, 0px));
+  right: calc(-1 * var(--bracket-spread, 0px));
+}
+
+/* The feature panel: brackets 32U → 105U, the column at 43U. */
+.panel-frame--meet {
+  left: var(--meet-frame-left, calc(100% - var(--gut) - 218 * var(--u)));
+  width: calc(var(--meet-frame-right, calc(100% - var(--gut))) - var(--meet-frame-left, calc(100% - var(--gut) - 218 * var(--u))));
+  top: var(--meet-frame-top, calc(32 * var(--u)));
+  height: calc(var(--meet-frame-bottom, calc(105 * var(--u))) - var(--meet-frame-top, calc(32 * var(--u))));
+}
+.projects-meet {
+  position: absolute; z-index: 20;
+  left: var(--meet-left, calc(100% - var(--gut) - 205 * var(--u)));
+  top: var(--meet-top, calc(43 * var(--u)));
+  width: var(--meet-w, calc(193 * var(--u)));
+  display: flex; flex-direction: column; gap: calc(6 * var(--u));
+  font-size: calc(14 * var(--u)); text-transform: uppercase; line-height: 0.9;
+}
+.projects-meet ul { display: flex; flex-direction: column; gap: calc(6 * var(--u)); }
+.meet-name { font-weight: 700; }
+
+/* The stats panel: brackets 137U → 535U, four rows of 58U. */
+.panel-frame--stats {
+  --bracket-stretch: var(--stats-stretch, 0px);
+  left: var(--stats-frame-left, calc(100% - var(--gut) - 218 * var(--u)));
+  width: calc(var(--stats-frame-right, calc(100% - var(--gut))) - var(--stats-frame-left, calc(100% - var(--gut) - 218 * var(--u))));
+  top: calc(137 * var(--u) + var(--stats-frame-drop, 0px));
+  height: calc(398 * var(--u));
+}
+.projects-stats {
+  position: absolute; z-index: 20;
+  left: var(--stats-left, calc(100% - var(--gut) - 205 * var(--u)));
+  top: calc(147 * var(--u) + var(--stats-drop, 0px));
+  width: var(--stats-col-w, calc(193 * var(--u)));
+}
+.stats-row {
+  display: flex; align-items: flex-end; gap: calc(24 * var(--u));
+  height: max(calc(58 * var(--u)), var(--stats-row-min, 0px));
+}
+.stats-row .icon--stat { flex: none; width: calc(31 * var(--u)); height: calc(31 * var(--u)); color: var(--foreground); }
+.stats-text {
+  display: flex; flex-direction: column; justify-content: space-between; align-self: stretch;
+  min-width: 0;
+}
+.stats-label {
+  font-size: max(calc(12 * var(--u)), var(--type-min, 0px)); text-transform: uppercase;
+  letter-spacing: calc(-0.48 * var(--u)); color: var(--foreground-muted); white-space: nowrap;
+}
+.stats-figure {
+  font-family: var(--font-display); font-weight: 500; font-size: calc(38 * var(--u));
+  line-height: 0.72; letter-spacing: calc(-3.04 * var(--u));
+}
+.stats-figure .reveal-units { column-gap: 0; }
+.stats-rule {
+  height: 1px; background: var(--foreground-muted);
+  margin: var(--stats-rule-top, calc(24 * var(--u))) 0 var(--stats-rule-bottom, calc(23 * var(--u)));
+}
+
+/* --- The project strip (the band) -------------------------------------- */
+.projects-strip {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 20; height: var(--band-h);
+  color: var(--foreground-on-dark);
+}
+.strip-link {
+  position: absolute; top: calc(9.1319cqw + var(--cal-mark-drop, 0px)); height: 1px;
+  background-image: repeating-linear-gradient(to right,
+    var(--foreground-on-dark-muted) 0 0.4861cqw, transparent 0.4861cqw 0.7951cqw);
+}
+.strip-card {
+  position: absolute; top: calc(2.9861cqw + var(--cal-card-drop, 0px));
+  width: var(--cal-card-w, var(--card-w));
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: max(0.8333cqw, var(--type-min, 0px)); text-transform: uppercase;
+}
+.strip-kicker, .strip-status { color: var(--foreground-on-dark-muted); white-space: nowrap; }
+.strip-kicker { font-size: max(0.8333cqw, var(--type-min, 0px)); letter-spacing: -0.0167cqw; }
+.strip-status { font-size: max(0.9722cqw, var(--type-min, 0px)); letter-spacing: -0.0194cqw; }
+.strip-name {
+  font-family: var(--font-display); font-weight: 700; line-height: 0.95; white-space: nowrap;
+  color: var(--foreground-on-dark);
+  font-size: max(max(1.25cqw, var(--type-min, 0px)), var(--copy-min-size, 0px));
+}
+.strip-card--live .strip-kicker, .strip-card--live .strip-status { color: var(--accent); }
+.strip-card a { transition: color var(--duration-fast) var(--ease-entrance); }
+.strip-card a:hover { color: var(--accent); }
+.strip-card--live a:hover { color: var(--foreground-on-dark); }
+
+.strip-marker {
+  position: absolute; top: calc(8.75cqw + var(--cal-mark-drop, 0px)); height: 0.7639cqw;
+  transform: translateX(-50%); display: flex; align-items: center; justify-content: center;
+}
+.marker-text {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 1;
+  font-size: max(0.8333cqw, var(--type-min, 0px)); color: var(--foreground-on-dark);
+  padding: 0 0.3em; background: var(--surface-black);
+}
+.marker-dot, .marker-ring { width: 0.7639cqw; height: 0.7639cqw; overflow: visible; }
+.marker-dot circle { fill: var(--accent); }
+.marker-dot .marker-pulse { fill: none; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.marker-ring circle { fill: var(--surface-black); stroke: var(--foreground-on-dark); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+.strip-bracket { color: var(--accent); --bracket-stretch: var(--live-stretch, 0px); }
+
+/* Below sm: the three public projects in a grid under a faint rule. */
+@media (max-width: 639px) {
+  .projects-strip {
+    height: auto; padding: 1.5rem 4%;
+    border-top: 1px solid rgb(255 255 255 / 0.15);
+  }
+  .strip-links, .strip-marker, .strip-bracket, .marker-pulse { display: none; }
+  .strip-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem 1.25rem; }
+  .strip-card { position: static; width: auto; }
+  .strip-card:nth-child(n + 4) { display: none; }
+  .strip-kicker, .strip-status { white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects .corner, .strip-card a { transition: none; }
+}
+
+/* short: on a landscape phone the tablet composition needs a tablet's height; the block grows
+   to it and scrolls rather than stacking heading, panels and copy on one 390px screen. */
+@media (max-height: 500px) and (min-width: 640px) {
+  .projects { --block-h: max(100lvh, 88vw); }
+}

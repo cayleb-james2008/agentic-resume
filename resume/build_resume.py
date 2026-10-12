@@ -43,9 +43,10 @@ def records(data, short=False):
 
 
 def validate_source(data):
-    assert data['headline'] == 'AI workflow developer'
+    assert data['headline'] == 'AI workflow integrator'
     assert [p['slug'] for p in data['projects']] == ['suite', 'sophos', 'dotz']
-    assert 'proposed use case' in data['summary'] and 'employee onboarding' in data['summary']
+    assert data['summary'].startswith('AI workflow integrator. Focus: ')
+    assert not re.search(r'\b(clients?|customers?|deployed)\b', data['summary'], re.I)
     assert len(data['additional_experience']) == 4
     assert data['education']['school'] == 'Portland High School'
     for link in [*data['links'].values(), *(l for p in data['projects'] for l in p['links'])]:
@@ -79,7 +80,7 @@ def detailed_fragment(rows):
 
 
 def short_fragment(data):
-    template = (ROOT / 'stage/incumbent-resume-source.html').read_text()
+    template = (ROOT / 'resume/fragment-template.html').read_text()
     template = template.replace('Cayleb Alvarez-James', html.escape(data['full_name'])).replace('caylebalvarezjames@gmail.com', data['email'])
     def replace(pattern, value):
         nonlocal template

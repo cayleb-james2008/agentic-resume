@@ -1,0 +1,138 @@
+/* Reset, accessibility helpers, the sticky stack, seams and shared controls. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html.menu-open { position: relative; overflow: hidden; height: 100%; }
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { display: block; max-width: 100%; }
+ul, ol, dl, dd, p, h1, h2, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: 1rem; z-index: 60; padding: 0.75rem 1rem;
+  background: var(--surface-black); color: var(--foreground-on-dark);
+  font-size: var(--type-label); text-transform: uppercase; transform: translateY(-200%);
+  transition: transform var(--duration-fast) var(--ease-entrance);
+}
+.skip-link:focus { transform: none; }
+
+.svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.asset-banner {
+  position: fixed; inset: 0 0 auto; z-index: 70; padding: 0.75rem 1.5rem;
+  background: var(--raw-color-orange-500); color: var(--surface-black);
+  font-size: var(--type-body); text-transform: uppercase; line-height: 1.3;
+}
+.asset-banner[hidden] { display: none; }
+
+/* --- The sticky stack (spec §L301–332) ---------------------------------- */
+.stack { position: relative; background: var(--surface-black); }
+.stack-layer { position: sticky; top: 0; z-index: 0; }
+.stack-layer + .stack-layer { z-index: 10; }
+.stack-inner { transform-origin: center; }
+.stack-shade {
+  position: absolute; inset: 0; background: var(--surface-black);
+  opacity: 0; pointer-events: none;
+}
+.stack-last { position: relative; z-index: 20; }
+
+/* --- Text engine (spec §L244–270): units are inline-blocks in a flex run - */
+.reveal { display: inline; }
+.reveal-units { display: inline-flex; flex-wrap: wrap; column-gap: var(--gap, 0.3em); }
+.reveal-word { display: inline-flex; white-space: nowrap; }
+.reveal-unit { display: inline-block; }
+.heading-line { display: block; }
+.heading-line .reveal { display: inline; }
+.heading-stop { display: inline-block; }
+
+/* Initial states — only for a scripted page, never after the failsafe. */
+.js:not(.reveal-failsafe) .reveal-unit { opacity: 0; transform: translateY(0.35em); }
+.js:not(.reveal-failsafe) .reveal[data-reveal="letter"] .reveal-unit { transform: translateY(0.3em); }
+.js:not(.reveal-failsafe) [data-rise] { opacity: 0; transform: translateY(0.75rem); }
+.js:not(.reveal-failsafe) [data-rise][data-from="translateY(1.25rem)"] { transform: translateY(1.25rem); }
+.js:not(.reveal-failsafe) [data-rise][data-from="translateY(0.5rem)"] { transform: translateY(0.5rem); }
+.js:not(.reveal-failsafe) [data-rise][data-from="translateY(0.3em)"] { transform: translateY(0.3em); }
+.js:not(.reveal-failsafe) [data-fade] { opacity: 0; }
+.js:not(.reveal-failsafe) [data-grow] { transform: scaleX(0); }
+[data-grow] { transform-origin: left; }
+
+/* --- Seams: the pixel dissolve band (spec §L2839–2877) ------------------ */
+.seam {
+  position: absolute; inset: 0 0 auto; height: 34svh; width: 100%;
+  pointer-events: none; z-index: 10;
+}
+@media (max-width: 639px) { .seam { z-index: 0; } }
+
+/* --- Contour backdrops (projects, contact) ----------------------------- */
+.contours { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* --- Bracket corners, drawn as one path four ways ----------------------- */
+.corner { position: absolute; width: 0.625rem; height: 0.625rem; overflow: visible; }
+.corner--tr { top: 0; right: 0; }
+.corner--tl { top: 0; left: 0; transform: scaleX(-1); }
+.corner--bl { bottom: 0; left: 0; transform: scale(-1); }
+.corner--br { bottom: 0; right: 0; transform: scaleY(-1); }
+
+/* --- Buttons: chamfered frames with an accent flood on hover ------------ */
+.cta {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  text-transform: uppercase; line-height: 0.9; color: var(--accent);
+  transition: color var(--duration-normal) var(--ease-plate);
+}
+.cta-frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cta-flood {
+  fill: var(--accent); transform-origin: left; transform: scaleX(0);
+  transition: transform var(--duration-normal) var(--ease-plate);
+}
+.cta-label, .cta-arrow { position: relative; }
+.cta-arrow {
+  width: 0.65em; height: 0.5em; overflow: visible;
+  transition: transform var(--duration-fast) var(--ease-entrance);
+}
+.cta:hover, .cta:focus-visible { color: var(--surface-black); }
+.cta:hover .cta-flood, .cta:focus-visible .cta-flood { transform: scaleX(1); }
+.cta:hover .cta-arrow, .cta:focus-visible .cta-arrow { transform: translateX(0.25rem); }
+
+/* --- Menu sheet (spec §L372–395) ---------------------------------------- */
+.menu-sheet {
+  position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column;
+  padding: 1.5rem 2rem; background: var(--background); color: var(--foreground);
+}
+.menu-sheet[hidden] { display: none; }
+.menu-top { display: flex; align-items: center; justify-content: space-between; }
+.menu-close { position: relative; width: 2.5rem; height: 2.5rem; margin-right: -0.5rem; }
+.menu-close span {
+  position: absolute; left: 0.5rem; top: 50%; width: 1.5rem; height: 1px;
+  background: var(--foreground);
+}
+.menu-close span:first-child { transform: rotate(45deg); }
+.menu-close span:last-child { transform: rotate(-45deg); }
+.menu-nav { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.menu-nav ul { display: flex; flex-direction: column; gap: 1rem; }
+.menu-nav a {
+  font-family: var(--font-display); font-weight: 700; font-size: var(--type-heading);
+  text-transform: uppercase; line-height: 0.95;
+  transition: color var(--duration-fast) var(--ease-entrance);
+}
+.menu-nav a:hover, .menu-nav a:focus-visible { color: var(--accent); }
+@media (min-width: 640px) {
+  .menu-nav ul { gap: 1.5rem; }
+  .menu-nav a { font-size: var(--type-display); }
+}
+
+/* --- Reduced motion: hover colour stays; nothing else moves ------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cta-arrow, .cta-flood, .skip-link { transition: none; }
+}

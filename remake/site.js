@@ -1,6 +1,7 @@
 import {WORKFLOWS} from '../stage/workflows.js';
 import {chapters,beats,stories,parse,serialize,receipt,moment,clamp,frameAt,isApproved,toggleApproval} from './state.js';
 import Lenis from './vendor/lenis.mjs';
+import * as refraction from './refraction.js';
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)');
@@ -55,6 +56,7 @@ if(ambient){
   .to('.chip-work',{y:0,duration:4,ease:'sine.inOut'},4)
   .fromTo('.chip-review',{y:0},{y:-4,duration:4,ease:'sine.inOut'},0)
   .to('.chip-review',{y:0,duration:4,ease:'sine.inOut'},4);
+ refraction.extendAmbient(ambient);
 }
 function tick(time){
  syncMotionPreference();
@@ -72,6 +74,7 @@ function tick(time){
     if(decoded.get(url)?.ready){img.src=url;p.index=index;}}
   }
  }
+ refraction.plate(enabled&&state.mode==='explore'&&openingVisible);
  requestAnimationFrame(tick);
 }
 document.addEventListener('visibilitychange',()=>{lastTime=null;});
@@ -79,6 +82,8 @@ document.addEventListener('visibilitychange',()=>{lastTime=null;});
 function paintStory(){
  const sceneKey=`${state.chapter}:${state.beat}:${isApproved(state)}`;
  const changed=lastScene!==null&&lastScene!==sceneKey;
+ const [fromChapter,fromBeat,fromApproved]=(lastScene||'').split(':');
+ const from=lastScene===null?null:{chapter:+fromChapter,beat:+fromBeat,approved:fromApproved==='true'};
  const priorChapter=root.dataset.chapter;
  const proofBefore=changed&&priorChapter==='folio'&&state.chapter===1&&motionAllowed()?
   $$('[data-proof-comment]').map(el=>({el,rect:el.getBoundingClientRect()})):[];
@@ -129,14 +134,17 @@ function paintStory(){
    const to=el.getBoundingClientRect(),x=rect.left-to.left,y=rect.top-to.top;
    if(Math.abs(x)+Math.abs(y)>1)sceneMotion.fromTo(el,{x,y},{x:0,y:0,duration:.32,ease:'power3.out',clearProps:'transform'},0);
   }
+  refraction.sceneTweens(sceneMotion,from,{chapter:state.chapter,beat:state.beat,approved});
  }
  lastScene=sceneKey;
+ refraction.paintIndicators();
 }
 function motionAllowed(){return state.mode==='explore'&&!reduce.matches&&!state.paused&&!!window.gsap;}
 function stopSceneMotion(){
  sceneMotion?.kill();sceneMotion=null;sceneGhost?.remove();sceneGhost=null;
  $$('#story-line,#decision-label,.glass-record strong,.story-character').forEach(el=>el.style.removeProperty('opacity'));
  $$('[data-proof-comment]').forEach(el=>el.style.removeProperty('transform'));
+ refraction.clearScene();
 }
 const arrow='<svg class="aether-prism-btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 function paintProjects(){
@@ -157,9 +165,10 @@ function paintProjects(){
  setText('unread-count',state.read?'Read':'1 unread');$('#mark-read').disabled=state.read;setText('mark-read',state.read?'Marked read':'Mark as read');
  $('#profile-select').value=state.profile;setText('profile-note',`${state.profile==='build'?'Build':'Review'} profile selected in this page’s simulation.`);
  $('#project-playground').open=state.details;
+ refraction.paintIndicators();
 }
 function paintMotion(){
- if(!motionAllowed()){stopSceneMotion();stopGuideMotion();}
+ if(!motionAllowed()){stopSceneMotion();stopGuideMotion();refraction.resetPointer();}
  root.classList.toggle('motion-paused',state.paused||reduce.matches);
  $('#motion-toggle').setAttribute('aria-pressed',String(state.paused));
  setText('motion-toggle',state.paused?'Resume ambient motion':'Pause ambient motion');
@@ -344,13 +353,15 @@ addEventListener('popstate',restore);addEventListener('hashchange',()=>{if(seria
 root.classList.add('js');$('#reading').open=false;
 $$('.character').forEach(img=>setPose(img,img.dataset.character,img.dataset.pose||'idle'));
 paint();persist();requestAnimationFrame(tick);
+refraction.layoutBeams();refraction.bindIndicators();refraction.bindPointer(()=>motionAllowed()&&openingVisible);
+refraction.intro(motionAllowed()&&state.view==='home'&&scrollY<40);
 Promise.all(chapters.concat('mofu').map(async name=>{
  try{const res=await fetch(`characters/${name}/asset-manifest.json`);if(!res.ok)throw new Error('manifest');
   manifests.set(name,await res.json());
   for(const [img,p] of players)if(p.name===name)setPose(img,p.name,p.pose);
  }catch{setText('motion-status','Artwork remains still while animation is unavailable.');}
 }));
-document.fonts.ready.then(()=>{layoutJourney();if(location.hash&&state.view!=='home')scrollView(false);});
+document.fonts.ready.then(()=>{layoutJourney();refraction.layoutBeams();refraction.paintIndicators();if(location.hash&&state.view!=='home')scrollView(false);});
 
 // Read-only diagnostics for browser QA. No tool, model or external action runs here.
 window.remake={getState:()=>({...state}),getMotion:()=>({reduced:reduce.matches,paused:state.paused,pin,lenis:!!lenis,scrollAuthority:lenis?'Lenis 1.3.26':'native',reactBits:!!$('#guide-material .glass-surface'),

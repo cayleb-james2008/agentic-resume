@@ -50,3 +50,6 @@ html=html.replace('</body>','<p id="live-status" class="sr-only" role="status" a
 
 html=(R/'index.html').read_text().replace('<title>','<link rel="canonical" href="https://cayleb-james2008.github.io/agentic-resume/"><title>',1)
 (R/'index.html').write_text(html)
+
+import runpy
+runpy.run_path(str(R/"scripts/enhance-refraction.py"))

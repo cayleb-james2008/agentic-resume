@@ -1,0 +1,11 @@
+{
+  "note": "Optional ambient plates generated in Higgsfield. A clip is only injected into the page when its file exists. Plates are environmental light only; they never redraw Mofu, Pip, Folio or Loam. See design/HIGGSFIELD-SHOTS.md.",
+  "clips": {
+    "hero-plate": {
+      "files": ["assets/motion/hero-caustics.webm", "assets/motion/hero-caustics.mp4"],
+      "poster": "assets/motion/hero-caustics.webp",
+      "slot": ".opening-art",
+      "status": "not generated"
+    }
+  }
+}

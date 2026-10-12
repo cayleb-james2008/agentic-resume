@@ -17,7 +17,7 @@
 
 **How I work.** A Catmull-Rom loop through four stations (Shadow, Understand, Build, Teach) to the finish, "Whole company". A halftone dot field is drawn over the same contour field.
 
-**Imagery.** All imagery is AI-generated from one character reference of Cayleb, a stylized 3D animated look. Every image is labelled "Illustration:" in its alt and credited in the footer. Provenance is recorded in `assets/home/PROVENANCE.md`.
+**Imagery.** The character art in the hero, projects and contact blocks is cut from Cayleb's own AI-generated 3D animated-style render. The seven timeline plates are line drawings in the site's contour-and-halftone language, made by `scripts/home/make_plates.py`. They stand in until generated scenes of his character replace them. Every image is labelled "Illustration:" in its alt, and the footer credits the AI character art. Provenance is in `assets/home/PROVENANCE.md`.
 
 **Claim limits.** These match PRODUCT.md:
 - Recorded demos only.

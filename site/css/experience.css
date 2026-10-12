@@ -113,6 +113,11 @@
   .row-layer--plate, .row--centre .row-layer--plate, .row--side .row-layer--plate { width: 82%; aspect-ratio: 710 / 462; }
   .row[data-side="left"] .row-layer--plate, .row[data-side="left"] .row-layer--year { margin-right: auto; }
   .row[data-side="right"] .row-layer--plate, .row[data-side="right"] .row-layer--year { margin-left: auto; }
-  .row-layer--year { height: 0; width: 82%; margin-top: -28.8cqw; overflow: visible; }
+  .row-layer--year { height: 0; width: 82%; translate: 0 -28.8cqw; overflow: visible; }
   .row-layer--copy { position: relative; }
+}
+
+/* On a phone the copy and titles land on the plates; a soft ink halo keeps them legible. */
+@media (max-width: 639px) {
+  .row-copy, .row-title { text-shadow: 0 0 0.6em var(--surface-black), 0 1px 2px var(--surface-black); }
 }

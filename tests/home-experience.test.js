@@ -44,3 +44,11 @@ test('centre years settle to 40% after the hold', () => {
   assert.equal(yearOpacityAfter('centre'), 0.4);
   assert.equal(yearOpacityAfter('side'), 1);
 });
+
+test('on a phone the year floats onto its plate without pulling the next row up', () => {
+  const css = readFileSync(new URL('../site/css/experience.css', import.meta.url), 'utf8');
+  const rule = css.match(/\.row-layer--year\s*\{[^}]*28\.8cqw[^}]*\}/);
+  assert.ok(rule, 'phone year offset rule');
+  assert.doesNotMatch(rule[0], /margin-top:\s*-/);
+  assert.match(rule[0], /translate:\s*0 -28\.8cqw|translateY\(-28\.8cqw\)/);
+});

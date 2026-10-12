@@ -53,13 +53,13 @@
   "experience": {
     "lines": ["Work", "experience"],
     "entries": [
-      {"year": "2024", "frame": "centre", "copyWidth": 228, "lead": "Dunkin', 2024–2026.", "body": "Two years of customer service.", "image": "assets/home/experience/2024-dunkin.webp", "alt": "Illustration: Cayleb handing a coffee across a café counter"},
-      {"year": "2024", "frame": "side", "align": "right", "title": "Tommy's Pizza", "image": "assets/home/experience/2024-pizza.webp", "alt": "Illustration: Cayleb sliding a pizza from the oven"},
-      {"year": "2025", "frame": "centre", "copyWidth": 272, "lead": "Robert H. Lord Company, summers 2025 & 2026.", "body": "Moving crew: hands-on, team-based work.", "image": "assets/home/experience/2025-moving.webp", "alt": "Illustration: Cayleb carrying a moving box with a crew"},
-      {"year": "2026", "frame": "side", "align": "left", "title": "David Cooke Plaster Co.", "image": "assets/home/experience/2026-plaster.webp", "alt": "Illustration: Cayleb smoothing a plaster wall"},
-      {"year": "2026", "frame": "centre", "copyWidth": 278, "lead": "Portland High School, class of 2026.", "body": "Coursework in cybersecurity and AP Computer Science.", "image": "assets/home/experience/2026-school.webp", "alt": "Illustration: Cayleb coding at a classroom computer"},
-      {"year": "2026", "frame": "side", "align": "right", "title": "dotz · Sophos · AI Suite", "image": "assets/home/experience/2026-builds.webp", "alt": "Illustration: Cayleb at a desk with two monitors of code"},
-      {"year": "2026", "frame": "centre", "copyWidth": 284, "lead": "AI workflow integration.", "body": "Independent, AI-assisted development of local agent tools. Now focused on shadowing teams and building each person an agent they will actually use.", "image": "assets/home/experience/2026-integrator.webp", "alt": "Illustration: Cayleb beside a coworker, taking notes on how they work"}
+      {"year": "2024", "frame": "centre", "copyWidth": 228, "lead": "Dunkin', 2024–2026.", "body": "Two years of customer service.", "image": "assets/home/experience/2024-dunkin.webp", "alt": "Illustration: line drawing of a coffee cup with rising steam on a café counter"},
+      {"year": "2024", "frame": "side", "align": "right", "title": "Tommy's Pizza", "image": "assets/home/experience/2024-pizza.webp", "alt": "Illustration: line drawing of a pizza on a peel in front of a brick oven"},
+      {"year": "2025", "frame": "centre", "copyWidth": 272, "lead": "Robert H. Lord Company, summers 2025 & 2026.", "body": "Moving crew: hands-on, team-based work.", "image": "assets/home/experience/2025-moving.webp", "alt": "Illustration: line drawing of stacked moving boxes and an arrow"},
+      {"year": "2026", "frame": "side", "align": "left", "title": "David Cooke Plaster Co.", "image": "assets/home/experience/2026-plaster.webp", "alt": "Illustration: line drawing of a trowel smoothing plaster strokes on a wall"},
+      {"year": "2026", "frame": "centre", "copyWidth": 278, "lead": "Portland High School, class of 2026.", "body": "Coursework in cybersecurity and AP Computer Science.", "image": "assets/home/experience/2026-school.webp", "alt": "Illustration: line drawing of a classroom computer with code and a security shield"},
+      {"year": "2026", "frame": "side", "align": "right", "title": "dotz · Sophos · AI Suite", "image": "assets/home/experience/2026-builds.webp", "alt": "Illustration: line drawing of two monitors of code and a chart, with a small glass-droplet AI agent"},
+      {"year": "2026", "frame": "centre", "copyWidth": 284, "lead": "AI workflow integration.", "body": "Independent, AI-assisted development of local agent tools. Now focused on shadowing teams and building each person an agent they will actually use.", "image": "assets/home/experience/2026-integrator.webp", "alt": "Illustration: line drawing of two people at a desk with notes and a glass-droplet AI agent between them"}
     ]
   },
   "projects": {
@@ -91,7 +91,7 @@
       {"label": "Résumé", "href": "resume.html"},
       {"label": "Email", "href": "mailto:caylebalvarezjames@gmail.com"}
     ],
-    "copyright": "© 2026 Cayleb Alvarez-James. Illustrations generated with AI.",
+    "copyright": "© 2026 Cayleb Alvarez-James. Character art generated with AI.",
     "cta": {"label": "Download résumé", "href": "Cayleb-James-polished-resume.pdf"},
     "links": [
       {"label": "GitHub", "href": "https://github.com/cayleb-james2008"},

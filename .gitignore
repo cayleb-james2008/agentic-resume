@@ -6,3 +6,6 @@
 node_modules/
 .env*
 __pycache__/
+
+# Third-party layout reference: kept local, never published
+docs/superpowers/specs/2026-10-12-layout-reference.md

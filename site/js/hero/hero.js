@@ -12,7 +12,10 @@ import { drawContours, fitCanvas } from '../engine/contours.js';
 import { CONFIGS, Spring } from '../engine/spring.js';
 import { ticker } from '../engine/ticker.js';
 import { readToken } from '../engine/tokens.js';
-import { fitSubjectToBox } from './fit.js';
+import { fitSubjectToBox, placeAgent, pxPerAgentUnit } from './fit.js';
+
+/** The droplet keeps this far from the hero's panels or the screen edge, in px. */
+const AGENT_MARGIN = 16;
 
 export const VEIL = Object.freeze({ CREEP: 0.7, CLEAR_MS: 430, PAUSE_MS: 240, LIFT_TIMEOUT_MS: 3000, GONE_AT: 0.004, MAX_WAIT_MS: 8000 });
 
@@ -206,12 +209,24 @@ export async function mount(section) {
       const b = box.getBoundingClientRect();
       fit = fitSubjectToBox(DEFAULT_PARAMS, { top: b.top - s.top, height: b.height }, container.clientHeight);
     }
+    // On a phone the screen is narrower than his shoulders: the droplet comes in closer and up.
+    const phone = media('(max-width: 639px)');
+    const asked = phone
+      ? { helmetX: DEFAULT_PARAMS.helmetX * 0.8, helmetY: DEFAULT_PARAMS.helmetY + 0.15, helmetScale: DEFAULT_PARAMS.helmetScale }
+      : DEFAULT_PARAMS;
+    // …and never past what stands to its right: from 1024 the panels, below it the screen edge.
+    const width = container.clientWidth;
+    const panels = section.querySelector('[data-hero-panels]');
+    const stop = media('(min-width: 1024px)') && panels?.offsetParent
+      ? panels.getBoundingClientRect().left - container.getBoundingClientRect().left - AGENT_MARGIN
+      : width - AGENT_MARGIN;
+    const k = pxPerAgentUnit(container.clientHeight, DEFAULT_PARAMS.cameraZ, fit?.subjectScale ?? DEFAULT_PARAMS.subjectScale);
     // No reveal at any width: the droplet is always visible, so neither the grey
     // cursor reveal nor the idle sweep has anything left to uncover.
     scene.setParams({
       ...DEFAULT_PARAMS, ...fit, bgRevealOpacity: 0, autoSweepAmount: 0,
-      // On a phone the screen is narrower than his shoulders: the droplet comes in closer.
-      ...(media('(max-width: 639px)') ? { helmetX: DEFAULT_PARAMS.helmetX * 0.8, helmetY: DEFAULT_PARAMS.helmetY + 0.15 } : null),
+      helmetY: asked.helmetY,
+      ...placeAgent(stop - width / 2, k, asked),
     });
   };
 

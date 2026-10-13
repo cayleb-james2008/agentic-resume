@@ -57,3 +57,17 @@ test('the lab wears the new look and keeps every element its script drives', () 
     'input-repo', 'input-route', 'input-threshold', 'enterprise-json']); // made by app.js per workflow
   for (const id of ids) if (!built.has(id)) assert.match(lab, new RegExp(`id="${id}"`), id);
 });
+
+test('the lab\'s status strip sits in a landmark and the lab ends with the shared footer', () => {
+  const lab = read('lab/index.html');
+  assert.match(lab, /<aside class="lab-strip" aria-label="Lab status">/);
+  assert.doesNotMatch(lab, /<div class="lab-strip">/);
+  assert.match(lab, /<footer class="sub-footer">[\s\S]*<\/footer>\s*<\/body>/);
+  assert.ok(lab.includes(escape(content.contact.copyright)));
+});
+
+test('on a phone the sub-page nav keeps to one row', () => {
+  const css = read('site/css/subpage.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const phone = css.slice(css.indexOf('@media (max-width: 639px)'));
+  assert.match(phone, /\.sub-masthead nav ul\s*\{[^}]*flex-wrap:\s*nowrap/);
+});

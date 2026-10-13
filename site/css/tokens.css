@@ -36,6 +36,11 @@
   --raw-color-white-alpha-40: rgb(255 255 255 / 0.4);  /* footer: the copyright */
   --raw-color-white: #ffffff;
   --raw-color-orange-500: #ff6b00;    /* error/warning only — never on the page */
+  /* Added 2026-10-12 (quality pass), not from the spec: the spec's 35% ink, 40% white and cyan
+     fall under 4.5:1 as small type. These carry the same hues at readable strength. */
+  --raw-color-ink-alpha-60: rgb(9 10 11 / 0.6);        /* muted labels on the light ground */
+  --raw-color-white-alpha-60: rgb(255 255 255 / 0.6);  /* footer: the copyright */
+  --raw-color-cyan-700: #007a85;      /* accent type on the light ground */
 
   --raw-font-size-96: 6rem;      /* the hero name */
   --raw-font-size-70: 4.375rem;  /* the name on phones */
@@ -64,7 +69,8 @@
   /* Tier 2 — roles */
   --background: var(--raw-color-ice-50);
   --foreground: var(--raw-color-ink-950);
-  --foreground-muted: var(--raw-color-ink-alpha-35);
+  --foreground-muted: var(--raw-color-ink-alpha-60);
+  --hairline-ink: var(--raw-color-ink-alpha-35);
   --surface-dark: var(--raw-color-ink-900);
   --surface-dark-raised: var(--raw-color-ink-800);
   --surface-black: var(--raw-color-ink-950);
@@ -72,7 +78,7 @@
   --surface-soft: var(--raw-color-ice-200);
   --foreground-on-dark: var(--raw-color-white);
   --foreground-on-dark-muted: var(--raw-color-steel-400);
-  --foreground-on-dark-faint: var(--raw-color-white-alpha-40);
+  --foreground-on-dark-faint: var(--raw-color-white-alpha-60);
   --border-muted: var(--raw-color-ice-200);
   --border-on-dark: var(--raw-color-ink-700);
   --map-dot: var(--raw-color-slate-500);
@@ -85,6 +91,7 @@
   --paddock-contour: var(--raw-color-ink-alpha-08);
   --footer-contour: var(--raw-color-white-alpha-10);
   --accent: var(--raw-color-cyan-400);
+  --accent-ink: var(--raw-color-cyan-700);
   --accent-muted: var(--raw-color-cyan-alpha-25);
   --type-impact: var(--raw-font-size-96); --type-display-lg: var(--raw-font-size-70);
   --type-display: var(--raw-font-size-52); --type-heading: var(--raw-font-size-38);

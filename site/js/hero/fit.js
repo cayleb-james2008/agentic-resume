@@ -86,3 +86,34 @@ export const fitSubjectToBox = (params, box, canvasHeight) => {
             (centreShift * world) / canvasHeight,
     };
 };
+
+/**
+ * The droplet beside his head, in helmet units (the scene's `helmetX` scale),
+ * calibrated on the 1440×900 hero: `perspective` is how much nearer the camera
+ * the droplet sits than the portrait (AGENT_OFFSET), `halfWidth` its half width
+ * per unit of `helmetScale`, `hair` where his hair ends right of the head's
+ * axis, and `minScale` the smallest it is allowed to get.
+ */
+export const AGENT = { perspective: 1.067, halfWidth: 0.4235, hair: 0.68, minScale: 0.4 };
+
+/** Screen px per helmet unit for a canvas `canvasHeight` px tall and the subject at `subjectScale`. */
+export const pxPerAgentUnit = (canvasHeight, cameraZ, subjectScale) =>
+    (canvasHeight / visibleWorldHeight(cameraZ)) * subjectScale * AGENT.perspective;
+
+/**
+ * Fits the droplet into the `room` (px) right of his head's axis, before the
+ * hero's panels or the screen edge, and off his hair. With room it keeps its
+ * place and size (moved out only as far as the hair needs); squeezed, it
+ * shrinks until it fits between his hair and the edge and tucks against the
+ * edge — at 1024×768 the panels stand where the 1440 droplet would be, and on
+ * a phone the screen does.
+ */
+export function placeAgent(room, k, { helmetX, helmetScale }) {
+    const reach = room / k;
+    // The nearest place to the asked-for one that keeps its left edge off his hair.
+    const clear = (scale) => Math.max(helmetX, AGENT.hair + AGENT.halfWidth * scale);
+    if (clear(helmetScale) + AGENT.halfWidth * helmetScale <= reach) return { helmetX: clear(helmetScale), helmetScale };
+    const fits = (reach - AGENT.hair) / (2 * AGENT.halfWidth);
+    const scale = Math.max(AGENT.minScale, Math.min(helmetScale, fits));
+    return { helmetX: reach - AGENT.halfWidth * scale, helmetScale: scale };
+}

@@ -17,7 +17,7 @@
   transition: color var(--duration-fast) var(--ease-entrance);
 }
 .masthead-nav a:hover, .masthead-nav a:focus-visible,
-.masthead-action:hover, .masthead-action:focus-visible { color: var(--accent); }
+.masthead-action:hover, .masthead-action:focus-visible { color: var(--accent-ink); }
 .masthead-action { font-weight: 700; }
 .burger { padding: 0.5rem; margin-right: -0.5rem; display: flex; flex-direction: column; gap: 0.3125rem; }
 .burger span { display: block; width: 1.5rem; height: 1px; background: var(--foreground); }
@@ -54,8 +54,10 @@
   background: linear-gradient(to bottom, transparent, var(--background) 60%, var(--background));
 }
 @media (min-width: 768px) { .hero-fit-box { height: calc(100% - 2rem); } }
+/* On a tablet the portrait starts under the action row: 30% of the block, but never above 23.5rem
+   (where the row ends on a 1024-tall screen) and never below 45%. */
 @media (max-width: 1023px) {
-  .hero-fit { top: 30%; }
+  .hero-fit { top: clamp(30%, 23.5rem, 45%); }
   .hero-fit-box { height: 100%; }
 }
 @media (max-width: 767px) { .hero-fit-ramp { display: block; } }
@@ -88,7 +90,12 @@
 @media (max-width: 1023px) { .hero-content, .hero-middle { gap: 1rem; } }
 @media (max-width: 639px) { .hero-content, .hero-middle { gap: 0.5rem; } }
 @media (min-width: 768px) and (max-width: 1279px) {
-  .hero-middle { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 2rem; flex: 0; }
+  .hero-middle { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+}
+/* Tablets stack the portrait under the row; from 1024 it fills the block behind it, so the row
+   goes to the foot of the hero, as from 1280, rather than across his face. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-middle { flex: 0; }
 }
 @media (min-width: 1280px) {
   .hero-middle { flex-direction: row; align-items: center; justify-content: space-between; }
@@ -112,12 +119,20 @@
   font-size: var(--type-lead); text-transform: uppercase; line-height: 0.9;
 }
 .hero-meta .icon { width: 1rem; height: 1rem; flex: none; }
+/* A phone holds each meta row on one line rather than leaving "2025" alone on the next. */
+@media (max-width: 639px) { .hero-meta li { font-size: min(var(--type-lead), 4.2vw); } }
 @media (min-width: 768px) { .hero-name { font-size: var(--type-impact); } }
 @media (min-width: 1024px) and (max-width: 1279px) { .hero-name { font-size: var(--type-display-lg); } }
 @media (min-width: 1280px) {
   .hero-id { position: absolute; left: 22.5rem; top: 0.5625rem; margin: 0; }
   .hero-name { font-size: var(--type-impact); }
   .hero-meta { margin-top: 6.0625rem; }
+}
+/* 1441–1920 scales the hero's type by --hero-base (tokens.css); the eyebrow's offset and the
+   column's width scale with it, or the eyebrow lands on CAYLEB and the meta rows wrap. */
+@media (min-width: 1441px) and (max-width: 1920px) {
+  .hero-id { left: calc(22.5rem * var(--hero-base)); }
+  .hero-identity { max-width: calc(26.0625rem * var(--hero-base)); }
 }
 
 /* Panels (spec §L422–446). */
@@ -132,7 +147,7 @@
 @media (min-width: 640px) { .bracket-panel { padding: 1rem 1.375rem 1.1875rem; } }
 .panel-eyebrow {
   font-size: var(--type-eyebrow); font-weight: 500; text-transform: uppercase;
-  line-height: 0.9; letter-spacing: -0.02em; color: var(--accent);
+  line-height: 0.9; letter-spacing: -0.02em; color: var(--accent-ink);
 }
 .panel-row { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
 .panel-list {
@@ -170,7 +185,7 @@
   font-size: var(--type-body); text-transform: uppercase; line-height: 0.9;
 }
 .hero-lab-label { font-weight: 500; transition: color var(--duration-fast) var(--ease-entrance); }
-.hero-lab:hover .hero-lab-label, .hero-lab:focus-visible .hero-lab-label { color: var(--accent); }
+.hero-lab:hover .hero-lab-label, .hero-lab:focus-visible .hero-lab-label { color: var(--accent-ink); }
 .hero-lab-sub { color: var(--foreground-muted); }
 
 .cta--hero {
@@ -188,7 +203,7 @@
     font-size: var(--type-body); text-transform: uppercase;
   }
   .hero-links a { transition: color var(--duration-fast) var(--ease-entrance); }
-  .hero-links a:hover, .hero-links a:focus-visible { color: var(--accent); }
+  .hero-links a:hover, .hero-links a:focus-visible { color: var(--accent-ink); }
 }
 @media (min-width: 1280px) { .hero-links { gap: 3.6875rem; } }
 

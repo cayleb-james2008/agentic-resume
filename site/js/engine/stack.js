@@ -39,7 +39,9 @@ export function initStack(root) {
       inner.style.transform = state.transform;
       inner.style.willChange = state.willChange;
       shade.style.opacity = String(state.shade);
-      inner.style.visibility = state.visible ? 'visible' : 'hidden';
+      // Opacity, not visibility: a covered layer drops out of sight but not out of the
+      // accessibility tree, so the hero's h1 is still there for a screen reader further down.
+      inner.style.opacity = state.visible ? '' : '0';
     }
   };
   const schedule = () => { if (!frame) frame = requestAnimationFrame(apply); };

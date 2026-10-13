@@ -7,14 +7,17 @@ dialog of disclosure questions.
 """
 from markup import attr, link, text
 
-# The droplet, flat: the hero's teardrop (point up), its cyan core, two eyes.
+# The droplet, flat: the hero's teardrop (point up), two eyes and a cyan glow along the foot.
 DROPLET_SVG = (
     '<svg class="guide-droplet" viewBox="0 0 64 72" aria-hidden="true" focusable="false">'
     '<defs><radialGradient id="guide-glass" cx="0.38" cy="0.62" r="0.75">'
     '<stop offset="0" stop-color="#eafcfe"/><stop offset="0.6" stop-color="#b4eff6"/>'
-    '<stop offset="1" stop-color="#5fdbe8"/></radialGradient></defs>'
+    '<stop offset="1" stop-color="#5fdbe8"/></radialGradient>'
+    '<linearGradient id="guide-foot" x1="0" y1="0" x2="0" y2="1">'
+    '<stop offset="0.55" stop-color="#02d2e3" stop-opacity="0"/>'
+    '<stop offset="1" stop-color="#02d2e3" stop-opacity="0.85"/></linearGradient></defs>'
     '<path class="guide-droplet-body" d="M32 4C37 17 56 30 56 46A24 24 0 0 1 8 46C8 30 27 17 32 4Z"/>'
-    '<circle class="guide-droplet-core" cx="32" cy="52" r="8"/>'
+    '<path class="guide-droplet-rim" d="M32 4C37 17 56 30 56 46A24 24 0 0 1 8 46C8 30 27 17 32 4Z"/>'
     '<g class="guide-droplet-eyes" data-guide-eyes>'
     '<ellipse cx="25" cy="44" rx="3.2" ry="4.6"/><ellipse cx="39" cy="44" rx="3.2" ry="4.6"/>'
     '<circle class="guide-droplet-glint" cx="24" cy="42" r="1.1"/>'

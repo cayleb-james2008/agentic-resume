@@ -32,7 +32,8 @@ export function mount(root) {
   const eyes = root.querySelector('[data-guide-eyes]');
   const dock = root.querySelector('[data-guide-dock]') || root;
   if (!agent || !bubble || !panel) return;
-  const phone = window.matchMedia('(max-width: 639px)');
+  // A landscape phone is as short of spare corner as a portrait one.
+  const phone = window.matchMedia('(max-width: 639px), (max-height: 500px)');
 
   const reduced = prefersReducedMotion();
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;

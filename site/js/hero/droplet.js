@@ -1,12 +1,13 @@
 /**
- * Cayleb's agent in 3D: a glass droplet with a cyan core and two glossy eyes,
- * built in code from droplet-shape.js. It takes the place the reference gave
- * its helmet — beside his head, following the cursor — but is always visible:
- * it is the second character in the hero, not something revealed.
+ * Cayleb's agent in 3D: a glass droplet with two glossy eyes and a cyan glow
+ * along its foot, as his generated scenes draw it, built in code from
+ * droplet-shape.js. It takes the place the reference gave its helmet — beside
+ * his head, following the cursor — but is always visible: it is the second
+ * character in the hero, not something revealed.
  */
 import {
-  BackSide, Color, Group, LatheGeometry, Mesh, MeshBasicMaterial,
-  MeshPhysicalMaterial, SphereGeometry, Vector2,
+  BackSide, Color, FrontSide, Group, LatheGeometry, Mesh, MeshBasicMaterial,
+  MeshPhysicalMaterial, ShaderMaterial, SphereGeometry, Vector2,
 } from "three";
 import { DROPLET_PROFILE } from "./droplet-shape.js";
 
@@ -30,6 +31,37 @@ const bodyMaterial = () => new MeshPhysicalMaterial({
   emissive: new Color("#02d2e3"), emissiveIntensity: 0.16,
 });
 
+/** Fresnel rim, weighted toward the foot (the lathe's y runs 0 at the foot to 1 at the tip). */
+const rimMaterial = () => new ShaderMaterial({
+  uniforms: { uColor: { value: new Color("#02d2e3") }, uStrength: { value: 0.95 } },
+  vertexShader: /* glsl */ `
+    varying vec3 vNormal;
+    varying vec3 vView;
+    varying float vY;
+    void main() {
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      vNormal = normalize(normalMatrix * normal);
+      vView = normalize(-mv.xyz);
+      vY = position.y;
+      gl_Position = projectionMatrix * mv;
+    }`,
+  fragmentShader: /* glsl */ `
+    uniform vec3 uColor;
+    uniform float uStrength;
+    varying vec3 vNormal;
+    varying vec3 vView;
+    varying float vY;
+    void main() {
+      float facing = clamp(dot(normalize(vNormal), normalize(vView)), 0.0, 1.0);
+      float rim = pow(1.0 - facing, 2.4);
+      float foot = 1.0 - smoothstep(0.06, 0.5, vY);
+      float glow = rim * (0.22 + 0.78 * foot) + foot * foot * 0.1;
+      gl_FragColor = vec4(uColor, clamp(glow * uStrength, 0.0, 1.0));
+      #include <colorspace_fragment>
+    }`,
+  transparent: true, depthWrite: false, depthTest: false, side: FrontSide,
+});
+
 export function buildDroplet() {
   const root = new Group();
   root.name = "droplet";
@@ -50,13 +82,13 @@ export function buildDroplet() {
   halo.position.y = -0.5 * 1.08;
   halo.renderOrder = 0;
 
-  const core = new Mesh(
-    new SphereGeometry(0.14, 24, 16),
-    new MeshBasicMaterial({ color: new Color("#02d2e3"), transparent: true, opacity: 0.4, depthWrite: false, depthTest: false }),
-  );
-  core.name = "core";
-  core.position.set(0, -0.24, 0);
-  core.renderOrder = 3; // drawn over the shell: it glows from inside it
+  // The glow: cyan where the glass turns away from the eye, strongest along the foot, the
+  // way light pools in the bottom of a drop. (A solid core used to sit just under the eyes
+  // and read as a nose.)
+  const rim = new Mesh(shape, rimMaterial());
+  rim.name = "rim";
+  rim.position.y = -0.5;
+  rim.renderOrder = 3; // over the shell, under the eyes
 
   const eyes = new Group();
   eyes.name = "eyes";
@@ -76,7 +108,7 @@ export function buildDroplet() {
     eyes.add(eye, spark);
   }
 
-  root.add(halo, body, core, eyes);
+  root.add(halo, body, rim, eyes);
   return root;
 }
 

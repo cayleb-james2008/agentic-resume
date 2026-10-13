@@ -75,3 +75,20 @@ test('on a short landscape screen the loop sits right of the copy column, inside
   const tall = stageFit(768, 1024);
   assert.ok(Math.abs(tall.s - 768 / TRACK_BOX.width) < 1e-9);
 });
+
+import { placeLabel } from '../site/js/approach/labels.js';
+
+test('a hanging station label that would cross the frame edge moves to the station\'s other side', () => {
+  // "Build" hangs right of its station; on a 390px phone it ran off the edge.
+  assert.deepEqual(placeLabel({ at: 360, dx: 14, anchor: 'start', width: 40 }, 8, 382), { x: 346, anchor: 'end' });
+  assert.deepEqual(placeLabel({ at: 300, dx: 14, anchor: 'start', width: 40 }, 8, 382), { x: 314, anchor: 'start' });
+  // "Whole company" hangs left of the start node.
+  assert.deepEqual(placeLabel({ at: 30, dx: -15, anchor: 'end', width: 90 }, 8, 382), { x: 45, anchor: 'start' });
+  assert.deepEqual(placeLabel({ at: 200, dx: -15, anchor: 'end', width: 90 }, 8, 382), { x: 185, anchor: 'end' });
+});
+
+test('a centred station label slides inside the frame', () => {
+  assert.deepEqual(placeLabel({ at: 20, dx: 0, anchor: 'middle', width: 80 }, 8, 382), { x: 48, anchor: 'middle' });
+  assert.deepEqual(placeLabel({ at: 370, dx: 0, anchor: 'middle', width: 80 }, 8, 382), { x: 342, anchor: 'middle' });
+  assert.deepEqual(placeLabel({ at: 190, dx: 0, anchor: 'middle', width: 80 }, 8, 382), { x: 190, anchor: 'middle' });
+});

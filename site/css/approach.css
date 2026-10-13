@@ -42,6 +42,8 @@
 .map-label {
   fill: var(--foreground-on-dark); font-family: var(--font-sans); font-weight: 500;
   font-size: var(--label-size, 28px); text-transform: uppercase; letter-spacing: 0.02em;
+  /* An ink outline under the fill, so a label the loop runs through stays readable. */
+  paint-order: stroke; stroke: var(--surface-black); stroke-width: 8px; stroke-linejoin: round;
 }
 
 /* The copy column. */
@@ -69,6 +71,8 @@
 .approach-intro {
   margin-top: max(2.0833cqw, var(--head-air, 0px)); width: max(16.1111cqw, var(--copy-min-w, 0px));
   font-size: max(1.25cqw, var(--copy-min-size, 0px)); text-transform: uppercase; line-height: 1.1;
+  /* The halftone runs under the last lines on wide screens; an ink halo keeps them clean. */
+  text-shadow: 0 0 0.4em var(--surface-black), 0 0 0.9em var(--surface-black);
 }
 
 /* The plate: 277×78, bottom-right corner cut 9. */
@@ -77,6 +81,8 @@
   width: var(--plate-w, 19.2361cqw); height: var(--plate-h, 5.4167cqw);
   display: grid; grid-template-columns: var(--plate-cell, 5.7639cqw) 1fr;
 }
+/* From 640 the legend sits bottom-left: the bottom-right corner belongs to the guide (guide.css). */
+@media (min-width: 640px) { .approach-plate { align-self: flex-start; } }
 .plate-frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .plate-frame path { fill: var(--surface-black); stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .plate-frame line { stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }

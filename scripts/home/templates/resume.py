@@ -2,8 +2,14 @@
 (resume/candidate-fragment.html, built by resume/build_resume.py) and a slim
 footer. No script — it reads the same with or without JavaScript, and prints."""
 from markup import attr, link, text
+from templates import social
 
 STYLES = ("tokens", "base", "resume")
+TITLE = "Résumé · Cayleb Alvarez-James"
+DESCRIPTION = (
+    "Cayleb Alvarez-James, AI workflow integrator: experience, education, selected projects and skills, "
+    "with one-page and detailed PDF downloads."
+)
 
 
 def _href(href: str) -> str:
@@ -38,9 +44,9 @@ def render(content: dict, fragment: str) -> str:
     return (
         '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        "<title>Résumé · Cayleb Alvarez-James</title>"
-        f'<meta name="description" content="{attr(meta["description"])}">'
-        '<link rel="canonical" href="https://cayleb-james2008.github.io/agentic-resume/resume.html">'
+        f"<title>{text(TITLE)}</title>"
+        f'<meta name="description" content="{attr(DESCRIPTION)}">'
+        f'{social.tags(meta, "resume.html", TITLE, DESCRIPTION)}'
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
         f"{styles}</head><body class=\"resume-page\">"
         '<a class="skip-link" href="#resume">Skip to résumé</a>'

@@ -117,7 +117,8 @@
   .row-layer--copy { position: relative; }
 }
 
-/* On a phone the copy and titles land on the plates; a soft ink halo keeps them legible. */
-@media (max-width: 639px) {
-  .row-copy, .row-title { text-shadow: 0 0 0.6em var(--surface-black), 0 1px 2px var(--surface-black); }
+/* The copy and titles land on the plates — on a phone always, and from 640 the copy column starts
+   inside the centre plates' right edge. An ink halo keeps them legible; on black it is invisible. */
+.row-copy, .row-title {
+  text-shadow: 0 0 0.35em rgb(9 10 11 / 0.95), 0 0 0.9em rgb(9 10 11 / 0.8), 0 1px 2px var(--surface-black);
 }

@@ -8,6 +8,7 @@ and the footer with the shared masthead and footer (templates/subpage.py).
 Links to the retired v8 résumé PDF are pointed at the current one. Running it
 again is a no-op on pages it has already converted.
 """
+import html
 import json
 import re
 import sys
@@ -16,7 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
 from markup import attr, text  # noqa: E402
-from templates import subpage  # noqa: E402
+from templates import guide, social, subpage  # noqa: E402
 
 RETIRED_PDFS = {
     "Cayleb-James-resume.pdf": "Cayleb-James-polished-resume.pdf",
@@ -43,6 +44,7 @@ def convert(page: str, content: dict, name: str) -> str:
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         f"<title>{title}</title>"
         f'<meta name="description" content="{description}">'
+        f"{social.tags(content['meta'], f'projects/{name}', html.unescape(title), html.unescape(description))}"
         '<meta name="theme-color" content="#090a0b">'
         '<link rel="icon" href="../favicon.svg" type="image/svg+xml">'
         f"{subpage.stylesheets('../')}</head>"
@@ -56,23 +58,82 @@ def convert(page: str, content: dict, name: str) -> str:
 
 
 LAB_STRIP = (
-    '<div class="lab-strip"><span class="lab-strip__edition">Industry AI Suite · recorded journeys / 01</span>'
-    '<span class="lab-strip__status"><span class="live-dot" aria-hidden="true"></span>Recorded · read only</span></div>'
+    '<aside class="lab-strip" aria-label="Lab status"><span class="lab-strip__edition">Industry AI Suite · recorded journeys / 01</span>'
+    '<span class="lab-strip__status"><span class="live-dot" aria-hidden="true"></span>Recorded · read only</span></aside>'
+)
+
+
+LAB_TITLE = "Industry AI Suite — recorded journeys"
+LAB_DESCRIPTION = (
+    "Ten recorded Industry AI Suite journeys by Cayleb Alvarez-James. Each shows its source, "
+    "the actual output and the decision left with a person. Read-only replays, not live runs."
 )
 
 
 def convert_lab(page: str, content: dict) -> str:
-    """The lab keeps its app and markup; only the head's styles and the top bar change."""
+    """The lab keeps its app and markup; the head's styles and sharing tags, the top bar and the footer change."""
     head_end = page.index("</head>")
     head = re.sub(r'\s*<link rel="stylesheet" href="[^"]*">', "", page[:head_end]).rstrip()
+    # Sharing tags are rebuilt every run: drop any from a previous one.
+    head = re.sub(r'\n[ \t]*<meta name="description"[^\n]*', "", head)
+    head = head.replace(f"<title>{text(LAB_TITLE)}</title>", f"<title>{text(LAB_TITLE)}</title>\n  "
+                        f'<meta name="description" content="{attr(LAB_DESCRIPTION)}">'
+                        f"{social.tags(content['meta'], 'lab/', LAB_TITLE, LAB_DESCRIPTION)}"
+                        '<link rel="icon" href="../favicon.svg" type="image/svg+xml">', 1)
+    if LAB_DESCRIPTION not in html.unescape(head):
+        raise SystemExit("lab/index.html: title changed; update LAB_TITLE")
     head = head.replace('<meta name="theme-color" content="#090C10">', '<meta name="theme-color" content="#090a0b">')
     head += "\n  " + subpage.stylesheets("../") + '<link rel="stylesheet" href="lab.css">\n'
     body = page[head_end:]
-    top = re.compile(r'<header class="(?:topbar|sub-masthead)">.*?</header>(?:<div class="lab-strip">.*?</span></div>)?', re.S)
+    top = re.compile(r'<header class="(?:topbar|sub-masthead)">.*?</header>'
+                     r'(?:<(?:div|aside) class="lab-strip"[^>]*>.*?</span>\s*</(?:div|aside)>)?', re.S)
     if not top.search(body):
         raise SystemExit("lab/index.html: no top bar to replace")
     body = top.sub(lambda _: subpage.masthead(content, "../") + LAB_STRIP, body, count=1)
+    # The shared footer, once, after the noscript note.
+    body = re.sub(r'\s*<footer class="sub-footer">.*?</footer>', "", body, flags=re.S)
+    body = body.replace("</body>", f"  {subpage.footer(content, '../')}\n</body>", 1)
     return head + body
+
+
+def not_found(content: dict) -> str:
+    """404.html. GitHub Pages serves it for any missing path at any depth, so every link is
+    relative to the site root through <base> — and the page has no #-links, which <base>
+    would send to the homepage."""
+    site = content["meta"]["siteUrl"]
+    return (
+        '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        f'<base href="{attr(site)}">'
+        "<title>Page not found · Cayleb Alvarez-James</title>"
+        '<meta name="robots" content="noindex">'
+        '<meta name="theme-color" content="#090a0b">'
+        '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
+        f"{subpage.stylesheets('')}</head>"
+        '<body class="project-page not-found-page">'
+        f"{subpage.masthead(content, '')}"
+        '<main class="not-found">'
+        f'<div class="not-found-agent" aria-hidden="true">{guide.DROPLET_SVG}</div>'
+        '<p class="not-found-code">404</p>'
+        '<h1 class="not-found-title">Page not found<span class="not-found-stop">.</span></h1>'
+        "<p class=\"not-found-copy\">Cayleb's agent looked everywhere. That address doesn't lead anywhere on this site; "
+        "it may have moved when the site was rebuilt.</p>"
+        '<ul class="not-found-links">'
+        '<li><a href="index.html">Home</a></li>'
+        '<li><a href="resume.html">Résumé</a></li>'
+        '<li><a href="index.html#work">Projects</a></li>'
+        '<li><a href="lab/">Lab</a></li></ul>'
+        "</main>"
+        f"{subpage.footer(content, '')}"
+        "</body></html>\n"
+    )
+
+
+def sitemap(content: dict) -> str:
+    site = content["meta"]["siteUrl"]
+    paths = ["", "resume.html", "lab/", *(f"projects/{p.name}" for p in sorted((ROOT / "projects").glob("*.html")))]
+    urls = "".join(f"  <url><loc>{site}{p}</loc></url>\n" for p in paths)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
 
 def main() -> list[Path]:
@@ -84,6 +145,9 @@ def main() -> list[Path]:
     lab = ROOT / "lab/index.html"
     lab.write_text(convert_lab(lab.read_text(), content))
     written.append(lab)
+    for name, body in (("404.html", not_found(content)), ("sitemap.xml", sitemap(content))):
+        (ROOT / name).write_text(body)
+        written.append(ROOT / name)
     return written
 
 

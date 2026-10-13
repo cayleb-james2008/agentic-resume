@@ -1,5 +1,6 @@
 """The document shell: head, the sticky stack, and the blocks in order."""
 from markup import PLATE_CLIP, attr, text
+from templates import social
 
 STYLES = ("tokens", "base", "hero", "approach", "experience", "projects", "contact", "guide")
 
@@ -46,6 +47,8 @@ def render(content: dict, blocks: dict) -> str:
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         f"<title>{text(meta['title'])}</title>"
         f'<meta name="description" content="{attr(meta["description"])}">'
+        f'{social.tags(meta, "", meta["title"], meta["description"])}'
+        '<meta name="theme-color" content="#f7fafb">'
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
         f"<script>{HEAD_SCRIPT}</script>{fonts}{styles}"
         f'<script type="importmap">{IMPORT_MAP}</script>'

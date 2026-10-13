@@ -11,6 +11,7 @@ import { readToken, rgbOf } from '../engine/tokens.js';
 import { Halftone } from './dots.js';
 import { COOL_MS, LAP_MS, TOTAL, distanceAtTime, makePalette, renderLap } from './lap.js';
 import { LOOP_MAP_D, LOOP_MAP_LENGTH, LOOP_MARKERS, LOOP_PATH, LOOP_START } from './loop-path.js';
+import { placeLabel } from './labels.js';
 import {
   CORNER_MARKS, CORNER_MARK_SIZE, DRIFT_MS, GRID_AXES_X, GRID_AXIS_Y, GRID_DASH, GRID_DASH_PERIOD,
   GRID_OVERRUN, GRID_STROKE, HUB, MAP_PLACEMENT, MAP_VIEW, PING_MS, PING_REACH, RINGS, artboardToMap,
@@ -24,6 +25,8 @@ const TRACK_PAD = 46;
 const PHONE_CENTRE = 0.62;
 const LABEL_SIZE = 28;
 const LABEL_MIN_PX = 11;
+/** Labels keep this far inside the frame's sides, in px. */
+const LABEL_EDGE = 10;
 
 const el = (name, attrs = {}, parent = null) => {
   const node = document.createElementNS(SVG, name);
@@ -101,10 +104,10 @@ function buildMap(stage) {
   for (const marker of LOOP_MARKERS) {
     const [x, y] = artboardToMap(marker.x, marker.y);
     el('circle', { cx: x, cy: y, r: 11, class: 'map-station' }, svg);
-    labels.push({ at: marker.d, node: el('text', { x: x + marker.dx, y: y + marker.dy, 'text-anchor': marker.anchor, class: 'map-label', opacity: 0 }, svg), shownAt: null });
+    labels.push({ at: marker.d, node: el('text', { x: x + marker.dx, y: y + marker.dy, 'text-anchor': marker.anchor, class: 'map-label', opacity: 0 }, svg), shownAt: null, home: { x, dx: marker.dx, anchor: marker.anchor } });
     labels.at(-1).node.textContent = marker.label;
   }
-  const finish = { at: TOTAL, node: el('text', { x: sx + LOOP_START.dx, y: sy + LOOP_START.dy, 'text-anchor': LOOP_START.anchor, class: 'map-label', opacity: 0 }, svg), shownAt: null };
+  const finish = { at: TOTAL, node: el('text', { x: sx + LOOP_START.dx, y: sy + LOOP_START.dy, 'text-anchor': LOOP_START.anchor, class: 'map-label', opacity: 0 }, svg), shownAt: null, home: { x: sx, dx: LOOP_START.dx, anchor: LOOP_START.anchor } };
   finish.node.textContent = LOOP_START.label;
   labels.push(finish);
 
@@ -140,10 +143,24 @@ export function mount(section) {
     // Station labels never drop under 11px on screen, however small the stage.
     const mapUnitsPerPixel = MAP_VIEW.width / MAP_PLACEMENT.width / s;
     stage.style.setProperty('--label-size', `${Math.max(LABEL_SIZE, LABEL_MIN_PX * mapUnitsPerPixel)}px`);
+    keepLabelsOnScreen(s, tx);
     halftone.bake();
+  };
+  // Each label at its home side unless that runs it off the frame (labels.js).
+  const keepLabelsOnScreen = (s, tx) => {
+    const unit = (s * MAP_PLACEMENT.width) / MAP_VIEW.width;
+    const lo = LABEL_EDGE;
+    const hi = frame.clientWidth - LABEL_EDGE;
+    for (const { node, home } of map.labels) {
+      const width = node.getComputedTextLength() * unit;
+      const place = placeLabel({ at: tx + home.x * unit, dx: home.dx * unit, anchor: home.anchor, width }, lo, hi);
+      node.setAttribute('x', String((place.x - tx) / unit));
+      node.setAttribute('text-anchor', place.anchor);
+    }
   };
   new ResizeObserver(fit).observe(frame);
   fit();
+  document.fonts?.ready.then(fit);
 
   // The lap: one pass, never re-run or reversed; then the head cools.
   let lap = 0;

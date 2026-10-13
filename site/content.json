@@ -5,7 +5,10 @@
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
-    "github": "https://github.com/cayleb-james2008"
+    "github": "https://github.com/cayleb-james2008",
+    "siteUrl": "https://cayleb-james2008.github.io/agentic-resume/",
+    "shareImage": "assets/og/card.png",
+    "shareAlt": "Illustration: Cayleb as a 3D character beside his glass-droplet AI agent, with his name and the title AI workflow integrator."
   },
   "wordmark": "CAYLEB.AJ",
   "nav": [

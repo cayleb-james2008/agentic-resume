@@ -47,7 +47,7 @@
     --melt-lead: 0px;
     --block-h: 1062px; --intro-bottom: 139px; --head-left: 24px; --intro-left: 24px;
     --head-top: 24px; --intro-min-w: 320px; --intro-gap: 24px; --band-fade: 60px;
-    --fig-cap: 599px; --fig-x-override: 48.5%; --fig-lift: 328px; --band-scale: 8.48;
+    --fig-cap: min(599px, 143cqw); --fig-x-override: calc(50% + 18px); --fig-lift: 328px; --band-scale: 8.48;
     --cal-card-w: 100%; --head-min: 40px;
   }
 }
@@ -190,7 +190,7 @@
 }
 .stats-figure .reveal-units { column-gap: 0; }
 .stats-rule {
-  height: 1px; background: var(--foreground-muted);
+  height: 1px; background: var(--hairline-ink);
   margin: var(--stats-rule-top, calc(24 * var(--u))) 0 var(--stats-rule-bottom, calc(23 * var(--u)));
 }
 
@@ -257,7 +257,8 @@
 }
 
 /* short: on a landscape phone the tablet composition needs a tablet's height; the block grows
-   to it and scrolls rather than stacking heading, panels and copy on one 390px screen. */
+   to it and scrolls rather than stacking heading, panels and copy on one 390px screen. The
+   figure, sized off that height, would cover the stats and the copy: it stands smaller, right. */
 @media (max-height: 500px) and (min-width: 640px) {
-  .projects { --block-h: max(100lvh, 88vw); }
+  .projects { --block-h: max(100lvh, 108vw); --fig-cap: 72cqw; --fig-x-override: 76%; }
 }

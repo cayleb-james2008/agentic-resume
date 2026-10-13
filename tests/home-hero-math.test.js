@@ -89,3 +89,47 @@ test('a blink squashes the eyes briefly and returns to full height', () => {
   assert.ok(blinkSquash(BLINK_MS / 2) < 0.2);
   assert.ok(blinkSquash(BLINK_MS / 4) < 1 && blinkSquash(BLINK_MS / 4) > blinkSquash(BLINK_MS / 2));
 });
+
+import { AGENT, placeAgent, pxPerAgentUnit, visibleWorldHeight } from '../site/js/hero/fit.js';
+
+const DEFAULTS = { helmetX: 1.05, helmetScale: 0.6 };
+const edges = ({ helmetX, helmetScale }, k) => ({
+  left: (helmetX - AGENT.halfWidth * helmetScale) * k,
+  right: (helmetX + AGENT.halfWidth * helmetScale) * k,
+});
+
+test('px per agent unit follows the canvas height and the subject\'s scale', () => {
+  const k = pxPerAgentUnit(900, 6.5, 1.15);
+  assert.ok(Math.abs(k - (900 / visibleWorldHeight(6.5)) * 1.15 * AGENT.perspective) < 1e-9);
+  assert.ok(Math.abs(k - 269.5) < 3, `calibrated at 1440×900: ${k}`); // measured: 283px for helmetX 1.05
+});
+
+test('with room beside his head the droplet keeps its place and size', () => {
+  const k = pxPerAgentUnit(900, 6.5, 1.15);
+  assert.deepEqual(placeAgent(454, k, DEFAULTS), DEFAULTS); // 1440×900: panels start ~1190px
+});
+
+test('squeezed by the panels (1024×768) the droplet shrinks and tucks in, clear of panel and hair', () => {
+  const k = pxPerAgentUnit(768, 6.5, 1.15 * (736 / 768));
+  const room = 247; // panels' left edge 775 − margin 16 − head axis 512
+  const placed = placeAgent(room, k, DEFAULTS);
+  const { left, right } = edges(placed, k);
+  assert.ok(right <= room + 0.5, `right edge ${right.toFixed(1)} > ${room}`);
+  assert.ok(left >= AGENT.hair * k - 0.5, `left edge ${left.toFixed(1)} inside the hair (${(AGENT.hair * k).toFixed(1)})`);
+  assert.ok(placed.helmetScale < DEFAULTS.helmetScale && placed.helmetScale >= AGENT.minScale);
+});
+
+test('on a 390px phone the droplet stays on screen and off his hair', () => {
+  const k = pxPerAgentUnit(844, 6.5, 1.15 * (540 / 844));
+  const room = 390 / 2 - 10;
+  const { left, right } = edges(placeAgent(room, k, { helmetX: 1.05 * 0.8, helmetScale: 0.6 }), k);
+  assert.ok(right <= room + 0.5);
+  assert.ok(left >= AGENT.hair * k - 0.5);
+});
+
+test('when even the smallest droplet cannot clear the hair, it stays at its smallest against the edge', () => {
+  const k = 200;
+  const placed = placeAgent(120, k, DEFAULTS);
+  assert.equal(placed.helmetScale, AGENT.minScale);
+  assert.ok(Math.abs(edges(placed, k).right - 120) < 1e-9);
+});

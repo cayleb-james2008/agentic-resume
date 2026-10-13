@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { CAP_60, getSceneTier } from '../site/js/hero/tier.js';
 import { DEG, fitSubjectToBox, swing } from '../site/js/hero/fit.js';
-import { HEADSET_PROFILE, VISOR_BAND } from '../site/js/hero/headset-profile.js';
+import { BLINK_MS, DROPLET_PROFILE, EYE_MAX_DEG, blinkSquash, lookAngles } from '../site/js/hero/droplet-shape.js';
 
 /** A stand-in for window: width, pointer class, reduced motion, save-data. */
 const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
@@ -61,12 +61,31 @@ test('swing reaches the amplitude', () => {
   assert.equal(swing(0, 8, 3), 0);
 });
 
-test('headset profile is a closed dome', () => {
-  for (let i = 1; i < HEADSET_PROFILE.length; i += 1) {
-    assert.ok(HEADSET_PROFILE[i][1] > HEADSET_PROFILE[i - 1][1], 'y strictly increases');
+test('the droplet is a closed teardrop, round at the foot and pointed at the top', () => {
+  for (let i = 1; i < DROPLET_PROFILE.length; i += 1) {
+    assert.ok(DROPLET_PROFILE[i][1] > DROPLET_PROFILE[i - 1][1], 'y strictly increases');
   }
-  assert.ok(HEADSET_PROFILE.every(([x]) => x >= 0));
-  assert.equal(HEADSET_PROFILE.at(-1)[0], 0);
-  const inBand = HEADSET_PROFILE.filter(([, y]) => y >= VISOR_BAND[0] && y <= VISOR_BAND[1]);
-  assert.ok(inBand.length >= 2);
+  assert.ok(DROPLET_PROFILE.every(([x]) => x >= 0));
+  assert.equal(DROPLET_PROFILE[0][0], 0, 'closed at the foot');
+  assert.equal(DROPLET_PROFILE.at(-1)[0], 0, 'closed at the tip');
+  const top = DROPLET_PROFILE.at(-1)[1];
+  const widest = DROPLET_PROFILE.reduce((a, b) => (b[0] > a[0] ? b : a));
+  assert.ok(widest[1] < top * 0.45, 'the belly sits in the lower half');
+});
+
+test('the eyes look toward the cursor, never past their clamp', () => {
+  assert.deepEqual(lookAngles(0, 0), { yaw: 0, pitch: 0 });
+  const right = lookAngles(1, 0);
+  assert.ok(right.yaw > 0 && right.pitch === 0);
+  const far = lookAngles(9, 9);
+  assert.ok(Math.abs(far.yaw) <= EYE_MAX_DEG * Math.PI / 180 + 1e-12);
+  assert.ok(Math.abs(far.pitch) <= EYE_MAX_DEG * Math.PI / 180 + 1e-12);
+  assert.ok(far.pitch > 0, 'cursor below (screen y down) pitches down');
+});
+
+test('a blink squashes the eyes briefly and returns to full height', () => {
+  assert.equal(blinkSquash(-1), 1);
+  assert.equal(blinkSquash(BLINK_MS + 1), 1);
+  assert.ok(blinkSquash(BLINK_MS / 2) < 0.2);
+  assert.ok(blinkSquash(BLINK_MS / 4) < 1 && blinkSquash(BLINK_MS / 4) > blinkSquash(BLINK_MS / 2));
 });

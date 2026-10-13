@@ -1,0 +1,98 @@
+/* The guide: Cayleb's droplet agent in the corner, its speech bubble and the
+   "Ask my agent" panel (spec 2026-10-12-droplet-agent-guide-design). Above
+   content, below the menu sheet and veil (50) and the asset banner (70). */
+
+.guide {
+  position: fixed; z-index: 40;
+  right: calc(1rem + env(safe-area-inset-right, 0px));
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;
+  pointer-events: none;
+}
+.guide[hidden] { display: none; }
+.guide > * { pointer-events: auto; }
+.guide-dock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; pointer-events: none; }
+.guide-dock > * { pointer-events: auto; }
+
+/* The droplet button. */
+.guide-agent {
+  width: 4rem; height: 4.5rem; padding: 0; border-radius: 50%;
+  filter: drop-shadow(0 0.4rem 0.9rem rgb(9 10 11 / 0.28));
+}
+@media (max-width: 639px) { .guide-agent { width: 3.25rem; height: 3.65rem; } }
+.guide-agent:focus-visible { outline-offset: 4px; }
+.guide-droplet { width: 100%; height: 100%; overflow: visible; }
+.guide-droplet-body { fill: url(#guide-glass); stroke: var(--accent); stroke-width: 1.5; }
+.guide-droplet-core { fill: var(--accent); opacity: 0.45; }
+.guide-droplet-eyes ellipse { fill: #0b0d10; }
+.guide-droplet-glint { fill: #fff; }
+.guide-droplet-shine { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; opacity: 0.85; }
+
+/* The speech bubble: a line per section, decoration for screen readers. */
+.guide-bubble {
+  position: relative; margin: 0 0.25rem 0 0; max-width: min(17rem, calc(100vw - 2rem));
+  padding: 0.75rem 1rem; background: var(--surface-black); color: var(--foreground-on-dark);
+  border: 1px solid rgb(255 255 255 / 0.12); border-left: 2px solid var(--accent);
+  font-size: 0.875rem; line-height: 1.35;
+}
+.guide-bubble::after {
+  content: ""; position: absolute; right: 1.4rem; bottom: -6px; width: 10px; height: 10px;
+  background: var(--surface-black); transform: rotate(45deg);
+  border-right: 1px solid rgb(255 255 255 / 0.12); border-bottom: 1px solid rgb(255 255 255 / 0.12);
+}
+.guide-bubble[hidden] { display: none; }
+
+/* The panel: a non-modal dialog of quick answers. */
+.guide-panel {
+  width: min(21rem, calc(100vw - 2rem)); max-height: min(70vh, 34rem); overflow: auto;
+  padding: 1.25rem; background: var(--surface-black); color: var(--foreground-on-dark);
+  border: 1px solid rgb(255 255 255 / 0.12); border-top: 2px solid var(--accent);
+  overscroll-behavior: contain;
+}
+.guide-panel[hidden] { display: none; }
+.guide-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.guide-title {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: 1.5rem; line-height: 0.95; color: var(--accent);
+}
+.guide-close { position: relative; flex: none; width: 2rem; height: 2rem; margin-right: -0.4rem; }
+.guide-close span {
+  position: absolute; left: 0.45rem; top: 50%; width: 1.1rem; height: 1px; background: var(--foreground-on-dark);
+}
+.guide-close span:first-child { transform: rotate(45deg); }
+.guide-close span:last-child { transform: rotate(-45deg); }
+.guide-intro { margin: 0.5rem 0 0.75rem; font-size: 0.8125rem; line-height: 1.4; color: rgb(255 255 255 / 0.64); }
+.guide-qs li + li { border-top: 1px solid rgb(255 255 255 / 0.12); }
+.guide-q {
+  width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: 0.8rem 0; text-align: left; text-transform: uppercase; font-size: 0.875rem; line-height: 1.2;
+  transition: color var(--duration-fast) var(--ease-entrance);
+}
+.guide-q::after { content: "+"; color: var(--accent); font-size: 1rem; line-height: 1; }
+.guide-q[aria-expanded="true"]::after { content: "\2013"; }
+.guide-q:hover, .guide-q:focus-visible { color: var(--accent); }
+.guide-a p { margin: 0; padding-bottom: 0.9rem; font-size: 0.875rem; line-height: 1.5; color: rgb(255 255 255 / 0.84); }
+.guide-a[hidden] { display: none; }
+.guide-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: -0.4rem; }
+.guide-links a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+.guide-quiet {
+  margin-top: 0.75rem; font-size: 0.75rem; text-transform: uppercase; color: rgb(255 255 255 / 0.64);
+  text-decoration: underline; text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-entrance);
+}
+.guide-quiet[aria-pressed="true"], .guide-quiet:hover { color: var(--accent); }
+
+/* Phones: the panel is a bottom sheet. */
+@media (max-width: 639px) {
+  .guide-panel {
+    position: fixed; left: 0; right: 0; bottom: 0; width: auto; max-height: 78vh;
+    border-left: 0; border-right: 0; border-bottom: 0;
+    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  }
+  /* The sheet has its own close button; the droplet would sit on its last row. */
+  .guide-panel:not([hidden]) + .guide-dock { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-q, .guide-quiet { transition: none; }
+}

@@ -1,16 +1,17 @@
 /**
  * The hero scene — the reference's scene.ts (spec §L738–2789) with types
  * stripped. Deltas, all marked in place: assets from assets/home/hero, no
- * GLTF/Draco/HDR loaders (a procedural headset and RoomEnvironment instead),
- * per-mesh reveal masks, brightness that keeps the shell's colour, and load
- * failures reported through `onError` instead of a hung loader.
+ * GLTF/Draco/HDR loaders (RoomEnvironment instead), the helmet replaced by
+ * Cayleb's agent — a procedural glass droplet that is always visible (no
+ * reveal mask, no wireframe, no burn) — and load failures reported through
+ * `onError` instead of a hung loader.
  */
-import { ACESFilmicToneMapping, Box3, Color, FrontSide, Group, LinearMipmapLinearFilter, Matrix4, Mesh, PerspectiveCamera, PlaneGeometry, PMREMGenerator, RepeatWrapping, Scene, ShaderMaterial, SRGBColorSpace, Texture, TextureLoader, Vector2, Vector3, WebGLRenderer, } from "three";
+import { ACESFilmicToneMapping, Color, Group, LinearMipmapLinearFilter, Mesh, PerspectiveCamera, PlaneGeometry, PMREMGenerator, RepeatWrapping, Scene, ShaderMaterial, SRGBColorSpace, Texture, TextureLoader, Vector2, Vector3, WebGLRenderer, } from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { readToken } from "../engine/tokens.js";
 import { CAMERA_FOV, CAMERA_Y, fitSubjectToBox, swing, visibleWorldHeight } from "./fit.js";
-import { SHELL_BASE, buildHeadset } from "./headset.js";
+import { animateDroplet, buildDroplet } from "./droplet.js";
+import { blinkSquash, lookAngles, nextBlinkDelay } from "./droplet-shape.js";
 import { getSceneTier } from "./tier.js";
 export { CAMERA_FOV, CAMERA_Y, fitSubjectToBox, visibleWorldHeight };
 const ASSETS = "assets/home/hero";
@@ -23,7 +24,10 @@ const HEAD_HEIGHT = 5.4;
  * frames the eyes (photo eye-line ~ y -0.4) and pushed forward so it sits in
  * front of the portrait plane rather than through it.
  */
-const HELMET_WORN_OFFSET = new Vector3(0, -0.56, 0.35);
+/** Where the droplet sits relative to its placement group: in front of the portrait plane. */
+const AGENT_OFFSET = new Vector3(0, 0, 0.6);
+/** How long the droplet takes to pop in once the scene is ready, in seconds. */
+const AGENT_POP = 0.9;
 /**
  * Extra plane height added below the portrait, as a fraction of HEAD_HEIGHT.
  *
@@ -56,12 +60,6 @@ const STATIC_POSE = { x: 0.3, y: 0.1 };
  * Because it sizes a uniform array and a loop bound, it must be baked into
  * the shader source at construction; it cannot become a uniform.
  */
-/**
- * Ceiling on outline waves in flight at once. The loop breaks as soon as a
- * spawn is older than its period, so this only bounds the shader — the real
- * count is `outlinePeriod / outlineStagger`.
- */
-const OUTLINE_MAX_WAVES = 8;
 /** Depth of the backdrop plane — behind everything the subject group holds. */
 const BACKDROP_Z = -3;
 /**
@@ -287,9 +285,10 @@ export const DEFAULT_PARAMS = {
     headY: 0.58,
     headParallax: 0.005,
     headRelight: 0.32,
-    helmetScale: 0.54,
-    helmetX: 0.02,
-    helmetY: -0.08,
+    // Cayleb's agent: beside his head on his left, a little above the eye-line.
+    helmetScale: 0.6,
+    helmetX: 1.05,
+    helmetY: -0.25,
     helmetZ: 0,
     helmetFollow: 0.01,
     // The owner's pass on the degree sliders (2026-09-08, second tune of the
@@ -323,15 +322,9 @@ export const DEFAULT_PARAMS = {
     paceRelease: 0.205,
     paceThreshold: 0.06,
     paceRamp: 0.15,
-    outlinePeriod: 3.1,
     sweepWarp: 0.86,
     sweepLength: 0.67,
     sweepRadius: 0.33,
-    outlineStagger: 1.2,
-    outlineOpacity: 0.09,
-    outlineWidth: 0.15,
-    outlineBase: 0,
-    outlineLightness: 0.64,
     bgLineScale: 3.8,
     // 1 slices the noise field into a single band, so the backdrop draws one
     // sparse iso-line rather than a dense contour map.
@@ -344,7 +337,7 @@ export const DEFAULT_PARAMS = {
     // helmet's on-screen value, which is what makes the two halves read as one.
     bgRevealLightness: 0.62,
     bgRevealLightnessAlt: 0.44,
-    bgRevealOpacity: 1,
+    bgRevealOpacity: 0,
     introDuration: 4,
     burnStart: 0.14,
     burnSoftness: 0.02,
@@ -359,74 +352,6 @@ export const DEFAULT_PARAMS = {
     autoSweepStroke: 0.45,
     autoSweepHold: 0,
 };
-/**
- * Wireframe wave over the helmet's own geometry. The helmet is invisible by
- * default; a soft band travels crown-to-chin once per `uPeriod` and is the
- * only thing that ever draws it, so the shape fades up as the wave arrives
- * and fades out behind it.
- *
- * The band is a gaussian, not the reference's `pow(fract(...), 4.)`. That
- * form is a repeating sawtooth: it snaps from full to nothing at the wrap,
- * which reads as a hard scan line rather than a wave. Centring a gaussian and
- * starting it *above* the crown / ending it *below* the chin means the only
- * fade in and out are the wave's own tails — no discontinuity to hide.
- *
- * `uMinY`/`uRangeY` normalise local Y from the merged geometry's bounds, so
- * one wave spans the helmet regardless of the model's own scale.
- */
-const outlineVertex = /* glsl */ `
-  varying float vHeight;
-  uniform float uMinY;
-  uniform float uRangeY;
-  void main() {
-    vHeight = (position.y - uMinY) / max(uRangeY, 0.0001);
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-const outlineFragment = /* glsl */ `
-  varying float vHeight;
-  uniform float uTime;
-  uniform float uPeriod;
-  uniform float uStagger;
-  uniform float uOpacity;
-  uniform float uBase;
-  uniform float uWidth;
-  uniform float uLightness;
-  uniform float uRevealMix;
-  uniform vec3 uColor;
-
-  void main() {
-    float width = max(uWidth, 0.0001);
-    float period = max(uPeriod, 0.0001);
-    float stagger = max(uStagger, 0.0001);
-
-    // Enter three widths above the crown, leave three below the chin, so a
-    // wave is fully faded at both ends of its travel.
-    float start = 1.0 + width * 3.0;
-    float travel = 1.0 + width * 6.0;
-
-    // A wave is *spawned* every uStagger seconds and lives uPeriod seconds,
-    // so several are in flight at once whenever stagger < period — that is
-    // the wave train. Walking back from the most recent spawn means the loop
-    // costs only as many iterations as there are live waves; set stagger >=
-    // period and it collapses to the single-wave behaviour.
-    float wave = 0.0;
-    for (int i = 0; i < ${OUTLINE_MAX_WAVES}; i++) {
-      float age = mod(uTime, stagger) + float(i) * stagger;
-      if (age > period) break;
-      float centre = start - (age / period) * travel;
-      float d = (vHeight - centre) / width;
-      // max, not sum: waves all travel the same way at the same speed so they
-      // never actually meet, and summing would blow out if they ever did.
-      wave = max(wave, exp(-d * d));
-    }
-
-    // Lift off the foreground token toward white, so the token stays the
-    // source of the colour and this is only a tuning offset from it.
-    vec3 stroke = mix(uColor, vec3(1.0), uLightness);
-    gl_FragColor = vec4(stroke, (uBase + wave * uOpacity) * uRevealMix);
-  }
-`;
 /**
  * The backdrop: animated contour lines, plus the grey half of the cursor
  * reveal.
@@ -583,9 +508,9 @@ const headFragment = /* glsl */ `
   }
 `;
 /**
- * The immersive hero scene — depth-parallax head, glass helmet shell, the
- * gold helmet revealed liquid-style around the cursor, and wireframe
- * circuit outlines. Plain three.js class; the React wrapper drives
+ * The immersive hero scene — depth-parallax head, Cayleb's glass droplet
+ * agent beside it, and the contour backdrop. Plain three.js class; the
+ * React wrapper drives
  * update/resize/dispose through the project's shared ticker loop.
  */
 export class HeroScene {
@@ -594,13 +519,12 @@ export class HeroScene {
     camera = new PerspectiveCamera(CAMERA_FOV, 1, 0.1, 50);
     headMaterial = null;
     headMesh = null;
-    shellMaterial = null;
-    /** The shell's own maps, unpacked from the GLB — prewarmed like the rest. */
-    helmetTextures = [];
     revealUniforms = null;
-    outlineMaterial = null;
-    /** The wireframe itself — kept so `retune()` can show or hide it per tier. */
-    outlineMesh = null;
+    /** Cayleb's agent, the glass droplet (droplet.js). */
+    agent = null;
+    /** When the droplet next blinks, and when the current blink began (scene seconds). */
+    nextBlinkAt = 2.5;
+    blinkAt = -1;
     /** How many samples each trail keeps — from the tier. */
     samples;
     /** Pointer history in NDC, newest first — the reveal mask's input. */
@@ -611,7 +535,7 @@ export class HeroScene {
      * The helmet's own centre, and the node the cursor tilt turns.
      *
      * This exists because rotating `helmetGroup` does not turn the helmet, it
-     * *orbits* it: the mesh sits `HELMET_WORN_OFFSET` away from that group's
+     * *orbits* it: the mesh sits `AGENT_OFFSET` (once `HELMET_WORN_OFFSET`) away from that group's
      * origin, ~0.66 units, so a tilt swung the helmet through an arc of that
      * radius and dragged it along z. Under a perspective camera a z-swing is an
      * apparent size change, so the helmet lunged toward the viewer and grew on
@@ -765,8 +689,6 @@ export class HeroScene {
         };
         this._tier = tier;
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, tier.maxDpr));
-        if (this.outlineMesh)
-            this.outlineMesh.visible = tier.outline;
         // The pointer follows the tier's class: parked where there is none, and
         // un-parked — waiting for the first real event to snap to — where one
         // has appeared. Leaving a parked pose under a live cursor would hold the
@@ -1064,30 +986,21 @@ export class HeroScene {
             bg.uRevealColor.value.setScalar(p.bgRevealLightness);
             bg.uRevealColorAlt.value.setScalar(p.bgRevealLightnessAlt);
         }
-        if (this.outlineMaterial) {
-            const outline = this.outlineMaterial.uniforms;
-            outline.uTime.value = t;
-            outline.uPeriod.value = p.outlinePeriod;
-            outline.uStagger.value = p.outlineStagger;
-            outline.uOpacity.value = p.outlineOpacity;
-            outline.uWidth.value = p.outlineWidth;
-            outline.uLightness.value = p.outlineLightness;
-            outline.uBase.value = p.outlineBase;
-            // Held back until the burn has actually consumed the shell.
-            //
-            // The outline exists to disclose an *invisible* helmet. Drawn over a
-            // solid one — which is exactly what the entrance shows for its first
-            // second — it is a wireframe laid across opaque paint and reads as raw
-            // polygons, worst of all through the semi-transparent visor. Fading it
-            // in on the burn's own curve means the two hand over rather than
-            // overlap: the shell dissolves, the outline takes its place.
-            outline.uRevealMix.value = this.reveal * this.burnProgress(p);
+        if (this.agent) {
+            // Bob, gaze and blink — held still on a frozen (reduced-motion) tier.
+            const still = this._tier.freeze;
+            if (!still && t >= this.nextBlinkAt) {
+                this.blinkAt = t;
+                this.nextBlinkAt = t + nextBlinkDelay() / 1000;
+            }
+            const pop = Math.min(1, Math.max(0, (t - (this.readyAt ?? t)) / AGENT_POP));
+            animateDroplet(this.agent, {
+                bob: still ? 0 : Math.sin(t * 2.1) * 0.06,
+                look: still ? { yaw: 0, pitch: 0 } : lookAngles(this.smoothed.x, this.smoothed.y),
+                squash: still ? 1 : blinkSquash((t - this.blinkAt) * 1000),
+                scale: still ? 1 : 1 - Math.pow(1 - pop, 3) * (1 - 0.1 * Math.sin(pop * Math.PI)),
+            });
         }
-        // `color` multiplies the base-colour map, so this is a live brightness
-        // dial over the baked grey without regenerating the atlas.
-        // The procedural shell has no base-colour map, so brightness scales
-        // its own colour rather than replacing it (setScalar would turn it white).
-        this.shellMaterial?.color.copy(SHELL_BASE).multiplyScalar(p.helmetBrightness);
         this.renderer.render(this.scene, this.camera);
     }
     /**
@@ -1244,7 +1157,7 @@ export class HeroScene {
                 resolve(texture);
             }, undefined, () => reject(Object.assign(new Error(`Couldn't load ${ASSETS}/${file}`), { url: `${ASSETS}/${file}` })));
         });
-        // The helmet is procedural (headset.js) and the studio light is three's
+        // The droplet is procedural (droplet.js) and the studio light is three's
         // own RoomEnvironment, so only the portrait maps and the noise load.
         let headMaps, noise;
         try {
@@ -1272,10 +1185,10 @@ export class HeroScene {
         const pmrem = new PMREMGenerator(this.renderer);
         this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
         pmrem.dispose();
-        // Order matters: buildHelmet creates the shared reveal uniforms that the
-        // backdrop's copy of the mask reads from.
+        // Order matters: buildAgent creates the shared reveal uniforms the
+        // backdrop reads from.
         this.buildHead(headMaps[0], headMaps[1], headMaps[2], headMaps[3]);
-        this.buildHelmet(buildHeadset(), noise);
+        this.buildAgent(buildDroplet(), noise);
         this.buildBackdrop(noise);
         // Opaque from the first frame. This used to ramp 0 → 1 over about a
         // second once ready, which was both pointless and a visible bug: the
@@ -1294,7 +1207,7 @@ export class HeroScene {
         // visible frame allocates nothing (optimize-3d-scene §3).
         // The helmet's maps come out of the GLB rather than off the network, but
         // they are uploaded on first draw just the same, so they belong here too.
-        for (const texture of [...headMaps, noise, ...this.helmetTextures]) {
+        for (const texture of [...headMaps, noise]) {
             this.renderer.initTexture(texture);
         }
         await this.renderer.compileAsync(this.scene, this.camera);
@@ -1327,250 +1240,62 @@ export class HeroScene {
         this.headMesh = head;
         this.subjectGroup.add(head);
     }
-    buildHelmet(root, noise) {
+    /**
+     * The shared reveal uniforms. Nothing is masked by them any more — the
+     * droplet is always visible — but the backdrop's contour shader still reads
+     * its time, aspect and mix from here, and its grey reveal stays switched off
+     * (`bgRevealOpacity: 0`).
+     */
+    createRevealUniforms(noise) {
         noise.wrapS = RepeatWrapping;
         noise.wrapT = RepeatWrapping;
-        // Shared by every masked material, written once per frame in update().
-        this.revealUniforms = {
-            uTrail: { value: this.trail },
-            uTrailMin: { value: new Vector2(-1e3, -1e3) },
-            uTrailMax: { value: new Vector2(1e3, 1e3) },
-            uSweep: { value: this.sweepTrail },
-            uSweepMin: { value: new Vector2(-1e3, -1e3) },
-            uSweepMax: { value: new Vector2(1e3, 1e3) },
-            uSweepPace: { value: 0 },
-            uSweepWarp: { value: DEFAULT_PARAMS.sweepWarp },
-            uSweepLength: { value: DEFAULT_PARAMS.sweepLength },
-            uSweepRadius: { value: DEFAULT_PARAMS.sweepRadius },
-            uAspect: { value: this.aspect },
-            uRadius: { value: DEFAULT_PARAMS.trailRadius },
-            uIdleScale: { value: DEFAULT_PARAMS.trailIdleScale },
-            uTaper: { value: DEFAULT_PARAMS.trailTaper },
-            uTaperIdle: { value: DEFAULT_PARAMS.trailTaperIdle },
-            uTaperFast: { value: DEFAULT_PARAMS.trailTaperFast },
-            uLength: { value: DEFAULT_PARAMS.trailLength },
-            uPace: { value: 0 },
-            uGateStart: { value: DEFAULT_PARAMS.paceThreshold },
-            uGateWidth: { value: DEFAULT_PARAMS.paceRamp },
-            uWarpScale: { value: DEFAULT_PARAMS.revealWarpScale },
-            uTime: { value: 0 },
-            uThreshold: { value: DEFAULT_PARAMS.revealThreshold },
-            uEdge: { value: DEFAULT_PARAMS.revealEdge },
-            uWarp: { value: DEFAULT_PARAMS.revealWarp },
-            uRevealMix: { value: 0 },
-            uNoiseTex: { value: noise },
-            uIntro: { value: 0 },
-            uBurnStart: { value: DEFAULT_PARAMS.burnStart },
-            uBurnSoft: { value: DEFAULT_PARAMS.burnSoftness },
-            uBurnGlow: { value: DEFAULT_PARAMS.burnGlow },
-            uBurnColor: { value: new Color(readToken("--accent")) },
-        };
-        root.traverse((object) => {
-            if (!object.isMesh)
-                return;
-            const mesh = object;
-            // The supplied helmet is a single mesh under one material, not the old
-            // helmet/glass/plastic split, so there is nothing to match by name and
-            // nothing to hide. The material it arrives with is already the right
-            // one — a MeshStandardMaterial carrying the baked base colour, normal
-            // and metallic-roughness in the model's own UVs — so the shell is that
-            // material, adjusted for the reveal rather than rebuilt from an atlas.
-            const shell = mesh.material;
-            // FrontSide whatever the export declares. The exporter marks this
-            // material double-sided, and a double-sided pass that is `transparent`
-            // with `depthWrite: false` — which the liquid reveal requires — shows
-            // the helmet's own back faces through itself and reads as loose
-            // polygons. Same failure the entrance burn was fixed for.
-            shell.side = FrontSide;
-            shell.transparent = true;
-            shell.depthWrite = false;
-            // The baked maps set metalness and roughness per texel; only the
-            // environment weight is a look decision, and it is the value the
-            // previous lacquered shell was tuned to.
-            shell.envMapIntensity = 1.3;
-            this.injectRevealMask(shell);
-            mesh.renderOrder = 1;
-            if (mesh.name === "shell")
-                this.shellMaterial = shell;
-            // Kept so the prewarm can upload them before the loader lifts.
-            for (const map of [
-                shell.map,
-                shell.normalMap,
-                shell.roughnessMap,
-                shell.metalnessMap,
-            ]) {
-                if (map && !this.helmetTextures.includes(map)) {
-                    this.helmetTextures.push(map);
-                }
-            }
-        });
-        // Normalise so the helmet is worn: sized to the head plane's face area.
-        const bounds = new Box3().setFromObject(root);
-        const size = bounds.getSize(new Vector3());
-        const scale = (HEAD_HEIGHT * 0.56) / size.y;
-        root.scale.setScalar(scale);
-        bounds.setFromObject(root);
-        const center = bounds.getCenter(new Vector3());
-        // Centred on the pivot's origin, so turning the pivot turns the helmet in
-        // place. The offset that actually wears it lives on the pivot itself, one
-        // level up, where the tilt cannot reach it.
-        root.position.sub(center);
-        this.helmetPivot.position.copy(HELMET_WORN_OFFSET);
+            return {
+        uTrail: { value: this.trail },
+        uTrailMin: { value: new Vector2(-1e3, -1e3) },
+        uTrailMax: { value: new Vector2(1e3, 1e3) },
+        uSweep: { value: this.sweepTrail },
+        uSweepMin: { value: new Vector2(-1e3, -1e3) },
+        uSweepMax: { value: new Vector2(1e3, 1e3) },
+        uSweepPace: { value: 0 },
+        uSweepWarp: { value: DEFAULT_PARAMS.sweepWarp },
+        uSweepLength: { value: DEFAULT_PARAMS.sweepLength },
+        uSweepRadius: { value: DEFAULT_PARAMS.sweepRadius },
+        uAspect: { value: this.aspect },
+        uRadius: { value: DEFAULT_PARAMS.trailRadius },
+        uIdleScale: { value: DEFAULT_PARAMS.trailIdleScale },
+        uTaper: { value: DEFAULT_PARAMS.trailTaper },
+        uTaperIdle: { value: DEFAULT_PARAMS.trailTaperIdle },
+        uTaperFast: { value: DEFAULT_PARAMS.trailTaperFast },
+        uLength: { value: DEFAULT_PARAMS.trailLength },
+        uPace: { value: 0 },
+        uGateStart: { value: DEFAULT_PARAMS.paceThreshold },
+        uGateWidth: { value: DEFAULT_PARAMS.paceRamp },
+        uWarpScale: { value: DEFAULT_PARAMS.revealWarpScale },
+        uTime: { value: 0 },
+        uThreshold: { value: DEFAULT_PARAMS.revealThreshold },
+        uEdge: { value: DEFAULT_PARAMS.revealEdge },
+        uWarp: { value: DEFAULT_PARAMS.revealWarp },
+        uRevealMix: { value: 0 },
+        uNoiseTex: { value: noise },
+        uIntro: { value: 0 },
+        uBurnStart: { value: DEFAULT_PARAMS.burnStart },
+        uBurnSoft: { value: DEFAULT_PARAMS.burnSoftness },
+        uBurnGlow: { value: DEFAULT_PARAMS.burnGlow },
+        uBurnColor: { value: new Color(readToken("--accent")) },
+    };
+    }
+    /**
+     * Cayleb's agent. Parented to the pivot the helmet used, so the composition's
+     * placement (`helmetX/Y/Scale`) and the gentle lean toward the cursor carry
+     * over; it sits AGENT_OFFSET in front of the portrait plane and is never
+     * masked.
+     */
+    buildAgent(root, noise) {
+        this.revealUniforms = this.createRevealUniforms(noise);
+        this.agent = root;
+        this.helmetPivot.position.copy(AGENT_OFFSET);
         this.helmetPivot.add(root);
         this.helmetGroup.updateMatrixWorld(true);
-        this.buildOutline(root);
-    }
-    /**
-     * The scanning wireframe. Built from the helmet's own geometries merged into
-     * one mesh so the scan is a single draw rather than one per shell, and
-     * parented to the same node as the shell — the pivot — so it inherits every
-     * transform including the tilt; a separately-placed copy drifts out of
-     * register the moment the helmet follows the pointer.
-     */
-    buildOutline(root) {
-        // Bake each mesh into the pivot's local space. Using `matrixWorld`
-        // directly would fold in that node's own transform and then have it
-        // applied a second time when the outline is parented back to it.
-        const toGroupLocal = this.helmetPivot.matrixWorld.clone().invert();
-        const geometries = [];
-        root.traverse((object) => {
-            const mesh = object;
-            // Only the shell and visor — the hidden plastic hardware would scan too.
-            if (!mesh.isMesh || !mesh.visible || !mesh.geometry)
-                return;
-            const geometry = mesh.geometry.clone();
-            geometry.applyMatrix4(new Matrix4().multiplyMatrices(toGroupLocal, mesh.matrixWorld));
-            // The merge needs an identical attribute set across inputs.
-            for (const name of Object.keys(geometry.attributes)) {
-                if (name !== "position")
-                    geometry.deleteAttribute(name);
-            }
-            geometries.push(geometry);
-        });
-        if (!geometries.length)
-            return;
-        const merged = mergeGeometries(geometries, false);
-        for (const geometry of geometries)
-            geometry.dispose();
-        if (!merged)
-            return;
-        // A full triangle wireframe, not crease edges: the shell is a smooth dome,
-        // so any workable crease threshold throws the silhouette away and leaves
-        // only the visor brim floating. Density is handled with opacity instead —
-        // each line is faint enough that the overlap reads as a ghosted surface
-        // rather than the solid grey mass a higher alpha collapses into.
-        merged.computeBoundingBox();
-        const bounds = merged.boundingBox;
-        const minY = bounds?.min.y ?? 0;
-        const rangeY = bounds ? bounds.max.y - bounds.min.y : 1;
-        this.outlineMaterial = new ShaderMaterial({
-            vertexShader: outlineVertex,
-            fragmentShader: outlineFragment,
-            wireframe: true,
-            transparent: true,
-            depthWrite: false,
-            uniforms: {
-                uTime: { value: 0 },
-                uPeriod: { value: DEFAULT_PARAMS.outlinePeriod },
-                uStagger: { value: DEFAULT_PARAMS.outlineStagger },
-                uOpacity: { value: DEFAULT_PARAMS.outlineOpacity },
-                uWidth: { value: DEFAULT_PARAMS.outlineWidth },
-                uLightness: { value: DEFAULT_PARAMS.outlineLightness },
-                uBase: { value: DEFAULT_PARAMS.outlineBase },
-                uRevealMix: { value: 0 },
-                uColor: { value: new Color(readToken("--foreground")) },
-                uMinY: { value: minY },
-                uRangeY: { value: rangeY },
-            },
-        });
-        const outline = new Mesh(merged, this.outlineMaterial);
-        outline.renderOrder = 3;
-        // Per tier — off on a phone, where 113k mostly sub-pixel lines are the
-        // most expensive draw in the frame for the least visible thing in it.
-        // See `SceneTier.outline`. Built regardless, and compiled in the prewarm,
-        // so a tier change can switch it on without a mid-session compile.
-        outline.visible = this._tier.outline;
-        this.outlineMesh = outline;
-        // `root` already carries the fit transform, and the merge baked each
-        // mesh's world matrix in — so the outline goes beside root, not inside it.
-        // On the pivot, though, or the wireframe stays put while the shell tilts.
-        this.helmetPivot.add(outline);
-    }
-    /**
-     * Injects the liquid reveal into a material's alpha.
-     *
-     * The mask is the cursor's recent *path* (see `SceneTier.trailSamples`), not a falloff
-     * around its current position: the helmet floods along the way the pointer
-     * came and drains behind it. The threshold is deliberately narrow —
-     * `uEdge` is a few hundredths — because a hard boundary is what makes the
-     * surface read as liquid metal instead of a soft spotlight; the softness
-     * that keeps it from looking cut out comes from `uWarp` displacing the
-     * lookup with scrolling noise, so the edge crawls.
-     *
-     * Shares one uniforms object across every masked material (shell + visor).
-     */
-    injectRevealMask(material) {
-        const uniforms = this.revealUniforms;
-        if (!uniforms)
-            return;
-        material.onBeforeCompile = (shader) => {
-            Object.assign(shader.uniforms, uniforms);
-            shader.vertexShader = shader.vertexShader
-                .replace("#include <common>", "#include <common>\nvarying vec4 vRevealClip;")
-                .replace("#include <project_vertex>", "#include <project_vertex>\nvRevealClip = gl_Position;");
-            shader.fragmentShader = shader.fragmentShader
-                .replace("#include <common>", `#include <common>
-           varying vec4 vRevealClip;
-           uniform float uIntro;
-           uniform float uBurnStart;
-           uniform float uBurnSoft;
-           uniform float uBurnGlow;
-           uniform vec3 uBurnColor;
-           ${buildRevealDeclarations(this.samples)}`)
-                .replace("#include <alphamap_fragment>", `#include <alphamap_fragment>
-           vec2 revealNdc = vRevealClip.xy / vRevealClip.w;
-
-           // Entrance: the helmet arrives whole, then burns off.
-           //
-           // Every pixel gets a threshold from a noise lookup biased by
-           // height, and the burn front sweeps that threshold from 0 to 1.
-           // Pure noise dissolves as an even speckle; pure height is a flat
-           // wipe. Mixing them gives a ragged front that still travels
-           // crown-to-chin, which is the direction the outline wave runs.
-           float burnFront = smoothstep(uBurnStart, 1.0, uIntro);
-           float burnNoise = texture2D(uNoiseTex, revealNdc * 0.5 + 0.5).r;
-           float burnHeight = 1.0 - (revealNdc.y * 0.5 + 0.5);
-           float burnAt = mix(burnHeight, burnNoise, 0.45);
-           // 1 where the shell is still intact, 0 where the burn has passed.
-           float intact = smoothstep(
-             burnFront - uBurnSoft,
-             burnFront + uBurnSoft,
-             burnAt
-           );
-
-           // Union, so the cursor can already be carving the helmet back in
-           // while the tail of the burn is still finishing.
-           float mask = max(revealTrail(revealNdc), intact);
-           diffuseColor.a *= mask * uRevealMix;
-
-           // The dissolve front itself glows — without it the shell just
-           // thins out and the burn reads as a fade, not a burn.
-           //
-           // Derived from intact rather than from a second gaussian over
-           // burnAt, which is what made the burn flicker. That form had its
-           // own width (uBurnSoft) applied to a *noisy* field, so at a tight
-           // setting the glowing pixels were a scatter that re-rolled every
-           // frame as the front crept — sparkle, not a moving edge. This peaks
-           // at exactly intact == 0.5, so it is pinned to the real dissolve
-           // boundary however ragged that is, and can never be noisier than
-           // the dissolve already is.
-           float burnEdge = 4.0 * intact * (1.0 - intact);
-
-           // No step() gate either: that snapped the glow off the instant
-           // uIntro reached 1 and popped. intact is already 0 once the burn
-           // has passed, so the term retires on its own.
-           diffuseColor.rgb += uBurnColor * burnEdge * uBurnGlow * uRevealMix;`);
-        };
     }
     /**
      * The backdrop plane — animated contour lines plus the grey half of the

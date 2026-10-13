@@ -100,5 +100,51 @@
     ],
     "figure": {"image": "assets/home/contact/figure.webp", "alt": "Illustration: Cayleb taking notes on a tablet"}
   },
-  "loading": {"name": "Cayleb Alvarez-James", "label": "Loading Cayleb Alvarez-James's résumé", "done": "Loaded"}
+  "loading": {"name": "Cayleb Alvarez-James", "label": "Loading Cayleb Alvarez-James's résumé", "done": "Loaded"},
+  "guide": {
+    "label": "Ask my agent",
+    "greeting": "Hey, I'm Cayleb's agent. I'll ride along.",
+    "lines": {
+      "approach": "This is the loop he runs with every person: shadow, understand, build, teach.",
+      "experience": "Real jobs first. He learned how teams actually work before building for them.",
+      "work": "These are his own builds: recorded demos and drafts, labelled honestly.",
+      "contact": "Want an agent built around how you work? This is where you say hi."
+    },
+    "title": "Ask my agent",
+    "intro": "Quick answers, written by Cayleb. No live AI here.",
+    "questions": [
+      {
+        "q": "What does Cayleb do?",
+        "a": "He's an AI workflow integrator. He shadows people to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, then does the same across the whole company."
+      },
+      {
+        "q": "How does a shadow day work?",
+        "a": "He spends a couple of days alongside someone, noting where their time and attention go. Then he builds an agent around those tasks and teaches them how to get the most out of it."
+      },
+      {
+        "q": "Has he done this for a company yet?",
+        "a": "Not yet. Everything on this site is his own work, labelled as recorded demos or drafts."
+      },
+      {
+        "q": "What's EvoHedge?",
+        "a": "A private research project, still in development: an autonomous trading research system. No performance claims."
+      },
+      {
+        "q": "How do I reach him?",
+        "a": "Email is fastest, or grab the résumé PDF.",
+        "links": [
+          {
+            "label": "Email Cayleb",
+            "href": "mailto:caylebalvarezjames@gmail.com"
+          },
+          {
+            "label": "Résumé PDF",
+            "href": "Cayleb-James-polished-resume.pdf"
+          }
+        ]
+      }
+    ],
+    "quiet": "Quiet the bubbles",
+    "close": "Close"
+  }
 }

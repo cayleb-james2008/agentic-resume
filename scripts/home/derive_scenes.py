@@ -43,8 +43,8 @@ def fill_height(img: Image.Image, size: tuple[int, int], left: int | None = None
 
 def main(scenes: Path, mattes: Path, out: Path) -> list[Path]:
     out.mkdir(parents=True, exist_ok=True)
-    # Hero — the classroom shot, facing the camera: eye-line 60% down the square (the headset
-    # fills the headroom), face on the centre line, head about a third of the square.
+    # Hero — the classroom shot, facing the camera: eye-line 60% down the square (the hero
+    # scene's own framing), face on the centre line, head about a third of the square.
     school = cut(scenes, mattes, "2026-school")
     face_x, eye_y, span = 600, 188, 890
     x0, y0 = face_x - span // 2, eye_y - round(0.60 * span)

@@ -9,5 +9,12 @@
   "projects.cards[].name": 9,
   "projects.cards[].kicker": 16,
   "projects.cards[].status": 14,
-  "contact.cta.label": 16
+  "contact.cta.label": 16,
+  "guide.greeting": 80,
+  "guide.lines.approach": 90,
+  "guide.lines.experience": 90,
+  "guide.lines.work": 90,
+  "guide.lines.contact": 90,
+  "guide.questions[].q": 40,
+  "guide.questions[].a": 280
 }

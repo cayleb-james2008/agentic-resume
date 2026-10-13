@@ -206,17 +206,12 @@ export async function mount(section) {
       const b = box.getBoundingClientRect();
       fit = fitSubjectToBox(DEFAULT_PARAMS, { top: b.top - s.top, height: b.height }, container.clientHeight);
     }
+    // No reveal at any width: the droplet is always visible, so neither the grey
+    // cursor reveal nor the idle sweep has anything left to uncover.
     scene.setParams({
-      ...DEFAULT_PARAMS,
-      ...fit,
-      // Every touch width, not just phones: the parked cursor reveal never moves and reads as a blob.
-      ...(media('(max-width: 1023px)') ? { bgRevealOpacity: 0 } : null),
-      // Where there is no pointer at all the reveal is driven for the reader by the idle sweep.
-      ...(media('(hover: none)') ? { autoSweepAmount: 0.76 } : null),
-      // The brush is sized for the screen: on a phone a wider brush reveals the head as one mass.
-      ...(media('(max-width: 639px)') ? { sweepRadius: 0.95, sweepWarp: 0.18, autoSweepAmount: 0.55 } : null),
-      // Last, because it overrides the two above: the mobile tier has no reveal after the burn at all.
-      ...(scene.tier.reveal ? null : { autoSweepAmount: 0 }),
+      ...DEFAULT_PARAMS, ...fit, bgRevealOpacity: 0, autoSweepAmount: 0,
+      // On a phone the screen is narrower than his shoulders: the droplet comes in closer.
+      ...(media('(max-width: 639px)') ? { helmetX: DEFAULT_PARAMS.helmetX * 0.68 } : null),
     });
   };
 

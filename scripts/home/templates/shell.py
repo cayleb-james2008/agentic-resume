@@ -1,7 +1,7 @@
 """The document shell: head, the sticky stack, and the blocks in order."""
 from markup import PLATE_CLIP, attr, text
 
-STYLES = ("tokens", "base", "hero", "approach", "experience", "projects", "contact")
+STYLES = ("tokens", "base", "hero", "approach", "experience", "projects", "contact", "guide")
 
 IMPORT_MAP = (
     '{"imports":{"three":"./vendor/three-0.185.0/three.module.min.js",'
@@ -60,5 +60,6 @@ def render(content: dict, blocks: dict) -> str:
         "</div>"
         f"{blocks['projects']}</main>"
         f"<footer class=\"site-footer\">{blocks['contact']}</footer>"
+        f"{blocks['guide']}"
         "</body></html>\n"
     )

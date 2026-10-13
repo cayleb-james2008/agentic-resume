@@ -17,6 +17,7 @@ import { mount as mountHero } from './hero/hero.js';
 import { mountMenu } from './hero/menu.js';
 import { mount as mountProjects } from './projects/projects.js';
 import { mount as mountContact } from './contact/contact.js';
+import { mount as mountGuide } from './guide/guide.js';
 
 /** Each block's mount, added as the block is built. */
 const MOUNTS = [
@@ -25,6 +26,7 @@ const MOUNTS = [
   ['[data-experience]', mountExperience],
   ['[data-projects]', mountProjects],
   ['[data-contact]', mountContact],
+  ['[data-guide]', mountGuide],
 ];
 
 function sizeRoot() {

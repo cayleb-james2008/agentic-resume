@@ -19,11 +19,11 @@
   "experience": {
     "title": "Independent Project Development - AI-Assisted Software & Evaluation",
     "dates": "Oct 2025\u2013present",
-    "intro": "AI-assisted build, debug, test and review: local tools, API integrations, documented human next steps."
+    "intro": "Builds, tests and fixes software with AI help: local tools, app connections, clear next steps for people."
   },
   "projects": [
     {
-      "name": "Ergon - Personalized Employee Assistant & Remote Support",
+      "name": "Ergon - Personal Work Assistants & Remote Support",
       "stack": "OpenClaw, Node.js, C#, Windows, SQLite",
       "links": [
         {
@@ -32,16 +32,16 @@
         }
       ],
       "bullets": [
-        "Built Windows employee-assistant installer: native Outis taskbar management, Linux support service. Employee data kept across upgrades.",
-        "Built ticket-driven connector builds and device-scoped repair tools: screen input, Gateway-checked activation/rollback, shared AI budgets."
+        "Built a Windows installer for employee AI assistants, with a taskbar app for setup and support. Employee data stays safe through updates.",
+        "Built remote-repair tools and automatic connections to the apps a team already uses, each with approval and undo steps."
       ],
       "slug": "ergon",
       "short_name": "Ergon",
-      "short": "Built Windows assistant installer. Native Outis management. Automated connector builds. Screen-control repair tools."
+      "short": "Built a Windows installer for employee AI assistants, remote-repair tools and automatic connections to everyday apps."
     },
     {
-      "name": "Industry AI Suite - Source-Grounded Review Tools",
-      "stack": "Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript",
+      "name": "Industry AI Suite - Source-Checked Review Tools",
+      "stack": "Python, local AI models, web APIs",
       "links": [
         {
           "label": "github.com/cayleb-james2008/industry-ai-suite",
@@ -53,16 +53,16 @@
         }
       ],
       "bullets": [
-        "Built 10 local review tools: finance, research, security, operations. Source receipts. Explicit human review. Durable history, export, deletion.",
-        "Added optional loopback model drafts from minimized findings. Exact citation checks. Explicit failure handling."
+        "Built 10 tools that review finance, research, security and operations data. Every finding shows its source; a person makes the call.",
+        "Added optional AI-written drafts that must cite their sources, plus saved history, review, export and delete."
       ],
       "slug": "suite",
       "short_name": "Industry AI Suite",
-      "short": "Built 10 source-grounded review tools. Cited local model drafts. History, review, export, deletion."
+      "short": "Built 10 review tools where every finding shows its source and a person decides; optional AI drafts with citations."
     },
     {
-      "name": "dotz - Multi-Agent Coding Dashboard",
-      "stack": "Rust, axum, Tauri, JavaScript, SQLite",
+      "name": "dotz - AI Coding Agent Dashboard",
+      "stack": "Rust, Tauri, JavaScript, SQLite",
       "links": [
         {
           "label": "github.com/cayleb-james2008/dotz",
@@ -70,16 +70,16 @@
         }
       ],
       "bullets": [
-        "Built Rust and Tauri agent desktop: model selection, supervised tools, platform-specific process cleanup.",
-        "Made local model failures explicit. Safe cleanup retries. Core tests, lint, dependency checks pass on Windows, macOS, Linux."
+        "Built a desktop app that runs and supervises AI coding agents, with model choice and safe cleanup.",
+        "Made failures clear instead of silent. Core tests pass on Windows, macOS and Linux."
       ],
       "slug": "dotz",
       "short_name": "dotz",
-      "short": "Built Rust/Tauri agent desktop. Explicit local routing. Supervised tools. Core checks pass on Windows, macOS, Linux."
+      "short": "Built a desktop app that runs and supervises AI coding agents; core tests pass on Windows, macOS and Linux."
     },
     {
-      "name": "Sophos - Coding-Agent Desktop",
-      "stack": "React, TypeScript, Tauri, JSON-RPC",
+      "name": "Sophos - Coding-Agent Desktop App",
+      "stack": "React, TypeScript, Tauri",
       "links": [
         {
           "label": "github.com/cayleb-james2008/sophos",
@@ -87,16 +87,16 @@
         }
       ],
       "bullets": [
-        "Connected employee-selected agent profiles to real daemon sessions and local model catalogs. Durable transcripts. Restart recovery.",
-        "Reconciled parallel source histories; kept lifecycle, security and build controls. App and daemon verified by regression tests."
+        "Connected saved agent profiles and local AI models to a coding-agent desktop app.",
+        "Kept sessions safe across restarts and merged two code histories without losing work; checked with automated tests."
       ],
       "slug": "sophos",
       "short_name": "Sophos",
-      "short": "Connected agent profiles and local model catalogs to a coding-agent desktop. Durable sessions. Tested restart recovery."
+      "short": "Connected saved agent profiles and local AI models to a coding-agent app, with sessions that survive restarts."
     },
     {
-      "name": "Asmodeus - Research & Paper Replay",
-      "stack": "Rust, Historical Data, Local LLMs",
+      "name": "Asmodeus - Trading Research on Past Data",
+      "stack": "Rust, historical market data, local AI models",
       "links": [
         {
           "label": "Asmodeus case study",
@@ -104,12 +104,12 @@
         }
       ],
       "bullets": [
-        "Built research and paper replay: verified historical data, chronological evaluation, persisted cursors, fees, duplicate-fill prevention.",
-        "Added keyless loopback model route: redirect and proxy guards. Chronological train/validation/test slices. Reviewable refutation records."
+        "Built a research tool that tests trading ideas on real past market data, in time order, with no real money.",
+        "Added safeguards so tests never peek at future data, plus records of rejected ideas for review."
       ],
       "slug": "asmodeus",
       "short_name": "Asmodeus",
-      "short": "Built research and paper replay. Historical-data provenance. Chronological evaluation. Restart-safe simulated fills."
+      "short": "Built a research tool that tests trading ideas on real past market data, in time order, with no real money."
     }
   ],
   "skills": [
@@ -118,12 +118,12 @@
       "Python, Rust, TypeScript, JavaScript, HTML/CSS"
     ],
     [
-      "Frameworks & data",
-      "React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite"
+      "Apps & data",
+      "React, Tauri, SQLite, web APIs"
     ],
     [
-      "AI & verification",
-      "Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest, Cargo, Git/GitHub, Linux"
+      "AI & testing",
+      "AI agents and automation, local AI models, source-checked review, automated testing, Git/GitHub, Linux"
     ]
   ],
   "additional_experience": [
@@ -153,10 +153,9 @@
   "status": "Unpublished polish candidate; approved PDF artifacts remain unchanged.",
   "snapshot_note": "Selected engineering projects \u00b7 Updated October 13, 2026.",
   "short_skills": [
-    "Python \u00b7 Rust \u00b7 TypeScript \u00b7 JavaScript",
-    "React \u00b7 Tauri \u00b7 REST \u00b7 SQLite",
-    "AI/API integration \u00b7 Source-grounded review",
-    "Git \u00b7 Linux \u00b7 pytest \u00b7 Vitest \u00b7 Cargo"
+    "Python \u00b7 TypeScript \u00b7 JavaScript \u00b7 Rust",
+    "AI agents \u00b7 automation \u00b7 desktop and web apps",
+    "Automated testing \u00b7 Git \u00b7 Linux"
   ],
   "historical_evidence_notes": {
     "official_mercor_upload_guidance": {

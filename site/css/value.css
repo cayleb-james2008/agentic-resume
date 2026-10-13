@@ -1,6 +1,7 @@
-/* Worth it — what an employer gets for the money (2026-10-13). Continues the
-   projects band's ink: four blunt levers in a ruled grid, the measure-build-
-   measure proof row, and a bracketed calculator on the visitor's own numbers. */
+/* Worth it — how the value gets made (2026-10-13). Continues the projects
+   band's ink: the heading and the no-cuts line, then three bracketed examples
+   from businesses Cayleb has worked in (today → with his tools → what the
+   business gets), then the measure-build-measure row. */
 
 .value {
   position: relative; isolation: isolate;
@@ -8,46 +9,68 @@
   padding: clamp(4.5rem, 9vw, 9rem) clamp(1.5rem, 2.2222vw, 2.5rem) clamp(5rem, 10vw, 10rem);
   border-top: 1px solid var(--raw-color-white-alpha-10);
 }
-.value-inner {
-  max-width: 88rem; margin: 0 auto;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, 27rem);
-  gap: clamp(3rem, 6vw, 7rem); align-items: start;
-}
-@media (max-width: 1023px) { .value-inner { grid-template-columns: minmax(0, 1fr); } }
+.value-inner { max-width: 90rem; margin: 0 auto; }
 
-/* The pitch. */
+/* The head. */
+.value-head {
+  display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 1.5rem clamp(2rem, 6vw, 6rem); align-items: end;
+}
+@media (max-width: 767px) { .value-head { grid-template-columns: minmax(0, 1fr); } }
 .value-title {
+  grid-row: span 2;
   font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
   line-height: 0.95; color: var(--accent); font-size: clamp(3rem, 5.5vw, 6rem);
 }
+@media (max-width: 767px) { .value-title { grid-row: auto; } }
 .value-title .reveal-units { justify-content: flex-start; }
 .value-intro {
-  margin-top: 1.5rem; max-width: 34rem; text-wrap: balance;
-  font-size: clamp(1.125rem, 1.5vw, 1.5rem); line-height: 1.15; text-transform: uppercase;
+  max-width: 34rem; text-wrap: balance;
+  font-size: clamp(1.125rem, 1.6vw, 1.625rem); line-height: 1.15; text-transform: uppercase;
+}
+.value-proof-line {
+  max-width: 34rem; font-size: 0.9375rem; line-height: 1.4; color: var(--foreground-on-dark-muted);
 }
 
-.value-levers {
-  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0; padding: 0; list-style: none;
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--raw-color-white-alpha-20);
+/* The examples. */
+.value-examples {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem);
 }
-@media (max-width: 639px) { .value-levers { grid-template-columns: minmax(0, 1fr); } }
-.value-lever {
-  padding: 1.5rem 1.5rem 1.75rem 0;
-  border-bottom: 1px solid var(--raw-color-white-alpha-20);
+@media (max-width: 1023px) { .value-examples { grid-template-columns: minmax(0, 1fr); } }
+.value-example {
+  position: relative; display: flex; flex-direction: column;
+  padding: 1.75rem 1.5rem 1.5rem; background: var(--surface-dark);
 }
-@media (min-width: 640px) {
-  .value-lever:nth-child(odd) { padding-right: 2rem; border-right: 1px solid var(--raw-color-white-alpha-20); }
-  .value-lever:nth-child(even) { padding-left: 2rem; }
+.value-example .corner { color: var(--accent); }
+.value-kind {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.5rem, 2vw, 2rem); line-height: 0.95;
 }
-.value-lever-n { display: block; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--accent); }
-.value-lever-title {
-  margin: 0.75rem 0 0.5rem; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-  font-size: clamp(1.625rem, 2.4vw, 2.375rem); line-height: 0.95;
+.value-heads {
+  display: grid; grid-template-columns: 1fr 1.25rem 1fr; gap: 0.75rem; margin-top: 1.25rem;
+  font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--foreground-on-dark-muted);
 }
-.value-lever-line {
-  font-size: 0.9375rem; line-height: 1.35; text-transform: uppercase;
-  color: var(--foreground-on-dark-muted);
+.value-heads span:last-child { grid-column: 3; color: var(--accent); }
+.value-rows { margin: 0.5rem 0 0; padding: 0; list-style: none; }
+.value-row {
+  display: grid; grid-template-columns: 1fr 1.25rem 1fr; gap: 0.75rem; align-items: baseline;
+  padding: 0.9rem 0; border-top: 1px solid var(--raw-color-white-alpha-10);
+  font-size: 0.9375rem; line-height: 1.3;
+}
+.value-now { color: var(--foreground-on-dark-muted); }
+.value-arrow { color: var(--accent); text-align: center; }
+.value-then { color: var(--foreground-on-dark); }
+.value-gain {
+  margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--raw-color-white-alpha-20);
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.125rem, 1.4vw, 1.375rem); line-height: 1.05; color: var(--accent);
+}
+@media (max-width: 479px) {
+  .value-heads { display: none; }
+  .value-row { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+  .value-arrow { display: none; }
+  .value-then::before { content: "→ "; color: var(--accent); }
 }
 
 /* Measure, build, measure. */
@@ -63,51 +86,3 @@
 .value-steps li::before { content: counter(step); font-size: 0.55em; color: var(--accent); }
 .value-steps li + li::before { content: "→\00a0\00a0" counter(step); }
 .value-steps li + li { margin-left: 0.6em; }
-
-/* The calculator. */
-.value-calc {
-  position: relative; padding: 1.75rem 1.5rem 1.5rem;
-  background: var(--surface-dark); color: var(--foreground-on-dark);
-}
-.value-calc .corner { color: var(--accent); }
-.value-calc-title {
-  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-  font-size: 1.75rem; line-height: 1; color: var(--accent); margin-bottom: 1.25rem;
-}
-.value-field + .value-field { margin-top: 1rem; }
-.value-field label { display: block; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.4rem; }
-.value-input {
-  display: flex; align-items: center; gap: 0.75rem;
-  border: 1px solid var(--raw-color-white-alpha-20); background: var(--surface-black);
-  transition: border-color var(--duration-fast) var(--ease-entrance);
-}
-/* Focus shows on the whole field: a cyan 2px edge (the border plus a 1px ring). */
-.value-input:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-.value-input input {
-  flex: 1; min-width: 0; padding: 0.7rem 0.85rem; border: 0; outline: 0; background: transparent;
-  color: var(--foreground-on-dark); font: inherit; font-size: 1.125rem;
-}
-.value-input input:focus, .value-input input:focus-visible { outline: none; }
-.value-unit { flex: none; padding-right: 0.85rem; font-size: 0.8125rem; color: var(--foreground-on-dark-muted); white-space: nowrap; }
-
-.value-result {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
-  margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--raw-color-white-alpha-20);
-}
-.value-result--multiple { margin-top: 0.75rem; padding-top: 0; border-top: 0; }
-.value-result-label { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.02em; }
-.value-out {
-  font-family: var(--font-display); font-weight: 700; font-size: 2.25rem; line-height: 1;
-  color: var(--accent); text-align: right;
-}
-.value-out--multiple { font-size: 1.75rem; color: var(--foreground-on-dark); }
-/* Before any numbers: a quiet hint, not a headline. */
-.value-out[data-waiting] {
-  font-family: var(--font-sans); font-weight: 400; font-size: 0.875rem; line-height: 1.3;
-  text-transform: uppercase; color: var(--foreground-on-dark-muted);
-}
-.value-note { margin-top: 1.25rem; font-size: 0.8125rem; line-height: 1.4; color: var(--foreground-on-dark-muted); }
-
-@media (prefers-reduced-motion: reduce) {
-  .value-input { transition: none; }
-}

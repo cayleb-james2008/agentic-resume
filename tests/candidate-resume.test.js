@@ -37,12 +37,18 @@ test('the résumé page is a real page carrying the candidate fragment, and its 
  assert.ok(local.length>3);
  for(const href of local)assert.ok(existsSync(new URL('../'+href,import.meta.url)),href);
 });
-test('few words: résumé bullets are short and blunt, facts kept',()=>{
+test('plain words: résumé lines are short and free of developer jargon, facts kept',()=>{
  const count=s=>s.trim().split(/\s+/).length;
+ const JARGON=/\b(loopback|daemon|JSON-RPC|axum|Clippy|SHA|provenance|deterministic|Gateway|manifest|leases?|REST|IPC|catalogs?|chronological|source-grounded|replay|routing)\b/i;
  assert.ok(count(source.summary)<=36,`summary ${count(source.summary)} words`);
- assert.ok(count(source.experience.intro)<=16,'experience intro');
+ assert.ok(count(source.experience.intro)<=18,'experience intro');
+ for(const t of [source.summary,source.experience.intro])assert.doesNotMatch(t,JARGON,t);
  for(const p of source.projects){
-  for(const b of p.bullets)assert.ok(count(b)<=20,`${p.slug} bullet: ${count(b)} words: ${b}`);
-  assert.ok(count(p.short)<=16,`${p.slug} short: ${count(p.short)} words`);
+  for(const b of p.bullets){assert.ok(count(b)<=24,`${p.slug} bullet: ${count(b)} words: ${b}`);assert.doesNotMatch(b,JARGON,b);}
+  assert.ok(count(p.short)<=20,`${p.slug} short: ${count(p.short)} words`);
+  assert.doesNotMatch(p.short,JARGON,p.short);
+  assert.doesNotMatch(p.name,JARGON,p.name);
  }
+ // No small meta line under the résumé: the page footer and the PDFs end with the content.
+ assert.doesNotMatch(read('resume/candidate-fragment.html'),/Updated October 13, 2026/);
 });

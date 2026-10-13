@@ -14,67 +14,67 @@ Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent
 
 ### Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025–present
 
-AI-assisted build, debug, test and review: local tools, API integrations, documented human next steps.
+Builds, tests and fixes software with AI help: local tools, app connections, clear next steps for people.
 
 ## Selected Projects
 
-### Ergon - Personalized Employee Assistant & Remote Support
+### Ergon - Personal Work Assistants & Remote Support
 
 OpenClaw, Node.js, C#, Windows, SQLite
 
 [Ergon case study](https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html)
 
-- Built Windows employee-assistant installer: native Outis taskbar management, Linux support service. Employee data kept across upgrades.
+- Built a Windows installer for employee AI assistants, with a taskbar app for setup and support. Employee data stays safe through updates.
 
-- Built ticket-driven connector builds and device-scoped repair tools: screen input, Gateway-checked activation/rollback, shared AI budgets.
+- Built remote-repair tools and automatic connections to the apps a team already uses, each with approval and undo steps.
 
-### Industry AI Suite - Source-Grounded Review Tools
+### Industry AI Suite - Source-Checked Review Tools
 
-Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript
+Python, local AI models, web APIs
 
 [github.com/cayleb-james2008/industry-ai-suite](https://github.com/cayleb-james2008/industry-ai-suite) | [Review history implementation](https://github.com/cayleb-james2008/industry-ai-suite/pull/6)
 
-- Built 10 local review tools: finance, research, security, operations. Source receipts. Explicit human review. Durable history, export, deletion.
+- Built 10 tools that review finance, research, security and operations data. Every finding shows its source; a person makes the call.
 
-- Added optional loopback model drafts from minimized findings. Exact citation checks. Explicit failure handling.
+- Added optional AI-written drafts that must cite their sources, plus saved history, review, export and delete.
 
-### dotz - Multi-Agent Coding Dashboard
+### dotz - AI Coding Agent Dashboard
 
-Rust, axum, Tauri, JavaScript, SQLite
+Rust, Tauri, JavaScript, SQLite
 
 [github.com/cayleb-james2008/dotz](https://github.com/cayleb-james2008/dotz)
 
-- Built Rust and Tauri agent desktop: model selection, supervised tools, platform-specific process cleanup.
+- Built a desktop app that runs and supervises AI coding agents, with model choice and safe cleanup.
 
-- Made local model failures explicit. Safe cleanup retries. Core tests, lint, dependency checks pass on Windows, macOS, Linux.
+- Made failures clear instead of silent. Core tests pass on Windows, macOS and Linux.
 
-### Sophos - Coding-Agent Desktop
+### Sophos - Coding-Agent Desktop App
 
-React, TypeScript, Tauri, JSON-RPC
+React, TypeScript, Tauri
 
 [github.com/cayleb-james2008/sophos](https://github.com/cayleb-james2008/sophos)
 
-- Connected employee-selected agent profiles to real daemon sessions and local model catalogs. Durable transcripts. Restart recovery.
+- Connected saved agent profiles and local AI models to a coding-agent desktop app.
 
-- Reconciled parallel source histories; kept lifecycle, security and build controls. App and daemon verified by regression tests.
+- Kept sessions safe across restarts and merged two code histories without losing work; checked with automated tests.
 
-### Asmodeus - Research & Paper Replay
+### Asmodeus - Trading Research on Past Data
 
-Rust, Historical Data, Local LLMs
+Rust, historical market data, local AI models
 
 [Asmodeus case study](https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html)
 
-- Built research and paper replay: verified historical data, chronological evaluation, persisted cursors, fees, duplicate-fill prevention.
+- Built a research tool that tests trading ideas on real past market data, in time order, with no real money.
 
-- Added keyless loopback model route: redirect and proxy guards. Chronological train/validation/test slices. Reviewable refutation records.
+- Added safeguards so tests never peek at future data, plus records of rejected ideas for review.
 
 ## Skills
 
 Languages: Python, Rust, TypeScript, JavaScript, HTML/CSS
 
-Frameworks & data: React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite
+Apps & data: React, Tauri, SQLite, web APIs
 
-AI & verification: Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest, Cargo, Git/GitHub, Linux
+AI & testing: AI agents and automation, local AI models, source-checked review, automated testing, Git/GitHub, Linux
 
 ## Additional Experience
 
@@ -91,5 +91,3 @@ Tommy's Pizza | Summer 2024
 Portland High School | Portland, Connecticut | 2022–2026 · Graduated
 
 Coursework: Cybersecurity; AP Computer Science
-
-Selected engineering projects · Updated October 13, 2026.

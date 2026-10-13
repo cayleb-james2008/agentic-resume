@@ -61,7 +61,6 @@
 }
 .guide-close span:first-child { transform: rotate(45deg); }
 .guide-close span:last-child { transform: rotate(-45deg); }
-.guide-intro { margin: 0.5rem 0 0.75rem; font-size: 0.8125rem; line-height: 1.4; color: rgb(255 255 255 / 0.64); }
 .guide-qs li + li { border-top: 1px solid rgb(255 255 255 / 0.12); }
 .guide-q {
   width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;

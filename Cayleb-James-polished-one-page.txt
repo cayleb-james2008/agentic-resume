@@ -14,39 +14,37 @@ Experience
 
 Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025-present
 
-AI-assisted build, debug, test and review: local tools, API integrations, documented human next steps.
+Builds, tests and fixes software with AI help: local tools, app connections, clear next steps for people.
 
 Selected Projects
 
 Ergon
 
-- Built Windows assistant installer. Native Outis management. Automated connector builds. Screen-control repair tools.
+- Built a Windows installer for employee AI assistants, remote-repair tools and automatic connections to everyday apps.
 
 Industry AI Suite
 
-- Built 10 source-grounded review tools. Cited local model drafts. History, review, export, deletion.
+- Built 10 review tools where every finding shows its source and a person decides; optional AI drafts with citations.
 
 dotz
 
-- Built Rust/Tauri agent desktop. Explicit local routing. Supervised tools. Core checks pass on Windows, macOS, Linux.
+- Built a desktop app that runs and supervises AI coding agents; core tests pass on Windows, macOS and Linux.
 
 Sophos
 
-- Connected agent profiles and local model catalogs to a coding-agent desktop. Durable sessions. Tested restart recovery.
+- Connected saved agent profiles and local AI models to a coding-agent app, with sessions that survive restarts.
 
 Asmodeus
 
-- Built research and paper replay. Historical-data provenance. Chronological evaluation. Restart-safe simulated fills.
+- Built a research tool that tests trading ideas on real past market data, in time order, with no real money.
 
 Skills
 
-Python | Rust | TypeScript | JavaScript
+Python | TypeScript | JavaScript | Rust
 
-React | Tauri | REST | SQLite
+AI agents | automation | desktop and web apps
 
-AI/API integration | Source-grounded review
-
-Git | Linux | pytest | Vitest | Cargo
+Automated testing | Git | Linux
 
 Additional Experience
 
@@ -63,5 +61,3 @@ Education
 Portland High School | Portland, Connecticut | 2022-2026 | Graduated
 
 Coursework: Cybersecurity; AP Computer Science
-
-Selected engineering projects | Updated October 13, 2026.

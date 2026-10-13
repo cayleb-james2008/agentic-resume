@@ -90,7 +90,7 @@
     padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
   }
   /* The sheet has its own close button; the droplet would sit on its last row. */
-  .guide-panel:not([hidden]) + .guide-dock { visibility: hidden; }
+  .js .guide-panel:not([hidden]) + .guide-dock { visibility: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {

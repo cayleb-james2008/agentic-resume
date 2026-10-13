@@ -2,7 +2,7 @@
 
 Canonical website: https://cayleb-james2008.github.io/agentic-resume/
 
-Cayleb is an AI workflow integrator: he shadows people for a couple of days to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, and then does the same across the whole company.
+The role Cayleb is going for is Forward Thinking Engineer: he shadows people for a couple of days to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, and then does the same across the whole company.
 
 ## What's here
 

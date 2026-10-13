@@ -7,7 +7,7 @@ from templates import social
 STYLES = ("tokens", "base", "resume")
 TITLE = "Résumé · Cayleb Alvarez-James"
 DESCRIPTION = (
-    "Cayleb Alvarez-James, AI workflow integrator: experience, education, selected projects and skills, "
+    "Cayleb Alvarez-James, Forward Thinking Engineer: experience, education, selected projects and skills, "
     "with one-page and detailed PDF downloads."
 )
 

@@ -10,7 +10,7 @@ The homepage `index.html` is generated from `site/content.json` by `scripts/buil
 
 `resume.html` is a plain, printable résumé page built from `resume/candidate-fragment.html`. Both candidate PDFs are linked from the homepage and the résumé page. GitHub Pages publishes `main` at https://cayleb-james2008.github.io/agentic-resume/.
 
-**Positioning.** Cayleb is an AI workflow integrator. He shadows employees for a couple of days to learn how they actually work, builds each person a custom AI agent they can work with, and teaches them to use it for faster, higher-quality daily work. Then he scales that across the whole company.
+**Positioning.** The role Cayleb is going for is **Forward Thinking Engineer** (the exact title, used as the headline everywhere: site, résumé, PDFs, share card). The work: he shadows employees for a couple of days to learn how they actually work, builds each person a custom AI agent they can work with, and teaches them to use it for faster, higher-quality daily work. Then he scales that across the whole company.
 
 **Claim limits.** These hold on every page and in every image:
 - Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. The ten Industry AI Suite workflows are always "recorded demos", never "working" workflows.

@@ -66,3 +66,22 @@ test('the sitemap lists every page by its canonical address', () => {
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   assert.deepEqual(locs.sort(), Object.values(PAGES).map((p) => SITE + p).sort());
 });
+
+// The role he is going for, by its exact name (2026-10-13): "Forward Thinking Engineer".
+const TITLE = 'Forward Thinking Engineer';
+test('the headline title is Forward Thinking Engineer on the site, the résumé and the share card', () => {
+  assert.equal(content.meta.title, `Cayleb Alvarez-James · ${TITLE}`);
+  assert.ok(content.hero.meta.some((m) => m.label === TITLE), 'hero meta row');
+  assert.ok(content.meta.shareAlt.includes(TITLE));
+  assert.ok(read('resume.html').includes(`<p>${TITLE} · Connecticut · Remote-only</p>`));
+  assert.ok(read('scripts/home/make_share_card.py').includes(`"${TITLE}"`));
+  for (const file of ['Cayleb-James-polished-resume.txt', 'Cayleb-James-polished-one-page.txt', 'resume/resume.md', 'resume/one-page.md']) {
+    assert.equal(read(file).split('\n')[2], TITLE, `${file} headline`);
+  }
+});
+
+test('the old title is gone from every served page and résumé export', () => {
+  const served = ['index.html', 'resume.html', '404.html', 'lab/index.html', ...projects.map((p) => `projects/${p}`),
+    'Cayleb-James-polished-resume.txt', 'Cayleb-James-polished-one-page.txt', 'resume/candidate-fragment.html'];
+  for (const file of served) assert.doesNotMatch(read(file), /workflow integrator/i, file);
+});

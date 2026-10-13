@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Cayleb Alvarez-James · AI workflow integrator",
+    "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
     "description": "Cayleb Alvarez-James builds personal AI agents around how people already work: shadow the role, build the agent, teach it, then scale across the company.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
@@ -8,7 +8,7 @@
     "github": "https://github.com/cayleb-james2008",
     "siteUrl": "https://cayleb-james2008.github.io/agentic-resume/",
     "shareImage": "assets/og/card.png",
-    "shareAlt": "Illustration: Cayleb as a 3D character beside his glass-droplet AI agent, with his name and the title AI workflow integrator."
+    "shareAlt": "Illustration: Cayleb as a 3D character beside his glass-droplet AI agent, with his name and the title Forward Thinking Engineer."
   },
   "wordmark": "CAYLEB.AJ",
   "nav": [
@@ -24,7 +24,7 @@
     "nameWords": ["Cayleb", "Alvarez-", "James"],
     "meta": [
       {"icon": "pin", "label": "Connecticut, USA"},
-      {"icon": "spark", "label": "AI workflow integrator"},
+      {"icon": "spark", "label": "Forward Thinking Engineer"},
       {"icon": "spark", "label": "Independent developer · since 2025"}
     ],
     "now": {"eyebrow": "Now building", "title": "EvoHedge", "lines": ["Autonomous trading research", "Private · in development"]},
@@ -118,7 +118,7 @@
     "questions": [
       {
         "q": "What does Cayleb do?",
-        "a": "He's an AI workflow integrator. He shadows people to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, then does the same across the whole company."
+        "a": "He's going for Forward Thinking Engineer roles. He shadows people to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, then does the same across the whole company."
       },
       {
         "q": "How does a shadow day work?",

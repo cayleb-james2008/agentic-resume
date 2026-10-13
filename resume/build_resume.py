@@ -43,9 +43,9 @@ def records(data, short=False):
 
 
 def validate_source(data):
-    assert data['headline'] == 'AI workflow integrator'
+    assert data['headline'] == 'Forward Thinking Engineer'
     assert [p['slug'] for p in data['projects']] == ['suite', 'sophos', 'dotz']
-    assert data['summary'].startswith('AI workflow integrator. Focus: ')
+    assert data['summary'].startswith('Forward Thinking Engineer. Focus: ')
     assert not re.search(r'\b(clients?|customers?|deployed)\b', data['summary'], re.I)
     assert len(data['additional_experience']) == 4
     assert data['education']['school'] == 'Portland High School'

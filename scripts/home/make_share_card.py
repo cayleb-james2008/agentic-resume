@@ -21,7 +21,7 @@ DISPLAY = FONTS / "oswald-latin-700-normal.woff2"
 SANS = FONTS / "space-grotesk-latin-500-normal.woff2"
 
 NAME = ("CAYLEB", "ALVAREZ-", "JAMES")
-META = ("AI workflow integrator", "Independent developer · since 2025", "Connecticut, USA")
+META = ("Forward Thinking Engineer", "Independent developer · since 2025", "Connecticut, USA")
 URL = "cayleb-james2008.github.io/agentic-resume"
 
 

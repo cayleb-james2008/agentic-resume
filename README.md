@@ -9,7 +9,7 @@ The role Cayleb is going for is Forward Thinking Engineer: he shadows people for
 - `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, Cayleb as a Pixar-style 3D character, and his glass-droplet AI agent), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
 - `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
 - `projects/*.html` and `lab/`: the project write-ups (the five featured projects and ten suite workflows) and the recorded workflow lab. `scripts/build-subpages.py` gives them the homepage's masthead, footer and look (`site/css/subpage.css`, `lab/lab.css`); the lab's app and historical receipts are preserved.
-- `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source and artifact hashes. It is not a user approval or an ATS score.
+- `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source, artifact hashes and local build checks; it does not claim independent employment verification or an ATS score.
 
 Engineering evidence and project copy are updated from the October 13 implementation work. The current featured projects are Ergon, dotz, Sophos, Industry AI Suite and Asmodeus. Work history and education remain self-reported. The hosted lab retains its dated recorded receipts; project pages separate source checks from native installation, live providers and customer outcomes. Private projects publish sanitized case studies only.
 
@@ -38,7 +38,7 @@ Every page carries a canonical address and Open Graph/Twitter tags (`scripts/hom
 
 Imagery lives under `assets/home/`. Every image is an AI-generated illustration of Cayleb, its `alt` begins "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. `scripts/home/derive_scenes.py` cuts the hero, projects and contact frames out of his scenes. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`. `scripts/home/make_plate_sizes.py` writes a 960px copy of each timeline plate, which the page offers through `srcset`.
 
-To rebuild the candidate PDFs: `bash resume/build.sh`. It uses ReportLab; `PYTHON` can select another interpreter.
+To rebuild the résumé PDFs: `bash resume/build.sh`. It uses ReportLab; `PYTHON` can select another interpreter.
 
 ## History
 

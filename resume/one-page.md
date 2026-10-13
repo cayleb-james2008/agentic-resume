@@ -20,23 +20,23 @@ Direct AI-assisted implementation, debugging, testing and review of local tools,
 
 ### Ergon
 
-- Built a Windows assistant installer with native Outis management, automated connector builds and screen-control tools for remote support.
+- Built and delivered a Windows assistant installer with native Outis management, connector builds and device-scoped screen-support tools.
 
 ### Industry AI Suite
 
-- Built ten source-grounded review tools with cited local model drafts, durable history and review, export and deletion flows.
+- Built ten source-grounded review tools with human review, durable history, export and deletion; the current suite passes 382 tests.
 
 ### dotz
 
-- Developed a Rust and Tauri agent desktop with explicit local routing and supervised tools; core checks pass on Windows, macOS and Linux.
+- Built a Rust and Tauri coding-agent desktop with supervised tools; Linux, Windows and macOS CI passed.
 
 ### Sophos
 
-- Connected agent profiles and local model catalogs to a coding-agent desktop, with durable sessions and tested restart recovery.
+- Connected agent profiles and local model catalogs to real daemon sessions, with durable transcripts and restart recovery.
 
 ### Asmodeus
 
-- Built a research and paper replay system with historical-data provenance, chronological evaluation and restart-safe simulated fills.
+- Built a research and paper-replay system with historical-data provenance, chronological evaluation and restart-safe simulated fills.
 
 ## Skills
 

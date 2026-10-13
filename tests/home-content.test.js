@@ -95,7 +95,7 @@ test('banned claims stay out', () => {
   assert.equal(content.projects.cards.some(c=>['EvoHedge','Maki'].includes(c.name)),false);
   for(const name of ['Ergon','Asmodeus'])assert.ok(content.projects.cards.find(c=>c.name===name).href);
   assert.equal(content.projects.cards.find(c=>c.name==='Ergon').status,'Windows pilot');
-  assert.equal(resume.evidence_notes.ergon.windows_acceptance,'pending');
+  assert.match(resume.evidence_notes.ergon.windows_acceptance,/User testing is underway/);
 });
 
 test('generated imagery is labelled as illustration', () => {

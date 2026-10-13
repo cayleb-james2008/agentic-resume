@@ -1,7 +1,7 @@
 {
-  "status": "Unpublished candidate, not user-approved or deployed",
+  "status": "Validated publication candidate; deployment is verified separately",
   "source": "resume/resume-content.json",
-  "source_sha256": "12e11b08fc436d71e35714b6aba9b594e4d437c3bc41845e62ae292d170ac123",
+  "source_sha256": "68b1bb4f04d6d94d4608cb8d5cb9969f7fdb89ed773c363e38cd27b428c7546c",
   "body_font_pt": {
     "one_page": 10,
     "detailed": 10.5
@@ -12,25 +12,25 @@
     "Approved PDF hashes unchanged"
   ],
   "limits": [
-    "No ATS score, hiring prediction, new project execution or employment verification",
+    "No ATS score, hiring prediction, new project execution or independent employment verification",
     "Selected engineering projects \u00b7 Updated October 13, 2026."
   ],
   "artifacts": {
     "Cayleb-James-polished-one-page.txt": {
-      "sha256": "f04bed6eabf98c82714afef43a615f1e37c8887dbbf003a3733afcb748c55718"
+      "sha256": "0a1b596f63871a883428918efd647e37235647d41a8afd2bd4f57c9f952230d6"
     },
     "Cayleb-James-polished-one-page.pdf": {
-      "sha256": "7fe15b49d094369013ebb7d228f0ce13b49fda6027016eec1d21483ea9cd85b4",
+      "sha256": "c1d454599ad006b1362d40f6482d0798af2fd4be34e75a310f353adc4e5f97cf",
       "pages": 1,
-      "bytes": 42550
+      "bytes": 42539
     },
     "Cayleb-James-polished-resume.txt": {
-      "sha256": "db2a313ec4f39e09f7f4d1e5792fa5b09ba973ab6e2b0eb4e4087ecf0904c293"
+      "sha256": "0a1ecba7680ba1b5ccfa2407404112460f316e854f818c440f433fed2c104a36"
     },
     "Cayleb-James-polished-resume.pdf": {
-      "sha256": "953d0dada862e058c34229cfb5fd25b342ec833d181c4f0be81800895fd104e3",
+      "sha256": "ff42bfdf456b70729b7ed4dfb38503d0bafd528323a3438f748101623f56b283",
       "pages": 2,
-      "bytes": 45792
+      "bytes": 45532
     }
   }
 }

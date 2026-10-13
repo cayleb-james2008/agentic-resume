@@ -9,10 +9,13 @@ test('candidate copy preserves factual scope, attribution and dated boundaries',
  assert.deepEqual(source.projects.map(p=>p.slug),['ergon','suite','dotz','sophos','asmodeus']);
  for(const project of source.projects)assert.ok(read('resume/candidate-fragment.html').includes(project.short));
  assert.equal(source.evidence_notes.industry_ai_suite.python_tests,382);
- assert.equal(source.evidence_notes.industry_ai_suite.actual_model_inference,'not exercised: configured loopback endpoint unavailable');
- assert.equal(source.evidence_notes.ergon.windows_acceptance,'pending');
- assert.equal(source.evidence_notes.asmodeus.live_money_trading,false);
- assert.equal(source.evidence_notes.sophos.ui_tests,1213);
+ assert.equal(source.evidence_notes.industry_ai_suite.actual_model_inference,'not exercised: configured loopback endpoint was unavailable during the current run');
+ assert.match(source.evidence_notes.ergon.windows_acceptance,/User testing is underway/);
+ assert.match(source.evidence_notes.asmodeus.scope,/No live broker, real-money execution/);
+ assert.equal(source.evidence_notes.sophos.ui_tests,1224);
+ assert.equal(source.evidence_notes.dotz.merge_commit,'4df6871ff45250e52b6a2276d37b5f9303743bf0');
+ assert.match(source.historical_evidence_notes.context,/superseded by evidence_notes/);
+ assert.doesNotMatch(source.status,/unpublished/i);
  assert.match(source.snapshot_note,/October 13, 2026/);
  assert.doesNotMatch(source.projects.map(p=>p.name).join(' '),/Maki|EvoHedge/);
  assert.equal(source.additional_experience.length,4);

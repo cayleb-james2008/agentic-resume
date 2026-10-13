@@ -1,4 +1,4 @@
-"""Build unpublished candidate exports from resume-content.json; never overwrite approved PDFs."""
+"""Build validated résumé exports from resume-content.json; preserve historical approved PDFs."""
 from __future__ import annotations
 import argparse
 import hashlib
@@ -183,12 +183,12 @@ def main():
     (HERE / 'resume-fragment.html').write_text(detailed_fragment(records(data)))
     (HERE / 'candidate-fragment.html').write_text(short_fragment(data))
     if not args.content_only:
-        manifest = {'status': 'Unpublished candidate, not user-approved or deployed', 'source': 'resume/resume-content.json',
+        manifest = {'status': 'Validated publication candidate; deployment is verified separately', 'source': 'resume/resume-content.json',
                     'source_sha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(), 'body_font_pt': {'one_page': 10, 'detailed': 10.5},
                     'checks': ['Sequential default and layout PDF extraction matched all source records', 'One-page PDF exactly one page; detailed PDF at most two pages', 'Approved PDF hashes unchanged'],
-                    'limits': ['No ATS score, hiring prediction, new project execution or employment verification', data['snapshot_note']], 'artifacts': exports}
+                    'limits': ['No ATS score, hiring prediction, new project execution or independent employment verification', data['snapshot_note']], 'artifacts': exports}
         (HERE / 'candidate-verification.json').write_text(json.dumps(manifest, indent=2) + '\n')
-    print('Generated candidate text, Markdown and fragments' + ('' if args.content_only else '; PDFs passed extraction/order/page checks'))
+    print('Generated résumé text, Markdown and fragments' + ('' if args.content_only else '; PDFs passed extraction/order/page checks'))
 
 
 if __name__ == '__main__':

@@ -232,18 +232,18 @@
       },
       {
         "icon": "bars",
-        "label": "Tests passed",
+        "label": "Python tests",
         "value": "382"
       },
       {
         "icon": "quote",
-        "label": "Cited samples",
-        "value": "5"
+        "label": "Subtests",
+        "value": "178"
       },
       {
         "icon": "gauge",
-        "label": "Model exchanges",
-        "value": "6"
+        "label": "Browser checks",
+        "value": "19"
       }
     ],
     "cards": [

@@ -18,25 +18,25 @@ Direct AI-assisted implementation, debugging, testing and review of local tools,
 
 Selected Projects
 
-Ergon - Personalized Employee Assistant & Remote Support
+Ergon - Windows Employee Assistant & Remote Support
 
 OpenClaw, Node.js, C#, Windows, SQLite
 
 Ergon case study: https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html
 
-- Built a Windows employee-assistant installer with native Outis taskbar management and a Linux support service. Preserves employee data across upgrades.
+- Built and delivered a Windows employee-assistant installer with native Outis taskbar management and a Linux support service; the setup preserves employee data across upgrades.
 
-- Implemented ticket-driven connector builds and device-scoped repair tools, including screen input, Gateway-checked activation/rollback and shared AI budgets.
+- Implemented ticket-driven REST connector builds with exact read/write grants and device-scoped screen-control tools; activation and rollback require a local Gateway check.
 
 Industry AI Suite - Source-Grounded Review Tools
 
 Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript
 
-github.com/cayleb-james2008/industry-ai-suite: https://github.com/cayleb-james2008/industry-ai-suite | Review history implementation: https://github.com/cayleb-james2008/industry-ai-suite/pull/6
+Public source repository: https://github.com/cayleb-james2008/industry-ai-suite
 
-- Built ten local review tools for finance, research, security and operations, with source receipts and explicit human review. Added durable history, review decisions, export and deletion.
+- Built ten local review tools for finance, research, security and operations, with source receipts, human review, durable history, export and deletion.
 
-- Integrated optional loopback model drafting from minimized findings, with exact citation checks and explicit failure handling.
+- Added optional loopback model drafts from minimized findings, with citation checks and explicit failure handling.
 
 dotz - Multi-Agent Coding Dashboard
 
@@ -44,9 +44,9 @@ Rust, axum, Tauri, JavaScript, SQLite
 
 github.com/cayleb-james2008/dotz: https://github.com/cayleb-james2008/dotz
 
-- Developed a Rust and Tauri agent desktop with model selection, supervised tools and platform-specific process cleanup.
+- Built a Rust and Tauri coding-agent desktop with supervised tools, explicit provider routing and platform-specific process cleanup.
 
-- Made local model failures explicit and added safe cleanup retries. Core tests, lint and dependency checks pass on Windows, macOS and Linux.
+- Made local-model failures clear and added safe cleanup retries. Cross-platform CI passed on Linux, Windows and macOS.
 
 Sophos - Coding-Agent Desktop
 
@@ -54,9 +54,9 @@ React, TypeScript, Tauri, JSON-RPC
 
 github.com/cayleb-james2008/sophos: https://github.com/cayleb-james2008/sophos
 
-- Connected employee-selected agent profiles to real daemon sessions and local model catalogs, with durable session transcripts and restart recovery.
+- Connected selected agent profiles to real daemon sessions and local model catalogs, with durable transcripts and restart recovery.
 
-- Reconciled parallel source histories while preserving lifecycle, security and build controls; verified the application and daemon with regression tests.
+- Added daemon-backed context summarization, preserved provider configuration and clear runtime errors, with automated session and recovery checks.
 
 Asmodeus - Research & Paper Replay
 
@@ -64,9 +64,9 @@ Rust, Historical Data, Local LLMs
 
 Asmodeus case study: https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html
 
-- Built a research and paper replay system with verified historical data, chronological evaluation, persisted cursors, fees and duplicate-fill prevention.
+- Built a research and paper-replay system with verified historical data, chronological evaluation, persisted cursors, fees and duplicate-fill prevention.
 
-- Added a keyless loopback model route with redirect and proxy guards, chronological train/validation/test slices and reviewable refutation records.
+- Added a guarded keyless local-model route, chronological train/validation/test slices and reviewable refutation records. The merged implementation passed Windows CI.
 
 Skills
 

@@ -16,7 +16,7 @@ Cayleb generated seven scenes of his character in ChatGPT and supplied them in c
 | `2026-builds.webp` | at a desk with two monitors and his glass-droplet AI agent | dotz · Sophos · AI Suite, since 2025 |
 | `2026-integrator.webp` | beside a coworker, taking notes, the agent between them | AI workflow integration, 2026 |
 
-The café scene shows Dunkin' branding and the pizzeria has a "TOMMY PIZZA" sign. Cayleb chose to keep both as generated. Each plate is centre-cropped to 1431×1024 by `scripts/home/import_images.py --kind plate`.
+The café scene shows Dunkin' branding and the pizzeria has a "TOMMY PIZZA" sign. Cayleb chose to keep both as generated. Each plate is centre-cropped to 1431×1024 by `scripts/home/import_images.py --kind plate`. `scripts/home/make_plate_sizes.py` adds a 960×687 copy of each (`*-960.webp`) for phones and the side rows.
 
 ## Character frames (plain-background renders)
 
@@ -43,3 +43,7 @@ These aren't stored in the repo either.
 ## Fallback drawings
 
 `scripts/home/make_plates.py` draws a line-art plate for each job, using the site's contour field and a cyan halftone. These plates are not used on the site now. They stay available as a no-AI fallback.
+
+## Share card
+
+`assets/og/card.png` (1200×630) is drawn by `scripts/home/make_share_card.py` from the hero maps above (`person-diffuse` with `person-alpha` as its matte), the site's fonts and a flat drawing of his droplet agent. Its `og:image:alt` begins "Illustration:".

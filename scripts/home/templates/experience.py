@@ -10,12 +10,15 @@ def row(index: int, entry: dict) -> str:
     align = entry.get("align", "centre")
     classes = f"row row--{frame}" + (f" row--{align}" if frame == "side" else "")
     side = "left" if index % 2 == 0 else "right"
+    # The 960px copy (make_plate_sizes.py) serves phones and the narrow side plates.
+    small = entry["image"].removesuffix(".webp") + "-960.webp"
     plate = (
         f'<div class="row-layer row-layer--plate" data-layer="plate">'
         f'<figure class="plate" data-plate>'
         f'<div class="plate-fill" style="clip-path:url(#plate-clip)"><div class="plate-slot" data-plate-slot>'
-        f'<img src="{attr(entry["image"])}" alt="{attr(entry["alt"])}" width="{PLATE_SIZE[0]}" '
-        f'height="{PLATE_SIZE[1]}" loading="lazy" decoding="async"></div></div>'
+        f'<img src="{attr(entry["image"])}" srcset="{attr(small)} 960w, {attr(entry["image"])} {PLATE_SIZE[0]}w" '
+        f'sizes="(max-width: 639px) 82vw, {"50vw" if frame == "centre" else "24vw"}" alt="{attr(entry["alt"])}" '
+        f'width="{PLATE_SIZE[0]}" height="{PLATE_SIZE[1]}" loading="lazy" decoding="async"></div></div>'
         f'<svg class="plate-outline" viewBox="0 0 710.995 462.995" preserveAspectRatio="none" aria-hidden="true">'
         f'<path d="{PLATE_OUTLINE}"/></svg></figure></div>'
     )

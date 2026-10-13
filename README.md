@@ -19,7 +19,7 @@ No install is needed to view the site. three.js 0.185.0, Lenis 1.3.26, Oswald an
 
 ```sh
 python3 scripts/build-home.py           # index.html + resume.html from site/content.json
-python3 scripts/build-subpages.py       # project pages and the lab: shared masthead, footer and styles
+python3 scripts/build-subpages.py       # project pages and the lab (shared masthead, footer, styles), 404.html, sitemap.xml
 node --test tests/*.test.js
 python3 -m unittest discover -s tests/py
 python3 scripts/check-release.py
@@ -28,13 +28,15 @@ python3 scripts/check-release.py
 `build-home.py` refuses to build if a string in `content.json` is longer than the frame it sits in (`site/content-limits.json`).
 
 `check-release.py` does three things:
-- checks every local link on the homepage, the résumé page, the lab and every project page;
+- checks every local link on the homepage, the résumé page, the 404 page, the lab and every project page;
 - runs `scripts/home/check_assets.py` in its non-strict mode;
 - re-verifies the PDF and text outputs against `resume/build_resume.py`.
 
 `python3 scripts/home/check_assets.py --strict` is the ship gate for imagery. It fails while any placeholder listed in `assets/home/PLACEHOLDERS.json` is still on the page.
 
-Imagery lives under `assets/home/`. Every image is an AI-generated illustration of Cayleb, its `alt` begins "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. `scripts/home/derive_scenes.py` cuts the hero, projects and contact frames out of his scenes. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`.
+Every page carries a canonical address and Open Graph/Twitter tags (`scripts/home/templates/social.py`) pointing at one share card, `assets/og/card.png`, drawn by `python3 scripts/home/make_share_card.py` from the hero maps. `404.html` is served by GitHub Pages for any missing path; it resolves its links through `<base>`, so it works at any depth. `sitemap.xml` is for submitting to a search console by hand (a project site's `robots.txt` is never read).
+
+Imagery lives under `assets/home/`. Every image is an AI-generated illustration of Cayleb, its `alt` begins "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. `scripts/home/derive_scenes.py` cuts the hero, projects and contact frames out of his scenes. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`. `scripts/home/make_plate_sizes.py` writes a 960px copy of each timeline plate, which the page offers through `srcset`.
 
 To rebuild the candidate PDFs: `bash resume/build.sh`. It uses ReportLab; `PYTHON` can select another interpreter.
 

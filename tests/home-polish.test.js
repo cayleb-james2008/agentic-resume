@@ -178,3 +178,17 @@ test('the guide droplet matches: no core disc, a rim along the foot', () => {
   assert.match(read('site/css/guide.css'), /\.guide-droplet-rim\s*\{\s*fill:\s*url\(#guide-foot\)/);
   assert.doesNotMatch(read('site/css/guide.css'), /guide-droplet-core/);
 });
+
+// --- Weight ----------------------------------------------------------------------------
+test('timeline plates offer a 960px file, so phones and the side plates skip the full 1431px one', async () => {
+  const { existsSync } = await import('node:fs');
+  const home = read('index.html');
+  const imgs = [...home.matchAll(/<img src="(assets\/home\/experience\/[^"]+\.webp)"[^>]*>/g)];
+  assert.equal(imgs.length, 7);
+  for (const [tag, src] of imgs) {
+    const small = src.replace(/\.webp$/, '-960.webp');
+    assert.ok(tag.includes(`srcset="${small} 960w, ${src} 1431w"`), tag);
+    assert.match(tag, /sizes="\(max-width: 639px\) 82vw, (50|24)vw"/);
+    assert.ok(existsSync(new URL('../' + small, import.meta.url)), small);
+  }
+});

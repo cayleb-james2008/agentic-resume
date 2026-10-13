@@ -16,6 +16,10 @@
    frame it grows into the right-hand panels. The cap keeps the laptop's corner left of them:
    0.6569W + (0.765 − 0.5) × 1.1588h ≤ 0.8264W  ⇒  h ≤ 0.55W. */
 @media (min-width: 1024px) { .projects { --fig-cap: 55cqw; } }
+/* …and the block is never shorter than that frame. One screen tall on a window wider than ~2.3:1
+   (an ultrawide, or DevTools docked below) is shorter, and the bottom-anchored copy rode up into
+   the heading. Taller than the screen there, the block simply scrolls. */
+@media (min-width: 1024px) { .projects { --block-h: max(100lvh, 55.5556vw); } }
 
 /* Narrow variables (spec "The narrow variables"). */
 @media (max-width: 1023px) {
@@ -259,6 +263,6 @@
 /* short: on a landscape phone the tablet composition needs a tablet's height; the block grows
    to it and scrolls rather than stacking heading, panels and copy on one 390px screen. The
    figure, sized off that height, would cover the stats and the copy: it stands smaller, right. */
-@media (max-height: 500px) and (min-width: 640px) {
+@media (max-height: 500px) and (min-width: 640px) and (max-width: 1023px) {
   .projects { --block-h: max(100lvh, 108vw); --fig-cap: 72cqw; --fig-x-override: 76%; }
 }

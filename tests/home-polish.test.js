@@ -138,7 +138,7 @@ test('on phones the projects figure keeps his whole head and the laptop in frame
 });
 
 test('a landscape phone gives the projects block room for its stats and copy', () => {
-  const short = block(strip(read('site/css/projects.css')), '(max-height: 500px) and (min-width: 640px)');
+  const short = block(strip(read('site/css/projects.css')), '(max-height: 500px) and (min-width: 640px) and (max-width: 1023px)');
   const vw = short.match(/--block-h:\s*max\(100lvh, (\d+)vw\)/);
   assert.ok(vw && Number(vw[1]) >= 106, short);
   // …and a figure that stands right of the stats and the intro copy (which end 35.5% across)
@@ -191,4 +191,20 @@ test('timeline plates offer a 960px file, so phones and the side plates skip the
     assert.match(tag, /sizes="\(max-width: 639px\) 82vw, (50|24)vw"/);
     assert.ok(existsSync(new URL('../' + small, import.meta.url)), small);
   }
+});
+
+// --- Wide, short windows (an ultrawide, or a browser with DevTools docked below) ----------
+// The projects block is the 1440×800 frame scaled to the width, anchored top (heading) and
+// bottom (copy, button, band). One screen tall on a window wider than ~2.3:1 is shorter than
+// the frame, and the copy rode up into SELECTED PROJECTS.
+test('from 1024px the projects block is never shorter than its 1440×800 frame', () => {
+  const css = strip(read('site/css/projects.css'));
+  const all = css.split('@media (min-width: 1024px)').slice(1).map((part) => block('@media (min-width: 1024px)' + part, '(min-width: 1024px)'));
+  assert.ok(all.some((b) => /--block-h:\s*max\(100lvh, 55\.5556vw\)/.test(b)));
+});
+
+test('the landscape-phone projects layout stays below 1024px', () => {
+  const css = strip(read('site/css/projects.css'));
+  assert.ok(css.includes('@media (max-height: 500px) and (min-width: 640px) and (max-width: 1023px)'));
+  assert.ok(!/@media \(max-height: 500px\) and \(min-width: 640px\)\s*\{/.test(css), 'the unbounded short rule would move the desktop figure');
 });

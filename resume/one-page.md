@@ -20,7 +20,7 @@ Direct AI-assisted implementation, debugging, testing and review of local tools,
 
 ### Ergon
 
-- Built a Windows employee-assistant installer with reviewed onboarding, Outis support management, approved phone workflows and shared AI budgets.
+- Built a Windows assistant installer with native Outis management, automated connector builds and screen-control tools for remote support.
 
 ### Industry AI Suite
 

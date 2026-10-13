@@ -298,68 +298,78 @@
     ],
     "intro": "No cuts. No lost pay. The money comes from fixing the busywork.",
     "proof": "He's worked these jobs. He knows where the time goes.",
-    "now": "Today",
-    "then": "With his tools",
+    "cardLabel": "What he builds for",
+    "todayLabel": "Today",
     "examples": [
       {
         "kind": "A moving company",
         "rows": [
           {
-            "now": "Quotes typed up after every walkthrough.",
-            "then": "Quote drafted from the walkthrough photos."
+            "system": "Lead to booking",
+            "then": "An agent answers every inquiry, gets a video walkthrough, prices the move and books the date. The office just approves.",
+            "now": "Office takes calls, books walkthroughs, types up quotes."
           },
           {
-            "now": "The office calls customers about arrival.",
-            "then": "Customers get a “crew on the way” text."
+            "system": "Self-planning dispatch",
+            "then": "Assigns crews and trucks, plans routes around traffic, re-plans when a job runs long, and texts customers live arrival times.",
+            "now": "Crews and trucks planned on a whiteboard."
           },
           {
-            "now": "Damage claims chased on paper.",
-            "then": "Claims filed with photos in one place."
+            "system": "Job to paid",
+            "then": "Crew photos and times become the invoice and payment link. Damage claims build themselves from before-and-after photos.",
+            "now": "Paperwork after every job: hours, invoices, claims."
           }
         ],
-        "value": "More jobs quoted the same day. Faster claims."
+        "value": "More jobs booked. Trucks stay busy. Paid faster."
       },
       {
         "kind": "A plaster and pool crew",
         "rows": [
           {
-            "now": "Every estimate built from scratch.",
-            "then": "Estimate drafted from pool size and photos."
+            "system": "Estimate from a video",
+            "then": "A phone video of the pool becomes measurements, a materials list, crew days and a price. The proposal goes out the same day.",
+            "now": "Every estimate measured and priced by hand."
           },
           {
-            "now": "Material orders guessed.",
-            "then": "Order list built from the job size."
+            "system": "Supply autopilot",
+            "then": "Orders the right amount from the best-priced supplier, timed to arrive the morning the crew needs it.",
+            "now": "Materials guessed and picked up in person."
           },
           {
-            "now": "Rain days rescheduled by phone.",
-            "then": "Weather check moves the job, texts the customer."
+            "system": "Weather-smart schedule",
+            "then": "Watches the forecast and curing times, reshuffles the whole week, and tells every crew and customer what changed.",
+            "now": "Rain days reshuffled by phone."
           }
         ],
-        "value": "Fewer second trips. Less wasted material."
+        "value": "Same-day proposals. No wasted trips. Owners kept in the loop."
       },
       {
         "kind": "A shop or restaurant",
         "rows": [
           {
-            "now": "Stock counted by hand at close.",
-            "then": "Counts logged by photo. Reorder list ready."
+            "system": "Self-ordering stock",
+            "then": "Tracks what sells, predicts busy days from weather and local events, and drafts supplier orders for a quick yes.",
+            "now": "Stock counted by hand, orders guessed."
           },
           {
-            "now": "Shift swaps lost in group texts.",
-            "then": "Swaps asked and confirmed in one place."
+            "system": "Smart scheduling",
+            "then": "Builds shifts from the forecast and everyone's availability, and handles swaps by the shop's own rules.",
+            "now": "Schedules by hand, swaps lost in group texts."
           },
           {
-            "now": "The same questions answered all day.",
-            "then": "Hours and common questions answered automatically."
+            "system": "Front-desk agent",
+            "then": "Takes phone and online orders, answers common questions, replies to reviews, and flags anything a person should see.",
+            "now": "Phones, orders and reviews juggled at the counter."
           }
         ],
-        "value": "Less waste. Fewer missed orders."
+        "value": "Less waste. Shorter lines. The owner sees every day at a glance."
       }
     ],
+    "wired": "Each one is a full system, wired into the phones, calendars, email and books the company already uses.",
     "stepsTitle": "How you know",
     "steps": [
       "Measure first.",
-      "Build the tools.",
+      "Build the system.",
       "Measure again."
     ]
   },
@@ -441,7 +451,7 @@
       },
       {
         "q": "What kind of tools?",
-        "a": "Anything digital a team wants automated: quotes, scheduling, reminder texts, paperwork, reports. Built for them, not off the shelf."
+        "a": "Anything digital a team wants automated, from small tools to full systems: quoting, dispatch, ordering, scheduling, paperwork. Built for them, not off the shelf."
       },
       {
         "q": "Done this for a company?",

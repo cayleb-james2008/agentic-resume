@@ -21,19 +21,28 @@ test('the value section sits between projects and contact, with one h2', () => {
   assert.ok(home.indexOf('id="value"') < home.indexOf('id="contact"'));
 });
 
-test('it shows the value in three kinds of business he has worked in', () => {
+test('it shows full systems for three kinds of business he has worked in', () => {
   const v = content.value;
   assert.deepEqual(v.examples.map((e) => e.kind), ['A moving company', 'A plaster and pool crew', 'A shop or restaurant']);
   for (const e of v.examples) {
     assert.equal(e.rows.length, 3, e.kind);
     for (const r of e.rows) {
-      assert.ok(words(r.now) <= 8 && words(r.then) <= 9, `${e.kind}: "${r.now}" → "${r.then}"`);
-      assert.ok(section.includes(esc(r.now)) && section.includes(esc(r.then)), r.then);
+      assert.ok(words(r.system) <= 4, `system name: ${r.system}`);
+      assert.ok(words(r.then) >= 12 && words(r.then) <= 28, `${e.kind}: a whole system, said briefly: "${r.then}"`);
+      assert.ok(words(r.now) <= 10, `today: ${r.now}`);
+      for (const t of [r.system, r.then, r.now]) assert.ok(section.includes(esc(t)), t);
     }
-    assert.ok(words(e.value) <= 10, e.value);
+    assert.ok(words(e.value) <= 12, e.value);
     assert.ok(section.includes(esc(e.value)));
   }
   assert.ok(section.includes(esc(v.proof)));
+  assert.ok(section.includes(esc(v.wired)));
+});
+
+test('the systems read as his confident offer, without naming a real company as a client', () => {
+  assert.match(content.value.cardLabel, /^What he builds for$/);
+  assert.ok(section.includes(esc(content.value.cardLabel)));
+  assert.doesNotMatch(JSON.stringify(content.value) + section, /Robert H\.? Lord|\bRHL\b|David Cooke|Dunkin|Tommy/i);
 });
 
 test('no calculator: no form, no inputs, no script', () => {

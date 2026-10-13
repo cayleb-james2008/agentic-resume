@@ -37,7 +37,41 @@ test('it shows full systems for three kinds of business he has worked in', () =>
   }
   assert.ok(section.includes(esc(v.proof)));
   assert.match(v.proof,/Illustrative estimates; actual savings are measured with each team\./);
-  assert.ok(section.includes(esc(v.wired)));
+});
+
+// Built around each company (2026-10-13, fifth pass). A big part of the value is the fit: each
+// build is shaped by the company's situation, the tools it already uses, how its people work and
+// what it needs. It sits right after the head, before the examples, so it frames them.
+test('the value section says every build is shaped around the company', () => {
+  const f = content.value.fit;
+  assert.match(f.title, /^Built around each company$/);
+  assert.ok(words(f.lead) <= 8, `lead: ${f.lead}`);
+  assert.deepEqual(f.points.map((p) => p.name), ['Their situation', 'Their tools', 'How they work', 'What they need']);
+  for (const p of f.points) assert.ok(words(p.text) >= 8 && words(p.text) <= 18, `${p.name}: ${p.text}`);
+  // The old "wired into the tools they already use" line now lives in "Their tools".
+  assert.equal(content.value.wired, undefined);
+  assert.match(f.points[1].text, /phones/i);
+  assert.match(f.points[1].text, /already use/i);
+  assert.match(f.points[2].text, /shadows/i);
+  const fit = section.match(/<div class="value-fit"[\s\S]*?<\/ul><\/div>/)?.[0] ?? '';
+  assert.ok(fit, '.value-fit block');
+  assert.ok(section.indexOf('class="value-fit"') < section.indexOf('class="value-examples"'), 'before the examples');
+  assert.ok(fit.includes(`<h3 class="value-fit-title">${esc(f.title)}</h3>`), 'h3 title');
+  assert.ok(fit.includes(esc(f.lead)), 'lead');
+  const items = fit.match(/<li class="value-fit-point">[\s\S]*?<\/li>/g) || [];
+  assert.equal(items.length, 4);
+  f.points.forEach((p, i) => {
+    assert.ok(items[i].includes(`<p class="value-fit-name">${esc(p.name)}</p>`), p.name);
+    assert.ok(items[i].includes(`<p class="value-fit-text">${esc(p.text)}</p>`), p.text);
+  });
+});
+
+test('the page description and the agent say it too: AI built around each company, saving money', () => {
+  assert.match(content.meta.description, /Integrates AI built around each company\. Saves money, no cuts\.$/);
+  assert.match(content.guide.lines.value, /each company/i);
+  const what = content.guide.questions.find((q) => q.q === 'What does Cayleb do?');
+  assert.match(what.a, /bring AI into companies to save them money/i);
+  assert.match(what.a, /around how they work, what they use and what they need/i);
 });
 
 test('the systems read as his confident offer, without naming a real company as a client', () => {
@@ -59,43 +93,76 @@ test('the pitch never saves money by taking hours, pay or people', () => {
   assert.match(content.value.intro, /no cuts/i);
 });
 
-// Dollars before and after (2026-10-13, third pass). Each card carries a sized example: what the
-// busywork loses a month today, what it loses with his systems, and the yearly saving. The figures
-// are whole numbers in content.json and the yearly saving is worked out at build time, so the
-// arithmetic on the page can't drift. Each card says what business size the figures assume and
-// where the money comes from — never from anyone's hours or pay.
-const usd = (n) => '$' + n.toLocaleString('en-US');
+// Dollars before and after, as a receipt (2026-10-13, fourth pass). Each card carries a sized
+// example: every cost line names what the busywork loses, how many a month today → with his
+// systems, and the price of each. The site multiplies and adds, so the line amounts, the totals
+// and the yearly saving always agree. Each card says what business size it assumes. The money
+// never comes from anyone's hours or pay.
+const usd = (n) => '$' + (Number.isInteger(n) ? n.toLocaleString('en-US') : n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+const NOT_PAY = /\b(pay|payroll|wages?|hours?|overtime|labou?r|staff|salar\w*|shifts?)\b/i;
+const receipt = (m) => {
+  const lines = m.items.map((it) => ({ ...it, today: Math.round(it.qty[0] * it.each), after: Math.round(it.qty[1] * it.each) }));
+  const today = lines.reduce((t, l) => t + l.today, 0);
+  const after = lines.reduce((t, l) => t + l.after, 0);
+  return { lines, today, after, yearly: (today - after) * 12 };
+};
 
-test('each card shows the money lost a month, before and after, and the yearly saving', () => {
+test('each card itemizes the money lost a month, today and with his systems', () => {
   const v = content.value;
   assert.match(v.money.label, /^Lost each month$/);
   assert.equal(v.money.today, v.todayLabel);
-  assert.ok(v.money.after && v.money.saves && v.money.year);
+  for (const k of ['after', 'total', 'item', 'to', 'per', 'saves', 'year']) assert.ok(v.money[k], `money.${k}`);
+  for (const e of v.examples) {
+    const m = e.money;
+    assert.ok(m.items.length >= 3 && m.items.length <= 4, `${e.kind}: 3 or 4 cost lines`);
+    for (const it of m.items) {
+      assert.ok(words(it.what) <= 5, `cost line: ${it.what}`);
+      assert.doesNotMatch(it.what + ' ' + it.unit, /\d/, 'names are words; counts and prices are numbers');
+      assert.doesNotMatch(it.what + ' ' + it.unit, NOT_PAY, it.what);
+      assert.ok(words(it.unit) === 1 && !/s$/.test(it.unit), `one of a thing: ${it.unit}`);
+      assert.ok(it.qty.length === 2 && it.qty.every(Number.isInteger), `${it.what}: whole counts`);
+      assert.ok(it.qty[0] > it.qty[1] && it.qty[1] >= 0, `${it.what}: fewer with his systems`);
+      assert.ok(it.each > 0 && Number.isInteger(Math.round(it.each * 100)) && Math.abs(it.each * 100 - Math.round(it.each * 100)) < 1e-9, `${it.what}: price in cents`);
+      assert.ok(Number.isInteger(it.qty[0] * it.each), `${it.what}: whole-dollar line`);
+    }
+    const r = receipt(m);
+    assert.ok(r.today > r.after && r.after > 0, `${e.kind}: ${r.today} > ${r.after} > 0`);
+    // Believable for a small business.
+    assert.ok(r.today <= 10000 && r.yearly <= 60000, `${e.kind}: ${r.today}/mo, ${r.yearly}/yr`);
+    // The receipt shows where the money comes from; the line under it says what size of business.
+    assert.match(m.basis, /^Sized for (a|an|one) [a-z -]+\.$/, `basis: ${m.basis}`);
+    assert.equal(m.today, undefined, 'totals are worked out, not typed');
+    assert.equal(m.after, undefined, 'totals are worked out, not typed');
+  }
+});
+
+test('the receipt on the page shows every line, the totals and the yearly saving', () => {
+  const v = content.value;
+  const L = v.money;
   const cards = section.match(/<article class="value-example"[\s\S]*?<\/article>/g) || [];
   assert.equal(cards.length, v.examples.length);
   v.examples.forEach((e, i) => {
-    const m = e.money;
-    assert.ok(m, `${e.kind}: money`);
-    assert.ok(Number.isInteger(m.today) && Number.isInteger(m.after), `${e.kind}: whole dollars`);
-    assert.ok(m.today > m.after && m.after > 0, `${e.kind}: today ${m.today} > after ${m.after} > 0`);
-    // Keep it believable for a small business.
-    assert.ok(m.today <= 10000, `${e.kind}: ${m.today} a month is too big to believe`);
-    const yearly = (m.today - m.after) * 12;
-    assert.ok(yearly % 1000 === 0 && yearly <= 60000, `${e.kind}: yearly ${yearly}`);
-    assert.ok(words(m.basis) <= 12, `basis: ${m.basis}`);
-    assert.doesNotMatch(m.basis, /\d/, 'basis is words, the money is in the figures');
-    assert.doesNotMatch(m.basis, /\b(pay|payroll|wages?|hours?|overtime|labou?r|staff|salar\w*)\b/i, m.basis);
+    const r = receipt(e.money);
     const card = cards[i];
     const money = card.match(/<div class="value-money">[\s\S]*?<\/div>/)?.[0] ?? '';
-    assert.ok(money, `${e.kind}: .value-money block`);
+    assert.ok(money, `${e.kind}: .value-money`);
     assert.ok(card.indexOf('class="value-rows"') < card.indexOf('class="value-money"'), 'money comes after the systems');
-    assert.ok(money.includes(`${esc(v.money.label)}`), 'label');
-    assert.match(money, new RegExp(`${v.money.today}</span> \\${usd(m.today)}<`), `today ${usd(m.today)}`);
-    assert.match(money, new RegExp(`${v.money.after}</span> \\${usd(m.after)}<`), `after ${usd(m.after)}`);
-    assert.ok(money.includes(`${v.money.saves} ${usd(yearly)} ${v.money.year}`), `saves ${usd(yearly)} ${v.money.year}`);
-    assert.ok(money.includes(esc(m.basis)), m.basis);
-    // The arrow is decoration; a screen reader hears "Today $5,000, With it $1,500".
-    assert.match(money, /<span class="value-money-arrow" aria-hidden="true">→<\/span>/);
+    const table = money.match(/<table class="value-receipt">[\s\S]*?<\/table>/)?.[0] ?? '';
+    assert.ok(table, 'a real table');
+    assert.ok(table.includes(`<caption class="value-money-label">${L.label}</caption>`), 'caption');
+    assert.ok(table.includes(`<thead><tr><th scope="col"><span class="sr-only">${L.item}</span></th><th scope="col">${L.today}</th><th scope="col">${L.after}</th></tr></thead>`), 'column heads');
+    const rows = table.match(/<tbody>([\s\S]*?)<\/tbody>/)[1].match(/<tr>[\s\S]*?<\/tr>/g) || [];
+    assert.equal(rows.length, r.lines.length, `${e.kind}: one row per cost line`);
+    r.lines.forEach((l, j) => {
+      const row = rows[j];
+      assert.ok(row.startsWith(`<tr><th scope="row"><span class="value-receipt-what">${esc(l.what)}</span>`), l.what);
+      const math = `${l.qty[0].toLocaleString('en-US')} <span aria-hidden="true">→</span><span class="sr-only"> ${L.to}</span> ${l.qty[1].toLocaleString('en-US')}, ${usd(l.each)} ${L.per} ${esc(l.unit)}`;
+      assert.ok(row.includes(`<span class="value-receipt-math">${math}</span>`), `math: ${l.what}`);
+      assert.ok(row.endsWith(`<td>${usd(l.today)}</td><td>${usd(l.after)}</td></tr>`), `amounts: ${l.what} ${usd(l.today)} → ${usd(l.after)}`);
+    });
+    assert.ok(table.includes(`<tfoot><tr><th scope="row">${L.total}</th><td>${usd(r.today)}</td><td>${usd(r.after)}</td></tr></tfoot>`), `${e.kind}: total ${usd(r.today)} → ${usd(r.after)}`);
+    assert.ok(money.includes(`<p class="value-money-saved">${L.saves} ${usd(r.yearly)} ${L.year}</p>`), `saves ${usd(r.yearly)}`);
+    assert.ok(money.includes(esc(e.money.basis)), e.money.basis);
   });
 });
 

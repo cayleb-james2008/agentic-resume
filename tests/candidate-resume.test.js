@@ -43,7 +43,7 @@ test('the homepage reaches the résumé page and both candidate PDFs',()=>{
 });
 test('headline is the target role, Forward Thinking Engineer',()=>{
  assert.equal(source.headline,'Forward Thinking Engineer');
- assert.equal(source.summary,'Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent plus tools for any digital task they want automated, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.');
+ assert.equal(source.summary,"Forward Thinking Engineer. Focus: integrate AI, custom-built around each company's tools, workflows and needs; shadow employees, build agents and tools for any digital task, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.");
  assert.doesNotMatch(source.summary,/clients?|customers?|deployed/i);
 });
 test('the résumé page is a real page carrying the candidate fragment, and its links resolve',()=>{

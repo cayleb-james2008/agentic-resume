@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
-    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Shadow the job. Build agents and tools. Teach. Repeat.",
+    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Integrates AI built around each company. Saves money, no cuts.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
@@ -298,12 +298,38 @@
     ],
     "intro": "No cuts. No lost pay. The money comes from fixing the busywork.",
     "proof": "He's worked these jobs. He knows where the time goes. Illustrative estimates; actual savings are measured with each team.",
+    "fit": {
+      "title": "Built around each company",
+      "lead": "Nothing off the shelf. Two movers, two builds.",
+      "points": [
+        {
+          "name": "Their situation",
+          "text": "Size, season, and what's costing them most right now. The build starts there."
+        },
+        {
+          "name": "Their tools",
+          "text": "Wired into the phones, calendars, email, software and books they already use. Nothing to switch."
+        },
+        {
+          "name": "How they work",
+          "text": "He shadows the team first, so every system fits how they already do the job."
+        },
+        {
+          "name": "What they need",
+          "text": "They pick what gets automated, from one small tool to a full system."
+        }
+      ]
+    },
     "cardLabel": "What he builds for",
     "todayLabel": "Today",
     "money": {
       "label": "Lost each month",
       "today": "Today",
       "after": "With it",
+      "total": "Total",
+      "item": "Cost",
+      "to": "to",
+      "per": "per",
       "saves": "Saves",
       "year": "a year"
     },
@@ -329,9 +355,45 @@
         ],
         "value": "More jobs booked. Trucks stay busy. Paid faster.",
         "money": {
-          "today": 5000,
-          "after": 1500,
-          "basis": "Three-truck mover: missed jobs, extra miles, damage claims."
+          "items": [
+            {
+              "what": "Moves lost to slow replies",
+              "unit": "move",
+              "qty": [
+                3,
+                1
+              ],
+              "each": 1000
+            },
+            {
+              "what": "Extra truck miles",
+              "unit": "mile",
+              "qty": [
+                1600,
+                400
+              ],
+              "each": 0.5
+            },
+            {
+              "what": "Damage claims paid",
+              "unit": "claim",
+              "qty": [
+                2,
+                1
+              ],
+              "each": 300
+            },
+            {
+              "what": "Extras never billed",
+              "unit": "extra",
+              "qty": [
+                6,
+                1
+              ],
+              "each": 100
+            }
+          ],
+          "basis": "Sized for a three-truck mover."
         }
       },
       {
@@ -355,9 +417,45 @@
         ],
         "value": "Same-day proposals. No wasted trips. Owners kept in the loop.",
         "money": {
-          "today": 4000,
-          "after": 1000,
-          "basis": "Two-crew outfit: lost bids, wasted material, extra trips, rain days."
+          "items": [
+            {
+              "what": "Bids lost to slow quotes",
+              "unit": "bid",
+              "qty": [
+                1,
+                0
+              ],
+              "each": 2000
+            },
+            {
+              "what": "Wasted plaster mix",
+              "unit": "bag",
+              "qty": [
+                20,
+                5
+              ],
+              "each": 40
+            },
+            {
+              "what": "Extra supply runs",
+              "unit": "run",
+              "qty": [
+                10,
+                2
+              ],
+              "each": 50
+            },
+            {
+              "what": "Rain-day losses",
+              "unit": "day",
+              "qty": [
+                2,
+                1
+              ],
+              "each": 350
+            }
+          ],
+          "basis": "Sized for a two-crew outfit."
         }
       },
       {
@@ -381,13 +479,39 @@
         ],
         "value": "Less waste. Shorter lines. The owner sees every day at a glance.",
         "money": {
-          "today": 3000,
-          "after": 1000,
-          "basis": "One location: spoiled stock, rush orders, missed phone orders."
+          "items": [
+            {
+              "what": "Spoiled stock",
+              "unit": "case",
+              "qty": [
+                30,
+                10
+              ],
+              "each": 50
+            },
+            {
+              "what": "Rush orders",
+              "unit": "order",
+              "qty": [
+                5,
+                1
+              ],
+              "each": 100
+            },
+            {
+              "what": "Missed phone orders",
+              "unit": "order",
+              "qty": [
+                40,
+                10
+              ],
+              "each": 25
+            }
+          ],
+          "basis": "Sized for one location."
         }
       }
     ],
-    "wired": "Each one is a full system, wired into the phones, calendars, email and books the company already uses.",
     "stepsTitle": "How you know",
     "steps": [
       "Measure first.",
@@ -458,14 +582,14 @@
       "approach": "This is the loop he runs: shadow, understand, build, teach.",
       "experience": "Real jobs first. He knows how crews actually work.",
       "work": "His own builds: work assistants, desktop apps, review tools.",
-      "value": "No cuts. The money comes from fixing the busywork.",
+      "value": "Every build fits each company. The money comes from fixing busywork.",
       "contact": "Want tools built around how your team works? Say hi."
     },
     "title": "Ask my agent",
     "questions": [
       {
         "q": "What does Cayleb do?",
-        "a": "He's going for Forward Thinking Engineer roles. He shadows people, builds them an AI agent and tools for whatever digital work they want automated, and teaches them to use it."
+        "a": "His job: bring AI into companies to save them money. He shadows the team, builds agents and tools around how they work, what they use and what they need, then teaches them."
       },
       {
         "q": "How does a shadow day work?",

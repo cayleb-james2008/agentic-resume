@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
-    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Shadow the job. Build the agent. Teach it. Repeat.",
+    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Shadow the job. Build agents and tools. Teach. Repeat.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
@@ -112,7 +112,7 @@
       "How I",
       "work"
     ],
-    "intro": "Shadow the job. Build the agent. Teach. Repeat.",
+    "intro": "Shadow the job. Build agents and tools. Teach. Repeat.",
     "badge": [
       "AI",
       "/ 2026"
@@ -124,7 +124,7 @@
       },
       {
         "n": "02",
-        "text": "build the agent"
+        "text": "build agents + tools"
       },
       {
         "n": "03",
@@ -201,7 +201,7 @@
         "frame": "centre",
         "copyWidth": 284,
         "lead": "AI-assisted builds, Oct 2025–now.",
-        "body": "Local agent tools. Next: one agent per teammate.",
+        "body": "Local agents, tools, automations. Next: built per teammate.",
         "image": "assets/home/experience/2026-integrator.webp",
         "alt": "Illustration: Cayleb beside a coworker, taking notes on how she works, his AI agent between them"
       }
@@ -339,7 +339,7 @@
         {
           "id": "value-trim",
           "key": "trim",
-          "label": "Agents trim it by",
+          "label": "Agents + tools trim it by",
           "unit": "%"
         },
         {
@@ -426,11 +426,15 @@
     "questions": [
       {
         "q": "What does Cayleb do?",
-        "a": "Going for Forward Thinking Engineer. Shadows people. Builds each one an agent. Teaches it. Scales it."
+        "a": "Going for Forward Thinking Engineer. Shadows people. Builds agents and tools for any digital task. Teaches. Scales."
       },
       {
         "q": "How does a shadow day work?",
         "a": "Sits with you a couple days. Sees where time goes. Builds an agent for that. Teaches you."
+      },
+      {
+        "q": "What kind of tools?",
+        "a": "Anything digital a team wants automated or agent-driven. Built for them, not off the shelf."
       },
       {
         "q": "Done this for a company?",

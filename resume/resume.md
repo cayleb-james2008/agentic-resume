@@ -8,7 +8,7 @@ Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
 
 ## Summary
 
-Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent, teach it, scale it. Goal: lower costs, no cuts to people. Independent, AI-assisted developer: local workflow tools, desktop apps, source-grounded review.
+Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent plus tools for any digital task they want automated, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.
 
 ## Experience
 

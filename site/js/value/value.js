@@ -16,6 +16,7 @@ export function mount(section) {
     const values = Object.fromEntries([...form.querySelectorAll('input')].map((i) => [i.name, i.value]));
     const { perYear, multiple: times } = valueMath(values);
     out.textContent = perYear === null ? out.dataset.empty : money.format(perYear);
+    out.toggleAttribute('data-waiting', perYear === null);
     multiple.textContent = times === null ? '—' : `${times}×`;
   };
   form.addEventListener('input', update);

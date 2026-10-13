@@ -101,6 +101,11 @@
   color: var(--accent); text-align: right;
 }
 .value-out--multiple { font-size: 1.75rem; color: var(--foreground-on-dark); }
+/* Before any numbers: a quiet hint, not a headline. */
+.value-out[data-waiting] {
+  font-family: var(--font-sans); font-weight: 400; font-size: 0.875rem; line-height: 1.3;
+  text-transform: uppercase; color: var(--foreground-on-dark-muted);
+}
 .value-note { margin-top: 1.25rem; font-size: 0.8125rem; line-height: 1.4; color: var(--foreground-on-dark-muted); }
 
 @media (prefers-reduced-motion: reduce) {

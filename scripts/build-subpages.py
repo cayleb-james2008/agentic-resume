@@ -116,8 +116,7 @@ def not_found(content: dict) -> str:
         f'<div class="not-found-agent" aria-hidden="true">{guide.DROPLET_SVG}</div>'
         '<p class="not-found-code">404</p>'
         '<h1 class="not-found-title">Page not found<span class="not-found-stop">.</span></h1>'
-        "<p class=\"not-found-copy\">Cayleb's agent looked everywhere. That address doesn't lead anywhere on this site; "
-        "it may have moved when the site was rebuilt.</p>"
+        "<p class=\"not-found-copy\">Me agent. Me look everywhere. Page not here. Maybe moved.</p>"
         '<ul class="not-found-links">'
         '<li><a href="index.html">Home</a></li>'
         '<li><a href="resume.html">Résumé</a></li>'

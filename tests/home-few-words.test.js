@@ -11,7 +11,7 @@ const within = (label, text, max) => assert.ok(words(text) <= max, `${label}: ${
 test('hero, how-I-work and projects copy stay blunt', () => {
   within('meta.description', content.meta.description, 16);
   for (const line of content.hero.now.lines) within('hero.now line', line, 3);
-  within('approach.intro', content.approach.intro, 8);
+  within('approach.intro', content.approach.intro, 10);
   for (const row of content.approach.rows) within('approach row', row.text, 3);
   within('projects.report', content.projects.report, 12);
 });

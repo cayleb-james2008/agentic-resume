@@ -1,8 +1,10 @@
 /* Worth it — how the value gets made (2026-10-13). Continues the projects
-   band's ink: the heading and the no-cuts line, then three bracketed examples
-   from businesses Cayleb has worked in (today → with his tools → what the
-   business gets → a receipt of the money lost a month, today and with his
-   systems, and the yearly saving), then the measure-build-measure row. */
+   band's ink: the heading and the no-cuts line, then built around each
+   company (situation, tools, how they work, what they need), then three
+   bracketed examples from businesses Cayleb has worked in (today → with his
+   tools → what the business gets → a receipt of the money lost a month,
+   today and with his systems, and the yearly saving), then the
+   measure-build-measure row. */
 
 .value {
   position: relative; isolation: isolate;
@@ -32,6 +34,35 @@
 .value-proof-line {
   max-width: 34rem; font-size: 0.9375rem; line-height: 1.4; color: var(--foreground-on-dark-muted);
 }
+
+/* Built around each company: the fit comes first and frames the examples. */
+.value-fit {
+  margin-top: clamp(3rem, 6vw, 5rem); padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--raw-color-white-alpha-20);
+}
+.value-fit-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem clamp(1.25rem, 3vw, 2.5rem); }
+.value-fit-title {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.75rem, 2.8vw, 2.75rem); line-height: 0.95; color: var(--foreground-on-dark);
+}
+.value-fit-lead {
+  font-size: clamp(1rem, 1.25vw, 1.25rem); line-height: 1.2; text-transform: uppercase; color: var(--foreground-on-dark-muted);
+  text-wrap: balance;
+}
+.value-fit-points {
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0; padding: 0; list-style: none; counter-reset: fit;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem clamp(1rem, 2vw, 2rem);
+}
+@media (max-width: 1023px) { .value-fit-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .value-fit-points { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; } }
+.value-fit-point { counter-increment: fit; padding-top: 0.9rem; border-top: 1px solid var(--raw-color-white-alpha-10); }
+.value-fit-name {
+  display: flex; align-items: baseline; gap: 0.5em;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem); line-height: 1; color: var(--accent);
+}
+.value-fit-name::before { content: counter(fit, decimal-leading-zero); font-size: 0.6em; color: var(--foreground-on-dark-muted); }
+.value-fit-text { margin-top: 0.55rem; max-width: 26rem; font-size: 0.9375rem; line-height: 1.4; color: var(--foreground-on-dark); }
 
 /* The examples. */
 .value-examples {
@@ -116,10 +147,6 @@
 }
 .value-money-basis { margin-top: 0.55rem; font-size: 0.8125rem; line-height: 1.35; color: var(--foreground-on-dark-muted); }
 
-.value-wired {
-  margin-top: clamp(2rem, 4vw, 3rem); max-width: 46rem; text-wrap: balance;
-  font-size: clamp(1rem, 1.3vw, 1.25rem); line-height: 1.3; text-transform: uppercase;
-}
 
 /* Measure, build, measure. */
 .value-proof { margin-top: clamp(2.5rem, 5vw, 4rem); }

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
-    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Shadow the job. Build agents and tools. Teach. Repeat.",
+    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Integrates AI built around each company. Saves money, no cuts.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
@@ -298,6 +298,28 @@
     ],
     "intro": "No cuts. No lost pay. The money comes from fixing the busywork.",
     "proof": "He's worked these jobs. He knows where the time goes.",
+    "fit": {
+      "title": "Built around each company",
+      "lead": "Nothing off the shelf. Two movers, two builds.",
+      "points": [
+        {
+          "name": "Their situation",
+          "text": "Size, season, and what's costing them most right now. The build starts there."
+        },
+        {
+          "name": "Their tools",
+          "text": "Wired into the phones, calendars, email, software and books they already use. Nothing to switch."
+        },
+        {
+          "name": "How they work",
+          "text": "He shadows the team first, so every system fits how they already do the job."
+        },
+        {
+          "name": "What they need",
+          "text": "They pick what gets automated, from one small tool to a full system."
+        }
+      ]
+    },
     "cardLabel": "What he builds for",
     "todayLabel": "Today",
     "money": {
@@ -490,7 +512,6 @@
         }
       }
     ],
-    "wired": "Each one is a full system, wired into the phones, calendars, email and books the company already uses.",
     "stepsTitle": "How you know",
     "steps": [
       "Measure first.",
@@ -561,14 +582,14 @@
       "approach": "This is the loop he runs: shadow, understand, build, teach.",
       "experience": "Real jobs first. He knows how crews actually work.",
       "work": "His own builds: work assistants, desktop apps, review tools.",
-      "value": "No cuts. The money comes from fixing the busywork.",
+      "value": "Every build fits each company. The money comes from fixing busywork.",
       "contact": "Want tools built around how your team works? Say hi."
     },
     "title": "Ask my agent",
     "questions": [
       {
         "q": "What does Cayleb do?",
-        "a": "He's going for Forward Thinking Engineer roles. He shadows people, builds them an AI agent and tools for whatever digital work they want automated, and teaches them to use it."
+        "a": "His job: bring AI into companies to save them money. He shadows the team, builds agents and tools around how they work, what they use and what they need, then teaches them."
       },
       {
         "q": "How does a shadow day work?",

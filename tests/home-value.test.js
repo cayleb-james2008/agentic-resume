@@ -36,7 +36,41 @@ test('it shows full systems for three kinds of business he has worked in', () =>
     assert.ok(section.includes(esc(e.value)));
   }
   assert.ok(section.includes(esc(v.proof)));
-  assert.ok(section.includes(esc(v.wired)));
+});
+
+// Built around each company (2026-10-13, fifth pass). A big part of the value is the fit: each
+// build is shaped by the company's situation, the tools it already uses, how its people work and
+// what it needs. It sits right after the head, before the examples, so it frames them.
+test('the value section says every build is shaped around the company', () => {
+  const f = content.value.fit;
+  assert.match(f.title, /^Built around each company$/);
+  assert.ok(words(f.lead) <= 8, `lead: ${f.lead}`);
+  assert.deepEqual(f.points.map((p) => p.name), ['Their situation', 'Their tools', 'How they work', 'What they need']);
+  for (const p of f.points) assert.ok(words(p.text) >= 8 && words(p.text) <= 18, `${p.name}: ${p.text}`);
+  // The old "wired into the tools they already use" line now lives in "Their tools".
+  assert.equal(content.value.wired, undefined);
+  assert.match(f.points[1].text, /phones/i);
+  assert.match(f.points[1].text, /already use/i);
+  assert.match(f.points[2].text, /shadows/i);
+  const fit = section.match(/<div class="value-fit"[\s\S]*?<\/ul><\/div>/)?.[0] ?? '';
+  assert.ok(fit, '.value-fit block');
+  assert.ok(section.indexOf('class="value-fit"') < section.indexOf('class="value-examples"'), 'before the examples');
+  assert.ok(fit.includes(`<h3 class="value-fit-title">${esc(f.title)}</h3>`), 'h3 title');
+  assert.ok(fit.includes(esc(f.lead)), 'lead');
+  const items = fit.match(/<li class="value-fit-point">[\s\S]*?<\/li>/g) || [];
+  assert.equal(items.length, 4);
+  f.points.forEach((p, i) => {
+    assert.ok(items[i].includes(`<p class="value-fit-name">${esc(p.name)}</p>`), p.name);
+    assert.ok(items[i].includes(`<p class="value-fit-text">${esc(p.text)}</p>`), p.text);
+  });
+});
+
+test('the page description and the agent say it too: AI built around each company, saving money', () => {
+  assert.match(content.meta.description, /Integrates AI built around each company\. Saves money, no cuts\.$/);
+  assert.match(content.guide.lines.value, /each company/i);
+  const what = content.guide.questions.find((q) => q.q === 'What does Cayleb do?');
+  assert.match(what.a, /bring AI into companies to save them money/i);
+  assert.match(what.a, /around how they work, what they use and what they need/i);
 });
 
 test('the systems read as his confident offer, without naming a real company as a client', () => {

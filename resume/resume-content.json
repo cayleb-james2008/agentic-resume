@@ -18,7 +18,7 @@
   "summary": "Forward Thinking Engineer. Focus: integrate AI, custom-built around each company's tools, workflows and needs; shadow employees, build agents and tools for any digital task, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.",
   "experience": {
     "title": "Independent Project Development - AI-Assisted Software & Evaluation",
-    "dates": "Oct 2025\u2013present",
+    "dates": "Oct 2025–present",
     "intro": "Builds, tests and fixes software with AI help: local tools, app connections, clear next steps for people."
   },
   "projects": [
@@ -88,7 +88,7 @@
       ],
       "bullets": [
         "Connected saved agent profiles and local AI models to a coding-agent desktop app.",
-        "Kept sessions safe across restarts and merged two code histories without losing work; checked with automated tests."
+        "Sessions and transcripts survive restarts. Context summaries use the agent service; provider failures keep saved settings and show a clear error."
       ],
       "slug": "sophos",
       "short_name": "Sophos",
@@ -128,16 +128,16 @@
   ],
   "additional_experience": [
     {
-      "organization": "Robert H. Lord Company \u2014 Moving Crew",
-      "dates": "Summer 2025; 2026\u2013present"
+      "organization": "Robert H. Lord Company — Moving Crew",
+      "dates": "Summer 2025; 2026–present"
     },
     {
-      "organization": "David Cooke Plaster Co. \u2014 Plaster Work",
+      "organization": "David Cooke Plaster Co. — Plaster Work",
       "dates": "Summer 2026"
     },
     {
       "organization": "Dunkin'",
-      "dates": "2024\u20132026"
+      "dates": "2024–2026"
     },
     {
       "organization": "Tommy's Pizza",
@@ -147,15 +147,15 @@
   "education": {
     "school": "Portland High School",
     "location": "Portland, Connecticut",
-    "status": "2022\u20132026 \u00b7 Graduated",
+    "status": "2022–2026 · Graduated",
     "coursework": "Cybersecurity; AP Computer Science"
   },
   "status": "Unpublished polish candidate; approved PDF artifacts remain unchanged.",
-  "snapshot_note": "Selected engineering projects \u00b7 Updated October 13, 2026.",
+  "snapshot_note": "Selected engineering projects · Updated October 13, 2026.",
   "short_skills": [
-    "Python \u00b7 TypeScript \u00b7 JavaScript \u00b7 Rust",
-    "AI agents \u00b7 automation \u00b7 desktop and web apps",
-    "Automated testing \u00b7 Git \u00b7 Linux"
+    "Python · TypeScript · JavaScript · Rust",
+    "AI agents · automation · desktop and web apps",
+    "Automated testing · Git · Linux"
   ],
   "historical_evidence_notes": {
     "official_mercor_upload_guidance": {
@@ -163,7 +163,7 @@
       "retrieved": "2026-10-05",
       "requirements": [
         "PDF only; OCR-friendly and text-based, not scanned",
-        "1\u20132 pages and under 2 MB",
+        "1–2 pages and under 2 MB",
         "simple standardized layout; avoid images, tables, and complex design",
         "clear headings such as Education, Experience, Skills, and Certifications"
       ]
@@ -320,11 +320,11 @@
         "public_pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/2",
         "state": "OPEN_DRAFT",
         "head_sha": "2c8b163b7ae490e02ea990df978b59d0d0768455",
-        "candidate_test_result_as_provided": "372 tests and 178 subtests; draft-candidate result, separate from the post-merge public-main baseline of 370 tests and 178 subtests used in the r\u00e9sum\u00e9",
+        "candidate_test_result_as_provided": "372 tests and 178 subtests; draft-candidate result, separate from the post-merge public-main baseline of 370 tests and 178 subtests used in the résumé",
         "state_source": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json"
       }
     },
-    "personal_information": "Contact email, Connecticut location, and remote-only preference match the prior source r\u00e9sum\u00e9/profile materials. Education and coursework match the prior r\u00e9sum\u00e9 extract. Employer names and date ranges match the prior r\u00e9sum\u00e9's self-report and are not employer-verified. The current full name follows the user-provided profile context (Cayleb Alvarez-James); the older source r\u00e9sum\u00e9 header used the shorter form Cayleb James, so confirm preferred display/legal name before submission if the profile has since changed.",
+    "personal_information": "Contact email, Connecticut location, and remote-only preference match the prior source résumé/profile materials. Education and coursework match the prior résumé extract. Employer names and date ranges match the prior résumé's self-report and are not employer-verified. The current full name follows the user-provided profile context (Cayleb Alvarez-James); the older source résumé header used the shorter form Cayleb James, so confirm preferred display/legal name before submission if the profile has since changed.",
     "nonclaims": [
       "No paid engineering role or employer relationship is asserted",
       "No sole-authorship, revenue, adoption, production deployment, degree, model-training, whole-app, release-readiness, or live provider-inference achievement is asserted; Suite PR #1 is explicitly labeled merged, while Sophos #9/#10/#11 and dotz #218 remain open drafts"
@@ -333,41 +333,114 @@
   "evidence_notes": {
     "updated_at": "2026-10-13",
     "industry_ai_suite": {
-      "source_sha": "06f0722",
+      "source_sha": "06f07229afe1f8aa89694e0d8b10ba47e02455de",
+      "merge_commit": "aef17e0f462594f9185d47696a56652d943e4056",
       "python_tests": 382,
       "subtests": 178,
       "browser_navigation_tests": 19,
       "pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/6",
-      "actual_model_inference": "not exercised: configured loopback endpoint unavailable"
+      "actual_model_inference": "not exercised: configured loopback endpoint was unavailable during the current run",
+      "scope": "Ten bounded local review tools with source receipts, optional citation-checked loopback drafting, and human review; not completed enterprise workflows or provider/model accuracy.",
+      "documentation_merge_commit": "f4a93ddb93a4e3ec7068383ec0875cbc127f855c"
     },
     "ergon": {
-      "version": "1.4.9 candidate",
-      "windows_acceptance": "pending",
-      "automatic_work_repair": "pending"
+      "version": "1.4.9 delivered pilot",
+      "source_commit": "71d7b1bb69e266ceaa50d3aa112910e88454afbf",
+      "installer": "OpenClaw-Baseline-Setup-1.4.9.exe, delivered on the pilot USB and hash-verified",
+      "linux_services": "Protected Outis and MeshCentral public HTTPS endpoints returned 200; unauthenticated ticket access returned 401.",
+      "windows_acceptance": "User testing is underway; actual Windows installation, enrollment, screen control, and reboot acceptance are not yet verified.",
+      "hosted_work_repair": "Not provisioned; no automatic ChatGPT Work event worker or image-tool integration is available.",
+      "live_model_and_phone": "No live Haiku/Opus calls or phone test were made.",
+      "scope": "Implemented 1.4.9 pilot: native Outis taskbar app, ticket-driven connector builder, device-scoped repair and screen tools; hosted model/provider/phone setup and real Windows acceptance remain separate.",
+      "documentation_commit": "5d8ee7c",
+      "next_build": {
+        "version": "1.5.0 source candidate",
+        "source_commit": "099ce52bf1e08aa17ce23425c9c79d269faaafc8",
+        "source_status": "Installer built from the reviewed source; protected stable-feed generation 1 is live and its signed manifest and full HTTPS payload readback were verified. Windows runtime acceptance remains pending.",
+        "implemented": "Defaults to Hindsight for native memory and includes signed managed updates that apply on close.",
+        "verification": {
+          "node_tests_passed": 539,
+          "node_tests_skipped": 2,
+          "python_tests_passed": 80,
+          "publisher_tests_passed": 3,
+          "net_framework_48_helpers_compiled": 8
+        },
+        "limits": "Windows installation and runtime acceptance remain unverified. Linux Hindsight is not provisioned, so live memory retrieval is untested and the protected memory endpoint returns 503 pending model choice. Live provider calls, phone tests and an automatic ChatGPT Work event worker remain unverified.",
+        "installer": {
+          "filename": "OpenClaw-Baseline-Setup-1.5.0.exe",
+          "bytes": 323920383,
+          "sha256": "726ea20ee7506216e63654936803078e660966683ad4255f5fc0ccae323d5f13"
+        },
+        "source_archive": {
+          "filename": "ergon-1.5.0-connectors-source.zip",
+          "bytes": 2149703,
+          "sha256": "d1fefcfecdf5d374f5a0feac8fe7bc7df00ffcad7ccd74d52f3d53cb26bae090"
+        },
+        "protected_feed": {
+          "channel": "stable",
+          "generation": 1,
+          "platform": "windows-x64",
+          "verified_at": "2026-10-13T22:40:15.054Z",
+          "manifest_expires_at": "2026-10-27T22:33:57.709Z",
+          "signature": "Ed25519 verified",
+          "authenticated_full_https_payload_readback": {
+            "status": 200,
+            "bytes": 323920383,
+            "sha256": "726ea20ee7506216e63654936803078e660966683ad4255f5fc0ccae323d5f13"
+          },
+          "unauthenticated_access": 401,
+          "non_device_roles": 403,
+          "mesh_dashboard": 200,
+          "mesh_service_changed": false
+        }
+      }
     },
     "sophos": {
-      "source_sha": "30a3dd2f55707c3ec31d0f0bc8e90ffc60e04899",
-      "ui_tests": 1213,
-      "lifecycle_assertions": 53,
+      "source_sha": "3e3e52c8693f415be2aa6695feff112d710ca344",
+      "ui_tests": 1224,
+      "node_tests": 82,
+      "bridge_boundary_tests": 9,
+      "lease_tests": 8,
       "settings_assertions": 12,
-      "native_windows_acceptance": "pending",
-      "node_tests": 81,
-      "production_runtime_audit": "One high package record: two unresolved extract-zip advisories; ZIP helper disabled",
+      "verifier_regressions": 14,
+      "windows_lifecycle_checks": "56/56 passed",
+      "cua_suites": "8/8 passed; 59/59 assertions, with two keyboard interactions skipped",
+      "public_installed_app_smoke": "7/7 passed in a fresh profile",
+      "status": "PR #20 merged at 33559fc996d04badc00ab62a0469d2ee7be023cd. Final hosted CI run 38471697435 passed: 1,224 interface tests, 82 Node tests, 56/56 Windows checks, lifecycle, and all CUA suites.",
+      "ci_runs": [
+        38471688511,
+        38471697435
+      ],
+      "merge_commit": "33559fc996d04badc00ab62a0469d2ee7be023cd",
+      "pull_request_state": "MERGED",
+      "final_ci_run": 38471697435,
+      "verified_core": "Saved profiles start real daemon sessions; local model catalogs, durable transcripts and restart recovery work. Context summarization calls the daemon compactor; provider settings survive failures and runtime errors are clear.",
+      "review_boundary": "Unsupported advanced APIs reject requests; their panels are preview-only.",
+      "native_windows_acceptance": "The public updater build passed a 7/7 fresh-profile smoke. Clean installation of the source-head MSI is not verified; the CUA suite used demo/mock IPC, and live model inference is untested.",
+      "production_runtime_audit": "Five high development advisories; pinned production runtime has one high and one moderate advisory. ZIP helper disabled.",
       "pull_request": "https://github.com/cayleb-james2008/sophos/pull/20"
     },
     "dotz": {
       "public_pull_request": "https://github.com/cayleb-james2008/dotz/pull/222",
-      "source_commit": "85bd6d21ef7e602f9c840aeaddc4f931b34da21c",
-      "current_validation": "Core tests, formatting, Clippy and dependency checks passed on Windows, macOS and Linux. Local UI/helper checks and Linux native compilation passed. Clean-download/native UI acceptance remains pending.",
-      "hosted_ci": "https://github.com/cayleb-james2008/dotz/actions/runs/38416589014"
+      "source_commit": "de040bda77420ccf6a79b6eab825db514cc78da3",
+      "merge_commit": "4df6871ff45250e52b6a2276d37b5f9303743bf0",
+      "cross_platform_core_tests": {
+        "Linux": 839,
+        "Windows": 828,
+        "macOS": 831
+      },
+      "ci": "All six hosted CI jobs passed on the reviewed tree.",
+      "scope": "Core CI and focused process-tree checks passed; clean-download native UI acceptance, packaging/signing/updater and live provider use remain open.",
+      "documentation_merge_commit": "2139526fae091915a6c74eec673c5f188dfc520d"
     },
     "asmodeus": {
-      "source_commit": "6899a09d236c3c6f4c380d35c035b0897ba5f812",
-      "workspace_tests": 1107,
-      "test_binaries": 83,
-      "transport_tests": 20,
-      "scope": "Private research and paper replay. No live broker/model route or real-money execution used.",
-      "live_money_trading": false
+      "tested_head": "34ad38a1c89d318d08bc0350a3a246c1b3447a83",
+      "merge_commit": "91de908aab5c37b266799752b8c539a643e083fe",
+      "workspace_tests": 1111,
+      "windows_python_tests": 33,
+      "checks": "Windows CI passed tests, formatting, Clippy, documentation and the unchanged coverage gate; Linux tests and parity checks passed.",
+      "scope": "Private research and paper replay. No live broker, real-money execution, paid model call or profitability claim.",
+      "documentation_merge_commit": "d301d959e46a87b5b5dc1f9c2ca07c0a665ce620"
     }
   }
 }

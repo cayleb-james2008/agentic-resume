@@ -36,6 +36,7 @@ test('it shows full systems for three kinds of business he has worked in', () =>
     assert.ok(section.includes(esc(e.value)));
   }
   assert.ok(section.includes(esc(v.proof)));
+  assert.match(v.proof,/Illustrative estimates; actual savings are measured with each team\./);
 });
 
 // Built around each company (2026-10-13, fifth pass). A big part of the value is the fit: each

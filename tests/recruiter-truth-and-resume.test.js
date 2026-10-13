@@ -9,8 +9,19 @@ test('suite examples retain synthetic and unverified scope without production cl
  assert.doesNotMatch(home,/working workflows|10 working/i);
  assert.match(home,/recorded demos/i);
  assert.match(read('projects/industry-ai-suite.html'),/organization outcomes remain UNVERIFIED/);
- assert.match(read('projects/ergon.html'),/Native Windows installation/);
+ assert.match(read('projects/ergon.html'),/Windows installation, enrollment, actual screen control/);
+ assert.match(read('projects/ergon.html'),/installer is built and the protected update feed is live/);
+ assert.match(read('projects/ergon.html'),/verified the update signature and downloaded the full installer over HTTPS/);
+ assert.match(read('projects/ergon.html'),/Linux Hindsight isn't provisioned while model selection is pending/);
  assert.match(read('projects/asmodeus.html'),/paper simulation/);
+ assert.match(read('projects/dotz.html'),/the merged implementation/);
+ assert.match(read('projects/sophos.html'),/Advanced feature panels are previews; those functions are not part of the verified native controls/);
+ assert.match(read('projects/sophos.html'),/The change merged October 13 \(commit <code>33559fc<\/code>\)/);
+ assert.match(read('projects/sophos.html'),/Installing the source build from scratch.*remain unverified/);
+ assert.match(read('README.md'),/Sophos PR #20 merged at `33559fc`/);
+ assert.doesNotMatch(read('projects/sophos.html'),/application audit is clear|implementation PR #20/i);
+ assert.doesNotMatch(read('projects/sophos.html'),/\bCUA\b|checkpoint|distilled-skills|thought-tree/i);
+ assert.doesNotMatch(read('projects/dotz.html'),/current PR #222/i);
 });
 test('public PDFs match the exact user-approved release bytes',()=>{
  const manifest=JSON.parse(read('resume/approved-verification.json'));

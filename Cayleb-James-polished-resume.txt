@@ -56,7 +56,7 @@ github.com/cayleb-james2008/sophos: https://github.com/cayleb-james2008/sophos
 
 - Connected saved agent profiles and local AI models to a coding-agent desktop app.
 
-- Kept sessions safe across restarts and merged two code histories without losing work; checked with automated tests.
+- Sessions and transcripts survive restarts. Context summaries use the agent service; provider failures keep saved settings and show a clear error.
 
 Asmodeus - Trading Research on Past Data
 

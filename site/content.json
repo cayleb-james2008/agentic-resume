@@ -304,6 +304,10 @@
       "label": "Lost each month",
       "today": "Today",
       "after": "With it",
+      "total": "Total",
+      "item": "Cost",
+      "to": "to",
+      "per": "per",
       "saves": "Saves",
       "year": "a year"
     },
@@ -329,9 +333,45 @@
         ],
         "value": "More jobs booked. Trucks stay busy. Paid faster.",
         "money": {
-          "today": 5000,
-          "after": 1500,
-          "basis": "Three-truck mover: missed jobs, extra miles, damage claims."
+          "items": [
+            {
+              "what": "Moves lost to slow replies",
+              "unit": "move",
+              "qty": [
+                3,
+                1
+              ],
+              "each": 1000
+            },
+            {
+              "what": "Extra truck miles",
+              "unit": "mile",
+              "qty": [
+                1600,
+                400
+              ],
+              "each": 0.5
+            },
+            {
+              "what": "Damage claims paid",
+              "unit": "claim",
+              "qty": [
+                2,
+                1
+              ],
+              "each": 300
+            },
+            {
+              "what": "Extras never billed",
+              "unit": "extra",
+              "qty": [
+                6,
+                1
+              ],
+              "each": 100
+            }
+          ],
+          "basis": "Sized for a three-truck mover."
         }
       },
       {
@@ -355,9 +395,45 @@
         ],
         "value": "Same-day proposals. No wasted trips. Owners kept in the loop.",
         "money": {
-          "today": 4000,
-          "after": 1000,
-          "basis": "Two-crew outfit: lost bids, wasted material, extra trips, rain days."
+          "items": [
+            {
+              "what": "Bids lost to slow quotes",
+              "unit": "bid",
+              "qty": [
+                1,
+                0
+              ],
+              "each": 2000
+            },
+            {
+              "what": "Wasted plaster mix",
+              "unit": "bag",
+              "qty": [
+                20,
+                5
+              ],
+              "each": 40
+            },
+            {
+              "what": "Extra supply runs",
+              "unit": "run",
+              "qty": [
+                10,
+                2
+              ],
+              "each": 50
+            },
+            {
+              "what": "Rain-day losses",
+              "unit": "day",
+              "qty": [
+                2,
+                1
+              ],
+              "each": 350
+            }
+          ],
+          "basis": "Sized for a two-crew outfit."
         }
       },
       {
@@ -381,9 +457,36 @@
         ],
         "value": "Less waste. Shorter lines. The owner sees every day at a glance.",
         "money": {
-          "today": 3000,
-          "after": 1000,
-          "basis": "One location: spoiled stock, rush orders, missed phone orders."
+          "items": [
+            {
+              "what": "Spoiled stock",
+              "unit": "case",
+              "qty": [
+                30,
+                10
+              ],
+              "each": 50
+            },
+            {
+              "what": "Rush orders",
+              "unit": "order",
+              "qty": [
+                5,
+                1
+              ],
+              "each": 100
+            },
+            {
+              "what": "Missed phone orders",
+              "unit": "order",
+              "qty": [
+                40,
+                10
+              ],
+              "each": 25
+            }
+          ],
+          "basis": "Sized for one location."
         }
       }
     ],

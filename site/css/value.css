@@ -1,8 +1,8 @@
 /* Worth it — how the value gets made (2026-10-13). Continues the projects
    band's ink: the heading and the no-cuts line, then three bracketed examples
    from businesses Cayleb has worked in (today → with his tools → what the
-   business gets → the money lost a month, before and after, and the yearly
-   saving), then the measure-build-measure row. */
+   business gets → a receipt of the money lost a month, today and with his
+   systems, and the yearly saving), then the measure-build-measure row. */
 
 .value {
   position: relative; isolation: isolate;
@@ -66,27 +66,49 @@
   font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
   font-size: clamp(1.125rem, 1.4vw, 1.375rem); line-height: 1.05; color: var(--foreground-on-dark);
 }
-/* The money: before → after, then the yearly saving as the punchline. */
+/* The money, as a receipt: each cost line (count today → with his systems,
+   price each), the monthly totals, then the yearly saving as the punchline. */
 .value-money {
   margin-top: 1.25rem; padding: 1.1rem 1.15rem 1.05rem;
   border: 1px solid var(--raw-color-white-alpha-20);
 }
+@media (max-width: 479px) { .value-money { padding: 0.95rem 0.85rem 0.9rem; } }
 .value-money-label {
   font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--foreground-on-dark-muted);
 }
-.value-money-row {
-  margin-top: 0.7rem; display: flex; align-items: flex-end; gap: 0.5rem 1rem; flex-wrap: wrap;
-  font-family: var(--font-display); font-weight: 700; line-height: 1;
-  font-size: clamp(1.5rem, 2.1vw, 2rem);
-}
-.value-money-before, .value-money-after { display: inline-flex; flex-direction: column; gap: 0.35rem; }
-.value-money-before { color: var(--foreground-on-dark-muted); }
-.value-money-after { color: var(--foreground-on-dark); }
-.value-money-tag {
-  font-family: var(--font-sans); font-weight: 400;
+.value-receipt { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.value-receipt caption { caption-side: top; text-align: left; padding-bottom: 0.6rem; }
+.value-receipt thead th {
+  padding: 0 0 0.45rem 0.75rem; text-align: right; font-weight: 400;
   font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--foreground-on-dark-muted);
 }
-.value-money-arrow { font-size: 0.75em; color: var(--accent); padding-bottom: 0.08em; }
+.value-receipt thead th:first-child { padding-left: 0; }
+.value-receipt tbody th, .value-receipt tbody td {
+  padding: 0.6rem 0 0.6rem 0.75rem; vertical-align: top;
+  border-top: 1px dashed var(--raw-color-white-alpha-20);
+}
+.value-receipt tbody th { padding-left: 0; text-align: left; font-weight: 400; }
+.value-receipt td { width: 1%; text-align: right; white-space: nowrap; }
+.value-receipt tbody td { font-size: 0.9375rem; line-height: 1.25; }
+.value-receipt td:nth-child(2) { color: var(--foreground-on-dark-muted); }
+.value-receipt td:last-child { color: var(--foreground-on-dark); }
+.value-receipt-what { display: block; font-size: 0.875rem; line-height: 1.25; color: var(--foreground-on-dark); }
+.value-receipt-math { display: block; margin-top: 0.2rem; font-size: 0.75rem; line-height: 1.3; color: var(--foreground-on-dark-muted); }
+.value-receipt tfoot th, .value-receipt tfoot td {
+  padding: 0.7rem 0 0 0.75rem; border-top: 1px solid var(--raw-color-white-alpha-20);
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 1;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+}
+.value-receipt tfoot th { padding-left: 0; text-align: left; font-size: 0.8125rem; letter-spacing: 0.08em; vertical-align: bottom; }
+/* Small phones: give the cost names room. */
+@media (max-width: 479px) {
+  .value-receipt thead th, .value-receipt tbody td, .value-receipt tfoot td { padding-left: 0.5rem; }
+  .value-receipt tbody td { font-size: 0.875rem; }
+}
+@media (max-width: 359px) {
+  .value-example { padding-inline: 1rem; }
+  .value-money { padding-inline: 0.65rem; }
+}
 .value-money-saved {
   margin-top: 0.85rem; padding-top: 0.8rem; border-top: 1px solid var(--raw-color-white-alpha-10);
   font-family: var(--font-display); font-weight: 700; text-transform: uppercase;

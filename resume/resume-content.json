@@ -404,13 +404,19 @@
       "settings_assertions": 12,
       "verifier_regressions": 14,
       "windows_lifecycle_checks": "56/56 passed",
-      "status": "Windows and lifecycle checks passed; the latest completed automated UI attempt failed and a retry is running. PR #20 remains open pending final CI and merge.",
+      "cua_suites": "8/8 passed; 59/59 assertions, with two keyboard interactions skipped",
+      "public_installed_app_smoke": "7/7 passed in a fresh profile",
+      "status": "PR #20 merged at 33559fc996d04badc00ab62a0469d2ee7be023cd. Final hosted CI run 38471697435 passed: 1,224 interface tests, 82 Node tests, 56/56 Windows checks, lifecycle, and all CUA suites.",
       "ci_runs": [
+        38471688511,
         38471697435
       ],
+      "merge_commit": "33559fc996d04badc00ab62a0469d2ee7be023cd",
+      "pull_request_state": "MERGED",
+      "final_ci_run": 38471697435,
       "verified_core": "Saved profiles start real daemon sessions; local model catalogs, durable transcripts and restart recovery work. Context summarization calls the daemon compactor; provider settings survive failures and runtime errors are clear.",
       "review_boundary": "Unsupported advanced APIs reject requests; their panels are preview-only.",
-      "native_windows_acceptance": "Clean installation of the source-head MSI is not verified; live model inference is untested.",
+      "native_windows_acceptance": "The public updater build passed a 7/7 fresh-profile smoke. Clean installation of the source-head MSI is not verified; the CUA suite used demo/mock IPC, and live model inference is untested.",
       "production_runtime_audit": "Five high development advisories; pinned production runtime has one high and one moderate advisory. ZIP helper disabled.",
       "pull_request": "https://github.com/cayleb-james2008/sophos/pull/20"
     },

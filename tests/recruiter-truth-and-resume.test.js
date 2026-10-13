@@ -16,6 +16,9 @@ test('suite examples retain synthetic and unverified scope without production cl
  assert.match(read('projects/asmodeus.html'),/paper simulation/);
  assert.match(read('projects/dotz.html'),/the merged implementation/);
  assert.match(read('projects/sophos.html'),/Advanced feature panels are previews; those functions are not part of the verified native controls/);
+ assert.match(read('projects/sophos.html'),/The change merged October 13 \(commit <code>33559fc<\/code>\)/);
+ assert.match(read('projects/sophos.html'),/Installing the source build from scratch.*remain unverified/);
+ assert.match(read('README.md'),/Sophos PR #20 merged at `33559fc`/);
  assert.doesNotMatch(read('projects/sophos.html'),/application audit is clear|implementation PR #20/i);
  assert.doesNotMatch(read('projects/sophos.html'),/\bCUA\b|checkpoint|distilled-skills|thought-tree/i);
  assert.doesNotMatch(read('projects/dotz.html'),/current PR #222/i);

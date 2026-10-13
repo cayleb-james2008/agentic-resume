@@ -1,7 +1,7 @@
 {
   "status": "Validated publication candidate; deployment is verified separately",
   "source": "resume/resume-content.json",
-  "source_sha256": "bd5d699d6be5445a6735093d8f44870390e99e0a7e37c8891200b6a7dedc8274",
+  "source_sha256": "7ac426f0629b5456807414ce879a06309a0fb7099787b4a9a67e077aaffcff9d",
   "body_font_pt": {
     "one_page": 10,
     "detailed": 10.5

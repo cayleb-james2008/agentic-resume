@@ -14,7 +14,11 @@ test('candidate copy preserves factual scope, attribution and dated boundaries',
  assert.match(source.evidence_notes.asmodeus.scope,/No live broker, real-money execution/);
  assert.equal(source.evidence_notes.sophos.ui_tests,1224);
  assert.equal(source.evidence_notes.sophos.source_sha,'3e3e52c8693f415be2aa6695feff112d710ca344');
- assert.match(source.evidence_notes.sophos.status,/latest completed automated UI attempt failed.*retry is running.*PR #20 remains open/i);
+ assert.equal(source.evidence_notes.sophos.merge_commit,'33559fc996d04badc00ab62a0469d2ee7be023cd');
+ assert.equal(source.evidence_notes.sophos.final_ci_run,38471697435);
+ assert.equal(source.evidence_notes.sophos.cua_suites,'8/8 passed; 59/59 assertions, with two keyboard interactions skipped');
+ assert.match(source.evidence_notes.sophos.status,/PR #20 merged.*Final hosted CI run 38471697435 passed/i);
+ assert.match(source.evidence_notes.sophos.native_windows_acceptance,/source-head MSI is not verified.*demo\/mock IPC.*inference is untested/i);
  assert.equal(source.evidence_notes.ergon.next_build.version,'1.5.0 source candidate');
  assert.equal(source.evidence_notes.ergon.next_build.source_commit,'099ce52bf1e08aa17ce23425c9c79d269faaafc8');
  assert.equal(source.evidence_notes.ergon.next_build.installer.filename,'OpenClaw-Baseline-Setup-1.5.0.exe');

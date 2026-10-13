@@ -7,9 +7,9 @@ const content = JSON.parse(read('site/content.json'));
 const projectPages = readdirSync(new URL('../projects/', import.meta.url)).filter((f) => f.endsWith('.html'));
 const escape = (s) => s.replace(/&/g, '&amp;');
 
-test('there are thirteen project pages: the suite, its ten workflows, dotz and Sophos', () => {
-  assert.equal(projectPages.length, 13);
-  for (const name of ['industry-ai-suite.html', 'dotz.html', 'sophos.html', 'ledgerbridge.html']) assert.ok(projectPages.includes(name), name);
+test('the suite workflows and five featured projects have case pages', () => {
+  assert.equal(projectPages.length, 15);
+  for (const name of ['industry-ai-suite.html', 'dotz.html', 'sophos.html', 'ergon.html', 'asmodeus.html', 'ledgerbridge.html']) assert.ok(projectPages.includes(name), name);
 });
 
 test('every project page wears the new look and nothing from the old one', () => {
@@ -42,7 +42,8 @@ test('project pages offer the current résumé, never the retired one', () => {
 test('project pages keep the site\'s claim rules', () => {
   for (const name of projectPages) {
     const text = read(`projects/${name}`).replace(/<[^>]+>/g, ' ');
-    assert.doesNotMatch(text, /hedge fund|working workflows|10 working|\bpilot\b/i, name);
+    assert.doesNotMatch(text, /hedge fund|working workflows|10 working/i, name);
+    if(name==='ergon.html')assert.match(text,/live checks|require live checks/);
   }
 });
 

@@ -12,7 +12,9 @@ test('all three portfolio projects retain their source and evidence destinations
  for(const name of ['industry-ai-suite','sophos','dotz']){
   assert.ok(home.includes('https://github.com/cayleb-james2008/'+name));
   const page=read('projects/'+name+'.html');
-  for(const heading of ['What it does','How to try it','Source proof','Credit and limits'])assert.ok(page.includes(`<h2>${heading}</h2>`));
+  assert.ok(page.includes('project-content'));
+  assert.ok(page.includes('Evidence'));
+  assert.match(page,/Verification|Source proof/);
  }
 });
 test('all ten dated receipts remain readable from the linked lab',()=>{

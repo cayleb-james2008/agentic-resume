@@ -36,10 +36,10 @@ const select = (value, pattern) => {
 };
 
 test('numbers trace to the résumé', () => {
-  const allowed = new Set([...resumeText.matchAll(/\d[\d,]*/g)].map((m) => m[0]));
+  const allowed = new Set([...resumeText.matchAll(/\d+(?:,\d{3})*/g)].map((m) => m[0]));
   for (const ordinal of ['01', '02', '03']) allowed.add(ordinal);
   for (const [path, text] of strings(content)) {
-    for (const [token] of text.matchAll(/\d[\d,]*/g)) {
+    for (const [token] of text.matchAll(/\d+(?:,\d{3})*/g)) {
       assert.ok(allowed.has(token), `${path}: "${token}" does not appear in resume-content.json`);
     }
   }
@@ -50,8 +50,8 @@ test('computed stats match', () => {
   assert.equal(stat('Projects'), String(content.projects.cards.length));
   const languages = resume.skills.find(([name]) => name === 'Languages')[1].split(',');
   assert.equal(stat('Languages'), String(languages.length));
-  assert.equal(stat('Demos'), '10');
-  assert.match(resume.projects[0].bullets[0], /\b10\b/);
+  assert.equal(stat('Tools'), '10');
+  assert.match(resume.projects.find(p=>p.slug==='suite').bullets[0], /ten/i);
   assert.match(content.hero.lab.sub, /^10 recorded demos$/);
 });
 
@@ -90,13 +90,12 @@ test('content lengths stay inside their frames', () => {
 
 test('banned claims stay out', () => {
   for (const [path, text] of strings(content)) {
-    assert.doesNotMatch(text, /\b(hedge fund|returns?|profit|revenue|clients?|pilot)\b/i, path);
+    assert.doesNotMatch(text, /\b(hedge fund|returns?|profit|revenue|clients?)\b/i, path);
   }
-  for (const name of ['EvoHedge', 'Maki']) {
-    const card = content.projects.cards.find((c) => c.name === name);
-    assert.match(card.status, /private/i);
-    assert.equal(card.href, undefined);
-  }
+  assert.equal(content.projects.cards.some(c=>['EvoHedge','Maki'].includes(c.name)),false);
+  for(const name of ['Ergon','Asmodeus'])assert.ok(content.projects.cards.find(c=>c.name===name).href);
+  assert.equal(content.projects.cards.find(c=>c.name==='Ergon').status,'Windows pilot');
+  assert.equal(resume.evidence_notes.ergon.windows_acceptance,'pending');
 });
 
 test('generated imagery is labelled as illustration', () => {

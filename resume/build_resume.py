@@ -27,9 +27,7 @@ def records(data, short=False):
             ('body', data['experience']['intro']), ('h2', 'Selected Projects')]
     for project in data['projects']:
         rows.append(('h3', project['short_name'] if short else project['name']))
-        if short:
-            rows.append(('links', project['links'][:1]))
-        else:
+        if not short:
             rows += [('body', project['stack']), ('links', project['links'])]
         rows += [('bullet', b) for b in ([project['short']] if short else project['bullets'])]
     rows.append(('h2', 'Skills'))
@@ -44,7 +42,7 @@ def records(data, short=False):
 
 def validate_source(data):
     assert data['headline'] == 'Forward Thinking Engineer'
-    assert [p['slug'] for p in data['projects']] == ['suite', 'sophos', 'dotz']
+    assert [p['slug'] for p in data['projects']] == ['ergon', 'suite', 'dotz', 'sophos', 'asmodeus']
     assert data['summary'].startswith('Forward Thinking Engineer. Focus: ')
     assert not re.search(r'\b(clients?|customers?|deployed)\b', data['summary'], re.I)
     assert len(data['additional_experience']) == 4
@@ -129,28 +127,39 @@ def check_pdf(path, rows, max_pages, exact_pages=None):
     return {'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'pages': pages, 'bytes': path.stat().st_size}
 
 
-def build_pdf(path, rows, short):
+def build_pdf(path, rows, short, snapshot_note):
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.lib.pagesizes import LETTER
     from reportlab.lib.styles import ParagraphStyle
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, PageBreak
-    body = ParagraphStyle('body', fontName='Helvetica', fontSize=10 if short else 10.5, leading=12 if short else 13, spaceAfter=3)
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, KeepTogether
+    # Embed Helvetica-compatible fonts so PDF viewers cannot substitute mismatched glyph metrics.
+    pdfmetrics.registerFont(TTFont('ResumeSans', str(HERE / 'fonts/LiberationSans-Regular.ttf')))
+    pdfmetrics.registerFont(TTFont('ResumeSans-Bold', str(HERE / 'fonts/LiberationSans-Bold.ttf')))
+    body = ParagraphStyle('body', fontName='ResumeSans', fontSize=10 if short else 10.5, leading=12 if short else 13, spaceAfter=3)
     styles = {'body': body, 'links': ParagraphStyle('links', parent=body),
-              'title': ParagraphStyle('title', parent=body, fontName='Helvetica-Bold', fontSize=18, leading=21, spaceAfter=4),
-              'h2': ParagraphStyle('h2', parent=body, fontName='Helvetica-Bold', fontSize=11, leading=14, spaceBefore=7, spaceAfter=3, keepWithNext=True),
-              'h3': ParagraphStyle('h3', parent=body, fontName='Helvetica-Bold', spaceBefore=4, keepWithNext=True),
+              'title': ParagraphStyle('title', parent=body, fontName='ResumeSans-Bold', fontSize=18, leading=21, spaceAfter=4),
+              'h2': ParagraphStyle('h2', parent=body, fontName='ResumeSans-Bold', fontSize=11, leading=14, spaceBefore=7, spaceAfter=3, keepWithNext=True),
+              'h3': ParagraphStyle('h3', parent=body, fontName='ResumeSans-Bold', spaceBefore=4, keepWithNext=True),
               'bullet': ParagraphStyle('bullet', parent=body, leftIndent=10, bulletIndent=0)}
-    story = []
+    story = []; project_block = []
     for kind, value in rows:
-        if not short and kind == 'h3' and value.startswith('dotz -'):
-            story.append(PageBreak())
+        if not short and kind in {'h2', 'h3'} and project_block:
+            story.append(KeepTogether(project_block)); project_block = []
         if kind == 'links':
             value = ' | '.join(f'<link href="{html.escape(l["url"], quote=True)}"><u>{html.escape(plain(l["label"]))}</u></link>' for l in value)
         else:
             value = html.escape(plain(value))
-        story.append(Paragraph(value, styles[kind], bulletText='-' if kind == 'bullet' else None))
+        paragraph = Paragraph(value, styles[kind], bulletText='-' if kind == 'bullet' else None)
+        if not short and (kind == 'h3' or project_block):
+            project_block.append(paragraph)
+        else:
+            story.append(paragraph)
+    if project_block:
+        story.append(KeepTogether(project_block))
     doc = SimpleDocTemplate(str(path), pagesize=LETTER, leftMargin=36, rightMargin=36, topMargin=30, bottomMargin=30,
                             title='Cayleb Alvarez-James - AI workflow developer', author='Cayleb Alvarez-James',
-                            subject='Unpublished resume polish candidate; October 5, 2026 project snapshot', invariant=1)
+                            subject=snapshot_note, invariant=1)
     doc.build(story)
     return check_pdf(path, rows, 1 if short else 2, 1 if short else None)
 
@@ -170,7 +179,7 @@ def main():
         path = ROOT / (stem + '.txt'); path.write_text(text_export(rows), encoding='utf-8')
         exports[path.name] = {'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
         if not args.content_only:
-            exports[stem + '.pdf'] = build_pdf(ROOT / (stem + '.pdf'), rows, short)
+            exports[stem + '.pdf'] = build_pdf(ROOT / (stem + '.pdf'), rows, short, data['snapshot_note'])
     (HERE / 'resume-fragment.html').write_text(detailed_fragment(records(data)))
     (HERE / 'candidate-fragment.html').write_text(short_fragment(data))
     if not args.content_only:

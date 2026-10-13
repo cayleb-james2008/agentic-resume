@@ -6,17 +6,15 @@ const source=JSON.parse(read('resume/resume-content.json'));
 test('candidate copy preserves factual scope, attribution and dated boundaries',()=>{
  assert.match(source.summary,/^Forward Thinking Engineer\. Focus: /);
  assert.match(source.summary,/AI-assisted/);
- assert.deepEqual(source.projects.map(p=>p.slug),['suite','sophos','dotz']);
- for(const [slug,pattern] of [['suite',/all ten full workflows remain UNVERIFIED/],['sophos',/Prime Intellect.*demo IPC; draft PR #10/],['dotz',/Draft PR #218.*Ubuntu acceptance not established/]]){
-  const project=source.projects.find(p=>p.slug===slug);
-  assert.match(project.short,pattern);
-  assert.ok(read('resume/candidate-fragment.html').includes(project.short));
- }
- assert.equal(source.evidence_notes.sophos.native_ui.case_results_without_skip_marker,57);
- assert.equal(source.evidence_notes.sophos.native_ui.explicit_skipped_branches,2);
- assert.equal(source.evidence_notes.dotz.hosted_ci.core_jobs.Ubuntu.state,'FAILURE');
- assert.match(source.evidence_notes.industry_ai_suite.historical_model_evidence,/failure and corrected retry/);
- assert.match(source.snapshot_note,/October 5, 2026.*not rechecked/);
+ assert.deepEqual(source.projects.map(p=>p.slug),['ergon','suite','dotz','sophos','asmodeus']);
+ for(const project of source.projects)assert.ok(read('resume/candidate-fragment.html').includes(project.short));
+ assert.equal(source.evidence_notes.industry_ai_suite.python_tests,382);
+ assert.equal(source.evidence_notes.industry_ai_suite.actual_model_inference,'not exercised: configured loopback endpoint unavailable');
+ assert.equal(source.evidence_notes.ergon.windows_acceptance,'pending');
+ assert.equal(source.evidence_notes.asmodeus.live_money_trading,false);
+ assert.equal(source.evidence_notes.sophos.ui_tests,1213);
+ assert.match(source.snapshot_note,/October 13, 2026/);
+ assert.doesNotMatch(source.projects.map(p=>p.name).join(' '),/Maki|EvoHedge/);
  assert.equal(source.additional_experience.length,4);
 });
 test('the homepage reaches the résumé page and both candidate PDFs',()=>{

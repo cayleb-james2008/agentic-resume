@@ -1,23 +1,18 @@
-# Current canonical résumé (2026-10-12)
+# Current canonical résumé (2026-10-13)
 
 The homepage `index.html` is generated from `site/content.json` by `scripts/build-home.py`. It has five blocks:
 
 1. The hero: Cayleb's name, a 3D-styled illustrated character wearing a headset, and the integrator line.
 2. How I work: a loop through Shadow, Understand, Build and Teach that ends at "Whole company".
 3. Work experience: a timeline of his résumé employment.
-4. Selected projects: Industry AI Suite featured, plus dotz, Sophos, EvoHedge and Maki.
+4. Selected projects: Industry AI Suite featured, plus dotz, Sophos, Asmodeus and Ergon.
 5. Contact: links and the downloads.
 
 `resume.html` is a plain, printable résumé page built from `resume/candidate-fragment.html`. Both candidate PDFs are linked from the homepage and the résumé page. GitHub Pages publishes `main` at https://cayleb-james2008.github.io/agentic-resume/.
 
 **Positioning.** The role Cayleb is going for is **Forward Thinking Engineer** (the exact title, used as the headline everywhere: site, résumé, PDFs, share card). The work: he shadows employees for a couple of days to learn how they actually work, builds each person a custom AI agent they can work with, and teaches them to use it for faster, higher-quality daily work. Then he scales that across the whole company.
 
-**Claim limits.** These hold on every page and in every image:
-- Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. The ten Industry AI Suite workflows are always "recorded demos", never "working" workflows.
-- No clients, customers, pilots, revenue, returns or profit are claimed.
-- Robert H. Lord Company appears only as Cayleb's moving-crew job, never as a customer or engagement. Integrator role details held by his agent "outis" stay private.
-- EvoHedge and Maki are labelled private and in development. Neither has a repo link or performance figures. EvoHedge is never described as a hedge fund.
-- Every generated illustration has an `alt` starting "Illustration:", and the footer credits AI-generated illustrations. No racing imagery, names or marks from the layout reference appear anywhere.
+**Evidence boundaries.** Current implementation and dated verification belong in the project pages. The résumé states the implemented features concisely. The hosted lab remains a historical replay; source authority, native platform acceptance, live services and customer outcomes are separate checks. Ergon's Windows pilot is pending native acceptance. Asmodeus covers research and paper replay only. Employee information, access credentials and private source are absent from public case studies. Generated illustrations retain their labels and attribution.
 
 **Earlier versions.** The classic character-led homepage (Explore/Professional, Mofu, Pip, Folio, Loam) is recoverable at commit `2732c2f`. The earlier public résumé and site are recoverable at `476bb5623ef8b438028031faf86c55ff4520c090`. `resume/reviewed-verification.json` is historical; download integrity for the approved PDFs is recorded in `resume/approved-verification.json`.
 

@@ -67,7 +67,7 @@ test('every guide line belongs to a section on the page', () => {
 test('the guide keeps the site\'s claim rules', () => {
   const text = JSON.stringify(guide);
   assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilot\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
-  assert.match(guide.questions.find((q) => /EvoHedge/.test(q.q)).a, /private/i);
+  assert.match(guide.questions.find((q) => /Asmodeus/.test(q.q)).a, /private/i);
 });
 
 test('the guide is hidden until its script mounts it, and its panel is an accessible dialog', () => {

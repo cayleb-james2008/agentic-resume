@@ -2,7 +2,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-pdf="$root/Cayleb-James-resume.pdf"
+pdf="$root/Cayleb-James-polished-one-page.pdf"
 preview="$root/assets/img/resume-preview.webp"
 
 for command in pdfinfo pdftoppm magick; do

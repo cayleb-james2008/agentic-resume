@@ -24,9 +24,9 @@ OpenClaw, Node.js, C#, Windows, SQLite
 
 [Ergon case study](https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html)
 
-- Built a Windows employee-assistant installer with Outis taskbar management, reviewed onboarding and a Linux support service. Preserves employee data across upgrades.
+- Built a Windows employee-assistant installer with native Outis taskbar management and a Linux support service. Preserves employee data across upgrades.
 
-- Implemented device-scoped support, durable repair tracking, approved phone workflows and shared AI budgets, with Haiku defaults and bounded expert consultation.
+- Implemented ticket-driven connector builds and device-scoped repair tools, including screen input, Gateway-checked activation/rollback and shared AI budgets.
 
 ### Industry AI Suite - Source-Grounded Review Tools
 

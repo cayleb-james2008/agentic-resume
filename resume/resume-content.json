@@ -32,12 +32,12 @@
         }
       ],
       "bullets": [
-        "Built a Windows employee-assistant installer with Outis taskbar management, reviewed onboarding and a Linux support service. Preserves employee data across upgrades.",
-        "Implemented device-scoped support, durable repair tracking, approved phone workflows and shared AI budgets, with Haiku defaults and bounded expert consultation."
+        "Built a Windows employee-assistant installer with native Outis taskbar management and a Linux support service. Preserves employee data across upgrades.",
+        "Implemented ticket-driven connector builds and device-scoped repair tools, including screen input, Gateway-checked activation/rollback and shared AI budgets."
       ],
       "slug": "ergon",
       "short_name": "Ergon",
-      "short": "Built a Windows employee-assistant installer with reviewed onboarding, Outis support management, approved phone workflows and shared AI budgets."
+      "short": "Built a Windows assistant installer with native Outis management, automated connector builds and screen-control tools for remote support."
     },
     {
       "name": "Industry AI Suite - Source-Grounded Review Tools",

@@ -18,12 +18,29 @@
   "summary": "Forward Thinking Engineer. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.",
   "experience": {
     "title": "Independent Project Development - AI-Assisted Software & Evaluation",
-    "dates": "Oct 2025–present",
+    "dates": "Oct 2025\u2013present",
     "intro": "Direct AI-assisted implementation, debugging, testing and review of local tools, API integrations and documented human next steps."
   },
   "projects": [
     {
-      "name": "Industry AI Suite - Source-Grounded Review Workflows",
+      "name": "Ergon - Personalized Employee Assistant & Remote Support",
+      "stack": "OpenClaw, Node.js, C#, Windows, SQLite",
+      "links": [
+        {
+          "label": "Ergon case study",
+          "url": "https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html"
+        }
+      ],
+      "bullets": [
+        "Built a Windows employee-assistant installer with Outis taskbar management, reviewed onboarding and a Linux support service. Preserves employee data across upgrades.",
+        "Implemented device-scoped support, durable repair tracking, approved phone workflows and shared AI budgets, with Haiku defaults and bounded expert consultation."
+      ],
+      "slug": "ergon",
+      "short_name": "Ergon",
+      "short": "Built a Windows employee-assistant installer with reviewed onboarding, Outis support management, approved phone workflows and shared AI budgets."
+    },
+    {
+      "name": "Industry AI Suite - Source-Grounded Review Tools",
       "stack": "Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript",
       "links": [
         {
@@ -31,64 +48,17 @@
           "url": "https://github.com/cayleb-james2008/industry-ai-suite"
         },
         {
-          "label": "Merged PR #1",
-          "url": "https://github.com/cayleb-james2008/industry-ai-suite/pull/1"
-        },
-        {
-          "label": "September 26 evidence pack",
-          "url": "https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926"
-        },
-        {
-          "label": "Recorded workflow lab",
-          "url": "https://cayleb-james2008.github.io/agentic-resume/lab/"
+          "label": "Review history implementation",
+          "url": "https://github.com/cayleb-james2008/industry-ai-suite/pull/6"
         }
       ],
       "bullets": [
-        "Built 10 bounded local review workflows with public or permitted inputs, including Treasury-row reconciliation, cited research checks, CISA vulnerability triage and public-policy review. Retained dated source receipts and documented human next steps.",
-        "Local post-merge suite on public main: 370 tests and 178 subtests passed. Recorded examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED.",
-        "September 26 witness record: 6 local-model exchanges; 5 cited outputs passed citation-ID checks and narrow source review. Retained a privacy-filter/citation failure and its documented corrected retry."
+        "Built ten local review tools for finance, research, security and operations, with source receipts and explicit human review. Added durable history, review decisions, export and deletion.",
+        "Integrated optional loopback model drafting from minimized findings, with exact citation checks and explicit failure handling."
       ],
       "slug": "suite",
       "short_name": "Industry AI Suite",
-      "short": "Built ten bounded local review workflows with source receipts and documented human next steps. Recorded demonstrations; all ten full workflows remain UNVERIFIED."
-    },
-    {
-      "name": "Sophos - Windows Coding-Agent Desktop Integration",
-      "stack": "TypeScript, React, Tauri, Rust, Node.js",
-      "links": [
-        {
-          "label": "github.com/cayleb-james2008/sophos",
-          "url": "https://github.com/cayleb-james2008/sophos"
-        },
-        {
-          "label": "Open draft PR #10",
-          "url": "https://github.com/cayleb-james2008/sophos/pull/10"
-        },
-        {
-          "label": "PR #10 push CI",
-          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299547468"
-        },
-        {
-          "label": "PR #10 pull-request CI",
-          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37299551668"
-        },
-        {
-          "label": "Open draft PR #9 (baseline)",
-          "url": "https://github.com/cayleb-james2008/sophos/pull/9"
-        },
-        {
-          "label": "PR #9 runtime/MSI baseline",
-          "url": "https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024"
-        }
-      ],
-      "bullets": [
-        "Integrated Windows/Tauri and React/TypeScript views for Prime Intellect’s open-source Prime Agent. Prime Intellect supplies the upstream runtime, daemon and bridge.",
-        "Verified inbox read state and theme/profile persistence after restart in native Windows UI using demo IPC; live provider inference was not verified. Draft PR #10: 8 suites, 57 case results without skip markers and 2 skipped interaction branches.",
-        "Separate draft PR #9 baseline: 1,122 frontend tests and 47/47 Windows named-pipe checks passed; Windows x64 native-module loading and guarded MSI packaging verified. Neither draft establishes a release."
-      ],
-      "slug": "sophos",
-      "short_name": "Sophos",
-      "short": "Integrated a Windows/Tauri interface for Prime Intellect’s Prime Agent. Checked inbox state and theme/profile persistence over demo IPC; draft PR #10."
+      "short": "Built ten source-grounded review tools with cited local model drafts, durable history and review, export and deletion flows."
     },
     {
       "name": "dotz - Multi-Agent Coding Dashboard",
@@ -97,19 +67,49 @@
         {
           "label": "github.com/cayleb-james2008/dotz",
           "url": "https://github.com/cayleb-james2008/dotz"
-        },
-        {
-          "label": "Open draft PR #218",
-          "url": "https://github.com/cayleb-james2008/dotz/pull/218"
         }
       ],
       "bullets": [
-        "Integrated a local-first dashboard with a Rust/axum API, parallel coding-agent workflows, an inspectable graph, local memory and REST/WebSocket endpoints.",
-        "Isolated local Linux dotz-core: 824/824 passed; monitor-unit and platform-regression checks: 5/5 each. Draft PR #218; hosted Ubuntu core CI failed. Whole-app acceptance, merge and release were not established."
+        "Developed a Rust and Tauri agent desktop with model selection, supervised tools and platform-specific process cleanup.",
+        "Made local model failures explicit and added safe cleanup retries. Core tests, lint and dependency checks pass on Windows, macOS and Linux."
       ],
       "slug": "dotz",
       "short_name": "dotz",
-      "short": "Integrated a local dashboard, Rust API and inspectable coding workflow graph. Draft PR #218; local core checks, with hosted Ubuntu acceptance not established."
+      "short": "Developed a Rust and Tauri agent desktop with explicit local routing and supervised tools; core checks pass on Windows, macOS and Linux."
+    },
+    {
+      "name": "Sophos - Coding-Agent Desktop",
+      "stack": "React, TypeScript, Tauri, JSON-RPC",
+      "links": [
+        {
+          "label": "github.com/cayleb-james2008/sophos",
+          "url": "https://github.com/cayleb-james2008/sophos"
+        }
+      ],
+      "bullets": [
+        "Connected employee-selected agent profiles to real daemon sessions and local model catalogs, with durable session transcripts and restart recovery.",
+        "Reconciled parallel source histories while preserving lifecycle, security and build controls; verified the application and daemon with regression tests."
+      ],
+      "slug": "sophos",
+      "short_name": "Sophos",
+      "short": "Connected agent profiles and local model catalogs to a coding-agent desktop, with durable sessions and tested restart recovery."
+    },
+    {
+      "name": "Asmodeus - Research & Paper Replay",
+      "stack": "Rust, Historical Data, Local LLMs",
+      "links": [
+        {
+          "label": "Asmodeus case study",
+          "url": "https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html"
+        }
+      ],
+      "bullets": [
+        "Built a research and paper replay system with verified historical data, chronological evaluation, persisted cursors, fees and duplicate-fill prevention.",
+        "Added a keyless loopback model route with redirect and proxy guards, chronological train/validation/test slices and reviewable refutation records."
+      ],
+      "slug": "asmodeus",
+      "short_name": "Asmodeus",
+      "short": "Built a research and paper replay system with historical-data provenance, chronological evaluation and restart-safe simulated fills."
     }
   ],
   "skills": [
@@ -128,16 +128,16 @@
   ],
   "additional_experience": [
     {
-      "organization": "Robert H. Lord Company — Moving Crew",
-      "dates": "Summer 2025; 2026–present"
+      "organization": "Robert H. Lord Company \u2014 Moving Crew",
+      "dates": "Summer 2025; 2026\u2013present"
     },
     {
-      "organization": "David Cooke Plaster Co. — Plaster Work",
+      "organization": "David Cooke Plaster Co. \u2014 Plaster Work",
       "dates": "Summer 2026"
     },
     {
       "organization": "Dunkin'",
-      "dates": "2024–2026"
+      "dates": "2024\u20132026"
     },
     {
       "organization": "Tommy's Pizza",
@@ -147,16 +147,24 @@
   "education": {
     "school": "Portland High School",
     "location": "Portland, Connecticut",
-    "status": "2022–2026 · Graduated",
+    "status": "2022\u20132026 \u00b7 Graduated",
     "coursework": "Cybersecurity; AP Computer Science"
   },
-  "evidence_notes": {
+  "status": "Unpublished polish candidate; approved PDF artifacts remain unchanged.",
+  "snapshot_note": "Selected engineering projects \u00b7 Updated October 13, 2026.",
+  "short_skills": [
+    "Python \u00b7 Rust \u00b7 TypeScript \u00b7 JavaScript",
+    "React \u00b7 Tauri \u00b7 REST \u00b7 SQLite",
+    "AI/API integration \u00b7 Source-grounded review",
+    "Git \u00b7 Linux \u00b7 pytest \u00b7 Vitest \u00b7 Cargo"
+  ],
+  "historical_evidence_notes": {
     "official_mercor_upload_guidance": {
       "source": "https://talent.docs.mercor.com/how-to/apply",
       "retrieved": "2026-10-05",
       "requirements": [
         "PDF only; OCR-friendly and text-based, not scanned",
-        "1–2 pages and under 2 MB",
+        "1\u20132 pages and under 2 MB",
         "simple standardized layout; avoid images, tables, and complex design",
         "clear headings such as Education, Experience, Skills, and Certifications"
       ]
@@ -313,22 +321,54 @@
         "public_pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/2",
         "state": "OPEN_DRAFT",
         "head_sha": "2c8b163b7ae490e02ea990df978b59d0d0768455",
-        "candidate_test_result_as_provided": "372 tests and 178 subtests; draft-candidate result, separate from the post-merge public-main baseline of 370 tests and 178 subtests used in the résumé",
+        "candidate_test_result_as_provided": "372 tests and 178 subtests; draft-candidate result, separate from the post-merge public-main baseline of 370 tests and 178 subtests used in the r\u00e9sum\u00e9",
         "state_source": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json"
       }
     },
-    "personal_information": "Contact email, Connecticut location, and remote-only preference match the prior source résumé/profile materials. Education and coursework match the prior résumé extract. Employer names and date ranges match the prior résumé's self-report and are not employer-verified. The current full name follows the user-provided profile context (Cayleb Alvarez-James); the older source résumé header used the shorter form Cayleb James, so confirm preferred display/legal name before submission if the profile has since changed.",
+    "personal_information": "Contact email, Connecticut location, and remote-only preference match the prior source r\u00e9sum\u00e9/profile materials. Education and coursework match the prior r\u00e9sum\u00e9 extract. Employer names and date ranges match the prior r\u00e9sum\u00e9's self-report and are not employer-verified. The current full name follows the user-provided profile context (Cayleb Alvarez-James); the older source r\u00e9sum\u00e9 header used the shorter form Cayleb James, so confirm preferred display/legal name before submission if the profile has since changed.",
     "nonclaims": [
       "No paid engineering role or employer relationship is asserted",
       "No sole-authorship, revenue, adoption, production deployment, degree, model-training, whole-app, release-readiness, or live provider-inference achievement is asserted; Suite PR #1 is explicitly labeled merged, while Sophos #9/#10/#11 and dotz #218 remain open drafts"
     ]
   },
-  "status": "Unpublished polish candidate; approved PDF artifacts remain unchanged.",
-  "snapshot_note": "Project evidence and PR states: October 5, 2026 snapshot; not rechecked for this revision. Work history and education are self-reported.",
-  "short_skills": [
-    "Python · Rust · TypeScript · JavaScript",
-    "React · Tauri · REST · SQLite",
-    "AI/API integration · Source-grounded review",
-    "Git · Linux · pytest · Vitest · Cargo"
-  ]
+  "evidence_notes": {
+    "updated_at": "2026-10-13",
+    "industry_ai_suite": {
+      "source_sha": "06f0722",
+      "python_tests": 382,
+      "subtests": 178,
+      "browser_navigation_tests": 19,
+      "pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/6",
+      "actual_model_inference": "not exercised: configured loopback endpoint unavailable"
+    },
+    "ergon": {
+      "version": "1.4.9 candidate",
+      "windows_acceptance": "pending",
+      "automatic_work_repair": "pending"
+    },
+    "sophos": {
+      "source_sha": "30a3dd2f55707c3ec31d0f0bc8e90ffc60e04899",
+      "ui_tests": 1213,
+      "lifecycle_assertions": 53,
+      "settings_assertions": 12,
+      "native_windows_acceptance": "pending",
+      "node_tests": 81,
+      "production_runtime_audit": "One high package record: two unresolved extract-zip advisories; ZIP helper disabled",
+      "pull_request": "https://github.com/cayleb-james2008/sophos/pull/20"
+    },
+    "dotz": {
+      "public_pull_request": "https://github.com/cayleb-james2008/dotz/pull/222",
+      "source_commit": "85bd6d21ef7e602f9c840aeaddc4f931b34da21c",
+      "current_validation": "Core tests, formatting, Clippy and dependency checks passed on Windows, macOS and Linux. Local UI/helper checks and Linux native compilation passed. Clean-download/native UI acceptance remains pending.",
+      "hosted_ci": "https://github.com/cayleb-james2008/dotz/actions/runs/38416589014"
+    },
+    "asmodeus": {
+      "source_commit": "6899a09d236c3c6f4c380d35c035b0897ba5f812",
+      "workspace_tests": 1107,
+      "test_binaries": 83,
+      "transport_tests": 20,
+      "scope": "Private research and paper replay. No live broker/model route or real-money execution used.",
+      "live_money_trading": false
+    }
+  }
 }

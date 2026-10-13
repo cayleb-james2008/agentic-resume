@@ -18,39 +18,55 @@ Direct AI-assisted implementation, debugging, testing and review of local tools,
 
 ## Selected Projects
 
-### Industry AI Suite - Source-Grounded Review Workflows
+### Ergon - Personalized Employee Assistant & Remote Support
+
+OpenClaw, Node.js, C#, Windows, SQLite
+
+[Ergon case study](https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html)
+
+- Built a Windows employee-assistant installer with Outis taskbar management, reviewed onboarding and a Linux support service. Preserves employee data across upgrades.
+
+- Implemented device-scoped support, durable repair tracking, approved phone workflows and shared AI budgets, with Haiku defaults and bounded expert consultation.
+
+### Industry AI Suite - Source-Grounded Review Tools
 
 Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript
 
-[github.com/cayleb-james2008/industry-ai-suite](https://github.com/cayleb-james2008/industry-ai-suite) | [Merged PR #1](https://github.com/cayleb-james2008/industry-ai-suite/pull/1) | [September 26 evidence pack](https://github.com/cayleb-james2008/industry-ai-suite/tree/main/evidence/ai-witness-20260926) | [Recorded workflow lab](https://cayleb-james2008.github.io/agentic-resume/lab/)
+[github.com/cayleb-james2008/industry-ai-suite](https://github.com/cayleb-james2008/industry-ai-suite) | [Review history implementation](https://github.com/cayleb-james2008/industry-ai-suite/pull/6)
 
-- Built 10 bounded local review workflows with public or permitted inputs, including Treasury-row reconciliation, cited research checks, CISA vulnerability triage and public-policy review. Retained dated source receipts and documented human next steps.
+- Built ten local review tools for finance, research, security and operations, with source receipts and explicit human review. Added durable history, review decisions, export and deletion.
 
-- Local post-merge suite on public main: 370 tests and 178 subtests passed. Recorded examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED.
-
-- September 26 witness record: 6 local-model exchanges; 5 cited outputs passed citation-ID checks and narrow source review. Retained a privacy-filter/citation failure and its documented corrected retry.
-
-### Sophos - Windows Coding-Agent Desktop Integration
-
-TypeScript, React, Tauri, Rust, Node.js
-
-[github.com/cayleb-james2008/sophos](https://github.com/cayleb-james2008/sophos) | [Open draft PR #10](https://github.com/cayleb-james2008/sophos/pull/10) | [PR #10 push CI](https://github.com/cayleb-james2008/sophos/actions/runs/37299547468) | [PR #10 pull-request CI](https://github.com/cayleb-james2008/sophos/actions/runs/37299551668) | [Open draft PR #9 (baseline)](https://github.com/cayleb-james2008/sophos/pull/9) | [PR #9 runtime/MSI baseline](https://github.com/cayleb-james2008/sophos/actions/runs/37265383040/job/111620998024)
-
-- Integrated Windows/Tauri and React/TypeScript views for Prime Intellect’s open-source Prime Agent. Prime Intellect supplies the upstream runtime, daemon and bridge.
-
-- Verified inbox read state and theme/profile persistence after restart in native Windows UI using demo IPC; live provider inference was not verified. Draft PR #10: 8 suites, 57 case results without skip markers and 2 skipped interaction branches.
-
-- Separate draft PR #9 baseline: 1,122 frontend tests and 47/47 Windows named-pipe checks passed; Windows x64 native-module loading and guarded MSI packaging verified. Neither draft establishes a release.
+- Integrated optional loopback model drafting from minimized findings, with exact citation checks and explicit failure handling.
 
 ### dotz - Multi-Agent Coding Dashboard
 
 Rust, axum, Tauri, JavaScript, SQLite
 
-[github.com/cayleb-james2008/dotz](https://github.com/cayleb-james2008/dotz) | [Open draft PR #218](https://github.com/cayleb-james2008/dotz/pull/218)
+[github.com/cayleb-james2008/dotz](https://github.com/cayleb-james2008/dotz)
 
-- Integrated a local-first dashboard with a Rust/axum API, parallel coding-agent workflows, an inspectable graph, local memory and REST/WebSocket endpoints.
+- Developed a Rust and Tauri agent desktop with model selection, supervised tools and platform-specific process cleanup.
 
-- Isolated local Linux dotz-core: 824/824 passed; monitor-unit and platform-regression checks: 5/5 each. Draft PR #218; hosted Ubuntu core CI failed. Whole-app acceptance, merge and release were not established.
+- Made local model failures explicit and added safe cleanup retries. Core tests, lint and dependency checks pass on Windows, macOS and Linux.
+
+### Sophos - Coding-Agent Desktop
+
+React, TypeScript, Tauri, JSON-RPC
+
+[github.com/cayleb-james2008/sophos](https://github.com/cayleb-james2008/sophos)
+
+- Connected employee-selected agent profiles to real daemon sessions and local model catalogs, with durable session transcripts and restart recovery.
+
+- Reconciled parallel source histories while preserving lifecycle, security and build controls; verified the application and daemon with regression tests.
+
+### Asmodeus - Research & Paper Replay
+
+Rust, Historical Data, Local LLMs
+
+[Asmodeus case study](https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html)
+
+- Built a research and paper replay system with verified historical data, chronological evaluation, persisted cursors, fees and duplicate-fill prevention.
+
+- Added a keyless loopback model route with redirect and proxy guards, chronological train/validation/test slices and reviewable refutation records.
 
 ## Skills
 
@@ -76,4 +92,4 @@ Portland High School | Portland, Connecticut | 2022–2026 · Graduated
 
 Coursework: Cybersecurity; AP Computer Science
 
-Project evidence and PR states: October 5, 2026 snapshot; not rechecked for this revision. Work history and education are self-reported.
+Selected engineering projects · Updated October 13, 2026.

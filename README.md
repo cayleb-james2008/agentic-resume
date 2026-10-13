@@ -8,10 +8,10 @@ The role Cayleb is going for is Forward Thinking Engineer: he shadows people for
 
 - `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, Cayleb as a Pixar-style 3D character, and his glass-droplet AI agent), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
 - `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
-- `projects/*.html` and `lab/`: the project write-ups (Industry AI Suite, its ten workflows, dotz, Sophos) and the recorded workflow lab. `scripts/build-subpages.py` gives them the homepage's masthead, footer and look (`site/css/subpage.css`, `lab/lab.css`); their content, evidence and the lab's app and receipts are unchanged.
+- `projects/*.html` and `lab/`: the project write-ups (the five featured projects and ten suite workflows) and the recorded workflow lab. `scripts/build-subpages.py` gives them the homepage's masthead, footer and look (`site/css/subpage.css`, `lab/lab.css`); the lab's app and historical receipts are preserved.
 - `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source and artifact hashes. It is not a user approval or an ATS score.
 
-Project evidence and PR statuses are an October 5, 2026 snapshot. Work history and education are self-reported. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. The Industry AI Suite workflows are always called recorded demos, never "working" workflows. No production customer outcome, onboarding delivery or ROI is claimed. EvoHedge and Maki are private and still in development.
+Engineering evidence and project copy are updated from the October 13 implementation work. The current featured projects are Ergon, dotz, Sophos, Industry AI Suite and Asmodeus. Work history and education remain self-reported. The hosted lab retains its dated recorded receipts; project pages separate source checks from native installation, live providers and customer outcomes. Private projects publish sanitized case studies only.
 
 ## Build and validate
 

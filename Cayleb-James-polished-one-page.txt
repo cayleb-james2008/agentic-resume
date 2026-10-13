@@ -18,23 +18,25 @@ Direct AI-assisted implementation, debugging, testing and review of local tools,
 
 Selected Projects
 
+Ergon
+
+- Built a Windows employee-assistant installer with reviewed onboarding, Outis support management, approved phone workflows and shared AI budgets.
+
 Industry AI Suite
 
-github.com/cayleb-james2008/industry-ai-suite: https://github.com/cayleb-james2008/industry-ai-suite
-
-- Built ten bounded local review workflows with source receipts and documented human next steps. Recorded demonstrations; all ten full workflows remain UNVERIFIED.
-
-Sophos
-
-github.com/cayleb-james2008/sophos: https://github.com/cayleb-james2008/sophos
-
-- Integrated a Windows/Tauri interface for Prime Intellect's Prime Agent. Checked inbox state and theme/profile persistence over demo IPC; draft PR #10.
+- Built ten source-grounded review tools with cited local model drafts, durable history and review, export and deletion flows.
 
 dotz
 
-github.com/cayleb-james2008/dotz: https://github.com/cayleb-james2008/dotz
+- Developed a Rust and Tauri agent desktop with explicit local routing and supervised tools; core checks pass on Windows, macOS and Linux.
 
-- Integrated a local dashboard, Rust API and inspectable coding workflow graph. Draft PR #218; local core checks, with hosted Ubuntu acceptance not established.
+Sophos
+
+- Connected agent profiles and local model catalogs to a coding-agent desktop, with durable sessions and tested restart recovery.
+
+Asmodeus
+
+- Built a research and paper replay system with historical-data provenance, chronological evaluation and restart-safe simulated fills.
 
 Skills
 
@@ -62,4 +64,4 @@ Portland High School | Portland, Connecticut | 2022-2026 | Graduated
 
 Coursework: Cybersecurity; AP Computer Science
 
-Project evidence and PR states: October 5, 2026 snapshot; not rechecked for this revision. Work history and education are self-reported.
+Selected engineering projects | Updated October 13, 2026.

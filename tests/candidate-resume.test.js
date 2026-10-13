@@ -13,9 +13,25 @@ test('candidate copy preserves factual scope, attribution and dated boundaries',
  assert.match(source.evidence_notes.ergon.windows_acceptance,/User testing is underway/);
  assert.match(source.evidence_notes.asmodeus.scope,/No live broker, real-money execution/);
  assert.equal(source.evidence_notes.sophos.ui_tests,1224);
+ assert.equal(source.evidence_notes.sophos.source_sha,'3e3e52c8693f415be2aa6695feff112d710ca344');
+ assert.match(source.evidence_notes.sophos.status,/latest completed automated UI attempt failed.*retry is running.*PR #20 remains open/i);
+ assert.equal(source.evidence_notes.ergon.next_build.version,'1.5.0 source candidate');
+ assert.equal(source.evidence_notes.ergon.next_build.source_commit,'099ce52bf1e08aa17ce23425c9c79d269faaafc8');
+ assert.equal(source.evidence_notes.ergon.next_build.installer.filename,'OpenClaw-Baseline-Setup-1.5.0.exe');
+ assert.equal(source.evidence_notes.ergon.next_build.installer.sha256,'726ea20ee7506216e63654936803078e660966683ad4255f5fc0ccae323d5f13');
+ assert.equal(source.evidence_notes.ergon.next_build.source_archive.sha256,'d1fefcfecdf5d374f5a0feac8fe7bc7df00ffcad7ccd74d52f3d53cb26bae090');
+ assert.equal(source.evidence_notes.ergon.next_build.protected_feed.signature,'Ed25519 verified');
+ assert.equal(source.evidence_notes.ergon.next_build.protected_feed.authenticated_full_https_payload_readback.status,200);
+ assert.equal(source.evidence_notes.ergon.next_build.protected_feed.authenticated_full_https_payload_readback.sha256,source.evidence_notes.ergon.next_build.installer.sha256);
+ assert.equal(source.evidence_notes.ergon.next_build.protected_feed.unauthenticated_access,401);
+ assert.equal(source.evidence_notes.ergon.next_build.protected_feed.non_device_roles,403);
+ assert.equal(source.evidence_notes.ergon.next_build.verification.node_tests_passed,539);
+ assert.match(source.evidence_notes.ergon.next_build.limits,/memory endpoint returns 503 pending model choice/);
+ assert.match(source.evidence_notes.ergon.next_build.limits,/Windows installation and runtime acceptance remain unverified/);
  assert.equal(source.evidence_notes.dotz.merge_commit,'4df6871ff45250e52b6a2276d37b5f9303743bf0');
- assert.match(source.historical_evidence_notes.context,/superseded by evidence_notes/);
- assert.doesNotMatch(source.status,/unpublished/i);
+ assert.equal(source.historical_evidence_notes.remote_state_snapshot.captured_at,'2026-10-05T14:31:17-04:00');
+ assert.equal(source.historical_evidence_notes.dotz.state,'OPEN_DRAFT');
+ assert.match(source.status,/Unpublished polish candidate; approved PDF artifacts remain unchanged/);
  assert.match(source.snapshot_note,/October 13, 2026/);
  assert.doesNotMatch(source.projects.map(p=>p.name).join(' '),/Maki|EvoHedge/);
  assert.equal(source.additional_experience.length,4);
@@ -27,7 +43,7 @@ test('the homepage reaches the résumé page and both candidate PDFs',()=>{
 });
 test('headline is the target role, Forward Thinking Engineer',()=>{
  assert.equal(source.headline,'Forward Thinking Engineer');
- assert.equal(source.summary,'Forward Thinking Engineer. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.');
+ assert.equal(source.summary,'Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent plus tools for any digital task they want automated, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.');
  assert.doesNotMatch(source.summary,/clients?|customers?|deployed/i);
 });
 test('the résumé page is a real page carrying the candidate fragment, and its links resolve',()=>{
@@ -39,4 +55,19 @@ test('the résumé page is a real page carrying the candidate fragment, and its 
  const local=[...page.matchAll(/(?:href|src)="([^"#:?]+)"/g)].map(m=>m[1]).filter(h=>h!=='./');
  assert.ok(local.length>3);
  for(const href of local)assert.ok(existsSync(new URL('../'+href,import.meta.url)),href);
+});
+test('plain words: résumé lines are short and free of developer jargon, facts kept',()=>{
+ const count=s=>s.trim().split(/\s+/).length;
+ const JARGON=/\b(loopback|daemon|JSON-RPC|axum|Clippy|SHA|provenance|deterministic|Gateway|manifest|leases?|REST|IPC|catalogs?|chronological|source-grounded|replay|routing)\b/i;
+ assert.ok(count(source.summary)<=36,`summary ${count(source.summary)} words`);
+ assert.ok(count(source.experience.intro)<=18,'experience intro');
+ for(const t of [source.summary,source.experience.intro])assert.doesNotMatch(t,JARGON,t);
+ for(const p of source.projects){
+  for(const b of p.bullets){assert.ok(count(b)<=24,`${p.slug} bullet: ${count(b)} words: ${b}`);assert.doesNotMatch(b,JARGON,b);}
+  assert.ok(count(p.short)<=20,`${p.slug} short: ${count(p.short)} words`);
+  assert.doesNotMatch(p.short,JARGON,p.short);
+  assert.doesNotMatch(p.name,JARGON,p.name);
+ }
+ // No small meta line under the résumé: the page footer and the PDFs end with the content.
+ assert.doesNotMatch(read('resume/candidate-fragment.html'),/Updated October 13, 2026/);
 });

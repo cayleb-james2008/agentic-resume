@@ -51,7 +51,6 @@ def render(content: dict) -> str:
         f'<h2 class="guide-title" id="guide-title">{text(g["title"])}</h2>'
         f'<button type="button" class="guide-close" data-guide-close aria-label="{attr(g["close"])}">'
         '<span aria-hidden="true"></span><span aria-hidden="true"></span></button></div>'
-        f'<p class="guide-intro">{text(g["intro"])}</p>'
         f'<ul class="guide-qs">{questions}</ul>'
         f'<button type="button" class="guide-quiet" data-guide-quiet aria-pressed="false">{text(g["quiet"])}</button>'
         "</div>"

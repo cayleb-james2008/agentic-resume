@@ -36,7 +36,7 @@ def records(data, short=False):
     rows += [('body', f"{job['organization']} | {job['dates']}") for job in data['additional_experience']]
     school = data['education']
     rows += [('h2', 'Education'), ('body', f"{school['school']} | {school['location']} | {school['status']}"),
-             ('body', f"Coursework: {school['coursework']}"), ('body', data['snapshot_note'])]
+             ('body', f"Coursework: {school['coursework']}")]
     return rows
 
 
@@ -94,7 +94,7 @@ def short_fragment(data):
     projects = '<div class="resume-selected">' + ''.join(f'<h3><a href="{p["links"][0]["url"]}" data-goto-project="{p["slug"]}">{p["short_name"]} ↗</a></h3><p>{html.escape(p["short"])}</p>' for p in data['projects']) + '</div>'
     replace(r'<div class="resume-selected">.*?</div>', projects)
     replace(r'<section><h2>Skills</h2><p>.*?</p></section>', '<section><h2>Skills</h2><p>' + '<br>'.join(html.escape(value) for value in data['short_skills']) + '</p></section>')
-    actions = '<footer class="resume-actions"><a class="button primary" href="Cayleb-James-polished-one-page.pdf" download>One-page résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-resume.pdf" download>Detailed résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-one-page.txt" download>One-page text ↓</a><a class="quiet" href="Cayleb-James-polished-resume.txt" download>Detailed text ↓</a><a class="quiet" href="mailto:' + data['email'] + '">Let’s talk ↗</a><p>' + html.escape(data['snapshot_note']) + '</p></footer>'
+    actions = '<footer class="resume-actions"><a class="button primary" href="Cayleb-James-polished-one-page.pdf" download>One-page résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-resume.pdf" download>Detailed résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-one-page.txt" download>One-page text ↓</a><a class="quiet" href="Cayleb-James-polished-resume.txt" download>Detailed text ↓</a><a class="quiet" href="mailto:' + data['email'] + '">Let’s talk ↗</a></footer>'
     replace(r'<footer class="resume-actions">.*?</footer>', actions)
     return template
 

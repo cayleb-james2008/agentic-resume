@@ -19,9 +19,9 @@ test('one h1 holding the full name for assistive technology', () => {
   assert.ok(hero.includes('<h1'), 'the h1 lives in the hero section');
 });
 
-test('five sections, the other four each with one h2', () => {
+test('six sections (value joined 2026-10-13), the other five each with one h2', () => {
   const sections = sectionBodies();
-  assert.equal(sections.length, 5);
+  assert.equal(sections.length, 6);
   for (const section of sections.filter((s) => !s.includes('data-hero'))) {
     assert.equal((section.match(/<h2\b/g) || []).length, 1);
   }

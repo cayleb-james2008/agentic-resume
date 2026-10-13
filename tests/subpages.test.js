@@ -72,3 +72,21 @@ test('on a phone the sub-page nav keeps to one row', () => {
   const phone = css.slice(css.indexOf('@media (max-width: 639px)'));
   assert.match(phone, /\.sub-masthead nav ul\s*\{[^}]*flex-wrap:\s*nowrap/);
 });
+
+// Plain words (2026-10-13): the five main project pages read without developer jargon; the ten
+// workflow pages open with a plain line. Evidence (dates, IDs, file fingerprints) stays.
+const JARGON = /\b(loopback|daemon|Clippy|provenance|deterministic|leases?|manifest|IPC|catalogs?|runtime|binaries|refutation|cursors|PR #\d+|CI)\b/i;
+const mainText = (name) => read(`projects/${name}`).match(/<main id="main">([\s\S]*?)<\/main>/)[1].replace(/<[^>]+>/g, ' ');
+test('the five main project pages are in plain words', () => {
+  for (const name of ['ergon.html', 'industry-ai-suite.html', 'dotz.html', 'sophos.html', 'asmodeus.html']) {
+    const hit = mainText(name).match(JARGON);
+    assert.equal(hit, null, `${name}: "${hit?.[0]}"`);
+  }
+});
+test('every project page opens with a plain line', () => {
+  for (const name of projectPages) {
+    const out = read(`projects/${name}`).match(/<p class="case-hero__out">([\s\S]*?)<\/p>/)[1];
+    assert.doesNotMatch(out, /\b(EVM|OPM|deterministic|bounded|slice|metadata|chronology)\b/i, `${name}: ${out}`);
+    assert.doesNotMatch(mainText(name), /\bDeterministic\b/, `${name} says "deterministic"`);
+  }
+});

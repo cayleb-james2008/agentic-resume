@@ -10,9 +10,12 @@ test('suite examples retain synthetic and unverified scope without production cl
  assert.match(home,/recorded demos/i);
  assert.match(read('projects/industry-ai-suite.html'),/organization outcomes remain UNVERIFIED/);
  assert.match(read('projects/ergon.html'),/Windows installation, enrollment, actual screen control/);
+ assert.match(read('projects/ergon.html'),/installer is built and the protected update feed is live/);
+ assert.match(read('projects/ergon.html'),/verified the update signature and downloaded the full installer over HTTPS/);
+ assert.match(read('projects/ergon.html'),/Linux Hindsight isn't provisioned while model selection is pending/);
  assert.match(read('projects/asmodeus.html'),/paper simulation/);
- assert.match(read('projects/dotz.html'),/reviewed implementation is merged/);
- assert.match(read('projects/sophos.html'),/Advanced interface previews are kept separate from the native working controls/);
+ assert.match(read('projects/dotz.html'),/the merged implementation/);
+ assert.match(read('projects/sophos.html'),/Advanced feature panels are previews; those functions are not part of the verified native controls/);
  assert.doesNotMatch(read('projects/sophos.html'),/application audit is clear|implementation PR #20/i);
  assert.doesNotMatch(read('projects/sophos.html'),/\bCUA\b|checkpoint|distilled-skills|thought-tree/i);
  assert.doesNotMatch(read('projects/dotz.html'),/current PR #222/i);

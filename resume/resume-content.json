@@ -15,15 +15,15 @@
       "url": "https://cayleb-james2008.github.io/agentic-resume/"
     }
   },
-  "summary": "Forward Thinking Engineer. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.",
+  "summary": "Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent plus tools for any digital task they want automated, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.",
   "experience": {
     "title": "Independent Project Development - AI-Assisted Software & Evaluation",
     "dates": "Oct 2025–present",
-    "intro": "Direct AI-assisted implementation, debugging, testing and review of local tools, API integrations and documented human next steps."
+    "intro": "Builds, tests and fixes software with AI help: local tools, app connections, clear next steps for people."
   },
   "projects": [
     {
-      "name": "Ergon - Windows Employee Assistant & Remote Support",
+      "name": "Ergon - Personal Work Assistants & Remote Support",
       "stack": "OpenClaw, Node.js, C#, Windows, SQLite",
       "links": [
         {
@@ -32,33 +32,37 @@
         }
       ],
       "bullets": [
-        "Built and delivered a Windows employee-assistant installer with native Outis taskbar management and a Linux support service; the setup preserves employee data across upgrades.",
-        "Implemented ticket-driven REST connector builds with exact read/write grants and device-scoped screen-control tools; activation and rollback require a local Gateway check."
+        "Built a Windows installer for employee AI assistants, with a taskbar app for setup and support. Employee data stays safe through updates.",
+        "Built remote-repair tools and automatic connections to the apps a team already uses, each with approval and undo steps."
       ],
       "slug": "ergon",
       "short_name": "Ergon",
-      "short": "Built and delivered a Windows assistant installer with native Outis management, connector builds and device-scoped screen-support tools."
+      "short": "Built a Windows installer for employee AI assistants, remote-repair tools and automatic connections to everyday apps."
     },
     {
-      "name": "Industry AI Suite - Source-Grounded Review Tools",
-      "stack": "Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript",
+      "name": "Industry AI Suite - Source-Checked Review Tools",
+      "stack": "Python, local AI models, web APIs",
       "links": [
         {
-          "label": "Public source repository",
+          "label": "github.com/cayleb-james2008/industry-ai-suite",
           "url": "https://github.com/cayleb-james2008/industry-ai-suite"
+        },
+        {
+          "label": "Review history implementation",
+          "url": "https://github.com/cayleb-james2008/industry-ai-suite/pull/6"
         }
       ],
       "bullets": [
-        "Built ten local review tools for finance, research, security and operations, with source receipts, human review, durable history, export and deletion.",
-        "Added optional loopback model drafts from minimized findings, with citation checks and explicit failure handling."
+        "Built 10 tools that review finance, research, security and operations data. Every finding shows its source; a person makes the call.",
+        "Added optional AI-written drafts that must cite their sources, plus saved history, review, export and delete."
       ],
       "slug": "suite",
       "short_name": "Industry AI Suite",
-      "short": "Built ten source-grounded review tools with human review, durable history, export and deletion; the current suite passes 382 tests."
+      "short": "Built 10 review tools where every finding shows its source and a person decides; optional AI drafts with citations."
     },
     {
-      "name": "dotz - Multi-Agent Coding Dashboard",
-      "stack": "Rust, axum, Tauri, JavaScript, SQLite",
+      "name": "dotz - AI Coding Agent Dashboard",
+      "stack": "Rust, Tauri, JavaScript, SQLite",
       "links": [
         {
           "label": "github.com/cayleb-james2008/dotz",
@@ -66,16 +70,16 @@
         }
       ],
       "bullets": [
-        "Built a Rust and Tauri coding-agent desktop with supervised tools, explicit provider routing and platform-specific process cleanup.",
-        "Made local-model failures clear and added safe cleanup retries. Cross-platform CI passed on Linux, Windows and macOS."
+        "Built a desktop app that runs and supervises AI coding agents, with model choice and safe cleanup.",
+        "Made failures clear instead of silent. Core tests pass on Windows, macOS and Linux."
       ],
       "slug": "dotz",
       "short_name": "dotz",
-      "short": "Built a Rust and Tauri coding-agent desktop with supervised tools; Linux, Windows and macOS CI passed."
+      "short": "Built a desktop app that runs and supervises AI coding agents; core tests pass on Windows, macOS and Linux."
     },
     {
-      "name": "Sophos - Coding-Agent Desktop",
-      "stack": "React, TypeScript, Tauri, JSON-RPC",
+      "name": "Sophos - Coding-Agent Desktop App",
+      "stack": "React, TypeScript, Tauri",
       "links": [
         {
           "label": "github.com/cayleb-james2008/sophos",
@@ -83,16 +87,16 @@
         }
       ],
       "bullets": [
-        "Connected selected agent profiles to real daemon sessions and local model catalogs, with durable transcripts and restart recovery.",
-        "Added daemon-backed context summarization, preserved provider configuration and clear runtime errors, with automated session and recovery checks."
+        "Connected saved agent profiles and local AI models to a coding-agent desktop app.",
+        "Sessions and transcripts survive restarts. Context summaries use the agent service; provider failures keep saved settings and show a clear error."
       ],
       "slug": "sophos",
       "short_name": "Sophos",
-      "short": "Connected agent profiles and local model catalogs to real daemon sessions, with durable transcripts and restart recovery."
+      "short": "Connected saved agent profiles and local AI models to a coding-agent app, with sessions that survive restarts."
     },
     {
-      "name": "Asmodeus - Research & Paper Replay",
-      "stack": "Rust, Historical Data, Local LLMs",
+      "name": "Asmodeus - Trading Research on Past Data",
+      "stack": "Rust, historical market data, local AI models",
       "links": [
         {
           "label": "Asmodeus case study",
@@ -100,12 +104,12 @@
         }
       ],
       "bullets": [
-        "Built a research and paper-replay system with verified historical data, chronological evaluation, persisted cursors, fees and duplicate-fill prevention.",
-        "Added a guarded keyless local-model route, chronological train/validation/test slices and reviewable refutation records. The merged implementation passed Windows CI."
+        "Built a research tool that tests trading ideas on real past market data, in time order, with no real money.",
+        "Added safeguards so tests never peek at future data, plus records of rejected ideas for review."
       ],
       "slug": "asmodeus",
       "short_name": "Asmodeus",
-      "short": "Built a research and paper-replay system with historical-data provenance, chronological evaluation and restart-safe simulated fills."
+      "short": "Built a research tool that tests trading ideas on real past market data, in time order, with no real money."
     }
   ],
   "skills": [
@@ -114,12 +118,12 @@
       "Python, Rust, TypeScript, JavaScript, HTML/CSS"
     ],
     [
-      "Frameworks & data",
-      "React, Tauri, axum, REST, WebSockets, JSON-RPC, SQLite"
+      "Apps & data",
+      "React, Tauri, SQLite, web APIs"
     ],
     [
-      "AI & verification",
-      "Coding-agent orchestration, local LLM/API integration, source-grounded review, regression testing, pytest, Vitest, Cargo, Git/GitHub, Linux"
+      "AI & testing",
+      "AI agents and automation, local AI models, source-checked review, automated testing, Git/GitHub, Linux"
     ]
   ],
   "additional_experience": [
@@ -146,13 +150,12 @@
     "status": "2022–2026 · Graduated",
     "coursework": "Cybersecurity; AP Computer Science"
   },
-  "status": "Résumé copy and project evidence refreshed October 13, 2026; deployment status is verified separately.",
+  "status": "Unpublished polish candidate; approved PDF artifacts remain unchanged.",
   "snapshot_note": "Selected engineering projects · Updated October 13, 2026.",
   "short_skills": [
-    "Python · Rust · TypeScript · JavaScript",
-    "React · Tauri · REST · SQLite",
-    "AI/API integration · Source-grounded review",
-    "Git · Linux · pytest · Vitest · Cargo"
+    "Python · TypeScript · JavaScript · Rust",
+    "AI agents · automation · desktop and web apps",
+    "Automated testing · Git · Linux"
   ],
   "historical_evidence_notes": {
     "official_mercor_upload_guidance": {
@@ -169,7 +172,7 @@
       "path": "/home/cayleb/Work/session-artifacts/mercor-finish-20261005/resume-final-review/evidence/remote-state.json",
       "captured_at": "2026-10-05T14:31:17-04:00",
       "method": "GitHub public REST API, unauthenticated read-only GET",
-      "notes": "Historical read-only recheck captured October 5, 2026. It recorded then-current PR heads and checks; those states are superseded by the October 13 evidence_notes below."
+      "notes": "Read-only live recheck confirmed current PR heads/states and check conclusions: Sophos #10 and #9 are unmerged drafts with passing current checks, #11 is an unmerged draft with failed Windows test checks and 27/48 runtime at exact head, dotz #218 remains draft with failed Ubuntu core CI, suite #1 is merged, and suite #2 remains a draft candidate."
     },
     "dotz": {
       "public_pull_request": "https://github.com/cayleb-james2008/dotz/pull/218",
@@ -323,60 +326,96 @@
     },
     "personal_information": "Contact email, Connecticut location, and remote-only preference match the prior source résumé/profile materials. Education and coursework match the prior résumé extract. Employer names and date ranges match the prior résumé's self-report and are not employer-verified. The current full name follows the user-provided profile context (Cayleb Alvarez-James); the older source résumé header used the shorter form Cayleb James, so confirm preferred display/legal name before submission if the profile has since changed.",
     "nonclaims": [
-      "At the October 5 snapshot, no paid engineering role, employer relationship, sole-authorship, revenue, adoption, production deployment, degree, model-training, or live provider-inference achievement was asserted.",
-      "The snapshot records the project and PR states as they stood on October 5; current project evidence is maintained in evidence_notes."
-    ],
-    "context": "Historical evidence below records the October 5, 2026 snapshot. Its PR states and project statuses are superseded by evidence_notes, updated October 13, 2026."
+      "No paid engineering role or employer relationship is asserted",
+      "No sole-authorship, revenue, adoption, production deployment, degree, model-training, whole-app, release-readiness, or live provider-inference achievement is asserted; Suite PR #1 is explicitly labeled merged, while Sophos #9/#10/#11 and dotz #218 remain open drafts"
+    ]
   },
   "evidence_notes": {
     "updated_at": "2026-10-13",
     "industry_ai_suite": {
-      "source_commit": "06f07229afe1f8aa89694e0d8b10ba47e02455de",
+      "source_sha": "06f07229afe1f8aa89694e0d8b10ba47e02455de",
       "merge_commit": "aef17e0f462594f9185d47696a56652d943e4056",
       "python_tests": 382,
       "subtests": 178,
       "browser_navigation_tests": 19,
+      "pull_request": "https://github.com/cayleb-james2008/industry-ai-suite/pull/6",
       "actual_model_inference": "not exercised: configured loopback endpoint was unavailable during the current run",
       "scope": "Ten bounded local review tools with source receipts, optional citation-checked loopback drafting, and human review; not completed enterprise workflows or provider/model accuracy.",
       "documentation_merge_commit": "f4a93ddb93a4e3ec7068383ec0875cbc127f855c"
     },
     "ergon": {
+      "version": "1.4.9 delivered pilot",
       "source_commit": "71d7b1bb69e266ceaa50d3aa112910e88454afbf",
       "installer": "OpenClaw-Baseline-Setup-1.4.9.exe, delivered on the pilot USB and hash-verified",
       "linux_services": "Protected Outis and MeshCentral public HTTPS endpoints returned 200; unauthenticated ticket access returned 401.",
       "windows_acceptance": "User testing is underway; actual Windows installation, enrollment, screen control, and reboot acceptance are not yet verified.",
       "hosted_work_repair": "Not provisioned; no automatic ChatGPT Work event worker or image-tool integration is available.",
       "live_model_and_phone": "No live Haiku/Opus calls or phone test were made.",
-      "scope": "Implemented installer, native Outis taskbar app, ticket-driven connector builder, device-scoped repair and screen tools; hosted model/provider/phone setup and real Windows acceptance remain separate.",
-      "documentation_commit": "5d8ee7c"
+      "scope": "Implemented 1.4.9 pilot: native Outis taskbar app, ticket-driven connector builder, device-scoped repair and screen tools; hosted model/provider/phone setup and real Windows acceptance remain separate.",
+      "documentation_commit": "5d8ee7c",
+      "next_build": {
+        "version": "1.5.0 source candidate",
+        "source_commit": "099ce52bf1e08aa17ce23425c9c79d269faaafc8",
+        "source_status": "Installer built from the reviewed source; protected stable-feed generation 1 is live and its signed manifest and full HTTPS payload readback were verified. Windows runtime acceptance remains pending.",
+        "implemented": "Defaults to Hindsight for native memory and includes signed managed updates that apply on close.",
+        "verification": {
+          "node_tests_passed": 539,
+          "node_tests_skipped": 2,
+          "python_tests_passed": 80,
+          "publisher_tests_passed": 3,
+          "net_framework_48_helpers_compiled": 8
+        },
+        "limits": "Windows installation and runtime acceptance remain unverified. Linux Hindsight is not provisioned, so live memory retrieval is untested and the protected memory endpoint returns 503 pending model choice. Live provider calls, phone tests and an automatic ChatGPT Work event worker remain unverified.",
+        "installer": {
+          "filename": "OpenClaw-Baseline-Setup-1.5.0.exe",
+          "bytes": 323920383,
+          "sha256": "726ea20ee7506216e63654936803078e660966683ad4255f5fc0ccae323d5f13"
+        },
+        "source_archive": {
+          "filename": "ergon-1.5.0-connectors-source.zip",
+          "bytes": 2149703,
+          "sha256": "d1fefcfecdf5d374f5a0feac8fe7bc7df00ffcad7ccd74d52f3d53cb26bae090"
+        },
+        "protected_feed": {
+          "channel": "stable",
+          "generation": 1,
+          "platform": "windows-x64",
+          "verified_at": "2026-10-13T22:40:15.054Z",
+          "manifest_expires_at": "2026-10-27T22:33:57.709Z",
+          "signature": "Ed25519 verified",
+          "authenticated_full_https_payload_readback": {
+            "status": 200,
+            "bytes": 323920383,
+            "sha256": "726ea20ee7506216e63654936803078e660966683ad4255f5fc0ccae323d5f13"
+          },
+          "unauthenticated_access": 401,
+          "non_device_roles": 403,
+          "mesh_dashboard": 200,
+          "mesh_service_changed": false
+        }
+      }
     },
     "sophos": {
-      "source_sha": "14b4d7dd6ee5ad7c872e197db695d7c66f8ad731",
-      "pull_request": "https://github.com/cayleb-james2008/sophos/pull/20",
-      "status": "Final reviewed source pushed; required Windows CI running before merge.",
+      "source_sha": "3e3e52c8693f415be2aa6695feff112d710ca344",
       "ui_tests": 1224,
       "node_tests": 82,
-      "verified_core": "Selected profiles create real daemon sessions; local model catalog registration, durable transcripts and restart recovery are verified. Context summarization calls the daemon compactor; credential and settings persistence have failure and concurrency coverage.",
-      "review_boundary": "Unsupported advanced APIs explicitly reject requests and their panels are preview-only. Native controls describe actual runtime state and operations.",
-      "native_windows_acceptance": "Clean installation of the source-head MSI is not verified.",
-      "live_model_inference": "Not tested; Windows test routes used local mocks.",
-      "dependency_findings": "CI development dependencies report five high advisories; pinned production runtime has one high and one moderate advisory. The ZIP helper is disabled.",
       "bridge_boundary_tests": 9,
       "lease_tests": 8,
-      "historical_windows_checks": {
-        "source_sha": "493728d7f5ae1283d69d89e80a4de39b1968e007",
-        "native_containment_checks": "7/7 passed",
-        "runtime_checks": "143 passed; 14 skipped",
-        "staged_bundle_checks": "59/59 passed",
-        "lifecycle_checks": "53/53 passed",
-        "updater_checks": "35/35 passed"
-      },
+      "settings_assertions": 12,
+      "verifier_regressions": 14,
+      "windows_lifecycle_checks": "56/56 passed",
+      "status": "Windows and lifecycle checks passed; the latest completed automated UI attempt failed and a retry is running. PR #20 remains open pending final CI and merge.",
       "ci_runs": [
-        38464919183,
-        38464927439
-      ]
+        38471697435
+      ],
+      "verified_core": "Saved profiles start real daemon sessions; local model catalogs, durable transcripts and restart recovery work. Context summarization calls the daemon compactor; provider settings survive failures and runtime errors are clear.",
+      "review_boundary": "Unsupported advanced APIs reject requests; their panels are preview-only.",
+      "native_windows_acceptance": "Clean installation of the source-head MSI is not verified; live model inference is untested.",
+      "production_runtime_audit": "Five high development advisories; pinned production runtime has one high and one moderate advisory. ZIP helper disabled.",
+      "pull_request": "https://github.com/cayleb-james2008/sophos/pull/20"
     },
     "dotz": {
+      "public_pull_request": "https://github.com/cayleb-james2008/dotz/pull/222",
       "source_commit": "de040bda77420ccf6a79b6eab825db514cc78da3",
       "merge_commit": "4df6871ff45250e52b6a2276d37b5f9303743bf0",
       "cross_platform_core_tests": {

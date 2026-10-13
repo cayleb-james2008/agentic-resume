@@ -2,11 +2,11 @@
 
 Canonical website: https://cayleb-james2008.github.io/agentic-resume/
 
-The role Cayleb is going for is Forward Thinking Engineer: he shadows people for a couple of days to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, and then does the same across the whole company.
+The role Cayleb is going for is Forward Thinking Engineer: he shadows people for a couple of days to learn how they actually work, builds each of them a personal AI agent that fits their day, plus custom tools for anything digital the company wants automated, teaches them to use it well, and then does the same across the whole company.
 
 ## What's here
 
-- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, Cayleb as a Pixar-style 3D character, and his glass-droplet AI agent), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
+- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, Cayleb as a Pixar-style 3D character, and his glass-droplet AI agent), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects, "Worth it" (the full systems he builds for a moving company, a plaster and pool crew and a shop, against how the work is done today, each with the money lost a month before and after and the yearly saving) and contact. Copy is deliberately short and plain.
 - `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
 - `projects/*.html` and `lab/`: the project write-ups (the five featured projects and ten suite workflows) and the recorded workflow lab. `scripts/build-subpages.py` gives them the homepage's masthead, footer and look (`site/css/subpage.css`, `lab/lab.css`); the lab's app and historical receipts are preserved.
 - `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source, artifact hashes and local build checks; it does not claim independent employment verification or an ATS score.

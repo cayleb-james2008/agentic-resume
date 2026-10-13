@@ -300,6 +300,13 @@
     "proof": "He's worked these jobs. He knows where the time goes.",
     "cardLabel": "What he builds for",
     "todayLabel": "Today",
+    "money": {
+      "label": "Lost each month",
+      "today": "Today",
+      "after": "With it",
+      "saves": "Saves",
+      "year": "a year"
+    },
     "examples": [
       {
         "kind": "A moving company",
@@ -320,7 +327,12 @@
             "now": "Paperwork after every job: hours, invoices, claims."
           }
         ],
-        "value": "More jobs booked. Trucks stay busy. Paid faster."
+        "value": "More jobs booked. Trucks stay busy. Paid faster.",
+        "money": {
+          "today": 5000,
+          "after": 1500,
+          "basis": "Three-truck mover: missed jobs, extra miles, damage claims."
+        }
       },
       {
         "kind": "A plaster and pool crew",
@@ -341,7 +353,12 @@
             "now": "Rain days reshuffled by phone."
           }
         ],
-        "value": "Same-day proposals. No wasted trips. Owners kept in the loop."
+        "value": "Same-day proposals. No wasted trips. Owners kept in the loop.",
+        "money": {
+          "today": 4000,
+          "after": 1000,
+          "basis": "Two-crew outfit: lost bids, wasted material, extra trips, rain days."
+        }
       },
       {
         "kind": "A shop or restaurant",
@@ -362,7 +379,12 @@
             "now": "Phones, orders and reviews juggled at the counter."
           }
         ],
-        "value": "Less waste. Shorter lines. The owner sees every day at a glance."
+        "value": "Less waste. Shorter lines. The owner sees every day at a glance.",
+        "money": {
+          "today": 3000,
+          "after": 1000,
+          "basis": "One location: spoiled stock, rush orders, missed phone orders."
+        }
       }
     ],
     "wired": "Each one is a full system, wired into the phones, calendars, email and books the company already uses.",

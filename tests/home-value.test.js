@@ -56,8 +56,46 @@ test('the pitch never saves money by taking hours, pay or people', () => {
   const all = JSON.stringify(content.value) + section;
   assert.doesNotMatch(all, /headcount|lay ?offs?|replac\w* (staff|workers|people|employees|crew)|fewer (people|staff|employees|workers)|cut\w* (hours|pay|wages|staff|jobs)|(reduce|lower)\w* (payroll|wages|hours)/i);
   assert.match(content.value.intro, /no cuts/i);
-  // No numbers it can't back: the examples carry no figures.
-  for (const e of content.value.examples) assert.doesNotMatch(JSON.stringify(e), /\d/, e.kind);
+});
+
+// Dollars before and after (2026-10-13, third pass). Each card carries a sized example: what the
+// busywork loses a month today, what it loses with his systems, and the yearly saving. The figures
+// are whole numbers in content.json and the yearly saving is worked out at build time, so the
+// arithmetic on the page can't drift. Each card says what business size the figures assume and
+// where the money comes from — never from anyone's hours or pay.
+const usd = (n) => '$' + n.toLocaleString('en-US');
+
+test('each card shows the money lost a month, before and after, and the yearly saving', () => {
+  const v = content.value;
+  assert.match(v.money.label, /^Lost each month$/);
+  assert.equal(v.money.today, v.todayLabel);
+  assert.ok(v.money.after && v.money.saves && v.money.year);
+  const cards = section.match(/<article class="value-example"[\s\S]*?<\/article>/g) || [];
+  assert.equal(cards.length, v.examples.length);
+  v.examples.forEach((e, i) => {
+    const m = e.money;
+    assert.ok(m, `${e.kind}: money`);
+    assert.ok(Number.isInteger(m.today) && Number.isInteger(m.after), `${e.kind}: whole dollars`);
+    assert.ok(m.today > m.after && m.after > 0, `${e.kind}: today ${m.today} > after ${m.after} > 0`);
+    // Keep it believable for a small business.
+    assert.ok(m.today <= 10000, `${e.kind}: ${m.today} a month is too big to believe`);
+    const yearly = (m.today - m.after) * 12;
+    assert.ok(yearly % 1000 === 0 && yearly <= 60000, `${e.kind}: yearly ${yearly}`);
+    assert.ok(words(m.basis) <= 12, `basis: ${m.basis}`);
+    assert.doesNotMatch(m.basis, /\d/, 'basis is words, the money is in the figures');
+    assert.doesNotMatch(m.basis, /\b(pay|payroll|wages?|hours?|overtime|labou?r|staff|salar\w*)\b/i, m.basis);
+    const card = cards[i];
+    const money = card.match(/<div class="value-money">[\s\S]*?<\/div>/)?.[0] ?? '';
+    assert.ok(money, `${e.kind}: .value-money block`);
+    assert.ok(card.indexOf('class="value-rows"') < card.indexOf('class="value-money"'), 'money comes after the systems');
+    assert.ok(money.includes(`${esc(v.money.label)}`), 'label');
+    assert.match(money, new RegExp(`${v.money.today}</span> \\${usd(m.today)}<`), `today ${usd(m.today)}`);
+    assert.match(money, new RegExp(`${v.money.after}</span> \\${usd(m.after)}<`), `after ${usd(m.after)}`);
+    assert.ok(money.includes(`${v.money.saves} ${usd(yearly)} ${v.money.year}`), `saves ${usd(yearly)} ${v.money.year}`);
+    assert.ok(money.includes(esc(m.basis)), m.basis);
+    // The arrow is decoration; a screen reader hears "Today $5,000, With it $1,500".
+    assert.match(money, /<span class="value-money-arrow" aria-hidden="true">→<\/span>/);
+  });
 });
 
 test('the agent has a line for the value section', () => {

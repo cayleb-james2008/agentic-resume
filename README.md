@@ -6,9 +6,9 @@ Cayleb is an AI workflow integrator: he shadows people for a couple of days to l
 
 ## What's here
 
-- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, and Cayleb as a Pixar-style 3D character wearing an AI headset), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
+- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, Cayleb as a Pixar-style 3D character, and his glass-droplet AI agent), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects and contact.
 - `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
-- `projects/*.html` and `lab/`: the project write-ups and the local workflow lab. These are unchanged.
+- `projects/*.html` and `lab/`: the project write-ups (Industry AI Suite, its ten workflows, dotz, Sophos) and the recorded workflow lab. `scripts/build-subpages.py` gives them the homepage's masthead, footer and look (`site/css/subpage.css`, `lab/lab.css`); their content, evidence and the lab's app and receipts are unchanged.
 - `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source and artifact hashes. It is not a user approval or an ATS score.
 
 Project evidence and PR statuses are an October 5, 2026 snapshot. Work history and education are self-reported. Local examples are synthetic demonstrations; all ten full workflows remain UNVERIFIED. The Industry AI Suite workflows are always called recorded demos, never "working" workflows. No production customer outcome, onboarding delivery or ROI is claimed. EvoHedge and Maki are private and still in development.
@@ -19,6 +19,7 @@ No install is needed to view the site. three.js 0.185.0, Lenis 1.3.26, Oswald an
 
 ```sh
 python3 scripts/build-home.py           # index.html + resume.html from site/content.json
+python3 scripts/build-subpages.py       # project pages and the lab: shared masthead, footer and styles
 node --test tests/*.test.js
 python3 -m unittest discover -s tests/py
 python3 scripts/check-release.py
@@ -27,7 +28,7 @@ python3 scripts/check-release.py
 `build-home.py` refuses to build if a string in `content.json` is longer than the frame it sits in (`site/content-limits.json`).
 
 `check-release.py` does three things:
-- checks every local link on both pages;
+- checks every local link on the homepage, the résumé page, the lab and every project page;
 - runs `scripts/home/check_assets.py` in its non-strict mode;
 - re-verifies the PDF and text outputs against `resume/build_resume.py`.
 

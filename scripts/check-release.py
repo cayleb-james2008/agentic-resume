@@ -10,13 +10,13 @@ class Page(HTMLParser):
   if 'id' in a:self.ids.append(a['id'])
   self.refs.extend(a[k] for k in ('href','src') if k in a)
 ids=refs=0
-for page in ('index.html','resume.html'):
+for page in ('index.html','resume.html','lab/index.html',*sorted(str(x.relative_to(R)) for x in (R/'projects').glob('*.html'))):
  p=Page();p.feed((R/page).read_text());assert len(p.ids)==len(set(p.ids)),page
  ids+=len(p.ids);refs+=len(p.refs)
  for ref in p.refs:
   u=urlparse(ref)
   if u.scheme or ref.startswith('#'):continue
-  target=R/unquote(u.path)
+  target=(R/page).parent/unquote(u.path)
   assert (target/'index.html' if u.path.endswith('/') or not u.path else target).is_file(),(page,ref)
   assert not u.path.startswith('/'),(page,ref)
 for f in (R/'site/css').glob('*.css'):

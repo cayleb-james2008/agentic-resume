@@ -12,6 +12,10 @@
   --u: var(--panel-u, calc(100cqw / 1440));
   --cta-h: 3.4722cqw;
 }
+/* From lg the figure is sized off the block's height, so on a screen taller than the 1440×800
+   frame it grows into the right-hand panels. The cap keeps the laptop's corner left of them:
+   0.6569W + (0.765 − 0.5) × 1.1588h ≤ 0.8264W  ⇒  h ≤ 0.55W. */
+@media (min-width: 1024px) { .projects { --fig-cap: 55cqw; } }
 
 /* Narrow variables (spec "The narrow variables"). */
 @media (max-width: 1023px) {
@@ -40,6 +44,7 @@
 }
 @media (max-width: 639px) {
   .projects {
+    --melt-lead: 0px;
     --block-h: 1062px; --intro-bottom: 139px; --head-left: 24px; --intro-left: 24px;
     --head-top: 24px; --intro-min-w: 320px; --intro-gap: 24px; --band-fade: 60px;
     --fig-cap: 599px; --fig-x-override: 48.5%; --fig-lift: 328px; --band-scale: 8.48;
@@ -66,9 +71,12 @@
   user-select: none; -webkit-user-select: none;
 }
 
+/* The melt starts a little above the band (--melt-lead) and is solid black before the strip's
+   first line of type, so no card ever reads over the figure (the spec's 38.685% did, here). */
 .projects-melt {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 10; height: var(--band-h);
-  background: linear-gradient(to bottom, rgb(9 10 11 / 0) 0%, var(--surface-black) var(--band-fade, 38.685%));
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 10;
+  height: calc(var(--band-h) + var(--melt-lead, 3.4722cqw));
+  background: linear-gradient(to bottom, rgb(9 10 11 / 0) 0%, var(--surface-black) var(--band-fade, 32%));
   pointer-events: none;
 }
 

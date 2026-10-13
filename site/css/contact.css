@@ -19,7 +19,7 @@
 }
 @media (min-width: 640px) and (max-width: 1023px) {
   .contact {
-    --foot-h: 104cqw; --fig-scale: 0.87; --fig-shift: 3%; --logo-h: 24px;
+    --foot-h: 104cqw; --fig-scale: 0.87; --fig-shift: 14%; --logo-h: 24px;
     --nav-size: 36px; --nav-gap: 12px; --nav-row: 34px;
     --cta-left: 50%; --cta-shift: -50%; --foot-copy-min: 200px;
   }

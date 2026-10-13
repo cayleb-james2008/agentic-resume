@@ -80,7 +80,7 @@
       {"kicker": "Python · agents", "name": "EvoHedge", "status": "Private", "marker": "ring"},
       {"kicker": "Windows · AI", "name": "Maki", "status": "Private", "marker": "ring"}
     ],
-    "figure": {"image": "assets/home/projects/figure.webp", "alt": "Illustration: Cayleb typing at his desk"}
+    "figure": {"image": "assets/home/projects/figure.webp", "alt": "Illustration: Cayleb typing on a laptop"}
   },
   "contact": {
     "lines": ["Let's work", "together"],
@@ -98,7 +98,7 @@
       {"label": "Email", "href": "mailto:caylebalvarezjames@gmail.com"},
       {"label": "One-page PDF", "href": "Cayleb-James-polished-one-page.pdf"}
     ],
-    "figure": {"image": "assets/home/contact/figure.webp", "alt": "Illustration: Cayleb taking notes on a tablet"}
+    "figure": {"image": "assets/home/contact/figure.webp", "alt": "Illustration: Cayleb waving hello"}
   },
   "loading": {"name": "Cayleb Alvarez-James", "label": "Loading Cayleb Alvarez-James's résumé", "done": "Loaded"},
   "guide": {

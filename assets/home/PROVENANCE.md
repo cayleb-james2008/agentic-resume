@@ -10,31 +10,33 @@ Cayleb generated seven scenes of his character in ChatGPT and supplied them in c
 |---|---|---|
 | `2024-dunkin.webp` | handing a coffee across a Dunkin' counter | Dunkin', 2024–2026 |
 | `2024-pizza.webp` | sliding a pizza out of a brick oven | Tommy's Pizza, 2024 |
-| `2025-moving.webp` | assembling a desk in a warehouse | Robert H. Lord Company, 2025 & 2026 |
+| `2025-moving.webp` | assembling a desk in a warehouse | Robert H. Lord Company, summer 2025, then 2026–present |
 | `2026-plaster.webp` | breaking up old pool plaster with a sledgehammer | David Cooke Plaster Co., 2026 |
-| `2026-school.webp` | coding at a classroom computer | Portland High School, 2026 |
-| `2026-builds.webp` | at a desk with two monitors and his glass-droplet AI agent | dotz · Sophos · AI Suite, 2026 |
+| `2026-school.webp` | coding at a classroom computer | Portland High School, 2022–2026 |
+| `2026-builds.webp` | at a desk with two monitors and his glass-droplet AI agent | dotz · Sophos · AI Suite, since 2025 |
 | `2026-integrator.webp` | beside a coworker, taking notes, the agent between them | AI workflow integration, 2026 |
 
 The café scene shows Dunkin' branding and the pizzeria has a "TOMMY PIZZA" sign. Cayleb chose to keep both as generated. Each plate is centre-cropped to 1431×1024 by `scripts/home/import_images.py --kind plate`.
 
-## Character frames
+## Character frames (plain-background renders)
 
-All three character frames are cut from three of those scenes.
+Cayleb also supplied three plain-background renders of the same character, made in the same ChatGPT chat as the scenes:
+- `hero.png`: waist-up, facing the camera, 1254².
+- `projects.png`: typing on a laptop, 1536×1024.
+- `contact.png`: waving, 1536×1024.
 
-1. The background is removed with rembg 2.0.85, using the ISNet `isnet-general-use` model. Alpha matting is left off because it produced blocky edges.
-2. `scripts/home/derive_scenes.py` frames each cut-out. It uses the helpers in `derive_character.py`:
-   - keep the largest matte component;
-   - clear props the matte kept: the agent droplet, chair backs and the coworker;
-   - decontaminate the soft edge against the local backdrop;
-   - crop and scale.
-3. `import_images.py` encodes the frames. `person_maps.py` derives the hero's diffuse, alpha, depth, normal and veil maps from the portrait.
+These aren't stored in the repo either.
+
+1. The background is removed with rembg 2.0.85, using the ISNet `isnet-general-use` model, no alpha matting.
+2. On the laptop render, the matte lost the grey lid against the grey backdrop. A backdrop-distance matte restores it inside the laptop's box.
+3. `scripts/home/derive_scenes.py` frames the three renders.
+4. `import_images.py` encodes them. `person_maps.py` derives the hero maps.
 
 | File | From | Frame |
 |---|---|---|
-| `hero/person-*.webp`, `hero/veil-mask.png` | classroom | 1024² portrait. Face on the centre line, eye-line 60% down, head about a third of the square, matching the hero scene's framing so the headset fills the headroom. The chest fades out over the last 90 px. |
-| `projects/figure.webp` | two monitors | 1186×1024. Head to hands, typing, height-filling, pinned left so he clears the right-hand panels. His hands melt into the dark band. |
-| `contact/figure.webp` | coworker | 1536×1024. Him alone with the tablet, filling the bottom edge, centred. |
+| `hero/person-*.webp`, `hero/veil-mask.png` | hero.png | 1024² portrait. Face on the centre line, eye-line 60% down, the chest fading out over the last 90 px. |
+| `projects/figure.webp` | projects.png | 1186×1024, at 90% scale, standing on the foot. On desktop the CSS caps the figure at 55cqw tall so the laptop stays left of the stats panel. |
+| `contact/figure.webp` | contact.png | 1536×1024, as rendered: centred, filling the bottom edge. |
 
 `hero/noise.webp` is procedural (`scripts/home/make_noise.py`).
 

@@ -127,7 +127,9 @@ export function mount(root) {
   const sectionWatch = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      request(state, entry.target.id);
+      // A phone has no spare corner: a bubble there sits on the copy. It greets once, then
+      // stays a button.
+      if (!phone.matches) request(state, entry.target.id);
       activeHeading = entry.target.querySelector('h2') || entry.target;
       start();
     }

@@ -20,10 +20,22 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from derive_character import decontaminate, largest_component, window  # noqa: E402
 
 
-def cut(scenes: Path, mattes: Path, name: str, keep_largest=True, clear=()) -> Image.Image:
+def backdrop_matte(ref: np.ndarray, near: float = 0.08, far: float = 0.16) -> np.ndarray:
+    """Alpha from distance to the plain backdrop's colour (the median of the image border)."""
+    border = np.concatenate([ref[0], ref[-1], ref[:, 0], ref[:, -1]])
+    bg = np.median(border, axis=0)
+    dist = np.sqrt(((ref - bg) ** 2).sum(-1))
+    return np.clip((dist - near) / (far - near), 0, 1)
+
+
+def cut(scenes: Path, mattes: Path, name: str, keep_largest=True, clear=(), recover=()) -> Image.Image:
     ref = np.asarray(Image.open(scenes / f"{name}.png").convert("RGB"), dtype=np.float64) / 255
     alpha = np.asarray(Image.open(mattes / f"cut-{name}.png").getchannel("A"), dtype=np.float64) / 255
     alpha = alpha.copy()
+    if recover:  # props the matte lost against a plain backdrop — the grey laptop lid on grey
+        colour = backdrop_matte(ref)
+        for x0, y0, x1, y1 in recover:
+            alpha[y0:y1, x0:x1] = np.maximum(alpha[y0:y1, x0:x1], colour[y0:y1, x0:x1])
     for x0, y0, x1, y1 in clear:  # props the matte kept: the agent droplet, chair backs, the coworker
         alpha[y0:y1, x0:x1] = 0
     if keep_largest:
@@ -41,21 +53,23 @@ def fill_height(img: Image.Image, size: tuple[int, int], left: int | None = None
     return canvas
 
 
-def main(scenes: Path, mattes: Path, out: Path) -> list[Path]:
+def main(renders: Path, mattes: Path, out: Path) -> list[Path]:
+    """Frame the three plain-background renders (hero.png, projects.png, contact.png)."""
     out.mkdir(parents=True, exist_ok=True)
-    # Hero — the classroom shot, facing the camera: eye-line 60% down the square (the hero
-    # scene's own framing), face on the centre line, head about a third of the square.
-    school = cut(scenes, mattes, "2026-school")
-    face_x, eye_y, span = 600, 188, 890
+    # Hero — facing the camera: eye-line 60% down the square (the hero scene's own framing),
+    # face on the centre line, head about a third of the square.
+    hero = cut(renders, mattes, "hero")
+    face_x, eye_y, span = 610, 483, 800
     x0, y0 = face_x - span // 2, eye_y - round(0.60 * span)
-    portrait = window(school, x0, y0, x0 + span, y0 + span, (1024, 1024), fade_bottom=90)
-    # Projects — the two-monitor shot, typing: head to hands, height-filling, left of the panels.
-    builds = cut(scenes, mattes, "2026-builds", clear=[(225, 215, 385, 366), (0, 430, 192, 1024)])
-    projects = fill_height(window(builds, 110, -40, 1150, 860, (1040, 900), fade_right=80), (1186, 1024), left=0)
-    # Contact — beside the coworker, him alone with the tablet, filling the bottom edge, centred.
-    integrator = cut(scenes, mattes, "2026-integrator", keep_largest=False,
-                     clear=[(672, 0, 1536, 560), (712, 560, 1536, 1024)])
-    contact = fill_height(window(integrator, 0, -60, 760, 760, (760, 820), fade_right=50), (1536, 1024))
+    portrait = window(hero, x0, y0, x0 + span, y0 + span, (1024, 1024), fade_bottom=90)
+    # Projects — typing on the laptop, at 90%: standing on the foot of the frame and ending
+    # before the right-hand panels (the laptop's corner would otherwise sit under the stats).
+    laptop = cut(renders, mattes, "projects", recover=[(560, 560, 1040, 1024)])
+    scaled = laptop.resize((round(laptop.width * 0.9), round(laptop.height * 0.9)), Image.Resampling.LANCZOS)
+    projects = Image.new("RGBA", (1186, 1024), (0, 0, 0, 0))
+    projects.paste(scaled, (-20, 1024 - scaled.height), scaled)
+    # Contact — the wave, as rendered: centred, filling the bottom edge.
+    contact = cut(renders, mattes, "contact")
     written = []
     for name, image in (("portrait.png", portrait), ("projects.png", projects), ("contact.png", contact)):
         image.save(out / name)

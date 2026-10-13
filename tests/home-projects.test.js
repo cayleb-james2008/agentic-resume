@@ -38,3 +38,15 @@ test('the live pulse grows and fades', () => {
   assert.ok(Math.abs(end.r - (5.5 + 5.5 * 3.4)) < 1e-9);
   assert.equal(end.opacity, 0);
 });
+
+test('the live bracket clears its card\'s status line instead of sitting on it', () => {
+  const live = content.projects.cards.find((c) => c.marker === 'live');
+  const style = home.match(/<div class="strip-bracket"[^>]*style="([^"]+)"/)[1];
+  const cq = (re) => Number(style.match(re)[1]) * 14.4; // cqw → design px in the 1440 frame
+  const width = cq(/width:calc\(([\d.]+)cqw/);
+  const top = cq(/top:calc\(([\d.]+)cqw/);
+  const height = cq(/height:([\d.]+)cqw/);
+  const textWidth = live.status.length * 14 * 0.62;
+  assert.ok(width >= textWidth + 2 * (10 + 4), `bracket ${width.toFixed(0)}px for a ${textWidth.toFixed(0)}px status`);
+  assert.ok(top + height >= 118, `bracket ends at ${(top + height).toFixed(0)}px, status runs to ~117`);
+});

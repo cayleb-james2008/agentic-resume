@@ -211,7 +211,7 @@ export async function mount(section) {
     scene.setParams({
       ...DEFAULT_PARAMS, ...fit, bgRevealOpacity: 0, autoSweepAmount: 0,
       // On a phone the screen is narrower than his shoulders: the droplet comes in closer.
-      ...(media('(max-width: 639px)') ? { helmetX: DEFAULT_PARAMS.helmetX * 0.68 } : null),
+      ...(media('(max-width: 639px)') ? { helmetX: DEFAULT_PARAMS.helmetX * 0.8, helmetY: DEFAULT_PARAMS.helmetY + 0.15 } : null),
     });
   };
 

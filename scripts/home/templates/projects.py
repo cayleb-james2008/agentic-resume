@@ -13,7 +13,9 @@ FIGURE_SIZE = (1186, 1024)
 # The strip, in the frame's own pixels from the top of the dark band (spec CALENDAR).
 CARDS = [(347, 100), (511, 100), (675, 100), (839, 114), (1017, 76)]
 LINKS = [(416, 126), (580, 128), (743, 136), (914, 124)]
-LIVE = {"left": 669, "right": 781, "top": 32, "bottom": 113}
+# Wider and lower than the spec's 669–781 × 32–113: its live round read "12 jul"; this one reads
+# "Merged PR #1", and the spec's corners sat on those letters.
+LIVE = {"left": 655, "right": 795, "top": 32, "bottom": 120}
 
 
 def spread(x: float) -> str:

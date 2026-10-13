@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
-    "description": "Cayleb Alvarez-James builds personal AI agents around how people already work: shadow the role, build the agent, teach it, then scale across the company.",
+    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Shadow the job. Build the agent. Teach it. Repeat.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
@@ -55,15 +55,15 @@
       },
       {
         "icon": "spark",
-        "label": "Independent developer · since 2025"
+        "label": "Independent dev · since 2025"
       }
     ],
     "now": {
-      "eyebrow": "Current focus",
+      "eyebrow": "Now",
       "title": "Ergon",
       "lines": [
-        "Personalized employee assistants",
-        "Windows setup · remote support"
+        "Employee assistants",
+        "Windows · remote support"
       ]
     },
     "glance": {
@@ -84,7 +84,7 @@
       ]
     },
     "lab": {
-      "label": "See the workflow lab",
+      "label": "See the lab",
       "sub": "10 recorded demos",
       "href": "lab/"
     },
@@ -112,7 +112,7 @@
       "How I",
       "work"
     ],
-    "intro": "Shadow each role for a couple of days. Build that person an agent that fits how they already work. Teach them to use it well, then repeat across the company.",
+    "intro": "Shadow the job. Build the agent. Teach. Repeat.",
     "badge": [
       "AI",
       "/ 2026"
@@ -120,15 +120,15 @@
     "rows": [
       {
         "n": "01",
-        "text": "shadow each role"
+        "text": "shadow the job"
       },
       {
         "n": "02",
-        "text": "build their agent"
+        "text": "build the agent"
       },
       {
         "n": "03",
-        "text": "teach, then scale."
+        "text": "teach. repeat."
       }
     ],
     "stations": [
@@ -150,7 +150,7 @@
         "frame": "centre",
         "copyWidth": 228,
         "lead": "Portland High School, 2022–2026.",
-        "body": "Coursework in cybersecurity and AP Computer Science.",
+        "body": "Cybersecurity. AP Computer Science.",
         "image": "assets/home/experience/2026-school.webp",
         "alt": "Illustration: Cayleb coding at a classroom computer"
       },
@@ -167,7 +167,7 @@
         "frame": "centre",
         "copyWidth": 272,
         "lead": "Dunkin', 2024–2026.",
-        "body": "Two years of customer service.",
+        "body": "Customers. Rush hour.",
         "image": "assets/home/experience/2024-dunkin.webp",
         "alt": "Illustration: Cayleb handing a coffee across a Dunkin' counter"
       },
@@ -183,8 +183,8 @@
         "year": "2025",
         "frame": "centre",
         "copyWidth": 278,
-        "lead": "Robert H. Lord Company, summer 2025; 2026–present.",
-        "body": "Moving crew: hands-on, team-based work.",
+        "lead": "Robert H. Lord Company, summer 2025; 2026–now.",
+        "body": "Moving crew. Team work.",
         "image": "assets/home/experience/2025-moving.webp",
         "alt": "Illustration: Cayleb assembling a desk in a warehouse"
       },
@@ -200,8 +200,8 @@
         "year": "2026",
         "frame": "centre",
         "copyWidth": 284,
-        "lead": "AI workflow integration.",
-        "body": "Independent, AI-assisted development of local agent tools since Oct 2025. Now focused on shadowing teams and building each person an agent they will actually use.",
+        "lead": "AI-assisted builds, Oct 2025–now.",
+        "body": "Local agent tools. Next: one agent per teammate.",
         "image": "assets/home/experience/2026-integrator.webp",
         "alt": "Illustration: Cayleb beside a coworker, taking notes on how she works, his AI agent between them"
       }
@@ -212,7 +212,7 @@
       "Selected",
       "projects"
     ],
-    "report": "Industry AI Suite: ten local review tools with source receipts, optional cited model drafts and a complete human review flow.",
+    "report": "Industry AI Suite. 10 local review tools. Sources cited. A person decides.",
     "cta": {
       "label": "Case study",
       "href": "projects/industry-ai-suite.html"
@@ -291,6 +291,70 @@
       "alt": "Illustration: Cayleb typing on a laptop"
     }
   },
+  "value": {
+    "lines": [
+      "Worth",
+      "it"
+    ],
+    "intro": "No cuts. No lost pay. Your people keep the time.",
+    "levers": [
+      {
+        "title": "Fewer mistakes",
+        "line": "Agent checks the work. Less rework."
+      },
+      {
+        "title": "Faster answers",
+        "line": "Quotes and replies go out sooner."
+      },
+      {
+        "title": "Less outside spend",
+        "line": "Fewer IT calls. Fewer unused tools."
+      },
+      {
+        "title": "People stay",
+        "line": "Less busywork. Less burnout."
+      }
+    ],
+    "stepsTitle": "How you know",
+    "steps": [
+      "Measure first.",
+      "Build the agent.",
+      "Measure again."
+    ],
+    "calc": {
+      "title": "Your math",
+      "fields": [
+        {
+          "id": "value-mistakes",
+          "key": "mistakes",
+          "label": "Mistakes + rework",
+          "unit": "$ / month"
+        },
+        {
+          "id": "value-outside",
+          "key": "outside",
+          "label": "Outside IT + unused tools",
+          "unit": "$ / month"
+        },
+        {
+          "id": "value-trim",
+          "key": "trim",
+          "label": "Agents trim it by",
+          "unit": "%"
+        },
+        {
+          "id": "value-hire",
+          "key": "hire",
+          "label": "Cost to hire Cayleb",
+          "unit": "$ / year"
+        }
+      ],
+      "result": "Back each year",
+      "multiple": "Covers the hire",
+      "empty": "Put in your numbers.",
+      "note": "Your numbers. Stays in your browser. An estimate, not a promise."
+    }
+  },
   "contact": {
     "lines": [
       "Let's work",
@@ -318,7 +382,7 @@
         "href": "mailto:caylebalvarezjames@gmail.com"
       }
     ],
-    "copyright": "© 2026 Cayleb Alvarez-James. Illustrations generated with AI.",
+    "copyright": "© 2026 Cayleb Alvarez-James. Illustrations by AI.",
     "cta": {
       "label": "Download résumé",
       "href": "Cayleb-James-polished-resume.pdf"
@@ -349,35 +413,36 @@
   },
   "guide": {
     "label": "Ask my agent",
-    "greeting": "Hey, I'm Cayleb's agent. I'll ride along.",
+    "greeting": "Me agent. Me ride along.",
     "lines": {
-      "approach": "This is the loop he runs with every person: shadow, understand, build, teach.",
-      "experience": "Real jobs first. He learned how teams actually work before building for them.",
-      "work": "These are his own builds: employee assistants, agent desktops and local review tools.",
-      "contact": "Want an agent built around how you work? This is where you say hi."
+      "approach": "The loop. Shadow, understand, build, teach.",
+      "experience": "Real jobs first. Learn how teams work.",
+      "work": "His builds. Assistants, desktops, review tools.",
+      "value": "Money back. Nobody cut.",
+      "contact": "Need agent? Say hi."
     },
     "title": "Ask my agent",
-    "intro": "Quick answers, written by Cayleb. No live AI here.",
+    "intro": "Cayleb wrote these. No live AI.",
     "questions": [
       {
         "q": "What does Cayleb do?",
-        "a": "He's going for Forward Thinking Engineer roles. He shadows people to learn how they actually work, builds each of them a personal AI agent that fits their day, teaches them to use it well, then does the same across the whole company."
+        "a": "Going for Forward Thinking Engineer. Shadows people. Builds each one an agent. Teaches it. Scales it."
       },
       {
         "q": "How does a shadow day work?",
-        "a": "He spends a couple of days alongside someone, noting where their time and attention go. Then he builds an agent around those tasks and teaches them how to get the most out of it."
+        "a": "Sits with you a couple days. Sees where time goes. Builds an agent for that. Teaches you."
       },
       {
-        "q": "Has he done this for a company yet?",
-        "a": "Not yet. These are independent engineering projects. The project pages record what was implemented and tested."
+        "q": "Done this for a company?",
+        "a": "Not yet. Own projects. Project pages show what's built and tested."
       },
       {
         "q": "What's Asmodeus?",
-        "a": "A private research and paper replay system with chronological validation and durable replay state. It makes no live trading or performance claims."
+        "a": "Private research. Paper replay only. No live trading. No performance claims."
       },
       {
         "q": "How do I reach him?",
-        "a": "Email is fastest, or grab the résumé PDF.",
+        "a": "Email. Fastest. Or grab the résumé.",
         "links": [
           {
             "label": "Email Cayleb",
@@ -390,7 +455,7 @@
         ]
       }
     ],
-    "quiet": "Quiet the bubbles",
+    "quiet": "Quiet",
     "close": "Close"
   }
 }

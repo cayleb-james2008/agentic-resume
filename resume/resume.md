@@ -8,13 +8,13 @@ Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
 
 ## Summary
 
-Forward Thinking Engineer. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.
+Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent, teach it, scale it. Goal: lower costs, no cuts to people. Independent, AI-assisted developer: local workflow tools, desktop apps, source-grounded review.
 
 ## Experience
 
 ### Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025–present
 
-Direct AI-assisted implementation, debugging, testing and review of local tools, API integrations and documented human next steps.
+AI-assisted build, debug, test and review: local tools, API integrations, documented human next steps.
 
 ## Selected Projects
 
@@ -24,9 +24,9 @@ OpenClaw, Node.js, C#, Windows, SQLite
 
 [Ergon case study](https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html)
 
-- Built a Windows employee-assistant installer with native Outis taskbar management and a Linux support service. Preserves employee data across upgrades.
+- Built Windows employee-assistant installer: native Outis taskbar management, Linux support service. Employee data kept across upgrades.
 
-- Implemented ticket-driven connector builds and device-scoped repair tools, including screen input, Gateway-checked activation/rollback and shared AI budgets.
+- Built ticket-driven connector builds and device-scoped repair tools: screen input, Gateway-checked activation/rollback, shared AI budgets.
 
 ### Industry AI Suite - Source-Grounded Review Tools
 
@@ -34,9 +34,9 @@ Python, HTTP APIs, Local LLMs, HTML/CSS/JavaScript
 
 [github.com/cayleb-james2008/industry-ai-suite](https://github.com/cayleb-james2008/industry-ai-suite) | [Review history implementation](https://github.com/cayleb-james2008/industry-ai-suite/pull/6)
 
-- Built ten local review tools for finance, research, security and operations, with source receipts and explicit human review. Added durable history, review decisions, export and deletion.
+- Built 10 local review tools: finance, research, security, operations. Source receipts. Explicit human review. Durable history, export, deletion.
 
-- Integrated optional loopback model drafting from minimized findings, with exact citation checks and explicit failure handling.
+- Added optional loopback model drafts from minimized findings. Exact citation checks. Explicit failure handling.
 
 ### dotz - Multi-Agent Coding Dashboard
 
@@ -44,9 +44,9 @@ Rust, axum, Tauri, JavaScript, SQLite
 
 [github.com/cayleb-james2008/dotz](https://github.com/cayleb-james2008/dotz)
 
-- Developed a Rust and Tauri agent desktop with model selection, supervised tools and platform-specific process cleanup.
+- Built Rust and Tauri agent desktop: model selection, supervised tools, platform-specific process cleanup.
 
-- Made local model failures explicit and added safe cleanup retries. Core tests, lint and dependency checks pass on Windows, macOS and Linux.
+- Made local model failures explicit. Safe cleanup retries. Core tests, lint, dependency checks pass on Windows, macOS, Linux.
 
 ### Sophos - Coding-Agent Desktop
 
@@ -54,9 +54,9 @@ React, TypeScript, Tauri, JSON-RPC
 
 [github.com/cayleb-james2008/sophos](https://github.com/cayleb-james2008/sophos)
 
-- Connected employee-selected agent profiles to real daemon sessions and local model catalogs, with durable session transcripts and restart recovery.
+- Connected employee-selected agent profiles to real daemon sessions and local model catalogs. Durable transcripts. Restart recovery.
 
-- Reconciled parallel source histories while preserving lifecycle, security and build controls; verified the application and daemon with regression tests.
+- Reconciled parallel source histories; kept lifecycle, security and build controls. App and daemon verified by regression tests.
 
 ### Asmodeus - Research & Paper Replay
 
@@ -64,9 +64,9 @@ Rust, Historical Data, Local LLMs
 
 [Asmodeus case study](https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html)
 
-- Built a research and paper replay system with verified historical data, chronological evaluation, persisted cursors, fees and duplicate-fill prevention.
+- Built research and paper replay: verified historical data, chronological evaluation, persisted cursors, fees, duplicate-fill prevention.
 
-- Added a keyless loopback model route with redirect and proxy guards, chronological train/validation/test slices and reviewable refutation records.
+- Added keyless loopback model route: redirect and proxy guards. Chronological train/validation/test slices. Reviewable refutation records.
 
 ## Skills
 

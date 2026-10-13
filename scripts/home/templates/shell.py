@@ -2,7 +2,7 @@
 from markup import PLATE_CLIP, attr, text
 from templates import social
 
-STYLES = ("tokens", "base", "hero", "approach", "experience", "projects", "contact", "guide")
+STYLES = ("tokens", "base", "hero", "approach", "experience", "projects", "value", "contact", "guide")
 
 IMPORT_MAP = (
     '{"imports":{"three":"./vendor/three-0.185.0/three.module.min.js",'
@@ -61,7 +61,7 @@ def render(content: dict, blocks: dict) -> str:
         f"{stack_layer(blocks['hero'])}{stack_layer(blocks['approach'])}"
         f'<div class="stack-last">{blocks["experience"]}</div>'
         "</div>"
-        f"{blocks['projects']}</main>"
+        f"{blocks['projects']}{blocks['value']}</main>"
         f"<footer class=\"site-footer\">{blocks['contact']}</footer>"
         f"{blocks['guide']}"
         "</body></html>\n"

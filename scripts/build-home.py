@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
 
-from templates import approach, contact, experience, guide, hero, projects, resume, shell  # noqa: E402
+from templates import approach, contact, experience, guide, hero, projects, resume, shell, value  # noqa: E402
 
 CENTRE_COPY_MAX = 190
 STAT_LABELS_MAX = 22
@@ -67,6 +67,7 @@ def build() -> str:
         "approach": approach.render(content),
         "experience": experience.render(content),
         "projects": projects.render(content),
+        "value": value.render(content),
         "contact": contact.render(content),
         "guide": guide.render(content),
     }

@@ -10,7 +10,7 @@ import { ticker } from '../engine/ticker.js';
 import { blinkSquash, nextBlinkDelay } from '../hero/droplet-shape.js';
 import { createGuideState, gaze, request, setQuiet, tick } from './queue.js';
 
-const SECTIONS = ['approach', 'experience', 'work', 'contact'];
+const SECTIONS = ['approach', 'experience', 'work', 'value', 'contact'];
 const QUIET_KEY = 'cayleb-guide-quiet';
 /** Scrolled this many viewport heights, the hero is behind the reader. */
 export const APPEAR_AFTER = 0.85;
@@ -42,6 +42,7 @@ export function mount(root) {
     approach: root.dataset.lineApproach,
     experience: root.dataset.lineExperience,
     work: root.dataset.lineWork,
+    value: root.dataset.lineValue,
     contact: root.dataset.lineContact,
   };
 

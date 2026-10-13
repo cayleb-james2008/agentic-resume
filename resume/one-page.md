@@ -8,35 +8,35 @@ Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
 
 ## Summary
 
-Forward Thinking Engineer. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.
+Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent, teach it, scale it. Goal: lower costs, no cuts to people. Independent, AI-assisted developer: local workflow tools, desktop apps, source-grounded review.
 
 ## Experience
 
 ### Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025–present
 
-Direct AI-assisted implementation, debugging, testing and review of local tools, API integrations and documented human next steps.
+AI-assisted build, debug, test and review: local tools, API integrations, documented human next steps.
 
 ## Selected Projects
 
 ### Ergon
 
-- Built a Windows assistant installer with native Outis management, automated connector builds and screen-control tools for remote support.
+- Built Windows assistant installer. Native Outis management. Automated connector builds. Screen-control repair tools.
 
 ### Industry AI Suite
 
-- Built ten source-grounded review tools with cited local model drafts, durable history and review, export and deletion flows.
+- Built 10 source-grounded review tools. Cited local model drafts. History, review, export, deletion.
 
 ### dotz
 
-- Developed a Rust and Tauri agent desktop with explicit local routing and supervised tools; core checks pass on Windows, macOS and Linux.
+- Built Rust/Tauri agent desktop. Explicit local routing. Supervised tools. Core checks pass on Windows, macOS, Linux.
 
 ### Sophos
 
-- Connected agent profiles and local model catalogs to a coding-agent desktop, with durable sessions and tested restart recovery.
+- Connected agent profiles and local model catalogs to a coding-agent desktop. Durable sessions. Tested restart recovery.
 
 ### Asmodeus
 
-- Built a research and paper replay system with historical-data provenance, chronological evaluation and restart-safe simulated fills.
+- Built research and paper replay. Historical-data provenance. Chronological evaluation. Restart-safe simulated fills.
 
 ## Skills
 

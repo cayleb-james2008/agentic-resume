@@ -51,7 +51,7 @@ test('computed stats match', () => {
   const languages = resume.skills.find(([name]) => name === 'Languages')[1].split(',');
   assert.equal(stat('Languages'), String(languages.length));
   assert.equal(stat('Tools'), '10');
-  assert.match(resume.projects.find(p=>p.slug==='suite').bullets[0], /ten/i);
+  assert.match(resume.projects.find(p=>p.slug==='suite').bullets[0], /\b(ten|10)\b/i);
   assert.match(content.hero.lab.sub, /^10 recorded demos$/);
 });
 

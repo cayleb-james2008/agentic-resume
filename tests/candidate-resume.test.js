@@ -24,7 +24,7 @@ test('the homepage reaches the résumé page and both candidate PDFs',()=>{
 });
 test('headline is the target role, Forward Thinking Engineer',()=>{
  assert.equal(source.headline,'Forward Thinking Engineer');
- assert.equal(source.summary,'Forward Thinking Engineer. Focus: shadowing employees to learn how they work, building each person a custom AI agent that fits their day, and teaching them to use it well, then scaling across the company. Independent, AI-assisted developer of local workflow tools, desktop interfaces and source-grounded review workflows. Background includes service and hands-on work.');
+ assert.equal(source.summary,'Forward Thinking Engineer. Focus: shadow employees, build each a custom AI agent, teach it, scale it. Goal: lower costs, no cuts to people. Independent, AI-assisted developer: local workflow tools, desktop apps, source-grounded review.');
  assert.doesNotMatch(source.summary,/clients?|customers?|deployed/i);
 });
 test('the résumé page is a real page carrying the candidate fragment, and its links resolve',()=>{
@@ -36,4 +36,13 @@ test('the résumé page is a real page carrying the candidate fragment, and its 
  const local=[...page.matchAll(/(?:href|src)="([^"#:?]+)"/g)].map(m=>m[1]).filter(h=>h!=='./');
  assert.ok(local.length>3);
  for(const href of local)assert.ok(existsSync(new URL('../'+href,import.meta.url)),href);
+});
+test('few words: résumé bullets are short and blunt, facts kept',()=>{
+ const count=s=>s.trim().split(/\s+/).length;
+ assert.ok(count(source.summary)<=36,`summary ${count(source.summary)} words`);
+ assert.ok(count(source.experience.intro)<=16,'experience intro');
+ for(const p of source.projects){
+  for(const b of p.bullets)assert.ok(count(b)<=20,`${p.slug} bullet: ${count(b)} words: ${b}`);
+  assert.ok(count(p.short)<=16,`${p.slug} short: ${count(p.short)} words`);
+ }
 });

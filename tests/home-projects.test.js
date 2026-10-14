@@ -50,3 +50,9 @@ test('the live bracket clears its card\'s status line instead of sitting on it',
   assert.ok(width >= textWidth + 2 * (10 + 4), `bracket ${width.toFixed(0)}px for a ${textWidth.toFixed(0)}px status`);
   assert.ok(top + height >= 118, `bracket ends at ${(top + height).toFixed(0)}px, status runs to ~117`);
 });
+
+test('on a phone all five project cards remain visible in the grid', () => {
+  const css = read('site/css/projects.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const phone = css.slice(css.indexOf('@media (max-width: 639px)'));
+  assert.doesNotMatch(phone, /\.strip-card:nth-child\(n\s*\+\s*4\)\s*\{\s*display:\s*none/);
+});

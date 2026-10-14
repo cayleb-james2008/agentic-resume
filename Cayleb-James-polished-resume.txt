@@ -14,7 +14,7 @@ Experience
 
 Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025-present
 
-Builds, tests and fixes software with AI help: local tools, app connections, clear next steps for people.
+Builds and tests local AI agents, desktop software and app connections; 3,300+ automated checks across 5 systems.
 
 Selected Projects
 
@@ -24,9 +24,9 @@ OpenClaw, Node.js, C#, Windows, SQLite
 
 Ergon case study: https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html
 
-- Built a Windows installer for employee AI assistants, with a taskbar app for setup and support. Employee data stays safe through updates.
+- Built a signed Windows installer, taskbar setup app and live update feed for employee AI assistants; user data survives updates.
 
-- Built remote-repair tools and automatic connections to the apps a team already uses, each with approval and undo steps.
+- Built ticket-scoped remote repair and automatic connectors to existing company apps, with approval gates, undo steps and 622 passing tests.
 
 Industry AI Suite - Source-Checked Review Tools
 
@@ -34,9 +34,9 @@ Python, local AI models, web APIs
 
 github.com/cayleb-james2008/industry-ai-suite: https://github.com/cayleb-james2008/industry-ai-suite | Review history implementation: https://github.com/cayleb-james2008/industry-ai-suite/pull/6
 
-- Built 10 tools that review finance, research, security and operations data. Every finding shows its source; a person makes the call.
+- Built 10 local tools that review finance, research, security and operations files; every finding shows its source and a person decides.
 
-- Added optional AI-written drafts that must cite their sources, plus saved history, review, export and delete.
+- Added optional local AI drafts that halt if sources are missing, plus review history, export and delete (382 Python and 19 browser tests).
 
 dotz - AI Coding Agent Dashboard
 
@@ -44,9 +44,9 @@ Rust, Tauri, JavaScript, SQLite
 
 github.com/cayleb-james2008/dotz: https://github.com/cayleb-james2008/dotz
 
-- Built a desktop app that runs and supervises AI coding agents, with model choice and safe cleanup.
+- Built a desktop app that runs and supervises AI coding agents, with model choice, process-tree cleanup and clear local failure states.
 
-- Made failures clear instead of silent. Core tests pass on Windows, macOS and Linux.
+- Verified across Windows (828), macOS (831) and Linux (839) core automated tests; all 6 hosted check jobs pass.
 
 Sophos - Coding-Agent Desktop App
 
@@ -54,9 +54,9 @@ React, TypeScript, Tauri
 
 github.com/cayleb-james2008/sophos: https://github.com/cayleb-james2008/sophos
 
-- Connected saved agent profiles and local AI models to a coding-agent desktop app.
+- Connected saved agent profiles and local AI models to a Windows coding-agent desktop app, with sessions and transcripts that survive restarts.
 
-- Sessions and transcripts survive restarts. Context summaries use the agent service; provider failures keep saved settings and show a clear error.
+- Context summaries use the agent service and provider failures keep saved settings; 1,224 interface, 82 Node and 56/56 Windows checks pass.
 
 Asmodeus - Trading Research on Past Data
 
@@ -64,9 +64,9 @@ Rust, historical market data, local AI models
 
 Asmodeus case study: https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html
 
-- Built a research tool that tests trading ideas on real past market data, in time order, with no real money.
+- Built a private research tool that tests trading ideas on real past market data in strict time order, with fees and no real money.
 
-- Added safeguards so tests never peek at future data, plus records of rejected ideas for review.
+- Added safeguards against peeking at future data, restart recovery and rejected-idea logs; 1,111 Rust and 33 Python tests pass.
 
 Skills
 

@@ -170,3 +170,20 @@ test('the agent has a line for the value section', () => {
   assert.ok(content.guide.lines.value && words(content.guide.lines.value) <= 12);
   assert.match(read('site/js/guide/guide.js'), /const SECTIONS = \[[^\]]*'value'/);
 });
+
+test('every system row names human approval, review or flags', () => {
+  const APPROVAL = /\b(approv\w*|review\w*|quick yes|one-tap owner yes|flags?)\b/i;
+  for (const e of content.value.examples) {
+    for (const r of e.rows) {
+      assert.match(r.then, APPROVAL, `${e.kind} / ${r.system}: "${r.then}"`);
+    }
+  }
+});
+
+test('the value section ends with a direct contact and résumé action strip', () => {
+  const c = content.value.cta;
+  assert.ok(c && c.lead && c.label && c.href && c.secondaryLabel && c.secondaryHref);
+  assert.ok(words(c.lead) <= 10, c.lead);
+  assert.match(section, /<div class="value-cta"[\s\S]*?<a class="value-cta-btn" href="mailto:caylebalvarezjames@gmail\.com">/);
+  assert.match(section, /<a class="value-cta-link" href="resume\.html">/);
+});

@@ -22,11 +22,16 @@
 .resume-masthead a, .resume-footer a {
   transition: color var(--duration-fast) var(--ease-entrance);
 }
-.resume-masthead nav a {
+.resume-masthead nav a, .resume-download {
   font-size: 0.875rem; text-transform: uppercase; line-height: 1;
 }
+.resume-download { font-weight: 700; color: var(--accent-ink, #007f8c); }
 .resume-masthead a:hover, .resume-masthead a:focus-visible,
 .resume-footer a:hover, .resume-footer a:focus-visible { color: var(--accent-ink, #007f8c); }
+@media (max-width: 767px) {
+  .resume-masthead nav { order: 3; flex-basis: 100%; }
+  .resume-download { margin-left: auto; }
+}
 
 /* --- The sheet --------------------------------------------------------- */
 .resume-main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
@@ -52,15 +57,20 @@
   font-size: 1.5rem; line-height: 1; margin-bottom: 0.9rem;
   padding-bottom: 0.6rem; border-bottom: 1px solid var(--foreground);
 }
-.resume-sheet h3 { font-size: 1rem; font-weight: 700; line-height: 1.3; margin: 1.1rem 0 0.25rem; }
+.resume-sheet h3 {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0.25rem 1rem; font-size: 1rem; font-weight: 700; line-height: 1.3; margin: 1.1rem 0 0.25rem;
+}
 .resume-sheet h3:first-of-type { margin-top: 0; }
+.resume-stack { font-weight: 400; font-size: 0.875rem; color: var(--resume-muted); }
 .resume-sheet p + p { margin-top: 0.5rem; }
 .resume-date { font-size: 0.875rem; color: var(--resume-muted); text-transform: uppercase; }
 
 .resume-columns { display: flex; flex-direction: column; gap: 2.25rem; }
 .resume-columns > div { display: flex; flex-direction: column; gap: 2.25rem; }
 
-.resume-jobs { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.resume-jobs { margin-top: 2.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.resume-jobs h2 { margin-bottom: 0.5rem; }
 .resume-jobs p {
   display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0;
 }

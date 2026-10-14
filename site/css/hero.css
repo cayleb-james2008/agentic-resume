@@ -24,7 +24,7 @@
 
 @media (min-width: 1280px) {
   .masthead-nav { display: block; position: absolute; left: 50%; transform: translateX(-50%); }
-  .masthead-nav ul { display: flex; gap: 4rem; }
+  .masthead-nav ul { display: flex; gap: clamp(2rem, 2.75vw, 3.5rem); }
   .masthead-action { display: inline; }
   .burger { display: none; }
 }

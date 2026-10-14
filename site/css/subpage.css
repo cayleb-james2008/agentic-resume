@@ -79,7 +79,7 @@ body { margin: 0; background: var(--background); color: var(--foreground); line-
 @media (max-width: 899px) { .project-layout { grid-template-columns: 1fr; } }
 
 .project-content { display: flex; flex-direction: column; gap: 2.5rem; max-width: 46rem; }
-.project-content h2, .project-rail h2 {
+.project-content h2, .project-rail h2, .project-aside h2 {
   font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 1;
 }
 .project-content h2 {
@@ -87,12 +87,12 @@ body { margin: 0; background: var(--background); color: var(--foreground); line-
 }
 .project-content p { line-height: 1.65; }
 .project-content p + p { margin-top: 0.75rem; }
-.project-content a, .project-rail a:not(.btn) {
+.project-content a, .project-rail a:not(.btn), .project-aside a:not(.btn) {
   text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
   transition: color var(--duration-fast) var(--ease-entrance);
 }
-.project-content a:hover, .project-rail a:not(.btn):hover { color: var(--accent-ink, #007f8c); }
-.project-content code, .project-rail code {
+.project-content a:hover, .project-rail a:not(.btn):hover, .project-aside a:not(.btn):hover { color: var(--accent-ink, #007f8c); }
+.project-content code, .project-rail code, .project-aside code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.85em;
   padding: 0.1em 0.35em; background: rgb(9 10 11 / 0.06); overflow-wrap: anywhere;
 }
@@ -105,11 +105,13 @@ body { margin: 0; background: var(--background); color: var(--foreground); line-
 .project-code-link { font-weight: 700; }
 .project-code-link::after { content: " ↗"; }
 
-.project-rail { display: flex; flex-direction: column; gap: 2rem; }
+.project-rail, .project-aside { display: flex; flex-direction: column; gap: 2rem; }
+.project-aside { gap: 0.75rem; padding-top: 1rem; border-top: 1px solid rgb(9 10 11 / 0.2); align-self: start; }
 .project-rail section { padding-top: 1rem; border-top: 1px solid rgb(9 10 11 / 0.2); }
-.project-rail h2 { font-size: 1rem; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
-.project-rail p { font-size: 0.9375rem; line-height: 1.55; }
-.project-rail p + p { margin-top: 0.6rem; }
+.project-rail h2, .project-aside h2 { font-size: 1rem; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+.project-aside h2 { margin-bottom: 0.25rem; }
+.project-rail p, .project-aside p { font-size: 0.9375rem; line-height: 1.55; }
+.project-rail p + p, .project-aside p + p { margin-top: 0.6rem; }
 .source-links { display: flex; flex-direction: column; gap: 0.5rem; list-style: none; padding: 0; }
 .source-links a::after { content: " ↗"; }
 
@@ -131,7 +133,7 @@ body { margin: 0; background: var(--background); color: var(--foreground); line-
 .case-footer .btn--primary:hover, .case-footer .btn--primary:focus-visible { background: var(--foreground-on-dark); }
 
 @media (prefers-reduced-motion: reduce) {
-  .sub-masthead a, .sub-footer a, .btn, .project-content a, .project-rail a { transition: none; }
+  .sub-masthead a, .sub-footer a, .btn, .project-content a, .project-rail a, .project-aside a { transition: none; }
 }
 
 /* --- 404 ----------------------------------------------------------------- */

@@ -243,16 +243,15 @@
 
 .strip-bracket { color: var(--accent); --bracket-stretch: var(--live-stretch, 0px); }
 
-/* Below sm: the three public projects in a grid under a faint rule. */
+/* Below sm: all five projects in a grid under a faint rule. */
 @media (max-width: 639px) {
   .projects-strip {
     height: auto; padding: 1.5rem 4%;
     border-top: 1px solid rgb(255 255 255 / 0.15);
   }
   .strip-links, .strip-marker, .strip-bracket, .marker-pulse { display: none; }
-  .strip-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem 1.25rem; }
+  .strip-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem 1rem; }
   .strip-card { position: static; width: auto; }
-  .strip-card:nth-child(n + 4) { display: none; }
   .strip-kicker, .strip-status { white-space: normal; }
 }
 

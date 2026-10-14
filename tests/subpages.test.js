@@ -73,6 +73,15 @@ test('on a phone the sub-page nav keeps to one row', () => {
   assert.match(phone, /\.sub-masthead nav ul\s*\{[^}]*flex-wrap:\s*nowrap/);
 });
 
+test('the five main project pages style their right-hand evidence rail via .project-aside', () => {
+  const css = read('site/css/subpage.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(css, /\.project-aside\s*\{[^}]*border-top:/);
+  assert.match(css, /\.project-rail h2,\s*\.project-aside h2/);
+  for (const name of ['ergon.html', 'industry-ai-suite.html', 'dotz.html', 'sophos.html', 'asmodeus.html']) {
+    assert.match(read(`projects/${name}`), /<aside class="project-aside"><h2>Evidence<\/h2>/, name);
+  }
+});
+
 // Plain words (2026-10-13): the five main project pages read without developer jargon; the ten
 // workflow pages open with a plain line. Evidence (dates, IDs, file fingerprints) stays.
 const JARGON = /\b(loopback|daemon|Clippy|provenance|deterministic|leases?|manifest|IPC|catalogs?|runtime|binaries|refutation|cursors|PR #\d+|CI)\b/i;

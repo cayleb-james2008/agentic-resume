@@ -23,6 +23,7 @@ def masthead(content: dict) -> str:
         '<header class="resume-masthead">'
         f'<a class="resume-wordmark" href="./" aria-label="Cayleb Alvarez-James, home">{text(content["wordmark"])}</a>'
         f'<nav aria-label="Primary"><ul>{items}</ul></nav>'
+        f'<a class="resume-download" href="{attr(content["meta"]["onePagePdf"])}" download>One-page PDF ↓</a>'
         "</header>"
     )
 

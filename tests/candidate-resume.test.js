@@ -56,6 +56,7 @@ test('the résumé page is a real page carrying the candidate fragment, and its 
  assert.ok(page.includes(read('resume/candidate-fragment.html').trim()));
  assert.ok(page.includes('href="site/css/resume.css"'));
  assert.ok(page.includes('href="./"'));
+ assert.match(page,/<header class="resume-masthead">[\s\S]*?<a class="resume-download" href="Cayleb-James-polished-one-page\.pdf" download>/);
  const local=[...page.matchAll(/(?:href|src)="([^"#:?]+)"/g)].map(m=>m[1]).filter(h=>h!=='./');
  assert.ok(local.length>3);
  for(const href of local)assert.ok(existsSync(new URL('../'+href,import.meta.url)),href);
@@ -74,4 +75,10 @@ test('plain words: résumé lines are short and free of developer jargon, facts 
  }
  // No small meta line under the résumé: the page footer and the PDFs end with the content.
  assert.doesNotMatch(read('resume/candidate-fragment.html'),/Updated October 13, 2026/);
+ // Every project short line and project bullet set carries concrete verification numbers.
+ for(const p of source.projects){
+  assert.match(p.short,/\d/,`${p.slug} short has a proof number`);
+  assert.match(p.bullets.join(' '),/\d/,`${p.slug} bullets have a proof number`);
+ }
+ assert.match(source.experience.intro,/3,300\+/);
 });

@@ -161,3 +161,37 @@
 .value-steps li::before { content: counter(step); font-size: 0.55em; color: var(--accent); }
 .value-steps li + li::before { content: "→\00a0\00a0" counter(step); }
 .value-steps li + li { margin-left: 0.6em; }
+
+/* Direct conversion strip under the receipt proof. */
+.value-cta {
+  margin-top: clamp(2rem, 4vw, 3rem); padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid var(--raw-color-white-alpha-10);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1rem 2rem;
+}
+.value-cta-lead {
+  font-size: 1rem; line-height: 1.35; color: var(--foreground-on-dark);
+}
+.value-cta-actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem;
+}
+.value-cta-btn {
+  display: inline-flex; align-items: center; padding: 0.85rem 1.25rem;
+  background: var(--accent); color: var(--surface-black);
+  font-family: var(--font-display); font-weight: 700; font-size: 0.9375rem;
+  text-transform: uppercase; line-height: 1; letter-spacing: 0.02em;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  transition: background var(--duration-fast) var(--ease-entrance), color var(--duration-fast) var(--ease-entrance);
+}
+.value-cta-btn:hover, .value-cta-btn:focus-visible {
+  background: var(--foreground-on-dark); color: var(--surface-black);
+}
+.value-cta-link {
+  font-size: 0.875rem; text-transform: uppercase; color: var(--foreground-on-dark-muted);
+  text-decoration: underline; text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-entrance);
+}
+.value-cta-link:hover, .value-cta-link:focus-visible { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .value-cta-btn, .value-cta-link { transition: none; }
+}

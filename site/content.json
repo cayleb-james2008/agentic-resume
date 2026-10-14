@@ -25,6 +25,10 @@
       "href": "#work"
     },
     {
+      "label": "Worth it",
+      "href": "#value"
+    },
+    {
       "label": "Lab",
       "href": "lab/"
     },
@@ -62,8 +66,8 @@
       "eyebrow": "Now",
       "title": "Ergon",
       "lines": [
-        "Staff AI helpers",
-        "Remote setup, help"
+        "Employee AI agents",
+        "Remote setup, repair"
       ]
     },
     "glance": {
@@ -94,6 +98,10 @@
     },
     "links": [
       {
+        "label": "Worth it",
+        "href": "#value"
+      },
+      {
         "label": "GitHub",
         "href": "https://github.com/cayleb-james2008"
       },
@@ -112,7 +120,7 @@
       "How I",
       "work"
     ],
-    "intro": "Shadow the job. Build agents and tools. Teach. Repeat.",
+    "intro": "Shadow two days. Build agents and tools. Teach. Scale.",
     "badge": [
       "AI",
       "/ 2026"
@@ -120,7 +128,7 @@
     "rows": [
       {
         "n": "01",
-        "text": "shadow the job"
+        "text": "shadow 2 days"
       },
       {
         "n": "02",
@@ -128,7 +136,7 @@
       },
       {
         "n": "03",
-        "text": "teach. repeat."
+        "text": "teach + scale"
       }
     ],
     "stations": [
@@ -167,7 +175,7 @@
         "frame": "centre",
         "copyWidth": 272,
         "lead": "Dunkin', 2024–2026.",
-        "body": "Customers. Rush hour.",
+        "body": "Rush-hour speed. Inventory.",
         "image": "assets/home/experience/2024-dunkin.webp",
         "alt": "Illustration: Cayleb handing a coffee across a Dunkin' counter"
       },
@@ -184,7 +192,7 @@
         "frame": "centre",
         "copyWidth": 278,
         "lead": "Robert H. Lord Company, summer 2025; 2026–now.",
-        "body": "Moving crew. Team work.",
+        "body": "Moving crew. Commercial ops.",
         "image": "assets/home/experience/2025-moving.webp",
         "alt": "Illustration: Cayleb assembling a desk in a warehouse"
       },
@@ -201,7 +209,7 @@
         "frame": "centre",
         "copyWidth": 284,
         "lead": "Building with AI, Oct 2025–now.",
-        "body": "Agents, tools and automations. Next: built for each teammate.",
+        "body": "5 systems, 3,300+ checks. Next: built for each team.",
         "image": "assets/home/experience/2026-integrator.webp",
         "alt": "Illustration: Cayleb beside a coworker, taking notes on how she works, his AI agent between them"
       }
@@ -212,7 +220,7 @@
       "Selected",
       "projects"
     ],
-    "report": "Industry AI Suite: 10 checking tools. Answers show sources. A person decides.",
+    "report": "Industry AI Suite: 10 local review tools. Answers show sources. People decide.",
     "cta": {
       "label": "Case study",
       "href": "projects/industry-ai-suite.html"
@@ -250,7 +258,7 @@
       {
         "kicker": "Desktop app",
         "name": "dotz",
-        "status": "Runs AI coders",
+        "status": "828+ checks",
         "marker": "ring",
         "href": "projects/dotz.html",
         "repo": "https://github.com/cayleb-james2008/dotz"
@@ -258,7 +266,7 @@
       {
         "kicker": "Desktop app",
         "name": "Sophos",
-        "status": "AI coding app",
+        "status": "1,224 checks",
         "marker": "ring",
         "href": "projects/sophos.html",
         "repo": "https://github.com/cayleb-james2008/sophos"
@@ -266,7 +274,7 @@
       {
         "kicker": "Review tools",
         "name": "AI Suite",
-        "status": "Checks work",
+        "status": "382 checks",
         "marker": "live",
         "href": "projects/industry-ai-suite.html",
         "repo": "https://github.com/cayleb-james2008/industry-ai-suite"
@@ -274,7 +282,7 @@
       {
         "kicker": "Research",
         "name": "Asmodeus",
-        "status": "Practice runs",
+        "status": "1,111 checks",
         "marker": "ring",
         "href": "projects/asmodeus.html"
       },
@@ -297,14 +305,14 @@
       "it"
     ],
     "intro": "No cuts. No lost pay. The money comes from fixing the busywork.",
-    "proof": "He's worked these jobs. He knows where the time goes. Illustrative estimates; actual savings are measured with each team.",
+    "proof": "He's worked these jobs and knows where the time goes. People approve before anything goes out. Illustrative estimates; actual savings are measured with each team.",
     "fit": {
       "title": "Built around each company",
       "lead": "Nothing off the shelf. Two movers, two builds.",
       "points": [
         {
           "name": "Their situation",
-          "text": "Size, season, and what's costing them most right now. The build starts there."
+          "text": "Size, season, and what's costing them most right now. The build starts with the biggest leak."
         },
         {
           "name": "Their tools",
@@ -312,11 +320,11 @@
         },
         {
           "name": "How they work",
-          "text": "He shadows the team first, so every system fits how they already do the job."
+          "text": "He shadows for two days without slowing the crew, so every system fits how they already work."
         },
         {
           "name": "What they need",
-          "text": "They pick what gets automated, from one small tool to a full system."
+          "text": "They pick what gets automated, from one small tool to a full system, with human sign-off and undo."
         }
       ]
     },
@@ -339,17 +347,17 @@
         "rows": [
           {
             "system": "Lead to booking",
-            "then": "An agent answers every inquiry, gets a video walkthrough, prices the move and books the date. The office just approves.",
+            "then": "An agent answers every inquiry in minutes, gets a video walkthrough, drafts the quote and holds the date. The office approves before it goes out.",
             "now": "Office takes calls, books walkthroughs, types up quotes."
           },
           {
             "system": "Self-planning dispatch",
-            "then": "Assigns crews and trucks, plans routes around traffic, re-plans when a job runs long, and texts customers live arrival times.",
+            "then": "Drafts crew and truck assignments around traffic, re-plans when a job runs long, and texts customers live arrival times once dispatch approves.",
             "now": "Crews and trucks planned on a whiteboard."
           },
           {
             "system": "Job to paid",
-            "then": "Crew photos and times become the invoice and payment link. Damage claims build themselves from before-and-after photos.",
+            "then": "Crew photos, stairs and heavy items become a draft invoice and payment link for review. Before-and-after photos back every damage claim.",
             "now": "Paperwork after every job: hours, invoices, claims."
           }
         ],
@@ -401,17 +409,17 @@
         "rows": [
           {
             "system": "Estimate from a video",
-            "then": "A phone video of the pool becomes measurements, a materials list, crew days and a price. The proposal goes out the same day.",
+            "then": "A phone video of the pool becomes draft measurements, a materials list, crew days and a price. The owner reviews and sends the proposal same day.",
             "now": "Every estimate measured and priced by hand."
           },
           {
             "system": "Supply autopilot",
-            "then": "Orders the right amount from the best-priced supplier, timed to arrive the morning the crew needs it.",
+            "then": "Drafts the right order from the best-priced supplier, timed to arrive the morning the crew needs it, ready for a quick yes.",
             "now": "Materials guessed and picked up in person."
           },
           {
             "system": "Weather-smart schedule",
-            "then": "Watches the forecast and curing times, reshuffles the whole week, and tells every crew and customer what changed.",
+            "then": "Watches the forecast and curing times, drafts the reshuffled week for approval, and updates every crew and homeowner.",
             "now": "Rain days reshuffled by phone."
           }
         ],
@@ -463,17 +471,17 @@
         "rows": [
           {
             "system": "Self-ordering stock",
-            "then": "Tracks what sells, predicts busy days from weather and local events, and drafts supplier orders for a quick yes.",
+            "then": "Tracks what sells, predicts busy days from weather and local events, and drafts supplier orders for a one-tap owner yes.",
             "now": "Stock counted by hand, orders guessed."
           },
           {
             "system": "Smart scheduling",
-            "then": "Builds shifts from the forecast and everyone's availability, and handles swaps by the shop's own rules.",
+            "then": "Drafts shifts from the forecast and everyone's availability, and prepares swap approvals by the shop's own rules.",
             "now": "Schedules by hand, swaps lost in group texts."
           },
           {
             "system": "Front-desk agent",
-            "then": "Takes phone and online orders, answers common questions, replies to reviews, and flags anything a person should see.",
+            "then": "Answers common questions, drafts review replies for approval, and flags any order or issue a person should handle.",
             "now": "Phones, orders and reviews juggled at the counter."
           }
         ],
@@ -517,7 +525,14 @@
       "Measure first.",
       "Build the system.",
       "Measure again."
-    ]
+    ],
+    "cta": {
+      "lead": "Start with a two-day shadow or one workflow.",
+      "label": "Email Cayleb →",
+      "href": "mailto:caylebalvarezjames@gmail.com",
+      "secondaryLabel": "Read the résumé",
+      "secondaryHref": "resume.html"
+    }
   },
   "contact": {
     "lines": [
@@ -593,27 +608,35 @@
       },
       {
         "q": "How does a shadow day work?",
-        "a": "He spends a couple of days alongside someone, sees where their time goes, then builds tools for exactly that and shows them how to use them."
+        "a": "He spends two days watching where time and money leak without slowing the crew, builds tools around their existing apps, and teaches the team."
       },
       {
         "q": "What kind of tools?",
-        "a": "Anything digital a team wants automated, from small tools to full systems: quoting, dispatch, ordering, scheduling, paperwork. Built for them, not off the shelf."
+        "a": "Anything digital a team wants automated: quoting, dispatch, ordering, scheduling, paperwork. Built around their apps, with human sign-off and undo."
       },
       {
         "q": "Done this for a company?",
-        "a": "Not yet. Everything here is his own project work."
+        "a": "Not yet as a paid rollout. He has worked moving, plaster and shop jobs firsthand, and built 5 systems with 3,300+ passing checks."
       },
       {
         "q": "What's Asmodeus?",
         "a": "A private research project that tests trading ideas on past market data. No real money, and no performance claims."
       },
       {
+        "q": "What if a tool makes a mistake?",
+        "a": "People approve before anything goes out, every connection has an undo step, and files stay on the company's own computers."
+      },
+      {
         "q": "How do I reach him?",
-        "a": "Email is fastest, or grab the résumé PDF.",
+        "a": "Email is fastest, or grab the résumé.",
         "links": [
           {
             "label": "Email Cayleb",
             "href": "mailto:caylebalvarezjames@gmail.com"
+          },
+          {
+            "label": "One-page PDF",
+            "href": "Cayleb-James-polished-one-page.pdf"
           },
           {
             "label": "Résumé PDF",

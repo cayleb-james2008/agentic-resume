@@ -90,6 +90,16 @@ def render(content: dict) -> str:
     v = content["value"]
     examples = "".join(example(e, i, v["cardLabel"], v["todayLabel"], v["money"]) for i, e in enumerate(v["examples"]))
     steps = "".join(f"<li>{text(step)}</li>" for step in v["steps"])
+    cta = ""
+    if v.get("cta"):
+        c = v["cta"]
+        cta = (
+            '<div class="value-cta" data-rise data-delay="680">'
+            f'<p class="value-cta-lead">{text(c["lead"])}</p>'
+            f'<div class="value-cta-actions"><a class="value-cta-btn" href="{c["href"]}">{text(c["label"])}</a>'
+            f'<a class="value-cta-link" href="{c["secondaryHref"]}">{text(c["secondaryLabel"])}</a></div>'
+            "</div>"
+        )
     return (
         '<section class="value" data-value id="value" aria-labelledby="value-title">'
         '<div class="value-inner">'
@@ -102,5 +112,6 @@ def render(content: dict) -> str:
         f'<div class="value-examples">{examples}</div>'
         f'<div class="value-proof" data-rise data-delay="600"><p class="value-proof-title">{text(v["stepsTitle"])}</p>'
         f'<ol class="value-steps">{steps}</ol></div>'
+        f"{cta}"
         "</div></section>"
     )

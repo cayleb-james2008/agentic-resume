@@ -26,7 +26,7 @@ def records(data, short=False):
             ('h2', 'Experience'), ('h3', f"{data['experience']['title']} | {data['experience']['dates']}"),
             ('body', data['experience']['intro']), ('h2', 'Selected Projects')]
     for project in data['projects']:
-        rows.append(('h3', project['short_name'] if short else project['name']))
+        rows.append(('h3', f"{project['short_name']} ({project['stack']})" if short else project['name']))
         if not short:
             rows += [('body', project['stack']), ('links', project['links'])]
         rows += [('bullet', b) for b in ([project['short']] if short else project['bullets'])]
@@ -86,12 +86,13 @@ def short_fragment(data):
         assert count == 1, pattern
     replace(r'<p>AI workflow developer · Connecticut</p>', f'<p>{html.escape(data["headline"])} · Connecticut · {data["work_preference"]}</p>')
     replace(r'(<div class="resume-summary"><h2>Summary</h2>)<p>.*?</p>', '<div class="resume-summary"><h2>Summary</h2><p>' + html.escape(data['summary']) + '</p>')
-    replace(r'(<p class="resume-date">2026</p>)<p>.*?</p>', '<p class="resume-date">' + data['experience']['dates'] + '</p><p>' + html.escape(data['experience']['intro']) + '</p>')
-    jobs = '<div class="resume-jobs">' + ''.join('<p><strong>' + html.escape(j['organization'].replace("'", '’').replace(' — ', ' · ')) + '</strong><span>' + html.escape(j['dates']) + '</span></p>' for j in data['additional_experience']) + '</div>'
+    replace(r'<h3>Independent project development</h3><p class="resume-date">2026</p><p>.*?</p>',
+            '<h3>' + html.escape(data['experience']['title'].replace(' - ', ' · ')) + '</h3><p class="resume-date">' + data['experience']['dates'] + '</p><p>' + html.escape(data['experience']['intro']) + '</p>')
+    jobs = '<div class="resume-jobs"><h2>Additional experience</h2>' + ''.join('<p><strong>' + html.escape(j['organization'].replace("'", '’').replace(' — ', ' · ')) + '</strong><span>' + html.escape(j['dates']) + '</span></p>' for j in data['additional_experience']) + '</div>'
     replace(r'<div class="resume-jobs">.*?</div>', jobs)
     school = data['education']
     replace(r'<h3>Portland High School</h3><p>.*?</p>', '<h3>' + html.escape(school['school']) + '</h3><p>' + html.escape(school['location'] + ' · ' + school['status']) + '<br>' + html.escape(school['coursework']) + '</p>')
-    projects = '<div class="resume-selected">' + ''.join(f'<h3><a href="{p["links"][0]["url"]}" data-goto-project="{p["slug"]}">{p["short_name"]} ↗</a></h3><p>{html.escape(p["short"])}</p>' for p in data['projects']) + '</div>'
+    projects = '<div class="resume-selected">' + ''.join(f'<h3><a href="{p["links"][0]["url"]}" data-goto-project="{p["slug"]}">{p["short_name"]} ↗</a> <span class="resume-stack">{html.escape(p["stack"])}</span></h3><p>{html.escape(p["short"])}</p>' for p in data['projects']) + '</div>'
     replace(r'<div class="resume-selected">.*?</div>', projects)
     replace(r'<section><h2>Skills</h2><p>.*?</p></section>', '<section><h2>Skills</h2><p>' + '<br>'.join(html.escape(value) for value in data['short_skills']) + '</p></section>')
     actions = '<footer class="resume-actions"><a class="button primary" href="Cayleb-James-polished-one-page.pdf" download>One-page résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-resume.pdf" download>Detailed résumé PDF ↓</a><a class="quiet" href="Cayleb-James-polished-one-page.txt" download>One-page text ↓</a><a class="quiet" href="Cayleb-James-polished-resume.txt" download>Detailed text ↓</a><a class="quiet" href="mailto:' + data['email'] + '">Let’s talk ↗</a></footer>'
@@ -127,7 +128,7 @@ def check_pdf(path, rows, max_pages, exact_pages=None):
     return {'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'pages': pages, 'bytes': path.stat().st_size}
 
 
-def build_pdf(path, rows, short, snapshot_note):
+def build_pdf(path, rows, short, snapshot_note, data):
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.lib.pagesizes import LETTER
@@ -158,7 +159,7 @@ def build_pdf(path, rows, short, snapshot_note):
     if project_block:
         story.append(KeepTogether(project_block))
     doc = SimpleDocTemplate(str(path), pagesize=LETTER, leftMargin=36, rightMargin=36, topMargin=30, bottomMargin=30,
-                            title='Cayleb Alvarez-James - AI workflow developer', author='Cayleb Alvarez-James',
+                            title=f"{data['full_name']} - {data['headline']}", author=data['full_name'],
                             subject=snapshot_note, invariant=1)
     doc.build(story)
     return check_pdf(path, rows, 1 if short else 2, 1 if short else None)
@@ -179,7 +180,7 @@ def main():
         path = ROOT / (stem + '.txt'); path.write_text(text_export(rows), encoding='utf-8')
         exports[path.name] = {'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
         if not args.content_only:
-            exports[stem + '.pdf'] = build_pdf(ROOT / (stem + '.pdf'), rows, short, data['snapshot_note'])
+            exports[stem + '.pdf'] = build_pdf(ROOT / (stem + '.pdf'), rows, short, data['snapshot_note'], data)
     (HERE / 'resume-fragment.html').write_text(detailed_fragment(records(data)))
     (HERE / 'candidate-fragment.html').write_text(short_fragment(data))
     if not args.content_only:

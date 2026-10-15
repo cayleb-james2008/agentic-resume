@@ -297,3 +297,16 @@ test('the stylesheet follows the brief and the house rules', () => {
   for (const [, value] of css.matchAll(/transition:\s*([^;]+);/g)) assert.match(value, /^(?:color\b|none$)/, 'transitions are hover colour only');
   assert.doesNotMatch(css, /#[0-9a-f]{3,8}\b/i, 'colours come from tokens');
 });
+
+test('deep links clear the fixed masthead: the section, the résumé and every project article keep the scroll margin', () => {
+  const css = read('site/css/resume-half.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const margin = /scroll-margin-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/;
+  const covered = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+    .filter((m) => margin.test(m[2]))
+    .flatMap((m) => m[1].split(',').map((s) => s.trim()));
+  for (const selector of ['.resume-half', '.resume-half section', '.resume-project']) assert.ok(covered.includes(selector), `${selector} clears the masthead`);
+  // Every article that carries an id (the suite pages link index.html#suite) is a .resume-project.
+  const withIds = [...html.matchAll(/<article class="([^"]*)"[^>]*\sid="([^"]+)"/g)];
+  assert.ok(withIds.length >= 5, 'ergon, suite, dotz, sophos and asmodeus carry ids');
+  for (const [, cls, id] of withIds) assert.match(cls, /(^|\s)resume-project(\s|$)/, `#${id} is covered by the scroll margin`);
+});

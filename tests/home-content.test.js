@@ -68,7 +68,7 @@ test('banned claims stay out', () => {
   for (const [path, text] of strings(content)) {
     assert.doesNotMatch(text, /\b(hedge fund|returns?|profit|revenue|clients?)\b/i, path);
   }
-  assert.equal(resume.projects.some((p) => /EvoHedge|Maki/.test(p.name)), false);
-  assert.doesNotMatch(JSON.stringify(content), /EvoHedge|Maki/);
+  assert.equal(resume.projects.some((p) => /\bEvoHedge\b|\bMaki\b/.test(p.name)), false);
+  assert.doesNotMatch(JSON.stringify(content), /\bEvoHedge\b|\bMaki\b/);
   assert.match(resume.evidence_notes.ergon.windows_acceptance, /User testing is underway/);
 });

@@ -108,8 +108,13 @@ test('the guide keeps the site\'s claim rules', () => {
   const STATUS = 'Windows pilot, live checks pending';
   assert.match(guide.questions.find((q) => q.q === "What's Ergon?").a, new RegExp(`${STATUS}\\.$`));
   const text = JSON.stringify(guide).replace(STATUS, '');
-  assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilot\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
+  assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilots?\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
   assert.match(guide.questions.find((q) => /Asmodeus/.test(q.q)).a, /private/i);
+});
+
+test('the education line promises only what that section holds: no PDFs, no downloads', () => {
+  assert.equal(guide.lines.education, 'School and skills, all in one place.');
+  assert.doesNotMatch(guide.lines.education, /pdf|download/i);
 });
 
 test('the guide is hidden until its script mounts it, and its panel is an accessible dialog', () => {

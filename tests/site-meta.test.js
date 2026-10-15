@@ -29,6 +29,10 @@ test('the share card is drawn from type and water: its script reads no person ma
   assert.doesNotMatch(read('scripts/home/make_share_card.py'), /person-|alpha|droplet/);
 });
 
+test('the share card carries the story\'s own headline, word for word', () => {
+  assert.ok(read('scripts/home/make_share_card.py').includes(content.story.beats[0].headline), 'the card\'s headline has drifted from beats[0].headline');
+});
+
 for (const [file, path] of Object.entries(PAGES)) {
   test(`${file}: description, canonical address and link-preview card`, () => {
     const html = read(file);

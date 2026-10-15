@@ -41,12 +41,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .js:not(.reveal-failsafe) .reveal-unit { opacity: 0; transform: translateY(0.35em); }
 .js:not(.reveal-failsafe) .reveal[data-reveal="letter"] .reveal-unit { transform: translateY(0.3em); }
 .js:not(.reveal-failsafe) [data-rise] { opacity: 0; transform: translateY(0.75rem); }
-.js:not(.reveal-failsafe) [data-rise][data-from="translateY(1.25rem)"] { transform: translateY(1.25rem); }
-.js:not(.reveal-failsafe) [data-rise][data-from="translateY(0.5rem)"] { transform: translateY(0.5rem); }
-.js:not(.reveal-failsafe) [data-rise][data-from="translateY(0.3em)"] { transform: translateY(0.3em); }
 .js:not(.reveal-failsafe) [data-fade] { opacity: 0; }
-.js:not(.reveal-failsafe) [data-grow] { transform: scaleX(0); }
-[data-grow] { transform-origin: left; }
 
 /* --- Buttons: chamfered frames with an accent flood on hover ------------ */
 .cta {

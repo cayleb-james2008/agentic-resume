@@ -88,3 +88,8 @@ test('the About statement\'s quiet half stays large text at every width (it is 3
 test('locking scroll for an overlay keeps the scrollbar\'s room, so the page never jumps sideways', () => {
   assert.match(strip(read('site/css/base.css')), /html\s*\{[^}]*scrollbar-gutter:\s*stable/);
 });
+
+test('at the very end of the page the footer\'s last line clears the floating Ask my agent pill', () => {
+  // The pill sits 1rem from the bottom and is 3rem tall; the page can't scroll past the footer, so it leaves room.
+  assert.match(rule(read('site/css/contact.css'), '.ft-legal'), /padding-bottom:\s*calc\(5rem \+ env\(safe-area-inset-bottom, 0px\)\)/);
+});

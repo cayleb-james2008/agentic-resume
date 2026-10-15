@@ -27,6 +27,7 @@
 .ft-cols ul a { display: inline-flex; align-items: center; min-height: 44px; font-size: max(12px, 0.875rem); color: var(--on-dark-72); transition: transform 0.3s var(--ease-hover), color 0.3s; }
 .ft-legal {
   display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2rem;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--raw-color-white-alpha-10); font-size: max(12px, 0.8125rem); color: var(--on-dark-56);
 }
 @media (min-width: 640px) { .ft-legal { flex-direction: row; } }

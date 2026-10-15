@@ -70,6 +70,7 @@ export function mount(section) {
   const cue = section.querySelector('[data-story-cue]');
   const captions = [...section.querySelectorAll('[data-caption]')];
   const overlays = [...section.querySelectorAll('[data-overlay]')];
+  const shapeLabels = [...section.querySelectorAll('[data-overlay="shape"] [data-overlay-item]')];
   const masthead = document.querySelector('[data-masthead]');
 
   // Every inline style written, so going static can take each one back.
@@ -204,6 +205,8 @@ export function mount(section) {
         put(el, 'opacity', fmt(s.overlays[el.dataset.overlay] ?? 0));
         put(el, 'pointerEvents', 'none');
       }
+      // The three shape labels sit in a row under one silhouette at a time: the one the water holds is full.
+      if (s.shapeIndex !== null) for (const el of shapeLabels) put(el, 'opacity', Number(el.dataset.index) === s.shapeIndex ? '1' : '0.4');
     };
 
     /**

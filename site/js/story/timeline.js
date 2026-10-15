@@ -8,7 +8,7 @@
  * Beat lengths are in screens, as the runway is laid out: the section is
  * `RUNWAY_SCREENS` viewports of scrolling, so progress p is at p × 7 screens.
  */
-import { morphAt, slotsFor } from './shapes.js';
+import { morphAt, silhouetteAt, slotsFor } from './shapes.js';
 
 export const BEATS = Object.freeze([
   { id: 'intro', screens: 1.5 }, { id: 'hero', screens: 0.75 }, { id: 'shape', screens: 1 },
@@ -53,7 +53,10 @@ const captionAt = (t) => ease(ramp(t, 0, 0.25)) * fadeOut(t);
  *   cue       the scroll cue's opacity; masthead, the masthead's
  *   captions  opacity per caption; at most one is above 0.5
  *   overlays  opacity per label group: its caption's, but only once the beat's
- *             morph is over (t 0.4)
+ *             morph is over (t 0.4); the shape beat's once its first silhouette
+ *             has settled, for it morphs three times
+ *   shapeIndex the silhouette the shape beat holds (0 truck, 1 desk, 2 shop),
+ *             so its label can be marked; null in every other beat
  *   slots     the water, `MAX_SLOTS` of them (shapes.js)
  *   flow      0..1, a swell while the water changes shape (0 when it is still)
  *   splashAt  the progress at which the drop lands: a constant, for the ripple
@@ -75,7 +78,7 @@ export const storyState = (progress, layout) => {
   };
   const settled = ease(ramp(t, 0.4, 0.55));
   const overlays = {
-    shape: captions.shape * settled,
+    shape: captions.shape * ease(ramp(t, 0.4 / 3, 0.55 / 3)),   // the first third's own settle
     team: captions.team * settled,
     tickets: captions.tickets * settled,
     worth: captions.worth * settled,
@@ -96,6 +99,7 @@ export const storyState = (progress, layout) => {
     masthead: ramp(intro, 0.6, 0.9),
     captions,
     overlays,
+    shapeIndex: id === 'shape' ? silhouetteAt(t) : null,
     slots: slotsFor(id, t, layout),
     flow: morph < 1 ? Math.sin(Math.PI * morph) : 0,
     splashAt: SPLASH_AT,

@@ -294,6 +294,9 @@ const BUILD = { intro: introSlots, hero: heroSlots, shape: shapeSlots, team: tea
 /** The beats that open by flowing in from the one before (shape handles its own, hero and intro have none). */
 const FLOWS_IN = new Set(['team', 'tickets', 'worth', 'drain']);
 
+/** Which silhouette the shape beat holds at local time `t`: 0 the truck, 1 the desk, 2 the shop. */
+export const silhouetteAt = (t) => third(Math.min(1, Math.max(0, t))).k;
+
 /**
  * How far through its morph a beat is at local time `t`: 0 as it starts, 1 once
  * it has settled. The intro hands the hero a finished pool, so neither morphs;

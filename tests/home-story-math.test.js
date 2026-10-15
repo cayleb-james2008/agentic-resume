@@ -486,3 +486,14 @@ test('a label that would run off the stage comes back to the gutter, and only th
   assert.equal(nudgeInside(5, 120, 390, 16), 0);         // in the gutter but whole: left on its node
   assert.equal(nudgeInside(-20, 400, 390, 16), 0);       // wider than the room: no move would help
 });
+
+test('the shape labels show from the first silhouette on, and the one the water holds is marked', () => {
+  const L = layoutFor(16 / 9, 6);
+  const shape = (t) => storyState((2.25 + t) / RUNWAY_SCREENS, L);
+  // The beat settles three times; its labels wait only for the first (the truck), not for the beat's t 0.4.
+  assert.equal(shape(0.05).overlays.shape, 0);
+  assert.ok(shape(0.28).overlays.shape > 0.99, 'the labels are up while the truck holds');
+  assert.deepEqual([0.28, 0.61, 0.84].map((t) => shape(t).shapeIndex), [0, 1, 2]);
+  assert.equal(shape(0.999).shapeIndex, 2);   // (shape t 1 is the team beat's first frame)
+  for (const p of [0.1, 0.5, 0.9]) assert.equal(storyState(p, L).shapeIndex, null, `p=${p} is not the shape beat`);
+});

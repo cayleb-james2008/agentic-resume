@@ -26,7 +26,8 @@ import { layoutFor, overlaysFor } from './shapes.js';
 import { getStoryTier } from './tier.js';
 import { storyState } from './timeline.js';
 import {
-  RIPPLE_START_OWED, RIPPLE_STEP_MS, WATER_DEADLINE_MS, deadline, nudgeInside, shouldRetune, stepsFor, toPercent,
+  RIPPLE_START_OWED, RIPPLE_STEP_MS, RIPPLE_STILL, WATER_DEADLINE_MS, deadline, isStill, nudgeInside, shouldRetune, stepsFor,
+  toPercent,
 } from './view.js';
 
 /** The water's colours, read off the page so they always match it. */
@@ -37,8 +38,6 @@ const COLOR_TOKENS = { ink: '--raw-color-ink-900', deep: '--raw-color-ink-950', 
  * it catches up at most this many steps instead of all at once.
  */
 const MAX_STEPS = 4;
-/** Below this the surface is still: no need to draw it again. */
-const STILL = 1e-4;
 /** A change in lean smaller than this (about 0.2°) is sensor noise. */
 const TILT_NOISE = 0.005;
 
@@ -65,9 +64,8 @@ export const pointOf = (o, beat, key) => {
 
 export function mount(section) {
   const noop = () => {};
-  if (prefersReducedMotion()) return noop;   // the CSS has already kept the runway off
   const root = document.documentElement;
-  if (root.classList.contains('reveal-failsafe')) return noop;   // so has the failsafe
+  if (root.classList.contains('reveal-failsafe')) return noop;   // the CSS has already kept the runway off
 
   const stage = section.querySelector('[data-story-stage]');
   const canvas = section.querySelector('canvas[data-water]');
@@ -104,7 +102,9 @@ export function mount(section) {
     if (masthead) masthead.style.opacity = '1';
   };
 
-  if (!stage || !canvas) {
+  // With motion reduced the CSS keeps the runway off, but nothing here would play it should motion be allowed
+  // again mid-visit: .story--static keeps it off for good, and the masthead shows.
+  if (prefersReducedMotion() || !stage || !canvas) {
     toStatic();
     return noop;
   }
@@ -118,6 +118,10 @@ export function mount(section) {
     try {
       const { Water } = await import('./water.js');
       if (ended) return;   // gone static meanwhile (the deadline passed, say): the water came too late
+      if (prefersReducedMotion()) {   // motion was reduced while it loaded: no runway to play
+        toStatic();
+        return;
+      }
       const colors = Object.fromEntries(Object.entries(COLOR_TOKENS).map(([key, token]) => [key, readToken(token)]));
       water = new Water(canvas, { tier, colors });
       late.met();
@@ -135,6 +139,9 @@ export function mount(section) {
     let rippled = true;            // the ripple has changed since its bytes were taken
     const tilt = [0, 0];
     let drawnTilt = 0;
+    let state = null;              // storyState at lastProgress: the same scroll is the same frame
+    let flowing = false;           // the last frame swelled mid-morph, which moves with time, scroll or not
+    let mastFocus = false;         // focus was in the masthead at the last frame drawn
 
     /**
      * The labels sit on the water's nodes: placed once per layout, from the same maths. One that would still
@@ -230,33 +237,50 @@ export function mount(section) {
       // 100lvh, taller than the window while a phone's toolbar shows, so measuring by the stage puts progress 1
       // there whatever the toolbar does: 0..1 is always the runway's seven svh screens of scrolling.
       const progress = triggerProgress(section.getBoundingClientRect(), stage.clientHeight || window.innerHeight, 'top top', 'bottom bottom');
-      const s = storyState(progress, layout);
 
+      // The ripple's clock runs on every ticked frame, the water still or not, so it keeps its half-step phase.
+      let steps = 0;
+      if (tick && !tier.freeze) {
+        const due = stepsFor(owed, clock === null ? 0 : time - clock, RIPPLE_STEP_MS, MAX_STEPS);
+        owed = due.owed;
+        steps = due.steps;
+      }
+      if (tick) clock = time;
+
+      // Still water at the same scroll: the frame on screen is this frame, so build, step and upload nothing.
+      const leaned = Math.abs(tilt[0] - drawnTilt) > TILT_NOISE;
+      const focus = masthead ? masthead.matches(':focus-within') : false;
+      const energy = tier.freeze ? 0 : ripple.energy();
+      if (isStill({ force, progress, lastProgress, energy, flowing, leaned, focusMoved: focus !== mastFocus })) return;
+      mastFocus = focus;
+
+      if (force || progress !== lastProgress || !state) state = storyState(progress, layout);
+      const s = state;
       if (!tier.freeze) {
         // The drop lands: one splash, going forward only.
         if (lastProgress !== null && lastProgress < s.splashAt && progress >= s.splashAt) {
           ripple.poke(0.5, 0.1, 0.9, 4);
           rippled = true;
         }
-        if (tick) {
-          const due = stepsFor(owed, clock === null ? 0 : time - clock, RIPPLE_STEP_MS, MAX_STEPS);
-          owed = due.owed;
-          for (let i = 0; i < due.steps; i++) ripple.step();
-          if (due.steps) rippled = true;
+        // A settled surface is left as it lies until a splash or a touch stirs it.
+        if (steps && (rippled || energy > RIPPLE_STILL)) {
+          for (let i = 0; i < steps; i++) ripple.step();
+          rippled = true;
         }
       }
-      if (tick) clock = time;
 
       writePage(s);
 
       const flow = tier.freeze ? 0 : s.flow;
-      const moving = rippled && ripple.energy() > STILL;
-      const leaned = Math.abs(tilt[0] - drawnTilt) > TILT_NOISE;
-      if (force || progress !== lastProgress || moving || flow > 0 || leaned) {
-        if (rippled) ripple.toBytes(bytes);
+      flowing = flow > 0;
+      const moving = rippled && ripple.energy() > RIPPLE_STILL;
+      if (force || progress !== lastProgress || moving || flowing || leaned) {
+        // The ripple's bytes go up only when it has changed since they last did.
+        const fresh = rippled;
+        if (fresh) ripple.toBytes(bytes);
         rippled = false;
         drawnTilt = tilt[0];
-        water.render({ slots: s.slots, flow, time, ripple: bytes, rippleSize: [ripple.cols, ripple.rows], tilt });
+        water.render({ slots: s.slots, flow, time, ripple: fresh ? bytes : null, rippleSize: fresh ? [ripple.cols, ripple.rows] : null, tilt });
         force = false;
       }
       lastProgress = progress;

@@ -33,7 +33,7 @@ const DEFAULT_COLORS = Object.freeze({
 
 /**
  * The swell's two waves turn at 0.002 and 0.0015 rad/ms, both whole multiples
- * of 0.0005, so time can wrap at 2π/0.0005 ms (about 3.5 hours) with no jump —
+ * of 0.0005, so time can wrap at 2π/0.0005 ms (about 12.6 s) with no jump —
  * and float32 keeps the phase sharp instead of drifting as the page stays open.
  */
 const TIME_PERIOD = (2 * Math.PI) / 0.0005;
@@ -50,7 +50,8 @@ const CONTEXT_ATTRIBUTES = Object.freeze({
   antialias: false,
   depth: false,          // one quad, no depth test: no depth buffer to fill
   stencil: false,
-  powerPreference: 'high-performance',
+  // One quad of water is no reason to wake a laptop's discrete GPU (and drain its battery) for the page.
+  powerPreference: 'default',
 });
 
 const VERTEX = /* glsl */ `
@@ -157,7 +158,7 @@ export class Water {
     this.loseContext = gl.getExtension('WEBGL_lose_context');
 
     this.renderer = new WebGLRenderer({
-      canvas, context: gl, antialias: false, alpha: false, powerPreference: 'high-performance',
+      canvas, context: gl, antialias: false, alpha: false, powerPreference: CONTEXT_ATTRIBUTES.powerPreference,
     });
     this.renderer.setPixelRatio(1);   // resize() sizes the drawing buffer itself
 
@@ -217,7 +218,8 @@ export class Water {
   /**
    * Draw one frame. `slots` are shapes.js slots; a slot is drawn when it has
    * size (`r + th > 0`) and some fill. `ripple` is ripple.js `toBytes` output
-   * for a `rippleSize` [cols, rows] grid; `time` is in ms.
+   * for a `rippleSize` [cols, rows] grid, or null to keep the heights last
+   * uploaded (the ripple has not changed); `time` is in ms.
    */
   render({ slots, flow = 0, time = 0, ripple, rippleSize, tilt = [0, 0] }) {
     const A = this.uniforms.uSlotA.value;
@@ -242,7 +244,7 @@ export class Water {
     this.renderer.render(this.scene, this.camera);
   }
 
-  /** The ripple bytes, re-uploaded every frame; a new grid size needs a new texture. */
+  /** The ripple bytes, uploaded on each frame they are given for; a new grid size needs a new texture. */
   uploadRipple(bytes, cols, rows) {
     const image = this.ripple.image;
     if (image.width !== cols || image.height !== rows) {

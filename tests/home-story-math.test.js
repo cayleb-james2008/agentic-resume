@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
 import { CAPTION_BOX, DROP_R, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, TICKETS, layoutFor, slotsFor, overlaysFor, ticketTrip } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
-import { RIPPLE_STEP_MS, RIPPLE_START_OWED, WATER_DEADLINE_MS, deadline, nudgeInside, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
+import { RIPPLE_STEP_MS, RIPPLE_START_OWED, RIPPLE_STILL, WATER_DEADLINE_MS, deadline, isStill, nudgeInside, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
 
 /** A stand-in for window: width, pointer class, reduced motion, save-data, memory. */
 const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
@@ -614,4 +614,61 @@ test('the runway\'s progress runs 0..1 over its seven svh screens, a phone\'s to
   // lvh never changes with the toolbar, so the stage never resizes for it; were a browser to resize it anyway,
   // a change under 160px is still not a retune.
   assert.equal(shouldRetune({ w: 390, h: 750 }, { w: 390, h: 664 }), false);
+});
+
+test('a still frame (same scroll, settled water, no swell, lean or focus change) is skipped, and the ripple clock runs on', () => {
+  const calm = { force: false, progress: 0.3, lastProgress: 0.3, energy: RIPPLE_STILL / 2, flowing: false, leaned: false, focusMoved: false };
+  assert.equal(isStill(calm), true);
+  // Any one change is a frame to draw.
+  for (const [key, value] of [['force', true], ['progress', 0.3001], ['lastProgress', null], ['energy', RIPPLE_STILL * 2], ['flowing', true], ['leaned', true], ['focusMoved', true]]) {
+    assert.equal(isStill({ ...calm, [key]: value }), false, key);
+  }
+  assert.equal(isStill({ ...calm, energy: RIPPLE_STILL }), true, 'the threshold itself is still');
+  assert.equal(isStill({ ...calm, energy: NaN }), true, 'no reading is no motion');
+  assert.equal(RIPPLE_STILL, 1e-4);
+
+  // story.js: the clock moves on every ticked frame before the skip, and the frame's work all comes after it.
+  const script = readFileSync(new URL('../site/js/story/story.js', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '');
+  const draw = script.slice(script.indexOf('const draw = '), script.indexOf('const frame = '));
+  const skip = draw.indexOf('if (isStill(');
+  assert.ok(skip > 0, 'draw skips still frames');
+  assert.ok(draw.indexOf('stepsFor(') < skip, 'the ripple clock (R11 half-step) runs before the skip');
+  for (const work of ['storyState(', 'ripple.step()', 'ripple.toBytes(', 'water.render(', 'writePage(']) {
+    assert.ok(draw.indexOf(work) > skip, `${work} waits for a frame that changes something`);
+  }
+  // The same scroll reuses its state, and the ripple's bytes go up only when they have changed.
+  assert.match(draw, /if \(force \|\| progress !== lastProgress \|\| !state\) state = storyState\(progress, layout\);/);
+  assert.match(draw, /ripple: fresh \? bytes : null/);
+  // With 60Hz frames the clock still steps two a frame, whether or not the water was skipped in between.
+  let owed = RIPPLE_START_OWED;
+  for (let i = 0; i < 120; i++) {
+    const r = stepsFor(owed, 1000 / 60, RIPPLE_STEP_MS, 4);
+    assert.equal(r.steps, 2);
+    owed = r.owed;
+  }
+});
+
+test('a page that loads with motion reduced stays static should motion come back, and so does one reduced mid-load', () => {
+  const script = readFileSync(new URL('../site/js/story/story.js', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '');
+  const mount = script.slice(script.indexOf('export function mount('));
+  // Reduced motion at mount goes through toStatic (which adds .story--static and shows the masthead), not a bare return.
+  assert.doesNotMatch(mount, /if \(prefersReducedMotion\(\)\) return noop;/);
+  assert.match(mount, /if \(prefersReducedMotion\(\) \|\| !stage \|\| !canvas\) \{\s*toStatic\(\);\s*return noop;/);
+  assert.ok(mount.indexOf('const toStatic') < mount.indexOf('prefersReducedMotion()'), 'toStatic exists by then');
+  const toStatic = mount.slice(mount.indexOf('const toStatic'), mount.indexOf('};', mount.indexOf('const toStatic')));
+  assert.match(toStatic, /classList\.add\('story--static'\)/);
+  assert.match(toStatic, /masthead\.style\.opacity = '1'/);
+  // And after the import resolves, motion is asked about again before the water is built.
+  const after = mount.slice(mount.indexOf("await import('./water.js')"));
+  assert.ok(after.indexOf('prefersReducedMotion()') < after.indexOf('new Water('));
+});
+
+test('the water asks for the default GPU, and its comments tell the truth about the time wrap', () => {
+  const water = readFileSync(new URL('../site/js/story/water.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(water, /high-performance/);
+  assert.match(water, /powerPreference: 'default'/);
+  // 2π / 0.0005 rad/ms is 12,566ms: about 12.6 s, not hours.
+  assert.ok(Math.abs((2 * Math.PI) / 0.0005 / 1000 - 12.6) < 0.05);
+  assert.match(water, /about 12\.6 s/);
+  assert.doesNotMatch(water, /3\.5 hours/);
 });

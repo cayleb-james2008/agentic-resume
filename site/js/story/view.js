@@ -59,6 +59,20 @@ export const stepsFor = (owedMs, dtMs, stepMs, maxSteps = Infinity) => {
   return { steps, owed: total - steps * stepMs };
 };
 
+/** Ripple energy (ripple.js `energy`) below this is still water: nothing to step, upload or draw again. */
+export const RIPPLE_STILL = 1e-4;
+
+/**
+ * Whether a frame would draw exactly what is already on screen: nothing forces
+ * it, the scroll is where the last frame left it, the water is still (no ripple
+ * energy above RIPPLE_STILL and no swell, which moves with time), and neither
+ * the lean nor the focus has changed. story.js then skips the frame's work (the
+ * story state, the ripple's steps and its texture upload); only the ripple's
+ * clock moves on, so it keeps its half-step phase.
+ */
+export const isStill = ({ force, progress, lastProgress, energy, flowing, leaned, focusMoved }) =>
+  !force && progress === lastProgress && !(energy > RIPPLE_STILL) && !flowing && !leaned && !focusMoved;
+
 /**
  * How long the water may take to load (three.js and water.js) and build after
  * the story mounts. Past it the story goes static instead of leaving a blank

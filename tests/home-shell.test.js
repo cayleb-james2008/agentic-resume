@@ -75,6 +75,11 @@ test('failsafe reveals the page', () => {
   const booted = main.indexOf('window.__homeBooted = true');
   assert.ok(main.lastIndexOf('mount(') > 0, 'main.js mounts the blocks');
   assert.ok(booted > main.lastIndexOf('mount('), '__homeBooted is set after every mount');
+  for (const module of ['loader', 'liquid', 'reveal', 'carousel', 'clock', 'count', 'ergon', 'overlays', 'grid']) {
+    assert.match(main, new RegExp(`from '\\./home/${module}\\.js'`), module);
+  }
+  assert.match(main, /from '\.\/guide\/guide\.js'/);
+  assert.doesNotMatch(main, /story|three/);
 });
 
 test('no keyframes', () => {

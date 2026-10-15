@@ -12,6 +12,7 @@ import { countProgress, formatCount, splitFigure } from '../site/js/home/count.j
 import { ladderStop, nextTeam, wirePath } from '../site/js/home/graph.js';
 import { createScrollLock } from '../site/js/home/overlays.js';
 import { composeMail, validate } from '../site/js/home/mail.js';
+import { term } from '../site/js/home/text.js';
 
 const close = (a, b, eps = 1e-3) => assert.ok(Math.abs(a - b) < eps, `${a} ≈ ${b}`);
 const points = (d) => [...d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
@@ -158,4 +159,11 @@ test('the mail draft carries any characters intact and names the topic', () => {
   assert.equal(query.get('body'), m.body);
   assert.equal(m.text, `To: me@example.com\nSubject: ${m.subject}\n\n${m.body}`);
   assert.equal(composeMail({ name: 'Sam', email: 'a@b.co', msg: 'x', topic: '' }, 'me@example.com').subject, 'Project: Sam');
+});
+
+test('terminal lines colour the prompt, ticks and ticket flags, and escape everything else', () => {
+  assert.equal(term(['$ ergon shape --team shop']), '<span class="c">$</span> ergon shape --team shop');
+  assert.equal(term(['› front desk · done ✓']), '<span class="c">›</span> front desk · done <span class="g">✓</span>');
+  assert.equal(term(['⚑ ticket · <b>&']), '<span class="w">⚑</span> ticket · &lt;b&gt;&amp;');
+  assert.equal(term(['a', 'b']), 'a\nb');
 });

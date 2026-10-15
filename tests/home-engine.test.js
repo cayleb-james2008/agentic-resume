@@ -80,7 +80,6 @@ test('named configs are the reference values', () => {
 });
 
 import { interpolate, triggerProgress } from '../site/js/engine/scroll.js';
-import { splitUnits } from '../site/js/engine/reveal.js';
 
 test('triggerProgress endpoints', () => {
   const vh = 800;
@@ -96,7 +95,3 @@ test('interpolate units', () => {
   assert.equal(interpolate(0, 10, 0.25), 2.5);
 });
 
-test('splitUnits', () => {
-  assert.deepEqual(splitUnits('next race', 'letter'), [['n', 'e', 'x', 't'], ['r', 'a', 'c', 'e']]);
-  assert.deepEqual(splitUnits('a b', 'word'), [['a'], ['b']]);
-});

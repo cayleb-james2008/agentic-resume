@@ -123,3 +123,24 @@ test('the loader shows only on a scripted page, never after the failsafe', () =>
   assert.match(css, /(^|\})\s*\.loader\s*\{\s*display:\s*none;?\s*\}/);
   assert.match(css, /\.js:not\(\.reveal-failsafe\) \.loader\s*\{[^}]*display:\s*flex/);
 });
+
+test('scripts load nothing from another origin, and scroll and pointer listeners never block scrolling', async () => {
+  const { readdirSync, statSync } = await import('node:fs');
+  const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(`${dir}/${n}`).isDirectory() ? walk(`${dir}/${n}`) : [`${dir}/${n}`]));
+  const files = walk(new URL('../site/js', import.meta.url).pathname).filter((f) => f.endsWith('.js'));
+  for (const file of files) {
+    const js = readFileSync(file, 'utf8');
+    // XML namespaces (the SVG one) are names, not requests.
+    assert.doesNotMatch(js.replace(/'http:\/\/www\.w3\.org\/2000\/svg'/g, ''), /https?:\/\//, `${file} fetches nothing remote`);
+    for (const m of js.matchAll(/addEventListener\('(pointermove|scroll|touchmove|wheel)'/g)) {
+      // Read the whole call, to its closing parenthesis, and check its options.
+      let depth = 0, end = m.index + 'addEventListener'.length;
+      for (; end < js.length; end++) {
+        if (js[end] === '(') depth++;
+        else if (js[end] === ')' && --depth === 0) break;
+      }
+      assert.match(js.slice(m.index, end + 1), /\{\s*passive:\s*true\s*\}\s*\)$/, `${file}: ${m[1]} listener is passive`);
+    }
+  }
+  assert.ok(files.some((f) => f.endsWith('home/liquid.js')) && files.some((f) => f.endsWith('home/ergon.js')));
+});

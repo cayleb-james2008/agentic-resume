@@ -7,3 +7,14 @@ export function formatClock(date, timeZone = 'America/New_York') {
   const d = parts({ day: 'numeric', month: 'long', year: 'numeric' }, 'en-GB');
   return { time: `${t.hour}:${t.minute}${t.dayPeriod.toLowerCase()}`, date: `${d.day} ${d.month}, ${d.year}` };
 }
+
+/** Writes the time into every [data-time] and the date into every [data-date], each second. */
+export function mount(doc = document) {
+  const tick = () => {
+    const { time, date } = formatClock(new Date());
+    doc.querySelectorAll('[data-time]').forEach((el) => { el.textContent = time; });
+    doc.querySelectorAll('[data-date]').forEach((el) => { el.textContent = date; });
+  };
+  tick();
+  return window.setInterval(tick, 1000);
+}

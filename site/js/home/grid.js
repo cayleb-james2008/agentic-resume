@@ -12,3 +12,14 @@ export function rootFontSize(width) {
   const widthReduction = ((BASE_WIDTH - width) / BASE_WIDTH) * 100;
   return FONT_BASE - (FONT_BASE * (widthReduction * COEF)) / 100;
 }
+
+/** Keeps the root size in step with the window above 1920px. */
+export function mount(root = document.documentElement) {
+  const apply = () => {
+    const size = rootFontSize(window.innerWidth);
+    if (size === null) root.style.removeProperty('font-size');
+    else root.style.fontSize = `${size}px`;
+  };
+  apply();
+  window.addEventListener('resize', apply, { passive: true });
+}

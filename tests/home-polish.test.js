@@ -75,9 +75,10 @@ test('the spec\'s tier-1 colours stay; the new ones are added beside them', () =
   assert.match(tokensCss, /--raw-color-white-alpha-40: rgb\(255 255 255 \/ 0\.4\);/);
 });
 
-test('landscape phones get the phone guide: one greeting, then a button', () => {
-  const js = read('site/js/guide/guide.js');
-  assert.match(js, /matchMedia\('\(max-width: 639px\), \(max-height: 500px\)'\)/);
+test("on a landscape phone the agent's answers scroll inside the panel, never past the screen", () => {
+  const css = strip(read('site/css/guide.css'));
+  assert.match(css, /\.guide-log\s*\{[^}]*max-height:\s*min\(17rem, 45vh\)[^}]*overflow-y:\s*auto/);
+  assert.match(css, /\.guide-panel\s*\{[^}]*width:\s*min\(23rem, calc\(100vw - 2rem\)\)/);
 });
 
 test('the agent is the >_ tile, with no face, on the homepage and the 404 page', () => {

@@ -29,6 +29,25 @@ test('fonts and licenses are present', () => {
   }
 });
 
+test('Onest and JetBrains Mono are vendored with licences', () => {
+  const provenance = JSON.parse(readFileSync(path('vendor/PROVENANCE.json'), 'utf8'));
+  const fonts = [
+    ...[400, 500, 600, 700].map((w) => `assets/fonts/onest-latin-${w}-normal.woff2`),
+    ...[400, 500].map((w) => `assets/fonts/jetbrains-mono-latin-${w}-normal.woff2`),
+  ];
+  for (const file of fonts) {
+    assert.ok(existsSync(path(file)), file);
+    assert.ok(provenance[file], `${file} is in PROVENANCE.json`);
+    const hash = createHash('sha256').update(readFileSync(path(file))).digest('hex');
+    assert.equal(hash, provenance[file].sha256, `${file} hash`);
+  }
+  for (const name of ['onest-OFL', 'jetbrains-mono-OFL']) {
+    const licence = path(`assets/licenses/${name}.txt`);
+    assert.ok(existsSync(licence), name);
+    assert.match(readFileSync(licence, 'utf8'), /SIL Open Font License, Version 1\.1/);
+  }
+});
+
 test('three is revision 185', async () => {
   const { REVISION } = await import(path('vendor/three-0.185.0/three.core.min.js'));
   assert.equal(REVISION, '185');

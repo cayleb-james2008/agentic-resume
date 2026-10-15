@@ -39,6 +39,17 @@ test('muted labels on the light ground read at 4.5:1 or better', () => {
   assert.ok(contrast('--foreground-muted', '--background') >= 4.5, contrast('--foreground-muted', '--background').toFixed(2));
 });
 
+test('the terminal dim tone reads on the terminal ground', () => {
+  assert.ok(contrast('--term-dim', '--term') >= 4.5, contrast('--term-dim', '--term').toFixed(2));
+  assert.ok(contrast('--term-fg', '--term') >= 7);
+});
+
+test('the type roles are Onest, with JetBrains Mono for terminal text', () => {
+  assert.match(tokens['--font-sans'], /^"Onest"/);
+  assert.match(tokens['--font-display'], /^"Onest"/);
+  assert.match(tokens['--font-mono'], /^"JetBrains Mono"/);
+});
+
 test('the footer copyright reads at 4.5:1 or better on black', () => {
   assert.ok(contrast('--foreground-on-dark-faint', '--surface-black') >= 4.5);
 });

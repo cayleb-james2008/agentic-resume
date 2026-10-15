@@ -13,6 +13,20 @@
 @font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 700; font-display: swap;
   src: url("../../assets/fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
 
+/* The Lumora layout (2026-10-15): Onest for everything a person reads, JetBrains Mono where the machine speaks. */
+@font-face { font-family: "Onest"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../../assets/fonts/onest-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Onest"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../../assets/fonts/onest-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Onest"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../../assets/fonts/onest-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Onest"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../../assets/fonts/onest-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../../assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../../assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+
 :root {
   --raw-color-ice-50: #f7fafb;        /* frame fill */
   --raw-color-ice-100: #ebeef1;       /* backdrop contour lines */
@@ -40,6 +54,22 @@
   --raw-color-ink-alpha-60: rgb(9 10 11 / 0.6);        /* muted labels on the light ground */
   --raw-color-white-alpha-60: rgb(255 255 255 / 0.6);  /* footer: the copyright */
   --raw-color-cyan-700: #007a85;      /* accent type on the light ground */
+  /* Added 2026-10-15 (Lumora layout): cool neutrals biased toward the cyan, the terminal, and status hues. */
+  --raw-color-cool-50: #f0f2f2;       /* light fills: cards, pills, the résumé sheet */
+  --raw-color-cool-100: #e1e5e6;      /* pressed fills, sheet dividers, the share card ground */
+  --raw-color-cool-150: #e3e7e8;      /* hairlines */
+  --raw-color-cool-300: #cdd2d4;      /* the hero ground behind its picture */
+  --raw-color-term-900: #0f1519;      /* terminal panels */
+  --raw-color-term-200: #cfdcde;      /* terminal text */
+  --raw-color-term-400: #8a9da2;      /* terminal dim text */
+  --raw-color-ok-300: #7ee2b8;        /* terminal ticks */
+  --raw-color-warn-400: #f2a93b;      /* pending status, tickets in flight */
+  --raw-color-ink-alpha-63: rgb(9 10 11 / 0.63);      /* small labels */
+  --raw-color-ink-alpha-67: rgb(9 10 11 / 0.67);      /* secondary copy */
+  --raw-color-ink-alpha-74: rgb(9 10 11 / 0.74);      /* body copy on light fills */
+  --raw-color-white-alpha-56: rgb(255 255 255 / 0.56);
+  --raw-color-white-alpha-62: rgb(255 255 255 / 0.62);
+  --raw-color-white-alpha-72: rgb(255 255 255 / 0.72);
 
   --raw-font-size-96: 6rem;      /* the hero name */
   --raw-font-size-70: 4.375rem;  /* the name on phones */
@@ -66,9 +96,9 @@
   --raw-edge-fade-share: 10%; --raw-edge-fade-length: 6rem;
 
   /* Tier 2 — roles */
-  --background: var(--raw-color-ice-50);
+  --background: var(--raw-color-white);
   --foreground: var(--raw-color-ink-950);
-  --foreground-muted: var(--raw-color-ink-alpha-60);
+  --foreground-muted: var(--raw-color-ink-alpha-63);
   --hairline-ink: var(--raw-color-ink-alpha-35);
   --surface-dark: var(--raw-color-ink-900);
   --surface-dark-raised: var(--raw-color-ink-800);
@@ -102,13 +132,36 @@
   --duration-fast: 150ms; --duration-normal: 250ms; --duration-plate: 700ms;
   --ease-entrance: cubic-bezier(0.2, 0, 0, 1);
   --ease-plate: cubic-bezier(0.33, 0, 0, 1);
-  --font-sans: "Space Grotesk", system-ui, sans-serif;
-  --font-display: "Oswald", Impact, sans-serif;
+  --surface: var(--raw-color-cool-50);
+  --surface-2: var(--raw-color-cool-100);
+  --line: var(--raw-color-cool-150);
+  --hero-ground: var(--raw-color-cool-300);
+  --ink: var(--raw-color-ink-950);
+  --text-74: var(--raw-color-ink-alpha-74);
+  --text-67: var(--raw-color-ink-alpha-67);
+  --text-63: var(--raw-color-ink-alpha-63);
+  --on-dark-72: var(--raw-color-white-alpha-72);
+  --on-dark-62: var(--raw-color-white-alpha-62);
+  --on-dark-56: var(--raw-color-white-alpha-56);
+  --term: var(--raw-color-term-900);
+  --term-fg: var(--raw-color-term-200);
+  --term-dim: var(--raw-color-term-400);
+  --ok: var(--raw-color-ok-300);
+  --warn: var(--raw-color-warn-400);
+  --radius-pill: 9999px; --radius-card: 2rem; --radius-card-sm: 1.25rem; --radius-control: 0.875rem;
+  --ease-line: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-word: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-hover: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --font-sans: "Onest", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Onest", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 body { background: var(--background); color: var(--foreground); min-height: 100lvh; margin: 0; }
 
-/* Root font-size bands (spec §L188–221). */
+/* The rem grid (Lumora layout, 2026-10-15): the reference's proportional bands without its jumps
+   (16px→12px at 1441px, 10px↔28px at 640px). Above 1920px, site/js/home/grid.js keeps scaling up. */
 html { font-size: 16px; }
-@media (max-width: 1920px) { html { font-size: 0.833333vw; } }   /* 16·100/1920 */
-@media (max-width: 1440px) { html { font-size: 1.111111vw; } }   /* 16·100/1440 */
-@media (max-width: 1279px) { html { font-size: 16px; } }
+@media (max-width: 1440px) { html { font-size: clamp(13px, 1.111111vw, 16px); } }
+@media (max-width: 1023.98px) { html { font-size: clamp(14px, 1.5625vw, 16px); } }
+@media (max-width: 640px) { html { font-size: min(4.444444vw, 18px); } }

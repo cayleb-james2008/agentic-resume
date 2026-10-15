@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { layoutFor, overlaysFor } from '../site/js/story/shapes.js';
+import { GATE_R, NODE_R, SOURCE_R, layoutFor, overlaysFor, slotsFor } from '../site/js/story/shapes.js';
+import { pointOf } from '../site/js/story/story.js';
 
 const root = new URL('../', import.meta.url);
 const read = (file) => readFileSync(new URL(file, root), 'utf8');
@@ -152,8 +153,10 @@ test('overlay labels come from content and are hidden from assistive tech', () =
   assert.deepEqual(items('shape').map(textOf), beat('shape').labels);
   assert.deepEqual(items('shape').map((el) => el.match(/data-index="(\w+)"/)[1]), ['0', '1', '2']);
 
-  // team: six people, each with the apps overlaysFor names for that index, and the tag
-  const people = items('team');
+  // team: six people, each with the apps overlaysFor names for that index, and the tag on the source
+  const team = items('team');
+  const people = team.filter((el) => !/data-index="source"/.test(el));
+  assert.equal(team.length, 7);
   assert.equal(people.length, 6);
   const apps = overlaysFor(layoutFor(1.6, 6)).team.map((p) => p.apps);
   people.forEach((person, i) => {
@@ -163,9 +166,11 @@ test('overlay labels come from content and are hidden from assistive tech', () =
     assert.equal(count(person, /<svg\b/g), apps[i].length);
   });
   assert.deepEqual(people.map((p) => textOf(one(p, 'span', /class="story-role"/))), beat('team').roles);
-  assert.equal(count(overlay('team'), /class="story-tag"/g), 1);
-  assert.equal(textOf(one(overlay('team'), 'span', /class="story-tag"/)), 'Ergon');
-  assert.ok(!people.some((p) => p.includes('story-tag')), 'the tag is not an item story.js would place by index');
+  const tag = team.filter((el) => /data-index="source"/.test(el));
+  assert.equal(tag.length, 1, 'one item sits on the team source');
+  assert.match(tag[0], /^<span class="story-item story-tag" data-overlay-item data-index="source">Ergon<\/span>$/);
+  assert.equal(count(overlay('team'), /story-tag/g), 1);
+  assert.ok(!people.some((p) => p.includes('story-tag')));
 
   // tickets: three gates by number, and a source on the person, holding the screen glyph
   const tickets = items('tickets');
@@ -183,10 +188,53 @@ test('overlay labels come from content and are hidden from assistive tech', () =
   assert.deepEqual(worth.map(textOf), ['$100 / mo', '+ more work']);
   assert.deepEqual(worth.map((el) => el.match(/data-index="(\w+)"/)[1]), ['0', '1']);
 
-  // every index the markup carries is one story.js can place from overlaysFor
-  const o = overlaysFor(layoutFor(1.6, 6));
-  assert.equal(o.shape.length, 3);
-  assert.ok(o.tickets.source && o.tickets.gates.length === 3 && o.worth.price && o.worth.more);
+});
+
+test('every overlay item in the markup is one story.js can place, from the same layout the water uses', () => {
+  const L = layoutFor(1.6, 6);
+  const o = overlaysFor(L);
+  assert.deepEqual(o.source, { x: L.source[0], y: L.source[1] }, 'overlaysFor exposes the team source');
+  assert.notDeepEqual(o.source, o.tickets.source, 'the team source is not the ticket person');
+  for (const id of ['shape', 'team', 'tickets', 'worth']) {
+    for (const el of items(id)) {
+      const index = el.match(/data-index="(\w+)"/)[1];
+      assert.ok(pointOf(o, id, index), `${id} item ${index} has a point`);
+    }
+  }
+  // The team source lands on the water's source slot, and the tickets source on the first person.
+  assert.equal(pointOf(o, 'team', 'source'), o.source);
+  assert.equal(pointOf(o, 'tickets', 'source'), o.tickets.source);
+  assert.ok(slotsFor('team', 1, L).some((s) => s.a[0] === o.source.x && s.a[1] === o.source.y && s.th === 0 && s.r === SOURCE_R));
+  // On a phone's team of four the last two people have no point (story.js hides them); the source still does.
+  const phone = overlaysFor(layoutFor(390 / 844, 4));
+  assert.equal(pointOf(phone, 'team', '4'), undefined);
+  assert.ok(pointOf(phone, 'team', 'source'));
+});
+
+test('the label offsets in story.css are the layout\'s radii, and no position is copied from it', () => {
+  const css = read('site/css/story.css');
+  const radius = (name) => Number(css.match(new RegExp(`${name}:\\s*([\\d.]+)svh;`))[1]);
+  // A stage is 100svh high, so a radius in stage heights is its value times 100 svh.
+  assert.ok(Math.abs(radius('--node-r') - NODE_R * 100) < 1e-9, `--node-r is ${NODE_R * 100}svh`);
+  assert.ok(Math.abs(radius('--gate-r') - GATE_R * 100) < 1e-9, `--gate-r is ${GATE_R * 100}svh`);
+  // The team nodes, the ticket person and the gates really are drawn with those radii.
+  const L = layoutFor(1.6, 6);
+  const drawn = (id) => slotsFor(id, 1, L).filter((s) => s.th === 0 && s.a[0] === s.b[0] && s.a[1] === s.b[1]).map((s) => s.r);
+  assert.ok(drawn('team').includes(NODE_R) && drawn('team').includes(SOURCE_R));
+  assert.ok(drawn('tickets').includes(NODE_R) && drawn('tickets').includes(GATE_R));
+  // Offsets use the variables. The only other svh in the file are the stage's own height and the name's size.
+  assert.match(css, /\.story-role \{[^}]*calc\(50% \+ var\(--node-r\)/);
+  assert.match(css, /\.story-label \{[^}]*var\(--gate-r\)[^}]*var\(--gate-r\)/);
+  const others = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([\w-]+):[^;{}]*?([\d.]+)svh/g)]
+    .filter(([, property]) => !['--node-r', '--gate-r'].includes(property))
+    .map(([, property, value]) => `${property} ${value}`);
+  assert.deepEqual(others.sort(), ['font-size 15', 'height 100', 'height 100'].sort(), 'no radius is copied into a rule');
+  // Nothing places a label by a number worked out from the layout: no percentages on an item, no orientation switch.
+  assert.doesNotMatch(css, /orientation/);
+  const rules = rulesOf('site/css/story.css');
+  for (const rule of rules.filter((r) => r.parts.some((p) => /\.story-(?:item|tag|chip|gate|person|source)\b/.test(p)))) {
+    assert.ok(!declares(rule.body, '(?:left|top)', '[^;]*%'), `${rule.selector} is placed by story.js, not by a percentage`);
+  }
 });
 
 test('every visible string is the content, not the template', () => {

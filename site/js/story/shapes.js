@@ -27,6 +27,15 @@ const BLEED = 0.3;
 /** How much of the art box a silhouette may fill, either way. */
 const FIT = 0.78;
 
+/**
+ * The radii of the team and tickets beats' circles, in stage heights. The
+ * story's CSS places the labels' offsets from them (story.css `--node-r`,
+ * `--gate-r`), and a test holds the two together.
+ */
+export const SOURCE_R = 0.045;
+export const NODE_R = 0.032;
+export const GATE_R = 0.03;
+
 // ease and ramp are timeline.js's too; two one-liners are cheaper than a module.
 const ramp = (x, a, b) => Math.min(1, Math.max(0, (x - a) / (b - a)));
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -209,8 +218,8 @@ const shapeSlots = (t, L) => {
 const teamSlots = (t, L) => {
   const start = (i) => 0.1 + 0.06 * i;
   return padded([
-    circle(L.source, 0.045),
-    ...L.nodes.map((p, i) => circle(p, 0.032 * ease(ramp(t, start(i) + 0.2, start(i) + 0.3)))),
+    circle(L.source, SOURCE_R),
+    ...L.nodes.map((p, i) => circle(p, NODE_R * ease(ramp(t, start(i) + 0.2, start(i) + 0.3)))),
     ...L.nodes.map((p, i) => capsule(L.source, p, ease(ramp(t, start(i), start(i) + 0.2)))),
   ]);
 };
@@ -237,8 +246,8 @@ const ticketSlots = (t, L) => {
   const to = [0];   // distance along the chain to each point
   for (let i = 1; i < chain.length; i++) to.push(to[i - 1] + Math.hypot(chain[i][0] - chain[i - 1][0], chain[i][1] - chain[i - 1][1]));
   return padded([
-    circle(chain[0], 0.032),
-    ...L.gates.map((g) => circle(g, 0.03)),
+    circle(chain[0], NODE_R),
+    ...L.gates.map((g) => circle(g, GATE_R)),
     ...[0, 1, 2].map((i) => capsule(chain[i], chain[i + 1], 1)),
     ...[0, 1, 2].map((j) => {
       const go = ease(ramp(t, 0.4 + 0.12 * j, 0.68 + 0.12 * j));
@@ -305,6 +314,8 @@ const APPS = [['mail', 'calendar'], ['sheet', 'phone', 'mail'], ['chat', 'calend
 /**
  * Where the DOM labels go, from the same layout as the water: positions and
  * indices only — every word comes from content and is set by the story markup.
+ * `source` is the team beat's root, the node every channel branches from;
+ * `tickets.source` is something else: the person the tickets come from.
  */
 export const overlaysFor = (layout) => {
   const { art, nodes, gates, columns } = layout;
@@ -313,6 +324,7 @@ export const overlaysFor = (layout) => {
   return {
     shape: [0, 1, 2].map((index) => ({ x: art.x0 + (w * (2 * index + 1)) / 6, y: labelY, index })),
     team: nodes.map(([x, y], index) => ({ x, y, index, apps: [...APPS[index % APPS.length]] })),
+    source: { x: layout.source[0], y: layout.source[1] },
     tickets: {
       source: { x: nodes[0][0], y: nodes[0][1] },
       gates: gates.map(([x, y], index) => ({ x, y, index })),

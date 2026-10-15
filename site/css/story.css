@@ -7,6 +7,10 @@
 
 .story {
   --headline: clamp(2.4rem, 5.2vw, 5.5rem);
+  /* The radii of a team node and a ticket gate, in stage heights (NODE_R and GATE_R in shapes.js; a test
+     holds them to those). A stage is 100svh high, so 3.2svh is 0.032 of it. */
+  --node-r: 3.2svh;
+  --gate-r: 3svh;
   display: flex; flex-direction: column;
   /* A 44rem column, centred; never closer to the edge than the gutter. */
   padding: calc(var(--masthead-h) + 2rem) max(var(--gutter), calc((100% - 44rem) / 2)) clamp(3rem, 8vw, 6rem);
@@ -80,22 +84,20 @@
 }
 .story-tile .icon { width: 1rem; height: 1rem; }
 
-/* A person: tiles on the node, the role under it (the node's radius is 3.2 stage heights in a hundred). */
-.story-role { position: absolute; left: 50%; top: calc(50% + 3.2svh + 0.3rem); transform: translateX(-50%); }
+/* A person: tiles on the node, the role under it. */
+.story-role { position: absolute; left: 50%; top: calc(50% + var(--node-r) + 0.3rem); transform: translateX(-50%); }
 
-/* "Ergon" sits beside the source the channels branch from: shapes.js layoutFor's `source`, 0.92 up the
-   art box, centred in it. A wide stage puts that at 75% across and 16.4% down; a tall one, 50% and 46.2%. */
+/* "Ergon" is an item like the rest, centred on the source the channels branch from; ink with the rim, so
+   it reads on the water however the layout is tuned. */
 .story-tag {
-  position: absolute; left: 75%; top: 16.4%; padding: 0.25rem 0.6rem;
-  transform: translate(calc(4.5svh + 0.6rem), -50%); white-space: nowrap;
-  border: 1px solid var(--raw-color-cyan-400); border-radius: 6.25rem;
+  padding: 0.25rem 0.6rem; border: 1px solid var(--raw-color-cyan-400); border-radius: 6.25rem;
   background: var(--raw-color-ink-900); color: var(--raw-color-white); letter-spacing: 0.12em;
 }
-@media (orientation: portrait) { .story-tag { left: 50%; top: 46.2%; } }
 
-/* A gate: the label above and to the left of its drop, clear of the channels in and out. */
+/* A gate: the label above and to the left of its drop (a gate's radius, along the diagonal), clear of the
+   channels in and out. */
 .story-gate { width: 0; height: 0; }
-.story-label { position: absolute; right: calc(2.2svh + 0.3rem); bottom: calc(2.2svh + 0.3rem); }
+.story-label { position: absolute; right: calc(var(--gate-r) * 0.71 + 0.3rem); bottom: calc(var(--gate-r) * 0.71 + 0.3rem); }
 
 /* The price and the "more" mark are ink with the rim, so they read on the water and off it. */
 .story-chip {

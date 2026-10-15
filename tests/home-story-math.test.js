@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
-import { CAPTION_BOX, MAX_SLOTS, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
+import { CAPTION_BOX, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
 import { RIPPLE_STEP_MS, RIPPLE_START_OWED, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
 
@@ -323,6 +323,9 @@ test('the team beat fans out to teamSize people, each with two or three apps', (
     assert.deepEqual(o.tickets.gates.map((g) => g.index), [0, 1, 2]);
     assert.ok(o.tickets.gates[0].x < o.tickets.gates[2].x && o.tickets.gates[0].y < o.tickets.gates[2].y);
     assert.deepEqual(o.tickets.source, { x: o.team[0].x, y: o.team[0].y });
+    // The team's own source is the root the channels branch from, at the layout's `source`.
+    assert.deepEqual(o.source, { x: L.source[0], y: L.source[1] });
+    assert.ok(o.source.x > 0 && o.source.x < aspect && o.source.y > 0 && o.source.y < 1);
     assert.equal(o.shape.length, 3);
     assert.deepEqual(o.shape.map((s) => s.index), [0, 1, 2]);
     assert.ok(o.shape.every((s) => s.y < L.art.y0 + 0.01 && s.x > L.art.x0 && s.x < L.art.x1));
@@ -330,7 +333,10 @@ test('the team beat fans out to teamSize people, each with two or three apps', (
 
     // The team slots land exactly on the overlay nodes, so DOM labels sit on the water.
     const slots = slotsFor('team', 1, L).filter(active);
-    for (const p of o.team) assert.ok(slots.some((s) => s.th === 0 && s.a[0] === p.x && s.a[1] === p.y && s.r === 0.032), `node ${p.index}`);
+    for (const p of o.team) assert.ok(slots.some((s) => s.th === 0 && s.a[0] === p.x && s.a[1] === p.y && s.r === NODE_R), `node ${p.index}`);
+    assert.ok(slots.some((s) => s.th === 0 && s.a[0] === o.source.x && s.a[1] === o.source.y && s.r === SOURCE_R), 'the source');
+    const tickets = slotsFor('tickets', 1, L).filter(active);
+    for (const g of o.tickets.gates) assert.ok(tickets.some((s) => s.th === 0 && s.a[0] === g.x && s.a[1] === g.y && s.r === GATE_R), `gate ${g.index}`);
     // The nodes are far enough apart not to merge.
     for (let i = 0; i < o.team.length; i++) for (let j = i + 1; j < o.team.length; j++) {
       assert.ok(Math.hypot(o.team[i].x - o.team[j].x, o.team[i].y - o.team[j].y) > 0.1, `nodes ${i} and ${j}`);

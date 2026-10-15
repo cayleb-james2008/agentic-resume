@@ -65,8 +65,8 @@ def team_items(beat: dict) -> str:
         )
         for i, role in enumerate(beat.get("roles", []))
     )
-    # Not an item: story.js places items by index, and this sits by the source in story.css.
-    tag = f'<span class="story-tag">{text(beat["tag"])}</span>' if people and beat.get("tag") else ""
+    # The tag labels the node the channels branch from: story.js places it by `data-index="source"`.
+    tag = item("source", text(beat["tag"]), "story-tag") if people and beat.get("tag") else ""
     return people + tag
 
 

@@ -14,7 +14,7 @@ import { ticker } from './engine/ticker.js';
 import { mount as mountApproach } from './approach/approach.js';
 import { mount as mountExperience } from './experience/timeline.js';
 import { mount as mountHero } from './hero/hero.js';
-import { mountMenu } from './hero/menu.js';
+import { mountMenu } from './masthead/menu.js';
 import { mount as mountProjects } from './projects/projects.js';
 import { mount as mountContact } from './contact/contact.js';
 import { mount as mountGuide } from './guide/guide.js';

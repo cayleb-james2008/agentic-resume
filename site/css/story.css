@@ -1,0 +1,147 @@
+/* The water story.
+   Default: a plain stack of blocks. The name is centred, each caption has its still drawing under it, and
+   the canvas, the cue and the labels the water carries are off. That is the whole page with scripts off,
+   with motion reduced, after the 4s failsafe, and once story.js gives up (it adds .story--static).
+   The scroll runway is the one block of rules inside @media (prefers-reduced-motion: no-preference),
+   every selector of it starting .js:not(.reveal-failsafe) and ending up on .story:not(.story--static). */
+
+.story {
+  --headline: clamp(2.4rem, 5.2vw, 5.5rem);
+  display: flex; flex-direction: column;
+  /* A 44rem column, centred; never closer to the edge than the gutter. */
+  padding: calc(var(--masthead-h) + 2rem) max(var(--gutter), calc((100% - 44rem) / 2)) clamp(3rem, 8vw, 6rem);
+  background: var(--background); color: var(--foreground);
+}
+/* The stage and the captions' box only group things for the runway; here their children are the blocks. */
+.story-stage, .story-captions { display: contents; }
+.story-canvas { display: none; }
+
+/* --- The name (the page's one h1) and the cue ----------------------------- */
+/* The font size lives on the block, not the h1: story.js sets its letter spacing in em. */
+.story-name {
+  order: 0; text-align: center;
+  padding: clamp(1.5rem, 6vh, 4rem) 0 clamp(2rem, 8vw, 5rem);
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 0.95;
+  font-size: clamp(3rem, min(19vw, 15svh), 8.5rem);
+}
+.story-h1 { font: inherit; }
+.story-h1 .reveal { display: block; }
+.story-h1 .reveal-units { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 0; }
+.story-h1 .reveal-word { flex-basis: 100%; justify-content: center; }
+.story-title {
+  margin-top: 1.25rem; font-family: var(--font-sans); font-weight: 500; font-size: var(--type-label);
+  letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.2; color: var(--foreground-muted);
+}
+.story-cue { display: none; }
+
+/* --- Captions: a headline and its line, a drawing under each --------------- */
+.story-caption { margin-top: clamp(3rem, 8vw, 6rem); }
+.story-caption h2 {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  line-height: var(--leading-headline); font-size: calc(var(--headline) * 0.7);
+}
+[data-caption="hero"] h2 { font-size: var(--headline); }
+.story-caption p {
+  max-width: 32rem; margin-top: 1rem;
+  font-size: var(--type-body); line-height: 1.5; color: var(--foreground-muted);
+}
+
+/* The drawings: ink with a cyan rim, the water's own colours. */
+.story-art {
+  display: block; width: 100%; max-width: 34rem; height: auto; margin-top: 1.5rem;
+  fill: var(--raw-color-ink-900); stroke: var(--raw-color-cyan-400); stroke-width: 2; stroke-linejoin: round;
+}
+.story-art .art-channel { fill: none; stroke: var(--raw-color-ink-900); stroke-width: 4; stroke-linecap: round; }
+
+/* One caption, then its drawing, in the order of the beats. */
+[data-caption="hero"] { order: 1; }    .story-art[data-art="hero"] { order: 2; }
+[data-caption="shape"] { order: 3; }   .story-art[data-art="shape"] { order: 4; }
+[data-caption="team"] { order: 5; }    .story-art[data-art="team"] { order: 6; }
+[data-caption="tickets"] { order: 7; } .story-art[data-art="tickets"] { order: 8; }
+[data-caption="worth"] { order: 9; }   .story-art[data-art="worth"] { order: 10; }
+
+/* --- The labels the water carries (shown only in the runway) --------------- */
+.story-overlay { display: none; }
+.story-item {
+  position: absolute; transform: translate(-50%, -50%); white-space: nowrap;
+  font-family: var(--font-sans); font-weight: 500; font-size: var(--type-body); line-height: 1.1;
+  color: var(--foreground);
+}
+[data-overlay="shape"] .story-item,
+.story-role, .story-label, .story-tag { text-transform: uppercase; letter-spacing: 0.08em; }
+.story-role, .story-label, .story-tag { font-size: var(--type-eyebrow); }
+
+/* An app: a small tile with the cyan rim, readable on the water and off it. */
+.story-tiles { display: flex; gap: 0.25rem; }
+.story-tile {
+  display: grid; place-items: center; width: 1.75rem; height: 1.75rem;
+  border: 1px solid var(--raw-color-cyan-400); border-radius: 0.5rem;
+  background: var(--background); color: var(--foreground);
+}
+.story-tile .icon { width: 1rem; height: 1rem; }
+
+/* A person: tiles on the node, the role under it (the node's radius is 3.2 stage heights in a hundred). */
+.story-role { position: absolute; left: 50%; top: calc(50% + 3.2svh + 0.3rem); transform: translateX(-50%); }
+
+/* "Ergon" sits beside the source the channels branch from: shapes.js layoutFor's `source`, 0.92 up the
+   art box, centred in it. A wide stage puts that at 75% across and 16.4% down; a tall one, 50% and 46.2%. */
+.story-tag {
+  position: absolute; left: 75%; top: 16.4%; padding: 0.25rem 0.6rem;
+  transform: translate(calc(4.5svh + 0.6rem), -50%); white-space: nowrap;
+  border: 1px solid var(--raw-color-cyan-400); border-radius: 6.25rem;
+  background: var(--raw-color-ink-900); color: var(--raw-color-white); letter-spacing: 0.12em;
+}
+@media (orientation: portrait) { .story-tag { left: 50%; top: 46.2%; } }
+
+/* A gate: the label above and to the left of its drop, clear of the channels in and out. */
+.story-gate { width: 0; height: 0; }
+.story-label { position: absolute; right: calc(2.2svh + 0.3rem); bottom: calc(2.2svh + 0.3rem); }
+
+/* The price and the "more" mark are ink with the rim, so they read on the water and off it. */
+.story-chip {
+  padding: 0.4rem 0.9rem; border: 1px solid var(--raw-color-cyan-400); border-radius: 6.25rem;
+  background: var(--raw-color-ink-900); color: var(--raw-color-white);
+  font-family: var(--font-display); font-weight: 700; font-size: var(--type-title);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+/* --- The runway: only a scripted page that allows motion, and only while the story runs ----- */
+@media (prefers-reduced-motion: no-preference) {
+  .js:not(.reveal-failsafe) .story:not(.story--static) { display: block; height: calc(100svh * 8); padding: 0; }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-stage {
+    display: block; position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--background);
+  }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-canvas {
+    display: block; position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y;
+  }
+  /* story.js flies this to the masthead: the block fills the stage so it turns about the stage's middle. */
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-name {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0; pointer-events: none;
+  }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-cue {
+    display: block; position: absolute; left: 50%; bottom: 1.75rem; transform: translateX(-50%);
+    font-size: var(--type-eyebrow); letter-spacing: 0.24em; text-transform: uppercase; color: var(--foreground-muted);
+  }
+  /* White on difference: dark over the light page, light over the ink water. */
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-caption {
+    position: absolute; left: var(--gutter); top: calc(var(--masthead-h) + 2rem); max-width: min(34rem, 46vw);
+    margin: 0; opacity: 0; color: #fff; mix-blend-mode: difference;
+  }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-caption p { color: rgb(255 255 255 / 0.78); }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-overlay {
+    display: block; position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-art { display: none; }
+}
+
+/* On a phone the caption spans the top, above the water. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 639px) {
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-caption { right: var(--gutter); max-width: none; }
+}
+
+/* No blend modes: the caption keeps the page's ink, which the water never enters. */
+@supports not (mix-blend-mode: difference) {
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-caption { color: var(--foreground); }
+  .js:not(.reveal-failsafe) .story:not(.story--static) .story-caption p { color: var(--foreground-muted); }
+}

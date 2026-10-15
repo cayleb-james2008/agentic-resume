@@ -1,7 +1,7 @@
 /**
  * The full-screen menu sheet below 1280 (spec §L372–395). Appended to <body>,
- * never inside the masthead: a transformed ancestor would pin a fixed sheet
- * inside the header.
+ * never inside the masthead: the masthead is fixed and fades in with the story,
+ * and the sheet must neither fade with it nor be pinned inside it.
  */
 import { prefersReducedMotion } from '../engine/scroll.js';
 import { CONFIGS, Spring } from '../engine/spring.js';

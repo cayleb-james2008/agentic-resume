@@ -55,6 +55,20 @@ def reveal(value: str, unit: str = "word", *, stagger: int = 110, delay: int = 0
     )
 
 
+LINE_STEP = 130
+STOP = LINE_STEP + 110
+
+
+def heading(lines: list[str], title_id: str, cls: str, stop_cls: str) -> str:
+    stop = f'<span class="heading-stop {stop_cls}" data-fade data-delay="{STOP}" aria-hidden="true">.</span>'
+    spans = "".join(
+        f'<span class="heading-line">{reveal(line, "word", stagger=110, delay=i * LINE_STEP)}'
+        f'{stop if i == len(lines) - 1 else ""}</span>'
+        for i, line in enumerate(lines)
+    )
+    return f'<h2 class="{cls}" id="{title_id}">{spans}</h2>'
+
+
 def link(href: str, label: str, cls: str = "", extra: str = "") -> str:
     """An anchor; PDF links are downloads, external links open normally."""
     download = " download" if href.endswith(".pdf") else ""
@@ -142,3 +156,21 @@ ICONS = {
     "gauge": ('<svg class="icon icon--stat" viewBox="0 0 31 31" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5">'
               '<path d="M3 24a12.5 12.5 0 1 1 25 0"/><path d="m15.5 24 6-9"/></g><circle cx="15.5" cy="24" r="2" fill="currentColor"/></svg>'),
 }
+
+
+def _stroked(shapes: str) -> str:
+    """A 16×16 stroked glyph, drawn like the others above."""
+    return (f'<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" '
+            f'stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{shapes}</g></svg>')
+
+
+# The apps a team member works in (the water story's overlay tiles) and the tick.
+ICONS.update({
+    "mail": _stroked('<rect x="1.5" y="3.5" width="13" height="9" rx="1.5"/><path d="m2 4.5 6 4.5 6-4.5"/>'),
+    "calendar": _stroked('<rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/>'),
+    "sheet": _stroked('<rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M2 6h12M2 10h12M6.5 6v8"/>'),
+    "phone": _stroked('<rect x="4.5" y="1.5" width="7" height="13" rx="1.5"/><path d="M7 12.5h2"/>'),
+    "chat": _stroked('<path d="M2 3h12v8H8l-3.5 3v-3H2Z"/>'),
+    "screen": _stroked('<rect x="1.5" y="2.5" width="13" height="8.5" rx="1"/><path d="M5.5 14h5M8 11v3"/>'),
+    "checkmark": _stroked('<path d="m3 8.5 3.2 3.2L13 4.5"/>'),
+})

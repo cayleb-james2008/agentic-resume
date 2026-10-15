@@ -26,7 +26,7 @@ function trap(container, e) {
 }
 
 /** One overlay: shown from `hidden`, faded in, scroll locked, focus trapped, Escape closes, focus handed back. */
-function overlay(el, { lock, reduced, focus, onOpen, onClose }) {
+export function overlay(el, { lock, reduced, focus, onOpen, onClose }) {
   let back = null, open = false;
   const key = (e) => { if (e.key === 'Escape') close(); else trap(el, e); };
   function show() {
@@ -52,8 +52,9 @@ function overlay(el, { lock, reduced, focus, onOpen, onClose }) {
       el.classList.remove('closing');
       lock.unlock();
       onClose?.();
+      // Focus goes home first, so an overlay opened next (menu → Contact) records the real opener.
+      back?.focus?.({ preventScroll: true });
       if (typeof then === 'function') then();
-      else back?.focus?.({ preventScroll: true });
     }, reduced ? 0 : CLOSE_MS);
   }
   return { show, close, get open() { return open; } };

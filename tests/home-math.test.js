@@ -167,3 +167,21 @@ test('terminal lines colour the prompt, ticks and ticket flags, and escape every
   assert.equal(term(['⚑ ticket · <b>&']), '<span class="w">⚑</span> ticket · &lt;b&gt;&amp;');
   assert.equal(term(['a', 'b']), 'a\nb');
 });
+
+test('an overlay that hands off to another (menu → Contact) gives focus back before the next one opens', async () => {
+  const { overlay } = await import('../site/js/home/overlays.js');
+  const calls = [];
+  const opener = { focus: () => { calls.push('opener'); globalThis.document.activeElement = opener; } };
+  const button = { focus: () => { globalThis.document.activeElement = button; } };
+  globalThis.window ??= globalThis;
+  globalThis.document = { activeElement: opener, addEventListener() {}, removeEventListener() {} };
+  const el = { hidden: true, offsetWidth: 0, classList: { add() {}, remove() {} }, querySelector: () => button };
+  const lock = createScrollLock({ stop() {}, start() {} });
+  const menu = overlay(el, { lock, reduced: true });
+  menu.show();
+  assert.equal(globalThis.document.activeElement, button, 'focus moves into the overlay');
+  await new Promise((done) => menu.close(() => { calls.push('then:' + (globalThis.document.activeElement === opener ? 'opener' : 'lost')); done(); }));
+  assert.deepEqual(calls, ['opener', 'then:opener'], 'the next overlay records the real opener, so closing it returns focus there');
+  assert.equal(lock.count, 0);
+  delete globalThis.document;
+});

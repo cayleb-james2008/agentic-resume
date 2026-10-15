@@ -469,3 +469,11 @@ test('the team source and its tag clear the 64px masthead even on a phone held s
     assert.ok((1 - L.source[1] - SOURCE_R) * h >= 64, `${w}×${h}: the source's top is ${((1 - L.source[1] - SOURCE_R) * h).toFixed(1)}px down`);
   }
 });
+
+test('the name is gone before the masthead starts to show, so the two never overlap', () => {
+  const L = layoutFor(16 / 9, 6);
+  for (let i = 0; i <= 2000; i++) {
+    const s = storyState(i / 2000, L);
+    assert.ok(!(s.name.opacity > 0 && s.masthead > 0), `p=${i / 2000}: name ${s.name.opacity} under masthead ${s.masthead}`);
+  }
+});

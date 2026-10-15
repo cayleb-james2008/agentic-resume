@@ -49,7 +49,7 @@ const captionAt = (t) => ease(ramp(t, 0, 0.25)) * fadeOut(t);
  *   beat      the beat's id, and `t` how far through it (0..1)
  *   name      the name block: `y` is how far it has risen (stage heights, up
  *             positive like every stage coordinate), `scale`, letter `spread`
- *             (em) and `opacity`; it has flown to the masthead by intro t 0.6
+ *             (em) and `opacity`; it has flown to the masthead, and faded, by intro t 0.6
  *   cue       the scroll cue's opacity; masthead, the masthead's
  *   captions  opacity per caption; at most one is above 0.5
  *   overlays  opacity per label group: its caption's, but only once the beat's
@@ -89,7 +89,8 @@ export const storyState = (progress, layout) => {
       y: 0.38 * fly,
       scale: 1 - 0.65 * fly,
       spread: 0.3 * ramp(intro, 0, 0.5),
-      opacity: 1 - ramp(intro, 0.55, 0.8),
+      // Gone by the time it reaches the top (intro t 0.6), when the masthead starts to show: the two never overlap.
+      opacity: 1 - ramp(intro, 0.4, 0.6),
     },
     cue: 1 - ramp(intro, 0, 0.15),
     masthead: ramp(intro, 0.6, 0.9),

@@ -1,0 +1,338 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
+import { createRipple, rippleSize } from '../site/js/story/ripple.js';
+import { CAPTION_BOX, MAX_SLOTS, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
+import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
+
+/** A stand-in for window: width, pointer class, reduced motion, save-data, memory. */
+const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
+  innerWidth: width,
+  navigator: { connection: { saveData }, deviceMemory: memory },
+  matchMedia: (q) => ({ matches: q.includes('coarse') ? coarse : q.includes('reduced-motion') ? reduced : false }),
+});
+
+/** A slot is drawn only when it has size and some fill. */
+const active = (s) => s.r + s.th > 0 && s.fill > 0;
+
+/**
+ * The tight axis-aligned bounds of one slot: the oriented box from a to b
+ * (half-thickness th/2 either side of the axis), grown by the rounding r. A
+ * circle (a = b) is th/2 + r in every direction.
+ */
+const bounds = (s) => {
+  const [ax, ay] = s.a, [bx, by] = s.b;
+  const len = Math.hypot(bx - ax, by - ay), half = s.th / 2;
+  const [gx, gy] = len > 1e-9 ? [(Math.abs(by - ay) / len) * half, (Math.abs(bx - ax) / len) * half] : [half, half];
+  return {
+    x0: Math.min(ax, bx) - gx - s.r, x1: Math.max(ax, bx) + gx + s.r,
+    y0: Math.min(ay, by) - gy - s.r, y1: Math.max(ay, by) + gy + s.r,
+  };
+};
+const overlaps = (p, q) => p.x0 < q.x1 && p.x1 > q.x0 && p.y0 < q.y1 && p.y1 > q.y0;
+const union = (list) => ({
+  x0: Math.min(...list.map((b) => b.x0)), x1: Math.max(...list.map((b) => b.x1)),
+  y0: Math.min(...list.map((b) => b.y0)), y1: Math.max(...list.map((b) => b.y1)),
+});
+
+test('story tier matrix', () => {
+  const desktop = getStoryTier(env({ width: 1440 }));
+  assert.equal(desktop.name, 'desktop');
+  assert.equal(desktop.mobile, false);
+  assert.equal(desktop.maxDpr, 1.5);
+  assert.equal(desktop.frameInterval, 0);
+  assert.equal(desktop.pointerEnabled, true);
+  assert.equal(desktop.rippleLong, 128);
+  assert.equal(desktop.teamSize, 6);
+  assert.equal(desktop.freeze, false);
+
+  const tablet = getStoryTier(env({ width: 1024, coarse: true }));
+  assert.equal(tablet.name, 'tablet');
+  assert.equal(tablet.coarsePointer, true);
+  assert.equal(tablet.maxDpr, 1.25);
+  assert.equal(tablet.frameInterval, CAP_60);
+  assert.equal(tablet.pointerEnabled, false);
+  assert.equal(tablet.rippleLong, 128);
+  assert.equal(tablet.teamSize, 6);
+
+  const phone = getStoryTier(env({ width: 390, coarse: true }));
+  assert.equal(phone.name, 'mobile');
+  assert.equal(phone.mobile, true);
+  assert.equal(phone.maxDpr, 1);
+  assert.equal(phone.frameInterval, CAP_60);
+  assert.equal(phone.rippleLong, 72);
+  assert.equal(phone.teamSize, 4);
+  assert.equal(phone.freeze, false);
+
+  // Save-Data on a phone, and reduced motion anywhere, freeze the scene.
+  assert.equal(getStoryTier(env({ width: 390, coarse: true, saveData: true })).freeze, true);
+  const reduced = getStoryTier(env({ width: 1440, reduced: true }));
+  assert.equal(reduced.reducedMotion, true);
+  assert.equal(reduced.freeze, true);
+  assert.equal(reduced.pointerEnabled, false);
+
+  // What the hero tier baked into its shader and mask is gone.
+  for (const dropped of ['trailSamples', 'outline', 'reveal', 'antialias']) {
+    assert.equal(desktop[dropped], undefined, dropped);
+    assert.equal(phone[dropped], undefined, dropped);
+  }
+});
+
+test('ripple: a poke is local, energy decays, heights stay bounded', () => {
+  const r = createRipple(64, 36);
+  assert.equal(r.cols, 64);
+  assert.equal(r.rows, 36);
+  assert.equal(r.energy(), 0);
+  r.poke(0.5, 0.5, 1, 2);
+  assert.ok(r.energy() > 0);
+  // Cells further than 3 cells from (32, 18) are exactly 0 right after the poke.
+  for (let y = 0; y < 36; y++) {
+    for (let x = 0; x < 64; x++) {
+      if (Math.hypot(x - 32, y - 18) > 3) assert.equal(r.height[y * 64 + x], 0, `(${x},${y})`);
+    }
+  }
+  const e20 = (() => { for (let i = 0; i < 20; i++) r.step(); return r.energy(); })();
+  for (let i = 0; i < 400; i++) r.step();
+  assert.ok(r.energy() < e20 * 0.2);
+  assert.ok(Math.max(...r.height.map(Math.abs)) <= 1);
+
+  // 0 height → 128; a poke only moves the bytes near it; the buffer is reused.
+  const flat = createRipple(64, 36);
+  const out = new Uint8Array(64 * 36);
+  assert.equal(flat.toBytes(out), out);
+  assert.ok(out.every((b) => b === 128));
+  flat.poke(0.5, 0.5, 1, 2);
+  const bytes = flat.toBytes(out);
+  assert.ok(bytes[18 * 64 + 32] > 128);
+  assert.equal(bytes[0], 128);
+  flat.poke(0.5, 0.5, -3, 2);   // an over-strong poke clamps at -1: byte 0
+  assert.ok(Math.max(...flat.height.map(Math.abs)) <= 1);
+  assert.equal(flat.toBytes(out)[18 * 64 + 32] < 128, true);
+
+  // Edges are clamped, so a poke in a corner is safe and still local.
+  const corner = createRipple(16, 9);
+  corner.poke(0, 0, 1, 2);
+  corner.poke(1, 1, 1, 2);
+  for (let i = 0; i < 50; i++) corner.step();
+  assert.ok(corner.height.every(Number.isFinite));
+});
+
+test('rippleSize keeps cells square-ish', () => {
+  assert.deepEqual(rippleSize(16 / 9, 128), [128, 72]);
+  assert.deepEqual(rippleSize(390 / 844, 72), [33, 72]);
+  assert.deepEqual(rippleSize(1, 72), [72, 72]);
+});
+
+test('beats add up to the runway and the intro is 1.5 screens', () => {
+  assert.equal(BEATS.reduce((s, b) => s + b.screens, 0), RUNWAY_SCREENS);
+  assert.equal(RUNWAY_SCREENS, 7);
+  assert.deepEqual(BEATS.map((b) => b.id), ['intro', 'hero', 'shape', 'team', 'tickets', 'worth', 'drain']);
+  assert.equal(BEATS[0].screens, 1.5);
+  assert.deepEqual(beatAt(0), { index: 0, id: 'intro', t: 0 });
+  assert.equal(beatAt(1).id, 'drain'); assert.equal(beatAt(1).t, 1);
+  // 0.5 of the runway is 3.5 screens: a fifth of the way into the 1.25-screen team beat.
+  assert.deepEqual(beatAt(0.5), { index: 3, id: 'team', t: 0.2 });
+  // Out-of-range progress clamps instead of running off the ends.
+  assert.deepEqual(beatAt(-1), beatAt(0));
+  assert.deepEqual(beatAt(2), beatAt(1));
+  assert.deepEqual(beatAt(NaN), beatAt(0));
+});
+
+test('storyState is pure and reversible', () => {
+  const L = layoutFor(16 / 9, 6);
+  for (const p of [0, 0.13, 0.5, 0.77, 1]) assert.deepEqual(storyState(p, L), storyState(p, L));
+  // Scrolling forward and back lands on the same frame.
+  const there = storyState(0.62, L);
+  storyState(0.9, L); storyState(0.2, L);
+  assert.deepEqual(storyState(0.62, L), there);
+
+  // It also never jumps: a fifth of a pixel of a 5,600px runway (seven 800px screens) moves each slot drawn on both sides a hair.
+  // (A slot that fades in or out of use has no size to jump from, so it is skipped.)
+  const STEPS = 28000;
+  for (const [aspect, team] of [[16 / 9, 6], [390 / 844, 4], [844 / 390, 4]]) {
+    const layout = layoutFor(aspect, team);
+    let prev = storyState(0, layout);
+    for (let i = 1; i <= STEPS; i++) {
+      const cur = storyState(i / STEPS, layout);
+      prev.slots.forEach((s, k) => {
+        const c = cur.slots[k];
+        if (!active(s) || !active(c)) return;
+        for (const [name, d] of [['ax', s.a[0] - c.a[0]], ['ay', s.a[1] - c.a[1]], ['bx', s.b[0] - c.b[0]],
+          ['by', s.b[1] - c.b[1]], ['th', s.th - c.th], ['r', s.r - c.r], ['fill', s.fill - c.fill]]) {
+          assert.ok(Math.abs(d) < 0.02, `${name} of slot ${k} jumped ${d} at step ${i} (${cur.beat})`);
+        }
+      });
+      assert.ok(Math.abs(cur.flow - prev.flow) < 0.02, `flow jumped at step ${i}`);
+      prev = cur;
+    }
+    // Every beat hands over to the next with the same drawn shapes (the intro to the hero exactly).
+    assert.deepEqual(slotsFor('intro', 1, layout), slotsFor('hero', 0, layout));
+    const order = ['hero', 'shape', 'team', 'tickets', 'worth', 'drain'];
+    order.slice(1).forEach((id, i) => {
+      const was = slotsFor(order[i], 1, layout).filter(active);
+      const now = slotsFor(id, 0, layout).filter(active);
+      assert.equal(now.length, was.length, id);
+    });
+  }
+});
+
+test('at most one caption reads at a time, and each beat with a caption shows it fully', () => {
+  for (const [aspect, team] of [[16 / 9, 6], [390 / 844, 4]]) {
+    const L = layoutFor(aspect, team);
+    const peak = {};
+    for (let i = 0; i <= 1000; i++) {
+      const c = storyState(i / 1000, L).captions;
+      assert.ok(Object.values(c).filter((o) => o > 0.5).length <= 1, `p=${i / 1000}`);
+      for (const [k, o] of Object.entries(c)) peak[k] = Math.max(peak[k] ?? 0, o);
+    }
+    for (const k of ['hero', 'shape', 'team', 'tickets', 'worth']) assert.equal(peak[k], 1, k);
+
+    // The hero line rises out of the intro (from intro t 0.8) and is full by hero t 0.2.
+    assert.equal(storyState(1.2 / 7, L).captions.hero, 0);
+    assert.ok(storyState(1.5 / 7, L).captions.hero > 0);
+    assert.equal(storyState(1.65 / 7, L).captions.hero, 1);
+    // A caption fades in over the first 25% of its beat and out over the last 15%.
+    const start = (id) => BEATS.slice(0, BEATS.findIndex((b) => b.id === id)).reduce((n, b) => n + b.screens, 0);
+    const caption = (id, t) => storyState((start(id) + t * BEATS.find((b) => b.id === id).screens) / RUNWAY_SCREENS, L).captions[id];
+    for (const id of ['hero', 'shape', 'team', 'tickets', 'worth']) {
+      if (id !== 'hero') {
+        assert.ok(caption(id, 0.05) > 0 && caption(id, 0.05) < 0.5, `${id} fades in`);
+        assert.ok(caption(id, 0.2) > 0.5 && caption(id, 0.2) < 1, `${id} is nearly in`);
+        assert.ok(caption(id, 0) < 1e-9, `${id} starts at 0`);
+      }
+      assert.equal(caption(id, 0.5), 1);
+      assert.ok(caption(id, 0.9) > 0 && caption(id, 0.9) < 1, `${id} fades out`);
+      assert.ok(caption(id, 0.999) < 0.01, `${id} is gone by its end`);
+    }
+    // A caption is 0 outside its own beat; an overlay waits for the morph to finish (t 0.4).
+    assert.equal(storyState(2.5 / 7, L).captions.team, 0);
+    assert.equal(storyState((3.25 + 0.3 * 1.25) / 7, L).overlays.team, 0);
+    assert.equal(storyState((3.25 + 0.7 * 1.25) / 7, L).overlays.team, 1);
+    assert.equal(storyState((3.25 + 0.7 * 1.25) / 7, L).captions.team, 1);
+    for (let i = 0; i <= 1000; i++) {
+      const s = storyState(i / 1000, L);
+      for (const k of ['shape', 'team', 'tickets', 'worth']) assert.ok(s.overlays[k] <= s.captions[k] + 1e-12, `${k} p=${i / 1000}`);
+    }
+  }
+});
+
+test('the ends: name on screen at 0, drained and masthead shown at 1', () => {
+  const L = layoutFor(16 / 9, 6);
+  const s0 = storyState(0, L), s1 = storyState(1, L);
+  assert.equal(s0.name.opacity, 1);
+  assert.equal(s0.name.scale, 1);
+  assert.equal(s0.cue, 1);
+  assert.equal(s0.masthead, 0);
+  assert.equal(s1.masthead, 1);
+  assert.equal(s1.name.opacity, 0);
+  assert.equal(s1.cue, 0);
+  for (const [k, o] of Object.entries(s1.captions)) assert.equal(o, 0, k);
+  for (const [k, o] of Object.entries(s1.overlays)) assert.equal(o, 0, k);
+  // The only active slot at 1 is the waterline, whose top edge is at most y 0.03.
+  const live = s1.slots.filter(active);
+  assert.equal(live.length, 1);
+  assert.ok(Math.max(live[0].a[1], live[0].b[1]) + live[0].th / 2 + live[0].r <= 0.03);
+  assert.equal(s1.flow, 0);
+
+  // Mid-intro: the name has risen (up is positive, in stage heights) and shrunk, then gone; the drop lands at splashAt.
+  const intro = (t) => storyState((t * BEATS[0].screens) / RUNWAY_SCREENS, L);
+  assert.equal(s0.name.y, 0);
+  assert.equal(s0.name.spread, 0);
+  const near = (x, y) => assert.ok(Math.abs(x - y) < 1e-9, `${x} is not ${y}`);
+  near(intro(0.6).name.scale, 0.35);
+  near(intro(0.6).name.y, 0.38);
+  near(intro(0.5).name.spread, 0.3);
+  near(intro(0.8).name.opacity, 0);
+  near(intro(0.9).masthead, 1);
+  assert.ok(intro(0.3).name.y > 0 && intro(0.3).name.y < intro(0.5).name.y);
+  assert.equal(s0.splashAt, (0.6 * 1.5) / 7);
+  assert.equal(s1.splashAt, s0.splashAt);
+  // Before 0.35 there is no drop; it hangs at the stage centre, lands at poolTop * 0.1, then joins the pool.
+  assert.equal(intro(0.3).slots.filter((s) => active(s) && s.th === 0).length, 0);
+  const drop = (t) => intro(t).slots.find((s) => s.th === 0 && s.r > 0);
+  assert.equal(drop(0.4).a[0], L.aspect / 2);
+  assert.ok(drop(0.36).a[1] > 0.49 && drop(0.36).a[1] <= 0.5);
+  assert.ok(Math.abs(drop(0.6).a[1] - L.poolTop * 0.1) < 1e-9);
+  assert.equal(drop(0.9), undefined);
+  // The pool's top edge reaches poolTop at the end of the intro.
+  const pool = intro(1).slots[0];
+  assert.equal(pool.th, L.poolTop);
+
+  // Flow swells while the water changes shape and is 0 when it is still: never in the intro or hero,
+  // at its peak halfway through a morph, and three times in the shape beat (one per silhouette).
+  const at = (screens) => storyState(screens / RUNWAY_SCREENS, L).flow;
+  assert.equal(at(1), 0);
+  assert.equal(at(1.9), 0);
+  near(at(3.25 + 0.2 * 1.25), 1);          // team: t 0.2 is half of its 0.4 morph
+  assert.equal(at(3.25 + 0.5 * 1.25), 0);
+  for (const k of [0, 1, 2]) near(at(2.25 + (k + 0.2) / 3), 1);   // shape: half of each silhouette's morph (u 0.2 of its third)
+  assert.equal(at(2.25 + 0.2), 0);         // ... and settled by u 0.4
+});
+
+test('slots stay in the stage and out of the caption box', () => {
+  const ids = ['intro', 'hero', 'shape', 'team', 'tickets', 'worth', 'drain'];
+  for (const [aspect, team] of [[16 / 9, 6], [4 / 3, 6], [844 / 390, 4], [390 / 844, 4], [768 / 1024, 6]]) {
+    const L = layoutFor(aspect, team), box = CAPTION_BOX(aspect);
+    const sweep = [0, 0.25, 0.5, 0.75, 1, ...Array.from({ length: 101 }, (_, i) => i / 100)];   // the brief's five, then every 1%
+    for (const id of ids) for (const t of sweep) {
+      const slots = slotsFor(id, t, L);
+      assert.equal(slots.length, MAX_SLOTS);
+      for (const s of slots) {
+        for (const n of [...s.a, ...s.b, s.th, s.r, s.fill]) assert.ok(Number.isFinite(n), `${id} t=${t}`);
+        if (!active(s)) continue;
+        // Its bounds lie within x ∈ [-0.35, aspect+0.35], y ∈ [-0.35, 1] and miss the caption box.
+        const b = bounds(s);
+        assert.ok(b.x0 >= -0.35 && b.x1 <= aspect + 0.35 && b.y0 >= -0.35 && b.y1 <= 1, `${aspect} ${id} t=${t} stage`);
+        assert.ok(!overlaps(b, box), `${aspect} ${id} t=${t} caption box`);
+      }
+    }
+
+    // The shape beat holds three silhouettes of at most six slots, centred in the art box and at most 80% of it.
+    const { art } = L, w = art.x1 - art.x0, h = art.y1 - art.y0;
+    for (const t of [0.25, 0.5, 0.9]) {
+      const held = slotsFor('shape', t, L).filter(active);
+      assert.ok(held.length >= 4 && held.length <= 6, `silhouette at ${t} has ${held.length} slots`);
+      const u = union(held.map(bounds));
+      assert.ok(Math.abs((u.x0 + u.x1) / 2 - (art.x0 + art.x1) / 2) < 1e-9, `${aspect} silhouette ${t} centred in x`);
+      assert.ok(Math.abs((u.y0 + u.y1) / 2 - (art.y0 + art.y1) / 2) < 1e-9, `${aspect} silhouette ${t} centred in y`);
+      assert.ok(u.x1 - u.x0 <= 0.8 * w + 1e-9 && u.y1 - u.y0 <= 0.8 * h + 1e-9, `${aspect} silhouette ${t} size`);
+    }
+    // The other beats draw inside the art box (the pool and waterline are the only wide ones).
+    for (const id of ['team', 'tickets', 'worth']) {
+      const u = union(slotsFor(id, 1, L).filter(active).map(bounds));
+      assert.ok(u.x0 >= art.x0 - 0.05 && u.x1 <= art.x1 + 0.05 && u.y0 >= art.y0 - 0.05 && u.y1 <= art.y1 + 0.05, `${aspect} ${id} in the art box`);
+    }
+  }
+});
+
+test('the team beat fans out to teamSize people, each with two or three apps', () => {
+  assert.equal(overlaysFor(layoutFor(16 / 9, 6)).team.length, 6);
+  assert.equal(overlaysFor(layoutFor(390 / 844, 4)).team.length, 4);
+  const APPS = ['mail', 'calendar', 'sheet', 'phone', 'chat'];
+  for (const [aspect, team] of [[16 / 9, 6], [390 / 844, 4], [768 / 1024, 6], [844 / 390, 4]]) {
+    const L = layoutFor(aspect, team), o = overlaysFor(L);
+    o.team.forEach((p, i) => {
+      assert.equal(p.index, i);
+      assert.ok(p.apps.length >= 2 && p.apps.length <= 3, `person ${i}`);
+      assert.ok(p.apps.every((a) => APPS.includes(a)), `person ${i} apps`);
+      assert.ok(p.x > 0 && p.x < aspect && p.y > 0 && p.y < 1, `person ${i} on stage`);
+    });
+    assert.deepEqual(o.team.slice(0, 3).map((p) => p.apps), [['mail', 'calendar'], ['sheet', 'phone', 'mail'], ['chat', 'calendar']]);
+    assert.equal(o.tickets.gates.length, 3);
+    assert.deepEqual(o.tickets.gates.map((g) => g.index), [0, 1, 2]);
+    assert.ok(o.tickets.gates[0].x < o.tickets.gates[2].x && o.tickets.gates[0].y < o.tickets.gates[2].y);
+    assert.deepEqual(o.tickets.source, { x: o.team[0].x, y: o.team[0].y });
+    assert.equal(o.shape.length, 3);
+    assert.deepEqual(o.shape.map((s) => s.index), [0, 1, 2]);
+    assert.ok(o.shape.every((s) => s.y < L.art.y0 + 0.01 && s.x > L.art.x0 && s.x < L.art.x1));
+    assert.ok(o.worth.price.x > L.art.x0 && o.worth.more.x < L.art.x1 && o.worth.price.x < o.worth.more.x);
+
+    // The team slots land exactly on the overlay nodes, so DOM labels sit on the water.
+    const slots = slotsFor('team', 1, L).filter(active);
+    for (const p of o.team) assert.ok(slots.some((s) => s.th === 0 && s.a[0] === p.x && s.a[1] === p.y && s.r === 0.032), `node ${p.index}`);
+    // The nodes are far enough apart not to merge.
+    for (let i = 0; i < o.team.length; i++) for (let j = i + 1; j < o.team.length; j++) {
+      assert.ok(Math.hypot(o.team[i].x - o.team[j].x, o.team[i].y - o.team[j].y) > 0.1, `nodes ${i} and ${j}`);
+    }
+  }
+});

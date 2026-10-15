@@ -4,7 +4,7 @@ import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
 import { CAPTION_BOX, DROP_R, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, TICKETS, layoutFor, slotsFor, overlaysFor, ticketTrip } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
-import { RIPPLE_STEP_MS, RIPPLE_START_OWED, nudgeInside, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
+import { RIPPLE_STEP_MS, RIPPLE_START_OWED, WATER_DEADLINE_MS, deadline, nudgeInside, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
 
 /** A stand-in for window: width, pointer class, reduced motion, save-data, memory. */
 const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
@@ -560,4 +560,37 @@ test('the tickets: most stop at the first gate, one climbs to the second, one re
   // And the overlay (the gates' labels and the check) is up by the time the first drop gets there.
   const L = layoutFor(16 / 9, 6);
   assert.equal(storyState((ticketStart + ticketTrip(0).arrive * ticketScreens) / RUNWAY_SCREENS, L).overlays.tickets > 0.9, true);
+});
+
+test('the water has a deadline: late, the story goes static once; on time, never; whatever arrives late is dropped', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  assert.equal(WATER_DEADLINE_MS, 4000);
+  // Late: nothing by 4s, so onLate runs once, and a load that resolves after that is told it missed.
+  let late = 0;
+  const slow = deadline(WATER_DEADLINE_MS, () => late++);
+  t.mock.timers.tick(3999);
+  assert.equal(late, 0, 'not before the deadline');
+  t.mock.timers.tick(1);
+  assert.equal(late, 1, 'at the deadline');
+  t.mock.timers.tick(10000);
+  assert.equal(late, 1, 'once');
+  assert.equal(slow.met(), false, 'the water that came after it is dropped');
+  // On time: met() stops the clock, so the story never goes static on its account.
+  let missed = 0;
+  const quick = deadline(WATER_DEADLINE_MS, () => missed++);
+  t.mock.timers.tick(2500);
+  assert.equal(quick.met(), true);
+  t.mock.timers.tick(10000);
+  assert.equal(missed, 0);
+  assert.equal(quick.met(), false, 'met only once');
+  // Cancelled (the story went static another way, or unmounted): no verdict, and no call.
+  let cancelled = 0;
+  deadline(WATER_DEADLINE_MS, () => cancelled++).cancel();
+  t.mock.timers.tick(10000);
+  assert.equal(cancelled, 0);
+  // It takes its timers from the caller, so it needs no window.
+  const calls = [];
+  const fake = { setTimeout: (fn, ms) => { calls.push(['set', ms]); return 7; }, clearTimeout: (id) => calls.push(['clear', id]) };
+  deadline(123, () => {}, fake).met();
+  assert.deepEqual(calls, [['set', 123], ['clear', 7]]);
 });

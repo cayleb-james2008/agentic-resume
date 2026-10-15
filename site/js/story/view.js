@@ -59,6 +59,36 @@ export const stepsFor = (owedMs, dtMs, stepMs, maxSteps = Infinity) => {
 };
 
 /**
+ * How long the water may take to load (three.js and water.js) and build after
+ * the story mounts. Past it the story goes static instead of leaving a blank
+ * runway: a stalled fetch never times out on its own, and by then the page has
+ * booted, so the head script's failsafe will not step in.
+ */
+export const WATER_DEADLINE_MS = 4000;
+
+/**
+ * A deadline: `onLate()` runs once, `ms` from now, unless `met()` is called
+ * first. `met()` stops the clock and says whether it was in time (false once
+ * `onLate` has run, so whatever arrives late is dropped); `cancel()` stops the
+ * clock with no verdict. `timers` is anything with setTimeout/clearTimeout.
+ */
+export const deadline = (ms, onLate, timers = globalThis) => {
+  let open = true;
+  const id = timers.setTimeout(() => {
+    if (!open) return;
+    open = false;
+    onLate();
+  }, ms);
+  const close = () => {
+    const inTime = open;
+    open = false;
+    timers.clearTimeout(id);
+    return inTime;
+  };
+  return { met: close, cancel: () => { close(); } };
+};
+
+/**
  * A stage point (origin bottom-left, y 0..1, x 0..aspect) as CSS `left`/`top`
  * percentages of the stage box (origin top-left).
  */

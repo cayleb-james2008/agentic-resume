@@ -5,10 +5,12 @@
  * progress alone, so scrolling back plays the same frames in reverse.
  *
  * three.js comes in through a dynamic import, so nothing on the page waits for
- * it to parse. If it does not load, there is no WebGL, the shader does not
- * build, the context is lost, or motion is turned off (reduced motion, the
- * failsafe), the story turns static: `.story--static` takes the runway away,
- * every inline style this module wrote is taken back, and the masthead shows.
+ * it to parse (the shell preloads it). If it does not load, or has not loaded
+ * and built within WATER_DEADLINE_MS of mount, there is no WebGL, the shader
+ * does not build, the context is lost, or motion is turned off (reduced
+ * motion, the failsafe), the story turns static: `.story--static` takes the
+ * runway away, every inline style this module wrote is taken back, and the
+ * masthead shows. Water that arrives after that is dropped.
  *
  * Input only ever adds ripples. Every pointer, touch and orientation listener
  * is passive, so a swipe over the water always scrolls the page.
@@ -23,7 +25,9 @@ import { createRipple, rippleSize } from './ripple.js';
 import { layoutFor, overlaysFor } from './shapes.js';
 import { getStoryTier } from './tier.js';
 import { storyState } from './timeline.js';
-import { RIPPLE_START_OWED, RIPPLE_STEP_MS, nudgeInside, shouldRetune, stepsFor, toPercent } from './view.js';
+import {
+  RIPPLE_START_OWED, RIPPLE_STEP_MS, WATER_DEADLINE_MS, deadline, nudgeInside, shouldRetune, stepsFor, toPercent,
+} from './view.js';
 
 /** The water's colours, read off the page so they always match it. */
 const COLOR_TOKENS = { ink: '--raw-color-ink-900', deep: '--raw-color-ink-950', rim: '--raw-color-cyan-400', bg: '--raw-color-ice-50' };
@@ -86,11 +90,13 @@ export function mount(section) {
 
   let stop = noop;   // tears the running story down, once there is one
   let ended = false;
+  let late = null;   // the water's deadline
 
   /** No motion after all: the static story, as if the runway had never been. */
   const toStatic = () => {
     if (ended) return;
     ended = true;
+    late?.cancel();
     stop();
     section.classList.add('story--static');
     for (const [el, props] of written) for (const prop of Object.keys(props)) el.style[prop] = '';
@@ -104,14 +110,17 @@ export function mount(section) {
   }
 
   let tier = getStoryTier();
+  // A stalled fetch would leave a blank runway for good: past the deadline, the static story instead.
+  late = deadline(WATER_DEADLINE_MS, toStatic);
 
   const start = async () => {
     let water;
     try {
       const { Water } = await import('./water.js');
-      if (ended) return;
+      if (ended) return;   // gone static meanwhile (the deadline passed, say): the water came too late
       const colors = Object.fromEntries(Object.entries(COLOR_TOKENS).map(([key, token]) => [key, readToken(token)]));
       water = new Water(canvas, { tier, colors });
+      late.met();
     } catch {
       toStatic();   // no three.js, no WebGL2, or a shader that did not build
       return;
@@ -370,6 +379,7 @@ export function mount(section) {
   start();
   return () => {
     ended = true;
+    late.cancel();
     stop();
   };
 }

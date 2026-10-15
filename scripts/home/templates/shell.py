@@ -26,6 +26,16 @@ HEAD_SCRIPT = (
 
 PRELOAD_FONTS = ("oswald-latin-700-normal", "space-grotesk-latin-400-normal")
 
+# The water's modules, fetched alongside main.js rather than only once story.js asks for them, so the story is
+# not left waiting on three.js (it gives up after 4s; see story.js). Only where motion is allowed: with motion
+# reduced the story never loads them. They follow the import map, which must come before any module fetch.
+PRELOAD_MODULES = (
+    "site/js/story/water.js",
+    "vendor/three-0.185.0/three.module.min.js",
+    "vendor/three-0.185.0/three.core.min.js",
+)
+MOTION_OK = "(prefers-reduced-motion: no-preference)"
+
 
 def render(content: dict, blocks: dict) -> str:
     meta = content["meta"]
@@ -34,6 +44,7 @@ def render(content: dict, blocks: dict) -> str:
         f'<link rel="preload" href="assets/fonts/{name}.woff2" as="font" type="font/woff2" crossorigin>'
         for name in PRELOAD_FONTS
     )
+    modules = "".join(f'<link rel="modulepreload" href="{path}" media="{MOTION_OK}">' for path in PRELOAD_MODULES)
     return (
         '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
@@ -43,7 +54,7 @@ def render(content: dict, blocks: dict) -> str:
         '<meta name="theme-color" content="#f7fafb">'
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
         f"<script>{HEAD_SCRIPT}</script>{fonts}{styles}"
-        f'<script type="importmap">{IMPORT_MAP}</script>'
+        f'<script type="importmap">{IMPORT_MAP}</script>{modules}'
         '<script type="module" src="site/js/main.js"></script>'
         "</head><body>"
         '<a class="skip-link" href="#resume">Skip to résumé</a>'

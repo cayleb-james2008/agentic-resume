@@ -463,3 +463,18 @@ test('the menu moved to the masthead folder and the page still loads it', () => 
   assert.match(read('site/js/main.js'), /from '\.\/masthead\/menu\.js'/);
   assert.throws(() => read('site/js/hero/menu.js'), /ENOENT/);
 });
+
+test('the story arms the water\'s deadline at mount, and drops water that comes after it', () => {
+  const script = read('site/js/story/story.js').replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '');
+  // Armed in mount, before the import starts, with the static story as what happens when it passes.
+  const armed = script.indexOf('late = deadline(WATER_DEADLINE_MS, toStatic)');
+  assert.ok(armed > script.indexOf('export function mount(') && armed < script.indexOf("await import('./water.js')"));
+  // After the import: anything that ended the story meanwhile (the deadline among them) drops the water unbuilt...
+  const after = script.slice(script.indexOf("await import('./water.js')"));
+  assert.match(after, /^await import\('\.\/water\.js'\);\s*if \(ended\) return;/);
+  // ...and building it in time stops the clock. Going static, or unmounting, stops it too.
+  assert.ok(after.indexOf('late.met()') > after.indexOf('new Water('));
+  const toStatic = script.slice(script.indexOf('const toStatic'), script.indexOf('};', script.indexOf('const toStatic')));
+  assert.match(toStatic, /late\?\.cancel\(\)/);
+  assert.match(script.slice(script.lastIndexOf('start();')), /late\.cancel\(\)/);
+});

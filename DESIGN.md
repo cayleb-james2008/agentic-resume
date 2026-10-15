@@ -6,7 +6,7 @@
 
 **Structure.** Two halves and a footer, under a slim fixed masthead.
 - The water story: a tall scroll runway with a sticky full-screen stage. The name, then five short beats: the headline, shape, team (Ergon), tickets, and the price. Words sit top left.
-- The official résumé: a white sheet built from `resume/resume-content.json`, the same source as the PDFs. Experience, projects with Ergon first, education and skills, then the downloads.
+- The official résumé: a white sheet built from `resume/resume-content.json`, the same source as the PDFs. The two downloads sit in its head, then experience, projects with Ergon first, and education and skills.
 - The contact footer: email, GitHub and the PDFs.
 - The guide is a plain bead with no face. It shows only in the résumé half.
 
@@ -27,7 +27,7 @@
 - The ticket ladder is Agent → Senior agent → Person. No model names, because the routing may change.
 - The price, about $100 a person a month, is Cayleb's own 2026-10-15 figure, sized per company.
 - The résumé half carries the verified status: Ergon is a Windows pilot with live checks pending. The other jobs are labelled "Work ethic". There is no certifications section.
-- The limits in PRODUCT.md still hold: recorded demos only, no clients, returns or revenue, RHL only as a moving-crew job, EvoHedge and Maki private.
+- The claim limits hold, and tests enforce them: no clients, returns, profit or revenue in the homepage copy, and EvoHedge and Maki never named (`tests/home-content.test.js`); the guide names no clients, customers or company pilots, and never RHL (`tests/home-guide.test.js`). The lab is described as recorded demos, and RHL appears only as the moving-crew job in the résumé half.
 
 ---
 

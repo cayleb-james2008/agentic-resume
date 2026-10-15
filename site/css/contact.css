@@ -1,10 +1,13 @@
 /* Contact footer — the reference's sign-off (spec §L5275–5476). A cyan page
    edge around a plain near-black panel; the copy on the section in frame
-   coordinates. Below 640: a stacked phone footer. */
+   coordinates. Below 640: a stacked phone footer.
+   A jump to #contact (the nav, a deep link) stops a masthead's height down; where the footer fills the
+   screen it fills only what the fixed masthead leaves, so its foot row is never pushed off the bottom. */
 
 .contact {
   container-type: inline-size; position: relative; isolation: isolate;
-  min-height: var(--foot-h, 100lvh); width: 100%; overflow: hidden;
+  min-height: var(--foot-h, calc(100lvh - var(--masthead-h))); width: 100%; overflow: hidden;
+  scroll-margin-top: var(--masthead-h);
   background: var(--accent); color: var(--foreground-on-dark);
   --g: var(--foot-gutter, 2.2222cqw);
   --cta-h: 3.4722cqw;

@@ -113,7 +113,7 @@ def not_found(content: dict) -> str:
         '<body class="project-page not-found-page">'
         f"{subpage.masthead(content, '')}"
         '<main class="not-found">'
-        f'<div class="not-found-agent" aria-hidden="true">{guide.DROPLET_SVG}</div>'
+        f'<div class="not-found-agent" aria-hidden="true">{guide.BEAD_SVG}</div>'
         '<p class="not-found-code">404</p>'
         '<h1 class="not-found-title">Page not found<span class="not-found-stop">.</span></h1>'
         "<p class=\"not-found-copy\">Cayleb's agent looked everywhere. This page isn't here; it may have moved.</p>"

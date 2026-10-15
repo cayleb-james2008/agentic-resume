@@ -1,22 +1,30 @@
 /**
- * The guide (spec 2026-10-12-droplet-agent-guide-design): Cayleb's droplet
- * agent rides along in the corner once the hero is behind the reader, says a
- * line per section, and opens an "Ask my agent" panel. What to say and when is
- * queue.js; this file is the DOM, the springs and the ticker.
+ * The guide (spec 2026-10-12-droplet-agent-guide-design): a faceless ink bead
+ * rides along in the corner once the scroll story is behind the reader (the
+ * résumé has come into view), says a line per section, and opens an "Ask my
+ * agent" panel. It has no face: it bobs, and that is all. What to say and when
+ * is queue.js; this file is the DOM, the springs and the ticker.
  */
 import { prefersReducedMotion } from '../engine/scroll.js';
 import { CONFIGS, Spring } from '../engine/spring.js';
 import { ticker } from '../engine/ticker.js';
-import { blinkSquash, nextBlinkDelay } from '../hero/droplet-shape.js';
-import { createGuideState, gaze, request, setQuiet, tick } from './queue.js';
+import { createGuideState, request, setQuiet, tick } from './queue.js';
 
-const SECTIONS = ['approach', 'experience', 'work', 'value', 'contact'];
+const SECTIONS = ['experience', 'work', 'education', 'contact'];
 const QUIET_KEY = 'cayleb-guide-quiet';
-/** Scrolled this many viewport heights, the hero is behind the reader. */
-export const APPEAR_AFTER = 0.85;
-/** How far the droplet lifts to clear the footer's foot row, in px. */
+/** The résumé counts as reached once its top is above this share of the way down the viewport. */
+const REACH = 0.6;
+/** How far the bead lifts to clear the footer's foot row, in px. */
 export const FOOT_LIFT = 92;
 const BOB_PX = 3;
+
+/**
+ * The guide appears once the reader reaches the résumé, which follows the scroll
+ * story: true when the résumé's top (`resumeTop`, in page px) is above the line 60%
+ * of the way down the viewport. With no résumé on the page `resumeTop` is Infinity,
+ * so the guide stays away.
+ */
+export const pastStory = (scrollY, resumeTop, viewport) => scrollY + viewport * REACH > resumeTop;
 
 const quietStore = {
   get() { try { return window.localStorage.getItem(QUIET_KEY) === '1'; } catch { return false; } },
@@ -29,7 +37,6 @@ export function mount(root) {
   const panel = root.querySelector('#guide-panel');
   const closeBtn = root.querySelector('[data-guide-close]');
   const quietBtn = root.querySelector('[data-guide-quiet]');
-  const eyes = root.querySelector('[data-guide-eyes]');
   const dock = root.querySelector('[data-guide-dock]') || root;
   if (!agent || !bubble || !panel) return;
   // A landscape phone is as short of spare corner as a portrait one.
@@ -37,27 +44,29 @@ export function mount(root) {
 
   const reduced = prefersReducedMotion();
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const lines = {
-    greeting: root.dataset.lineGreeting,
-    approach: root.dataset.lineApproach,
-    experience: root.dataset.lineExperience,
-    work: root.dataset.lineWork,
-    value: root.dataset.lineValue,
-    contact: root.dataset.lineContact,
-  };
+  // data-line-<id> on the root: "greeting", then one per section.
+  const lineOf = (id) => root.dataset[`line${id[0].toUpperCase()}${id.slice(1)}`];
+  const lines = Object.fromEntries(['greeting', ...SECTIONS].map((id) => [id, lineOf(id)]));
 
   const state = createGuideState();
   const enter = new Spring({ ...CONFIGS.ITEM, value: 0, precision: 0.001 });
   const lift = new Spring({ ...CONFIGS.SHEET, value: 0, precision: 0.1 });
   let shown = false;
   let away = true;
-  /** On a phone the footer has no room beside its foot row: the droplet steps away instead of lifting. */
+  /** On a phone the footer has no room beside its foot row: the bead steps away instead of lifting. */
   let footAway = false;
   let open = false;
-  let pointer = null;
-  let activeHeading = null;
-  let blinkAt = -1;
-  let nextBlink = performance.now() + nextBlinkDelay();
+  /**
+   * Where the résumé starts, in page px: from the viewport, not the offset parent. Measured now, on
+   * resize, once the fonts are in, and whenever the page's height changes (the story going static
+   * after mount takes its runway away).
+   */
+  let resumeTop = Infinity;
+  const measure = () => {
+    const el = document.getElementById('resume');
+    resumeTop = el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+  };
+  measure();
 
   // --- Quiet -------------------------------------------------------------
   const applyQuiet = (on) => {
@@ -103,7 +112,7 @@ export function mount(root) {
   }
 
   // --- Appearing, sections and the footer ---------------------------------
-  // Back up on the hero, the hero's own droplet is on screen: this one steps away.
+  // Back up in the story, the bead steps away.
   const settle = () => {
     const present = !away && !footAway;
     if (!present) {
@@ -114,7 +123,7 @@ export function mount(root) {
     start();
   };
   const onScroll = () => {
-    const past = window.scrollY > window.innerHeight * APPEAR_AFTER;
+    const past = pastStory(window.scrollY, resumeTop, window.innerHeight);
     if (past === !away) return;
     away = !past;
     if (past && !shown) {
@@ -125,6 +134,10 @@ export function mount(root) {
     settle();
   };
   window.addEventListener('scroll', onScroll, { passive: true });
+  const remeasure = () => { measure(); onScroll(); };
+  window.addEventListener('resize', remeasure);
+  document.fonts?.ready.then(remeasure);
+  if (typeof ResizeObserver === 'function') new ResizeObserver(remeasure).observe(document.body);
 
   const sectionWatch = new IntersectionObserver((entries) => {
     for (const entry of entries) {
@@ -132,7 +145,6 @@ export function mount(root) {
       // A phone has no spare corner: a bubble there sits on the copy. It greets once, then
       // stays a button.
       if (!phone.matches) request(state, entry.target.id);
-      activeHeading = entry.target.querySelector('h2') || entry.target;
       start();
     }
   }, { rootMargin: '-35% 0px -35% 0px' });
@@ -153,10 +165,6 @@ export function mount(root) {
       if (reduced) lift.jump(target); else lift.set(target);
       start();
     }, { threshold: [0, 0.55, 1] }).observe(contact);
-  }
-
-  if (fine && !reduced) {
-    window.addEventListener('pointermove', (event) => { pointer = { x: event.clientX, y: event.clientY }; }, { passive: true });
   }
 
   // --- The frame loop ------------------------------------------------------
@@ -180,22 +188,7 @@ export function mount(root) {
     root.style.opacity = String(Math.min(1, Math.max(0, enter.value)));
     root.style.visibility = (away || footAway) && enter.value < 0.02 ? 'hidden' : '';
 
-    if (eyes && !reduced) {
-      if (now >= nextBlink) { blinkAt = now; nextBlink = now + nextBlinkDelay(); }
-      const box = agent.getBoundingClientRect();
-      const cx = box.left + box.width / 2;
-      const cy = box.top + box.height * 0.6;
-      let target = pointer;
-      if (!target && activeHeading) {
-        const h = activeHeading.getBoundingClientRect();
-        target = { x: h.left + h.width / 2, y: h.top + h.height / 2 };
-      }
-      const g = target ? gaze(target.x - cx, target.y - cy, 3) : { x: 0, y: 0 };
-      const squash = blinkSquash(now - blinkAt);
-      eyes.setAttribute('transform', `translate(${g.x.toFixed(2)} ${(g.y + 44 * (1 - squash)).toFixed(2)}) scale(1 ${squash.toFixed(3)})`);
-    }
-
-    // Idle: nothing moving, nothing showing or waiting, and no reason to animate the droplet.
+    // Idle: nothing moving, nothing showing or waiting, and no bob to run.
     const busy = moving || state.current !== null || state.pending !== null || (state.greeting && !state.said.has('greeting'));
     if ((!busy && reduced) || ((away || footAway) && !moving)) stop();
   };

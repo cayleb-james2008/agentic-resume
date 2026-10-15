@@ -15,7 +15,7 @@ const meta = (html, attr, key) => unescape(html.match(new RegExp(`<meta ${attr}=
 test('the site address and the share card live in content.json', () => {
   assert.equal(content.meta.siteUrl, SITE);
   assert.equal(content.meta.shareImage, 'assets/og/card.png');
-  assert.match(content.meta.shareAlt, /^Illustration:/);
+  assert.match(content.meta.shareAlt, /^Share card:/);
 });
 
 test('the share card is a 1200×630 PNG', () => {
@@ -23,6 +23,14 @@ test('the share card is a 1200×630 PNG', () => {
   assert.equal(png.toString('ascii', 1, 4), 'PNG');
   assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [1200, 630]);
   assert.ok(png.length < 400_000, `${png.length} bytes`);
+});
+
+test('the share card is drawn from type and water: its script reads no person map and draws no droplet', () => {
+  assert.doesNotMatch(read('scripts/home/make_share_card.py'), /person-|alpha|droplet/);
+});
+
+test('the share card carries the story\'s own headline, word for word', () => {
+  assert.ok(read('scripts/home/make_share_card.py').includes(content.story.beats[0].headline), 'the card\'s headline has drifted from beats[0].headline');
 });
 
 for (const [file, path] of Object.entries(PAGES)) {
@@ -38,7 +46,7 @@ for (const [file, path] of Object.entries(PAGES)) {
     assert.equal(meta(head, 'property', 'og:image'), SITE + content.meta.shareImage);
     assert.equal(meta(head, 'property', 'og:image:width'), '1200');
     assert.equal(meta(head, 'property', 'og:image:height'), '630');
-    assert.match(meta(head, 'property', 'og:image:alt'), /^Illustration:/);
+    assert.match(meta(head, 'property', 'og:image:alt'), /^Share card:/);
     assert.equal(meta(head, 'name', 'twitter:card'), 'summary_large_image');
     assert.match(head, /<link rel="icon" href="[^"]*favicon\.svg"/);
     assert.equal((head.match(/rel="canonical"/g) || []).length, 1, 'one canonical');
@@ -71,7 +79,7 @@ test('the sitemap lists every page by its canonical address', () => {
 const TITLE = 'Forward Thinking Engineer';
 test('the headline title is Forward Thinking Engineer on the site, the résumé and the share card', () => {
   assert.equal(content.meta.title, `Cayleb Alvarez-James · ${TITLE}`);
-  assert.ok(content.hero.meta.some((m) => m.label === TITLE), 'hero meta row');
+  assert.equal(content.story.intro.title, TITLE, 'the story\'s title under the name');
   assert.ok(content.meta.shareAlt.includes(TITLE));
   assert.ok(read('resume.html').includes(`<p>${TITLE} · Connecticut · Remote-only</p>`));
   assert.ok(read('scripts/home/make_share_card.py').includes(`"${TITLE}"`));

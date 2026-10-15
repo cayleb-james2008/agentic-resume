@@ -1,0 +1,48 @@
+/* The masthead: wordmark, primary nav and burger, fixed over the page. Solid, so the story's water never
+   shows through it. On a scripted page that allows motion the story fades it in as the name flies up
+   into it (story.js owns its inline opacity from there). */
+
+:root {
+  --masthead-h: 4rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+}
+
+/* Whatever the page scrolls to (a deep link, a nav jump through Lenis, a focused link) stops clear of the fixed
+   masthead, never under it (WCAG 2.2 SC 2.4.11). One rule for the whole page: Lenis and the browser add an
+   element's scroll-margin to this, so no section carries its own. */
+html { scroll-padding-top: calc(var(--masthead-h) + 1rem); }
+
+.masthead {
+  position: fixed; inset: 0 0 auto; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--masthead-h); padding: 0 var(--gutter);
+  background: var(--background);
+}
+.wordmark {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.5rem;
+  line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; color: var(--foreground);
+}
+.masthead-nav { display: none; }
+.masthead-action { display: none; }
+.masthead-nav a, .masthead-action {
+  font-size: var(--type-label); text-transform: uppercase; line-height: 0.9;
+  color: var(--foreground);
+  transition: color var(--duration-fast) var(--ease-entrance);
+}
+.masthead-nav a:hover, .masthead-nav a:focus-visible,
+.masthead-action:hover, .masthead-action:focus-visible { color: var(--accent-ink); }
+.masthead-action { font-weight: 700; }
+.burger { padding: 0.5rem; margin-right: -0.5rem; display: flex; flex-direction: column; gap: 0.3125rem; }
+.burger span { display: block; width: 1.5rem; height: 1px; background: var(--foreground); }
+
+@media (min-width: 1280px) {
+  .masthead-nav { display: block; position: absolute; left: 50%; transform: translateX(-50%); }
+  .masthead-nav ul { display: flex; gap: clamp(2rem, 2.75vw, 3.5rem); }
+  .masthead-action { display: inline; }
+  .burger { display: none; }
+}
+
+/* The runway's intro: the masthead is not there yet. */
+@media (prefers-reduced-motion: no-preference) {
+  .js:not(.reveal-failsafe) [data-masthead] { opacity: 0; }
+}

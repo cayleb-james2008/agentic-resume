@@ -1,14 +1,14 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
-    "description": "Cayleb Alvarez-James. Forward Thinking Engineer. Integrates AI built around each company. Saves money, no cuts.",
+    "description": "Cayleb Alvarez-James, Forward Thinking Engineer. Learns how you work, builds AI into it.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
     "github": "https://github.com/cayleb-james2008",
     "siteUrl": "https://cayleb-james2008.github.io/agentic-resume/",
     "shareImage": "assets/og/card.png",
-    "shareAlt": "Illustration: Cayleb as a 3D character beside his glass-droplet AI agent, with his name and the title Forward Thinking Engineer."
+    "shareAlt": "Share card: Cayleb Alvarez-James, Forward Thinking Engineer, above a line of ink water."
   },
   "wordmark": "CAYLEB.AJ",
   "nav": [
@@ -17,16 +17,8 @@
       "href": "#experience"
     },
     {
-      "label": "How I work",
-      "href": "#approach"
-    },
-    {
       "label": "Projects",
       "href": "#work"
-    },
-    {
-      "label": "Worth it",
-      "href": "#value"
     },
     {
       "label": "Lab",
@@ -41,498 +33,94 @@
     "label": "Résumé",
     "href": "resume.html"
   },
-  "hero": {
-    "eyebrow": "Résumé · 2026",
-    "nameWords": [
-      "Cayleb",
-      "Alvarez-",
-      "James"
-    ],
-    "meta": [
-      {
-        "icon": "pin",
-        "label": "Connecticut, USA"
-      },
-      {
-        "icon": "spark",
-        "label": "Forward Thinking Engineer"
-      },
-      {
-        "icon": "spark",
-        "label": "Independent dev · since 2025"
-      }
-    ],
-    "now": {
-      "eyebrow": "Now",
-      "title": "Ergon",
-      "lines": [
-        "Employee AI agents",
-        "Remote setup, repair"
-      ]
+  "story": {
+    "intro": {
+      "nameWords": [
+        "Cayleb",
+        "Alvarez-",
+        "James"
+      ],
+      "title": "Forward Thinking Engineer",
+      "cue": "Scroll"
     },
-    "glance": {
-      "eyebrow": "At a glance",
-      "stats": [
-        {
-          "label": "Projects",
-          "value": "5"
-        },
-        {
-          "label": "Tools",
-          "value": "10"
-        },
-        {
-          "label": "Languages",
-          "value": "5"
-        }
-      ]
+    "beats": [
+      {
+        "id": "hero",
+        "headline": "Show me how you work. I'll find where AI fits.",
+        "line": "Forward Thinking Engineer. I learn the job first, then build AI and automation into it. Saves time and raises quality, in any field."
+      },
+      {
+        "id": "shape",
+        "headline": "Every team works differently.",
+        "line": "I build to fit yours.",
+        "labels": [
+          "Moving crew",
+          "Office",
+          "Shop"
+        ]
+      },
+      {
+        "id": "team",
+        "headline": "Everyone gets their own assistant.",
+        "line": "Built around the apps they already use.",
+        "tag": "Ergon",
+        "roles": [
+          "Owner",
+          "Dispatch",
+          "Front desk",
+          "Books",
+          "Crew lead",
+          "Sales"
+        ]
+      },
+      {
+        "id": "tickets",
+        "headline": "Problems fix themselves.",
+        "line": "Right on the computer. Hard ones go up. A person has the last word.",
+        "ladder": [
+          "Agent",
+          "Senior agent",
+          "Person"
+        ]
+      },
+      {
+        "id": "worth",
+        "headline": "About $100 a person a month.",
+        "line": "Time back to take on more work.",
+        "price": "$100 / mo",
+        "more": "+ more work"
+      }
+    ]
+  },
+  "resumeHalf": {
+    "kicker": "Résumé",
+    "experience": "Experience",
+    "projects": "Projects",
+    "education": "Education and skills",
+    "skills": "Skills",
+    "caseStudy": "Case study",
+    "workEthic": {
+      "title": "Work ethic",
+      "line": "Real jobs, real hours. Where I learned how teams actually work."
+    },
+    "status": {
+      "ergon": "Windows pilot · live checks pending"
     },
     "lab": {
       "label": "See the lab",
       "sub": "10 recorded demos",
       "href": "lab/"
     },
-    "cta": {
-      "label": "Résumé PDF",
-      "href": "Cayleb-James-polished-resume.pdf"
-    },
-    "links": [
+    "downloads": [
       {
-        "label": "Worth it",
-        "href": "#value"
+        "label": "Résumé PDF",
+        "href": "Cayleb-James-polished-resume.pdf"
       },
       {
-        "label": "GitHub",
-        "href": "https://github.com/cayleb-james2008"
-      },
-      {
-        "label": "Email",
-        "href": "mailto:caylebalvarezjames@gmail.com"
-      },
-      {
-        "label": "Résumé",
-        "href": "resume.html"
+        "label": "One-page PDF",
+        "href": "Cayleb-James-polished-one-page.pdf"
       }
     ]
-  },
-  "approach": {
-    "lines": [
-      "How I",
-      "work"
-    ],
-    "intro": "Shadow two days. Build agents and tools. Teach. Scale.",
-    "badge": [
-      "AI",
-      "/ 2026"
-    ],
-    "rows": [
-      {
-        "n": "01",
-        "text": "shadow 2 days"
-      },
-      {
-        "n": "02",
-        "text": "build agents + tools"
-      },
-      {
-        "n": "03",
-        "text": "teach + scale"
-      }
-    ],
-    "stations": [
-      "Shadow",
-      "Understand",
-      "Build",
-      "Teach"
-    ],
-    "finish": "Whole company"
-  },
-  "experience": {
-    "lines": [
-      "Work",
-      "experience"
-    ],
-    "entries": [
-      {
-        "year": "2022",
-        "frame": "centre",
-        "copyWidth": 228,
-        "lead": "Portland High School, 2022–2026.",
-        "body": "Cybersecurity. AP Computer Science.",
-        "image": "assets/home/experience/2026-school.webp",
-        "alt": "Illustration: Cayleb coding at a classroom computer"
-      },
-      {
-        "year": "2024",
-        "frame": "side",
-        "align": "right",
-        "title": "Tommy's Pizza",
-        "image": "assets/home/experience/2024-pizza.webp",
-        "alt": "Illustration: Cayleb sliding a pizza out of a brick oven"
-      },
-      {
-        "year": "2024",
-        "frame": "centre",
-        "copyWidth": 272,
-        "lead": "Dunkin', 2024–2026.",
-        "body": "Rush-hour speed. Inventory.",
-        "image": "assets/home/experience/2024-dunkin.webp",
-        "alt": "Illustration: Cayleb handing a coffee across a Dunkin' counter"
-      },
-      {
-        "year": "2025",
-        "frame": "side",
-        "align": "left",
-        "title": "dotz · Sophos · AI Suite",
-        "image": "assets/home/experience/2026-builds.webp",
-        "alt": "Illustration: Cayleb at a desk with two monitors of code, his AI agent beside him"
-      },
-      {
-        "year": "2025",
-        "frame": "centre",
-        "copyWidth": 278,
-        "lead": "Robert H. Lord Company, summer 2025; 2026–now.",
-        "body": "Moving crew. Commercial ops.",
-        "image": "assets/home/experience/2025-moving.webp",
-        "alt": "Illustration: Cayleb assembling a desk in a warehouse"
-      },
-      {
-        "year": "2026",
-        "frame": "side",
-        "align": "right",
-        "title": "David Cooke Plaster Co.",
-        "image": "assets/home/experience/2026-plaster.webp",
-        "alt": "Illustration: Cayleb breaking up old pool plaster with a sledgehammer"
-      },
-      {
-        "year": "2026",
-        "frame": "centre",
-        "copyWidth": 284,
-        "lead": "Building with AI, Oct 2025–now.",
-        "body": "5 systems, 3,300+ checks. Next: built for each team.",
-        "image": "assets/home/experience/2026-integrator.webp",
-        "alt": "Illustration: Cayleb beside a coworker, taking notes on how she works, his AI agent between them"
-      }
-    ]
-  },
-  "projects": {
-    "lines": [
-      "Selected",
-      "projects"
-    ],
-    "report": "Industry AI Suite: 10 local review tools. Answers show sources. People decide.",
-    "cta": {
-      "label": "Case study",
-      "href": "projects/industry-ai-suite.html"
-    },
-    "feature": {
-      "name": "Industry AI Suite",
-      "lines": [
-        "Runs on your own computer",
-        "Shows its sources"
-      ]
-    },
-    "stats": [
-      {
-        "icon": "check",
-        "label": "Review tools",
-        "value": "10"
-      },
-      {
-        "icon": "bars",
-        "label": "Checks passed",
-        "value": "382"
-      },
-      {
-        "icon": "quote",
-        "label": "Sourced answers",
-        "value": "5"
-      },
-      {
-        "icon": "gauge",
-        "label": "AI test runs",
-        "value": "6"
-      }
-    ],
-    "cards": [
-      {
-        "kicker": "Desktop app",
-        "name": "dotz",
-        "status": "828+ checks",
-        "marker": "ring",
-        "href": "projects/dotz.html",
-        "repo": "https://github.com/cayleb-james2008/dotz"
-      },
-      {
-        "kicker": "Desktop app",
-        "name": "Sophos",
-        "status": "1,224 checks",
-        "marker": "ring",
-        "href": "projects/sophos.html",
-        "repo": "https://github.com/cayleb-james2008/sophos"
-      },
-      {
-        "kicker": "Review tools",
-        "name": "AI Suite",
-        "status": "382 checks",
-        "marker": "live",
-        "href": "projects/industry-ai-suite.html",
-        "repo": "https://github.com/cayleb-james2008/industry-ai-suite"
-      },
-      {
-        "kicker": "Research",
-        "name": "Asmodeus",
-        "status": "1,111 checks",
-        "marker": "ring",
-        "href": "projects/asmodeus.html"
-      },
-      {
-        "kicker": "Work assistant",
-        "name": "Ergon",
-        "status": "Windows pilot",
-        "marker": "ring",
-        "href": "projects/ergon.html"
-      }
-    ],
-    "figure": {
-      "image": "assets/home/projects/figure.webp",
-      "alt": "Illustration: Cayleb typing on a laptop"
-    }
-  },
-  "value": {
-    "lines": [
-      "Worth",
-      "it"
-    ],
-    "intro": "No cuts. No lost pay. The money comes from fixing the busywork.",
-    "proof": "He's worked these jobs and knows where the time goes. People approve before anything goes out. Illustrative estimates; actual savings are measured with each team.",
-    "fit": {
-      "title": "Built around each company",
-      "lead": "Nothing off the shelf. Two movers, two builds.",
-      "points": [
-        {
-          "name": "Their situation",
-          "text": "Size, season, and what's costing them most right now. The build starts with the biggest leak."
-        },
-        {
-          "name": "Their tools",
-          "text": "Wired into the phones, calendars, email, software and books they already use. Nothing to switch."
-        },
-        {
-          "name": "How they work",
-          "text": "He shadows for two days without slowing the crew, so every system fits how they already work."
-        },
-        {
-          "name": "What they need",
-          "text": "They pick what gets automated, from one small tool to a full system, with human sign-off and undo."
-        }
-      ]
-    },
-    "cardLabel": "What he builds for",
-    "todayLabel": "Today",
-    "money": {
-      "label": "Lost each month",
-      "today": "Today",
-      "after": "With it",
-      "total": "Total",
-      "item": "Cost",
-      "to": "to",
-      "per": "per",
-      "saves": "Saves",
-      "year": "a year"
-    },
-    "examples": [
-      {
-        "kind": "A moving company",
-        "rows": [
-          {
-            "system": "Lead to booking",
-            "then": "An agent answers every inquiry in minutes, gets a video walkthrough, drafts the quote and holds the date. The office approves before it goes out.",
-            "now": "Office takes calls, books walkthroughs, types up quotes."
-          },
-          {
-            "system": "Self-planning dispatch",
-            "then": "Drafts crew and truck assignments around traffic, re-plans when a job runs long, and texts customers live arrival times once dispatch approves.",
-            "now": "Crews and trucks planned on a whiteboard."
-          },
-          {
-            "system": "Job to paid",
-            "then": "Crew photos, stairs and heavy items become a draft invoice and payment link for review. Before-and-after photos back every damage claim.",
-            "now": "Paperwork after every job: hours, invoices, claims."
-          }
-        ],
-        "value": "More jobs booked. Trucks stay busy. Paid faster.",
-        "money": {
-          "items": [
-            {
-              "what": "Moves lost to slow replies",
-              "unit": "move",
-              "qty": [
-                3,
-                1
-              ],
-              "each": 1000
-            },
-            {
-              "what": "Extra truck miles",
-              "unit": "mile",
-              "qty": [
-                1600,
-                400
-              ],
-              "each": 0.5
-            },
-            {
-              "what": "Damage claims paid",
-              "unit": "claim",
-              "qty": [
-                2,
-                1
-              ],
-              "each": 300
-            },
-            {
-              "what": "Extras never billed",
-              "unit": "extra",
-              "qty": [
-                6,
-                1
-              ],
-              "each": 100
-            }
-          ],
-          "basis": "Sized for a three-truck mover."
-        }
-      },
-      {
-        "kind": "A plaster and pool crew",
-        "rows": [
-          {
-            "system": "Estimate from a video",
-            "then": "A phone video of the pool becomes draft measurements, a materials list, crew days and a price. The owner reviews and sends the proposal same day.",
-            "now": "Every estimate measured and priced by hand."
-          },
-          {
-            "system": "Supply autopilot",
-            "then": "Drafts the right order from the best-priced supplier, timed to arrive the morning the crew needs it, ready for a quick yes.",
-            "now": "Materials guessed and picked up in person."
-          },
-          {
-            "system": "Weather-smart schedule",
-            "then": "Watches the forecast and curing times, drafts the reshuffled week for approval, and updates every crew and homeowner.",
-            "now": "Rain days reshuffled by phone."
-          }
-        ],
-        "value": "Same-day proposals. No wasted trips. Owners kept in the loop.",
-        "money": {
-          "items": [
-            {
-              "what": "Bids lost to slow quotes",
-              "unit": "bid",
-              "qty": [
-                1,
-                0
-              ],
-              "each": 2000
-            },
-            {
-              "what": "Wasted plaster mix",
-              "unit": "bag",
-              "qty": [
-                20,
-                5
-              ],
-              "each": 40
-            },
-            {
-              "what": "Extra supply runs",
-              "unit": "run",
-              "qty": [
-                10,
-                2
-              ],
-              "each": 50
-            },
-            {
-              "what": "Rain-day losses",
-              "unit": "day",
-              "qty": [
-                2,
-                1
-              ],
-              "each": 350
-            }
-          ],
-          "basis": "Sized for a two-crew outfit."
-        }
-      },
-      {
-        "kind": "A shop or restaurant",
-        "rows": [
-          {
-            "system": "Self-ordering stock",
-            "then": "Tracks what sells, predicts busy days from weather and local events, and drafts supplier orders for a one-tap owner yes.",
-            "now": "Stock counted by hand, orders guessed."
-          },
-          {
-            "system": "Smart scheduling",
-            "then": "Drafts shifts from the forecast and everyone's availability, and prepares swap approvals by the shop's own rules.",
-            "now": "Schedules by hand, swaps lost in group texts."
-          },
-          {
-            "system": "Front-desk agent",
-            "then": "Answers common questions, drafts review replies for approval, and flags any order or issue a person should handle.",
-            "now": "Phones, orders and reviews juggled at the counter."
-          }
-        ],
-        "value": "Less waste. Shorter lines. The owner sees every day at a glance.",
-        "money": {
-          "items": [
-            {
-              "what": "Spoiled stock",
-              "unit": "case",
-              "qty": [
-                30,
-                10
-              ],
-              "each": 50
-            },
-            {
-              "what": "Rush orders",
-              "unit": "order",
-              "qty": [
-                5,
-                1
-              ],
-              "each": 100
-            },
-            {
-              "what": "Missed phone orders",
-              "unit": "order",
-              "qty": [
-                40,
-                10
-              ],
-              "each": 25
-            }
-          ],
-          "basis": "Sized for one location."
-        }
-      }
-    ],
-    "stepsTitle": "How you know",
-    "steps": [
-      "Measure first.",
-      "Build the system.",
-      "Measure again."
-    ],
-    "cta": {
-      "lead": "Start with a two-day shadow or one workflow.",
-      "label": "Email Cayleb →",
-      "href": "mailto:caylebalvarezjames@gmail.com",
-      "secondaryLabel": "Read the résumé",
-      "secondaryHref": "resume.html"
-    }
   },
   "contact": {
     "lines": [
@@ -561,7 +149,7 @@
         "href": "mailto:caylebalvarezjames@gmail.com"
       }
     ],
-    "copyright": "© 2026 Cayleb Alvarez-James. Illustrations by AI.",
+    "copyright": "© 2026 Cayleb Alvarez-James.",
     "cta": {
       "label": "Download résumé",
       "href": "Cayleb-James-polished-resume.pdf"
@@ -579,36 +167,26 @@
         "label": "One-page PDF",
         "href": "Cayleb-James-polished-one-page.pdf"
       }
-    ],
-    "figure": {
-      "image": "assets/home/contact/figure.webp",
-      "alt": "Illustration: Cayleb waving hello"
-    }
-  },
-  "loading": {
-    "name": "Cayleb Alvarez-James",
-    "label": "Loading Cayleb Alvarez-James's résumé",
-    "done": "Loaded"
+    ]
   },
   "guide": {
     "label": "Ask my agent",
     "greeting": "Hi, I'm Cayleb's agent. I'll ride along.",
     "lines": {
-      "approach": "This is the loop he runs: shadow, understand, build, teach.",
       "experience": "Real jobs first. He knows how crews actually work.",
-      "work": "His own builds: work assistants, desktop apps, review tools.",
-      "value": "Every build fits each company. The money comes from fixing busywork.",
-      "contact": "Want tools built around how your team works? Say hi."
+      "work": "His own builds. Ergon puts an assistant on every desk.",
+      "education": "School and skills, all in one place.",
+      "contact": "Want AI built around how your team works? Say hi."
     },
     "title": "Ask my agent",
     "questions": [
       {
         "q": "What does Cayleb do?",
-        "a": "His job: bring AI into companies to save them money. He shadows the team, builds agents and tools around how they work, what they use and what they need, then teaches them."
+        "a": "He learns how your people actually work, then builds AI and automation around the apps they already use. It saves time, raises quality, and he teaches the team to run it."
       },
       {
-        "q": "How does a shadow day work?",
-        "a": "He spends two days watching where time and money leak without slowing the crew, builds tools around their existing apps, and teaches the team."
+        "q": "What's Ergon?",
+        "a": "A personal assistant for every employee, built around their apps. Tickets get fixed by an agent right on the computer; hard ones go up to a person. Windows pilot, live checks pending."
       },
       {
         "q": "What kind of tools?",

@@ -63,15 +63,3 @@ export function setQuiet(state, quiet) {
   }
   return out;
 }
-
-/**
- * Where the pupils sit when looking toward a point `dx, dy` px away from the
- * droplet: the direction, scaled down and held inside a circle of `max` px so
- * the eyes never leave their sockets.
- */
-export function gaze(dx, dy, max = 3) {
-  const d = Math.hypot(dx, dy);
-  if (d === 0) return { x: 0, y: 0 };
-  const reach = Math.min(max, d / 60);
-  return { x: (dx / d) * reach, y: (dy / d) * reach };
-}

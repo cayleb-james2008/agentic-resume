@@ -1,31 +1,21 @@
 /**
  * Boot: Lenis on the shared ticker first (so every reader sees this frame's
- * scrollY), then the sticky stack, the menu, and each block's mount.
- * `window.__homeBooted` is set only after every mount returns; until then the
- * head script's 4s failsafe stands ready to un-hide the page.
+ * scrollY), then the menu, the reveals, and each block's mount: the water
+ * story, then the guide. `window.__homeBooted` is set only after every mount
+ * returns; until then the head script's 4s failsafe stands ready to un-hide
+ * the page.
  */
 import Lenis from 'lenis';
-import { mountContours } from './engine/contours.js';
-import { mountDissolve } from './engine/dissolve.js';
 import { mountReveals } from './engine/reveal.js';
 import { prefersReducedMotion } from './engine/scroll.js';
-import { initStack } from './engine/stack.js';
 import { ticker } from './engine/ticker.js';
-import { mount as mountApproach } from './approach/approach.js';
-import { mount as mountExperience } from './experience/timeline.js';
-import { mount as mountHero } from './hero/hero.js';
-import { mountMenu } from './hero/menu.js';
-import { mount as mountProjects } from './projects/projects.js';
-import { mount as mountContact } from './contact/contact.js';
 import { mount as mountGuide } from './guide/guide.js';
+import { mountMenu } from './masthead/menu.js';
+import { mount as mountStory } from './story/story.js';
 
-/** Each block's mount, added as the block is built. */
+/** Each block's mount, in page order. */
 const MOUNTS = [
-  ['[data-hero]', mountHero],
-  ['[data-approach]', mountApproach],
-  ['[data-experience]', mountExperience],
-  ['[data-projects]', mountProjects],
-  ['[data-contact]', mountContact],
+  ['[data-story]', mountStory],
   ['[data-guide]', mountGuide],
 ];
 
@@ -46,13 +36,9 @@ function boot() {
   window.__lenis = lenis;
   sizeRoot();
   window.addEventListener('resize', sizeRoot);
-  const stack = document.querySelector('[data-stack]');
-  if (stack) initStack(stack);
   const header = document.querySelector('[data-masthead]');
   if (header) mountMenu(header, { lenis });
   mountReveals(document.body);
-  document.querySelectorAll('canvas[data-seam]').forEach((band) => mountDissolve(band, band.dataset.seam));
-  document.querySelectorAll('canvas[data-contours]').forEach((canvas) => mountContours(canvas, canvas.dataset.contours));
   for (const [selector, mount] of MOUNTS) {
     const el = document.querySelector(selector);
     if (el) mount(el, { lenis });

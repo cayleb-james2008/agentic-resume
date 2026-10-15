@@ -8,16 +8,23 @@ const content = JSON.parse(readFileSync(new URL('../site/content.json', import.m
 const words = (s) => s.trim().split(/\s+/).filter((w) => /\w/.test(w)).length;
 const within = (label, text, max) => assert.ok(words(text) <= max, `${label}: ${words(text)} words (max ${max}): "${text}"`);
 
-test('hero, how-I-work and projects copy stay blunt', () => {
+test('the story says it in few words', () => {
   within('meta.description', content.meta.description, 16);
-  for (const line of content.hero.now.lines) within('hero.now line', line, 3);
-  within('approach.intro', content.approach.intro, 10);
-  for (const row of content.approach.rows) within('approach row', row.text, 3);
-  within('projects.report', content.projects.report, 12);
+  const [hero, ...rest] = content.story.beats;
+  assert.equal(hero.id, 'hero');
+  within('hero headline', hero.headline, 10);
+  // Ruling R4 (2026-10-15): Cayleb's approved support line is 23 words, so its budget is 24.
+  within('hero line', hero.line, 24);
+  for (const b of rest) {
+    within(`${b.id} headline`, b.headline, 6);
+    within(`${b.id} line`, b.line, 16);
+  }
 });
 
-test('each timeline entry is a few words', () => {
-  for (const e of content.experience.entries.filter((x) => x.frame === 'centre')) within(`timeline ${e.year}`, `${e.lead} ${e.body}`, 14);
+test('every role, label and ladder step is a word or two', () => {
+  const labels = content.story.beats.flatMap((b) => [...(b.roles ?? []), ...(b.labels ?? []), ...(b.ladder ?? [])]);
+  assert.ok(labels.length > 0);
+  for (const label of labels) within('story label', label, 2);
 });
 
 test('the agent talks plainly and briefly — no caveman voice, no meta lines', () => {

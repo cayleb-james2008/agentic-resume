@@ -2,7 +2,9 @@
 
     python3 scripts/build-home.py
 
-Every visible string lives in site/content.json; this script only arranges it.
+Every visible string lives in site/content.json, bar the résumé half, which is
+set from resume/resume-content.json (the PDFs' own source); this script only
+arranges them.
 It refuses to build when a string is longer than the frame it sits in
 (site/content-limits.json), so an edit that would overflow fails here rather
 than on the live page.
@@ -14,14 +16,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
 
-from templates import approach, contact, experience, guide, hero, projects, resume, shell, value  # noqa: E402
-
-CENTRE_COPY_MAX = 190
-STAT_LABELS_MAX = 22
+from templates import contact, guide, masthead, resume, resume_half, shell, story  # noqa: E402
 
 
 def select(value, pattern: str):
-    """(value, path) pairs for a pattern such as `projects.cards[].name`."""
+    """(value, path) pairs for a pattern such as `story.beats[].roles[]`."""
     nodes = [(value, "")]
     for part in pattern.split("."):
         many = part.endswith("[]")
@@ -45,14 +44,6 @@ def check_limits(content: dict, limits: dict) -> list[str]:
         for value, path in select(content, pattern):
             if len(str(value)) > limit:
                 problems.append(f"{path} is {len(str(value))} characters; its frame allows {limit}")
-    labels = sum(len(s["label"]) for s in content["hero"]["glance"]["stats"])
-    if labels > STAT_LABELS_MAX:
-        problems.append(f"hero.glance.stats labels total {labels} characters; their row allows {STAT_LABELS_MAX}")
-    for i, entry in enumerate(content["experience"]["entries"]):
-        if entry["frame"] == "centre":
-            length = len(f"{entry['lead']} {entry['body']}")
-            if length > CENTRE_COPY_MAX:
-                problems.append(f"experience.entries[{i}] copy is {length} characters; its column allows {CENTRE_COPY_MAX}")
     return problems
 
 
@@ -62,12 +53,11 @@ def build() -> str:
     problems = check_limits(content, limits)
     if problems:
         raise SystemExit("content.json does not fit its frames:\n  " + "\n  ".join(problems))
+    resume_data = json.loads((ROOT / "resume/resume-content.json").read_text())
     blocks = {
-        "hero": hero.render(content),
-        "approach": approach.render(content),
-        "experience": experience.render(content),
-        "projects": projects.render(content),
-        "value": value.render(content),
+        "masthead": masthead.render(content),
+        "story": story.render(content),
+        "resume_half": resume_half.render(content, resume_data),
         "contact": contact.render(content),
         "guide": guide.render(content),
     }

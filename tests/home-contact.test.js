@@ -1,8 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { PARALLAX_FIGURE, px } from '../site/js/contact/geometry.js';
-import { FIGURE_WINDOW } from '../site/js/contact/contact.js';
 
 const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf8');
 const content = JSON.parse(read('site/content.json'));
@@ -18,27 +16,32 @@ test('the footer nav lists five links in content order', () => {
   assert.equal(hrefs.length, 5);
 });
 
-test('the copyright is the content line', () => {
+test('the footer has no picture and no backdrop canvas', () => {
+  const contact = home.slice(home.indexOf('<section class="contact"'), home.indexOf('</section>', home.indexOf('<section class="contact"')));
+  assert.ok(contact.length > 0, 'the contact section exists');
+  assert.doesNotMatch(contact, /<img/);
+  assert.doesNotMatch(contact, /data-figure-layer/);
+  assert.doesNotMatch(contact, /data-contours/);
+  assert.doesNotMatch(contact, /<canvas/);
+  assert.equal(content.contact.figure, undefined, 'content has no figure for it');
+});
+
+test('the copyright is the content line, without an illustration credit', () => {
+  assert.equal(content.contact.copyright, '© 2026 Cayleb Alvarez-James.');
+  assert.doesNotMatch(content.contact.copyright, /Illustrations/);
   const p = footer.match(/<p class="contact-copyright"[^>]*>([\s\S]*?)<\/p>/);
   assert.ok(p);
   assert.equal(p[1], escape(content.contact.copyright));
 });
 
-test('the figure is labelled as an illustration', () => {
-  const img = footer.match(/<img class="contact-figure"[^>]*alt="([^"]*)"/);
-  assert.ok(img);
-  assert.match(img[1], /^Illustration:/);
-});
-
-test('the figure rides back into place by the end of the page', () => {
-  assert.deepEqual(FIGURE_WINDOW, { start: 'top bottom', end: 'bottom bottom', from: px(PARALLAX_FIGURE), to: '0cqw' });
-  assert.equal(FIGURE_WINDOW.from, '4.1667cqw');
-});
-
-test('the hollow button keeps a dark ground so its label reads over the figure', () => {
-  const css = readFileSync(new URL('../site/css/contact.css', import.meta.url), 'utf8');
-  const rule = css.match(/\.cta-frame--hollow \.cta-body\s*\{([^}]*)\}/);
-  assert.ok(rule);
-  assert.doesNotMatch(rule[1], /fill:\s*none/);
-  assert.match(rule[1], /fill:\s*rgb\(9 10 11 \/ 0\.\d+\)/);
+test('a jump to #contact lands the whole footer under the fixed masthead', () => {
+  const css = read('site/css/contact.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const contact = css.match(/(?:^|\})\s*\.contact\s*\{([^}]*)\}/)[1];
+  // It stops under the masthead, not behind it: the page's one scroll padding (ruling R31), with no margin of
+  // its own for Lenis or the browser to add to it...
+  const masthead = read('site/css/masthead.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(masthead, /(?:^|\})\s*html\s*\{[^}]*scroll-padding-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/);
+  assert.doesNotMatch(css, /scroll-margin|scroll-padding/);
+  // ...and where it fills the screen, it fills only what that padding leaves, so its foot row is not pushed off.
+  assert.match(contact, /min-height:\s*var\(--foot-h,\s*calc\(100lvh - var\(--masthead-h\) - 1rem\)\)/);
 });

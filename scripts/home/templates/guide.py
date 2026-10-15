@@ -1,4 +1,4 @@
-"""The guide: Cayleb's droplet agent riding along in the corner (spec 2026-10-12-droplet-agent-guide-design).
+"""The guide: Cayleb's faceless ink bead riding along in the corner (spec 2026-10-12-droplet-agent-guide-design).
 
 Everything is `hidden` until site/js/guide/guide.js mounts it, so without
 JavaScript the guide simply isn't there. The bubble restates each section and
@@ -7,22 +7,14 @@ dialog of disclosure questions.
 """
 from markup import attr, link, text
 
-# The droplet, flat: the hero's teardrop (point up), two eyes and a cyan glow along the foot.
-DROPLET_SVG = (
-    '<svg class="guide-droplet" viewBox="0 0 64 72" aria-hidden="true" focusable="false">'
-    '<defs><radialGradient id="guide-glass" cx="0.38" cy="0.62" r="0.75">'
-    '<stop offset="0" stop-color="#eafcfe"/><stop offset="0.6" stop-color="#b4eff6"/>'
-    '<stop offset="1" stop-color="#5fdbe8"/></radialGradient>'
-    '<linearGradient id="guide-foot" x1="0" y1="0" x2="0" y2="1">'
-    '<stop offset="0.55" stop-color="#02d2e3" stop-opacity="0"/>'
-    '<stop offset="1" stop-color="#02d2e3" stop-opacity="0.85"/></linearGradient></defs>'
-    '<path class="guide-droplet-body" d="M32 4C37 17 56 30 56 46A24 24 0 0 1 8 46C8 30 27 17 32 4Z"/>'
-    '<path class="guide-droplet-rim" d="M32 4C37 17 56 30 56 46A24 24 0 0 1 8 46C8 30 27 17 32 4Z"/>'
-    '<g class="guide-droplet-eyes" data-guide-eyes>'
-    '<ellipse cx="25" cy="44" rx="3.2" ry="4.6"/><ellipse cx="39" cy="44" rx="3.2" ry="4.6"/>'
-    '<circle class="guide-droplet-glint" cx="24" cy="42" r="1.1"/>'
-    '<circle class="guide-droplet-glint" cx="38" cy="42" r="1.1"/></g>'
-    '<path class="guide-droplet-shine" d="M20 30C22 25 25 21 28 17"/>'
+# The bead, flat: the hero's teardrop (point up) as plain ink with a cyan rim and a short
+# highlight. A bead has no face and needs no gradients.
+_BEAD_PATH = "M32 4C37 17 56 30 56 46A24 24 0 0 1 8 46C8 30 27 17 32 4Z"
+BEAD_SVG = (
+    '<svg class="guide-bead" viewBox="0 0 64 72" aria-hidden="true" focusable="false">'
+    f'<path class="guide-bead-body" d="{_BEAD_PATH}"/>'
+    f'<path class="guide-bead-rim" d="{_BEAD_PATH}"/>'
+    '<path class="guide-bead-shine" d="M20 30C22 25 25 21 28 17"/>'
     "</svg>"
 )
 
@@ -59,6 +51,6 @@ def render(content: dict) -> str:
         '<div class="guide-dock" data-guide-dock>'
         '<p class="guide-bubble" data-guide-bubble aria-hidden="true" hidden></p>'
         f'<button type="button" class="guide-agent" data-guide-agent aria-controls="guide-panel" aria-expanded="false" '
-        f'aria-label="{attr(g["label"])}">{DROPLET_SVG}</button>'
+        f'aria-label="{attr(g["label"])}">{BEAD_SVG}</button>'
         "</div></aside>"
     )

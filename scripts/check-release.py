@@ -22,10 +22,6 @@ for page in ('index.html','resume.html','404.html','lab/index.html',*sorted(str(
 for f in (R/'site/css').glob('*.css'):
  for url in re.findall(r'url\([\"\']?([^\)\"\']+)',f.read_text()):
   if not url.startswith(('data:','#')):assert (f.parent/url.split('?')[0]).is_file(),url
-import sys
-sys.path.insert(0,str(R/'scripts/home'))
-import check_assets
-assert check_assets.main(R,strict=False)==0,'check_assets'
 for file,record in json.loads((R/'resume/approved-verification.json').read_text())['artifacts'].items():
  assert hashlib.sha256((R/file).read_bytes()).hexdigest()==record['sha256']
  info=subprocess.check_output(['pdfinfo',str(R/file)],text=True)

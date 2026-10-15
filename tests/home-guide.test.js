@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { GAP_MS, SHOW_MS, createGuideState, gaze, request, setQuiet, tick } from '../site/js/guide/queue.js';
+import { GAP_MS, SHOW_MS, createGuideState, request, setQuiet, tick } from '../site/js/guide/queue.js';
+import * as guideModule from '../site/js/guide/guide.js';
+import { FOOT_LIFT, pastStory } from '../site/js/guide/guide.js';
 
 const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf8');
 const content = JSON.parse(read('site/content.json'));
@@ -53,21 +55,66 @@ test('quiet hides what is showing and suppresses the rest', () => {
   assert.equal(tick(s, 20_000).show, 'contact');
 });
 
-test('the eyes glance toward a point, never past their rim', () => {
-  assert.deepEqual(gaze(0, 0), { x: 0, y: 0 });
-  const g = gaze(500, -500, 3);
-  assert.ok(Math.hypot(g.x, g.y) <= 3 + 1e-9);
-  assert.ok(g.x > 0 && g.y < 0);
+test('the guide appears once the story is behind the reader, and not before', () => {
+  assert.equal(pastStory(0, 6000, 800), false);
+  assert.equal(pastStory(5600, 6000, 800), true, '60% of the viewport reaches the resume');
+  assert.equal(pastStory(5400, 6000, 800), false);
+  assert.equal(pastStory(5520, 6000, 800), false, 'exactly at the line is not yet past it');
+  assert.equal(pastStory(0, Infinity, 800), false, 'with no resume on the page it never appears');
+  assert.equal(pastStory(1e9, Infinity, 800), false);
+});
+
+test('the guide module exports pastStory and FOOT_LIFT, and no longer APPEAR_AFTER', () => {
+  assert.equal(typeof guideModule.pastStory, 'function');
+  assert.equal(typeof FOOT_LIFT, 'number');
+  assert.equal('APPEAR_AFTER' in guideModule, false);
+});
+
+test('the guide has no face: no eyes, no blink, no gaze', () => {
+  const js = read('site/js/guide/guide.js');
+  assert.match(js, /const SECTIONS = \['experience', 'work', 'education', 'contact'\];/);
+  assert.doesNotMatch(js, /droplet-shape|blinkSquash|nextBlinkDelay|data-guide-eyes|gaze|pointermove/);
+  assert.doesNotMatch(read('site/js/guide/queue.js'), /gaze/);
+  assert.match(home, /class="guide-bead"/);
+  assert.doesNotMatch(home, /data-guide-eyes/);
 });
 
 test('every guide line belongs to a section on the page', () => {
-  for (const key of Object.keys(guide.lines)) assert.match(home, new RegExp(`id="${key}"`), key);
+  assert.deepEqual(Object.keys(guide.lines), ['experience', 'work', 'education', 'contact']);
+  for (const key of Object.keys(guide.lines)) assert.match(home, new RegExp(`\\sid="${key}"`), key);
+});
+
+test('every section the guide watches has a line and is on the page', () => {
+  const list = read('site/js/guide/guide.js').match(/const SECTIONS = \[([^\]]*)\];/);
+  assert.ok(list, 'guide.js names its SECTIONS');
+  const ids = [...list[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  assert.ok(ids.length > 0);
+  for (const id of ids) {
+    assert.ok(guide.lines[id], `content.guide.lines.${id}`);
+    assert.match(home, new RegExp(`\\sid="${id}"`), `id="${id}" on index.html`);
+  }
+});
+
+test('the guide measures the résumé from the top of the page, again once the fonts are in', () => {
+  const js = read('site/js/guide/guide.js');
+  assert.match(js, /getBoundingClientRect\(\)\.top \+ window\.scrollY/);
+  assert.doesNotMatch(js, /offsetTop/, 'offsetTop is relative to the offset parent, not the page');
+  assert.match(js, /document\.fonts\?\.ready/);
 });
 
 test('the guide keeps the site\'s claim rules', () => {
-  const text = JSON.stringify(guide);
-  assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilot\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
+  // "pilot" appears once, as Ergon's verified status in the résumé half's words: his own Windows
+  // pilot with its live checks still pending (water story plan, 2026-10-15). Never a pilot for a company.
+  const STATUS = 'Windows pilot, live checks pending';
+  assert.match(guide.questions.find((q) => q.q === "What's Ergon?").a, new RegExp(`${STATUS}\\.$`));
+  const text = JSON.stringify(guide).replace(STATUS, '');
+  assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilots?\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
   assert.match(guide.questions.find((q) => /Asmodeus/.test(q.q)).a, /private/i);
+});
+
+test('the education line promises only what that section holds: no PDFs, no downloads', () => {
+  assert.equal(guide.lines.education, 'School and skills, all in one place.');
+  assert.doesNotMatch(guide.lines.education, /pdf|download/i);
 });
 
 test('the guide is hidden until its script mounts it, and its panel is an accessible dialog', () => {

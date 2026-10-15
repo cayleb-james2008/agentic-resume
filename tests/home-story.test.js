@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { GATE_R, NODE_R, SOURCE_R, layoutFor, overlaysFor, slotsFor } from '../site/js/story/shapes.js';
 import { pointOf } from '../site/js/story/story.js';
 
@@ -489,4 +489,17 @@ test('the story arms the water\'s deadline at mount, and drops water that comes 
   const toStatic = script.slice(script.indexOf('const toStatic'), script.indexOf('};', script.indexOf('const toStatic')));
   assert.match(toStatic, /late\?\.cancel\(\)/);
   assert.match(script.slice(script.lastIndexOf('start();')), /late\.cancel\(\)/);
+});
+
+test('no served page carries an illustration or points into assets/home/', () => {
+  // The character and every illustration are gone (spec decision 6); so is assets/home/.
+  const projects = readdirSync(new URL('projects/', root)).filter((f) => f.endsWith('.html')).map((f) => `projects/${f}`);
+  const served = ['index.html', 'resume.html', '404.html', 'lab/index.html', ...projects];
+  assert.ok(projects.length >= 5, `${projects.length} project pages`);
+  for (const file of served) {
+    const page = read(file);
+    assert.doesNotMatch(page, /illustration/i, `${file} mentions an illustration`);
+    assert.doesNotMatch(page, /assets\/home\//, `${file} points into assets/home/`);
+  }
+  assert.throws(() => readdirSync(new URL('assets/home/', root)), /ENOENT/, 'assets/home/ is gone');
 });

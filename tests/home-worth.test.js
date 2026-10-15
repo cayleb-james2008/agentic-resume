@@ -11,9 +11,38 @@ const content = JSON.parse(raw);
 const home = read('index.html');
 const beat = (id) => content.story.beats.find((b) => b.id === id);
 
-test('the pitch never saves money by taking hours, pay or people', () => {
-  const all = JSON.stringify(content.story) + JSON.stringify(content.guide) + content.meta.description;
-  assert.doesNotMatch(all, /headcount|lay ?offs?|replac\w* (staff|workers|people|employees|crew)|fewer (people|staff|employees|workers)|cut\w* (hours|pay|wages|staff|jobs)|(reduce|lower)\w* (payroll|wages|hours)/i);
+/** Everything a visitor can read on the homepage: its text with the tags stripped, and the words in its attributes. */
+const visible = (() => {
+  const page = home.replace(/<(script|style)\b[\s\S]*?<\/\1>/g, ' ');
+  const decode = (t) => t.replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+  const text = decode(page.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
+  const attributes = [...page.matchAll(/\s(?:alt|aria-label|title|content|placeholder)="([^"]*)"/g)].map((m) => decode(m[1]));
+  return [text, ...attributes];
+})();
+/** Every string in content.json, with its path. */
+const strings = [];
+(function walk(value, path) {
+  if (typeof value === 'string') strings.push([path, value]);
+  else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+})(content, 'content');
+
+const TAKES = /headcount|lay ?offs?|replac\w* (staff|workers|people|employees|crew)|fewer (people|staff|employees|workers)|cut\w* (hours|pay|wages|staff|jobs)|(reduce|lower)\w* (payroll|wages|hours)/i;
+
+test('the pitch never saves money by taking hours, pay or people: not in any of the homepage\'s copy', () => {
+  // All of it (ruling R32): every string in content.json, and all the homepage shows, the résumé half included.
+  assert.ok(strings.length > 100, `${strings.length} content strings`);
+  for (const [path, value] of strings) assert.doesNotMatch(value, TAKES, path);
+  // The page's own text is all there to check: the story, the résumé half, the footer and the guide.
+  const [text] = visible;
+  for (const piece of [beat('worth').headline, 'Work ethic', content.contact.copyright, content.meta.description]) {
+    assert.ok(visible.some((v) => v.includes(piece)), `the homepage shows "${piece}"`);
+  }
+  assert.ok(text.length > 3000);
+  for (const value of visible) assert.doesNotMatch(value, TAKES);
+});
+
+test('no clients, revenue, profit or returns anywhere a visitor reads on the homepage', () => {
+  for (const value of visible) assert.doesNotMatch(value, /\b(clients?|revenue|profits?|returns?)\b/i);
 });
 
 test('the worth beat names the price per person, and the page shows it', () => {

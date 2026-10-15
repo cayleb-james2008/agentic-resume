@@ -4,6 +4,7 @@ import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
 import { CAPTION_BOX, MAX_SLOTS, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
+import { shouldRetune, renderSize, toPercent } from '../site/js/story/view.js';
 
 /** A stand-in for window: width, pointer class, reduced motion, save-data, memory. */
 const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
@@ -335,4 +336,20 @@ test('the team beat fans out to teamSize people, each with two or three apps', (
       assert.ok(Math.hypot(o.team[i].x - o.team[j].x, o.team[i].y - o.team[j].y) > 0.1, `nodes ${i} and ${j}`);
     }
   }
+});
+
+test('an address-bar resize never retunes; a width change does', () => {
+  assert.equal(shouldRetune({ w: 390, h: 844 }, { w: 390, h: 760 }), false);
+  assert.equal(shouldRetune({ w: 390, h: 844 }, { w: 390, h: 600 }), true);   // 244px: a real resize
+  assert.equal(shouldRetune({ w: 390, h: 844 }, { w: 844, h: 390 }), true);
+});
+
+test('render size respects the pixel cap', () => {
+  const big = renderSize(2560, 1440, 1.5);
+  assert.ok(big.width * big.height <= 3.7e6);
+  assert.deepEqual(renderSize(390, 844, 1), { width: 390, height: 844, ratio: 1 });
+});
+
+test('stage units map to overlay percentages', () => {
+  assert.deepEqual(toPercent({ x: 0.8, y: 0.25 }, 1.6), { left: 50, top: 75 });
 });

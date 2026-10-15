@@ -8,12 +8,18 @@ const home = read('index.html');
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const footer = home.slice(home.indexOf('<footer'), home.indexOf('</footer>'));
 
-test('the footer nav lists five links in content order', () => {
+test('the footer nav lists the site\'s sections in content order', () => {
   const nav = footer.match(/<nav class="contact-nav" aria-label="Footer">([\s\S]*?)<\/nav>/);
   assert.ok(nav, 'footer nav with aria-label="Footer"');
   const hrefs = [...nav[1].matchAll(/<a href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs, content.contact.nav.map((n) => escape(n.href)));
-  assert.equal(hrefs.length, 5);
+  assert.equal(hrefs.length, 4);
+});
+
+test('the footer shows the email as text with a copy button, since mail links may do nothing', () => {
+  const email = content.meta.email;
+  assert.ok(footer.includes(`<span class="ft-email">${email}</span>`), 'the address is readable text');
+  assert.match(footer, new RegExp(`<button class="copy" type="button" data-copy="${email.replace(/[.]/g, '\\.')}"`));
 });
 
 test('the footer has no picture and no backdrop canvas', () => {
@@ -34,14 +40,9 @@ test('the copyright is the content line, without an illustration credit', () => 
   assert.equal(p[1], escape(content.contact.copyright));
 });
 
-test('a jump to #contact lands the whole footer under the fixed masthead', () => {
+test('the footer\'s watermark is decorative and the footer keeps no scroll offsets of its own', () => {
+  assert.match(footer, /<div class="ft-wm" aria-hidden="true">/);
   const css = read('site/css/contact.css').replace(/\/\*[\s\S]*?\*\//g, '');
-  const contact = css.match(/(?:^|\})\s*\.contact\s*\{([^}]*)\}/)[1];
-  // It stops under the masthead, not behind it: the page's one scroll padding (ruling R31), with no margin of
-  // its own for Lenis or the browser to add to it...
-  const masthead = read('site/css/masthead.css').replace(/\/\*[\s\S]*?\*\//g, '');
-  assert.match(masthead, /(?:^|\})\s*html\s*\{[^}]*scroll-padding-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/);
   assert.doesNotMatch(css, /scroll-margin|scroll-padding/);
-  // ...and where it fills the screen, it fills only what that padding leaves, so its foot row is not pushed off.
-  assert.match(contact, /min-height:\s*var\(--foot-h,\s*calc\(100lvh - var\(--masthead-h\) - 1rem\)\)/);
+  assert.match(css, /\.foot-in\s*\{[^}]*padding-bottom:\s*calc\([^;]*env\(safe-area-inset-bottom/, 'the legal line clears a phone\'s home bar');
 });

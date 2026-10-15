@@ -75,40 +75,49 @@ test('failsafe reveals the page', () => {
   const booted = main.indexOf('window.__homeBooted = true');
   assert.ok(main.lastIndexOf('mount(') > 0, 'main.js mounts the blocks');
   assert.ok(booted > main.lastIndexOf('mount('), '__homeBooted is set after every mount');
+  for (const module of ['loader', 'liquid', 'reveal', 'carousel', 'clock', 'count', 'ergon', 'overlays', 'grid']) {
+    assert.match(main, new RegExp(`from '\\./home/${module}\\.js'`), module);
+  }
+  assert.match(main, /from '\.\/guide\/guide\.js'/);
+  assert.doesNotMatch(main, /story|three/);
 });
 
 test('no keyframes', () => {
   for (const [file, text] of Object.entries(css)) assert.doesNotMatch(text, /@keyframes/, file);
 });
 
-test('the water\'s modules are preloaded, after the import map and only where motion is allowed', () => {
-  // shell.py renders them (straight from the template, with empty blocks), and the built page carries them.
+test('the head is shell.py\'s: Lenis is the only import, the fonts and hero picture are preloaded', () => {
+  const blocks = ['loader', 'masthead', 'hero', 'about', 'ergon', 'built', 'services', 'stats', 'resume_half', 'contact', 'menu', 'modal', 'guide'];
   const shell = execFileSync('python3', ['-c', [
     'import json, sys',
     "sys.path.insert(0, 'scripts/home')",
     'from templates import shell',
-    "blocks = {k: '' for k in ('masthead', 'story', 'resume_half', 'contact', 'guide')}",
+    `blocks = {k: '' for k in ${JSON.stringify(blocks)}}`,
     "sys.stdout.write(shell.render(json.load(open('site/content.json')), blocks))",
   ].join('\n')], { cwd: new URL('../', import.meta.url), encoding: 'utf8' });
   const home = read('index.html');
   const head = home.slice(0, home.indexOf('</head>'));
   assert.equal(shell.slice(0, shell.indexOf('</head>')), head, 'index.html has the head shell.py renders');
-  const preloads = [...head.matchAll(/<link rel="modulepreload" href="([^"]+)"([^>]*)>/g)];
-  assert.deepEqual(preloads.map((m) => m[1]), [
-    'site/js/story/water.js',
-    'vendor/three-0.185.0/three.module.min.js',
-    'vendor/three-0.185.0/three.core.min.js',
-  ]);
-  for (const [tag, href, rest] of preloads) {
-    assert.ok(!href.startsWith('/') && !/^[a-z]+:/i.test(href), `${href} is relative`);
-    assert.doesNotThrow(() => read(href), `${href} exists`);
-    assert.match(rest, /^ media="\(prefers-reduced-motion: no-preference\)"$/, tag);
+  assert.match(head, /<script type="importmap">\{"imports":\{"lenis":"\.\/vendor\/lenis-1\.3\.26\/lenis\.mjs"\}\}<\/script>/);
+  assert.doesNotMatch(head, /three|modulepreload/);
+  for (const font of ['onest-latin-600-normal', 'onest-latin-400-normal']) {
+    assert.ok(head.includes(`<link rel="preload" href="assets/fonts/${font}.woff2" as="font" type="font/woff2" crossorigin>`), font);
   }
-  // An import map only applies to module fetches that start after it, and main.js is the module that needs them.
-  const map = head.indexOf('<script type="importmap">');
-  assert.ok(map > 0 && preloads.every((m) => head.indexOf(m[0]) > map), 'the preloads follow the import map');
-  assert.ok(preloads.every((m) => head.indexOf(m[0]) < head.indexOf('<script type="module" src="site/js/main.js">')));
-  // The import map still names the same three.js the preload fetches.
-  assert.ok(head.includes('"three":"./vendor/three-0.185.0/three.module.min.js"'));
-  assert.match(read('vendor/three-0.185.0/three.module.min.js'), /from"\.\/three\.core\.min\.js"/);
+  assert.match(head, /<link rel="preload" href="assets\/hero\/surface-wide\.jpg" as="image" media="\(min-width: 1024px\) and \(min-aspect-ratio: 7\/5\)">/);
+  assert.match(head, /<meta name="theme-color" content="#090a0b">/);
+  assert.ok(head.indexOf('<script type="importmap">') < head.indexOf('<script type="module" src="site/js/main.js">'));
+  for (const [, href] of head.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)) assert.doesNotThrow(() => read(href), href);
+});
+
+// The wide layer's cards sit right of the desktop headline. Below 1024px the hero stacks its text over the whole
+// picture (a landscape phone puts the headline straight on the cards), and on a 4:3 screen (1024×768, 1100×800)
+// the cover crop pulls the Assistant panel over the headline's first line. In both cases the hero shows the
+// texture-only tall layer; the picture, the preload and the liquid reveal share one query, so the blueprint
+// stays registered to the surface.
+test('the wide hero layer, whose cards sit right of the headline, shows only beside the desktop headline on screens wider than 7:5', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const liquid = readFileSync(new URL('../site/js/home/liquid.js', import.meta.url), 'utf8');
+  assert.match(html, /<picture><source media="\(max-width: 1023\.98px\), \(max-aspect-ratio: 7\/5\)" srcset="assets\/hero\/surface-tall\.jpg">/);
+  assert.match(liquid, /matchMedia\('\(max-width: 1023\.98px\), \(max-aspect-ratio: 7\/5\)'\)/);
+  assert.doesNotMatch(html + liquid, /aspect-ratio: 3\/4/);
 });

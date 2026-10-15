@@ -99,3 +99,54 @@ test('every project page opens with a plain line', () => {
     assert.doesNotMatch(mainText(name), /\bDeterministic\b/, `${name} says "deterministic"`);
   }
 });
+
+test('subpages and the résumé page carry the >_ tile beside the wordmark', () => {
+  const mark = '<span class="mk" aria-hidden="true">&gt;_</span>Cayleb.AJ</a>';
+  for (const page of ['projects/ergon.html', 'projects/industry-ai-suite.html', 'lab/index.html']) {
+    const html = readFileSync(new URL(`../${page}`, import.meta.url), 'utf8');
+    assert.match(html, /<a class="sub-wordmark" href="\.\.\/index\.html" aria-label="Cayleb Alvarez-James, home"><span class="mk"/, page);
+    assert.ok(html.includes(mark), page);
+  }
+  const resume = readFileSync(new URL('../resume.html', import.meta.url), 'utf8');
+  assert.ok(resume.includes(`<a class="resume-wordmark" href="./" aria-label="Cayleb Alvarez-James, home">${mark}`));
+});
+
+test('the pages one level down speak the homepage\'s look: sentence case and pill buttons, no chamfered slabs', () => {
+  for (const sheet of ['site/css/subpage.css', 'site/css/resume.css']) {
+    const css = read(sheet).replace(/\/\*[\s\S]*?\*\//g, '');
+    assert.doesNotMatch(css, /text-transform:\s*uppercase/, `${sheet} sets type in capitals`);
+    assert.doesNotMatch(css, /clip-path:\s*polygon/, `${sheet} still cuts a chamfer`);
+  }
+  assert.match(read('site/css/subpage.css'), /\.btn\s*\{[^}]*border-radius:\s*var\(--radius-pill\)/);
+  assert.match(read('site/css/resume.css'), /\.resume-actions \.button\s*\{[^}]*border-radius:\s*var\(--radius-pill\)/);
+});
+
+test('on a phone the project page\'s one column shrinks to the screen, and long records wrap inside it', () => {
+  const css = read('site/css/subpage.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  // A bare 1fr track is never narrower than its longest unbroken string (a file fingerprint, a URL).
+  assert.match(css, /@media \(max-width: 899px\)\s*\{\s*\.project-layout\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\);/);
+  assert.match(css, /\.project-content p, \.project-rail p, \.project-aside p[^{]*\{[^}]*overflow-wrap:\s*anywhere/);
+});
+
+test('the lab\'s .shell grid runs edge to edge, not inside the homepage\'s .shell container', () => {
+  const base = read('site/css/base.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const lab = read('lab/lab.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(base, /\.shell\s*\{[^}]*max-width/, 'the homepage container this guards against');
+  const rule = lab.match(/\.shell\s*\{([^}]*)\}/)[1];
+  assert.match(rule, /max-width:\s*none/);
+  assert.match(rule, /margin:\s*0/);
+  assert.match(rule, /padding:\s*0/);
+});
+
+test('the lab\'s wordmark reads in the lab\'s text colour, not its link cyan', () => {
+  const lab = read('lab/lab.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(lab, /\.sub-wordmark\s*\{[^}]*color:\s*var\(--lab-text\)/);
+});
+
+test('project write-ups keep a reading measure, and the lab sets no wide tracking on its notes', () => {
+  const css = read('site/css/subpage.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const measure = css.match(/\.project-content p, \.project-content ul\s*\{[^}]*max-width:\s*(\d+)ch/);
+  assert.ok(measure && Number(measure[1]) <= 68, 'paragraphs under about 80 characters a line');
+  const lab = read('lab/lab.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.doesNotMatch(lab.match(/\.rail__foot\s*\{([^}]*)\}/)[1], /letter-spacing:\s*0\.0[1-9]/);
+});

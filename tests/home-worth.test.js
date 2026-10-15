@@ -1,6 +1,5 @@
-// What it is worth (2026-10-15): the water story's last beat replaces "Worth it". One plain
-// price per person, the time it gives back, and hard tickets that climb to a person. The money
-// never comes from anyone's hours, pay or job, and no AI model is named.
+// What it is worth (2026-10-15): one plain price per person in the Ergon section, and hard tickets that climb
+// to a person. The money never comes from anyone's hours, pay or job, and no AI model is named.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -9,7 +8,6 @@ const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf
 const raw = read('site/content.json');
 const content = JSON.parse(raw);
 const home = read('index.html');
-const beat = (id) => content.story.beats.find((b) => b.id === id);
 
 /** Everything a visitor can read on the homepage: its text with the tags stripped, and the words in its attributes. */
 const visible = (() => {
@@ -34,7 +32,7 @@ test('the pitch never saves money by taking hours, pay or people: not in any of 
   for (const [path, value] of strings) assert.doesNotMatch(value, TAKES, path);
   // The page's own text is all there to check: the story, the résumé half, the footer and the guide.
   const [text] = visible;
-  for (const piece of [beat('worth').headline, 'Work ethic', content.contact.copyright, content.meta.description]) {
+  for (const piece of [`${content.ergon.price} ${content.ergon.priceRest}`, 'Work ethic', content.contact.copyright, content.meta.description]) {
     assert.ok(visible.some((v) => v.includes(piece)), `the homepage shows "${piece}"`);
   }
   assert.ok(text.length > 3000);
@@ -45,14 +43,16 @@ test('no clients, revenue, profit or returns anywhere a visitor reads on the hom
   for (const value of visible) assert.doesNotMatch(value, /\b(clients?|revenue|profits?|returns?)\b/i);
 });
 
-test('the worth beat names the price per person, and the page shows it', () => {
-  const worth = beat('worth');
-  assert.match(worth.headline, /\$100 a person a month/);
-  assert.ok(home.includes(`<h2>${worth.headline}</h2>`), 'the headline is on the page');
+test('the Ergon section names the price per person, and the page shows it', () => {
+  assert.equal(content.ergon.price, 'About $100');
+  assert.equal(content.ergon.priceRest, 'a person a month.');
+  const at = home.indexOf('<section class="ergon" id="team"');
+  const ergon = home.slice(at, home.indexOf('</section>', at));
+  assert.ok(ergon.includes('<b>About $100</b> a person a month.'), 'the price line is in the Ergon section');
 });
 
 test('hard tickets go up the ladder to a person', () => {
-  assert.deepEqual(beat('tickets').ladder, ['Agent', 'Senior agent', 'Person']);
+  assert.deepEqual(content.ergon.ladder, ['Agent', 'Senior agent', 'Person']);
 });
 
 test('no AI model is named anywhere in the content', () => {

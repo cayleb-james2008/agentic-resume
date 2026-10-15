@@ -1,10 +1,14 @@
-"""Markup helpers shared by the homepage templates.
+"""Markup helpers shared by the homepage templates (the 2026-10-15 layout).
 
-Text that animates is split here, at build time, into an assistive copy plus
-`aria-hidden` unit spans, so the page reads in full with JavaScript off and the
-script only has to move spans that already exist.
+Every value that reaches the page goes through `text()` or `attr()`. Icons are inline stroke SVGs in one
+weight; the `>_` tile is the wordmark's mark. Terminal lines are plain strings in content.json: `term()`
+colours a leading `$` or `›` and every `✓`, and nothing else.
 """
+import json
 from html import escape
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def text(value: str) -> str:
@@ -17,53 +21,6 @@ def attr(value: str) -> str:
     return escape(value, quote=True)
 
 
-def split_units(value: str, unit: str) -> list[list[str]]:
-    """Words, each a list of units — mirrors splitUnits() in reveal.js."""
-    words = value.split()
-    return [[w] for w in words] if unit == "word" else [list(w) for w in words]
-
-
-def reveal(value: str, unit: str = "word", *, stagger: int = 110, delay: int = 0,
-           config: str = "REVEAL", mode: str = "forward", gap: str | None = None,
-           words: list[str] | None = None, cls: str = "") -> str:
-    """A text run that the reveal engine animates unit by unit.
-
-    `words` overrides where the run breaks (the name breaks after "Alvarez-",
-    which whitespace splitting cannot express); the assistive copy is always
-    `value` as written.
-    """
-    groups = [[w] for w in words] if words and unit == "word" else (
-        [list(w) for w in words] if words else split_units(value, unit))
-    inner = "".join(
-        '<span class="reveal-word">'
-        + "".join(f'<span class="reveal-unit">{text(u)}</span>' for u in group)
-        + "</span>"
-        for group in groups
-    )
-    style = f' style="--gap:{gap}"' if gap else ""
-    classes = f"reveal {cls}".strip()
-    return (
-        f'<span class="{classes}" data-reveal="{unit}" data-stagger="{stagger}" '
-        f'data-delay="{delay}" data-config="{config}" data-mode="{mode}"{style}>'
-        f'<span class="sr-only">{text(value)}</span>'
-        f'<span class="reveal-units" aria-hidden="true">{inner}</span></span>'
-    )
-
-
-LINE_STEP = 130
-STOP = LINE_STEP + 110
-
-
-def heading(lines: list[str], title_id: str, cls: str, stop_cls: str) -> str:
-    stop = f'<span class="heading-stop {stop_cls}" data-fade data-delay="{STOP}" aria-hidden="true">.</span>'
-    spans = "".join(
-        f'<span class="heading-line">{reveal(line, "word", stagger=110, delay=i * LINE_STEP)}'
-        f'{stop if i == len(lines) - 1 else ""}</span>'
-        for i, line in enumerate(lines)
-    )
-    return f'<h2 class="{cls}" id="{title_id}">{spans}</h2>'
-
-
 def link(href: str, label: str, cls: str = "", extra: str = "") -> str:
     """An anchor; PDF links are downloads, external links open normally."""
     download = " download" if href.endswith(".pdf") else ""
@@ -71,36 +28,69 @@ def link(href: str, label: str, cls: str = "", extra: str = "") -> str:
     return f'<a{klass} href="{attr(href)}"{download}{extra}>{text(label)}</a>'
 
 
-# --- The spec's own frames (paths verbatim) -------------------------------
-
-def chamfer_frame(width: float, height: float, cut: float, cls: str) -> str:
-    """A slab or hollow button frame chamfered bottom-right, as the spec draws it."""
-    d = (f"M0.5 0.5H{width - 0.5:g}V{height - cut:g}L{width - cut:g} "
-         f"{height - 0.5:g}H0.5Z")
-    return (f'<svg class="cta-frame {cls}" viewBox="0 0 {width:g} {height:g}" '
-            f'preserveAspectRatio="none" aria-hidden="true">'
-            f'<path class="cta-body" d="{d}"/><path class="cta-flood" d="{d}"/>'
-            f'<path class="cta-line" d="{d}"/></svg>')
+def external(href: str) -> str:
+    """Attributes for a link that leaves the site."""
+    return ' target="_blank" rel="noopener"' if href.startswith(("http://", "https://")) else ""
 
 
-SLAB_ARROW = ('<svg class="cta-arrow" viewBox="0 0 13.71 10.71" aria-hidden="true">'
-              '<path d="M0 5.35H13M8 10.35L13 5.35L8 0.35" fill="none" stroke="currentColor"/></svg>')
-
-# --- Icons drawn for this site (not from the reference) --------------------
-
-def _stroked(shapes: str) -> str:
-    """A 16×16 glyph stroked in the text colour."""
-    return (f'<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" '
-            f'stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{shapes}</g></svg>')
-
-
-# The apps a team member works in (the water story's overlay tiles) and the tick.
+_STROKE = 'fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"'
 ICONS = {
-    "mail": _stroked('<rect x="1.5" y="3.5" width="13" height="9" rx="1.5"/><path d="m2 4.5 6 4.5 6-4.5"/>'),
-    "calendar": _stroked('<rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/>'),
-    "sheet": _stroked('<rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M2 6h12M2 10h12M6.5 6v8"/>'),
-    "phone": _stroked('<rect x="4.5" y="1.5" width="7" height="13" rx="1.5"/><path d="M7 12.5h2"/>'),
-    "chat": _stroked('<path d="M2 3h12v8H8l-3.5 3v-3H2Z"/>'),
-    "screen": _stroked('<rect x="1.5" y="2.5" width="13" height="8.5" rx="1"/><path d="M5.5 14h5M8 11v3"/>'),
-    "checkmark": _stroked('<path d="m3 8.5 3.2 3.2L13 4.5"/>'),
+    "arrow": f'<svg class="icon ar" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    "upright": f'<svg class="icon ur" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>',
+    "x": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><path d="M4 4l16 16M20 4 4 20"/></svg>',
+    "menu": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    "dot": (f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.6"><circle cx="12" cy="12" r="9"/>'
+            '<circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/></svg>'),
+    "pin": (f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.6">'
+            '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>'),
+    "code": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.9"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>',
+    "mail": (f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.7">'
+             '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7.5l8 5.5 8-5.5"/></svg>'),
+    "doc": (f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.7">'
+            '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>'),
+    "copy": (f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.8"><rect x="8" y="8" width="12" height="12" rx="2.5"/>'
+             '<path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>'),
+    "person": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+    "check": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2.2"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
 }
+
+
+def icon(name: str) -> str:
+    return ICONS[name]
+
+
+def mk(cls: str = "") -> str:
+    """The `>_` tile."""
+    return f'<span class="mk{" " + cls if cls else ""}" aria-hidden="true">&gt;_</span>'
+
+
+def rv(kind: str = "", delay: int = 0, extra: str = "") -> str:
+    """Reveal attributes: `data-rv` (with a kind) and its delay."""
+    kind_attr = f' data-rv="{kind}"' if kind else " data-rv"
+    style = f"--d:{delay}ms;{extra}" if delay or extra else ""
+    return kind_attr + (f' style="{style}"' if style else "")
+
+
+def eyebrow(label: str, cls: str = "", reveal: str = "") -> str:
+    klass = f"eyebrow {cls}".strip()
+    return f'<p class="{klass}"{reveal}><i></i>{text(label)}</p>'
+
+
+def term_line(line: str) -> str:
+    """One terminal line: a leading prompt and every tick coloured, the rest as written."""
+    body = text(line)
+    for prompt in ("$", "›"):
+        if line.startswith(prompt):
+            body = f'<span class="c">{prompt}</span>{text(line[len(prompt):])}'
+            break
+    return body.replace("✓", '<span class="g">✓</span>')
+
+
+def term(lines: list[str]) -> str:
+    return "\n".join(term_line(line) for line in lines)
+
+
+def image_size(src: str) -> tuple[int, int]:
+    """An image's pixel size from assets/IMAGES.json, so every <img> reserves its box."""
+    record = json.loads((ROOT / "assets/IMAGES.json").read_text())[src]
+    return record["width"], record["height"]

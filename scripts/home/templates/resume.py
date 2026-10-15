@@ -1,8 +1,9 @@
 """The résumé page: the homepage's masthead, the generated candidate fragment
 (resume/candidate-fragment.html, built by resume/build_resume.py) and a slim
 footer. No script — it reads the same with or without JavaScript, and prints."""
-from markup import attr, link, text
+from markup import attr, link, mk, text
 from templates import social
+from templates.shell import THEME_COLOR
 
 STYLES = ("tokens", "base", "resume")
 TITLE = "Résumé · Cayleb Alvarez-James"
@@ -21,7 +22,7 @@ def masthead(content: dict) -> str:
     items = "".join(f"<li>{link(_href(n['href']), n['label'])}</li>" for n in content["nav"])
     return (
         '<header class="resume-masthead">'
-        f'<a class="resume-wordmark" href="./" aria-label="Cayleb Alvarez-James, home">{text(content["wordmark"])}</a>'
+        f'<a class="resume-wordmark" href="./" aria-label="Cayleb Alvarez-James, home">{mk()}{text(content["wordmark"])}</a>'
         f'<nav aria-label="Primary"><ul>{items}</ul></nav>'
         f'<a class="resume-download" href="{attr(content["meta"]["onePagePdf"])}" download>One-page PDF ↓</a>'
         "</header>"
@@ -48,6 +49,7 @@ def render(content: dict, fragment: str) -> str:
         f"<title>{text(TITLE)}</title>"
         f'<meta name="description" content="{attr(DESCRIPTION)}">'
         f'{social.tags(meta, "resume.html", TITLE, DESCRIPTION)}'
+        f'<meta name="theme-color" content="{THEME_COLOR}">'
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
         f"{styles}</head><body class=\"resume-page\">"
         '<a class="skip-link" href="#resume">Skip to résumé</a>'

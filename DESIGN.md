@@ -1,4 +1,27 @@
+# Tech-studio homepage (2026-10-15)
+
+**Source.** The design is `docs/superpowers/specs/2026-10-15-lumora-design.md`; the plan is `docs/superpowers/plans/2026-10-15-lumora.md`. The layout, components and motion come from a third-party "recreate this site" spec for a studio page, kept locally and git-ignored like the 2026-10-12 one; none of its names, copy, marks, stats or images are used. It replaces the water story below, which is recoverable at commit `b0763a3`.
+
+**Idea.** A calm, professional tech page that is easy to take in. The pitch, in order: he comes into a business and builds AI around how the team works (AI employees, workflows, automations); Ergon shows what that looks like; the work and its test counts show he ships. The official résumé follows, then contact. There is no picture of him anywhere.
+
+**Structure.** Loader → hero → About and its band → Ergon's team graph → Work → What I do → track record → the résumé half → the contact footer, plus a full-screen menu, a request composer and "Ask my agent". One `<h1>`; one `<h2>` per section after it.
+
+**Look.** Light cool-grey surfaces, black cards and one cyan accent (`#02d2e3`, with `#007a85` for accent text on light). Onest for everything a person reads, JetBrains Mono only where the machine speaks: the loader, the proof chip, terminals, the Ergon log and route labels. Both are vendored. Raw tokens in `site/css/tokens.css` stay verbatim; the new ones are added beside them. Sizes are in rem on one adaptive root grid. The project pages, the résumé page, the lab and 404 share the look: the `>_` tile beside the wordmark, sentence case, pill buttons and the ink footer.
+
+**Motion.**
+- One ticker drives every frame; Lenis runs on it. No `@keyframes`; hover motion only for a fine pointer.
+- The hero's liquid reveal paints a blueprint layer along the pointer's trail on a canvas; one automatic stroke runs once so phones see it.
+- The team graph draws SVG wires from the DOM, sends packets along them, and walks tickets up the ladder. Ticket *n* stops at Person if *n* is a multiple of 7, else at Senior agent on a multiple of 3, else at Agent. Autoplay runs only on screen, in a visible tab, with motion allowed.
+- Text reveals split headings into words and stagger them by line. Counters count up with scroll.
+- With JS off, motion reduced or the 4-second failsafe tripped, everything is visible at rest. Hiding CSS appears only under `.js:not(.reveal-failsafe)`.
+
+**Claims.** Unchanged from the water story: the ladder has no model names; the price, about $100 a person a month, is Cayleb's own figure and the only number not traced to the résumé; Ergon is a Windows pilot with live checks pending; the other jobs are "Work ethic"; no certifications; no clients, hours, pay or people as the source of savings (`tests/home-content.test.js`, `tests/home-worth.test.js`, `tests/home-guide.test.js`).
+
+---
+
 # Water story homepage (2026-10-15)
+
+> **Superseded 2026-10-15** by the tech-studio homepage above. The water story is recoverable at commit `b0763a3`. Its shader, three.js and the Oswald and Space Grotesk faces were removed after that commit, so the paths named here exist only there.
 
 **Source.** The design is `docs/superpowers/specs/2026-10-15-water-story-design.md`; the plan is `docs/superpowers/plans/2026-10-15-water-story.md`. It replaces the illustrated, character-led homepage below, which is recoverable at commit `cbdd73c`.
 
@@ -34,7 +57,7 @@
 
 # Personalized homepage (2026-10-12)
 
-> **Superseded 2026-10-15** by the water story above. This is the illustrated, character-led homepage, recoverable at commit `cbdd73c`. Its image scripts and `assets/home/` were removed after that commit, so the paths named here exist only there.
+> **Superseded 2026-10-15** by the water story above (itself superseded the same day). This is the illustrated, character-led homepage, recoverable at commit `cbdd73c`. Its image scripts and `assets/home/` were removed after that commit, so the paths named here exist only there.
 
 **Source of the layout.** The layout, motion and engine are rebuilt from a third-party "recreate this site" spec, kept locally at `docs/superpowers/specs/` and git-ignored. Only the format is kept: page structure, animations and engine. All of the spec's racing imagery, names and assets are replaced. The plan is `docs/superpowers/plans/2026-10-12-personalized-homepage.md`, and its Personalization map records every substitution.
 

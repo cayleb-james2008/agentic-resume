@@ -1,0 +1,183 @@
+<!doctype html>
+<!-- The hero's two layers (the 2026-10-15 layout): "surface" is the calm product the team sees; "blueprint"
+     is the same screen drawn as its wiring, revealed under the pointer. Rendered to assets/hero/ by
+     scripts/home/render_hero.mjs; never served. No pictures of anyone. -->
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Onest;font-weight:400;src:url(../../assets/fonts/onest-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Onest;font-weight:500;src:url(../../assets/fonts/onest-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Onest;font-weight:600;src:url(../../assets/fonts/onest-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:JBM;font-weight:400;src:url(../../assets/fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:JBM;font-weight:500;src:url(../../assets/fonts/jetbrains-mono-latin-500-normal.woff2) format("woff2")}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+.box{position:absolute}
+/* ---------- surface layer ---------- */
+.surface{background:linear-gradient(180deg,#eef0f1 0%,#dde1e3 55%,#ccd2d4 100%);color:#111}
+.surface::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(17,24,28,.07) 1.4px,transparent 1.6px);background-size:30px 30px}
+.surface .card{background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);border-radius:26px;box-shadow:0 1px 2px rgba(20,32,38,.06),0 30px 70px -20px rgba(20,32,38,.22)}
+.mark{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#0a0a0a;color:#02d2e3;font:500 13px/1 JBM,monospace;letter-spacing:-.04em}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:999px;background:#eef1f2;color:rgba(17,17,17,.7);font-size:13px;font-weight:500}
+.dot{width:8px;height:8px;border-radius:50%;background:#02d2e3;display:inline-block}
+.win-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(17,17,17,.06)}
+.win-head .t{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:600}
+.win-head .t span:not(.mark){color:rgba(17,17,17,.45);font-weight:500}
+.chips{display:flex;gap:8px;align-items:center}
+.win-body{display:grid;grid-template-columns:210px 1fr;height:calc(100% - 63px)}
+.side{padding:18px 14px;border-right:1px solid rgba(17,17,17,.06);display:flex;flex-direction:column;gap:6px}
+.side .lbl{font-size:12px;font-weight:500;color:rgba(17,17,17,.42);padding:0 10px 6px}
+.person{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;font-size:15px;font-weight:500;color:rgba(17,17,17,.78)}
+.person.on{background:#eef1f2;color:#111}
+.person .av{width:26px;height:26px;border-radius:50%;background:#dfe4e6;display:grid;place-items:center}
+.person .av svg{width:14px;height:14px;stroke:rgba(17,17,17,.55);fill:none;stroke-width:1.8}
+.person .dot{margin-left:auto;width:7px;height:7px}
+.main{padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.bubble{display:flex;gap:12px;align-items:flex-start}
+.bubble p{background:#f3f5f6;border-radius:6px 18px 18px 18px;padding:14px 16px;font-size:16px;line-height:1.45;max-width:440px}
+.drafts{display:flex;flex-direction:column;gap:8px;margin-left:42px}
+.draft{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:12px;border:1px solid rgba(17,17,17,.07);font-size:14px;font-weight:500;background:#fff}
+.draft em{font-style:normal;color:#007a85;font-size:13px}
+.acts{display:flex;gap:10px;margin-left:42px;align-items:center}
+.btn{height:38px;padding:0 18px;border-radius:999px;display:inline-flex;align-items:center;font-size:14px;font-weight:500}
+.btn.dark{background:#0a0a0a;color:#fff}
+.btn.out{border:1px solid rgba(17,17,17,.14);color:#111}
+.acts small{font-size:13px;color:rgba(17,17,17,.45);margin-left:6px}
+.ticket{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.ticket .k{font-size:12px;font-weight:500;color:rgba(17,17,17,.45)}
+.ticket .h{font-size:18px;font-weight:600}
+.ok{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#007a85}
+.ladder{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(17,17,17,.4)}
+.ladder b{font-weight:500;padding:5px 10px;border-radius:999px;background:#eef1f2;color:rgba(17,17,17,.55)}
+.ladder b.on{background:#0a0a0a;color:#fff}
+.flow{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.flow .row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;white-space:nowrap;font-size:13px;color:rgba(17,17,17,.35)}
+.flow .row b{font-weight:500;padding:6px 11px;border-radius:999px;background:#eef1f2;color:rgba(17,17,17,.72)}
+.flow .row b.on{background:#02d2e3;color:#0a0a0a}
+/* ---------- blueprint layer: a light blueprint of the same UI ---------- */
+.blueprint{background:linear-gradient(180deg,#eaf6f7 0%,#dceef0 60%,#cfe5e8 100%);color:#12393e}
+.blueprint::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,122,133,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(0,122,133,.13) 1px,transparent 1px),linear-gradient(rgba(0,122,133,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,122,133,.06) 1px,transparent 1px);background-size:150px 150px,150px 150px,30px 30px,30px 30px}
+.blueprint .card{background:rgba(255,255,255,.42);border:1.5px dashed rgba(0,122,133,.55);border-radius:26px}
+.blueprint .tag{position:absolute;left:18px;top:-13px;padding:3px 10px;border-radius:7px;background:#02d2e3;color:#05262a;font:500 14px/1.3 JBM,monospace}
+.blueprint .dim{position:absolute;right:16px;bottom:-24px;font:400 13px/1 JBM,monospace;color:#5d8589}
+.term{font:400 19px/1.62 JBM,monospace;white-space:pre;padding:22px 24px;color:#163f44}
+.term .p{color:#007a85;font-weight:500}
+.term .m{color:#5d8589}
+.term .g{color:#08875a}
+.term .w{color:#06262a;font-weight:500}
+.term .cur{display:inline-block;width:.6em;height:1.05em;background:#02d2e3;vertical-align:-.15em}
+.tree{font:400 19px/1.7 JBM,monospace;white-space:pre;color:#86b3b8}
+.tree .p{color:#3f939b}
+.blueprint .tabbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1.5px dashed rgba(0,122,133,.35);font:500 14px/1 JBM,monospace;color:#5d8589}
+.blueprint .tabbar b{color:#007a85;font-weight:500}
+</style></head>
+<body>
+<script>
+const q=new URLSearchParams(location.search);
+const layer=q.get('layer')||'surface', fmt=q.get('fmt')||'wide';
+// Every check count is read from resume/resume-content.json by render_hero.mjs; none is typed here.
+const C=JSON.parse(q.get('counts'));
+document.body.className=layer;
+const person='<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>';
+// geometry (CSS px) per format
+const G = fmt==='wide' ? {
+  win:[1010,118,780,450], ticket:[540,150,420,0], tree:[300,452]
+} : {
+  tree:[40,120]
+};
+function place(el,[x,y,w,h]){Object.assign(el.style,{left:x+'px',top:y+'px',width:w+'px',height:(h?h+'px':'auto')});return el}
+function card(html,r,cls='',tag=''){const d=document.createElement('div');d.className='box card '+cls;d.innerHTML=html+(tag&&layer==='blueprint'?`<span class="tag">${tag}</span><span class="dim">${r[2]} × ${r[3]||'auto'}</span>`:'');document.body.appendChild(place(d,r));const dm=d.querySelector('.dim');if(dm)dm.textContent=`${r[2]} × ${d.offsetHeight}`;return d}
+const narrow = fmt!=='wide';
+if(layer==='surface' && narrow){ /* texture only behind the phone's stacked text */ }
+else if(layer==='surface'){
+  card(`<div class="win-head"><div class="t"><span class="mark">&gt;_</span>Assistant <span>· Front desk</span></div>
+    <div class="chips">${narrow?'':'<span class="chip">Email</span><span class="chip">Calendar</span><span class="chip">Docs</span>'}<span class="chip"><i class="dot"></i>On</span></div></div>
+    <div class="win-body" style="${narrow?'grid-template-columns:1fr':''}">
+    ${narrow?'':`<div class="side"><div class="lbl">Team</div>
+      ${['Front desk','Sales','Bookkeeping','Operations','Manager'].map((n,i)=>`<div class="person ${i?'':'on'}"><span class="av">${person}</span>${n}<i class="dot"></i></div>`).join('')}</div>`}
+    <div class="main">
+      <div class="bubble"><span class="mark">&gt;_</span><p>Morning. I drafted replies to 3 emails and moved Thursday’s install to 2:00. Want a look before they go out?</p></div>
+      <div class="drafts">
+        <div class="draft">Re: Kitchen quote <em>Draft ready</em></div>
+        <div class="draft">Re: Delivery window <em>Draft ready</em></div>
+        ${narrow?'':'<div class="draft">Re: Invoice question <em>Draft ready</em></div>'}
+      </div>
+      <div class="acts"><span class="btn dark">Approve all</span><span class="btn out">Review</span>${narrow?'':'<small>Nothing sends until you approve.</small>'}</div>
+    </div></div>`, G.win);
+  card(`<div class="ticket"><div class="k">Ticket</div><div class="h">Printer won’t connect</div>
+    <div class="ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Fixed on the computer</div>
+    <div class="ladder"><b class="on">Agent</b>→<b>Senior agent</b>→<b>Person</b></div></div>`, G.ticket);
+
+} else {
+  const P=s=>`<span class="p">${s}</span>`, M=s=>`<span class="m">${s}</span>`, Gr=s=>`<span class="g">${s}</span>`, W=s=>`<span class="w">${s}</span>`;
+  const termA = narrow ?
+`${P('~/front-desk $')} ergon status
+  inbox     3 need replies  ${Gr('drafted ✓')}
+  calendar  Thu install → 2:00 ${Gr('✓')}
+  approval  ${W('waiting on you')}
+${P('$')} checks --all
+  ${Gr('✓')} ergon     ${C.ergon} passing
+  ${Gr('✓')} dotz      ${C.dotz}
+  ${Gr('✓')} sophos    ${C.sophos}
+  ${Gr('✓')} suite     ${C.suite}
+  ${Gr('✓')} asmodeus  ${C.asmodeus}
+  ${W(`${C.total} checks · ${C.systems} systems`)} <span class="cur"></span>` :
+`${P('~/front-desk $')} ergon assistant status
+  apps      email · calendar · docs   ${Gr('connected ✓')}
+  inbox     3 need replies            ${Gr('drafted ✓')}
+  calendar  Thu install → 2:00        ${Gr('moved ✓')} ${M('undo ready')}
+  approval  ${W('waiting on you')}            ${M('nothing sends yet')}
+${P('~/front-desk $')} checks --all
+  ${Gr('✓')} ergon       ${C.ergon} passing
+  ${Gr('✓')} dotz        ${C.dotz}
+  ${Gr('✓')} sophos      ${C.sophos}
+  ${Gr('✓')} suite       ${C.suite}
+  ${Gr('✓')} asmodeus    ${C.asmodeus}
+  ${W(`${C.total} checks across ${C.systems} systems`)} <span class="cur"></span>`;
+  if(!narrow) card(`<div class="tabbar"><span><b>&gt;_</b> front-desk — assistant</span><span>ergon</span></div><div class="term">${termA}</div>`, G.win, '', 'assistant.front-desk');
+  if(!narrow) card(`<div class="term" style="font-size:16px">${P('$')} ergon ticket open
+  ${W('"printer won\'t connect"')}
+  agent   ${M('remote session')}
+  fixed   print queue reset ${Gr('✓')}
+  ladder  ${Gr('agent ✓')} → senior → person</div>`, G.ticket, '', 'ticket');
+
+  const t=document.createElement('div'); t.className='box tree';
+  t.innerHTML = narrow ?
+`${P('$')} ergon status
+  installer    signed ${Gr('✓')}
+  updates      live feed ${Gr('✓')}
+  connectors   your apps ${Gr('✓')}
+  repairs      ticket-scoped ${Gr('✓')}
+
+
+${P('$')} checks --all
+  ${Gr('✓')} ergon      ${C.ergon}
+  ${Gr('✓')} dotz       ${C.dotz}
+  ${Gr('✓')} sophos     ${C.sophosShort}
+  ${Gr('✓')} suite      ${C.suite}
+  ${Gr('✓')} asmodeus   ${C.asmodeus}
+
+
+${P('team')}
+├─ front desk ─ assistant
+├─ sales ────── assistant
+├─ books ────── assistant
+└─ manager ──── assistant
+   ${P('ergon')} · managed remotely
+
+
+${P('$')} ergon ticket open
+  agent    fixing on the computer
+  fixed    ${Gr('✓')}` :
+`${P('team')}
+├─ front desk ── assistant ── email, calendar
+├─ sales ─────── assistant ── crm, quotes
+├─ bookkeeping ─ assistant ── invoices, sheets
+├─ operations ── assistant ── scheduling, docs
+└─ manager ───── assistant ── reports
+   ${P('ergon')} ── managed remotely · tickets fixed on the computer`;
+  place(t,[G.tree[0],G.tree[1]]); t.style.height='auto'; if(narrow) t.style.opacity='.55'; document.body.appendChild(t);
+}
+document.fonts.ready.then(()=>document.body.dataset.ready='1');
+</script>
+</body></html>

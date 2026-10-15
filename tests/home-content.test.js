@@ -37,20 +37,24 @@ const select = (value, pattern) => {
 
 test('numbers trace to the résumé', () => {
   const allowed = new Set([...resumeText.matchAll(/\d+(?:,\d{3})*/g)].map((m) => m[0]));
-  // Cayleb's stated per-person monthly price, 2026-10-15.
-  const worth = content.story.beats.find((b) => b.id === 'worth');
-  if (/\$100/.test(JSON.stringify(worth))) allowed.add('100');
   for (const [path, text] of strings(content)) {
-    for (const [token] of text.matchAll(/\d+(?:,\d{3})*/g)) {
-      assert.ok(allowed.has(token), `${path}: "${token}" does not appear in resume-content.json`);
+    for (const m of text.matchAll(/\d+(?:,\d{3})*/g)) {
+      // Cayleb's stated per-person monthly price, 2026-10-15, written only as "$100".
+      if (m[0] === '100' && text[m.index - 1] === '$') continue;
+      assert.ok(allowed.has(m[0]), `${path}: "${m[0]}" does not appear in resume-content.json`);
     }
   }
 });
 
-test('name renders as three words', () => {
-  const [first, ...rest] = content.story.intro.nameWords;
-  assert.equal(content.story.intro.nameWords.length, 3);
-  assert.equal(`${first} ${rest.join('')}`, resume.full_name);
+test("the page's parts each have their copy, and the water story is gone", () => {
+  for (const key of ['loader', 'masthead', 'menu', 'hero', 'about', 'band', 'ergon', 'built', 'services', 'stats', 'resumeHalf', 'contact', 'modal', 'guide']) {
+    assert.ok(content[key], `content.${key}`);
+  }
+  assert.equal(content.story, undefined);
+  assert.equal(content.navAction, undefined);
+  assert.equal(content.wordmark, 'Cayleb.AJ');
+  assert.equal(content.hero.headline, "Show me how you work. I'll find where AI fits.");
+  assert.equal(content.hero.eyebrow, 'Forward Thinking Engineer');
 });
 
 test('content lengths stay inside their frames', () => {
@@ -66,7 +70,7 @@ test('content lengths stay inside their frames', () => {
 
 test('banned claims stay out', () => {
   for (const [path, text] of strings(content)) {
-    assert.doesNotMatch(text, /\b(hedge fund|returns?|profit|revenue|clients?)\b/i, path);
+    assert.doesNotMatch(text, /\b(hedge fund|returns?|profit|revenue|clients?|customers?)\b/i, path);
   }
   assert.equal(resume.projects.some((p) => /\bEvoHedge\b|\bMaki\b/.test(p.name)), false);
   assert.doesNotMatch(JSON.stringify(content), /\bEvoHedge\b|\bMaki\b/);

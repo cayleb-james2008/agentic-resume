@@ -117,8 +117,10 @@ test('experience lists the main role, then the other jobs as work ethic', () => 
   const entry = one(box, 'article', /class="resume-entry"/);
   const { title, dates, intro } = resume.experience;
   assert.ok(title.includes('&'), 'the real title has an ampersand to escape');
-  assert.ok(entry.includes(escaped(title)), 'title, "&" escaped');
-  assert.equal(textOf(one(entry, 'h3')), title);
+  const dotted = (value) => value.replace(' - ', ' · '); // the official résumé page's separator (build_resume.py)
+  assert.ok(title.includes(' - '), 'the real title has a spaced hyphen to set');
+  assert.ok(entry.includes(escaped(dotted(title))), 'title, " · " and "&" escaped');
+  assert.equal(textOf(one(entry, 'h3')), dotted(title));
   assert.equal(textOf(one(entry, 'p', /class="resume-dates"/)), dates);
   assert.ok(textOf(entry).includes(intro));
 
@@ -136,11 +138,14 @@ test('experience lists the main role, then the other jobs as work ethic', () => 
     const li = jobs[i];
     assert.equal(textOf(one(li, 'span', /class="resume-dates"/)), job.dates);
     const label = one(li, 'span', /class="resume-org"/);
-    assert.equal(textOf(label), job.organization, 'the organization reads as written');
+    assert.equal(textOf(label), job.organization.replace(' — ', ' · '), 'company · role, as the official résumé page sets it');
     assert.equal(textOf(one(label, 'span', /class="resume-company"/)), org);
     if (role) assert.equal(textOf(one(label, 'span', /class="resume-role"/)), role);
     else assert.equal(count(label, /resume-role/g), 0, `${org} has no role`);
   });
+  // Every title and name is set with " · ": no spaced hyphen or em dash is left, and apostrophes stay straight.
+  assert.ok(!html.includes(' - ') && !html.includes(' — '), 'separators match the official résumé page');
+  assert.ok(!html.includes('’'), 'no curly apostrophe');
   // The names the recruiter test looks for, apostrophes literal.
   for (const phrase of ['Dunkin', 'Robert H. Lord Company', "Tommy's Pizza", 'David Cooke Plaster']) {
     assert.ok(html.includes(phrase), phrase);
@@ -155,7 +160,7 @@ test('projects come in résumé order with Ergon first, each linking its case st
 
   const cards = projects();
   assert.equal(cards.length, resume.projects.length);
-  assert.deepEqual(cards.map((c) => textOf(one(c, 'h3'))), resume.projects.map((p) => p.name), 'résumé order');
+  assert.deepEqual(cards.map((c) => textOf(one(c, 'h3'))), resume.projects.map((p) => p.name.replace(' - ', ' · ')), 'résumé order, names set with " · "');
 
   // Ergon leads, alone, and alone carries its status.
   assert.match(cards[0], /^<article class="resume-project resume-project--lead"/);
@@ -192,6 +197,17 @@ test('projects come in résumé order with Ergon first, each linking its case st
   for (const repo of ['dotz', 'sophos', 'industry-ai-suite']) {
     assert.ok(html.includes(`href="https://github.com/cayleb-james2008/${repo}"`), repo);
   }
+
+  // A link to the site itself becomes relative, wherever it points: a page, the lab, the home page.
+  const own = structuredClone(resume);
+  own.projects[1].links.push(
+    { label: 'Lab', url: `${meta.siteUrl}lab/` },
+    { label: 'Home', url: meta.siteUrl },
+  );
+  const converted = elements(render(own), 'article', /class="resume-project\b/)[1];
+  assert.ok(converted.includes('href="lab/">Lab</a>'), 'site url + lab/ → lab/');
+  assert.ok(converted.includes('href="./">Home</a>'), 'the bare site url → ./');
+  assert.ok(!converted.includes(meta.siteUrl), 'nothing absolute is left');
 
   // The lab, last in the section.
   const lab = one(box, 'p', /class="resume-lab"/);

@@ -13,6 +13,12 @@ from markup import link, text
 CASE_PAGES = {"suite": "projects/industry-ai-suite.html"}
 
 
+def dotted(value: str) -> str:
+    """The official résumé page sets a spaced hyphen as " · " (resume/build_resume.py); so does this half.
+    Apostrophes stay straight: the page names "Tommy's Pizza" as the data does."""
+    return value.replace(" - ", " · ")
+
+
 def case_page(slug: str) -> str:
     return CASE_PAGES.get(slug, f"projects/{slug}.html")
 
@@ -47,11 +53,11 @@ def head(half: dict, resume: dict) -> str:
 
 
 def job(item: dict) -> str:
-    """An organization, then its role when the résumé gives one (split on " — ")."""
+    """An organization, then its role when the résumé gives one (split on " — ", set with " · ")."""
     company, _, role = item["organization"].partition(" — ")
     org = f'<span class="resume-company">{text(company)}</span>'
     if role:
-        org += f' — <span class="resume-role">{text(role)}</span>'
+        org += f' · <span class="resume-role">{text(role)}</span>'
     return f'<li><span class="resume-org">{org}</span><span class="resume-dates">{text(item["dates"])}</span></li>'
 
 
@@ -61,7 +67,7 @@ def experience(half: dict, resume: dict) -> str:
     jobs = "".join(job(item) for item in resume["additional_experience"])
     body = (
         '<article class="resume-entry">'
-        f'<h3>{text(e["title"])}</h3><p class="resume-dates">{text(e["dates"])}</p><p>{text(e["intro"])}</p></article>'
+        f'<h3>{text(dotted(e["title"]))}</h3><p class="resume-dates">{text(e["dates"])}</p><p>{text(e["intro"])}</p></article>'
         '<div class="resume-ethic">'
         f'<h3>{text(ethic["title"])}</h3><p>{text(ethic["line"])}</p><ul class="resume-jobs">{jobs}</ul></div>'
     )
@@ -81,7 +87,7 @@ def project(index: int, item: dict, half: dict, site_url: str) -> str:
     lead = " resume-project--lead" if index == 0 else ""
     return (
         f'<article class="resume-project{lead}">'
-        f'<h3>{text(item["name"])}</h3><p class="resume-stack">{text(item["stack"])}</p>{note}'
+        f'<h3>{text(dotted(item["name"]))}</h3><p class="resume-stack">{text(item["stack"])}</p>{note}'
         f'<ul>{bullets}</ul><p class="resume-links">{" ".join(links)}</p></article>'
     )
 

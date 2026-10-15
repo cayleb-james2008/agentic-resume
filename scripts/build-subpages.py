@@ -121,7 +121,7 @@ def not_found(content: dict) -> str:
         '<ul class="not-found-links">'
         '<li><a href="index.html">Home</a></li>'
         '<li><a href="resume.html">Résumé</a></li>'
-        '<li><a href="index.html#work">Projects</a></li>'
+        '<li><a href="index.html#built">Work</a></li>'
         '<li><a href="lab/">Lab</a></li></ul>'
         "</main>"
         f"{subpage.footer(content, '')}"

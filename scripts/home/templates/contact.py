@@ -18,7 +18,8 @@ def render(content: dict) -> str:
     return (
         '<section class="contact" id="contact" aria-labelledby="contact-title"><div class="shell foot-in">'
         f'<div class="ft-cta"><h2 class="ft-h" id="contact-title" data-lines data-stagger="100">{text(c["headline"])}</h2>'
-        f'<button class="pill light arrow" type="button" data-modal>{text(c["cta"]["label"])}<span class="pb">{icon("upright")}</span></button></div>'
+        # Without the script this is a plain email link; with it, it opens the composer.
+        f'<a class="pill light arrow" href="mailto:{attr(content["meta"]["email"])}" data-modal>{text(c["cta"]["label"])}<span class="pb">{icon("upright")}</span></a></div>'
         '<div class="ft-cols">'
         f'<div class="ft-brand"><p class="brandline">{mk()}{text(content["wordmark"])}</p><p>{text(c["blurb"])}</p>'
         f'<p class="ft-mail"><span class="ft-email">{text(email)}</span>'

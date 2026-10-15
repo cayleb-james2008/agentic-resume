@@ -164,8 +164,10 @@
 }
 body { background: var(--background); color: var(--foreground); min-height: 100lvh; margin: 0; }
 
-/* The rem grid (2026-10-15 layout): the reference's proportional bands without its jumps
-   (16px→12px at 1441px, 10px↔28px at 640px). Above 1920px, site/js/home/grid.js keeps scaling up. */
+/* The rem grid (2026-10-15 layout): the reference's proportional bands with smaller jumps than its own
+   (16px→12px at 1441px, 10px↔28px at 640px). Two remain, where the layout changes anyway: 13px → 16px at 1024px
+   and 14px → 18px at 640px. A device sits in one band; only resizing a window across a breakpoint shows them.
+   Above 1920px, site/js/home/grid.js keeps scaling up. */
 html { font-size: 16px; }
 @media (max-width: 1440px) { html { font-size: clamp(13px, 1.111111vw, 16px); } }
 @media (max-width: 1023.98px) { html { font-size: clamp(14px, 1.5625vw, 16px); } }

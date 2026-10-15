@@ -8,7 +8,8 @@ BLUEPRINT_WIDE, BLUEPRINT_TALL = "assets/hero/blueprint-wide.jpg", "assets/hero/
 
 def _cta(c: dict) -> str:
     if c.get("modal"):
-        return f'<button class="pill dark arrow" type="button" data-modal>{text(c["label"])}<span class="pb">{icon("arrow")}</span></button>'
+        # An anchor, so it still lands on the contact section without the script; with it, it opens the composer.
+        return f'<a class="pill dark arrow" href="#contact" data-modal>{text(c["label"])}<span class="pb">{icon("arrow")}</span></a>'
     return f'<a class="pill outline" href="{attr(c["href"])}" data-go="{attr(c["href"].lstrip("#"))}">{text(c["label"])}</a>'
 
 

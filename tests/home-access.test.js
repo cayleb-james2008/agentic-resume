@@ -185,3 +185,23 @@ test('Lenis leaves link clicks alone: our handler scrolls plain clicks, the brow
   assert.match(main, /new Lenis\(\{ smoothWheel: true \}\)/);
   assert.doesNotMatch(main, /anchors:\s*true/);
 });
+
+// Codex, third pass (2026-10-15).
+test('every control that opens the composer still goes somewhere without JS (the menu, which needs JS, aside)', () => {
+  const outsideMenu = home.replace(/<div class="menu dark-ctx" id="menu"[\s\S]*?<div class="modal" id="modal"/, '<div class="modal" id="modal"');
+  assert.doesNotMatch(outsideMenu, /<button[^>]*\sdata-modal[\s>=]/, 'a <button data-modal> does nothing without the script');
+  assert.match(home, /<a class="pill dark arrow" href="#contact" data-modal>/, 'the hero\'s Let\'s talk falls back to the contact section');
+  assert.match(home, /<a class="pill light arrow" href="mailto:caylebalvarezjames@gmail\.com" data-modal>/, 'the footer\'s Get in touch falls back to an email');
+});
+
+test('the 404 page sends Work to the Work section, not the résumé\'s projects list', () => {
+  const page = read('404.html');
+  assert.match(page, /<li><a href="index\.html#built">Work<\/a><\/li>/);
+  assert.doesNotMatch(page, /index\.html#work"/);
+});
+
+test('the rem grid\'s comment says what it does: smaller jumps than the reference, not none', () => {
+  const tokens = read('site/css/tokens.css');
+  assert.doesNotMatch(tokens, /without its jumps/);
+  assert.match(tokens, /13px → 16px at 1024px/);
+});

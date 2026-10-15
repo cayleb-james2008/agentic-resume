@@ -1,4 +1,39 @@
+# Water story homepage (2026-10-15)
+
+**Source.** The design is `docs/superpowers/specs/2026-10-15-water-story-design.md`; the plan is `docs/superpowers/plans/2026-10-15-water-story.md`. It replaces the illustrated, character-led homepage below, which is recoverable at commit `cbdd73c`.
+
+**Idea.** Water takes the shape of whatever holds it, and so does Cayleb. One calm body of water flows into a team's shape, then branches out to every employee. That is the pitch, shown with very few words. There is no picture of him anywhere.
+
+**Structure.** Two halves and a footer, under a slim fixed masthead.
+- The water story: a tall scroll runway with a sticky full-screen stage. The name, then five short beats: the headline, shape, team (Ergon), tickets, and the price. Words sit top left.
+- The official résumé: a white sheet built from `resume/resume-content.json`, the same source as the PDFs. Experience, projects with Ergon first, education and skills, then the downloads.
+- The contact footer: email, GitHub and the PDFs.
+- The guide is a plain bead with no face. It shows only in the résumé half.
+
+**Motion.**
+- One ticker (`site/js/engine/ticker.js`) drives every spring and tween. Lenis provides smooth scroll.
+- One shader draws the water: a single full-screen pass on the vendored three.js 0.185.0 that blends the beat's shapes into one body. A small wave grid on the CPU gives ripples under the cursor or a finger.
+- The beats are scrubbed by scroll. Each is a pure function of scroll progress (`site/js/story/timeline.js`), so scrolling back plays it in reverse. The runway is about seven screens.
+- Static fallback: the runway exists only with scripts on, motion allowed, WebGL working and the 4-second failsafe not tripped. Otherwise the story is a stack of blocks: the name, then each beat's heading, line and a small inline drawing. Nothing moves and nothing is hidden.
+- There are no CSS keyframes. CSS transitions are reserved for hover colour and button floods.
+- Phones get a smaller wave grid and four team nodes instead of six. Tilt works only on Android; nothing is ever asked on iOS.
+
+**Colour.** Ink water (`--raw-color-ink-900`, `#0e0f14`), a thin cyan rim (`--raw-color-cyan-400`, `#02d2e3`), on an ice ground (`--raw-color-ice-50`, `#f7fafb`). The headline is white with a difference blend, so it reads dark on ice and light on ink; where that blend is missing it falls back to plain ink. The résumé sheet is white with the same ink and cyan. Raw token values do not change, and scripts read colour through `readToken`.
+
+**Type.** Oswald 700 for headlines, Space Grotesk for lines and body. Both are vendored.
+
+**Claims.** The story is the offer; the résumé half is the record.
+- The story says what he builds in the present tense, in few plain words. No client is named, no hours are claimed, and money never comes from anyone's hours, pay or people.
+- The ticket ladder is Agent → Senior agent → Person. No model names, because the routing may change.
+- The price, about $100 a person a month, is Cayleb's own 2026-10-15 figure, sized per company.
+- The résumé half carries the verified status: Ergon is a Windows pilot with live checks pending. The other jobs are labelled "Work ethic". There is no certifications section.
+- The limits in PRODUCT.md still hold: recorded demos only, no clients, returns or revenue, RHL only as a moving-crew job, EvoHedge and Maki private.
+
+---
+
 # Personalized homepage (2026-10-12)
+
+> **Superseded 2026-10-15** by the water story above. This is the illustrated, character-led homepage, recoverable at commit `cbdd73c`. Its image scripts and `assets/home/` were removed after that commit, so the paths named here exist only there.
 
 **Source of the layout.** The layout, motion and engine are rebuilt from a third-party "recreate this site" spec, kept locally at `docs/superpowers/specs/` and git-ignored. Only the format is kept: page structure, animations and engine. All of the spec's racing imagery, names and assets are replaced. The plan is `docs/superpowers/plans/2026-10-12-personalized-homepage.md`, and its Personalization map records every substitution.
 

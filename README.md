@@ -2,11 +2,11 @@
 
 Canonical website: https://cayleb-james2008.github.io/agentic-resume/
 
-The role Cayleb is going for is Forward Thinking Engineer: he shadows people for a couple of days to learn how they actually work, builds each of them a personal AI agent that fits their day, plus custom tools for anything digital the company wants automated, teaches them to use it well, and then does the same across the whole company.
+The role Cayleb is going for is Forward Thinking Engineer: he learns how a role really works, then finds where AI fits. It saves time and raises quality, in any field. Ergon, one of his builds, gives each employee a personal assistant. The homepage prices it at about $100 a person a month, sized per company.
 
 ## What's here
 
-- `index.html`: the homepage, generated from `site/content.json`. It has five blocks: the hero (name, Cayleb as a Pixar-style 3D character, and his glass-droplet AI agent), how he works (Shadow → Understand → Build → Teach → whole company), work experience, selected projects, "Worth it" (every build shaped around the company's situation, tools, way of working and needs, then the full systems he builds for a moving company, a plaster and pool crew and a shop, against how the work is done today, each with an itemized receipt of the money lost a month, today and with his systems, and the yearly saving) and contact. Copy is deliberately short and plain.
+- `index.html`: the homepage, generated from `site/content.json` and `resume/resume-content.json`. It has two halves and a contact footer. The first half is the water story: a scroll-driven intro where one calm body of water takes the shape of a moving crew, an office and a shop, branches into an assistant for every employee (Ergon), shows how a problem climbs from Agent to Senior agent to Person, and ends on the price. It is a few plain words at a time, top left. The second half is the official résumé: experience (with the other jobs shown as work ethic), projects with Ergon first, education, skills and the PDFs. The contact footer has the email, GitHub and the downloads. With scripts off, motion reduced or no WebGL, the story is a plain stack of blocks and reads the same. There is no picture of Cayleb anywhere on the site.
 - `resume.html`: the plain résumé page. It uses the same masthead, the generated `resume/candidate-fragment.html` and a print stylesheet.
 - `projects/*.html` and `lab/`: the project write-ups (the five featured projects and ten suite workflows) and the recorded workflow lab. `scripts/build-subpages.py` gives them the homepage's masthead, footer and look (`site/css/subpage.css`, `lab/lab.css`); the lab's app and historical receipts are preserved.
 - `Cayleb-James-polished-one-page.pdf` and `Cayleb-James-polished-resume.pdf` are the downloads, along with their UTF-8 `.txt` equivalents. `resume/resume-content.json` generates their copy, Markdown, text and HTML fragment. `resume/candidate-verification.json` records the source, artifact hashes and local build checks; it does not claim independent employment verification or an ATS score.
@@ -27,19 +27,16 @@ python3 scripts/check-release.py
 
 `build-home.py` refuses to build if a string in `content.json` is longer than the frame it sits in (`site/content-limits.json`).
 
-`check-release.py` does three things:
-- checks every local link on the homepage, the résumé page, the 404 page, the lab and every project page;
-- runs `scripts/home/check_assets.py` in its non-strict mode;
+`check-release.py` does two things:
+- checks that every local `href`, `src` and stylesheet `url()` on the homepage, the résumé page, the 404 page, the lab and every project page resolves;
 - re-verifies the PDF and text outputs against `resume/build_resume.py`.
 
-`python3 scripts/home/check_assets.py --strict` is the ship gate for imagery. It fails while any placeholder listed in `assets/home/PLACEHOLDERS.json` is still on the page.
+The Python tests in `tests/py` cover the share card script.
 
-Every page carries a canonical address and Open Graph/Twitter tags (`scripts/home/templates/social.py`) pointing at one share card, `assets/og/card.png`, drawn by `python3 scripts/home/make_share_card.py` from the hero maps. `404.html` is served by GitHub Pages for any missing path; it resolves its links through `<base>`, so it works at any depth. `sitemap.xml` is for submitting to a search console by hand (a project site's `robots.txt` is never read).
-
-Imagery lives under `assets/home/`. Every image is an AI-generated illustration of Cayleb, its `alt` begins "Illustration:", and its provenance is recorded in `assets/home/PROVENANCE.md`. `scripts/home/derive_scenes.py` cuts the hero, projects and contact frames out of his scenes. Hero depth, normal and veil maps are derived from the portrait by `scripts/home/person_maps.py`. `scripts/home/make_plate_sizes.py` writes a 960px copy of each timeline plate, which the page offers through `srcset`.
+Every page carries a canonical address and Open Graph/Twitter tags (`scripts/home/templates/social.py`) pointing at one share card, `assets/og/card.png`, drawn by `python3 scripts/home/make_share_card.py` from type and water: his name, the title, the headline and a line of ink water. `404.html` is served by GitHub Pages for any missing path; it resolves its links through `<base>`, so it works at any depth. `sitemap.xml` is for submitting to a search console by hand (a project site's `robots.txt` is never read).
 
 To rebuild the résumé PDFs: `bash resume/build.sh`. It uses ReportLab; `PYTHON` can select another interpreter.
 
 ## History
 
-The layout, motion and engine are adapted from a third-party "recreate this site" spec. That spec is kept locally and git-ignored. None of its racing imagery, names or assets are used. The classic character-led homepage (Mofu, Pip, Folio, Loam) is recoverable at commit `2732c2f`. The earlier public résumé is recoverable at `476bb5623ef8b438028031faf86c55ff4520c090`. `release.json` describes that historical v8 release, and the historical PDFs and `resume/approved-verification.json` remain unchanged.
+The layout, motion and engine are adapted from a third-party "recreate this site" spec. That spec is kept locally and git-ignored. None of its racing imagery, names or assets are used. The illustrated, character-led homepage is recoverable at commit `cbdd73c`. The classic character-led homepage (Mofu, Pip, Folio, Loam) is recoverable at commit `2732c2f`. The earlier public résumé is recoverable at `476bb5623ef8b438028031faf86c55ff4520c090`. `release.json` describes that historical v8 release, and the historical PDFs and `resume/approved-verification.json` remain unchanged.

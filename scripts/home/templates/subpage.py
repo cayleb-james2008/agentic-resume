@@ -3,7 +3,7 @@
 Same wordmark, nav and footer credit as the homepage, with every link made
 relative to the page's folder.
 """
-from markup import attr, link, text
+from markup import attr, link, mk, text
 
 
 def _href(href: str, root: str) -> str:
@@ -21,7 +21,7 @@ def masthead(content: dict, root: str = "../", tagline: str = "") -> str:
     return (
         '<header class="sub-masthead">'
         f'<a class="sub-wordmark" href="{attr(root)}index.html" aria-label="Cayleb Alvarez-James, home">'
-        f"{text(content['wordmark'])}</a>{tag}"
+        f"{mk()}{text(content['wordmark'])}</a>{tag}"
         f'<nav aria-label="Primary"><ul>{items}</ul></nav>'
         f'<a class="sub-resume" href="{attr(root + content["meta"]["resumePdf"])}" download>Résumé PDF</a>'
         "</header>"

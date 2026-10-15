@@ -1,5 +1,5 @@
-/* The recorded lab in the site's language: the near-black of the homepage's
-   dark blocks, Oswald display caps, Space Grotesk body, one cyan accent.
+/* The recorded lab in the site's language: the homepage's terminal ink,
+   Onest for what a person reads, JetBrains Mono where the machine speaks, one cyan accent.
    Selectors are app.js's own (it builds the nav, fields and results). */
 
 :root {
@@ -20,28 +20,37 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 ::selection { background: var(--accent); color: var(--surface-black); }
 button:disabled { cursor: wait; opacity: 0.6; }
 
+/* The shared masthead, on the lab's ink. */
+.sub-masthead { background: var(--lab-bg); color: var(--lab-text); border-bottom-color: var(--lab-line); }
+.sub-wordmark { color: var(--lab-text); }
+.sub-masthead .mk { background: var(--raw-color-ink-800); }
+.sub-masthead nav a { color: var(--lab-muted); }
+.sub-masthead nav a:focus-visible { color: var(--lab-text); }
+.sub-resume { background: var(--foreground-on-dark); color: var(--surface-black); }
+@media (hover: hover) and (pointer: fine) { .sub-masthead nav a:hover { color: var(--lab-text); } }
+
 /* The strip under the masthead: what this is, and that it is read only. */
-.sub-masthead { border-bottom: 1px solid var(--lab-line); }
 .lab-strip {
   display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  padding: 0.6rem clamp(1.5rem, 2.2222vw, 2rem); border-bottom: 1px solid var(--lab-line);
-  font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lab-muted);
+  padding: 0.6rem max(var(--g), env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--lab-line);
+  font: 400 0.75rem/1.4 var(--font-mono); color: var(--lab-muted);
 }
 .lab-strip__status { display: inline-flex; align-items: center; gap: 0.5rem; }
 .live-dot { width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--accent); }
 
 /* --- Shell: the rail and the workspace --------------------------------- */
-.shell { display: grid; grid-template-columns: minmax(17rem, 21rem) minmax(0, 1fr); min-height: calc(100vh - 7rem); }
+/* base.css's .shell is the homepage's centred container; the lab's .shell is its full-width app grid. */
+.shell { max-width: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(17rem, 21rem) minmax(0, 1fr); min-height: calc(100vh - 7rem); }
 .rail { display: flex; flex-direction: column; min-width: 0; border-right: 1px solid var(--lab-line); background: var(--lab-panel); }
 .rail__intro { padding: clamp(2rem, 4vw, 3.5rem) clamp(1.4rem, 3vw, 2.25rem) 1.5rem; }
 .eyebrow, .signal, .workspace__topline, .step-number, .status-stamp, .result-state, .workspace__foot,
 .micro, .rail__foot, .nav-number {
-  font-size: 0.6875rem; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.45; letter-spacing: 0;
 }
 .eyebrow { margin: 0 0 0.55rem; color: var(--accent); }
 .rail h1 {
-  margin: 0.75rem 0 1.1rem; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-  font-size: clamp(2.4rem, 3.4vw, 3.5rem); line-height: 0.95;
+  margin: 0.75rem 0 1.1rem; font-weight: 600; letter-spacing: -0.025em; text-wrap: balance;
+  font-size: clamp(2.25rem, 3.2vw, 3.25rem); line-height: 1;
 }
 .rail h1 em { font-style: normal; color: var(--accent); }
 .rail__intro > p:last-child { max-width: 26rem; font-size: 0.9375rem; line-height: 1.6; color: var(--lab-muted); }
@@ -55,7 +64,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .nav-item[aria-current="page"] { background: var(--lab-bg); box-shadow: inset 3px 0 var(--accent); }
 .nav-number { color: var(--lab-faint); }
 .nav-item[aria-current="page"] .nav-number { color: var(--accent); }
-.nav-item__name { font-size: 0.9375rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+.nav-item__name { font-size: 0.9375rem; font-weight: 600; }
 .nav-item__arrow { color: var(--accent); }
 .rail__foot { margin: auto 0 0; padding: 1.5rem clamp(1.4rem, 3vw, 2.25rem); line-height: 1.6; letter-spacing: 0.06em; color: var(--lab-faint); }
 
@@ -64,19 +73,19 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .workspace__hero { display: flex; align-items: end; justify-content: space-between; gap: 2rem; padding: clamp(2rem, 4vw, 3.5rem) 0 2rem; }
 .signal { margin: 0 0 0.75rem; color: var(--accent); }
 .workspace h2 {
-  margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-  font-size: clamp(2.8rem, 5.5vw, 5rem); line-height: 0.95;
+  margin: 0; font-weight: 600; letter-spacing: -0.025em; text-wrap: balance;
+  font-size: clamp(2.5rem, 5vw, 4.25rem); line-height: 1;
 }
 .workspace__description { max-width: 46rem; margin: 1rem 0 0; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.5; color: var(--lab-muted); }
-.status-stamp { margin-bottom: 0.6rem; padding: 0.7rem 0.85rem; white-space: nowrap; border: 1px solid var(--accent); color: var(--accent); }
+.status-stamp { margin-bottom: 0.6rem; padding: 0.5rem 0.875rem; white-space: nowrap; border-radius: var(--radius-pill); border: 1px solid var(--accent); color: var(--accent); }
 
 /* --- Panels -------------------------------------------------------------- */
 .workflow-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr); gap: 1rem; }
-.panel, .result-panel { padding: clamp(1.25rem, 2vw, 2rem); background: var(--lab-panel); border: 1px solid var(--lab-line); }
+.panel, .result-panel { padding: clamp(1.25rem, 2vw, 2rem); border-radius: var(--radius-card-sm); background: var(--lab-panel); border: 1px solid var(--lab-line); }
 .panel__header { display: flex; align-items: start; gap: 0.9rem; margin-bottom: 1.1rem; }
-.step-number { flex: 0 0 2rem; width: 2rem; height: 2rem; display: grid; place-items: center; border: 1px solid var(--accent); color: var(--accent); }
+.step-number { flex: 0 0 2rem; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 0.55rem; background: var(--raw-color-ink-800); color: var(--accent); }
 .panel h3, .result-panel h3, .result-section h4 {
-  margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 1;
+  margin: 0; font-weight: 600; letter-spacing: -0.01em; line-height: 1.15;
 }
 .panel h3, .result-panel h3 { font-size: 1.4rem; }
 .result-section h4 { margin: 0.1rem 0 0.75rem; font-size: 1.05rem; }
@@ -84,40 +93,42 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .boundary-rule { margin: 1.3rem 0; border-top: 1px solid var(--lab-line); }
 
 .field { display: flex; flex-direction: column; gap: 0.45rem; margin: 1rem 0; }
-.field label, .check-field label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.field label, .check-field label { font-size: 0.875rem; font-weight: 500; }
 .field small, .micro { color: var(--lab-faint); line-height: 1.5; }
-.micro { margin: 1rem 0 0; letter-spacing: 0.04em; }
+.micro { margin: 1rem 0 0; }
 .field input, .field select, .field textarea, .draft-box {
-  width: 100%; min-height: 2.875rem; padding: 0.75rem 0.9rem; border: 1px solid rgb(255 255 255 / 0.2); border-radius: 0;
+  width: 100%; min-height: 2.875rem; padding: 0.75rem 0.9rem; border: 1px solid rgb(255 255 255 / 0.2); border-radius: var(--radius-control);
   background: var(--lab-bg); color: var(--lab-text);
 }
 .field input::placeholder, .field textarea::placeholder { color: var(--lab-faint); }
 .field input:disabled, .field select:disabled, .field textarea:disabled { opacity: 0.6; }
 .field textarea, .draft-box {
-  min-height: 8rem; resize: vertical; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.8125rem; line-height: 1.55;
+  min-height: 8rem; resize: vertical; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.55;
 }
 .field input[type=checkbox] { width: 1.125rem; height: 1.125rem; min-height: 0; accent-color: var(--accent); }
 .check-field { display: flex; align-items: start; gap: 0.65rem; margin: 1rem 0; }
-.check-field label { text-transform: none; letter-spacing: 0; font-weight: 500; line-height: 1.45; }
+.check-field label { line-height: 1.45; }
 .enterprise-fields { display: grid; gap: 0.25rem; }
 .enterprise-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.75rem; }
 
-/* Buttons: the homepage's chamfered slabs. */
+/* Buttons: the homepage's pills. */
 .button {
   min-height: 2.875rem; display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem;
-  padding: 0.8rem 1.1rem; font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-  transition: background var(--duration-fast) var(--ease-entrance), color var(--duration-fast) var(--ease-entrance);
+  padding: 0.75rem 1.375rem; border-radius: var(--radius-pill); font-size: 0.875rem; font-weight: 500; line-height: 1.2;
+  transition: background var(--duration-fast) var(--ease-entrance), color var(--duration-fast) var(--ease-entrance), transform 0.35s var(--ease-hover);
 }
+.button:active:not(:disabled) { transform: scale(0.97); }
 .button--primary { min-width: 11.5rem; background: var(--accent); color: var(--surface-black); }
-.button--primary:hover { background: var(--foreground-on-dark); }
 .button--secondary { background: transparent; color: var(--lab-text); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4); }
-.button--secondary:hover { background: var(--accent); color: var(--surface-black); box-shadow: none; }
+@media (hover: hover) and (pointer: fine) {
+  .button--primary:hover { background: var(--foreground-on-dark); }
+  .button--secondary:hover { background: var(--accent); color: var(--surface-black); box-shadow: none; }
+}
 
 /* --- Result ------------------------------------------------------------- */
 .result-panel { margin-top: 1rem; }
 .result-panel__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--lab-line); }
-.result-state { padding: 0.35rem 0.6rem; text-align: center; border: 1px solid var(--lab-line); color: var(--lab-muted); }
+.result-state { padding: 0.35rem 0.75rem; text-align: center; border-radius: var(--radius-pill); border: 1px solid var(--lab-line); color: var(--lab-muted); }
 .result-state[data-tone="good"] { border-color: var(--accent); color: var(--accent); }
 .result-state[data-tone="warn"] { border-color: #f0a35e; color: #f0a35e; }
 .result-state[data-tone="loading"] { border-color: rgb(255 255 255 / 0.4); color: var(--lab-text); }
@@ -126,32 +137,33 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .empty-state p { max-width: 26rem; line-height: 1.6; }
 .result-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--lab-line); }
 .result-intro { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; margin: 1.25rem 0; }
-.metric { min-width: 0; padding: 1rem; background: var(--lab-panel-2); border-top: 2px solid var(--accent); }
-.metric__label { display: block; font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lab-faint); }
+.metric { min-width: 0; padding: 1rem; border-radius: var(--radius-control); background: var(--lab-panel-2); }
+.metric__label { display: block; font: 400 0.75rem/1.4 var(--font-mono); color: var(--lab-faint); }
 .metric__value {
   display: block; margin-top: 0.45rem; overflow-wrap: anywhere;
-  font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; line-height: 1.1;
+  font-weight: 600; font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums;
 }
 .result-copy { max-width: 72ch; font-size: 0.9375rem; line-height: 1.65; color: var(--lab-muted); }
 .result-copy strong { color: var(--lab-text); }
 .result-section { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--lab-line); }
 .result-list { display: grid; gap: 0.55rem; margin: 0; padding: 0; list-style: none; }
 .result-list li {
-  padding: 0.75rem 0.9rem; background: var(--lab-panel-2); border-left: 2px solid var(--accent);
+  padding: 0.75rem 0.9rem; border-radius: var(--radius-control); background: var(--lab-panel-2);
   font-size: 0.875rem; line-height: 1.5; overflow-wrap: anywhere;
 }
 .result-list li strong { display: block; margin-bottom: 0.22rem; }
 .source-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-.source-links a { font-size: 0.875rem; font-weight: 700; }
-.tag { display: inline-block; margin: 0.2rem 0.25rem 0.2rem 0; padding: 0.25rem 0.5rem; border: 1px solid var(--lab-line); font-size: 0.6875rem; text-transform: uppercase; }
+.source-links a { font-size: 0.875rem; font-weight: 600; }
+.tag { display: inline-block; margin: 0.2rem 0.25rem 0.2rem 0; padding: 0.25rem 0.625rem; border-radius: var(--radius-pill); border: 1px solid var(--lab-line); font: 400 0.75rem/1.4 var(--font-mono); }
 .series { display: block !important; width: 100%; height: 110px; margin-top: 1rem; overflow: hidden; }
 .series rect { fill: rgb(255 255 255 / 0.32); }
 .series rect:last-child { fill: var(--accent); }
 .raw-details { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--lab-line); }
-.raw-details summary { cursor: pointer; font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; }
+.raw-details summary { cursor: pointer; font-size: 0.875rem; font-weight: 600; }
 .raw-details pre {
   max-height: 22rem; overflow: auto; padding: 1rem; white-space: pre-wrap; word-break: break-word;
-  background: var(--lab-bg); border: 1px solid var(--lab-line); color: var(--lab-muted); font-size: 0.75rem; line-height: 1.5;
+  border-radius: var(--radius-control); background: var(--lab-bg); border: 1px solid var(--lab-line); color: var(--lab-muted);
+  font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.5;
 }
 .workspace__foot { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 1.3rem; border-top: 1px solid var(--lab-line); color: var(--lab-faint); }
 .noscript { padding: 2rem; }
@@ -166,21 +178,21 @@ button:disabled { cursor: wait; opacity: 0.6; }
   .shell { display: block; }
   .rail { border-right: 0; }
   .rail__intro { padding: 1.5rem 1.25rem 0.6rem; }
-  .rail h1 { margin: 0.5rem 0; font-size: 2.4rem; }
+  .rail h1 { margin: 0.5rem 0; font-size: 2.25rem; }
   .workflow-nav { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
   .nav-item { min-width: 10.5rem; grid-template-columns: auto 1fr; gap: 0.35rem; padding: 0.7rem; scroll-snap-align: start; border-right: 1px solid var(--lab-line); }
   .nav-item__arrow, .rail__foot { display: none; }
   .nav-item[aria-current="page"] { box-shadow: inset 0 -3px var(--accent); }
   .workspace { padding: 1.25rem; }
   .workspace__hero { padding: 1.6rem 0; }
-  .workspace h2 { font-size: 3rem; }
+  .workspace h2 { font-size: 2.75rem; }
   .result-intro { grid-template-columns: 1fr 1fr; }
   .workspace__foot { flex-direction: column; }
   .result-panel__head { align-items: start; }
 }
 @media (max-width: 430px) {
   .result-intro { grid-template-columns: 1fr; }
-  .workspace h2 { font-size: 2.6rem; }
+  .workspace h2 { font-size: 2.375rem; }
   .result-panel__head { display: block; }
   .result-state { display: inline-block; margin-top: 0.8rem; }
 }

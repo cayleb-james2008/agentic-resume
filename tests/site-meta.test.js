@@ -25,7 +25,7 @@ test('the share card is a 1200×630 PNG', () => {
   assert.ok(png.length < 400_000, `${png.length} bytes`);
 });
 
-test('the share card is drawn from type and water: its script reads no person map and draws no droplet', () => {
+test('the share card is drawn from type and one small figure: its script reads no person map and draws no droplet', () => {
   assert.doesNotMatch(read('scripts/home/make_share_card.py'), /person-|alpha|droplet/);
 });
 
@@ -66,6 +66,19 @@ test('the not-found page wears the site, works at any depth and stays out of sea
   assert.match(page, /href="site\/css\/subpage\.css"/);
 });
 
+test('every link on the not-found page lands on a real page or a real homepage section', () => {
+  const page = read('404.html');
+  const home = read('index.html');
+  const links = [...page.matchAll(/<a [^>]*href="([^"]+)"/g)].map((m) => m[1]).filter((h) => !/^(https?:|mailto:)/.test(h));
+  assert.ok(links.length >= 4);
+  for (const href of links) {
+    const [file, hash] = href.split('#');
+    const target = file.endsWith('/') ? `${file}index.html` : file || 'index.html';
+    assert.ok(existsSync(new URL(`../${target}`, import.meta.url)), href);
+    if (hash) assert.match(target === 'index.html' ? home : read(target), new RegExp(`id="${hash}"`), href);
+  }
+});
+
 // A project site's robots.txt is never read (crawlers only ask the domain root), so there is
 // none; the sitemap is for submitting to a search console by hand.
 test('the sitemap lists every page by its canonical address', () => {
@@ -92,4 +105,10 @@ test('the old title is gone from every served page and résumé export', () => {
   const served = ['index.html', 'resume.html', '404.html', 'lab/index.html', ...projects.map((p) => `projects/${p}`),
     'Cayleb-James-polished-resume.txt', 'Cayleb-James-polished-one-page.txt', 'resume/candidate-fragment.html'];
   for (const file of served) assert.doesNotMatch(read(file), /workflow integrator/i, file);
+});
+
+test('every page sets the same theme colour', () => {
+  const pages = ['index.html', 'resume.html', '404.html', 'lab/index.html',
+    ...readdirSync(new URL('../projects/', import.meta.url)).filter((f) => f.endsWith('.html')).map((f) => `projects/${f}`)];
+  for (const page of pages) assert.match(read(page), /<meta name="theme-color" content="#090a0b">/, page);
 });

@@ -1,18 +1,5 @@
 /* Design tokens — spec §L93–229, verbatim. Tier 1 is the only place a literal appears. */
 
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 400; font-display: swap;
-  src: url("../../assets/fonts/oswald-latin-400-normal.woff2") format("woff2"); }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500; font-display: swap;
-  src: url("../../assets/fonts/oswald-latin-500-normal.woff2") format("woff2"); }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 700; font-display: swap;
-  src: url("../../assets/fonts/oswald-latin-700-normal.woff2") format("woff2"); }
-@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 400; font-display: swap;
-  src: url("../../assets/fonts/space-grotesk-latin-400-normal.woff2") format("woff2"); }
-@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 500; font-display: swap;
-  src: url("../../assets/fonts/space-grotesk-latin-500-normal.woff2") format("woff2"); }
-@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 700; font-display: swap;
-  src: url("../../assets/fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
-
 /* The 2026-10-15 layout: Onest for everything a person reads, JetBrains Mono where the machine speaks. */
 @font-face { font-family: "Onest"; font-style: normal; font-weight: 400; font-display: swap;
   src: url("../../assets/fonts/onest-latin-400-normal.woff2") format("woff2"); }

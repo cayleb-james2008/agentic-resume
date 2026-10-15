@@ -17,15 +17,28 @@ test('vendored files match provenance', () => {
   }
 });
 
-test('fonts and licenses are present', () => {
-  for (const family of ['oswald', 'space-grotesk']) {
-    for (const weight of [400, 500, 700]) {
-      const file = `assets/fonts/${family}-latin-${weight}-normal.woff2`;
-      assert.ok(existsSync(path(file)), file);
-    }
+test('Lenis is the one vendored library; three.js and the old faces are gone', () => {
+  const provenance = JSON.parse(readFileSync(path('vendor/PROVENANCE.json'), 'utf8'));
+  assert.ok(existsSync(path('vendor/lenis-1.3.26/lenis.mjs')));
+  assert.ok(existsSync(path('assets/licenses/lenis-MIT.txt')));
+  assert.equal(existsSync(path('vendor/three-0.185.0')), false);
+  assert.equal(existsSync(path('assets/licenses/three-MIT.txt')), false);
+  for (const key of Object.keys(provenance)) assert.doesNotMatch(key, /three|oswald|space-grotesk/, key);
+  for (const face of ['oswald', 'space-grotesk']) {
+    for (const weight of [400, 500, 700]) assert.equal(existsSync(path(`assets/fonts/${face}-latin-${weight}-normal.woff2`)), false, face);
+    assert.equal(existsSync(path(`assets/licenses/${face}-OFL.txt`)), false, face);
   }
-  for (const name of ['three-MIT', 'lenis-MIT', 'oswald-OFL', 'space-grotesk-OFL']) {
-    assert.ok(existsSync(path(`assets/licenses/${name}.txt`)), name);
+});
+
+test('every stylesheet names only the vendored faces, and every face it loads exists', async () => {
+  const { readdirSync } = await import('node:fs');
+  const sheets = [...readdirSync(path('site/css/')).map((f) => `site/css/${f}`), 'lab/lab.css'];
+  for (const sheet of sheets) {
+    const css = readFileSync(path(sheet), 'utf8');
+    assert.doesNotMatch(css, /Oswald|Space Grotesk/, sheet);
+    for (const [, url] of css.matchAll(/url\("?([^")]+\.woff2)"?\)/g)) {
+      assert.ok(existsSync(new URL(url, path(sheet))), `${sheet} loads ${url}`);
+    }
   }
 });
 
@@ -48,7 +61,3 @@ test('Onest and JetBrains Mono are vendored with licences', () => {
   }
 });
 
-test('three is revision 185', async () => {
-  const { REVISION } = await import(path('vendor/three-0.185.0/three.core.min.js'));
-  assert.equal(REVISION, '185');
-});

@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
 from markup import attr, mk, text  # noqa: E402
 from templates import social, subpage  # noqa: E402
+from templates.shell import THEME_COLOR  # noqa: E402
 
 RETIRED_PDFS = {
     "Cayleb-James-resume.pdf": "Cayleb-James-polished-resume.pdf",
@@ -45,7 +46,7 @@ def convert(page: str, content: dict, name: str) -> str:
         f"<title>{title}</title>"
         f'<meta name="description" content="{description}">'
         f"{social.tags(content['meta'], f'projects/{name}', html.unescape(title), html.unescape(description))}"
-        '<meta name="theme-color" content="#090a0b">'
+        f'<meta name="theme-color" content="{THEME_COLOR}">'
         '<link rel="icon" href="../favicon.svg" type="image/svg+xml">'
         f"{subpage.stylesheets('../')}</head>"
         '<body class="project-page">'
@@ -82,7 +83,7 @@ def convert_lab(page: str, content: dict) -> str:
                         '<link rel="icon" href="../favicon.svg" type="image/svg+xml">', 1)
     if LAB_DESCRIPTION not in html.unescape(head):
         raise SystemExit("lab/index.html: title changed; update LAB_TITLE")
-    head = head.replace('<meta name="theme-color" content="#090C10">', '<meta name="theme-color" content="#090a0b">')
+    head = re.sub(r'<meta name="theme-color" content="[^"]*">', f'<meta name="theme-color" content="{THEME_COLOR}">', head)
     head += "\n  " + subpage.stylesheets("../") + '<link rel="stylesheet" href="lab.css">\n'
     body = page[head_end:]
     top = re.compile(r'<header class="(?:topbar|sub-masthead)">.*?</header>'
@@ -107,7 +108,7 @@ def not_found(content: dict) -> str:
         f'<base href="{attr(site)}">'
         "<title>Page not found · Cayleb Alvarez-James</title>"
         '<meta name="robots" content="noindex">'
-        '<meta name="theme-color" content="#090a0b">'
+        f'<meta name="theme-color" content="{THEME_COLOR}">'
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
         f"{subpage.stylesheets('')}</head>"
         '<body class="project-page not-found-page">'

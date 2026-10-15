@@ -81,24 +81,13 @@ test('landscape phones get the phone guide: one greeting, then a button', () => 
   assert.match(js, /matchMedia\('\(max-width: 639px\), \(max-height: 500px\)'\)/);
 });
 
-test('the guide bead is ink with a cyan rim and no face, on the homepage and the 404 page', () => {
-  const css = read('site/css/guide.css');
-  assert.match(css, /\.guide-bead-body\s*\{[^}]*fill:\s*var\(--raw-color-ink-900\)/);
-  assert.match(css, /\.guide-bead-rim\s*\{[^}]*stroke:\s*var\(--raw-color-cyan-400\)/);
-  assert.doesNotMatch(css, /@keyframes/);
+test('the agent is the >_ tile, with no face, on the homepage and the 404 page', () => {
   const py = read('scripts/home/templates/guide.py');
-  assert.doesNotMatch(py, /eyes|glint|DROPLET/);
-  const home = read('index.html');
-  assert.match(home, /<svg class="guide-bead"/);
-  assert.doesNotMatch(home, /guide-droplet/);
-  assert.doesNotMatch(home, /guide-glass|guide-foot/);
-  // The 404 page shows the same bead, styled by subpage.css (it loads no guide.css).
-  const notFound = read('404.html');
-  assert.match(notFound, /<div class="not-found-agent" aria-hidden="true"><svg class="guide-bead"/);
-  assert.doesNotMatch(notFound, /guide-droplet/);
-  const sub = strip(read('site/css/subpage.css'));
-  assert.doesNotMatch(sub, /guide-droplet/);
-  assert.match(rule(sub, '.not-found-agent .guide-bead-body'), /fill:\s*var\(--raw-color-ink-900\)/);
-  assert.match(rule(sub, '.not-found-agent .guide-bead-rim'), /stroke:\s*var\(--raw-color-cyan-400\)/);
-  assert.match(rule(sub, '.not-found-agent .guide-bead-shine'), /stroke:/);
+  assert.doesNotMatch(py, /eyes|glint|DROPLET|BEAD/);
+  for (const page of ['index.html', '404.html']) {
+    assert.doesNotMatch(read(page), /guide-bead|guide-droplet|guide-glass|guide-foot/, page);
+  }
+  assert.match(read('index.html'), /<button type="button" class="guide-agent"[^>]*><span class="mk" aria-hidden="true">&gt;_<\/span>/);
+  assert.match(read('404.html'), /<div class="not-found-agent" aria-hidden="true"><span class="mk mk--xl" aria-hidden="true">&gt;_<\/span><\/div>/);
+  assert.match(strip(read('site/css/base.css')), /\.mk--xl\s*\{/);
 });

@@ -75,24 +75,7 @@ test('the guide has no face: no eyes, no blink, no gaze', () => {
   assert.match(js, /const SECTIONS = \['experience', 'work', 'education', 'contact'\];/);
   assert.doesNotMatch(js, /droplet-shape|blinkSquash|nextBlinkDelay|data-guide-eyes|gaze|pointermove/);
   assert.doesNotMatch(read('site/js/guide/queue.js'), /gaze/);
-  assert.match(home, /class="guide-bead"/);
-  assert.doesNotMatch(home, /data-guide-eyes/);
-});
-
-test('every guide line belongs to a section on the page', () => {
-  assert.deepEqual(Object.keys(guide.lines), ['experience', 'work', 'education', 'contact']);
-  for (const key of Object.keys(guide.lines)) assert.match(home, new RegExp(`\\sid="${key}"`), key);
-});
-
-test('every section the guide watches has a line and is on the page', () => {
-  const list = read('site/js/guide/guide.js').match(/const SECTIONS = \[([^\]]*)\];/);
-  assert.ok(list, 'guide.js names its SECTIONS');
-  const ids = [...list[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
-  assert.ok(ids.length > 0);
-  for (const id of ids) {
-    assert.ok(guide.lines[id], `content.guide.lines.${id}`);
-    assert.match(home, new RegExp(`\\sid="${id}"`), `id="${id}" on index.html`);
-  }
+  assert.doesNotMatch(home, /data-guide-eyes|guide-bead/);
 });
 
 test('the guide measures the résumé from the top of the page, again once the fonts are in', () => {
@@ -112,17 +95,18 @@ test('the guide keeps the site\'s claim rules', () => {
   assert.match(guide.questions.find((q) => /Asmodeus/.test(q.q)).a, /private/i);
 });
 
-test('the education line promises only what that section holds: no PDFs, no downloads', () => {
-  assert.equal(guide.lines.education, 'School and skills, all in one place.');
-  assert.doesNotMatch(guide.lines.education, /pdf|download/i);
-});
-
-test('the guide is hidden until its script mounts it, and its panel is an accessible dialog', () => {
+test('Ask my agent is hidden until its script mounts it, and its panel is a labelled dialog of questions', () => {
   const aside = home.match(/<aside class="guide"[^>]*>/)[0];
   assert.match(aside, /\shidden(\s|>)/);
-  assert.match(home, /<div class="guide-panel"[^>]*role="dialog"[^>]*aria-modal="false"[^>]*aria-labelledby="guide-title"/);
-  assert.match(home, /<p class="guide-bubble"[^>]*aria-hidden="true"/);
+  assert.match(aside, /\sdata-guide(\s|>)/);
+  assert.match(home, /<div class="guide-panel" id="guide-panel" role="dialog" aria-modal="false" aria-labelledby="guide-title" hidden>/);
   assert.match(home, /<button[^>]*class="guide-agent"[^>]*aria-controls="guide-panel"[^>]*aria-expanded="false"/);
-  const questions = [...home.matchAll(/<button type="button" class="guide-q" id="guide-q-(\d)" aria-expanded="false" aria-controls="guide-a-\1">/g)];
-  assert.equal(questions.length, guide.questions.length);
+  assert.match(home, /<div class="guide-log mono" id="guide-log" role="log" aria-live="polite">/);
+  const buttons = [...home.matchAll(/<button type="button" class="guide-q" data-q="(\d+)" data-cmd="([^"]+)">/g)];
+  assert.equal(buttons.length, guide.questions.length);
+  buttons.forEach((b, i) => {
+    assert.equal(Number(b[1]), i);
+    assert.equal(b[2], guide.questions[i].cmd);
+  });
+  assert.ok(guide.questions.some((q) => q.q === 'What does Ergon cost?' && q.a === 'About $100 a person a month.'));
 });

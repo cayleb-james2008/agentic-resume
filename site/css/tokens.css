@@ -13,7 +13,7 @@
 @font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 700; font-display: swap;
   src: url("../../assets/fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
 
-/* The Lumora layout (2026-10-15): Onest for everything a person reads, JetBrains Mono where the machine speaks. */
+/* The 2026-10-15 layout: Onest for everything a person reads, JetBrains Mono where the machine speaks. */
 @font-face { font-family: "Onest"; font-style: normal; font-weight: 400; font-display: swap;
   src: url("../../assets/fonts/onest-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Onest"; font-style: normal; font-weight: 500; font-display: swap;
@@ -54,7 +54,7 @@
   --raw-color-ink-alpha-60: rgb(9 10 11 / 0.6);        /* muted labels on the light ground */
   --raw-color-white-alpha-60: rgb(255 255 255 / 0.6);  /* footer: the copyright */
   --raw-color-cyan-700: #007a85;      /* accent type on the light ground */
-  /* Added 2026-10-15 (Lumora layout): cool neutrals biased toward the cyan, the terminal, and status hues. */
+  /* Added 2026-10-15 (the 2026-10-15 layout): cool neutrals biased toward the cyan, the terminal, and status hues. */
   --raw-color-cool-50: #f0f2f2;       /* light fills: cards, pills, the résumé sheet */
   --raw-color-cool-100: #e1e5e6;      /* pressed fills, sheet dividers, the share card ground */
   --raw-color-cool-150: #e3e7e8;      /* hairlines */
@@ -159,7 +159,7 @@
 }
 body { background: var(--background); color: var(--foreground); min-height: 100lvh; margin: 0; }
 
-/* The rem grid (Lumora layout, 2026-10-15): the reference's proportional bands without its jumps
+/* The rem grid (2026-10-15 layout): the reference's proportional bands without its jumps
    (16px→12px at 1441px, 10px↔28px at 640px). Above 1920px, site/js/home/grid.js keeps scaling up. */
 html { font-size: 16px; }
 @media (max-width: 1440px) { html { font-size: clamp(13px, 1.111111vw, 16px); } }

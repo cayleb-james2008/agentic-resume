@@ -29,8 +29,8 @@ test('the share card is drawn from type and water: its script reads no person ma
   assert.doesNotMatch(read('scripts/home/make_share_card.py'), /person-|alpha|droplet/);
 });
 
-test('the share card carries the story\'s own headline, word for word', () => {
-  assert.ok(read('scripts/home/make_share_card.py').includes(content.story.beats[0].headline), 'the card\'s headline has drifted from beats[0].headline');
+test('the share card carries the homepage\'s own headline, word for word', () => {
+  assert.ok(read('scripts/home/make_share_card.py').includes(content.hero.headline), 'the card\'s headline has drifted from hero.headline');
 });
 
 for (const [file, path] of Object.entries(PAGES)) {
@@ -79,7 +79,7 @@ test('the sitemap lists every page by its canonical address', () => {
 const TITLE = 'Forward Thinking Engineer';
 test('the headline title is Forward Thinking Engineer on the site, the résumé and the share card', () => {
   assert.equal(content.meta.title, `Cayleb Alvarez-James · ${TITLE}`);
-  assert.equal(content.story.intro.title, TITLE, 'the story\'s title under the name');
+  assert.equal(content.hero.eyebrow, 'Forward Thinking Engineer', 'the hero\'s title over the headline');
   assert.ok(content.meta.shareAlt.includes(TITLE));
   assert.ok(read('resume.html').includes(`<p>${TITLE} · Connecticut · Remote-only</p>`));
   assert.ok(read('scripts/home/make_share_card.py').includes(`"${TITLE}"`));

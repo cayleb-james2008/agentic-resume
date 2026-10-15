@@ -10,6 +10,7 @@ const read = (file) => readFileSync(new URL(file, root), 'utf8');
 
 const RESUME_HALF = {
   kicker: 'Résumé',
+  title: 'The official version',
   experience: 'Experience', projects: 'Projects', education: 'Education and skills',
   skills: 'Skills', caseStudy: 'Case study',
   workEthic: { title: 'Work ethic', line: 'Real jobs, real hours. Where I learned how teams actually work.' },
@@ -86,6 +87,7 @@ test('the résumé half reads like the résumé: name, title, place, both PDFs',
   assert.equal(count(html, /\bid="resume"/g), 1);
 
   assert.equal(textOf(one(html, 'p', /class="resume-half-kicker"/)), RESUME_HALF.kicker);
+  assert.equal(textOf(one(html, 'p', /class="resume-half-title"/)), RESUME_HALF.title);
   assert.equal(textOf(one(html, 'p', /class="resume-half-name"/)), resume.full_name);
   assert.equal(
     textOf(one(html, 'p', /class="resume-half-meta"/)),
@@ -264,7 +266,7 @@ test('three sections, one h2 each, ids for deep links', () => {
     assert.ok(box.startsWith(`<section id="${id}" aria-labelledby="${titleId}"`), `${id} is named by its h2`);
   }
   assert.equal(count(html, /<h2\b/g), 3);
-  assert.equal(count(html, /<h1\b/g), 0, 'the story holds the page\'s one h1');
+  assert.equal(count(html, /<h1\b/g), 0, 'the hero holds the page\'s one h1');
   assert.equal(count(html, /<img\b/g), 0);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
   assert.equal(new Set(ids).size, ids.length, 'ids are unique');

@@ -56,7 +56,7 @@ header.masthead (absolute over the hero)               >_ Cayleb.AJ · Home Ergo
                            carousel card, "Built with", status bar
   section#about            >_ glyph, caption, word-reveal statement (h2), Find me online, Read my résumé
   div.band                 AI · built · → · around you   (a list, not a section)
-  section#ergon            copy, team switch, ladder, price + status  |  figure: team graph, ticket button, log
+  section#team             copy (Ergon), team switch, ladder, price + status  |  figure: team graph, ticket button, log
   section#built            "What I've built so far": Ergon (wide, mini terminal), dotz, Sophos,
                            Industry AI Suite (real screenshots), Asmodeus (mini terminal)
   section#services         "AI built around how you work": five hover-fill rows that open the request modal
@@ -127,7 +127,7 @@ div#menu (full-screen ink overlay) · div#modal (request composer) · aside.guid
 - **Reduced motion.** The team switch, test ticket and Ask my agent still work, with instant steps and no travel.
 - **Structure.**
   - One `<h1>`: the headline. Each `<section>` after the hero holds one `<h2>`.
-  - The ids `home`, `about`, `ergon`, `built`, `services`, `stats`, `resume`, `experience`, `work`, `education` and `contact` are all unique. The deep links that subpages use (`#experience`, `#work`, `#suite`, `#contact`) still land.
+  - The ids `home`, `about`, `team`, `built`, `services`, `stats`, `resume`, `experience`, `work`, `education` and `contact` are all unique. The deep links that subpages use (`#experience`, `#work`, `#suite`, `#contact`) still land.
   - The skip link goes to `#main`.
 - **Images.** The hero surface layer is decorative (`alt=""`). The screenshots get real descriptions. The graph is a `<figure>` with a figcaption, and its person cards are buttons with aria-labels.
 - **Craft floor.**

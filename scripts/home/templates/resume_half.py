@@ -46,6 +46,7 @@ def head(half: dict, resume: dict) -> str:
     return (
         '<header class="resume-half-head">'
         f'<p class="resume-half-kicker">{text(half["kicker"])}</p>'
+        f'<p class="resume-half-title">{text(half["title"])}</p>'
         f'<p class="resume-half-name">{text(resume["full_name"])}</p>'
         f'<p class="resume-half-meta">{text(place)}</p>'
         f'<ul class="resume-half-downloads">{downloads}</ul></header>'

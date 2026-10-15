@@ -8,12 +8,18 @@ const home = read('index.html');
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const footer = home.slice(home.indexOf('<footer'), home.indexOf('</footer>'));
 
-test('the footer nav lists five links in content order', () => {
+test('the footer nav lists the site\'s sections in content order', () => {
   const nav = footer.match(/<nav class="contact-nav" aria-label="Footer">([\s\S]*?)<\/nav>/);
   assert.ok(nav, 'footer nav with aria-label="Footer"');
   const hrefs = [...nav[1].matchAll(/<a href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs, content.contact.nav.map((n) => escape(n.href)));
-  assert.equal(hrefs.length, 5);
+  assert.equal(hrefs.length, 4);
+});
+
+test('the footer shows the email as text with a copy button, since mail links may do nothing', () => {
+  const email = content.meta.email;
+  assert.ok(footer.includes(`<span class="ft-email">${email}</span>`), 'the address is readable text');
+  assert.match(footer, new RegExp(`<button class="copy" type="button" data-copy="${email.replace(/[.]/g, '\\.')}"`));
 });
 
 test('the footer has no picture and no backdrop canvas', () => {

@@ -1,99 +1,581 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · Forward Thinking Engineer",
-    "description": "Cayleb Alvarez-James, Forward Thinking Engineer. Learns how you work, builds AI into it.",
+    "description": "Forward Thinking Engineer. I come into your business and build AI around how your team works.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
     "github": "https://github.com/cayleb-james2008",
     "siteUrl": "https://cayleb-james2008.github.io/agentic-resume/",
     "shareImage": "assets/og/card.png",
-    "shareAlt": "Share card: Cayleb Alvarez-James, Forward Thinking Engineer, above a line of ink water."
+    "shareAlt": "Share card: Cayleb Alvarez-James · Forward Thinking Engineer, with the headline Show me how you work. I'll find where AI fits."
   },
-  "wordmark": "CAYLEB.AJ",
+  "wordmark": "Cayleb.AJ",
   "nav": [
     {
-      "label": "Experience",
-      "href": "#experience"
+      "label": "Home",
+      "href": "#home"
     },
     {
-      "label": "Projects",
-      "href": "#work"
+      "label": "Ergon",
+      "href": "#team"
     },
     {
-      "label": "Lab",
-      "href": "lab/"
+      "label": "Work",
+      "href": "#built"
+    },
+    {
+      "label": "What I do",
+      "href": "#services"
+    },
+    {
+      "label": "Résumé",
+      "href": "#resume"
     },
     {
       "label": "Contact",
       "href": "#contact"
     }
   ],
-  "navAction": {
-    "label": "Résumé",
-    "href": "resume.html"
+  "loader": {
+    "tagline": "Show me how you work. I'll find where AI fits.",
+    "label": "Loading",
+    "terminal": [
+      "$ hello --from cayleb",
+      "› loading the work ......... ok",
+      "› loading ergon ............ ok",
+      "› ready"
+    ]
   },
-  "story": {
-    "intro": {
-      "nameWords": [
-        "Cayleb",
-        "Alvarez-",
-        "James"
-      ],
-      "title": "Forward Thinking Engineer",
-      "cue": "Scroll"
+  "masthead": {
+    "place": "Connecticut",
+    "timeFallback": "Eastern time",
+    "dateFallback": "Remote-only",
+    "menu": "Menu",
+    "menuOpen": "Open menu",
+    "home": "Cayleb.AJ, back to top",
+    "skip": "Skip to content"
+  },
+  "menu": {
+    "label": "Menu",
+    "close": "Close",
+    "routes": [
+      "/",
+      "/ergon",
+      "/work",
+      "/build",
+      "/resume",
+      "/contact"
+    ],
+    "start": "Start a project →",
+    "place": "Connecticut"
+  },
+  "hero": {
+    "eyebrow": "Forward Thinking Engineer",
+    "headline": "Show me how you work. I'll find where AI fits.",
+    "lead": "I come into your business, learn how your team works, and build AI around it: AI employees, workflows and automations.",
+    "proof": [
+      "3,300+ automated checks",
+      "5 systems"
+    ],
+    "ctas": [
+      {
+        "label": "Let's talk",
+        "modal": true
+      },
+      {
+        "label": "View work",
+        "href": "#built"
+      }
+    ],
+    "hint": "› move your cursor to see how it's built",
+    "carouselLabel": "What I build",
+    "next": "Next",
+    "previous": "Previous",
+    "carousel": [
+      {
+        "caption": "AI employees",
+        "title": "An assistant at every desk."
+      },
+      {
+        "caption": "AI workflows",
+        "title": "Built around how you work."
+      },
+      {
+        "caption": "AI automations",
+        "title": "The busywork, handled."
+      },
+      {
+        "caption": "AI everything",
+        "title": "If it runs on a computer, yes."
+      }
+    ],
+    "builtWithLabel": "Built with",
+    "builtWith": [
+      "TypeScript",
+      "Rust",
+      "Python",
+      "Tauri",
+      "Node.js",
+      "C#",
+      "SQLite",
+      "Windows"
+    ],
+    "status": [
+      "Building since Oct 2025",
+      "Remote-only · Connecticut",
+      "Scroll to explore ↓"
+    ],
+    "watermark": "CAYLEB"
+  },
+  "about": {
+    "eyebrow": "About",
+    "caption": "One engineer. Remote-only, based in Connecticut.",
+    "lead": "I come into your business and learn how your team really works,",
+    "rest": "then build AI employees, workflows and automations around it, on the apps you already use.",
+    "online": "Find me online",
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/cayleb-james2008",
+        "icon": "code"
+      },
+      {
+        "label": "Email",
+        "modal": true,
+        "icon": "mail"
+      },
+      {
+        "label": "Résumé PDF",
+        "href": "Cayleb-James-polished-resume.pdf",
+        "icon": "doc"
+      }
+    ],
+    "cta": {
+      "label": "Read my résumé",
+      "href": "#resume"
+    }
+  },
+  "band": [
+    "AI",
+    "built",
+    "around you"
+  ],
+  "ergon": {
+    "eyebrow": "Ergon",
+    "headline": "One assistant per person. Shaped to your team.",
+    "body": "Ergon gives everyone on your team their own AI assistant, set up around the apps they already use. I manage every computer remotely, and when something breaks, a support agent fixes it right on the machine.",
+    "tryLabel": "Try it on a team",
+    "teamOrder": [
+      "office",
+      "shop",
+      "trades",
+      "clinic"
+    ],
+    "teams": {
+      "office": {
+        "label": "Office",
+        "tickets": [
+          "Printer won't connect",
+          "Email keeps asking for a password"
+        ],
+        "people": [
+          {
+            "role": "Front desk",
+            "apps": [
+              "Email",
+              "Calendar"
+            ],
+            "task": "drafted replies, waiting for approval"
+          },
+          {
+            "role": "Sales",
+            "apps": [
+              "CRM",
+              "Quotes"
+            ],
+            "task": "followed up on open quotes"
+          },
+          {
+            "role": "Bookkeeping",
+            "apps": [
+              "Invoices",
+              "Sheets"
+            ],
+            "task": "matched invoices to payments"
+          },
+          {
+            "role": "Operations",
+            "apps": [
+              "Scheduling",
+              "Docs"
+            ],
+            "task": "rebuilt next week's schedule"
+          },
+          {
+            "role": "Manager",
+            "apps": [
+              "Reports",
+              "Approvals"
+            ],
+            "task": "summed up the week on one page"
+          }
+        ]
+      },
+      "shop": {
+        "label": "Shop",
+        "tickets": [
+          "Card reader offline",
+          "Label printer jammed"
+        ],
+        "people": [
+          {
+            "role": "Store lead",
+            "apps": [
+              "Register",
+              "Schedules"
+            ],
+            "task": "covered a shift swap"
+          },
+          {
+            "role": "Inventory",
+            "apps": [
+              "Stock",
+              "Orders"
+            ],
+            "task": "flagged low stock and drafted an order"
+          },
+          {
+            "role": "Online store",
+            "apps": [
+              "Listings",
+              "Shipping"
+            ],
+            "task": "updated listings from the stock count"
+          },
+          {
+            "role": "Support desk",
+            "apps": [
+              "Inbox",
+              "Refunds"
+            ],
+            "task": "sorted refund requests and drafted replies"
+          },
+          {
+            "role": "Owner",
+            "apps": [
+              "Reports",
+              "Approvals"
+            ],
+            "task": "sent the end-of-day summary"
+          }
+        ]
+      },
+      "trades": {
+        "label": "Trades",
+        "tickets": [
+          "Tablet won't sync",
+          "Shared drive missing"
+        ],
+        "people": [
+          {
+            "role": "Dispatcher",
+            "apps": [
+              "Job board",
+              "Calendar"
+            ],
+            "task": "booked tomorrow's jobs by route"
+          },
+          {
+            "role": "Field tech",
+            "apps": [
+              "Work orders",
+              "Photos"
+            ],
+            "task": "turned site photos into a job report"
+          },
+          {
+            "role": "Estimator",
+            "apps": [
+              "Quotes",
+              "Takeoffs"
+            ],
+            "task": "drafted a quote from site notes"
+          },
+          {
+            "role": "Office admin",
+            "apps": [
+              "Invoices",
+              "Email"
+            ],
+            "task": "sent invoices for finished jobs"
+          },
+          {
+            "role": "Owner",
+            "apps": [
+              "Reports",
+              "Approvals"
+            ],
+            "task": "flagged jobs running long"
+          }
+        ]
+      },
+      "clinic": {
+        "label": "Clinic",
+        "tickets": [
+          "Scanner not showing up",
+          "Laptop running slow"
+        ],
+        "people": [
+          {
+            "role": "Front desk",
+            "apps": [
+              "Scheduling",
+              "Intake"
+            ],
+            "task": "filled gaps in tomorrow's schedule"
+          },
+          {
+            "role": "Billing",
+            "apps": [
+              "Claims",
+              "Invoices"
+            ],
+            "task": "checked claims before they go out"
+          },
+          {
+            "role": "Care team",
+            "apps": [
+              "Notes",
+              "Messages"
+            ],
+            "task": "drafted follow-ups for review"
+          },
+          {
+            "role": "Practice lead",
+            "apps": [
+              "Reports",
+              "Staffing"
+            ],
+            "task": "built next week's staffing plan"
+          },
+          {
+            "role": "IT",
+            "apps": [
+              "Devices",
+              "Accounts"
+            ],
+            "task": "set up a new laptop remotely"
+          }
+        ]
+      }
     },
-    "beats": [
+    "ladderLabel": "When something breaks",
+    "ladder": [
+      "Agent",
+      "Senior agent",
+      "Person"
+    ],
+    "ladderNote": "Hard tickets move up a step. A person always has the last word.",
+    "price": "About $100",
+    "priceRest": "a person a month.",
+    "status": "Windows pilot · live checks pending",
+    "figure": {
+      "caption": "Sample team: Ergon connects to each person's assistant, and each assistant works in that person's apps.",
+      "prompt": "ergon › team view",
+      "sample": "Sample team",
+      "hub": "Ergon",
+      "hubSub": "Managed remotely",
+      "assistantOn": "assistant on",
+      "working": "working…",
+      "fixed": "fixed ✓",
+      "ticket": "Ticket",
+      "button": "Send a test ticket",
+      "busy": "Fixing…",
+      "tap": "Tap a person to see their assistant.",
+      "logLabel": "Ergon activity",
+      "terminal": [
+        "$ ergon shape --team office",
+        "✓ assistants set up around every person's apps",
+        "› front desk · drafted replies, waiting for approval",
+        "› bookkeeping · matched invoices to payments"
+      ],
+      "shape": "$ ergon shape --team",
+      "shaped": "✓ assistants set up around every person's apps",
+      "flag": "⚑ ticket",
+      "outcomes": [
+        "✓ agent fixed it on the computer",
+        "✓ senior agent fixed it after a closer look",
+        "✓ handed to a person, with notes"
+      ],
+      "personLabel": "{role}: assistant connected to {apps}",
+      "appsJoin": " and "
+    }
+  },
+  "built": {
+    "eyebrow": "Work",
+    "headline": "What I've built so far",
+    "cards": [
       {
-        "id": "hero",
-        "headline": "Show me how you work. I'll find where AI fits.",
-        "line": "Forward Thinking Engineer. I learn the job first, then build AI and automation into it. Saves time and raises quality, in any field."
-      },
-      {
-        "id": "shape",
-        "headline": "Every team works differently.",
-        "line": "I build to fit yours.",
-        "labels": [
-          "Moving crew",
-          "Office",
-          "Shop"
+        "slug": "ergon",
+        "category": "AI assistants · Windows",
+        "title": "Ergon",
+        "wide": true,
+        "status": true,
+        "href": "projects/ergon.html",
+        "text": "A personal AI assistant for every employee, set up around the apps they already use. Remote management, and tickets fixed right on the computer.",
+        "tags": [
+          "Signed installer",
+          "Remote repair",
+          "Approval gates"
+        ],
+        "count": "622 tests",
+        "terminal": [
+          "$ ergon status",
+          "  installer    signed ✓",
+          "  updates      live feed ✓",
+          "  your data    kept on update ✓",
+          "  connectors   your apps ✓",
+          "  repairs      ticket-scoped ✓",
+          "  undo         every step ✓",
+          "  approvals    person signs off ✓",
+          "  tests        622 passing"
         ]
       },
       {
-        "id": "team",
-        "headline": "Everyone gets their own assistant.",
-        "line": "Built around the apps they already use.",
-        "tag": "Ergon",
-        "roles": [
-          "Owner",
-          "Dispatch",
-          "Front desk",
-          "Books",
-          "Crew lead",
-          "Sales"
-        ]
+        "slug": "dotz",
+        "category": "Desktop app · Windows, macOS, Linux",
+        "title": "dotz",
+        "href": "https://github.com/cayleb-james2008/dotz",
+        "text": "A desktop app that runs and supervises AI coding agents, with safe cleanup and clear failure states.",
+        "tags": [
+          "Rust",
+          "Tauri",
+          "SQLite"
+        ],
+        "count": "828+ tests",
+        "image": {
+          "src": "assets/work/dotz.jpg",
+          "alt": "The dotz dashboard: a dark window with a prompt box for AI coding agents"
+        }
       },
       {
-        "id": "tickets",
-        "headline": "Problems fix themselves.",
-        "line": "Right on the computer. Hard ones go up. A person has the last word.",
-        "ladder": [
-          "Agent",
-          "Senior agent",
-          "Person"
-        ]
+        "slug": "sophos",
+        "category": "Desktop app · Windows",
+        "title": "Sophos",
+        "href": "https://github.com/cayleb-james2008/sophos",
+        "text": "A coding-agent desktop app with saved agent profiles, local AI models, and sessions that survive restarts.",
+        "tags": [
+          "TypeScript",
+          "Tauri"
+        ],
+        "count": "1,224 checks",
+        "image": {
+          "src": "assets/work/sophos.jpg",
+          "alt": "Sophos welcome screen: A quieter way to think, with a Get started button"
+        }
       },
       {
-        "id": "worth",
-        "headline": "About $100 a person a month.",
-        "line": "Time back to take on more work.",
-        "price": "$100 / mo",
-        "more": "+ more work"
+        "slug": "suite",
+        "category": "Review tools · 10 local tools",
+        "title": "Industry AI Suite",
+        "href": "https://github.com/cayleb-james2008/industry-ai-suite",
+        "text": "Ten local tools that review finance, research, security and operations files. Every finding shows its source, and a person decides.",
+        "tags": [
+          "Python",
+          "Local AI"
+        ],
+        "count": "382 tests",
+        "image": {
+          "src": "assets/work/suite.jpg",
+          "alt": "Industry AI Suite: the LedgerBridge review tool, with its inputs on the left and the result below"
+        }
+      },
+      {
+        "slug": "asmodeus",
+        "category": "Research tool · past data",
+        "title": "Asmodeus",
+        "href": "projects/asmodeus.html",
+        "text": "A private research tool that tests trading ideas on real past market data, in strict time order, with no real money.",
+        "tags": [
+          "Rust",
+          "Past data"
+        ],
+        "count": "1,111 tests",
+        "terminal": [
+          "$ asmodeus replay --past-data",
+          "  time order       strict ✓",
+          "  future peeking   blocked ✓",
+          "  fees             included ✓",
+          "  real money       none",
+          "  restarts         recovered ✓",
+          "  tests            1,111 + 33 ✓"
+        ]
       }
     ]
   },
+  "services": {
+    "eyebrow": "What I do",
+    "headline": "AI built around how you work",
+    "rows": [
+      {
+        "route": "/employees",
+        "title": "AI employees",
+        "text": "An assistant for every person on your team, set up around the apps they already use.",
+        "topic": "AI employees"
+      },
+      {
+        "route": "/workflows",
+        "title": "AI workflows",
+        "text": "I shadow your team, map how the work moves, then build AI into the slow steps.",
+        "topic": "AI workflows"
+      },
+      {
+        "route": "/automations",
+        "title": "AI automations",
+        "text": "Repeat work runs on its own, and a person approves anything that matters.",
+        "topic": "AI automations"
+      },
+      {
+        "route": "/support",
+        "title": "Remote support",
+        "text": "I manage every computer remotely. Tickets get fixed right on the machine.",
+        "topic": "Remote support"
+      },
+      {
+        "route": "/everything",
+        "title": "AI everything",
+        "text": "If it runs on a computer, I can build around it. Show me how you work.",
+        "topic": "Something else"
+      }
+    ]
+  },
+  "stats": {
+    "eyebrow": "Track record",
+    "headline": "Tested before it ships.",
+    "items": [
+      {
+        "figure": "3,300+",
+        "label": "Automated checks across my systems"
+      },
+      {
+        "figure": "5",
+        "label": "Systems built and tested"
+      },
+      {
+        "figure": "10",
+        "label": "Recorded demos in the lab"
+      },
+      {
+        "figure": "$100/mo",
+        "label": "Ergon, about a person a month"
+      }
+    ],
+    "note": "Counts come from each project's own test runs. Ergon's live checks are still pending, and it hasn't had a paid rollout yet."
+  },
   "resumeHalf": {
     "kicker": "Résumé",
+    "title": "The official version",
     "experience": "Experience",
     "projects": "Projects",
     "education": "Education and skills",
@@ -123,37 +605,87 @@
     ]
   },
   "contact": {
-    "lines": [
-      "Let's work",
-      "together"
-    ],
+    "headline": "Show me how your team works.",
+    "cta": {
+      "label": "Get in touch"
+    },
+    "blurb": "Forward Thinking Engineer. I build AI employees, workflows and automations around the way your team already works.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyFailed": "Select the address to copy",
+    "siteTitle": "Site",
     "nav": [
       {
-        "label": "Experience",
-        "href": "#experience"
+        "label": "Ergon",
+        "href": "#team"
       },
       {
-        "label": "Projects",
-        "href": "#work"
+        "label": "Work",
+        "href": "#built"
       },
       {
-        "label": "Lab",
-        "href": "lab/"
+        "label": "What I do",
+        "href": "#services"
       },
       {
         "label": "Résumé",
-        "href": "resume.html"
+        "href": "#resume"
+      }
+    ],
+    "columns": [
+      {
+        "title": "Projects",
+        "links": [
+          {
+            "label": "Ergon",
+            "href": "projects/ergon.html"
+          },
+          {
+            "label": "dotz",
+            "href": "https://github.com/cayleb-james2008/dotz"
+          },
+          {
+            "label": "Sophos",
+            "href": "https://github.com/cayleb-james2008/sophos"
+          },
+          {
+            "label": "Industry AI Suite",
+            "href": "https://github.com/cayleb-james2008/industry-ai-suite"
+          },
+          {
+            "label": "Asmodeus",
+            "href": "projects/asmodeus.html"
+          }
+        ]
       },
       {
-        "label": "Email",
-        "href": "mailto:caylebalvarezjames@gmail.com"
+        "title": "Elsewhere",
+        "links": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com/cayleb-james2008"
+          },
+          {
+            "label": "Email",
+            "href": "mailto:caylebalvarezjames@gmail.com"
+          },
+          {
+            "label": "Résumé PDF",
+            "href": "Cayleb-James-polished-resume.pdf"
+          },
+          {
+            "label": "Résumé page",
+            "href": "resume.html"
+          },
+          {
+            "label": "The lab · 10 demos",
+            "href": "lab/"
+          }
+        ]
       }
     ],
     "copyright": "© 2026 Cayleb Alvarez-James.",
-    "cta": {
-      "label": "Download résumé",
-      "href": "Cayleb-James-polished-resume.pdf"
-    },
+    "place": "Remote-only · Connecticut, USA",
     "links": [
       {
         "label": "GitHub",
@@ -167,45 +699,85 @@
         "label": "One-page PDF",
         "href": "Cayleb-James-polished-one-page.pdf"
       }
-    ]
+    ],
+    "watermark": "CAYLEB"
+  },
+  "modal": {
+    "eyebrow": "Start a project",
+    "topicPrefix": "About: ",
+    "headline": "Tell me how your team works.",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name",
+        "error": "Add your name so I know who's writing."
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@company.com",
+        "error": "Add an email I can reply to, like you@company.com."
+      },
+      "msg": {
+        "label": "Your team",
+        "placeholder": "Your team, the apps you use, and what eats the most time.",
+        "error": "A sentence or two is plenty."
+      }
+    },
+    "note": "I read every message myself.",
+    "submit": "Write the email",
+    "doneTitle": "Your email is ready",
+    "doneText": "Your email app should open with this message. If it didn't, copy it and send it to",
+    "copy": "Copy message",
+    "copied": "Copied",
+    "close": "Close",
+    "topicPlaceholder": "What should {topic} handle for your team?",
+    "otherPlaceholder": "What should AI take off your plate?",
+    "otherTopic": "Something else"
   },
   "guide": {
     "label": "Ask my agent",
-    "greeting": "Hi, I'm Cayleb's agent. I'll ride along.",
-    "lines": {
-      "experience": "Real jobs first. He knows how crews actually work.",
-      "work": "His own builds. Ergon puts an assistant on every desk.",
-      "education": "School and skills, all in one place.",
-      "contact": "Want AI built around how your team works? Say hi."
-    },
-    "title": "Ask my agent",
+    "title": "cayleb.aj › ask",
+    "greeting": "Hi, I'm Cayleb's agent. Pick a question.",
+    "close": "Close",
     "questions": [
       {
         "q": "What does Cayleb do?",
+        "cmd": "whoami",
         "a": "He learns how your people actually work, then builds AI and automation around the apps they already use. It saves time, raises quality, and he teaches the team to run it."
       },
       {
         "q": "What's Ergon?",
+        "cmd": "ergon --about",
         "a": "A personal assistant for every employee, built around their apps. Tickets get fixed by an agent right on the computer; hard ones go up to a person. Windows pilot, live checks pending."
       },
       {
+        "q": "What does Ergon cost?",
+        "cmd": "ergon --price",
+        "a": "About $100 a person a month."
+      },
+      {
         "q": "What kind of tools?",
+        "cmd": "tools --list",
         "a": "Anything digital a team wants automated: quoting, dispatch, ordering, scheduling, paperwork. Built around their apps, with human sign-off and undo."
       },
       {
         "q": "Done this for a company?",
+        "cmd": "history --rollouts",
         "a": "Not yet as a paid rollout. He has worked moving, plaster and shop jobs firsthand, and built 5 systems with 3,300+ passing checks."
       },
       {
-        "q": "What's Asmodeus?",
-        "a": "A private research project that tests trading ideas on past market data. No real money, and no performance claims."
-      },
-      {
         "q": "What if a tool makes a mistake?",
+        "cmd": "safety --check",
         "a": "People approve before anything goes out, every connection has an undo step, and files stay on the company's own computers."
       },
       {
+        "q": "What's Asmodeus?",
+        "cmd": "asmodeus --about",
+        "a": "A private research project that tests trading ideas on past market data. No real money, and no performance claims."
+      },
+      {
         "q": "How do I reach him?",
+        "cmd": "contact",
         "a": "Email is fastest, or grab the résumé.",
         "links": [
           {
@@ -222,8 +794,6 @@
           }
         ]
       }
-    ],
-    "quiet": "Quiet the bubbles",
-    "close": "Close"
+    ]
   }
 }

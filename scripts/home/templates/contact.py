@@ -1,30 +1,31 @@
-"""Contact footer — the reference's sign-off (§L5275–5476) with Cayleb's links, on a plain dark panel."""
-from markup import SLAB_ARROW, attr, chamfer_frame, heading, link, reveal, text
+"""The contact footer: the closing line and Get in touch, the brand and the email (shown as text, with a
+copy button, because mail links may do nothing), the Site / Projects / Elsewhere columns, the copyright."""
+from markup import attr, external, icon, link, mk, text
 
-LOGO = 120
-NAV, NAV_STEP = 260, 80
-FOOT = (640, 720, 800)
+
+def _column(title: str, links: list[dict]) -> str:
+    items = "".join(f"<li>{link(l['href'], l['label'], extra=external(l['href']))}</li>" for l in links)
+    return f'<div><p class="ft-t">{text(title)}</p><ul>{items}</ul></div>'
 
 
 def render(content: dict) -> str:
     c = content["contact"]
+    email = content["meta"]["email"]
     nav = "".join(
-        f'<li><a href="{attr(n["href"])}"{" download" if n["href"].endswith(".pdf") else ""}>'
-        f'{reveal(n["label"], "letter", stagger=22, delay=NAV + i * NAV_STEP, config="ROW", gap="0.2em")}'
-        '<span class="contact-nav-arrow" aria-hidden="true">→</span></a></li>'
-        for i, n in enumerate(c["nav"])
+        f'<li><a href="{attr(n["href"])}" data-go="{attr(n["href"].lstrip("#"))}">{text(n["label"])}</a></li>' for n in c["nav"]
     )
-    links = "".join(f"<li>{link(l['href'], l['label'])}</li>" for l in c["links"])
+    columns = "".join(_column(col["title"], col["links"]) for col in c["columns"])
     return (
-        '<section class="contact" data-contact id="contact" aria-labelledby="contact-title">'
-        '<div class="contact-panel"></div>'
-        f'<a class="contact-wordmark" href="./" data-fade data-delay="{LOGO}" aria-label="Cayleb Alvarez-James, home">'
-        f'{text(content["wordmark"])}</a>'
-        f'{heading(c["lines"], "contact-title", "contact-title", "heading-stop--white")}'
-        f'<nav class="contact-nav" aria-label="Footer"><ul>{nav}</ul></nav>'
-        f'<p class="contact-copyright" data-rise data-delay="{FOOT[0]}">{text(c["copyright"])}</p>'
-        f'<a class="cta cta--hollow" href="{attr(c["cta"]["href"])}" download data-rise data-delay="{FOOT[1]}">'
-        f'{chamfer_frame(275, 50, 8.835, "cta-frame--hollow")}<span class="cta-label">{text(c["cta"]["label"])}</span>{SLAB_ARROW}</a>'
-        f'<ul class="contact-links" data-rise data-delay="{FOOT[2]}">{links}</ul>'
-        "</section>"
+        '<section class="contact" id="contact" aria-labelledby="contact-title"><div class="shell foot-in">'
+        f'<div class="ft-cta"><h2 class="ft-h" id="contact-title" data-lines data-stagger="100">{text(c["headline"])}</h2>'
+        f'<button class="pill light arrow" type="button" data-modal>{text(c["cta"]["label"])}<span class="pb">{icon("upright")}</span></button></div>'
+        '<div class="ft-cols">'
+        f'<div class="ft-brand"><p class="brandline">{mk()}{text(content["wordmark"])}</p><p>{text(c["blurb"])}</p>'
+        f'<p class="ft-mail"><span class="ft-email">{text(email)}</span>'
+        f'<button class="copy" type="button" data-copy="{attr(email)}" data-copied="{attr(c["copied"])}" data-failed="{attr(c["copyFailed"])}">'
+        f'{icon("copy")}<span>{text(c["copy"])}</span></button></p></div>'
+        f'<nav class="contact-nav" aria-label="Footer"><p class="ft-t">{text(c["siteTitle"])}</p><ul>{nav}</ul></nav>'
+        f"{columns}</div>"
+        f'<div class="ft-legal"><p class="contact-copyright">{text(c["copyright"])}</p><span>{text(c["place"])}</span></div>'
+        f'</div><div class="ft-wm" aria-hidden="true">{text(c["watermark"])}</div></section>'
     )

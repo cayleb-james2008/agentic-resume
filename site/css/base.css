@@ -1,4 +1,4 @@
-/* Reset, accessibility helpers, the shared pieces of the Lumora layout (2026-10-15) and the reveal states. */
+/* Reset, accessibility helpers, the shared pieces of the 2026-10-15 layout and the reveal states. */
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-color: var(--raw-color-steel-400) var(--background); }

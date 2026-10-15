@@ -94,10 +94,11 @@
   background: var(--raw-color-ink-900); color: var(--raw-color-white); letter-spacing: 0.12em;
 }
 
-/* A gate: the label above and to the left of its drop (a gate's radius, along the diagonal), clear of the
-   channels in and out. */
+/* A gate: the label above and to the left of its drop, clear of the channels in and out. Along the diagonal
+   that is a third past the gate's radius (0.71 of it each way would only reach its edge), for the smooth join
+   where the channels meet the gate swells it a little. */
 .story-gate { width: 0; height: 0; }
-.story-label { position: absolute; right: calc(var(--gate-r) * 0.71 + 0.3rem); bottom: calc(var(--gate-r) * 0.71 + 0.3rem); }
+.story-label { position: absolute; right: calc(var(--gate-r) * 0.95 + 0.3rem); bottom: calc(var(--gate-r) * 0.95 + 0.3rem); }
 
 /* The price and the "more" mark are ink with the rim, so they read on the water and off it. */
 .story-chip {

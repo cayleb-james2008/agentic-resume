@@ -255,9 +255,9 @@ test('the ends: name on screen at 0, drained and masthead shown at 1', () => {
   assert.ok(drop(0.36).a[1] > 0.49 && drop(0.36).a[1] <= 0.5);
   assert.ok(Math.abs(drop(0.6).a[1] - L.poolTop * 0.1) < 1e-9);
   assert.equal(drop(0.9), undefined);
-  // The pool's top edge reaches poolTop at the end of the intro.
+  // The pool's top edge reaches poolTop at the end of the intro (its body runs on below the stage).
   const pool = intro(1).slots[0];
-  assert.equal(pool.th, L.poolTop);
+  near(pool.a[1] + pool.th / 2, L.poolTop);
 
   // Flow swells while the water changes shape and is 0 when it is still: never in the intro or hero,
   // at its peak halfway through a morph, and three times in the shape beat (one per silhouette).
@@ -392,4 +392,80 @@ test('the ripple clock takes a steady number of steps per frame, jitter and all'
   }
   // Time never runs backwards.
   assert.deepEqual(stepsFor(RIPPLE_START_OWED, -5, RIPPLE_STEP_MS, 4), { steps: 0, owed: RIPPLE_START_OWED });
+});
+
+// --- What the browser showed (visual QA, 2026-10-15) ------------------------------------------------
+
+/** How far point p is from the segment a–b. */
+const toSegment = (p, a, b) => {
+  const dx = b[0] - a[0], dy = b[1] - a[1], len2 = dx * dx + dy * dy;
+  const u = len2 ? Math.min(1, Math.max(0, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / len2)) : 0;
+  return Math.hypot(p[0] - a[0] - u * dx, p[1] - a[1] - u * dy);
+};
+const STAGES = [[16 / 9, 6], [16 / 10, 6], [4 / 3, 6], [1180 / 820, 6], [844 / 390, 4], [390 / 844, 4], [360 / 800, 4], [768 / 1024, 4], [768 / 1024, 6], [1024 / 1366, 6]];
+
+test('the pool runs on below the stage, so its underside never draws a rim along the foot', () => {
+  for (const [aspect, team] of STAGES) {
+    const L = layoutFor(aspect, team);
+    for (let i = 0; i <= 100; i++) {
+      const t = i / 100;
+      const pool = bounds(slotsFor('hero', t, L)[0]);
+      assert.ok(pool.y0 <= -0.1, `${aspect} hero pool reaches below the stage`);
+      const rising = slotsFor('intro', t, L)[0];
+      assert.ok(bounds(rising).y0 <= -0.1, `${aspect} intro t=${t} pool reaches below the stage`);
+      // Before it rises, all of it is under the stage: not even its top edge shows.
+      if (t < 0.55) assert.ok(bounds(rising).y1 < -0.005, `${aspect} intro t=${t} the pool is out of sight`);
+    }
+  }
+});
+
+test('a silhouette\'s parts either join or stand clearly apart: no hairline seam between them', () => {
+  for (const [aspect, team] of STAGES) {
+    const L = layoutFor(aspect, team);
+    for (const t of [0.28, 0.61, 0.94]) {
+      const held = slotsFor('shape', t, L).filter(active).map(bounds);
+      for (let i = 0; i < held.length; i++) for (let j = i + 1; j < held.length; j++) {
+        const p = held[i], q = held[j];
+        const dx = Math.max(0, q.x0 - p.x1, p.x0 - q.x1), dy = Math.max(0, q.y0 - p.y1, p.y0 - q.y1);
+        if (dx > 0 && dy > 0) continue;   // corner to corner: no slit runs between them
+        // Face to face, the smooth union bridges a gap under ~0.02 and leaves a rimmed slit up to ~0.04: a crack.
+        const g = dx + dy;
+        assert.ok(g === 0 || g >= 0.04, `${aspect} shape t=${t}: parts ${i} and ${j} leave a ${g.toFixed(4)} seam`);
+      }
+    }
+  }
+});
+
+test('no team channel runs past another person, and neighbours leave room for their apps', () => {
+  for (const [aspect, team] of STAGES) {
+    const L = layoutFor(aspect, team);
+    L.nodes.forEach((p, i) => L.nodes.forEach((q, j) => {
+      if (i === j) return;
+      // A channel clears every other node by its tiles' half-width and the role under it (about 0.075 stage heights).
+      assert.ok(toSegment(p, L.source, q) >= 0.075, `${aspect}×${team}: the channel to ${j} passes ${toSegment(p, L.source, q).toFixed(3)} from node ${i}`);
+    }));
+    // Side by side on a wide stage, two people's tiles and roles need about 0.1 stage heights.
+    if (aspect >= 1) for (let i = 1; i < L.nodes.length; i++) {
+      const d = Math.hypot(L.nodes[i][0] - L.nodes[i - 1][0], L.nodes[i][1] - L.nodes[i - 1][1]);
+      assert.ok(d >= 0.1, `${aspect}×${team}: nodes ${i - 1} and ${i} are ${d.toFixed(3)} apart`);
+    }
+  }
+});
+
+test('the ticket chain climbs into every gate, so the gate\'s label (above and left of it) stays off the water', () => {
+  for (const [aspect, team] of STAGES) {
+    const L = layoutFor(aspect, team);
+    const chain = [L.nodes[0], ...L.gates];
+    for (let i = 1; i < chain.length; i++) {
+      const deg = (Math.atan2(chain[i][1] - chain[i - 1][1], chain[i][0] - chain[i - 1][0]) * 180) / Math.PI;
+      assert.ok(deg >= 14, `${aspect}×${team}: the channel into gate ${i - 1} climbs only ${deg.toFixed(1)}°`);
+    }
+  }
+});
+
+test('the team source and its tag clear the 64px masthead even on a phone held sideways', () => {
+  for (const [w, h, team] of [[844, 390, 4], [667, 375, 4], [1440, 900, 6], [390, 844, 4]]) {
+    const L = layoutFor(w / h, team);
+    assert.ok((1 - L.source[1] - SOURCE_R) * h >= 64, `${w}×${h}: the source's top is ${((1 - L.source[1] - SOURCE_R) * h).toFixed(1)}px down`);
+  }
 });

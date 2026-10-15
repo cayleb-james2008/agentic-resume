@@ -22,7 +22,7 @@ export const MAX_SLOTS = 16;
 const MORPH = 0.4;
 /** The beats, in order. timeline.js owns their lengths; this is only the order. */
 const ORDER = ['intro', 'hero', 'shape', 'team', 'tickets', 'worth', 'drain'];
-/** How far the pool and waterline reach past each side of the stage. */
+/** How far the pool and waterline reach past each side of the stage, and the pool below its foot. */
 const BLEED = 0.3;
 /** How much of the art box a silhouette may fill, either way. */
 const FIT = 0.78;
@@ -98,7 +98,7 @@ export const CAPTION_BOX = (aspect) => (aspect >= 1
  * in (right of the caption on a wide stage, below it on a tall one); the rest
  * are points inside it, as [x, y]:
  *
- *   nodes    one per person: a shallow arc (wide) or a grid, two across (tall)
+ *   nodes    one per person: a shallow arc (wide) or rows, two across, each further in (tall)
  *   source   the root the channels branch from, at the top centre
  *   gates    the three escalation steps, rising left to right
  *   columns  one x per person for the worth beat's columns (left 75%)
@@ -115,19 +115,29 @@ export const layoutFor = (aspect, teamSize) => {
   const rows = Math.ceil(teamSize / 2);
 
   const nodes = Array.from({ length: teamSize }, (_, i) => {
-    if (!wide) return at(i % 2 ? 0.85 : 0.15, 0.6 * (1 - (Math.floor(i / 2) + 0.5) / rows));   // lower 60%, wide apart so no channel grazes another node
+    if (!wide) {
+      // Two across, in rows down the lower 60%. Each row sits further in than the one above it, so a channel
+      // down to a lower row passes inside the people above, clear of their apps and their role.
+      const row = Math.floor(i / 2);
+      const inset = 0.12 + (rows > 1 ? (0.18 * row) / (rows - 1) : 0);
+      return at(i % 2 ? 1 - inset : inset, 0.6 * (1 - (row + 0.5) / rows));
+    }
+    // A fan across the whole art box, the ends 0.1h higher: neighbours stay far enough apart, and far enough
+    // up or down from each other, for their tiles and roles even on a 4:3 stage.
     const s = teamSize > 1 ? i / (teamSize - 1) : 0.5;
-    return at(0.08 + 0.84 * s, 0.22 + 0.06 * (2 * s - 1) ** 2);   // the ends sit 0.06h higher
+    return at(0.03 + 0.94 * s, 0.22 + 0.1 * (2 * s - 1) ** 2);
   });
-  // The tall stage lifts its gates so the chain still climbs from its first node (a grid node, above a wide arc's end).
-  const gateY = wide ? [0.36, 0.52, 0.68] : [0.6, 0.72, 0.84];
+  // The gates climb from the first person, steeply enough that a gate's label (above and left of it) stays
+  // clear of the channel coming in; the tall stage's first person sits higher, so its gates do too.
+  const gateY = wide ? [0.42, 0.56, 0.7] : [0.6, 0.72, 0.84];
   return {
     aspect,
     teamSize,
     art,
     poolTop: wide ? 0.34 : 0.3,
     nodes,
-    source: at(0.5, 0.92),
+    // On a wide stage the source sits lower, so it and its tag clear the masthead on a short one (a phone on its side).
+    source: at(0.5, wide ? 0.84 : 0.92),
     gates: [0.35, 0.6, 0.85].map((fx, i) => at(fx, gateY[i])),
     columns: Array.from({ length: teamSize }, (_, i) => art.x0 + w * 0.75 * ((i + 0.5) / teamSize)),
   };
@@ -148,19 +158,18 @@ const spillOf = ({ art }) => {
  * Each is at most 6 slots, and `fitSilhouette` scales it into the art box.
  */
 const SILHOUETTES = [
-  [   // moving truck: chassis, cargo box, cab, two wheels
+  [   // moving truck: chassis, cargo box, cab (butted against the box, so no seam runs between them), two wheels
     [0, 0.45, 3.3, 0.45, 0.3, 0.04],
     [0, 1.35, 2.3, 1.35, 1.5, 0.08],
-    [2.55, 1.0, 3.3, 1.0, 0.95, 0.08],
+    [2.3, 1.0, 3.3, 1.0, 0.95, 0.08],
     [0.75, 0.3, 0.75, 0.3, 0, 0.4],
     [2.65, 0.3, 2.65, 0.3, 0, 0.4],
   ],
-  [   // office desk: top, monitor, two legs, stand
+  [   // office desk: top, a screen standing on it (a stand's narrow gaps drew as cracks), two legs
     [0, 1.1, 3.2, 1.1, 0.22, 0.04],
-    [0.9, 1.95, 2.3, 1.95, 1.0, 0.08],
+    [0.9, 1.7, 2.3, 1.7, 1.0, 0.08],
     [0.35, 0, 0.35, 1.1, 0.3, 0],
     [2.85, 0, 2.85, 1.1, 0.3, 0],
-    [1.6, 1.2, 1.6, 1.45, 0.3, 0.03],
   ],
   [   // shop counter: counter, awning, two posts
     [0.2, 0.55, 2.9, 0.55, 1.1, 0.05],
@@ -184,11 +193,16 @@ const fitSilhouette = (prims, art) => {
 
 // --- The beats --------------------------------------------------------------
 
-const poolAt = (aspect, th) => slot([-BLEED, th / 2], [aspect + BLEED, th / 2], th, 0);
+/**
+ * The pool, its surface `top` up the stage. It runs on BLEED below the foot as well as past each side, so the
+ * only edge on screen, and the only rim, is its surface.
+ */
+const poolAt = (aspect, top) => slot([-BLEED, (top - BLEED) / 2], [aspect + BLEED, (top - BLEED) / 2], top + BLEED, 0);
 
 /** A drop falls from the name, lands at the foot of the stage and joins a pool rising under it. */
 const introSlots = (t, L) => {
-  const list = [poolAt(L.aspect, L.poolTop * ramp(t, 0.55, 1))];
+  // Until it rises the pool waits just under the stage, out of sight: not even its rim shows along the foot.
+  const list = [poolAt(L.aspect, lerp(-0.02, L.poolTop, ramp(t, 0.55, 1)))];
   const q = ramp(t, 0.35, 0.6);
   const r = 0.022 * ramp(t, 0.35, 0.4) * (1 - ramp(t, 0.6, 0.75));
   if (r > 0) list.push(circle([L.aspect / 2, lerp(0.5, L.poolTop * 0.1, q * q)], r));

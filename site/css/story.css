@@ -57,6 +57,7 @@
   fill: var(--raw-color-ink-900); stroke: var(--raw-color-cyan-400); stroke-width: 2; stroke-linejoin: round;
 }
 .story-art .art-channel { fill: none; stroke: var(--raw-color-ink-900); stroke-width: 4; stroke-linecap: round; }
+.story-art .art-check { fill: none; stroke-width: 3; stroke-linecap: round; }
 
 /* One caption, then its drawing, in the order of the beats. */
 [data-caption="hero"] { order: 1; }    .story-art[data-art="hero"] { order: 2; }
@@ -98,8 +99,17 @@
 /* A gate: the label above and to the left of its drop, clear of the channels in and out. Along the diagonal
    that is a third past the gate's radius (0.71 of it each way would only reach its edge), for the smooth join
    where the channels meet the gate swells it a little. */
-.story-gate { width: 0; height: 0; }
+.story-gate, .story-mark { width: 0; height: 0; }
 .story-label { position: absolute; right: calc(var(--gate-r) * 0.95 + 0.3rem); bottom: calc(var(--gate-r) * 0.95 + 0.3rem); }
+/* The first gate's check: below and to the right of it, the one side no channel comes in or goes out. Ink with
+   the rim, like the chips. */
+.story-check {
+  position: absolute; left: calc(var(--gate-r) * 0.95 + 0.3rem); top: calc(var(--gate-r) * 0.95 + 0.3rem);
+  display: grid; place-items: center; width: 1.5rem; height: 1.5rem;
+  border: 1px solid var(--raw-color-cyan-400); border-radius: 50%;
+  background: var(--raw-color-ink-900); color: var(--raw-color-white);
+}
+.story-check .icon { width: 0.875rem; height: 0.875rem; }
 
 /* The price and the "more" mark are ink with the rim, so they read on the water and off it. */
 .story-chip {

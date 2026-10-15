@@ -75,9 +75,11 @@ def tickets_items(beat: dict) -> str:
         item(i, f'<span class="story-label">{text(label)}</span>', "story-gate")
         for i, label in enumerate(beat.get("ladder", []))
     )
-    # The tickets come from one person: the first, where the team beat left them.
+    # The tickets come from one person: the first, where the team beat left them. They leave from the screen.
     source = item("source", tile("screen"), "story-source") if gates else ""
-    return source + gates
+    # Most stop at the first gate: a check marks it (an icon, no words; story.js places it by `data-index="check"`).
+    check = item("check", f'<span class="story-check">{ICONS["checkmark"]}</span>', "story-mark") if gates else ""
+    return source + gates + check
 
 
 def worth_items(beat: dict) -> str:
@@ -127,11 +129,13 @@ ART = {
     ),
     # a source, and a channel from it to each of six people
     "team": _team_art(),
-    # three gates, each a step higher than the last
+    # three gates, each a step higher than the last; two tickets on their way to the first, which has a check
     "tickets": (
         '<path class="art-channel" d="M70 236L200 200L340 140L480 80"/>'
         '<circle cx="70" cy="236" r="14"/><circle cx="200" cy="200" r="18"/>'
         '<circle cx="340" cy="140" r="18"/><circle cx="480" cy="80" r="18"/>'
+        '<circle cx="113" cy="224" r="6"/><circle cx="156" cy="212" r="6"/>'
+        '<path class="art-check" d="M214 228l8 8 16-17"/>'
     ),
     # a column of water for each person, over a price mark
     "worth": _worth_art(),

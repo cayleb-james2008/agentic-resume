@@ -176,9 +176,9 @@ test('overlay labels come from content and are hidden from assistive tech', () =
   assert.equal(count(overlay('team'), /story-tag/g), 1);
   assert.ok(!people.some((p) => p.includes('story-tag')));
 
-  // tickets: three gates by number, and a source on the person, holding the screen glyph
+  // tickets: three gates by number, a source on the person holding the screen glyph, and a check on the first gate
   const tickets = items('tickets');
-  const gates = tickets.filter((el) => !/data-index="source"/.test(el));
+  const gates = tickets.filter((el) => /data-index="\d+"/.test(el));
   assert.deepEqual(gates.map(textOf), beat('tickets').ladder);
   assert.deepEqual(gates.map((el) => el.match(/data-index="(\w+)"/)[1]), ['0', '1', '2']);
   const source = tickets.filter((el) => /data-index="source"/.test(el));
@@ -186,6 +186,14 @@ test('overlay labels come from content and are hidden from assistive tech', () =
   assert.match(source[0], /data-app="screen"/);
   assert.equal(count(source[0], /<svg\b/g), 1);
   assert.equal(textOf(source[0]), '');
+  const check = tickets.filter((el) => /data-index="check"/.test(el));
+  assert.equal(check.length, 1, 'one check, on the first gate');
+  assert.equal(tickets.length, 5, 'the gates, the source and the check: nothing else');
+  assert.match(check[0], /^<span class="story-item story-mark" data-overlay-item data-index="check"><span class="story-check"><svg class="icon"/);
+  const icons = JSON.parse(python('import json, markup\nprint(json.dumps(markup.ICONS))'));
+  assert.ok(check[0].includes(icons.checkmark), 'the check is the checkmark icon');
+  assert.equal(count(check[0], /<svg\b/g), 1);
+  assert.equal(textOf(check[0]), '', 'the check is an icon, no words');
 
   // worth: 0 is the price, 1 the "more" mark
   const worth = items('worth');
@@ -205,9 +213,12 @@ test('every overlay item in the markup is one story.js can place, from the same 
       assert.ok(pointOf(o, id, index), `${id} item ${index} has a point`);
     }
   }
-  // The team source lands on the water's source slot, and the tickets source on the first person.
+  // The team source lands on the water's source slot, the tickets source on the first person, the check on the first gate.
   assert.equal(pointOf(o, 'team', 'source'), o.source);
   assert.equal(pointOf(o, 'tickets', 'source'), o.tickets.source);
+  assert.equal(pointOf(o, 'tickets', 'check'), o.tickets.check);
+  assert.deepEqual(pointOf(o, 'tickets', 'check'), { x: L.gates[0][0], y: L.gates[0][1] });
+  assert.equal(pointOf(o, 'tickets', 'nope'), undefined, 'an unknown key has no point (story.js hides it)');
   assert.ok(slotsFor('team', 1, L).some((s) => s.a[0] === o.source.x && s.a[1] === o.source.y && s.th === 0 && s.r === SOURCE_R));
   // On a phone's team of four the last two people have no point (story.js hides them); the source still does.
   const phone = overlaysFor(layoutFor(390 / 844, 4));
@@ -229,6 +240,7 @@ test('the label offsets in story.css are the layout\'s radii, and no position is
   // Offsets use the variables. The only other svh in the file are the stage's own height and the name's size.
   assert.match(css, /\.story-role \{[^}]*calc\(50% \+ var\(--node-r\)/);
   assert.match(css, /\.story-label \{[^}]*var\(--gate-r\)[^}]*var\(--gate-r\)/);
+  assert.match(css, /\.story-check \{[^}]*left:\s*calc\(var\(--gate-r\)[^}]*top:\s*calc\(var\(--gate-r\)/, 'the check sits below and right of the gate, by its radius');
   const others = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([\w-]+):[^;{}]*?([\d.]+)svh/g)]
     .filter(([, property]) => !['--node-r', '--gate-r'].includes(property))
     .map(([, property, value]) => `${property} ${value}`);
@@ -237,7 +249,7 @@ test('the label offsets in story.css are the layout\'s radii, and no position is
   // Nothing places a label by a number worked out from the layout: no percentages on an item, no orientation switch.
   assert.doesNotMatch(css, /orientation/);
   const rules = rulesOf('site/css/story.css');
-  for (const rule of rules.filter((r) => r.parts.some((p) => /\.story-(?:item|tag|chip|gate|person|source)\b/.test(p)))) {
+  for (const rule of rules.filter((r) => r.parts.some((p) => /\.story-(?:item|tag|chip|gate|person|source|mark|check)\b/.test(p)))) {
     assert.ok(!declares(rule.body, '(?:left|top)', '[^;]*%'), `${rule.selector} is placed by story.js, not by a percentage`);
   }
 });
@@ -371,6 +383,8 @@ test('the static drawings are ink with a cyan rim, set in CSS', () => {
   assert.equal(count(unit('team'), /<line\b|<path\b/g) >= 6, true, 'six channels');
   assert.ok(count(unit('team'), /<circle\b/g) >= 7, 'a source and six people');
   assert.equal(count(unit('tickets'), /<circle\b/g) >= 3, true, 'three gates');
+  assert.equal(count(unit('tickets'), /class="art-check"/g), 1, 'the first gate\'s check, in the still drawing too');
+  assert.ok(art.some((r) => r.parts.some((p) => p.endsWith('.art-check')) && declares(r.body, 'fill', 'none')), 'the check is a stroke');
 });
 
 // --- 7. The masthead ----------------------------------------------------------------------------------------

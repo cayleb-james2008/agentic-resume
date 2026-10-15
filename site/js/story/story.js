@@ -46,14 +46,15 @@ const fmt = (v) => String(Math.round(v * 1e4) / 1e4 || 0);
  * The point an overlay item sits on, from overlaysFor. Items are matched by
  * `data-index`: shape labels, team people and ticket gates by number; the
  * worth beat's 0 is the price and 1 the "more" mark; a team item with
- * `data-index="source"` sits on the node the channels branch from, and a
- * tickets item with `data-index="source"` on the person the tickets come from.
+ * `data-index="source"` sits on the node the channels branch from, a tickets
+ * item with `data-index="source"` on the person the tickets come from, and
+ * one with `data-index="check"` on the first gate, where most of them stop.
  */
 export const pointOf = (o, beat, key) => {
   const i = Number(key);
   if (beat === 'shape') return o.shape[i];
   if (beat === 'team') return key === 'source' ? o.source : o.team[i];
-  if (beat === 'tickets') return key === 'source' ? o.tickets.source : o.tickets.gates[i];
+  if (beat === 'tickets') return key === 'source' ? o.tickets.source : key === 'check' ? o.tickets.check : o.tickets.gates[i];
   if (beat === 'worth') return [o.worth.price, o.worth.more][i];
   return undefined;
 };

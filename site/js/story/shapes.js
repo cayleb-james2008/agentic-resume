@@ -252,8 +252,22 @@ const along = (points, d) => {
 };
 
 /**
- * One person, three gates in a chain, and three drops sent down it: the first
- * stops at gate 0, the second at gate 1, the third goes all the way to gate 2.
+ * The tickets, in the order they leave the person's screen: the gate each one
+ * stops at. Most stop at the first (the agent fixes it there, and the story
+ * marks it with a check); one climbs to the second, and one reaches the person.
+ */
+export const TICKETS = Object.freeze([0, 0, 1, 0, 2, 0]);
+/** A ticket's drop: its radius, and its trip in beat time — when it leaves, and how long its climb to gate g takes. */
+export const DROP_R = 0.014;
+export const ticketTrip = (j) => {
+  const leave = 0.4 + 0.048 * j;   // once the chain has formed, one after another
+  return { leave, arrive: leave + 0.12 + 0.05 * TICKETS[j] };
+};
+
+/**
+ * One person, three gates in a chain, and a drop for each ticket, sent down it
+ * from the person (where their screen sits) to its gate. Slot 0 is the person,
+ * then the gates, the links between them and the drops.
  */
 const ticketSlots = (t, L) => {
   const chain = [L.nodes[0], ...L.gates];
@@ -263,9 +277,9 @@ const ticketSlots = (t, L) => {
     circle(chain[0], NODE_R),
     ...L.gates.map((g) => circle(g, GATE_R)),
     ...[0, 1, 2].map((i) => capsule(chain[i], chain[i + 1], 1)),
-    ...[0, 1, 2].map((j) => {
-      const go = ease(ramp(t, 0.4 + 0.12 * j, 0.68 + 0.12 * j));
-      return circle(along(chain, go * to[j + 1]), 0.014);
+    ...TICKETS.map((gate, j) => {
+      const { leave, arrive } = ticketTrip(j);
+      return circle(along(chain, ease(ramp(t, leave, arrive)) * to[gate + 1]), DROP_R);
     }),
   ]);
 };
@@ -332,7 +346,8 @@ const APPS = [['mail', 'calendar'], ['sheet', 'phone', 'mail'], ['chat', 'calend
  * Where the DOM labels go, from the same layout as the water: positions and
  * indices only — every word comes from content and is set by the story markup.
  * `source` is the team beat's root, the node every channel branches from;
- * `tickets.source` is something else: the person the tickets come from.
+ * `tickets.source` is something else: the person the tickets come from, and
+ * `tickets.check` the first gate, where most tickets stop.
  */
 export const overlaysFor = (layout) => {
   const { art, nodes, gates, columns } = layout;
@@ -345,6 +360,7 @@ export const overlaysFor = (layout) => {
     tickets: {
       source: { x: nodes[0][0], y: nodes[0][1] },
       gates: gates.map(([x, y], index) => ({ x, y, index })),
+      check: { x: gates[0][0], y: gates[0][1] },
     },
     worth: {
       price: { x: columns[0], y: art.y0 + h * 0.12 },

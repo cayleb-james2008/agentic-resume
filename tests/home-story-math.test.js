@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
-import { CAPTION_BOX, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
+import { CAPTION_BOX, DROP_R, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, TICKETS, layoutFor, slotsFor, overlaysFor, ticketTrip } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
 import { RIPPLE_STEP_MS, RIPPLE_START_OWED, nudgeInside, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
 
@@ -496,4 +496,68 @@ test('the shape labels show from the first silhouette on, and the one the water 
   assert.deepEqual([0.28, 0.61, 0.84].map((t) => shape(t).shapeIndex), [0, 1, 2]);
   assert.equal(shape(0.999).shapeIndex, 2);   // (shape t 1 is the team beat's first frame)
   for (const p of [0.1, 0.5, 0.9]) assert.equal(storyState(p, L).shapeIndex, null, `p=${p} is not the shape beat`);
+});
+
+test('the tickets: most stop at the first gate, one climbs to the second, one reaches the person', () => {
+  // Spec beat 4 (ruling R28): six tickets, four of them fixed at the first gate.
+  assert.equal(TICKETS.length, 6);
+  assert.deepEqual([0, 1, 2].map((g) => TICKETS.filter((x) => x === g).length), [4, 1, 1]);
+  const ticketStart = 3.25 + 1.25, ticketScreens = 1;
+  for (const [aspect, team] of STAGES) {
+    const L = layoutFor(aspect, team), o = overlaysFor(L);
+    const chain = [L.nodes[0], ...L.gates];
+    const drops = (t) => slotsFor('tickets', t, L).filter((s) => active(s) && s.th === 0 && s.r === DROP_R);
+    // The person, three gates, three links and six drops: 13 of the 16 slots.
+    assert.equal(slotsFor('tickets', 1, L).filter(active).length, 13, `${aspect}×${team}`);
+    assert.ok(13 <= MAX_SLOTS);
+    // Once the chain has formed (t 0.4) every drop waits on the person, where the screen tile sits: they leave from it.
+    for (const d of drops(0.4)) assert.deepEqual(d.a, [o.tickets.source.x, o.tickets.source.y]);
+    assert.equal(drops(0.4).length, TICKETS.length);
+    // At the end each drop sits on its gate: four on the first (the check's), one on each of the others.
+    const at = (p, q) => Math.hypot(p[0] - q[0], p[1] - q[1]) < 1e-9;
+    const end = drops(1);
+    assert.equal(end.length, TICKETS.length);
+    assert.deepEqual(L.gates.map((g) => end.filter((d) => at(d.a, g)).length), [4, 1, 1], `${aspect}×${team} drops per gate`);
+    assert.deepEqual([o.tickets.check.x, o.tickets.check.y], L.gates[0], 'the check marks the gate most tickets stop at');
+
+    // Every drop rides the chain, only ever forward, and never past its own gate.
+    const reach = (p) => {   // how far along the chain point p is (it must be on it)
+      let best = Infinity, d = 0, along = 0;
+      for (let i = 1; i < chain.length; i++) {
+        const len = Math.hypot(chain[i][0] - chain[i - 1][0], chain[i][1] - chain[i - 1][1]);
+        const off = toSegment(p, chain[i - 1], chain[i]);
+        if (off < best - 1e-12) { best = off; along = d + Math.hypot(p[0] - chain[i - 1][0], p[1] - chain[i - 1][1]); }
+        d += len;
+      }
+      assert.ok(best < 1e-9, `${aspect}×${team}: a drop left the chain by ${best}`);
+      return along;
+    };
+    const gateAt = L.gates.map((g) => reach(g));
+    const left = TICKETS.map(() => null), arrived = TICKETS.map(() => null), last = TICKETS.map(() => 0);
+    for (let i = 400; i <= 1000; i++) {
+      const t = i / 1000;
+      slotsFor('tickets', t, L).slice(7, 7 + TICKETS.length).forEach((d, j) => {
+        assert.ok(active(d) && d.r === DROP_R && d.th === 0, `slot ${7 + j} is drop ${j}`);
+        const s = reach(d.a);
+        assert.ok(s >= last[j] - 1e-12, `${aspect}×${team}: drop ${j} went back at t=${t}`);
+        assert.ok(s <= gateAt[TICKETS[j]] + 1e-9, `${aspect}×${team}: drop ${j} ran past its gate`);
+        if (left[j] === null && s > 1e-9) left[j] = t;
+        if (arrived[j] === null && Math.abs(s - gateAt[TICKETS[j]]) < 1e-9) arrived[j] = t;
+        last[j] = s;
+      });
+    }
+    // Staggered: they leave one after another, never two together, and only once the chain is formed.
+    assert.ok(left.every((t) => t !== null) && left[0] > 0.4, `${left}`);
+    for (let j = 1; j < left.length; j++) assert.ok(left[j] - left[j - 1] >= 0.04, `drop ${j} leaves ${left[j]}, ${left[j - 1]} before it`);
+    // All are home before the caption starts to fade (t 0.85); the one that reaches the person is the last in.
+    assert.ok(arrived.every((t) => t !== null && t <= 0.85), `${arrived}`);
+    const person = TICKETS.indexOf(2);
+    assert.equal(Math.max(...arrived), arrived[person], 'the person has the last word');
+  }
+  // The trips: leave in order, each climb a little longer the further it goes.
+  for (let j = 1; j < TICKETS.length; j++) assert.ok(ticketTrip(j).leave > ticketTrip(j - 1).leave);
+  for (let j = 0; j < TICKETS.length; j++) assert.ok(ticketTrip(j).leave >= 0.4 && ticketTrip(j).arrive <= 0.85, `trip ${j}`);
+  // And the overlay (the gates' labels and the check) is up by the time the first drop gets there.
+  const L = layoutFor(16 / 9, 6);
+  assert.equal(storyState((ticketStart + ticketTrip(0).arrive * ticketScreens) / RUNWAY_SCREENS, L).overlays.tickets > 0.9, true);
 });

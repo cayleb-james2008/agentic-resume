@@ -7,6 +7,11 @@
   --gutter: clamp(1rem, 4vw, 3rem);
 }
 
+/* Whatever the page scrolls to (a deep link, a nav jump through Lenis, a focused link) stops clear of the fixed
+   masthead, never under it (WCAG 2.2 SC 2.4.11). One rule for the whole page: Lenis and the browser add an
+   element's scroll-margin to this, so no section carries its own. */
+html { scroll-padding-top: calc(var(--masthead-h) + 1rem); }
+
 .masthead {
   position: fixed; inset: 0 0 auto; z-index: 30;
   display: flex; align-items: center; justify-content: space-between;

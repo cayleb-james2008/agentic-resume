@@ -1,7 +1,6 @@
 /* The official half of the homepage: the résumé, plainly set on a white sheet.
    It reads the same with scripts off, with motion reduced and in a screen reader. Nothing here moves or hides. */
 
-.resume-half, .resume-half section, .resume-project { scroll-margin-top: calc(var(--masthead-h) + 1rem); }
 .resume-half {
   /* tokens.css sizes the root with the viewport: 12px at 1441px wide, back to 16px at 1920px. A résumé is
      read, not scaled, so this sheet takes the same type scale, and its width, in fixed pixels. */

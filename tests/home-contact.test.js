@@ -37,8 +37,11 @@ test('the copyright is the content line, without an illustration credit', () => 
 test('a jump to #contact lands the whole footer under the fixed masthead', () => {
   const css = read('site/css/contact.css').replace(/\/\*[\s\S]*?\*\//g, '');
   const contact = css.match(/(?:^|\})\s*\.contact\s*\{([^}]*)\}/)[1];
-  // It stops a masthead's height down, not under it...
-  assert.match(contact, /scroll-margin-top:\s*var\(--masthead-h\)/);
-  // ...and where it fills the screen, it fills only what the masthead leaves, so its foot row is not pushed off.
-  assert.match(contact, /min-height:\s*var\(--foot-h,\s*calc\(100lvh - var\(--masthead-h\)\)\)/);
+  // It stops under the masthead, not behind it: the page's one scroll padding (ruling R31), with no margin of
+  // its own for Lenis or the browser to add to it...
+  const masthead = read('site/css/masthead.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(masthead, /(?:^|\})\s*html\s*\{[^}]*scroll-padding-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/);
+  assert.doesNotMatch(css, /scroll-margin|scroll-padding/);
+  // ...and where it fills the screen, it fills only what that padding leaves, so its foot row is not pushed off.
+  assert.match(contact, /min-height:\s*var\(--foot-h,\s*calc\(100lvh - var\(--masthead-h\) - 1rem\)\)/);
 });

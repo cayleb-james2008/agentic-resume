@@ -298,15 +298,16 @@ test('the stylesheet follows the brief and the house rules', () => {
   assert.doesNotMatch(css, /#[0-9a-f]{3,8}\b/i, 'colours come from tokens');
 });
 
-test('deep links clear the fixed masthead: the section, the résumé and every project article keep the scroll margin', () => {
-  const css = read('site/css/resume-half.css').replace(/\/\*[\s\S]*?\*\//g, '');
-  const margin = /scroll-margin-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/;
-  const covered = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
-    .filter((m) => margin.test(m[2]))
-    .flatMap((m) => m[1].split(',').map((s) => s.trim()));
-  for (const selector of ['.resume-half', '.resume-half section', '.resume-project']) assert.ok(covered.includes(selector), `${selector} clears the masthead`);
-  // Every article that carries an id (the suite pages link index.html#suite) is a .resume-project.
+test('deep links clear the fixed masthead: the page\'s one scroll padding covers the résumé, its sections and every project', () => {
+  // Ruling R31: html { scroll-padding-top } in masthead.css replaces the per-section scroll-margin rules. Lenis
+  // and a native hash jump add an element's margin to the padding, so the résumé keeps none of its own.
+  const strip = (file) => read(file).replace(/\/\*[\s\S]*?\*\//g, '');
+  const html_ = [...strip('site/css/masthead.css').matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter((m) => m[1].trim() === 'html');
+  assert.equal(html_.length, 1, 'one html rule');
+  assert.match(html_[0][2], /scroll-padding-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/);
+  assert.doesNotMatch(strip('site/css/resume-half.css'), /scroll-margin|scroll-padding/, 'no margin of its own to add to the padding');
+  // The padding is the root's, so every id the suite pages link to (index.html#suite and the rest) is covered.
   const withIds = [...html.matchAll(/<article class="([^"]*)"[^>]*\sid="([^"]+)"/g)];
   assert.ok(withIds.length >= 5, 'ergon, suite, dotz, sophos and asmodeus carry ids');
-  for (const [, cls, id] of withIds) assert.match(cls, /(^|\s)resume-project(\s|$)/, `#${id} is covered by the scroll margin`);
+  for (const [, cls, id] of withIds) assert.match(cls, /(^|\s)resume-project(\s|$)/, `#${id} is a project`);
 });

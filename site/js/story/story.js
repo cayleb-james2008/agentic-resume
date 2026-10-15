@@ -191,7 +191,8 @@ export function mount(section) {
 
     const writePage = (s) => {
       if (name) {
-        // name.y is up-positive in stage heights; CSS y runs down.
+        // name.y is up-positive in stage heights; CSS y runs down. The name's block is the stage above the
+        // toolbar (story.css), 100svh, so that is what a stage height is here.
         put(name, 'transform', `translate3d(0, ${fmt(-s.name.y * 100)}svh, 0) scale(${fmt(s.name.scale)})`);
         put(name, 'letterSpacing', `${fmt(s.name.spread)}em`);
         put(name, 'opacity', fmt(s.name.opacity));
@@ -225,7 +226,10 @@ export function mount(section) {
      * view) would shift where the clock sits between steps.
      */
     const draw = (time, tick) => {
-      const progress = triggerProgress(section.getBoundingClientRect(), window.innerHeight, 'top top', 'bottom bottom');
+      // 'bottom bottom' is the runway's foot meeting the stage's, as the sticky stage lets go. The stage is
+      // 100lvh, taller than the window while a phone's toolbar shows, so measuring by the stage puts progress 1
+      // there whatever the toolbar does: 0..1 is always the runway's seven svh screens of scrolling.
+      const progress = triggerProgress(section.getBoundingClientRect(), stage.clientHeight || window.innerHeight, 'top top', 'bottom bottom');
       const s = storyState(progress, layout);
 
       if (!tier.freeze) {

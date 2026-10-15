@@ -228,24 +228,27 @@ test('every overlay item in the markup is one story.js can place, from the same 
 
 test('the label offsets in story.css are the layout\'s radii, and no position is copied from it', () => {
   const css = read('site/css/story.css');
-  const radius = (name) => Number(css.match(new RegExp(`${name}:\\s*([\\d.]+)svh;`))[1]);
-  // A stage is 100svh high, so a radius in stage heights is its value times 100 svh.
-  assert.ok(Math.abs(radius('--node-r') - NODE_R * 100) < 1e-9, `--node-r is ${NODE_R * 100}svh`);
-  assert.ok(Math.abs(radius('--gate-r') - GATE_R * 100) < 1e-9, `--gate-r is ${GATE_R * 100}svh`);
+  const radius = (name) => Number(css.match(new RegExp(`${name}:\\s*([\\d.]+)lvh;`))[1]);
+  // A stage is 100lvh high (ruling R30), so a radius in stage heights is its value times 100 lvh.
+  assert.ok(Math.abs(radius('--node-r') - NODE_R * 100) < 1e-9, `--node-r is ${NODE_R * 100}lvh`);
+  assert.ok(Math.abs(radius('--gate-r') - GATE_R * 100) < 1e-9, `--gate-r is ${GATE_R * 100}lvh`);
   // The team nodes, the ticket person and the gates really are drawn with those radii.
   const L = layoutFor(1.6, 6);
   const drawn = (id) => slotsFor(id, 1, L).filter((s) => s.th === 0 && s.a[0] === s.b[0] && s.a[1] === s.b[1]).map((s) => s.r);
   assert.ok(drawn('team').includes(NODE_R) && drawn('team').includes(SOURCE_R));
   assert.ok(drawn('tickets').includes(NODE_R) && drawn('tickets').includes(GATE_R));
-  // Offsets use the variables. The only other svh in the file are the stage's own height and the name's size.
+  // Offsets use the variables. The only other viewport heights in the file are the runway's and the stage's own,
+  // the toolbar lift (100lvh - 100svh) and the name's and headline's caps.
   assert.match(css, /\.story-role \{[^}]*calc\(50% \+ var\(--node-r\)/);
   assert.match(css, /\.story-label \{[^}]*var\(--gate-r\)[^}]*var\(--gate-r\)/);
   assert.match(css, /\.story-check \{[^}]*left:\s*calc\(var\(--gate-r\)[^}]*top:\s*calc\(var\(--gate-r\)/, 'the check sits below and right of the gate, by its radius');
-  const others = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([\w-]+):[^;{}]*?([\d.]+)svh/g)]
+  const uses = (unit) => [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(new RegExp(`([\\w-]+):[^;{}]*?([\\d.]+)${unit}`, 'g'))]
     .filter(([, property]) => !['--node-r', '--gate-r'].includes(property))
     .map(([, property, value]) => `${property} ${value}`);
-  // (The headline's 9.5svh is its cap on a short stage, so the hero line clears the pool.)
-  assert.deepEqual(others.sort(), ['--headline 9.5', 'font-size 15', 'height 100', 'height 100'].sort(), 'no radius is copied into a rule');
+  // (The headline's 9.5svh is its cap on a short stage, so the hero line clears the pool. The runway is
+  // 100svh * 7 + 100lvh; the name's block, the cue and the shape labels lift by 100lvh - 100svh.)
+  assert.deepEqual(uses('svh').sort(), ['--headline 9.5', 'font-size 15', 'height 100', 'inset 100', 'bottom 100', 'transform 100'].sort(), 'no radius is copied into a rule');
+  assert.deepEqual(uses('lvh').sort(), ['height 100', 'height 100', 'inset 100', 'bottom 100', 'transform 100'].sort(), 'no radius is copied into a rule');
   // Nothing places a label by a number worked out from the layout: no percentages on an item, no orientation switch.
   assert.doesNotMatch(css, /orientation/);
   const rules = rulesOf('site/css/story.css');
@@ -291,7 +294,7 @@ test('the water canvas is decorative and never blocks a vertical swipe', () => {
 
 test('the runway only exists for a scripted page that allows motion', () => {
   const rules = rulesOf('site/css/story.css');
-  const tall = rules.filter((r) => declares(r.body, 'height', '[^;]*svh'));
+  const tall = rules.filter((r) => declares(r.body, 'height', '[^;]*[sl]vh'));
   const sticky = rules.filter((r) => declares(r.body, 'position', 'sticky'));
   assert.ok(tall.length >= 2 && sticky.length === 1, 'the section and the stage are the only tall things');
   for (const rule of [...tall, ...sticky]) {
@@ -302,9 +305,18 @@ test('the runway only exists for a scripted page that allows motion', () => {
     }
   }
   assert.ok(sticky[0].parts.every((p) => p.endsWith('.story-stage')));
-  assert.ok(tall.some((r) => r.parts.includes(`${GUARD} ${RUNWAY}`) && declares(r.body, 'height', 'calc\\(100svh \\* 8\\)')),
-    'the runway is one stage and seven screens: calc(100svh * 8)');
-  assert.ok(tall.some((r) => r.parts.every((p) => p.endsWith('.story-stage')) && declares(r.body, 'height', '100svh')));
+  // Ruling R30: the stage is the large viewport, so a phone's toolbar collapsing uncovers no bare band under it,
+  // and the runway is seven screens of scrolling (svh, what is always seen) plus that stage.
+  assert.ok(tall.some((r) => r.parts.includes(`${GUARD} ${RUNWAY}`) && declares(r.body, 'height', 'calc\\(100svh \\* 7 \\+ 100lvh\\)')),
+    'the runway is seven screens and the stage: calc(100svh * 7 + 100lvh)');
+  assert.ok(tall.some((r) => r.parts.every((p) => p.endsWith('.story-stage')) && declares(r.body, 'height', '100lvh\\b')));
+  assert.equal(tall.length, 2, 'the section and the stage');
+  // What sits at the stage's foot is lifted by the toolbar's height, so the toolbar never covers it on load.
+  const LIFT = 'calc\\(1\\.75rem \\+ 100lvh - 100svh\\)';
+  const lifted = (end, property, value) => rules.some((r) => r.at.includes(MOTION) && r.parts.every((p) => p.endsWith(end)) && declares(r.body, property, value));
+  assert.ok(lifted('.story-cue', 'bottom', LIFT), 'the cue');
+  assert.ok(lifted('[data-overlay="shape"]', 'transform', 'translateY\\(calc\\(100svh - 100lvh\\)\\)'), 'the shape labels');
+  assert.ok(lifted('.story-name', 'inset', '0 0 calc\\(100lvh - 100svh\\)'), 'the name, centred in what is seen');
 
   // The story itself, outside that block, is only ever a normal-flow stack.
   const outside = rules.filter((r) => !r.at.includes(MOTION));

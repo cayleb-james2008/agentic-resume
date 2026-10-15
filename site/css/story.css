@@ -9,9 +9,9 @@
   /* The hero headline: 5.2vw, but never so tall that a short stage (a short window) runs it into the pool. */
   --headline: clamp(2.4rem, min(5.2vw, 9.5svh), 5.5rem);
   /* The radii of a team node and a ticket gate, in stage heights (NODE_R and GATE_R in shapes.js; a test
-     holds them to those). A stage is 100svh high, so 3.2svh is 0.032 of it. */
-  --node-r: 3.2svh;
-  --gate-r: 3svh;
+     holds them to those). A stage is 100lvh high, so 3.2lvh is 0.032 of it. */
+  --node-r: 3.2lvh;
+  --gate-r: 3lvh;
   display: flex; flex-direction: column;
   /* A 44rem column, centred; never closer to the edge than the gutter. */
   padding: calc(var(--masthead-h) + 2rem) max(var(--gutter), calc((100% - 44rem) / 2)) clamp(3rem, 8vw, 6rem);
@@ -119,22 +119,27 @@
   letter-spacing: 0.04em; text-transform: uppercase;
 }
 
-/* --- The runway: only a scripted page that allows motion, and only while the story runs ----- */
+/* --- The runway: only a scripted page that allows motion, and only while the story runs -----
+   The stage is the large viewport (100lvh): a phone's toolbar collapsing as the page scrolls never uncovers a
+   bare band under it, and lvh does not change as the toolbar comes and goes, so nothing resizes. The runway is
+   seven screens of scrolling (in svh, the height the reader always sees) plus the stage. What sits at the
+   stage's foot is lifted by the toolbar's height, 100lvh - 100svh, so the toolbar never covers it. */
 @media (prefers-reduced-motion: no-preference) {
-  .js:not(.reveal-failsafe) .story:not(.story--static) { display: block; height: calc(100svh * 8); padding: 0; }
+  .js:not(.reveal-failsafe) .story:not(.story--static) { display: block; height: calc(100svh * 7 + 100lvh); padding: 0; }
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-stage {
-    display: block; position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--background);
+    display: block; position: sticky; top: 0; height: 100lvh; overflow: hidden; background: var(--background);
   }
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-canvas {
     display: block; position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y;
   }
-  /* story.js flies this to the masthead: the block fills the stage so it turns about the stage's middle. */
+  /* story.js flies this to the masthead: the block fills the stage above the toolbar, so it turns about the
+     middle of what the reader sees. */
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-name {
-    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: absolute; inset: 0 0 calc(100lvh - 100svh); display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 0; pointer-events: none;
   }
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-cue {
-    display: block; position: absolute; left: 50%; bottom: 1.75rem; transform: translateX(-50%);
+    display: block; position: absolute; left: 50%; bottom: calc(1.75rem + 100lvh - 100svh); transform: translateX(-50%);
     font-size: var(--type-eyebrow); letter-spacing: 0.24em; text-transform: uppercase; color: var(--foreground-muted);
   }
   /* White on difference: dark over the light page, light over the ink water. */
@@ -146,6 +151,8 @@
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-overlay {
     display: block; position: absolute; inset: 0; opacity: 0; pointer-events: none;
   }
+  /* The shape labels sit under the silhouettes, near the stage's foot: lifted clear of the toolbar. */
+  .js:not(.reveal-failsafe) .story:not(.story--static) [data-overlay="shape"] { transform: translateY(calc(100svh - 100lvh)); }
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-art { display: none; }
 }
 

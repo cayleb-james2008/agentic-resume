@@ -6,8 +6,9 @@
 
 /**
  * A height change smaller than this is the phone's address bar showing or
- * hiding (about 50–120px), not a real resize. The runway is laid out in `svh`,
- * which ignores the bar, so the stage keeps its layout through it.
+ * hiding (about 50–120px), not a real resize. The stage is `100lvh`, which the
+ * bar never changes, so it should not see one at all; this is the backstop
+ * for a browser that resizes it anyway.
  */
 const ADDRESS_BAR = 160;
 

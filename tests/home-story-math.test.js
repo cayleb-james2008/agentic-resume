@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
+import { triggerProgress } from '../site/js/engine/scroll.js';
+import { readFileSync } from 'node:fs';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
 import { CAPTION_BOX, DROP_R, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, TICKETS, layoutFor, slotsFor, overlaysFor, ticketTrip } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
@@ -593,4 +595,23 @@ test('the water has a deadline: late, the story goes static once; on time, never
   const fake = { setTimeout: (fn, ms) => { calls.push(['set', ms]); return 7; }, clearTimeout: (id) => calls.push(['clear', id]) };
   deadline(123, () => {}, fake).met();
   assert.deepEqual(calls, [['set', 123], ['clear', 7]]);
+});
+
+test('the runway\'s progress runs 0..1 over its seven svh screens, a phone\'s toolbar shown or not', () => {
+  // Ruling R30: the stage is 100lvh, the runway 100svh * 7 + 100lvh. story.js measures progress by the stage's
+  // height, so 1 lands exactly where the sticky stage lets go, wherever the toolbar is.
+  for (const [svh, lvh] of [[900, 900], [664, 750], [740, 844]]) {
+    const runway = 7 * svh + lvh;
+    const at = (scrolled) => triggerProgress({ top: -scrolled, bottom: runway - scrolled, height: runway }, lvh, 'top top', 'bottom bottom');
+    assert.equal(at(0), 0, `${svh}/${lvh}: 0 at the top`);
+    assert.equal(at(7 * svh), 1, `${svh}/${lvh}: 1 as the stage lets go`);
+    for (const screens of [0.5, 1.5, 3.25, 6.5]) assert.ok(Math.abs(at(screens * svh) * RUNWAY_SCREENS - screens) < 1e-9, `${svh}/${lvh}: p × 7 is the screen`);
+    // The section's foot meets the stage's foot after exactly those seven screens: the stage is stuck all the way.
+    assert.equal(runway - 7 * svh, lvh);
+  }
+  const script = readFileSync(new URL('../site/js/story/story.js', import.meta.url), 'utf8');
+  assert.match(script, /triggerProgress\(section\.getBoundingClientRect\(\), stage\.clientHeight \|\| window\.innerHeight, 'top top', 'bottom bottom'\)/);
+  // lvh never changes with the toolbar, so the stage never resizes for it; were a browser to resize it anyway,
+  // a change under 160px is still not a retune.
+  assert.equal(shouldRetune({ w: 390, h: 750 }, { w: 390, h: 664 }), false);
 });

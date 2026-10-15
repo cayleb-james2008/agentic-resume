@@ -113,7 +113,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 
 /* Buttons: the homepage's pills. */
 .button {
-  min-height: 2.875rem; display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem;
+  min-height: max(44px, 2.875rem); display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem;
   padding: 0.75rem 1.375rem; border-radius: var(--radius-pill); font-size: max(12px, 0.875rem); font-weight: 500; line-height: 1.2;
   transition: background var(--duration-fast) var(--ease-entrance), color var(--duration-fast) var(--ease-entrance), transform 0.35s var(--ease-hover);
 }
@@ -153,7 +153,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 }
 .result-list li strong { display: block; margin-bottom: 0.22rem; }
 .source-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-.source-links a { font-size: max(12px, 0.875rem); font-weight: 600; }
+.source-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: max(12px, 0.875rem); font-weight: 600; }
 .tag { display: inline-block; margin: 0.2rem 0.25rem 0.2rem 0; padding: 0.25rem 0.625rem; border-radius: var(--radius-pill); border: 1px solid var(--lab-line); font: 400 max(12px, 0.75rem)/1.4 var(--font-mono); }
 .series { display: block !important; width: 100%; height: 110px; margin-top: 1rem; overflow: hidden; }
 .series rect { fill: rgb(255 255 255 / 0.32); }

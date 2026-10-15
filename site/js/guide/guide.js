@@ -19,12 +19,14 @@ export function mount(aside, { reduced, onModal }) {
   const log = aside.querySelector('.guide-log');
   const answers = JSON.parse(aside.querySelector('[data-guide-answers]').textContent);
   const hero = document.getElementById('home');
-  let typing = null;
+  let typing = null, open = false, hideTimer = 0;
 
   aside.hidden = false;
-  const toggle = (open) => {
+  const toggle = (next) => {
+    open = next;
     aside.classList.toggle('open', open);
     agent.setAttribute('aria-expanded', String(open));
+    window.clearTimeout(hideTimer);
     if (open) {
       panel.hidden = false;
       panel.classList.add('enter');
@@ -33,11 +35,11 @@ export function mount(aside, { reduced, onModal }) {
       aside.querySelector('.guide-q')?.focus({ preventScroll: true });
     } else {
       panel.classList.add('enter');
-      window.setTimeout(() => { panel.hidden = true; panel.classList.remove('enter'); }, reduced ? 0 : 250);
+      hideTimer = window.setTimeout(() => { panel.hidden = true; panel.classList.remove('enter'); }, reduced ? 0 : 250);
       agent.focus({ preventScroll: true });
     }
   };
-  agent.addEventListener('click', () => toggle(panel.hidden));
+  agent.addEventListener('click', () => toggle(!open));
   aside.querySelector('[data-guide-close]').addEventListener('click', () => toggle(false));
   panel.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggle(false); });
 

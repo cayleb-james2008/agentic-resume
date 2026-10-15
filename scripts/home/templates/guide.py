@@ -16,7 +16,7 @@ def render(content: dict) -> str:
                          ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return (
         f'<aside class="guide" data-guide hidden aria-label="{attr(g["label"])}">'
-        '<div class="guide-panel" id="guide-panel" role="dialog" aria-modal="false" aria-labelledby="guide-title" hidden>'
+        '<div class="guide-panel" id="guide-panel" data-lenis-prevent role="dialog" aria-modal="false" aria-labelledby="guide-title" hidden>'
         f'<div class="guide-top mono"><h2 class="guide-title" id="guide-title">{text(g["title"])}</h2>'
         f'<button type="button" class="guide-close" data-guide-close aria-label="{attr(g["close"])}">{icon("x")}</button></div>'
         f'<div class="guide-log mono" id="guide-log" data-lenis-prevent role="log" aria-live="polite"><p class="d">{text(g["greeting"])}</p></div>'

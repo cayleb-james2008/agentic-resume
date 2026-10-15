@@ -1,6 +1,6 @@
 /** The menu and the request modal. The scroll lock is counted so stacked overlays release it once. */
 
-import { composeMail, validate } from './mail.js';
+import { composeMail, topicPhrase, validate } from './mail.js';
 
 export function createScrollLock({ stop, start }) {
   let count = 0;
@@ -99,8 +99,9 @@ export function mountModal(root, ctx) {
   const raw = root.querySelector('[data-md-raw]');
   const fields = { name: form.elements.name, email: form.elements.email, msg: form.elements.msg };
   const d = root.dataset;
-  let topic = '', mail = null;
+  let topic = '', mail = null, resetTimer = 0;
   const reset = () => {
+    resetTimer = 0;
     form.reset();
     fields.msg.placeholder = d.defaultPh;
     for (const k of Object.keys(fields)) { fields[k].removeAttribute('aria-invalid'); root.querySelector(`#e-${k}`).hidden = true; }
@@ -114,7 +115,7 @@ export function mountModal(root, ctx) {
     ...ctx,
     focus: () => (done.hidden ? fields.name : doneTitle),
     // A draft the visitor dismissed stays for when they come back; only a written email clears the form.
-    onClose: () => { if (!done.hidden) window.setTimeout(reset, 300); },
+    onClose: () => { if (!done.hidden) resetTimer = window.setTimeout(reset, 300); },
   });
   root.addEventListener('click', (e) => { if (e.target === root) modal.close(); });
   form.addEventListener('submit', (e) => {
@@ -149,9 +150,11 @@ export function mountModal(root, ctx) {
   });
   return {
     open(t = '') {
+      // Reopened before the last written email's reset ran: reset now, so the form shows, not the old done view.
+      if (resetTimer) { window.clearTimeout(resetTimer); resetTimer = 0; reset(); }
       topic = t;
       topicLabel.textContent = t ? `${d.topicPrefix}${t}` : d.eyebrow;
-      if (t) fields.msg.placeholder = t === d.otherTopic ? d.otherPh : d.topicPh.replace('{topic}', t.toLowerCase());
+      fields.msg.placeholder = t ? (t === d.otherTopic ? d.otherPh : d.topicPh.replace('{topic}', topicPhrase(t))) : d.defaultPh;
       modal.show();
     },
     close: () => modal.close(),

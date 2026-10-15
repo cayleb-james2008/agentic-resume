@@ -62,7 +62,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 640px) { .h2 { font-size: 3rem; } }
 
 .pill {
-  display: inline-flex; align-items: center; gap: 0.75rem; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 0.75rem; min-height: 44px; border-radius: var(--radius-pill);
   font-size: max(12px, 0.875rem); font-weight: 500; line-height: 1.2; padding: 0.875rem 1.75rem; white-space: nowrap;
   transition: transform 0.35s var(--ease-hover), background-color 0.18s, color 0.18s, border-color 0.18s;
 }

@@ -98,12 +98,14 @@ export function mount(figure, { reduced }) {
   }
 
   async function routine(i, announce = false) {
-    const card = cards()[i], person = data.teams[team].people[i];
+    const card = cards()[i];
     if (!card || card.classList.contains('busy') || card.classList.contains('tk')) return;
     const status = card.querySelector('.st');
     card.classList.add('busy');
     status.textContent = f.working;
     await packet(i, 1, '', 850);
+    // Read the person now: a team switch during the packet reshapes this card into someone else.
+    const person = data.teams[team].people[i];
     line(`› ${person.role.toLowerCase()} · ${person.task}`, announce);
     await wait(500);
     card.classList.remove('busy');

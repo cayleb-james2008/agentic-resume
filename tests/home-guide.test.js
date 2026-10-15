@@ -46,7 +46,7 @@ test('Ask my agent is hidden until its script mounts it, and its panel is a labe
   const aside = home.match(/<aside class="guide"[^>]*>/)[0];
   assert.match(aside, /\shidden(\s|>)/);
   assert.match(aside, /\sdata-guide(\s|>)/);
-  assert.match(home, /<div class="guide-panel" id="guide-panel" role="dialog" aria-modal="false" aria-labelledby="guide-title" hidden>/);
+  assert.match(home, /<div class="guide-panel" id="guide-panel" data-lenis-prevent role="dialog" aria-modal="false" aria-labelledby="guide-title" hidden>/);
   assert.match(home, /<button[^>]*class="guide-agent"[^>]*aria-controls="guide-panel"[^>]*aria-expanded="false"/);
   assert.match(home, /<div class="guide-log mono" id="guide-log" data-lenis-prevent role="log" aria-live="polite">/);
   const buttons = [...home.matchAll(/<button type="button" class="guide-q" data-q="(\d+)" data-cmd="([^"]+)">/g)];

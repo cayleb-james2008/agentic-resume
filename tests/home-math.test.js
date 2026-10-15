@@ -185,3 +185,10 @@ test('an overlay that hands off to another (menu → Contact) gives focus back b
   assert.equal(lock.count, 0);
   delete globalThis.document;
 });
+
+test('a service topic reads naturally mid-sentence: lower-case first word, acronyms kept', async () => {
+  const { topicPhrase } = await import('../site/js/home/mail.js');
+  assert.equal(topicPhrase('AI employees'), 'AI employees');
+  assert.equal(topicPhrase('AI everything'), 'AI everything');
+  assert.equal(topicPhrase('Remote support'), 'remote support');
+});

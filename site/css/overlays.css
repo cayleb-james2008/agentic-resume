@@ -18,7 +18,7 @@
 .modal:not(.open) .md-panel { transform: translateY(28px); }
 .modal.closing .md-panel { transform: translateY(18px); }
 .md-x {
-  position: absolute; right: 1rem; top: 1rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  position: absolute; right: 1rem; top: 1rem; display: grid; place-items: center; width: max(44px, 2.5rem); height: max(44px, 2.5rem); border-radius: 50%;
   background: var(--surface); color: var(--text-67); transition: background-color 0.18s, color 0.18s;
 }
 .md-x .icon { width: 1rem; height: 1rem; }

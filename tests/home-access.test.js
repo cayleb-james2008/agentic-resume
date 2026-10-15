@@ -74,7 +74,7 @@ test('every small control has a 44px touch target', () => {
 
 test('the composer keeps a draft the visitor dismissed, and a failed copy shows the message to select', () => {
   const js = read('site/js/home/overlays.js');
-  assert.match(js, /onClose: \(\) => \{ if \(!done\.hidden\) window\.setTimeout\(reset, 300\); \}/);
+  assert.match(js, /onClose: \(\) => \{ if \(!done\.hidden\) (?:resetTimer = )?window\.setTimeout\(reset, 300\); \}/);
   assert.match(home, /<button class="pill light" type="button" data-md-copy data-copied="Copied" data-failed="[^"]+">/);
   assert.match(home, /<textarea class="md-raw" data-md-raw readonly rows="6" aria-label="[^"]+" hidden><\/textarea>/);
   assert.match(js, /copy\.dataset\.failed/);
@@ -92,4 +92,65 @@ test('locking scroll for an overlay keeps the scrollbar\'s room, so the page nev
 test('at the very end of the page the footer\'s last line clears the floating Ask my agent pill', () => {
   // The pill sits 1rem from the bottom and is 3rem tall; the page can't scroll past the footer, so it leaves room.
   assert.match(rule(read('site/css/contact.css'), '.ft-legal'), /padding-bottom:\s*calc\(5rem \+ env\(safe-area-inset-bottom, 0px\)\)/);
+});
+
+// Codex review, 2026-10-15: the rem grid drops the root to 13px at 1024px (an iPad in landscape) and to
+// about 14px on a 320px phone, so a control sized only in rem falls under the 44px floor there.
+test('controls sized in rem keep a 44px floor at the smallest root size', () => {
+  const floors = [
+    ['site/css/base.css', '.pill', /min-height:\s*44px/],
+    ['site/css/masthead.css', '.nav a', /min-height:\s*44px/],
+    ['site/css/about.css', '.soc a', /width:\s*max\(44px, 2\.75rem\)[^}]*height:\s*max\(44px, 2\.75rem\)/],
+    ['site/css/ergon.css', '.seg button', /min-height:\s*max\(44px, 2\.75rem\)/],
+    ['site/css/overlays.css', '.md-x', /width:\s*max\(44px, 2\.5rem\)[^}]*height:\s*max\(44px, 2\.5rem\)/],
+    ['site/css/guide.css', '.guide-agent', /height:\s*max\(44px, 3rem\)/],
+    ['site/css/subpage.css', '.sub-resume', /min-height:\s*44px/],
+    ['site/css/resume.css', '.resume-download', /min-height:\s*44px/],
+    ['site/css/resume.css', '.resume-actions .button', /min-height:\s*44px/],
+    ['lab/lab.css', '.button', /min-height:\s*max\(44px, 2\.875rem\)/],
+  ];
+  for (const [sheet, selector, re] of floors) assert.match(rule(read(sheet), selector), re, `${sheet} ${selector}`);
+  // Standalone links (not words inside a sentence) get the same floor.
+  assert.match(strip(read('site/css/resume.css')), /\.resume-contact a, \.resume-actions \.quiet\s*\{[^}]*min-height:\s*44px/);
+  assert.match(strip(read('site/css/subpage.css')), /\.project-aside p > a:only-child, \.source-links a\s*\{[^}]*min-height:\s*44px/);
+  assert.match(strip(read('lab/lab.css')), /\.source-links a\s*\{[^}]*min-height:\s*44px/);
+  assert.match(rule(read('site/css/subpage.css'), '.sub-footer a'), /min-height:\s*44px/);
+  assert.match(rule(read('site/css/resume.css'), '.resume-footer a'), /min-height:\s*44px/);
+  assert.match(rule(read('site/css/resume.css'), '.resume-selected h3 > a'), /min-height:\s*44px/);
+});
+
+// The rest of the Codex review (2026-10-15).
+const body = (src, start) => { const i = src.indexOf(start); assert.ok(i >= 0, start); return src.slice(i, src.indexOf('\n  }\n', i)); };
+
+test('a routine reads its person after the wire animation, so a team switch mid-flight logs the new team', () => {
+  const routine = body(read('site/js/home/ergon.js'), 'async function routine(');
+  assert.ok(routine.indexOf('data.teams[team].people[i]') > routine.indexOf('await packet('), routine);
+});
+
+test('Ask my agent keeps its own open state and cancels a pending hide when reopened quickly', () => {
+  const guide = read('site/js/guide/guide.js');
+  assert.match(guide, /agent\.addEventListener\('click', \(\) => toggle\(!open\)\)/);
+  assert.match(guide, /window\.clearTimeout\(hideTimer\)/);
+  assert.doesNotMatch(guide, /toggle\(panel\.hidden\)/);
+});
+
+test('on a short landscape phone the whole agent panel fits the screen and scrolls', () => {
+  assert.match(home, /<div class="guide-panel" id="guide-panel" data-lenis-prevent role="dialog"/);
+  const panel = rule(read('site/css/guide.css'), '.guide-panel');
+  assert.match(panel, /max-height:\s*calc\(100svh - 5\.5rem - env\(safe-area-inset-bottom, 0px\)\)/);
+  assert.match(panel, /overflow-y:\s*auto/);
+  assert.match(panel, /overscroll-behavior:\s*contain/);
+});
+
+test('reopening the composer right after a written email starts on a clean form, not the old done view', () => {
+  const js = read('site/js/home/overlays.js');
+  assert.match(js, /resetTimer = window\.setTimeout\(reset, 300\)/);
+  const open = body(js, '    open(t = \'\') {');
+  assert.match(open, /window\.clearTimeout\(resetTimer\)/);
+  assert.match(open, /reset\(\)/);
+});
+
+test('a generic open of the composer puts back the generic prompt', () => {
+  const open = body(read('site/js/home/overlays.js'), '    open(t = \'\') {');
+  assert.match(open, /fields\.msg\.placeholder = t \? [^;]+ : d\.defaultPh;/);
 });

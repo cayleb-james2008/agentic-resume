@@ -24,7 +24,7 @@
 }
 .af-l { margin-bottom: 0.625rem; font-size: max(12px, 0.875rem); color: var(--text-63); }
 .soc { display: flex; gap: 0.5rem; }
-.soc a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--surface); color: var(--text-74); }
+.soc a { display: grid; place-items: center; width: max(44px, 2.75rem); height: max(44px, 2.75rem); border-radius: 50%; background: var(--surface); color: var(--text-74); }
 .soc a.acc { background: var(--accent); color: var(--ink); }
 .soc .icon { width: 1.0625rem; height: 1.0625rem; transition: transform 0.3s var(--ease-hover); }
 

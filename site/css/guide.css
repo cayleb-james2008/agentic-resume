@@ -9,14 +9,16 @@
 .js:not(.reveal-failsafe) .guide:not(.show):not(.open) { opacity: 0; transform: translateY(1rem); pointer-events: none; }
 /* taste-skill-ignore: a floating control over the page */
 .guide-agent {
-  display: inline-flex; align-items: center; gap: 0.625rem; height: 3rem; padding: 0 1.125rem 0 0.5rem; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 0.625rem; height: max(44px, 3rem); padding: 0 1.125rem 0 0.5rem; border-radius: var(--radius-pill);
   background: var(--ink); color: var(--foreground-on-dark); font-size: max(12px, 0.875rem); font-weight: 500;
   box-shadow: 0 12px 30px -12px var(--raw-color-ink-alpha-60); transition: transform 0.3s var(--ease-hover);
 }
 .guide-agent .mk { width: 2rem; height: 2rem; border-radius: 50%; background: var(--raw-color-ink-800); }
 .guide-agent:active { transform: scale(0.97); }
 .guide-panel {
-  width: min(23rem, calc(100vw - 2rem)); overflow: hidden; border-radius: var(--radius-card-sm); transform-origin: bottom right;
+  width: min(23rem, calc(100vw - 2rem)); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; border-radius: var(--radius-card-sm); transform-origin: bottom right;
+  /* The pill (3rem + 1rem) and the gap sit below it; on a landscape phone the whole panel scrolls. */
+  max-height: calc(100vh - 5.5rem); max-height: calc(100svh - 5.5rem - env(safe-area-inset-bottom, 0px));
   background: var(--term); color: var(--term-fg); box-shadow: 0 25px 50px -12px var(--raw-color-ink-alpha-60);
   transition: opacity 0.25s var(--ease-spring), transform 0.3s var(--ease-spring);
 }

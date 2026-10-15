@@ -2,6 +2,8 @@
 
 Paused 2026-10-15 in a cloud session that couldn't reach Instagram, couldn't generate in Higgsfield, and had no browser control. Pick this up on the desktop, where an agent can drive Cayleb's logged-in browser. Nothing has been generated and no credits have been spent.
 
+**Visual rule:** the résumé site is being redesigned. Don't use its current version (art, characters, colors, layout) as a reference for anything visual. The look comes from @ink.industries_ and from Cayleb.
+
 ## Cayleb's original request (word for word)
 
 > I want to make a couple posts that I can use as promotional material on my Instagram promoting myself and workflows I use but not through typical advertising but more story telling. I really like how this guys videos are directed and the style they use so we're aiming to use higgsfeild and get a similar style https://www.instagram.com/ink.industries_?rpxt=MWt1YTV6OGV4NTA2eg==
@@ -15,12 +17,14 @@ Paused 2026-10-15 in a cloud session that couldn't reach Instagram, couldn't gen
 | Format | A series of **self-contained** episodes. No episode refers to another, and there's no running plot. Start with 2–3 and grow if they perform. |
 | Style | Match **@ink.industries_**: directing, pacing, storytelling, voice. **Not studied yet.** The cloud session couldn't reach Instagram. |
 | Audience | **Owners and hirers.** Stories are set inside small businesses (owners see themselves) and also work as proof for anyone hiring a Forward Thinking Engineer. |
-| On screen | Cayleb's **Pixar-style 3D character** from the site: messy brown hair, glasses, black button shirt, jeans. Also his **glass-droplet AI agent**, a small water droplet with eyes. The droplet is the AI's on-screen face, so no code or dashboards are needed. |
+| On screen | A **3D character version of Cayleb**, plus a visible on-screen form for the AI so no code or dashboards are needed. **The look isn't locked.** Design the character and the AI's form fresh with Cayleb, guided by the @ink.industries_ style. Don't copy the site's current renders or its glass-droplet agent. |
 | Voice | An **AI clone of Cayleb's own voice**, made in Higgsfield with ElevenLabs. |
 | Budget | Cayleb says he has about 60 credits and will move to the lowest paid plan if needed. **Check this.** On 2026-10-15 the connector saw one private workspace on the free plan with 10 credits, not marked as selected. |
 | AI brief | The stories should show strong AI capability, in plain words and visuals. |
 
 ## Brand facts to stay true to (from this repo)
+
+These cover what he does and how he talks, not how things look.
 
 **Positioning:** Forward Thinking Engineer.
 - He shadows people for two days.
@@ -46,15 +50,13 @@ Paused 2026-10-15 in a cloud session that couldn't reach Instagram, couldn't gen
 - Never claim real customers, revenue or savings.
 - Toggle Instagram's "AI info" label when posting.
 
-**Character references in the repo:**
-- `assets/home/experience/*.webp`: seven scenes, including `2026-integrator-960.webp` (him, a coworker and the droplet) and `2026-builds.webp`.
-- `assets/home/hero/person-diffuse.webp` (portrait).
-- `assets/home/projects/figure.webp` and `assets/home/contact/figure.webp`.
-- The original plain-background renders (hero, projects, contact) are in Cayleb's ChatGPT chat and not in the repo. Ask him for them; they make the best references.
+**Character look:** to be designed fresh.
+- Ask Cayleb for photos of himself (for likeness) and any style references he likes.
+- Don't use the images under `assets/home/` or any other site art as a style reference. The site is mid-redesign.
 
 ## Story seeds (drafts, not approved; adapt to the reference style once it's studied)
 
-Shape for every episode: one protagonist, one painful everyday moment, Cayleb quietly watching, then the droplet doing the work in a way you can *see*. Show it physically: magnets sliding on a whiteboard, phones buzzing with "Booked", a stack of paper thinning out. End on a human payoff and one closing line.
+Shape for every episode: one protagonist, one painful everyday moment, Cayleb quietly watching, then the AI doing the work in a way you can *see*. Show it physically: magnets sliding on a whiteboard, phones buzzing with "Booked", a stack of paper thinning out. End on a human payoff and one closing line.
 
 1. **The Whiteboard.**
    - Setup: 5:40 a.m. at a moving company. A sick driver and a job running long, and the whole day falls apart on the dispatch board.
@@ -69,13 +71,13 @@ Shape for every episode: one protagonist, one painful everyday moment, Cayleb qu
    - Closing line: "Respect the work first. Then build around it."
 3. **Out of Stock.**
    - Setup: the 7 a.m. rush at an unbranded café. The key item runs out again, and there's a sticky note reading "ORDER MORE."
-   - The droplet learns the week's rhythm.
+   - The AI learns the week's rhythm.
    - Turn: a delivery shows up before she knew she needed it.
    - Closing line: "Nobody lost a shift. The shelf just stopped running empty."
 4. **Who's Getting Replaced?**
    - Setup: an office worker hears "the AI guy is coming" and assumes she's done.
    - Cayleb just watches her work and asks what she hates doing.
-   - Turn: the droplet takes the busywork.
+   - Turn: the AI takes the busywork.
    - Payoff: she leaves at 5.
    - Closing line: "The goal was never fewer people. It was fewer wasted hours."
 5. **The Tailor** (a metaphor that leans toward hirers).
@@ -89,7 +91,7 @@ Shape for every episode: one protagonist, one painful everyday moment, Cayleb qu
 - Nano Banana Pro or 2.1 with image references.
 - Soul Cinema for cinematic stills.
 - Soul Cast for keeping a character's identity consistent.
-- Build a character sheet first (front, three-quarter, profile, full body) for Cayleb and the droplet.
+- Once the look is agreed, build a character sheet (front, three-quarter, profile, full body) for Cayleb's character and the AI's on-screen form.
 
 **Video:**
 - Cinema Studio Video 3.0: 4–15 s, up to 4K, genre hint, start and end frames.
@@ -119,7 +121,9 @@ Shape for every episode: one protagonist, one painful everyday moment, Cayleb qu
 2. **Check Higgsfield in the browser.**
    - Real balance and plan, which workspace, and credits per generation for the shortlisted models.
    - Propose a per-episode credit budget.
-3. **Pitch concepts.** Rework the seeds to fit the style guide, pitch 3–5 to Cayleb, and lock the first 2–3.
+3. **Pitch concepts and lock the look.**
+   - Rework the seeds to fit the style guide, pitch 3–5 to Cayleb, and lock the first 2–3.
+   - Agree on the character style and the AI's on-screen form with him, from the style guide plus his photos. Don't take anything from the résumé site.
 4. **Write each episode:**
    - logline and beat sheet
    - timed voiceover script, word for word
@@ -137,4 +141,4 @@ Shape for every episode: one protagonist, one painful everyday moment, Cayleb qu
 
 ## Kickoff prompt to paste on the desktop
 
-> Pick up my Instagram story series. Run `git fetch origin ccr-cdc7daf0-0ggnfh && git checkout ccr-cdc7daf0-0ggnfh` in cayleb-james2008/agentic-resume and read `design/INSTAGRAM-SERIES-HANDOFF.md` top to bottom first: it has my original request word for word and everything we've already decided. Then use my browser (I'm logged into Instagram and Higgsfield) to study @ink.industries_ and check my real Higgsfield credits and costs, and follow the "Next steps" in that doc. Ask me before spending any Higgsfield credits or changing my plan.
+> Pick up my Instagram story series. Run `git fetch origin ccr-cdc7daf0-0ggnfh && git checkout ccr-cdc7daf0-0ggnfh` in cayleb-james2008/agentic-resume and read `design/INSTAGRAM-SERIES-HANDOFF.md` top to bottom first: it has my original request word for word and everything we've already decided. Then use my browser (I'm logged into Instagram and Higgsfield) to study @ink.industries_ and check my real Higgsfield credits and costs, and follow the "Next steps" in that doc. My résumé site is being redesigned, so don't use its current version as a reference for anything visual. Ask me before spending any Higgsfield credits or changing my plan.

@@ -1,7 +1,8 @@
 /* Reset, accessibility helpers, the shared pieces of the 2026-10-15 layout and the reveal states. */
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-color: var(--raw-color-steel-400) var(--background); }
+/* The gutter stays when an overlay locks scroll, so nothing shifts sideways (or re-measures) as it opens. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-color: var(--raw-color-steel-400) var(--background); scrollbar-gutter: stable; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -29,6 +30,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--ink); color: var(--foreground-on-dark); font-size: max(12px, 0.875rem); transform: translateY(-200%);
 }
 .skip-link:focus { transform: none; }
+/* Sections take focus after an in-page jump (overlays.js land()); the ring belongs to controls. */
+[tabindex="-1"]:focus { outline: none; }
 
 /* --- Shared pieces --------------------------------------------------------- */
 .mono { font-family: var(--font-mono); font-feature-settings: "calt" 0; }
@@ -73,11 +76,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .pill.dark .pb { background: var(--foreground-on-dark); color: var(--ink); }
 .pill.light { background: var(--surface); color: var(--foreground); }
 .pill.outline { border: 1px solid var(--line); color: var(--foreground); }
-.pill.sm { padding: 0.625rem 1.125rem; font-size: max(12px, 0.8125rem); }
+.pill.sm { min-height: 44px; padding: 0.625rem 1.125rem; font-size: max(12px, 0.8125rem); }
 .pill:active { transform: scale(0.97); }
-.pill[disabled] { opacity: 0.55; cursor: default; }
+.pill[disabled], .pill[aria-disabled="true"] { opacity: 0.55; cursor: default; }
 @media (hover: hover) and (pointer: fine) {
-  .pill:not([disabled]):hover { transform: scale(1.04); }
+  .pill:not([disabled]):not([aria-disabled="true"]):hover { transform: scale(1.04); }
   .pill:hover .pb .ar { transform: translate(3px, 0); }
   .pill:hover .pb .ur { transform: translate(2px, -2px); }
   .pill.outline:hover { border-color: var(--raw-color-ink-alpha-35); }

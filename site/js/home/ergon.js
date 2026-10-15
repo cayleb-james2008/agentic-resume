@@ -113,7 +113,7 @@ export function mount(figure, { reduced }) {
   async function ticket(announce = false) {
     if (ticketBusy) return;
     ticketBusy = true;
-    button.disabled = true;
+    button.setAttribute('aria-disabled', 'true'); // not `disabled`: that would drop the visitor's focus
     button.textContent = f.busy;
     tickets += 1;
     const n = cards().length, i = (tickets * 2) % n;
@@ -142,7 +142,7 @@ export function mount(figure, { reduced }) {
     status.textContent = f.assistantOn;
     ladder.forEach((li) => li.classList.remove('on', 'ok'));
     ticketBusy = false;
-    button.disabled = false;
+    button.removeAttribute('aria-disabled');
     button.textContent = f.button;
   }
 

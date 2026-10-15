@@ -15,7 +15,7 @@
 .about-cap .icon { flex: none; width: 1.5rem; height: 1.5rem; color: var(--foreground); }
 .about-cap span { max-width: 15rem; }
 .about-r { display: flex; flex-direction: column; gap: 2.5rem; min-width: 0; }
-.about-h { font-size: 1.5rem; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; text-wrap: pretty; }
+.about-h { font-size: max(24px, 1.5rem); font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; text-wrap: pretty; }
 @media (min-width: 640px) { .about-h { font-size: 1.875rem; } }
 .about-h .mute { color: var(--text-quiet); }
 .about-foot {

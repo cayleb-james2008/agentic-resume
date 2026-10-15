@@ -97,7 +97,7 @@ test('the request modal has labelled fields, quiet errors, and never claims a me
 });
 
 test('the menu is a modal dialog, hidden until opened', () => {
-  assert.match(home, /<div class="menu dark-ctx" id="menu" data-menu role="dialog" aria-modal="true" aria-label="Menu" hidden>/);
+  assert.match(home, /<div class="menu dark-ctx" id="menu" data-menu data-lenis-prevent role="dialog" aria-modal="true" aria-label="Menu" hidden>/);
   assert.match(home, /<button class="menu-btn chipbox" id="menu-btn" type="button" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false">/);
 });
 

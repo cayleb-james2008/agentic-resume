@@ -49,10 +49,17 @@ export function mount(aside, { reduced, onModal }) {
     q.textContent = `$ ${item.cmd}`;
     const a = document.createElement('p');
     a.className = 'a';
+    // The log is a polite live region: it hears the whole answer once, never each typed step.
+    const typed = document.createElement('span');
+    typed.setAttribute('aria-hidden', 'true');
+    const said = document.createElement('span');
+    said.className = 'sr-only';
+    said.textContent = item.a;
+    a.append(typed, said);
     log.append(q, a);
     const finish = () => {
       window.clearInterval(timer);
-      a.textContent = item.a;
+      typed.textContent = item.a;
       for (const link of item.links ?? []) {
         const el = document.createElement('a');
         el.href = link.href;
@@ -67,9 +74,9 @@ export function mount(aside, { reduced, onModal }) {
     let tick = 0, timer = 0;
     if (reduced) { finish(); return; }
     timer = window.setInterval(() => {
-      a.textContent = typeStep(item.a, tick++);
+      typed.textContent = typeStep(item.a, tick++);
       log.scrollTop = log.scrollHeight;
-      if (a.textContent.length >= item.a.length) finish();
+      if (typed.textContent.length >= item.a.length) finish();
     }, TICK_MS);
     typing = { finish };
   }

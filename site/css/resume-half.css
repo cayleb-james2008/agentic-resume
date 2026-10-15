@@ -80,9 +80,9 @@
 .resume-project li::before {
   content: ""; position: absolute; left: 0; top: 0.62em; width: 0.3rem; height: 0.3rem; border-radius: 50%; background: var(--accent-ink);
 }
-.resume-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.625rem; font-size: max(12px, 0.875rem); }
+.resume-links { display: flex; flex-wrap: wrap; gap: 0 1.25rem; margin-top: 0.125rem; font-size: max(12px, 0.875rem); }
 .resume-link {
-  min-width: 0; overflow-wrap: anywhere; font-weight: 500; color: var(--accent-ink);
+  display: inline-flex; align-items: center; min-height: 44px; min-width: 0; overflow-wrap: anywhere; font-weight: 500; color: var(--accent-ink);
   text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
   transition: color 0.18s;
 }

@@ -38,7 +38,7 @@ def menu(content: dict) -> str:
         else:
             items.append(f'<li><a href="{attr(n["href"])}"{_target(n["href"])} style="--i:{i}">{inner}</a></li>')
     return (
-        '<div class="menu dark-ctx" id="menu" data-menu role="dialog" aria-modal="true" aria-label="Menu" hidden>'
+        '<div class="menu dark-ctx" id="menu" data-menu data-lenis-prevent role="dialog" aria-modal="true" aria-label="Menu" hidden>'
         f'<div class="shell mn-top"><span class="brandline">{mk()}{text(content["wordmark"])}</span>'
         f'<button class="mn-close" type="button" data-menu-close>{icon("x")}{text(mn["close"])}</button></div>'
         f'<nav class="shell mn-nav" aria-label="{attr(mn["label"])}"><ul>{"".join(items)}</ul></nav>'

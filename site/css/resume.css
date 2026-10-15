@@ -22,7 +22,7 @@
 }
 .resume-masthead ul { display: flex; flex-wrap: wrap; gap: 0.25rem clamp(1rem, 3vw, 1.75rem); }
 .resume-masthead nav a {
-  display: inline-block; padding-block: 0.625rem; font-size: max(12px, 0.875rem); font-weight: 500; line-height: 1;
+  display: inline-flex; align-items: center; min-height: 44px; font-size: max(12px, 0.875rem); font-weight: 500; line-height: 1;
   color: var(--text-74); transition: color 0.18s;
 }
 .resume-download {

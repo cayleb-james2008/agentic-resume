@@ -24,7 +24,7 @@ def render(content: dict) -> str:
     )
     return (
         f'<div class="modal" id="modal" data-modal-root{data} role="dialog" aria-modal="true" aria-labelledby="md-title" hidden>'
-        '<div class="md-panel">'
+        '<div class="md-panel" data-lenis-prevent>'
         f'<button class="md-x" type="button" data-modal-close aria-label="{attr(m["close"])}">{icon("x")}</button>'
         '<div data-md-form-wrap>'
         f'<div class="md-head"><p class="md-eb"><i></i><span data-md-topic>{text(m["eyebrow"])}</span></p>'
@@ -35,7 +35,8 @@ def render(content: dict) -> str:
         "</form></div>"
         f'<div class="md-done" data-md-done hidden>{mk("md-badge")}<h2 tabindex="-1" data-md-done-title>{text(m["doneTitle"])}</h2>'
         f'<p>{text(m["doneText"])} <span class="sel">{text(email)}</span>.</p>'
-        f'<div class="md-acts"><button class="pill light" type="button" data-md-copy data-copied="{attr(m["copied"])}">{text(m["copy"])}</button>'
+        f'<textarea class="md-raw" data-md-raw readonly rows="6" aria-label="{attr(m["rawLabel"])}" hidden></textarea>'
+        f'<div class="md-acts"><button class="pill light" type="button" data-md-copy data-copied="{attr(m["copied"])}" data-failed="{attr(m["copyFailed"])}">{text(m["copy"])}</button>'
         f'<button class="pill dark" type="button" data-modal-close>{text(m["close"])}</button></div></div>'
         "</div></div>"
     )

@@ -96,6 +96,7 @@ export function mountModal(root, ctx) {
   const doneTitle = root.querySelector('[data-md-done-title]');
   const topicLabel = root.querySelector('[data-md-topic]');
   const copy = root.querySelector('[data-md-copy]');
+  const raw = root.querySelector('[data-md-raw]');
   const fields = { name: form.elements.name, email: form.elements.email, msg: form.elements.msg };
   const d = root.dataset;
   let topic = '', mail = null;
@@ -105,13 +106,15 @@ export function mountModal(root, ctx) {
     for (const k of Object.keys(fields)) { fields[k].removeAttribute('aria-invalid'); root.querySelector(`#e-${k}`).hidden = true; }
     wrap.hidden = false;
     done.hidden = true;
+    raw.hidden = true;
     copy.textContent = copy.dataset.label || copy.textContent;
   };
   copy.dataset.label = copy.textContent;
   const modal = overlay(root, {
     ...ctx,
     focus: () => (done.hidden ? fields.name : doneTitle),
-    onClose: () => window.setTimeout(reset, 300),
+    // A draft the visitor dismissed stays for when they come back; only a written email clears the form.
+    onClose: () => { if (!done.hidden) window.setTimeout(reset, 300); },
   });
   root.addEventListener('click', (e) => { if (e.target === root) modal.close(); });
   form.addEventListener('submit', (e) => {
@@ -136,7 +139,13 @@ export function mountModal(root, ctx) {
   });
   copy.addEventListener('click', async () => {
     if (!mail) return;
-    copy.textContent = (await copyText(mail.text)) ? copy.dataset.copied : copy.dataset.label;
+    if (await copyText(mail.text)) { copy.textContent = copy.dataset.copied; return; }
+    // Neither clipboard path worked: show the message itself, selected, so a long-press or Ctrl+C takes it.
+    copy.textContent = copy.dataset.failed;
+    raw.value = mail.text;
+    raw.hidden = false;
+    raw.focus({ preventScroll: true });
+    raw.select();
   });
   return {
     open(t = '') {
@@ -150,6 +159,13 @@ export function mountModal(root, ctx) {
   };
 }
 
+/** After an in-page jump: the next Tab starts from the section, and its address is in the URL, as a native link would leave it. */
+export function land(target, id, hist = window.history) {
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+  hist.pushState(null, '', `#${id}`);
+}
+
 /** Every [data-go] scrolls to its section, every [data-modal] opens the composer, every [data-copy] copies. */
 export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
   const go = (id) => {
@@ -157,6 +173,7 @@ export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
     if (!target) return;
     if (lenis) lenis.scrollTo(target, { duration: 1.2 });
     else target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    land(target, id);
   };
   doc.addEventListener('click', async (e) => {
     const t = e.target.closest('[data-go], [data-modal], [data-menu-close], [data-modal-close], [data-copy]');

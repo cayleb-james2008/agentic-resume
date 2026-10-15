@@ -729,6 +729,8 @@
     "doneText": "Your email app should open with this message. If it didn't, copy it and send it to",
     "copy": "Copy message",
     "copied": "Copied",
+    "copyFailed": "Select the message below",
+    "rawLabel": "Your message, ready to copy",
     "close": "Close",
     "topicPlaceholder": "What should {topic} handle for your team?",
     "otherPlaceholder": "What should AI take off your plate?",

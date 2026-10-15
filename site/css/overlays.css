@@ -10,7 +10,7 @@
 .js:not(.reveal-failsafe) .modal:not(.open) { opacity: 0; }
 /* taste-skill-ignore: a real dialog over the page earns its shadow */
 .md-panel {
-  position: relative; width: 100%; max-width: 32rem; max-height: 100%; overflow: auto; padding: 1.5rem; border-radius: var(--radius-card);
+  position: relative; width: 100%; max-width: 32rem; max-height: 100%; overflow: auto; overscroll-behavior: contain; padding: 1.5rem; border-radius: var(--radius-card);
   background: var(--background); box-shadow: 0 25px 50px -12px var(--raw-color-ink-alpha-35), 0 0 0 1px var(--line);
   transition: transform 0.45s var(--ease-spring);
 }
@@ -50,4 +50,8 @@
 .md-done p { max-width: 34ch; font-size: max(12px, 0.875rem); color: var(--text-74); }
 .md-done .sel { user-select: all; overflow-wrap: anywhere; font-weight: 600; color: var(--foreground); }
 .md-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
+.md-raw {
+  width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: var(--radius-control); resize: none;
+  background: var(--surface); color: var(--foreground); font: 400 max(12px, 0.8125rem)/1.55 var(--font-mono); text-align: left;
+}
 @media (hover: hover) and (pointer: fine) { .md-x:hover { background: var(--surface-2); color: var(--foreground); } }

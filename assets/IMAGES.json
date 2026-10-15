@@ -1,0 +1,71 @@
+{
+  "assets/hero/blueprint-tall.jpg": {
+    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
+    "width": 1080,
+    "height": 2800,
+    "sha256": "3d36c41b86a3b383d15c0a35c7d05cbf24812230e3cb7463e5441aaa86fccc47"
+  },
+  "assets/hero/blueprint-wide.jpg": {
+    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
+    "width": 2560,
+    "height": 1440,
+    "sha256": "7c3cab08f6c51c170f6640697d067ebdb0d3af3e8d67b3d8f5cf07f22b63538d"
+  },
+  "assets/hero/surface-tall.jpg": {
+    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
+    "width": 1080,
+    "height": 2800,
+    "sha256": "b3c68c3df6780b2102f7173a9f67cd2ae2f41e063ac44c183ffe4fe3c15d5d47"
+  },
+  "assets/hero/surface-wide.jpg": {
+    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
+    "width": 2560,
+    "height": 1440,
+    "sha256": "f8261c2f3dd509169ebddb9e9cf3ec0f5ff71a3978244f137f810f97a27cecbc"
+  },
+  "assets/work/dotz.jpg": {
+    "source": "Cayleb's own product screenshot: https://github.com/cayleb-james2008/dotz @ 2139526",
+    "repo": "https://github.com/cayleb-james2008/dotz",
+    "commit": "2139526fae091915a6c74eec673c5f188dfc520d",
+    "file": "docs/screenshot.png",
+    "crop": [
+      240,
+      40,
+      1680,
+      940
+    ],
+    "width": 1280,
+    "height": 800,
+    "sha256": "f530cd8b487a9f302608166fc6a7bb7f036de746587d406d29e891112348267d"
+  },
+  "assets/work/sophos.jpg": {
+    "source": "Cayleb's own product screenshot: https://github.com/cayleb-james2008/sophos @ 33559fc",
+    "repo": "https://github.com/cayleb-james2008/sophos",
+    "commit": "33559fc996d04badc00ab62a0469d2ee7be023cd",
+    "file": "eval-shots/01-welcome.png",
+    "crop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "width": 1280,
+    "height": 800,
+    "sha256": "f2cf7f8363eb7f4de7a18c03bf3d6b4bc87d9ba6b4aa111b5868ce680190c345"
+  },
+  "assets/work/suite.jpg": {
+    "source": "Cayleb's own product screenshot: https://github.com/cayleb-james2008/industry-ai-suite @ f4a93dd",
+    "repo": "https://github.com/cayleb-james2008/industry-ai-suite",
+    "commit": "f4a93ddb93a4e3ec7068383ec0875cbc127f855c",
+    "file": "session-artifacts/industry-ai-suite-full-workflows-20260926/workbench-before.png",
+    "crop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "width": 1280,
+    "height": 800,
+    "sha256": "4be9e040508d9ce066eed9588f1c111d33407988254dfca48ff401e699d7ce75"
+  }
+}

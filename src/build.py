@@ -129,7 +129,7 @@ def img(src, w, h, alt='', lazy=True, cls=''):
 
 def cta(text='Have a project coming up?'):
     return f'''<section class="wrap contact" aria-labelledby="cta-h">
-  <p class="st" data-reveal>Furnishing a school, a library or an office? Come sit in the furniture first.</p>
+  <p class="st" data-reveal>Furnishing a school, a library or an office? Our showroom in Manchester is furnished with the lines we carry.</p>
   <figure class="ph" data-reveal style="--i:1">{img('assets/img/showroom.jpg', 1200, 800, 'Conference table and chairs in the RHL showroom, with the company logo on the screen')}<figcaption>Our showroom at 220 Chapel Road, Manchester</figcaption></figure>
   <div class="ask" data-reveal style="--i:2">
     <h2 id="cta-h">{text}</h2>
@@ -154,7 +154,7 @@ def build_home():
     tags = re.findall(r'data-p="([^"]+)" data-i="\d+" data-t="([^"]+)"', src)
     def n(f): return len({p for p, t in tags if f == 'all' or f in t.split()})
     src = re.sub(r'(data-f="([a-z0-9]+)" aria-pressed="(?:true|false)">[^<]+<span class="n">)\d+', lambda m: m.group(1) + str(n(m.group(2))), src)
-    src = re.sub(r'id="count" aria-live="polite">[^<]+', f'id="count" aria-live="polite">{len(tags)} photos of {n("all")} projects', src)
+    src = re.sub(r'id="count" aria-live="polite">[^<]+', f'id="count" aria-live="polite">{n("all")} projects', src)
     # ledger: counts and "also in" from the project data
     def row(m):
         a, pid, b, name = m.group(1), m.group(2), m.group(3), m.group(4)
@@ -206,7 +206,7 @@ def build_project(p, prev, nxt):
     if not about:
         about = f'<p>{e(p["scope"])}</p>'
     dl = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in p['credits'])
-    prods = ''.join(f'<dd><b>{e(b)}</b> {e(i)}</dd>' for b, i in p['products'])
+    prods = ''.join(f'<dd><b>{e(b)}</b>' + (f' {e(i)}' if i else '') + '</dd>' for b, i in p['products'])
     kind_note = ''
     if 'board' in kinds or 'render' in kinds:
         kind_note = '<p class="kind">These are our renderings and design boards for the project, not photos of the finished rooms.</p>' if kinds <= {'board', 'render'} else '<p class="kind">Includes our renderings and design boards for the project.</p>'
@@ -217,7 +217,7 @@ def build_project(p, prev, nxt):
     hero = p['photos'][ci]
     thumbs = ''.join(f'<button type="button" data-open="{p["id"]}:{k}" aria-label="Open image {k + 1} of {len(p["photos"])}">{img(x["t"], 480, 320)}</button>' for k, x in enumerate(p['photos']))
     cats = ' / '.join(f'<a href="/projects#{c_}">{CAT[c_]}</a>' for c_ in p['cats'])
-    scope = f'<div><dt>Scope</dt><dd>{e(p["scope"])}</dd></div>' if p['about'] else ''
+    scope = f'<div><dt>Scope</dt><dd>{e(p.get("scope_short", p["scope"]))}</dd></div>' if p['about'] else ''
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <nav class="crumb rise" style="--i:2" aria-label="Breadcrumb"><a href="/projects">Projects</a> / {cats}</nav>
   <h1 id="h1" class="disp long rise" style="--i:2">{e(p["name"])}</h1>
@@ -236,7 +236,7 @@ def build_project(p, prev, nxt):
   <nav class="pn" aria-label="More projects"><a href="{plink(prev)}"><span>Previous project</span><b>{e(prev['name'])}</b></a><a class="nx" href="{plink(nxt)}"><span>Next project</span><b>{e(nxt['name'])}</b></a></nav>
 </section>
 {cta()}'''
-    desc = f'{p["name"]}, {p["place"]}: {p["scope"]} Furniture supplied and installed by Robert H. Lord Co.'
+    desc = f'{p["name"]}, {p["place"]}: {p.get("scope_short", p["scope"])} A Robert H. Lord Co. project.'
     write(plink(p), p['name'], desc, body, data={'rooms': {p['id']: room(p, here=True)}}, dialog=True)
 
 # ---------------------------------------------------------------- team
@@ -328,9 +328,9 @@ def build_lines():
     <label class="sr" for="lsearch">Search lines</label><input class="lsearch" id="lsearch" type="search" placeholder="Search by name" autocomplete="off">
     <span class="count num" id="lcount" aria-live="polite">{len(LINES)} lines</span>
   </div>
+  <p class="muted" style="margin-top:14px;max-width:62ch;font-size:var(--step-small)">The line card lists {len(card)} lines. Four more appear only on the DAS / MHEC contract list, for {len(LINES)} in all, as published on rhlco.com.</p>
   <ul class="lgrid" id="lgrid">
 {items}  </ul>
-  <p class="muted" style="margin-top:28px;max-width:62ch">Lines and contract lists as published on rhlco.com. Four lines appear only on the contract list, not the main line card.</p>
 </section>
 {cta()}'''
     write('/lines', 'Lines and contracts', f'The {len(card)} manufacturer lines Robert H. Lord Co. carries, which ones are on the Connecticut DAS / MHEC and CLC purchasing contracts, and how buying on contract skips the bid process.', body)
@@ -343,18 +343,18 @@ def build_how():
     boards = ''.join(f'<a href="{plink(m)}" aria-label="Malden Police Department design image {k + 1}">{img(x["t"], 480, 320)}</a>' for k, x in enumerate(m['photos'][:8]))
     roles = [
         ('Account executive', 'One account executive is assigned to your project from start to finish. They learn what your project and your building need, give advice and recommendations, help you settle on a solution and put the plan in motion.',
-         'At Crosskey Architects, after a burst pipe flooded the studio, our account executive assessed what had to be replaced, specified the new furniture and handled the delivery and installation. <a href="/projects/crosskey-architects">See the project</a>',
+         'At Crosskey Architects, after a burst pipe flooded the studio, our account executive assessed what had to be replaced, specified the new furniture and arranged the delivery and installation. <a href="/projects/crosskey-architects">See the project</a>',
          ('assets/img/l/crosskey-0.jpg', 1000, 667, 'Crosskey Architects studio with Tayco benching'), ''),
         ('Interior designers', 'Our on-staff interior designers have hands-on experience in architecture and design. They work alongside your architect and designer, or directly with you, on layouts, finishes and furniture.',
          'For the Rockville Public Library addition we did the interior design together with the library staff. <a href="/projects/rockville-public-library">See the project</a>',
-         ('assets/img/l/rockville-0.jpg', 1000, 667, 'Rockville Public Library teen space with curved banquettes'), ''),
+         ('assets/img/r/2.jpg', 532, 666, 'RHL furniture plan for Westminster School, Cushing Hall: the dining floor plan with the chairs, tables and fabrics chosen for it', 'Furniture plan for Westminster School, Cushing Hall'), 'flat'),
         ('Estimators', 'Our estimators price budgets, bids, proposals and final quotes. They know the Connecticut State Contract, MHEC and the other purchasing contracts, so you get contract pricing where you qualify.',
          '<a href="/lines#contracts">How buying on contract works</a>',
-         ('assets/img/r/2.jpg', 532, 666, 'RHL design board for Westminster School: the dining floor plan with the chairs, tables and fabrics chosen for it'), 'flat'),
+         ('assets/img/v/malden-5.jpg', 1000, 667, 'RHL proposal board for the Malden Police Department with the desks, chairs and finishes for one room', 'Proposal board for the Malden Police Department'), 'flat'),
         ('Project managers', 'Project managers place every order promptly and accurately, and plan the logistics of each installation with you and our installers.',
-         'At Middlebury College’s Virtue Field House they verified the construction dimensions, took the shop drawings through approval, and oversaw and coordinated the installation. <a href="/projects/middlebury-college-virtue-field-house">See the project</a>',
+         'At Middlebury College’s Virtue Field House they verified the construction dimensions, assisted with the shop drawing approvals, and provided oversight and coordination for the installation. <a href="/projects/middlebury-college-virtue-field-house">See the project</a>',
          ('assets/img/l/middlebury-0.jpg', 1000, 667, 'Overhead batting cages in Middlebury College Virtue Field House'), ''),
-        ('Installers', 'Our in-house team of trained furniture installers assembles and sets the furniture we sell, efficiently and on time. Bleachers, seating and gym equipment go in with our manufacturer-certified installers.',
+        ('Installers', 'Our in-house team of trained furniture installers assembles and sets the furniture we sell, efficiently and on time. Bleachers, seating and gym equipment go in with our manufacturer-certified installers. Our project managers and installation crews coordinate each installation from scheduling to occupancy.',
          '<a href="/team#installers">Meet the install crew</a>',
          ('assets/img/r/4.jpg', 534, 667, 'Installers and equipment on the floor of Harvard’s Lavietes Pavilion mid-project'), ''),
         ('Service team', 'Telescoping bleachers, overhead basketball backboards and operable partitions are large, heavy equipment, and they can be dangerous if nobody inspects and maintains them. Our service team inspects your equipment, does the maintenance and makes the repairs that keep people safe.',
@@ -362,10 +362,11 @@ def build_how():
          ('assets/img/r/7.jpg', 534, 667, 'Telescopic bleachers at Biddeford High School printed with the school’s values'), ''),
     ]
     rows = ''
-    for k, (h, d, proof, (src, w, hh, alt), flat) in enumerate(roles):
+    for k, (h, d, proof, pic, flat) in enumerate(roles):
+        src, w, hh, alt = pic[:4]; cap = f'<figcaption>{pic[4]}</figcaption>' if len(pic) > 4 else ''
         rid = 'service' if h == 'Service team' else re.sub(r'[^a-z]+', '-', h.lower()).strip('-')
         rows += (f'<li class="role" id="{rid}" data-reveal><h3>{h}</h3><div class="rd"><p>{d}</p><p class="proof">{proof}</p></div>'
-                 f'<figure class="rp{" flat" if flat else ""}">{img(src, w, hh, alt)}</figure></li>\n')
+                 f'<figure class="rp{" flat" if flat else ""}">{img(src, w, hh, alt)}{cap}</figure></li>\n')
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">One company, start to finish</h1>
   <p class="lead wide rise" style="--i:3">We do more than sell furniture. The same company designs the rooms, prices them on contract, orders everything and installs it with our own crew. Our service team looks after bleachers, backboards and partitions for years after.</p>
@@ -386,7 +387,7 @@ def build_how():
   <div class="boards" data-reveal>{boards}</div>
 </section>
 <section class="wrap sec" aria-labelledby="open-h">
-  <div class="todo-box" data-reveal><p>{TODO}Things we have heard but can't show from rhlco.com yet. If they're true, send us the details and we'll add them here:</p><p>How many install crews RHL runs (we have heard there is more than one), and whether the bleacher and seating installers are RHL staff too. Anything else about the full-service side that rhlco.com doesn’t say yet, such as delivery or storage.</p></div>
+  <div class="todo-box" data-reveal><p>{TODO}Things we have heard but can't show from rhlco.com yet. If they're true, send us the details and we'll add them here:</p><p>How many install crews RHL runs, and whether the bleacher and seating installers are RHL staff too. Anything else about the full-service side that rhlco.com doesn’t say yet, such as delivery or storage.</p></div>
 </section>
 {cta()}'''
     write('/how-we-work', 'How we work', 'One company from the first call to opening day: account executives, interior designers, estimators, project managers, an in-house install crew and a service team at Robert H. Lord Co.', body)
@@ -429,7 +430,7 @@ def build_about():
   </div>
 </section>
 <section class="wrap sec" id="showroom" aria-labelledby="show-h">
-  <div class="sec-head"><h2 id="show-h" class="head" data-reveal>Our showroom</h2><p data-reveal style="--i:1">In 2014 we renovated our headquarters at 220 Chapel Road in Manchester. We designed it and acted as our own general contractor. The 8,000 sq ft showroom and open office are furnished with lines we carry, so you can sit in them.</p></div>
+  <div class="sec-head"><h2 id="show-h" class="head" data-reveal>Our showroom</h2><p data-reveal style="--i:1">In 2014 we renovated our headquarters at 220 Chapel Road in Manchester. We designed it and acted as our own general contractor. The 8,000 sq ft showroom and open office are furnished with lines we carry.</p></div>
   <div class="shots" data-reveal>{shots}</div>
   <div class="todo-box" style="margin-top:24px" data-reveal><p>{TODO}Showroom hours, and whether visits are walk-in or by appointment. rhlco.com doesn’t list them.</p></div>
 </section>
@@ -458,7 +459,7 @@ def build_contact():
     to = ''.join(f'<option value="{p["slug"]}">{e(p["name"])}, {e(p["title"])}</option>' for p in TEAM if p['group'] != 'install')
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">Start a project</h1>
-  <p class="lead wide rise" style="--i:3">Call us, come and see the showroom, or send a note and the right person will get back to you.</p>
+  <p class="lead wide rise" style="--i:3">Call us, or send a note and we’ll be in touch.</p>
   <div class="cgrid">
     <div class="call rise" style="--i:4">
       <a class="tel" href="tel:+18606458700">{PHONE}</a>
@@ -472,7 +473,7 @@ def build_contact():
 </section>
 <section class="wrap sec" id="find" aria-labelledby="find-h">
   <div class="finder">
-    <div class="fh"><h2 id="find-h">Find your account executive</h2><p>Each part of New England has its own account executives: one for furniture, one for bleachers, seating and gym equipment. Pick where your building is.</p><noscript><p><a href="/team">See every account executive and the areas they cover</a></p></noscript></div>
+    <div class="fh"><h2 id="find-h">Find your account executive</h2><p>Most of New England has one account executive for furniture and one for bleachers, seating and gym equipment. Pick where your building is.</p><noscript><p><a href="/team">See every account executive and the areas they cover</a></p></noscript></div>
     <div class="fc" id="finder">
       <div class="pick">
         <div class="field"><label for="f-state">State</label><select id="f-state"><option value="">Choose a state</option>{opts}</select></div>

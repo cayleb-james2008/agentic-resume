@@ -69,7 +69,8 @@
     "h": 666,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "A 350-seat auditorium in the new 242,000 sq ft Edward P. Evans Hall."
  },
  {
   "id": "academy",
@@ -188,7 +189,7 @@
   ],
   "source": "https://rhlco.com/portfolio/corporate/crosskey-architects",
   "about": [
-   "A burst pipe flooded Crosskey Architects' newly renovated design studio. Our account executive worked with them to sort out what had to be replaced, specified the replacement furniture, and handled the delivery and installation."
+   "A burst pipe flooded Crosskey Architects' newly renovated design studio. Our account executive worked with them to sort out what had to be replaced, specified the replacement furniture, and arranged the delivery and installation."
   ],
   "credits": [
    [
@@ -212,7 +213,7 @@
   ],
   "name": "Crosskey Architects",
   "place": "Hartford, CT",
-  "scope": "A burst pipe flooded their newly renovated studio. We assessed the damage, specified the replacements, and handled delivery and installation.",
+  "scope": "A burst pipe flooded their newly renovated studio. We assessed the damage, specified the replacements, and arranged the delivery and installation.",
   "photo_credit": "Heather Conley Photography",
   "home": true,
   "cover": {
@@ -242,7 +243,8 @@
     "h": 667,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "Replacement of damaged furniture."
  },
  {
   "id": "franklin",
@@ -451,7 +453,7 @@
   ],
   "name": "Harvard Lavietes Pavilion",
   "place": "Boston, MA",
-  "scope": "Renovation of and addition to a 33,565 sq ft basketball pavilion. These photos are from installation.",
+  "scope": "Renovation of and addition to a 33,565 sq ft basketball pavilion.",
   "photo_credit": "",
   "home": true,
   "cover": {
@@ -584,7 +586,8 @@
     "h": 667,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "New construction."
  },
  {
   "id": "middlebury",
@@ -595,7 +598,7 @@
   "source": "https://rhlco.com/portfolio/athletic-facilities/middlebury-college-virtue-field-house",
   "about": [
    "For Middlebury's new Virtue Field House we selected and specified the overhead batting and throwing cages, the perimeter curtains and other field house equipment.",
-   "Our project managers verified the construction dimensions, took the shop drawings through approval, and oversaw and coordinated the installation."
+   "Our project managers verified the construction dimensions, assisted with the shop drawing approvals, and provided oversight and coordination for the installation."
   ],
   "credits": [
    [
@@ -619,7 +622,7 @@
   ],
   "name": "Middlebury College Virtue Field House",
   "place": "Middlebury, VT",
-  "scope": "A new 110,000 sq ft field house. Our project managers verified construction dimensions, ran shop drawing approvals and coordinated the installation.",
+  "scope": "A new 110,000 sq ft field house. Our project managers verified construction dimensions, assisted with the shop drawing approvals and provided oversight and coordination for the installation.",
   "photo_credit": "",
   "home": true,
   "cover": {
@@ -663,7 +666,8 @@
     "h": 666,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "New 110,000 sq ft field house."
  },
  {
   "id": "morgan",
@@ -771,16 +775,16 @@
   "products": [
    [
     "Hussey Seating",
-    "Seating"
+    ""
    ],
    [
     "Porter Athletic",
-    "Athletic equipment"
+    ""
    ]
   ],
   "name": "The Track at New Balance",
   "place": "Boston, MA",
-  "scope": "Seating and athletic equipment for the indoor track and arena.",
+  "scope": "Hussey seating and Porter athletic equipment.",
   "photo_credit": "",
   "home": true,
   "cover": {
@@ -956,7 +960,8 @@
     "h": 667,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "Renovation and expansion of the existing library."
  },
  {
   "id": "rockville",
@@ -1054,7 +1059,8 @@
     "h": 667,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "Addition to the existing library."
  },
  {
   "id": "south-hadley",
@@ -1143,7 +1149,8 @@
     "h": 666,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "New construction."
  },
  {
   "id": "tolland",
@@ -1244,7 +1251,8 @@
     "h": 667,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "Renovation of and addition to the existing building."
  },
  {
   "id": "uconn-babbidge",
@@ -1389,7 +1397,8 @@
     "h": 1011,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "Furniture for tenant spaces."
  },
  {
   "id": "umass",
@@ -1466,7 +1475,8 @@
     "h": 666,
     "kind": "photo"
    }
-  ]
+  ],
+  "scope_short": "New 55,000 sq ft Football Performance Center at McGuirk Alumni Stadium."
  },
  {
   "id": "waterford",
@@ -1591,7 +1601,7 @@
   "source": "https://rhlco.com/portfolio/corporate/rhl-co",
   "about": [
    "In 2014 we renovated our own headquarters in Manchester, Connecticut. The goal was a contemporary, open space where our team and our clients could work together.",
-   "We designed it and acted as our own general contractor. The 8,000 sq ft showroom and open office are furnished with pieces from many of the manufacturers we represent, so you can see and sit in them."
+   "We designed it and acted as our own general contractor. The 8,000 sq ft showroom and open office are furnished with pieces from many of the manufacturers we represent."
   ],
   "credits": [
    [

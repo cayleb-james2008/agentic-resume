@@ -125,7 +125,7 @@
   "crosskey": {
    "name": "Crosskey Architects",
    "place": "Hartford, CT",
-   "scope": "A burst pipe flooded their newly renovated studio. We assessed the damage, specified the replacements, and handled delivery and installation.",
+   "scope": "A burst pipe flooded their newly renovated studio. We assessed the damage, specified the replacements, and arranged the delivery and installation.",
    "architect": "",
    "products": [
     [
@@ -831,7 +831,7 @@
   "lavietes": {
    "name": "Harvard Lavietes Pavilion",
    "place": "Boston, MA",
-   "scope": "Renovation of and addition to a 33,565 sq ft basketball pavilion. These photos are from installation.",
+   "scope": "Renovation of and addition to a 33,565 sq ft basketball pavilion.",
    "architect": "Bruner/Cott Architects",
    "products": [
     [
@@ -1136,7 +1136,7 @@
   "middlebury": {
    "name": "Middlebury College Virtue Field House",
    "place": "Middlebury, VT",
-   "scope": "A new 110,000 sq ft field house. Our project managers verified construction dimensions, ran shop drawing approvals and coordinated the installation.",
+   "scope": "A new 110,000 sq ft field house. Our project managers verified construction dimensions, assisted with the shop drawing approvals and provided oversight and coordination for the installation.",
    "architect": "Sasaki Associates",
    "products": [
     [
@@ -1321,21 +1321,21 @@
   "new-balance": {
    "name": "The Track at New Balance",
    "place": "Boston, MA",
-   "scope": "Seating and athletic equipment for the indoor track and arena.",
+   "scope": "Hussey seating and Porter athletic equipment.",
    "architect": "Elkus Manfredi",
    "products": [
     [
      "Hussey Seating",
-     "Seating"
+     ""
     ],
     [
      "Porter Athletic",
-     "Athletic equipment"
+     ""
     ]
    ],
    "url": "https://rhlco.com/portfolio/athletic-facilities/the-track-at-new-balance",
    "credit": "",
-   "spec": "<b>Hussey Seating</b> Seating; <b>Porter Athletic</b> Athletic equipment",
+   "spec": "<b>Hussey Seating</b> and <b>Porter Athletic</b>",
    "frames": [
     {
      "l": "assets/img/l/new-balance-0.jpg",

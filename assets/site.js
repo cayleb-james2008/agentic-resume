@@ -151,7 +151,7 @@
         });
         stagger();
         var r = Object.keys(seen).length;
-        count.textContent = n + ' photos of ' + r + (r === 1 ? ' project' : ' projects');
+        count.textContent = r + (r === 1 ? ' project' : ' projects');
         if(firstFr) showLoupe(firstFr.getAttribute('data-p'), +firstFr.getAttribute('data-i'), false);
       });
     });

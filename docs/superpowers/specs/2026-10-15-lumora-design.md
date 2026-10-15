@@ -99,7 +99,7 @@ div#menu (full-screen ink overlay) · div#modal (request composer) · aside.guid
   - Points between pointer moves are spaced `max(radius × 0.3, 1)` apart, up to 60 per move.
   - It stamps with `source-in` from an offscreen cover canvas and fades with `destination-out`.
   - One automatic stroke runs 650ms after the loader, so phones see it once. It is skipped if the pointer has already moved.
-  - The wide or tall layer is picked by `(max-aspect-ratio: 3/4)`.
+  - The texture-only tall layer shows on `(max-width: 1023.98px), (max-aspect-ratio: 7/5)`: below 1024px the hero stacks its text over the whole picture, and on a 4:3 screen the cover crop would pull the wide layer's cards behind the headline.
 - **Text reveals** (`site/js/home/reveal.js`, CSS transitions).
   - Headings split into word spans. Words are grouped into lines by `offsetTop` at reveal time and staggered 120ms per line (100ms in the footer), over 900ms with `cubic-bezier(.215,.61,.355,1)`.
   - The About statement staggers each word by 35ms over 700ms with `cubic-bezier(.165,.84,.44,1)`.

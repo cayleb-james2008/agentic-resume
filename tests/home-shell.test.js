@@ -103,8 +103,21 @@ test('the head is shell.py\'s: Lenis is the only import, the fonts and hero pict
   for (const font of ['onest-latin-600-normal', 'onest-latin-400-normal']) {
     assert.ok(head.includes(`<link rel="preload" href="assets/fonts/${font}.woff2" as="font" type="font/woff2" crossorigin>`), font);
   }
-  assert.match(head, /<link rel="preload" href="assets\/hero\/surface-wide\.jpg" as="image" media="\(min-aspect-ratio: 3\/4\)">/);
+  assert.match(head, /<link rel="preload" href="assets\/hero\/surface-wide\.jpg" as="image" media="\(min-width: 1024px\) and \(min-aspect-ratio: 7\/5\)">/);
   assert.match(head, /<meta name="theme-color" content="#090a0b">/);
   assert.ok(head.indexOf('<script type="importmap">') < head.indexOf('<script type="module" src="site/js/main.js">'));
   for (const [, href] of head.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)) assert.doesNotThrow(() => read(href), href);
+});
+
+// The wide layer's cards sit right of the desktop headline. Below 1024px the hero stacks its text over the whole
+// picture (a landscape phone puts the headline straight on the cards), and on a 4:3 screen (1024×768, 1100×800)
+// the cover crop pulls the Assistant panel over the headline's first line. In both cases the hero shows the
+// texture-only tall layer; the picture, the preload and the liquid reveal share one query, so the blueprint
+// stays registered to the surface.
+test('the wide hero layer, whose cards sit right of the headline, shows only beside the desktop headline on screens wider than 7:5', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const liquid = readFileSync(new URL('../site/js/home/liquid.js', import.meta.url), 'utf8');
+  assert.match(html, /<picture><source media="\(max-width: 1023\.98px\), \(max-aspect-ratio: 7\/5\)" srcset="assets\/hero\/surface-tall\.jpg">/);
+  assert.match(liquid, /matchMedia\('\(max-width: 1023\.98px\), \(max-aspect-ratio: 7\/5\)'\)/);
+  assert.doesNotMatch(html + liquid, /aspect-ratio: 3\/4/);
 });

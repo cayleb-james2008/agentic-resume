@@ -9,30 +9,30 @@
 }
 .eg-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; min-width: 0; }
 .eg-p { max-width: 34rem; font-size: 1rem; line-height: 1.55; color: var(--text-74); text-wrap: pretty; }
-.eg-lbl { margin-bottom: 0.625rem; font-size: 0.8125rem; font-weight: 500; color: var(--text-63); }
+.eg-lbl { margin-bottom: 0.625rem; font-size: max(12px, 0.8125rem); font-weight: 500; color: var(--text-63); }
 .seg { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.25rem; border-radius: 1.5rem; background: var(--surface); }
 .seg button {
   min-height: 2.75rem; padding: 0.5rem 1.125rem; border-radius: var(--radius-pill);
-  font-size: 0.875rem; font-weight: 500; color: var(--text-74); transition: background-color 0.2s, color 0.2s, transform 0.2s var(--ease-hover);
+  font-size: max(12px, 0.875rem); font-weight: 500; color: var(--text-74); transition: background-color 0.2s, color 0.2s, transform 0.2s var(--ease-hover);
 }
 .seg button[aria-checked="true"] { background: var(--ink); color: var(--foreground-on-dark); }
 .seg button:active { transform: scale(0.97); }
 .ladder { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0; }
 .ladder li {
   position: relative; display: inline-flex; align-items: center; padding: 0.5rem 0.875rem; border-radius: var(--radius-pill);
-  background: var(--surface); font-size: 0.875rem; font-weight: 500; color: var(--text-74); transition: background-color 0.25s, color 0.25s;
+  background: var(--surface); font-size: max(12px, 0.875rem); font-weight: 500; color: var(--text-74); transition: background-color 0.25s, color 0.25s;
 }
 .ladder li + li { margin-left: 1.75rem; }
 .ladder li + li::before { content: "→"; position: absolute; left: -1.3rem; top: 50%; transform: translateY(-52%); font-size: 0.9375rem; color: var(--raw-color-ink-alpha-35); }
 .ladder li.on { background: var(--ink); color: var(--foreground-on-dark); }
 .ladder li.ok { background: var(--accent); color: var(--ink); }
-.eg-note { margin-top: 0.625rem; font-size: 0.875rem; color: var(--text-67); }
+.eg-note { margin-top: 0.625rem; font-size: max(12px, 0.875rem); color: var(--text-67); }
 .eg-price { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; width: 100%; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 .eg-price p { font-size: 1.125rem; color: var(--text-74); }
 .eg-price b { font-weight: 600; color: var(--foreground); }
 
 .eg-panel { min-width: 0; padding: 0.5rem; border-radius: var(--radius-card); background: var(--surface); }
-.egp-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1rem; font-size: 0.8125rem; color: var(--text-67); }
+.egp-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1rem; font-size: max(12px, 0.8125rem); color: var(--text-67); }
 .egp-top b { font-weight: 500; color: var(--accent-ink); }
 .egp-top .live { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-weight: 500; }
 .egp-top .live i { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-muted); }
@@ -49,7 +49,7 @@
 }
 .eg-hub .mk { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--raw-color-ink-800); font-size: 0.8125rem; }
 .eg-hub b { display: block; font-size: 0.9375rem; font-weight: 600; line-height: 1.2; }
-.eg-hub small { display: block; font-size: 0.75rem; color: var(--on-dark-62); }
+.eg-hub small { display: block; font-size: max(12px, 0.75rem); color: var(--on-dark-62); }
 .eg-hub.hot { box-shadow: 0 0 0 4px var(--raw-color-warn-alpha-35); }
 .eg-people { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.625rem; }
 .eg-person {
@@ -67,14 +67,14 @@
   box-shadow: 0 0 0 2px var(--surface);
 }
 .eg-person .who { display: flex; flex-direction: column; gap: 0.125rem; min-width: 0; }
-.eg-person .role { font-size: 0.875rem; font-weight: 600; line-height: 1.2; }
-.eg-person .st { font-size: 0.75rem; color: var(--text-63); transition: color 0.2s; }
+.eg-person .role { font-size: max(12px, 0.875rem); font-weight: 600; line-height: 1.2; }
+.eg-person .st { font-size: max(12px, 0.75rem); color: var(--text-63); transition: color 0.2s; }
 .eg-person .apps { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem; }
 .eg-person .apps span { padding: 0.25rem 0.5rem; border-radius: var(--radius-pill); background: var(--background); box-shadow: 0 0 0 1px var(--line);
-  font-size: 0.75rem; line-height: 1.2; color: var(--text-74); }
+  font-size: max(12px, 0.75rem); line-height: 1.2; color: var(--text-74); }
 .eg-person .tkb {
   position: absolute; top: -0.65rem; left: 50%; padding: 0.125rem 0.5rem; border-radius: var(--radius-pill); white-space: nowrap; pointer-events: none;
-  background: var(--warn); color: var(--raw-color-warn-900); font-size: 0.75rem; font-weight: 600;
+  background: var(--warn); color: var(--raw-color-warn-900); font-size: max(12px, 0.75rem); font-weight: 600;
   transform: translate(-50%, 0); transition: opacity 0.25s, transform 0.25s var(--ease-spring);
 }
 .eg-person:not(.tk) .tkb { display: none; }
@@ -84,11 +84,11 @@
 .eg-person.tk { box-shadow: 0 0 0 2px var(--warn); }
 .eg-people.swap .eg-person { opacity: 0.25; transform: translateY(6px); }
 .eg-ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.875rem 0.5rem 0.375rem; }
-.eg-ctl p { font-size: 0.8125rem; color: var(--text-67); }
+.eg-ctl p { font-size: max(12px, 0.8125rem); color: var(--text-67); }
 .eg-log {
   display: flex; flex-direction: column; justify-content: flex-end; height: 8.6rem; margin-top: 0.5rem; overflow: hidden;
   padding: 0.875rem 1.125rem; border-radius: var(--radius-card-sm); background: var(--term); color: var(--term-fg);
-  font-size: 0.8125rem; line-height: 1.75;
+  font-size: max(12px, 0.8125rem); line-height: 1.75;
 }
 .eg-log p { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; transition: opacity 0.3s; }
 .eg-log p.old { opacity: 0.66; }
@@ -96,7 +96,7 @@
 .eg-log .g { color: var(--ok); }
 .eg-log .w { color: var(--raw-color-warn-300); }
 .eg-log .d { color: var(--term-dim); }
-@media (max-width: 640px) { .eg-log { height: 10.5rem; font-size: 0.75rem; line-height: 1.6; } .eg-log p { white-space: normal; } }
+@media (max-width: 640px) { .eg-log { height: 10.5rem; font-size: max(12px, 0.75rem); line-height: 1.6; } .eg-log p { white-space: normal; } }
 @media (max-width: 767.98px) {
   .eg-stage { padding: 1.25rem 0.875rem 1rem; }
   .eg-hub { margin: 0 0 1.25rem; }

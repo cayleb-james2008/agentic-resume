@@ -38,7 +38,7 @@ export function mount(box, { onReady, reduced }) {
   const canvas = box.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  const tallMQ = window.matchMedia('(max-aspect-ratio: 3/4)');
+  const tallMQ = window.matchMedia('(max-width: 1023.98px), (max-aspect-ratio: 7/5)');
   const cover = document.createElement('canvas');
   const brush = document.createElement('canvas');
   let dpr = 1, W = 0, H = 0, radius = BRUSH_RADIUS, img = null, pts = [], last = null, idle = FADE_FRAMES + 1, stop = null, manual = false;

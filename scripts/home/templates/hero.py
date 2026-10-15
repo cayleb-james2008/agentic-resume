@@ -40,7 +40,7 @@ def render(content: dict) -> str:
     return (
         '<section class="hero" id="home" aria-labelledby="hero-title">'
         f'<div class="lr" data-liquid data-wide="{BLUEPRINT_WIDE}" data-tall="{BLUEPRINT_TALL}">'
-        f'<picture><source media="(max-aspect-ratio: 3/4)" srcset="{SURFACE_TALL}">'
+        f'<picture><source media="(max-width: 1023.98px), (max-aspect-ratio: 7/5)" srcset="{SURFACE_TALL}">'
         f'<img src="{SURFACE_WIDE}" alt="" width="{width}" height="{height}" fetchpriority="high" decoding="async"></picture>'
         '<canvas aria-hidden="true"></canvas></div>'
         '<div class="hero-vig" aria-hidden="true"></div>'

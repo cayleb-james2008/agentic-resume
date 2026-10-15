@@ -103,3 +103,24 @@ test('hover motion only where a mouse can hover', async () => {
     }
   }
 });
+
+// The root grid drops to 13px between 1024 and about 1170px wide (and to 14px on tablets), so a bare
+// 0.75rem label renders at 9.75px there. Every size that could fall under 12px carries a 12px floor;
+// only the aria-hidden >_ glyphs in their tiles (.mk, the person cards' .as) are exempt.
+test('no text renders under 12px at the smallest root size', async () => {
+  const { readdirSync } = await import('node:fs');
+  const sheets = [...readdirSync(new URL('../site/css/', import.meta.url)).filter((f) => f.endsWith('.css')).map((f) => `site/css/${f}`), 'lab/lab.css'];
+  const under = [];
+  for (const sheet of sheets) {
+    for (const [, selector, decls] of strip(read(sheet)).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (/\.mk\b|\.as\b/.test(selector)) continue;
+      for (const [, value] of decls.matchAll(/(?<![-\w])font(?:-size)?:\s*([^;]+)/g)) {
+        if (/(?:max|clamp)\(12px,/.test(value)) continue;
+        for (const [, n] of value.matchAll(/(?<![\d.])(\d*\.?\d+)rem/g)) {
+          if (Number(n) * 13 < 12) under.push(`${sheet}: ${selector.trim()} → ${value.trim()}`);
+        }
+      }
+    }
+  }
+  assert.deepEqual(under, []);
+});

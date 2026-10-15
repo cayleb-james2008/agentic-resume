@@ -28,7 +28,7 @@
   border-bottom: 1px solid var(--surface-2); }
 .resume-half-kicker {
   display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; border: 1px solid var(--line);
-  border-radius: var(--radius-pill); background: var(--background); font-size: 0.875rem; font-weight: 500; color: var(--text-74);
+  border-radius: var(--radius-pill); background: var(--background); font-size: max(12px, 0.875rem); font-weight: 500; color: var(--text-74);
 }
 .resume-half-title { margin-top: 0.75rem; font-size: 2.25rem; font-weight: 600; line-height: 1.04; letter-spacing: -0.02em; }
 @media (min-width: 640px) { .resume-half-title { font-size: 3rem; } }
@@ -39,7 +39,7 @@
 .resume-half-download {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.5rem; border-radius: var(--radius-pill);
   background: var(--background); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--line);
-  font-size: 0.875rem; font-weight: 500; transition: color 0.18s;
+  font-size: max(12px, 0.875rem); font-weight: 500; transition: color 0.18s;
 }
 .resume-half-download:hover, .resume-half-download:focus-visible { color: var(--accent-ink); }
 
@@ -47,10 +47,10 @@
 .resume-half section + section { margin-top: 2.25rem; }
 @media (min-width: 1024px) { #education { margin-top: 0; } }
 .resume-half h2 {
-  margin-bottom: 1rem; font-size: 0.8125rem; font-weight: 600; line-height: 1.2; letter-spacing: 0.06em;
+  margin-bottom: 1rem; font-size: max(12px, 0.8125rem); font-weight: 600; line-height: 1.2; letter-spacing: 0.06em;
   text-transform: uppercase; color: var(--text-63);
 }
-.resume-dates { font-size: 0.875rem; color: var(--text-67); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.resume-dates { font-size: max(12px, 0.875rem); color: var(--text-67); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* --- Experience: the main role, then the other jobs as work ethic ---------------- */
 .resume-entry, .resume-edu { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.25rem 1.5rem; align-items: baseline; }
@@ -70,17 +70,17 @@
 .resume-project { display: flex; flex-direction: column; min-width: 0; padding-block: 1.125rem; border-top: 1px solid var(--surface-2); }
 .resume-project:first-child { padding-top: 0; border-top: 0; }
 .resume-project--lead { padding-left: 1rem; border-left: 2px solid var(--accent); }
-.resume-stack { margin-top: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-ink); }
+.resume-stack { margin-top: 0.25rem; font-family: var(--font-mono); font-size: max(12px, 0.75rem); color: var(--accent-ink); }
 .resume-status {
   align-self: flex-start; margin-top: 0.5rem; padding: 0.25rem 0.75rem; border-radius: var(--radius-pill); background: var(--background);
-  font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-74);
+  font-family: var(--font-mono); font-size: max(12px, 0.75rem); color: var(--text-74);
 }
 .resume-project ul { display: flex; flex-direction: column; gap: 0.375rem; margin-top: 0.625rem; }
 .resume-project li { position: relative; padding-left: 1rem; color: var(--text-74); }
 .resume-project li::before {
   content: ""; position: absolute; left: 0; top: 0.62em; width: 0.3rem; height: 0.3rem; border-radius: 50%; background: var(--accent-ink);
 }
-.resume-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.625rem; font-size: 0.875rem; }
+.resume-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.625rem; font-size: max(12px, 0.875rem); }
 .resume-link {
   min-width: 0; overflow-wrap: anywhere; font-weight: 500; color: var(--accent-ink);
   text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
@@ -88,10 +88,10 @@
 }
 .resume-link:hover, .resume-link:focus-visible { color: var(--accent-ink); text-decoration-thickness: 2px; }
 .resume-lab { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; margin-top: 1.5rem; }
-.resume-lab-sub { font-size: 0.875rem; color: var(--text-67); }
+.resume-lab-sub { font-size: max(12px, 0.875rem); color: var(--text-67); }
 
 /* --- Education and skills ------------------------------------------------------- */
-.resume-half .resume-skills-title { margin-top: 2rem; font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-63); }
+.resume-half .resume-skills-title { margin-top: 2rem; font-size: max(12px, 0.8125rem); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-63); }
 .resume-skills { margin-top: 0.75rem; }
 .resume-skills > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.125rem; padding-block: 0.625rem; border-top: 1px solid var(--surface-2); }
 .resume-skills dt { font-weight: 600; }

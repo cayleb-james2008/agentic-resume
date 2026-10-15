@@ -25,7 +25,7 @@ HEAD_SCRIPT = (
 )
 
 PRELOAD_FONTS = ("onest-latin-600-normal", "onest-latin-400-normal")
-HERO_PRELOAD = '<link rel="preload" href="assets/hero/surface-wide.jpg" as="image" media="(min-aspect-ratio: 3/4)">'
+HERO_PRELOAD = '<link rel="preload" href="assets/hero/surface-wide.jpg" as="image" media="(min-width: 1024px) and (min-aspect-ratio: 7/5)">'
 THEME_COLOR = "#090a0b"
 
 

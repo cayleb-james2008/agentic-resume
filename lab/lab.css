@@ -33,7 +33,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .lab-strip {
   display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
   padding: 0.6rem max(var(--g), env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--lab-line);
-  font: 400 0.75rem/1.4 var(--font-mono); color: var(--lab-muted);
+  font: 400 max(12px, 0.75rem)/1.4 var(--font-mono); color: var(--lab-muted);
 }
 .lab-strip__status { display: inline-flex; align-items: center; gap: 0.5rem; }
 .live-dot { width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--accent); }
@@ -45,7 +45,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .rail__intro { padding: clamp(2rem, 4vw, 3.5rem) clamp(1.4rem, 3vw, 2.25rem) 1.5rem; }
 .eyebrow, .signal, .workspace__topline, .step-number, .status-stamp, .result-state, .workspace__foot,
 .micro, .rail__foot, .nav-number {
-  font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.45; letter-spacing: 0;
+  font-family: var(--font-mono); font-size: max(12px, 0.75rem); line-height: 1.45; letter-spacing: 0;
 }
 .eyebrow { margin: 0 0 0.55rem; color: var(--accent); }
 .rail h1 {
@@ -93,7 +93,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .boundary-rule { margin: 1.3rem 0; border-top: 1px solid var(--lab-line); }
 
 .field { display: flex; flex-direction: column; gap: 0.45rem; margin: 1rem 0; }
-.field label, .check-field label { font-size: 0.875rem; font-weight: 500; }
+.field label, .check-field label { font-size: max(12px, 0.875rem); font-weight: 500; }
 .field small, .micro { color: var(--lab-faint); line-height: 1.5; }
 .micro { margin: 1rem 0 0; }
 .field input, .field select, .field textarea, .draft-box {
@@ -103,7 +103,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .field input::placeholder, .field textarea::placeholder { color: var(--lab-faint); }
 .field input:disabled, .field select:disabled, .field textarea:disabled { opacity: 0.6; }
 .field textarea, .draft-box {
-  min-height: 8rem; resize: vertical; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.55;
+  min-height: 8rem; resize: vertical; font-family: var(--font-mono); font-size: max(12px, 0.8125rem); line-height: 1.55;
 }
 .field input[type=checkbox] { width: 1.125rem; height: 1.125rem; min-height: 0; accent-color: var(--accent); }
 .check-field { display: flex; align-items: start; gap: 0.65rem; margin: 1rem 0; }
@@ -114,7 +114,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 /* Buttons: the homepage's pills. */
 .button {
   min-height: 2.875rem; display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem;
-  padding: 0.75rem 1.375rem; border-radius: var(--radius-pill); font-size: 0.875rem; font-weight: 500; line-height: 1.2;
+  padding: 0.75rem 1.375rem; border-radius: var(--radius-pill); font-size: max(12px, 0.875rem); font-weight: 500; line-height: 1.2;
   transition: background var(--duration-fast) var(--ease-entrance), color var(--duration-fast) var(--ease-entrance), transform 0.35s var(--ease-hover);
 }
 .button:active:not(:disabled) { transform: scale(0.97); }
@@ -138,7 +138,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .result-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--lab-line); }
 .result-intro { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; margin: 1.25rem 0; }
 .metric { min-width: 0; padding: 1rem; border-radius: var(--radius-control); background: var(--lab-panel-2); }
-.metric__label { display: block; font: 400 0.75rem/1.4 var(--font-mono); color: var(--lab-faint); }
+.metric__label { display: block; font: 400 max(12px, 0.75rem)/1.4 var(--font-mono); color: var(--lab-faint); }
 .metric__value {
   display: block; margin-top: 0.45rem; overflow-wrap: anywhere;
   font-weight: 600; font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums;
@@ -149,21 +149,21 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .result-list { display: grid; gap: 0.55rem; margin: 0; padding: 0; list-style: none; }
 .result-list li {
   padding: 0.75rem 0.9rem; border-radius: var(--radius-control); background: var(--lab-panel-2);
-  font-size: 0.875rem; line-height: 1.5; overflow-wrap: anywhere;
+  font-size: max(12px, 0.875rem); line-height: 1.5; overflow-wrap: anywhere;
 }
 .result-list li strong { display: block; margin-bottom: 0.22rem; }
 .source-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-.source-links a { font-size: 0.875rem; font-weight: 600; }
-.tag { display: inline-block; margin: 0.2rem 0.25rem 0.2rem 0; padding: 0.25rem 0.625rem; border-radius: var(--radius-pill); border: 1px solid var(--lab-line); font: 400 0.75rem/1.4 var(--font-mono); }
+.source-links a { font-size: max(12px, 0.875rem); font-weight: 600; }
+.tag { display: inline-block; margin: 0.2rem 0.25rem 0.2rem 0; padding: 0.25rem 0.625rem; border-radius: var(--radius-pill); border: 1px solid var(--lab-line); font: 400 max(12px, 0.75rem)/1.4 var(--font-mono); }
 .series { display: block !important; width: 100%; height: 110px; margin-top: 1rem; overflow: hidden; }
 .series rect { fill: rgb(255 255 255 / 0.32); }
 .series rect:last-child { fill: var(--accent); }
 .raw-details { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--lab-line); }
-.raw-details summary { cursor: pointer; font-size: 0.875rem; font-weight: 600; }
+.raw-details summary { cursor: pointer; font-size: max(12px, 0.875rem); font-weight: 600; }
 .raw-details pre {
   max-height: 22rem; overflow: auto; padding: 1rem; white-space: pre-wrap; word-break: break-word;
   border-radius: var(--radius-control); background: var(--lab-bg); border: 1px solid var(--lab-line); color: var(--lab-muted);
-  font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.5;
+  font-family: var(--font-mono); font-size: max(12px, 0.75rem); line-height: 1.5;
 }
 .workspace__foot { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 1.3rem; border-top: 1px solid var(--lab-line); color: var(--lab-faint); }
 .noscript { padding: 2rem; }

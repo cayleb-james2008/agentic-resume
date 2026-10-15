@@ -8,14 +8,14 @@
 .sv-row { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; border-radius: var(--radius-card-sm);
   transition: background-color 0.45s var(--ease-hover), padding 0.45s var(--ease-hover); }
 @media (min-width: 640px) { .sv-row { gap: 1.5rem; padding-block: 2rem; } }
-.sv-i { display: none; flex: none; width: 7.5rem; font-size: 0.8125rem; color: var(--text-63); }
+.sv-i { display: none; flex: none; width: 7.5rem; font-size: max(12px, 0.8125rem); color: var(--text-63); }
 @media (min-width: 640px) { .sv-i { display: block; } }
 .sv-mid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.375rem; }
 @media (min-width: 1024px) { .sv-mid { flex-direction: row; align-items: center; justify-content: space-between; gap: 2rem; } }
 .sv-mid h3 { font-size: 1.5rem; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
 @media (min-width: 640px) { .sv-mid h3 { font-size: 1.875rem; } }
 @media (min-width: 768px) { .sv-mid h3 { font-size: 2.25rem; } }
-.sv-mid p { max-width: 21rem; font-size: 0.875rem; color: var(--text-67); text-wrap: pretty; }
+.sv-mid p { max-width: 21rem; font-size: max(12px, 0.875rem); color: var(--text-67); text-wrap: pretty; }
 .sv-b { flex: none; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--ink);
   color: var(--foreground-on-dark); transition: transform 0.35s var(--ease-hover); }
 @media (min-width: 640px) { .sv-b { width: 3rem; height: 3rem; } }
@@ -38,5 +38,5 @@
 @media (min-width: 640px) { .st-n { font-size: 3.75rem; } }
 @media (min-width: 768px) { .st-n { font-size: 4.5rem; } }
 .st-n small { margin-left: 0.1em; font-size: 0.5em; font-weight: 500; color: var(--on-dark-62); }
-.st-l { max-width: 16rem; margin-top: 0.75rem; font-size: 0.875rem; color: var(--on-dark-62); }
-.st-foot { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--raw-color-white-alpha-10); font-size: 0.8125rem; color: var(--on-dark-62); }
+.st-l { max-width: 16rem; margin-top: 0.75rem; font-size: max(12px, 0.875rem); color: var(--on-dark-62); }
+.st-foot { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--raw-color-white-alpha-10); font-size: max(12px, 0.8125rem); color: var(--on-dark-62); }

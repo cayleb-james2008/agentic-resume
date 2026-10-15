@@ -27,7 +27,8 @@
 - The ticket ladder is Agent → Senior agent → Person. No model names, because the routing may change.
 - The price, about $100 a person a month, is Cayleb's own 2026-10-15 figure, sized per company.
 - The résumé half carries the verified status: Ergon is a Windows pilot with live checks pending. The other jobs are labelled "Work ethic". There is no certifications section.
-- The claim limits hold, and tests enforce them: no clients, returns, profit or revenue in the homepage copy, and EvoHedge and Maki never named (`tests/home-content.test.js`); the guide names no clients, customers or company pilots, and never RHL (`tests/home-guide.test.js`). The lab is described as recorded demos, and RHL appears only as the moving-crew job in the résumé half.
+- These claim limits are held by tests: no clients, returns, profit or revenue in the homepage copy, and EvoHedge and Maki never named (`tests/home-content.test.js`); the guide names no clients, customers or company pilots, and never RHL (`tests/home-guide.test.js`); the homepage describes the lab as recorded demos (`tests/recruiter-truth-and-resume.test.js`).
+- One more limit is kept by hand, with no test behind it: RHL appears only as the moving-crew job in the résumé half.
 
 ---
 

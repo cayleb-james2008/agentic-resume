@@ -40,14 +40,9 @@ test('the copyright is the content line, without an illustration credit', () => 
   assert.equal(p[1], escape(content.contact.copyright));
 });
 
-test('a jump to #contact lands the whole footer under the fixed masthead', () => {
+test('the footer\'s watermark is decorative and the footer keeps no scroll offsets of its own', () => {
+  assert.match(footer, /<div class="ft-wm" aria-hidden="true">/);
   const css = read('site/css/contact.css').replace(/\/\*[\s\S]*?\*\//g, '');
-  const contact = css.match(/(?:^|\})\s*\.contact\s*\{([^}]*)\}/)[1];
-  // It stops under the masthead, not behind it: the page's one scroll padding (ruling R31), with no margin of
-  // its own for Lenis or the browser to add to it...
-  const masthead = read('site/css/masthead.css').replace(/\/\*[\s\S]*?\*\//g, '');
-  assert.match(masthead, /(?:^|\})\s*html\s*\{[^}]*scroll-padding-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/);
   assert.doesNotMatch(css, /scroll-margin|scroll-padding/);
-  // ...and where it fills the screen, it fills only what that padding leaves, so its foot row is not pushed off.
-  assert.match(contact, /min-height:\s*var\(--foot-h,\s*calc\(100lvh - var\(--masthead-h\) - 1rem\)\)/);
+  assert.match(css, /\.foot-in\s*\{[^}]*padding-bottom:\s*calc\([^;]*env\(safe-area-inset-bottom/, 'the legal line clears a phone\'s home bar');
 });

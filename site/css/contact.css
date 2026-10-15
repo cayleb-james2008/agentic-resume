@@ -1,124 +1,40 @@
-/* Contact footer — the reference's sign-off (spec §L5275–5476). A cyan page
-   edge around a plain near-black panel; the copy on the section in frame
-   coordinates. Below 640: a stacked phone footer.
-   A jump to #contact (the nav, a deep link) stops under the fixed masthead, where html's scroll-padding
-   (masthead.css) puts it; where the footer fills the screen it fills only what that leaves, so its foot row is
-   never pushed off the bottom. */
+/* The contact footer: a black panel with rounded top corners, the closing line and Get in touch,
+   four columns, the copyright, and a faint CAYLEB watermark. */
 
-.contact {
-  container-type: inline-size; position: relative; isolation: isolate;
-  min-height: var(--foot-h, calc(100lvh - var(--masthead-h) - 1rem)); width: 100%; overflow: hidden;
-  background: var(--accent); color: var(--foreground-on-dark);
-  --g: var(--foot-gutter, 2.2222cqw);
-  --cta-h: 3.4722cqw;
-  --foot-bottom: max(2.2222cqw, var(--foot-bottom-min, 0px));
+.site-footer { margin-top: 0; }
+.contact { position: relative; overflow: hidden; border-radius: var(--radius-card) var(--radius-card) 0 0; background: var(--ink); color: var(--foreground-on-dark); }
+.foot-in { position: relative; z-index: 10; padding-top: 5rem; padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 1024px) { .foot-in { padding-top: 6rem; } }
+.ft-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 2rem; padding-bottom: 4rem; border-bottom: 1px solid var(--raw-color-white-alpha-10); }
+@media (min-width: 1024px) { .ft-cta { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+.ft-h { max-width: 16ch; font-size: 2.25rem; font-weight: 600; line-height: 1.02; letter-spacing: -0.02em; }
+@media (min-width: 640px) { .ft-h { font-size: 3rem; } }
+@media (min-width: 768px) { .ft-h { font-size: 3.75rem; } }
+.ft-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 3rem; padding-block: 4rem; }
+@media (min-width: 768px) { .ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .ft-cols { grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); } }
+.ft-brand { display: flex; flex-direction: column; gap: 1rem; }
+.ft-brand > p:not(.brandline):not(.ft-mail) { max-width: 21rem; font-size: 0.875rem; color: var(--on-dark-62); }
+.ft-mail { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; font-size: 0.875rem; }
+.ft-email { user-select: all; overflow-wrap: anywhere; color: var(--foreground-on-dark); }
+.copy {
+  display: inline-flex; align-items: center; gap: 0.375rem; min-height: 2.25rem; padding: 0.375rem 0.75rem; border-radius: var(--radius-pill);
+  background: var(--raw-color-white-alpha-10); font-size: 0.8125rem; color: var(--on-dark-72); transition: background-color 0.18s, color 0.18s;
 }
-@media (max-width: 1023px) {
-  .contact {
-    --type-min: 13px; --foot-bottom-min: 5cqw; --head-w-min: 44cqw; --foot-head-min: 6.6667cqw;
-    --cta-h: 50px;
-  }
+.copy .icon { width: 0.875rem; height: 0.875rem; }
+.ft-t { margin-bottom: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--on-dark-56); }
+.ft-cols ul { display: flex; flex-direction: column; gap: 0.75rem; }
+.ft-cols ul a { display: inline-flex; font-size: 0.875rem; color: var(--on-dark-72); transition: transform 0.3s var(--ease-hover), color 0.3s; }
+.ft-legal {
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 2rem;
+  border-top: 1px solid var(--raw-color-white-alpha-10); font-size: 0.8125rem; color: var(--on-dark-56);
 }
-@media (min-width: 640px) and (max-width: 1023px) {
-  .contact {
-    --foot-h: 104cqw; --logo-h: 24px;
-    --nav-size: 36px; --nav-gap: 12px; --nav-row: 34px;
-    --cta-left: 50%; --cta-shift: -50%; --foot-copy-min: 200px;
-  }
+@media (min-width: 640px) { .ft-legal { flex-direction: row; } }
+.ft-wm {
+  position: absolute; inset-inline: 0; bottom: -1.5rem; z-index: 0; pointer-events: none; user-select: none; text-align: center;
+  font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-size: min(13rem, 22vw); color: var(--raw-color-white-alpha-05);
 }
-@media (max-width: 639px) {
-  .contact {
-    --foot-gutter: 24px; --foot-h: 680px; --nav-mid: 318px; --cta-bottom: 73px;
-    --social-bottom: 151px; --social-left: 24px; --social-right: auto; --social-min-w: auto;
-    --logo-h: 24px; --nav-size: 30px; --nav-gap: 18px; --nav-row: auto;
-    --nav-w: calc(100cqw - 48px); --cta-left: 24px; --cta-w: calc(100cqw - 48px);
-    --foot-head-left: 24px; --foot-head-right: auto; --foot-head-top: 78px;
-    --foot-copy-min: 260px; --foot-head-min: 40px; --head-w-min: 240px;
-  }
-}
-
-/* The panel inset 16 on every side: plain near-black, no backdrop. */
-.contact-panel {
-  position: absolute; inset: 1.1111cqw; overflow: hidden; background: var(--surface-black);
-}
-
-/* --- Copy, on the section ---------------------------------------------- */
-.contact-wordmark {
-  position: absolute; z-index: 20; left: var(--g); top: var(--g);
-  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-  font-size: var(--logo-h, 1.6667cqw); line-height: 1; letter-spacing: 0.02em; color: var(--accent);
-}
-
-.contact-title {
-  position: absolute; z-index: 20;
-  top: var(--foot-head-top, var(--g)); right: var(--foot-head-right, var(--g)); left: var(--foot-head-left, auto);
-  width: max(25.6944cqw, var(--head-w-min, 0px));
-  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 0.95;
-  color: var(--accent); font-size: max(3.8194cqw, var(--foot-head-min, 0px)); text-align: right;
-}
-.contact-title .reveal-units { justify-content: flex-end; }
-@media (max-width: 639px) {
-  .contact-title { text-align: left; }
-  .contact-title .reveal-units { justify-content: flex-start; }
-}
-
-.contact-nav {
-  position: absolute; z-index: 20; left: 0; margin-left: var(--g);
-  top: var(--nav-mid, 50%); transform: translateY(-50%); width: var(--nav-w, 10.9722cqw);
-}
-.contact-nav ul { display: flex; flex-direction: column; gap: var(--nav-gap, max(0.8333cqw, var(--type-min, 0px))); }
-.contact-nav a {
-  display: block; width: max-content; white-space: nowrap;
-  height: var(--nav-row, max(2.3611cqw, var(--type-min, 0px)));
-  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 0.95;
-  font-size: var(--nav-size, max(2.5cqw, var(--type-min, 0px))); color: var(--foreground-on-dark);
-  transition: color var(--duration-fast) var(--ease-entrance);
-}
-.contact-nav a:hover, .contact-nav a:focus-visible { color: var(--accent); }
-.contact-nav-arrow { display: none; }
-@media (max-width: 639px) {
-  .contact-nav a {
-    width: 100%; display: flex; align-items: center; justify-content: space-between;
-    padding-bottom: 8px; border-bottom: 1px solid rgb(255 255 255 / 0.15);
-  }
-  .contact-nav-arrow { display: inline; color: var(--accent); font-family: var(--font-sans); font-weight: 400; }
-}
-
-/* --- The foot row: everything ends 32 above the foot ------------------- */
-.contact-copyright {
-  position: absolute; z-index: 20; left: var(--g); bottom: var(--foot-bottom);
-  width: max(max(18.0556cqw, var(--type-min, 0px)), var(--foot-copy-min, 0px));
-  font-size: max(0.9722cqw, var(--type-min, 0px)); text-transform: uppercase; line-height: 1.1;
-  color: var(--foreground-on-dark-faint);
-}
-
-.cta--hollow {
-  position: absolute; z-index: 20;
-  left: var(--cta-left, 40.4861cqw); bottom: var(--cta-bottom, var(--foot-bottom));
-  translate: var(--cta-shift, 0) 0;
-  height: var(--cta-h); width: var(--cta-w, calc(var(--cta-h) * 5.5));
-  justify-content: flex-start;
-  padding-left: calc(var(--cta-h) * 24 / 50); gap: calc(var(--cta-h) * 32 / 50);
-  font-size: calc(var(--cta-h) * 20 / 50);
-}
-.cta--hollow .cta-arrow { width: calc(var(--cta-h) * 13.71 / 50); height: calc(var(--cta-h) * 10.71 / 50); }
-/* Hollow per the spec: the plain panel shows through. */
-.cta-frame--hollow .cta-body { fill: none; }
-.cta-frame--hollow .cta-line { fill: none; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
-
-.contact-links {
-  position: absolute; z-index: 20;
-  right: var(--social-right, var(--g)); left: var(--social-left, auto);
-  bottom: var(--social-bottom, var(--foot-bottom));
-  width: max(max(14.3056cqw, var(--type-min, 0px)), var(--social-min-w, 0px));
-  min-width: max-content;
-  display: flex; justify-content: space-between; column-gap: 1.25rem;
-  font-size: max(0.9722cqw, var(--type-min, 0px)); text-transform: uppercase; line-height: 1;
-  white-space: nowrap;
-}
-.contact-links a { transition: color var(--duration-fast) var(--ease-entrance); }
-.contact-links a:hover, .contact-links a:focus-visible { color: var(--accent); }
-
-@media (prefers-reduced-motion: reduce) {
-  .contact-nav a, .contact-links a { transition: none; }
+@media (hover: hover) and (pointer: fine) {
+  .copy:hover { background: var(--raw-color-white-alpha-20); color: var(--foreground-on-dark); }
+  .ft-cols ul a:hover { transform: translateX(4px); color: var(--foreground-on-dark); }
 }

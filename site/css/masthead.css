@@ -1,48 +1,84 @@
-/* The masthead: wordmark, primary nav and burger, fixed over the page. Solid, so the story's water never
-   shows through it. On a scripted page that allows motion the story fades it in as the name flies up
-   into it (story.js owns its inline opacity from there). */
+/* The masthead over the hero (it scrolls away with it) and the full-screen menu it opens. */
 
-:root {
-  --masthead-h: 4rem;
-  --gutter: clamp(1rem, 4vw, 3rem);
+.masthead { position: absolute; inset-inline: 0; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); }
+.js:not(.reveal-failsafe) .masthead:not(.in) { opacity: 0; transform: translateY(-14px); }
+.masthead { transition: opacity 0.7s var(--ease-spring) 0.15s, transform 0.7s var(--ease-spring) 0.15s; }
+.hdr-in { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.25rem; }
+@media (min-width: 640px) { .hdr-in { padding-block: 1.5rem; } }
+.brand {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px;
+  font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; transition: transform 0.35s var(--ease-hover);
+}
+.nav { display: none; }
+@media (min-width: 1024px) { .nav { display: flex; } }
+.nav ul { display: flex; gap: 2rem; font-size: 0.875rem; font-weight: 500; }
+.nav a { display: inline-block; padding-block: 0.75rem; color: var(--text-74); transition: transform 0.3s var(--ease-hover), color 0.3s; }
+.nav a[aria-current] { color: var(--foreground); }
+.hdr-r { display: flex; align-items: center; gap: 0.75rem; }
+.chipbox {
+  border: 1px solid var(--line); background: var(--raw-color-white-alpha-40); border-radius: var(--radius-control);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.clock { display: none; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; font-size: 0.8125rem; color: var(--text-74); }
+@media (min-width: 768px) { .clock { display: flex; } }
+.clock .cl-l { color: var(--text-63); }
+.clock .cl-t { min-width: 3.5rem; font-variant-numeric: tabular-nums; font-weight: 500; color: var(--foreground); }
+.clock .cl-s { color: var(--raw-color-ink-alpha-35); }
+.clock .cl-d { font-weight: 500; color: var(--foreground); }
+.menu-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.625rem 1rem;
+  font-size: 0.8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;
+  transition: background-color 0.18s, transform 0.35s var(--ease-hover);
+}
+.menu-btn .icon { width: 0.875rem; height: 0.875rem; }
+.menu-btn .lbl { display: none; }
+@media (min-width: 640px) { .menu-btn .lbl { display: inline; } }
+.menu-btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .brand:hover { transform: scale(1.04); }
+  .nav a:hover { transform: translateY(-2px); color: var(--foreground); }
+  .menu-btn:hover { background: var(--raw-color-white-alpha-72); }
 }
 
-/* Whatever the page scrolls to (a deep link, a nav jump through Lenis, a focused link) stops clear of the fixed
-   masthead, never under it (WCAG 2.2 SC 2.4.11). One rule for the whole page: Lenis and the browser add an
-   element's scroll-margin to this, so no section carries its own. */
-html { scroll-padding-top: calc(var(--masthead-h) + 1rem); }
-
-.masthead {
-  position: fixed; inset: 0 0 auto; z-index: 30;
-  display: flex; align-items: center; justify-content: space-between;
-  height: var(--masthead-h); padding: 0 var(--gutter);
-  background: var(--background);
+/* --- The menu: a full-screen ink overlay --------------------------------- */
+.menu {
+  position: fixed; inset: 0; z-index: 115; display: flex; flex-direction: column; overflow-y: auto;
+  background: var(--ink); color: var(--foreground-on-dark);
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  transition: opacity 0.4s var(--ease-spring);
 }
-.wordmark {
-  font-family: var(--font-display); font-weight: 700; font-size: 1.5rem;
-  line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; color: var(--foreground);
+.js:not(.reveal-failsafe) .menu:not(.open) { opacity: 0; }
+.brandline { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.125rem; font-weight: 600; }
+.mn-top { display: flex; align-items: center; justify-content: space-between; padding-block: 1.25rem; }
+@media (min-width: 640px) { .mn-top { padding-block: 1.5rem; } }
+.mn-close {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.5rem 1rem;
+  border: 1px solid var(--raw-color-white-alpha-20); border-radius: var(--radius-control);
+  font-size: 0.8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--on-dark-72);
+  transition: border-color 0.18s, color 0.18s;
 }
-.masthead-nav { display: none; }
-.masthead-action { display: none; }
-.masthead-nav a, .masthead-action {
-  font-size: var(--type-label); text-transform: uppercase; line-height: 0.9;
-  color: var(--foreground);
-  transition: color var(--duration-fast) var(--ease-entrance);
+.mn-close .icon { width: 0.875rem; height: 0.875rem; }
+.mn-nav { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-block: 1rem; }
+.mn-nav ul { display: flex; flex-direction: column; gap: 0.25rem; }
+.mn-nav a, .mn-nav button {
+  display: flex; align-items: baseline; gap: 1rem; width: 100%; padding-block: 0.5rem;
+  font-size: 2.25rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; transition-delay: calc(var(--i) * 45ms + 80ms);
 }
-.masthead-nav a:hover, .masthead-nav a:focus-visible,
-.masthead-action:hover, .masthead-action:focus-visible { color: var(--accent-ink); }
-.masthead-action { font-weight: 700; }
-.burger { padding: 0.5rem; margin-right: -0.5rem; display: flex; flex-direction: column; gap: 0.3125rem; }
-.burger span { display: block; width: 1.5rem; height: 1px; background: var(--foreground); }
-
-@media (min-width: 1280px) {
-  .masthead-nav { display: block; position: absolute; left: 50%; transform: translateX(-50%); }
-  .masthead-nav ul { display: flex; gap: clamp(2rem, 2.75vw, 3.5rem); }
-  .masthead-action { display: inline; }
-  .burger { display: none; }
+@media (min-width: 640px) { .mn-nav a, .mn-nav button { font-size: 3.75rem; } }
+.js:not(.reveal-failsafe) .menu:not(.open) .mn-nav a,
+.js:not(.reveal-failsafe) .menu:not(.open) .mn-nav button { opacity: 0; transform: translateY(1rem); }
+.mn-i { flex: none; min-width: 5.5rem; font-size: 0.9375rem; font-weight: 400; color: var(--on-dark-56); transition: color 0.3s; }
+.mn-l { color: var(--on-dark-72); transition: color 0.3s; }
+.mn-bot {
+  display: flex; flex-direction: column; gap: 0.75rem; padding-block: 1.5rem; border-top: 1px solid var(--raw-color-white-alpha-10);
+  font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--on-dark-56);
 }
-
-/* The runway's intro: the masthead is not there yet. */
-@media (prefers-reduced-motion: no-preference) {
-  .js:not(.reveal-failsafe) [data-masthead] { opacity: 0; }
+@media (min-width: 640px) { .mn-bot { flex-direction: row; justify-content: space-between; align-items: center; } }
+.mn-bot button { align-self: flex-start; min-height: 44px; color: var(--on-dark-72); text-transform: uppercase; letter-spacing: 0.03em; }
+@media (hover: hover) and (pointer: fine) {
+  .mn-close:hover { border-color: var(--raw-color-white-alpha-40); color: var(--foreground-on-dark); }
+  .mn-nav a:hover .mn-l, .mn-nav button:hover .mn-l { color: var(--foreground-on-dark); }
+  .mn-nav a:hover .mn-i, .mn-nav button:hover .mn-i { color: var(--accent); }
+  .mn-bot button:hover { color: var(--foreground-on-dark); text-decoration: underline; text-underline-offset: 0.25em; }
 }

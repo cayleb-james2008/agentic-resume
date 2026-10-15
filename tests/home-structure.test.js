@@ -130,3 +130,9 @@ test('served code carries no names from either layout reference', () => {
     assert.doesNotMatch(readFileSync(file, 'utf8'), /kimi|antonelli|mercedes|grid0?1\b|getlayers|lumora/i, file);
   }
 });
+
+test('each section\'s class names only that section, so section styles never leak into a component', () => {
+  for (const [, cls] of home.matchAll(/<section class="([\w-]+)"/g)) {
+    assert.equal(count(new RegExp(`class="${cls}[" ]`, 'g')), 1, `class="${cls}" is used by one element`);
+  }
+});

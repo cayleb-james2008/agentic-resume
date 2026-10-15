@@ -54,7 +54,7 @@ def render(content: dict) -> str:
         f'<p class="hint mono"{rv("fade", 1100)}>{text(h["hint"])}</p>'
         "</div>"
         f'<div class="hero-r">{_carousel(h)}'
-        f'<div class="built"{rv("", 550, "--ty:14px")}><p class="built-l">{text(h["builtWithLabel"])}</p><ul>{built}</ul></div>'
+        f'<div class="stackline"{rv("", 550, "--ty:14px")}><p class="stackline-l">{text(h["builtWithLabel"])}</p><ul>{built}</ul></div>'
         "</div></div>"
         f'<div class="shell hero-bar"{rv("fade", 900)}><div class="hb-in"><span>{text(status[0])}</span>'
         f'<span class="hb-c">{text(status[1])}</span><span>{text(status[2])}</span></div></div>'

@@ -1,95 +1,39 @@
-/* The guide: a faceless ink bead in the corner, its speech bubble and the
-   "Ask my agent" panel (spec 2026-10-12-droplet-agent-guide-design). Above
-   content, below the menu sheet and veil (50) and the asset banner (70). */
+/* Ask my agent: a pill in the corner that opens a small terminal of questions. It appears once the hero
+   is mostly out of view (site/js/guide/guide.js). */
 
 .guide {
-  position: fixed; z-index: 40;
-  right: calc(1rem + env(safe-area-inset-right, 0px));
-  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  position: fixed; right: max(1rem, env(safe-area-inset-right, 0px)); bottom: max(1rem, env(safe-area-inset-bottom, 0px)); z-index: 90;
   display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;
-  pointer-events: none;
+  transition: opacity 0.35s var(--ease-spring), transform 0.35s var(--ease-spring);
 }
-.guide[hidden] { display: none; }
-.guide > * { pointer-events: auto; }
-.guide-dock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; pointer-events: none; }
-.guide-dock > * { pointer-events: auto; }
-
-/* The bead button. */
+.js:not(.reveal-failsafe) .guide:not(.show):not(.open) { opacity: 0; transform: translateY(1rem); pointer-events: none; }
+/* taste-skill-ignore: a floating control over the page */
 .guide-agent {
-  width: 4rem; height: 4.5rem; padding: 0; border-radius: 50%;
-  filter: drop-shadow(0 0.4rem 0.9rem rgb(9 10 11 / 0.28));
+  display: inline-flex; align-items: center; gap: 0.625rem; height: 3rem; padding: 0 1.125rem 0 0.5rem; border-radius: var(--radius-pill);
+  background: var(--ink); color: var(--foreground-on-dark); font-size: 0.875rem; font-weight: 500;
+  box-shadow: 0 12px 30px -12px var(--raw-color-ink-alpha-60); transition: transform 0.3s var(--ease-hover);
 }
-@media (max-width: 639px) { .guide-agent { width: 3.25rem; height: 3.65rem; } }
-.guide-agent:focus-visible { outline-offset: 4px; }
-.guide-bead { width: 100%; height: 100%; overflow: visible; }
-.guide-bead-body { fill: var(--raw-color-ink-900); }
-.guide-bead-rim { fill: none; stroke: var(--raw-color-cyan-400); stroke-width: 1.5; }
-.guide-bead-shine { fill: none; stroke: var(--raw-color-ice-50); stroke-width: 2.5; stroke-linecap: round; opacity: 0.35; }
-
-/* The speech bubble: a line per section, decoration for screen readers. */
-.guide-bubble {
-  position: relative; margin: 0 0.25rem 0 0; max-width: min(17rem, calc(100vw - 2rem));
-  padding: 0.75rem 1rem; background: var(--surface-black); color: var(--foreground-on-dark);
-  border: 1px solid rgb(255 255 255 / 0.12); border-left: 2px solid var(--accent);
-  font-size: 0.875rem; line-height: 1.35;
-}
-.guide-bubble::after {
-  content: ""; position: absolute; right: 1.4rem; bottom: -6px; width: 10px; height: 10px;
-  background: var(--surface-black); transform: rotate(45deg);
-  border-right: 1px solid rgb(255 255 255 / 0.12); border-bottom: 1px solid rgb(255 255 255 / 0.12);
-}
-.guide-bubble[hidden] { display: none; }
-
-/* The panel: a non-modal dialog of quick answers. */
+.guide-agent .mk { width: 2rem; height: 2rem; border-radius: 50%; background: var(--raw-color-ink-800); }
+.guide-agent:active { transform: scale(0.97); }
 .guide-panel {
-  width: min(21rem, calc(100vw - 2rem)); max-height: min(70vh, 34rem); overflow: auto;
-  padding: 1.25rem; background: var(--surface-black); color: var(--foreground-on-dark);
-  border: 1px solid rgb(255 255 255 / 0.12); border-top: 2px solid var(--accent);
-  overscroll-behavior: contain;
+  width: min(23rem, calc(100vw - 2rem)); overflow: hidden; border-radius: var(--radius-card-sm); transform-origin: bottom right;
+  background: var(--term); color: var(--term-fg); box-shadow: 0 25px 50px -12px var(--raw-color-ink-alpha-60);
+  transition: opacity 0.25s var(--ease-spring), transform 0.3s var(--ease-spring);
 }
-.guide-panel[hidden] { display: none; }
-.guide-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.guide-title {
-  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-  font-size: 1.5rem; line-height: 0.95; color: var(--accent);
-}
-.guide-close { position: relative; flex: none; width: 2rem; height: 2rem; margin-right: -0.4rem; }
-.guide-close span {
-  position: absolute; left: 0.45rem; top: 50%; width: 1.1rem; height: 1px; background: var(--foreground-on-dark);
-}
-.guide-close span:first-child { transform: rotate(45deg); }
-.guide-close span:last-child { transform: rotate(-45deg); }
-.guide-qs li + li { border-top: 1px solid rgb(255 255 255 / 0.12); }
-.guide-q {
-  width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-  padding: 0.8rem 0; text-align: left; text-transform: uppercase; font-size: 0.875rem; line-height: 1.2;
-  transition: color var(--duration-fast) var(--ease-entrance);
-}
-.guide-q::after { content: "+"; color: var(--accent); font-size: 1rem; line-height: 1; }
-.guide-q[aria-expanded="true"]::after { content: "\2013"; }
-.guide-q:hover, .guide-q:focus-visible { color: var(--accent); }
-.guide-a p { margin: 0; padding-bottom: 0.9rem; font-size: 0.875rem; line-height: 1.5; color: rgb(255 255 255 / 0.84); }
-.guide-a[hidden] { display: none; }
-.guide-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: -0.4rem; }
-.guide-links a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
-.guide-quiet {
-  margin-top: 0.75rem; font-size: 0.75rem; text-transform: uppercase; color: rgb(255 255 255 / 0.64);
-  text-decoration: underline; text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-entrance);
-}
-.guide-quiet[aria-pressed="true"], .guide-quiet:hover { color: var(--accent); }
-
-/* Phones: the panel is a bottom sheet. */
-@media (max-width: 639px) {
-  .guide-panel {
-    position: fixed; left: 0; right: 0; bottom: 0; width: auto; max-height: 78vh;
-    border-left: 0; border-right: 0; border-bottom: 0;
-    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
-  }
-  /* The sheet has its own close button; the bead would sit on its last row. */
-  .js:not(.reveal-failsafe) .guide-panel:not([hidden]) + .guide-dock { visibility: hidden; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .guide-q, .guide-quiet { transition: none; }
+.js:not(.reveal-failsafe) .guide-panel.enter { opacity: 0; transform: translateY(8px) scale(0.97); }
+.guide-top { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.5rem 0.5rem 1rem; border-bottom: 1px solid var(--raw-color-white-alpha-10); }
+.guide-title { font-size: 0.75rem; font-weight: 400; color: var(--term-dim); }
+.guide-close { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; color: var(--term-dim); transition: color 0.18s, background-color 0.18s; }
+.guide-close .icon { width: 0.875rem; height: 0.875rem; }
+.guide-log { display: flex; flex-direction: column; gap: 0.75rem; max-height: min(17rem, 45vh); overflow-y: auto; padding: 1rem; font-size: 0.8125rem; line-height: 1.6; }
+.guide-log .q { color: var(--accent); }
+.guide-log .a { color: var(--term-fg); }
+.guide-log .d { color: var(--term-dim); }
+.guide-log a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+.guide-qs { display: flex; flex-wrap: wrap; gap: 0.375rem; padding: 0.75rem 1rem 1rem; border-top: 1px solid var(--raw-color-white-alpha-10); }
+.guide-q { min-height: 2.25rem; padding: 0.375rem 0.75rem; border-radius: var(--radius-pill); background: var(--raw-color-white-alpha-10); color: var(--term-fg);
+  font-size: 0.8125rem; transition: background-color 0.18s; }
+@media (hover: hover) and (pointer: fine) {
+  .guide-close:hover { color: var(--foreground-on-dark); background: var(--raw-color-white-alpha-10); }
+  .guide-q:hover { background: var(--raw-color-white-alpha-20); }
 }

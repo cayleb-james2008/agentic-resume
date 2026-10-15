@@ -63,8 +63,7 @@ const rule = (css, selector) => {
 
 test('accent type on the light ground uses the deeper ink accent, 4.5:1 or better', () => {
   assert.ok(contrast('--accent-ink', '--background') >= 4.5);
-  // Hover and focus on the light masthead and the résumé half go to the ink accent.
-  assert.match(rule(strip(read('site/css/masthead.css')), '.masthead-action:hover'), /color:\s*var\(--accent-ink\)/);
+  // Hover and focus on the résumé half go to the ink accent.
   const half = strip(read('site/css/resume-half.css'));
   const hovers = [...half.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter((m) => /:hover/.test(m[1]));
   assert.ok(hovers.length > 0, 'the résumé half styles its link hovers');
@@ -90,4 +89,16 @@ test('the agent is the >_ tile, with no face, on the homepage and the 404 page',
   assert.match(read('index.html'), /<button type="button" class="guide-agent"[^>]*><span class="mk" aria-hidden="true">&gt;_<\/span>/);
   assert.match(read('404.html'), /<div class="not-found-agent" aria-hidden="true"><span class="mk mk--xl" aria-hidden="true">&gt;_<\/span><\/div>/);
   assert.match(strip(read('site/css/base.css')), /\.mk--xl\s*\{/);
+});
+
+test('hover motion only where a mouse can hover', async () => {
+  const { readdirSync } = await import('node:fs');
+  for (const file of readdirSync(new URL('../site/css/', import.meta.url)).filter((f) => f.endsWith('.css'))) {
+    let css = strip(read(`site/css/${file}`));
+    // Drop the fine-pointer blocks, then nothing left may move on hover.
+    css = css.replace(/@media \(hover: hover\) and \(pointer: fine\)\s*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, '');
+    for (const [, selector, decls] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (/:hover/.test(selector)) assert.doesNotMatch(decls, /transform/, `${file}: ${selector.trim()}`);
+    }
+  }
 });

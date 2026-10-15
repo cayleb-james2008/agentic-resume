@@ -117,3 +117,9 @@ test('the stats show their final figures without JS', () => {
     assert.ok(stats.includes(`data-count="${figure}">${digits}<`), figure);
   }
 });
+
+test('the loader shows only on a scripted page, never after the failsafe', () => {
+  const css = read('site/css/hero.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(css, /(^|\})\s*\.loader\s*\{\s*display:\s*none;?\s*\}/);
+  assert.match(css, /\.js:not\(\.reveal-failsafe\) \.loader\s*\{[^}]*display:\s*flex/);
+});

@@ -276,22 +276,19 @@ test('three sections, one h2 each, ids for deep links', () => {
 
 // --- 6. The stylesheet -----------------------------------------------------------------------------------------
 
-test('the stylesheet follows the brief and the house rules', () => {
+test('the stylesheet sets the half as the official sheet, within the house rules', () => {
   const css = read('site/css/resume-half.css').replace(/\/\*[\s\S]*?\*\//g, '');
   const rule = (selector) => {
     const found = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter((m) => m[1].split(',').map((s) => s.trim()).includes(selector));
     assert.ok(found.length, `a rule for ${selector}`);
     return found.map((m) => m[2]).join(';');
   };
-  // 72rem, held to 1152px where tokens.css shrinks the root (12px at 1441px wide).
-  assert.match(rule('.resume-half'), /max-width:\s*max\(72rem, 1152px\)/);
-  assert.match(rule('.resume-half'), /background:\s*var\(--raw-color-white\)/);
-  assert.match(rule('.resume-half h2'), /font-family:\s*var\(--font-display\)/);
+  // A cool-grey card with the reference's 2rem radius; from 1024px the sections sit in two columns.
+  assert.match(rule('.resume-half'), /background:\s*var\(--surface\)/);
+  assert.match(rule('.resume-half'), /border-radius:\s*var\(--radius-card\)/);
+  assert.match(css, /grid-template-areas:\s*"head head"\s*"exp edu"\s*"work edu"/);
   assert.match(rule('.resume-half h2'), /text-transform:\s*uppercase/);
-  assert.match(rule('.resume-half section'), /border-top:\s*1px solid var\(--foreground\)/);
-  assert.match(rule('.resume-project--lead'), /border-left:\s*2px solid var\(--raw-color-cyan-400\)/);
-  assert.match(rule('.resume-project--lead'), /grid-column:\s*1\s*\/\s*-1/);
-  assert.match(rule('.resume-projects'), /grid-template-columns:\s*repeat\(2,/);
+  assert.match(rule('.resume-project--lead'), /border-left:\s*2px solid var\(--accent\)/);
   assert.match(css, /color:\s*var\(--accent-ink\)/, 'link hover is the accent ink');
 
   assert.doesNotMatch(css, /@keyframes/);
@@ -300,15 +297,10 @@ test('the stylesheet follows the brief and the house rules', () => {
   assert.doesNotMatch(css, /#[0-9a-f]{3,8}\b/i, 'colours come from tokens');
 });
 
-test('deep links clear the fixed masthead: the page\'s one scroll padding covers the résumé, its sections and every project', () => {
-  // Ruling R31: html { scroll-padding-top } in masthead.css replaces the per-section scroll-margin rules. Lenis
-  // and a native hash jump add an element's margin to the padding, so the résumé keeps none of its own.
+test('deep links land on the résumé, its sections and every project with no margin of their own', () => {
   const strip = (file) => read(file).replace(/\/\*[\s\S]*?\*\//g, '');
-  const html_ = [...strip('site/css/masthead.css').matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter((m) => m[1].trim() === 'html');
-  assert.equal(html_.length, 1, 'one html rule');
-  assert.match(html_[0][2], /scroll-padding-top:\s*calc\(var\(--masthead-h\) \+ 1rem\)/);
-  assert.doesNotMatch(strip('site/css/resume-half.css'), /scroll-margin|scroll-padding/, 'no margin of its own to add to the padding');
-  // The padding is the root's, so every id the suite pages link to (index.html#suite and the rest) is covered.
+  assert.doesNotMatch(strip('site/css/resume-half.css'), /scroll-margin|scroll-padding/);
+  // Every id the suite pages link to (index.html#suite and the rest) is a project.
   const withIds = [...html.matchAll(/<article class="([^"]*)"[^>]*\sid="([^"]+)"/g)];
   assert.ok(withIds.length >= 5, 'ergon, suite, dotz, sophos and asmodeus carry ids');
   for (const [, cls, id] of withIds) assert.match(cls, /(^|\s)resume-project(\s|$)/, `#${id} is a project`);

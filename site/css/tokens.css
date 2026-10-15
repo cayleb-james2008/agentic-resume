@@ -70,6 +70,19 @@
   --raw-color-white-alpha-56: rgb(255 255 255 / 0.56);
   --raw-color-white-alpha-62: rgb(255 255 255 / 0.62);
   --raw-color-white-alpha-72: rgb(255 255 255 / 0.72);
+  --raw-color-white-alpha-05: rgb(255 255 255 / 0.05);  /* the footer watermark */
+  --raw-color-ink-alpha-12: rgb(9 10 11 / 0.12);
+  --raw-color-ink-alpha-16: rgb(9 10 11 / 0.16);
+  --raw-color-ink-alpha-20: rgb(9 10 11 / 0.2);
+  --raw-color-cool-200: #d3dadc;      /* the team graph's wires */
+  --raw-color-cool-500: #868e90;      /* the About statement's quiet half (large type) */
+  --raw-color-cyan-50: #e3f8fa;       /* a person card while its assistant works */
+  --raw-color-cyan-200: #9fe7ee;      /* a wire carrying a packet */
+  --raw-color-warn-300: #f6c87a;      /* tickets in the terminal log */
+  --raw-color-warn-900: #3a2400;      /* type on the ticket badge */
+  --raw-color-warn-alpha-35: rgb(242 169 59 / 0.35);
+  --raw-color-ok-alpha-35: rgb(126 226 184 / 0.35);
+  --raw-color-red-700: #b3261e;       /* form errors */
 
   --raw-font-size-96: 6rem;      /* the hero name */
   --raw-font-size-70: 4.375rem;  /* the name on phones */
@@ -148,6 +161,11 @@
   --term-dim: var(--raw-color-term-400);
   --ok: var(--raw-color-ok-300);
   --warn: var(--raw-color-warn-400);
+  --text-quiet: var(--raw-color-cool-500);
+  --wire: var(--raw-color-cool-200);
+  --wire-hot: var(--raw-color-cyan-200);
+  --busy: var(--raw-color-cyan-50);
+  --danger: var(--raw-color-red-700);
   --radius-pill: 9999px; --radius-card: 2rem; --radius-card-sm: 1.25rem; --radius-control: 0.875rem;
   --ease-line: cubic-bezier(0.215, 0.61, 0.355, 1);
   --ease-word: cubic-bezier(0.165, 0.84, 0.44, 1);

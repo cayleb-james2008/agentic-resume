@@ -66,7 +66,7 @@ button:disabled { cursor: wait; opacity: 0.6; }
 .nav-item[aria-current="page"] .nav-number { color: var(--accent); }
 .nav-item__name { font-size: 0.9375rem; font-weight: 600; }
 .nav-item__arrow { color: var(--accent); }
-.rail__foot { margin: auto 0 0; padding: 1.5rem clamp(1.4rem, 3vw, 2.25rem); line-height: 1.6; letter-spacing: 0.06em; color: var(--lab-faint); }
+.rail__foot { margin: auto 0 0; padding: 1.5rem clamp(1.4rem, 3vw, 2.25rem); line-height: 1.6; color: var(--lab-faint); }
 
 .workspace { width: 100%; max-width: 90rem; min-width: 0; margin: 0 auto; padding: clamp(1.3rem, 3.4vw, 3.5rem); }
 .workspace__topline { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--lab-line); color: var(--lab-muted); }

@@ -142,3 +142,11 @@ test('the lab\'s wordmark reads in the lab\'s text colour, not its link cyan', (
   const lab = read('lab/lab.css').replace(/\/\*[\s\S]*?\*\//g, '');
   assert.match(lab, /\.sub-wordmark\s*\{[^}]*color:\s*var\(--lab-text\)/);
 });
+
+test('project write-ups keep a reading measure, and the lab sets no wide tracking on its notes', () => {
+  const css = read('site/css/subpage.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  const measure = css.match(/\.project-content p, \.project-content ul\s*\{[^}]*max-width:\s*(\d+)ch/);
+  assert.ok(measure && Number(measure[1]) <= 68, 'paragraphs under about 80 characters a line');
+  const lab = read('lab/lab.css').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.doesNotMatch(lab.match(/\.rail__foot\s*\{([^}]*)\}/)[1], /letter-spacing:\s*0\.0[1-9]/);
+});

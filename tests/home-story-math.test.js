@@ -4,7 +4,7 @@ import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
 import { CAPTION_BOX, GATE_R, MAX_SLOTS, NODE_R, SOURCE_R, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
-import { RIPPLE_STEP_MS, RIPPLE_START_OWED, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
+import { RIPPLE_STEP_MS, RIPPLE_START_OWED, nudgeInside, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
 
 /** A stand-in for window: width, pointer class, reduced motion, save-data, memory. */
 const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
@@ -476,4 +476,13 @@ test('the name is gone before the masthead starts to show, so the two never over
     const s = storyState(i / 2000, L);
     assert.ok(!(s.name.opacity > 0 && s.masthead > 0), `p=${i / 2000}: name ${s.name.opacity} under masthead ${s.masthead}`);
   }
+});
+
+test('a label that would run off the stage comes back to the gutter, and only then', () => {
+  // A 390px stage with 16px gutters.
+  assert.equal(nudgeInside(-12, 100, 390, 16), 28);      // cut off on the left: back to 16
+  assert.equal(nudgeInside(300, 420, 390, 16), -46);     // cut off on the right: back to 374
+  assert.equal(nudgeInside(40, 200, 390, 16), 0);        // on the stage: left alone
+  assert.equal(nudgeInside(5, 120, 390, 16), 0);         // in the gutter but whole: left on its node
+  assert.equal(nudgeInside(-20, 400, 390, 16), 0);       // wider than the room: no move would help
 });

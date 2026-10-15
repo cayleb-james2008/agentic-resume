@@ -23,7 +23,7 @@ import { createRipple, rippleSize } from './ripple.js';
 import { layoutFor, overlaysFor } from './shapes.js';
 import { getStoryTier } from './tier.js';
 import { storyState } from './timeline.js';
-import { RIPPLE_START_OWED, RIPPLE_STEP_MS, shouldRetune, stepsFor, toPercent } from './view.js';
+import { RIPPLE_START_OWED, RIPPLE_STEP_MS, nudgeInside, shouldRetune, stepsFor, toPercent } from './view.js';
 
 /** The water's colours, read off the page so they always match it. */
 const COLOR_TOKENS = { ink: '--raw-color-ink-900', deep: '--raw-color-ink-950', rim: '--raw-color-cyan-400', bg: '--raw-color-ice-50' };
@@ -125,18 +125,16 @@ export function mount(section) {
     const tilt = [0, 0];
     let drawnTilt = 0;
 
-    /** Lay everything out again for a stage of w×h CSS px. */
-    const retune = (w, h) => {
-      size = { w, h };
-      tier = getStoryTier();
-      const aspect = w / h;
-      layout = layoutFor(aspect, tier.teamSize);
-      ripple = createRipple(...rippleSize(aspect, tier.rippleLong));
-      bytes = new Uint8Array(ripple.cols * ripple.rows);
-      rippled = true;
-
-      // The labels sit on the water's nodes: placed once per layout, from the same maths.
+    /**
+     * The labels sit on the water's nodes: placed once per layout, from the same maths. One that would still
+     * run off the stage (a price chip on a phone) is brought back to the gutter the masthead keeps, so every
+     * label is measured, and placed again once the fonts it is set in have loaded.
+     */
+    const placeOverlays = () => {
+      const { w } = size;
+      const aspect = layout.aspect;
       const o = overlaysFor(layout);
+      const placed = [];
       for (const group of overlays) {
         for (const item of group.querySelectorAll('[data-overlay-item]')) {
           const point = pointOf(o, group.dataset.overlay, item.dataset.index);
@@ -148,8 +146,32 @@ export function mount(section) {
           put(item, 'left', `${fmt(left)}%`);
           put(item, 'top', `${fmt(top)}%`);
           put(item, 'visibility', '');
+          placed.push([item, left]);
         }
       }
+      const gutter = masthead ? parseFloat(getComputedStyle(masthead).paddingLeft) || 0 : 16;
+      const box = stage.getBoundingClientRect();
+      for (const [item, left] of placed) {
+        let lo = Infinity, hi = -Infinity;
+        for (const el of [item, ...item.children]) {
+          const r = el.getBoundingClientRect();
+          if (r.width > 0) { lo = Math.min(lo, r.left - box.left); hi = Math.max(hi, r.right - box.left); }
+        }
+        const dx = lo < hi ? nudgeInside(lo, hi, w, gutter) : 0;
+        if (dx) put(item, 'left', `${fmt(left + (dx / w) * 100)}%`);
+      }
+    };
+
+    /** Lay everything out again for a stage of w×h CSS px. */
+    const retune = (w, h) => {
+      size = { w, h };
+      tier = getStoryTier();
+      const aspect = w / h;
+      layout = layoutFor(aspect, tier.teamSize);
+      ripple = createRipple(...rippleSize(aspect, tier.rippleLong));
+      bytes = new Uint8Array(ripple.cols * ripple.rows);
+      rippled = true;
+      placeOverlays();
 
       water.tier = tier;
       water.resize(w, h, window.devicePixelRatio || 1);
@@ -328,6 +350,9 @@ export function mount(section) {
       console.error(error);
       return;
     }
+    document.fonts?.ready.then(() => {
+      if (!ended) placeOverlays();
+    });
     section.addEventListener('pointermove', onPointerMove, { passive: true });
     section.addEventListener('pointerdown', onPointerDown, { passive: true });
     if (tiltFree) window.addEventListener('deviceorientation', onTilt, { passive: true });

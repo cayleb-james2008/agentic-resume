@@ -63,3 +63,15 @@ export const stepsFor = (owedMs, dtMs, stepMs, maxSteps = Infinity) => {
  * percentages of the stage box (origin top-left).
  */
 export const toPercent = ({ x, y }, aspect) => ({ left: (x / aspect) * 100, top: (1 - y) * 100 });
+
+/**
+ * How far to move a label that spans `lo`..`hi` (CSS px across a stage `width`
+ * wide) so none of it is cut off. A label already on the stage stays where it
+ * is, even inside the gutter, so a person's tiles stay on their node; one that
+ * runs off an edge comes back to the `gutter` on that side. A label wider than
+ * the room between the gutters is left alone: no move would help.
+ */
+export const nudgeInside = (lo, hi, width, gutter) => {
+  if ((lo >= 0 && hi <= width) || hi - lo > width - 2 * gutter) return 0;
+  return lo < gutter ? gutter - lo : width - gutter - hi;
+};

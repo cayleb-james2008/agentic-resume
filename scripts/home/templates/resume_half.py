@@ -7,7 +7,7 @@ status, the lab link, the download labels) come from content["resumeHalf"].
 There are no certifications, by Cayleb's decision: anyone can have an agent earn one. They are
 never rendered, so a `certifications` key in the résumé data is never read.
 """
-from markup import link, text
+from markup import attr, link, text
 
 # Case-study pages live at projects/<slug>.html, bar the ones named here.
 CASE_PAGES = {"suite": "projects/industry-ai-suite.html"}
@@ -85,8 +85,9 @@ def project(index: int, item: dict, half: dict, site_url: str) -> str:
     note = f'<p class="resume-status">{text(status)}</p>' if status else ""
     bullets = "".join(f"<li>{text(b)}</li>" for b in item["bullets"])
     lead = " resume-project--lead" if index == 0 else ""
+    # The slug is a deep link: the suite's ten tool pages link back to index.html#suite.
     return (
-        f'<article class="resume-project{lead}">'
+        f'<article class="resume-project{lead}" id="{attr(item["slug"])}">'
         f'<h3>{text(dotted(item["name"]))}</h3><p class="resume-stack">{text(item["stack"])}</p>{note}'
         f'<ul>{bullets}</ul><p class="resume-links">{" ".join(links)}</p></article>'
     )

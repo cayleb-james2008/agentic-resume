@@ -27,9 +27,12 @@ PLACEHOLDERS = ROOT / "assets/home/PLACEHOLDERS.json"
 
 
 def content_images(root: Path = ROOT) -> dict[str, str]:
-    """Image path → target kind, read from site/content.json."""
+    """Image path → target kind, for the images site/content.json still names. The water story names none;
+    this pipeline is retired with the character assets."""
     content = json.loads((root / "site/content.json").read_text())
-    images = {entry["image"]: "plate" for entry in content["experience"]["entries"]}
-    images[content["projects"]["figure"]["image"]] = "projects-figure"
-    images[content["contact"]["figure"]["image"]] = "contact-figure"
+    images = {entry["image"]: "plate" for entry in content.get("experience", {}).get("entries", [])}
+    for block, kind in (("projects", "projects-figure"), ("contact", "contact-figure")):
+        figure = content.get(block, {}).get("figure")
+        if figure:
+            images[figure["image"]] = kind
     return images

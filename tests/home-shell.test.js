@@ -52,7 +52,7 @@ test('tier-1 tokens are verbatim', () => {
 });
 
 test('hidden states only apply under .js', () => {
-  const allowed = /\.menu-sheet\[hidden\]|\.asset-banner\[hidden\]|\.stack-shade|\.sr-only/;
+  const allowed = /\.menu-sheet\[hidden\]|\.sr-only/;
   for (const [file, text] of Object.entries(css)) {
     const rules = text.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([^{}]+)\{([^{}]*)\}/g);
     for (const [, selector, body] of rules) {

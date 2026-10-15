@@ -17,8 +17,6 @@ BEAD_SVG = (
     '<path class="guide-bead-shine" d="M20 30C22 25 25 21 28 17"/>'
     "</svg>"
 )
-# The 404 page (scripts/build-subpages.py) still asks for the old name until Task 6 moves it.
-DROPLET_SVG = BEAD_SVG
 
 
 def question(index: int, item: dict) -> str:

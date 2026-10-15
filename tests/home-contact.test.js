@@ -23,6 +23,7 @@ test('the footer has no picture and no backdrop canvas', () => {
   assert.doesNotMatch(contact, /data-figure-layer/);
   assert.doesNotMatch(contact, /data-contours/);
   assert.doesNotMatch(contact, /<canvas/);
+  assert.equal(content.contact.figure, undefined, 'content has no figure for it');
 });
 
 test('the copyright is the content line, without an illustration credit', () => {

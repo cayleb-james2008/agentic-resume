@@ -59,6 +59,7 @@ test('the guide appears once the story is behind the reader, and not before', ()
   assert.equal(pastStory(0, 6000, 800), false);
   assert.equal(pastStory(5600, 6000, 800), true, '60% of the viewport reaches the resume');
   assert.equal(pastStory(5400, 6000, 800), false);
+  assert.equal(pastStory(5520, 6000, 800), false, 'exactly at the line is not yet past it');
   assert.equal(pastStory(0, Infinity, 800), false, 'with no resume on the page it never appears');
   assert.equal(pastStory(1e9, Infinity, 800), false);
 });
@@ -79,11 +80,34 @@ test('the guide has no face: no eyes, no blink, no gaze', () => {
 });
 
 test('every guide line belongs to a section on the page', () => {
-  for (const key of Object.keys(guide.lines)) assert.match(home, new RegExp(`id="${key}"`), key);
+  assert.deepEqual(Object.keys(guide.lines), ['experience', 'work', 'education', 'contact']);
+  for (const key of Object.keys(guide.lines)) assert.match(home, new RegExp(`\\sid="${key}"`), key);
+});
+
+test('every section the guide watches has a line and is on the page', () => {
+  const list = read('site/js/guide/guide.js').match(/const SECTIONS = \[([^\]]*)\];/);
+  assert.ok(list, 'guide.js names its SECTIONS');
+  const ids = [...list[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  assert.ok(ids.length > 0);
+  for (const id of ids) {
+    assert.ok(guide.lines[id], `content.guide.lines.${id}`);
+    assert.match(home, new RegExp(`\\sid="${id}"`), `id="${id}" on index.html`);
+  }
+});
+
+test('the guide measures the résumé from the top of the page, again once the fonts are in', () => {
+  const js = read('site/js/guide/guide.js');
+  assert.match(js, /getBoundingClientRect\(\)\.top \+ window\.scrollY/);
+  assert.doesNotMatch(js, /offsetTop/, 'offsetTop is relative to the offset parent, not the page');
+  assert.match(js, /document\.fonts\?\.ready/);
 });
 
 test('the guide keeps the site\'s claim rules', () => {
-  const text = JSON.stringify(guide);
+  // "pilot" appears once, as Ergon's verified status in the résumé half's words: his own Windows
+  // pilot with its live checks still pending (water story plan, 2026-10-15). Never a pilot for a company.
+  const STATUS = 'Windows pilot, live checks pending';
+  assert.match(guide.questions.find((q) => q.q === "What's Ergon?").a, new RegExp(`${STATUS}\\.$`));
+  const text = JSON.stringify(guide).replace(STATUS, '');
   assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilot\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
   assert.match(guide.questions.find((q) => /Asmodeus/.test(q.q)).a, /private/i);
 });

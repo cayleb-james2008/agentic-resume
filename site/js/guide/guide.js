@@ -56,9 +56,16 @@ export function mount(root) {
   /** On a phone the footer has no room beside its foot row: the bead steps away instead of lifting. */
   let footAway = false;
   let open = false;
-  /** Where the résumé starts, in page px; measured now and again whenever the window is resized. */
+  /**
+   * Where the résumé starts, in page px: from the viewport, not the offset parent. Measured now, on
+   * resize, once the fonts are in, and whenever the page's height changes (the story going static
+   * after mount takes its runway away).
+   */
   let resumeTop = Infinity;
-  const measure = () => { resumeTop = document.getElementById('resume')?.offsetTop ?? Infinity; };
+  const measure = () => {
+    const el = document.getElementById('resume');
+    resumeTop = el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+  };
   measure();
 
   // --- Quiet -------------------------------------------------------------
@@ -127,7 +134,10 @@ export function mount(root) {
     settle();
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { measure(); onScroll(); });
+  const remeasure = () => { measure(); onScroll(); };
+  window.addEventListener('resize', remeasure);
+  document.fonts?.ready.then(remeasure);
+  if (typeof ResizeObserver === 'function') new ResizeObserver(remeasure).observe(document.body);
 
   const sectionWatch = new IntersectionObserver((entries) => {
     for (const entry of entries) {

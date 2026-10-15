@@ -71,7 +71,7 @@ test('the sitemap lists every page by its canonical address', () => {
 const TITLE = 'Forward Thinking Engineer';
 test('the headline title is Forward Thinking Engineer on the site, the résumé and the share card', () => {
   assert.equal(content.meta.title, `Cayleb Alvarez-James · ${TITLE}`);
-  assert.ok(content.hero.meta.some((m) => m.label === TITLE), 'hero meta row');
+  assert.equal(content.story.intro.title, TITLE, 'the story\'s title under the name');
   assert.ok(content.meta.shareAlt.includes(TITLE));
   assert.ok(read('resume.html').includes(`<p>${TITLE} · Connecticut · Remote-only</p>`));
   assert.ok(read('scripts/home/make_share_card.py').includes(`"${TITLE}"`));

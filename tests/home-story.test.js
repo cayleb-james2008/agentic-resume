@@ -8,7 +8,7 @@ import { pointOf } from '../site/js/story/story.js';
 const root = new URL('../', import.meta.url);
 const read = (file) => readFileSync(new URL(file, root), 'utf8');
 
-// --- The fixture: Task 6 writes this into content.json; until then the test brings its own ---------------
+// --- The approved copy: content.json carries it word for word (pinned below) -----------------------------
 
 const STORY = {
   intro: { nameWords: ['Cayleb', 'Alvarez-', 'James'], title: 'Forward Thinking Engineer', cue: 'Scroll' },
@@ -24,7 +24,11 @@ const STORY = {
       price: '$100 / mo', more: '+ more work' },
   ],
 };
-const content = { ...JSON.parse(read('site/content.json')), story: STORY };
+const content = JSON.parse(read('site/content.json'));
+
+test('content.json carries the approved story copy', () => {
+  assert.deepEqual(content.story, STORY);
+});
 
 // --- Rendering and reading ----------------------------------------------------------------------------
 

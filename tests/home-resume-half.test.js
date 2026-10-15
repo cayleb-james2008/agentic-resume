@@ -6,7 +6,7 @@ import { existsSync, readFileSync } from 'node:fs';
 const root = new URL('../', import.meta.url);
 const read = (file) => readFileSync(new URL(file, root), 'utf8');
 
-// --- The fixture: Task 6 writes this into content.json; until then the test brings its own ------------------
+// --- The approved copy: content.json carries it word for word (pinned below) --------------------------------
 
 const RESUME_HALF = {
   kicker: 'Résumé',
@@ -20,7 +20,7 @@ const RESUME_HALF = {
     { label: 'One-page PDF', href: 'Cayleb-James-polished-one-page.pdf' },
   ],
 };
-const content = { ...JSON.parse(read('site/content.json')), resumeHalf: RESUME_HALF };
+const content = JSON.parse(read('site/content.json'));
 const resume = JSON.parse(read('resume/resume-content.json'));
 const { meta } = content;
 
@@ -73,6 +73,10 @@ const escaped = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').re
 const section = (id) => one(html, 'section', new RegExp(`\\bid="${id}"`));
 const projects = () => elements(html, 'article', /class="resume-project\b/);
 const CASE_PAGE = (slug) => (slug === 'suite' ? 'industry-ai-suite' : slug);
+
+test('content.json carries the approved résumé-half copy', () => {
+  assert.deepEqual(content.resumeHalf, RESUME_HALF);
+});
 
 // --- 1. The head -----------------------------------------------------------------------------------------------
 
@@ -171,6 +175,8 @@ test('projects come in résumé order with Ergon first, each linking its case st
 
   resume.projects.forEach((project, i) => {
     const card = cards[i];
+    // Each project is a deep link by its slug: the suite's ten tool pages link back to index.html#suite.
+    assert.match(card, new RegExp(`^<article class="resume-project[^"]*" id="${project.slug}">`), `#${project.slug}`);
     assert.equal(textOf(one(card, 'p', /class="resume-stack"/)), project.stack);
     const bullets = elements(one(card, 'ul'), 'li').map(textOf);
     assert.deepEqual(bullets, project.bullets);

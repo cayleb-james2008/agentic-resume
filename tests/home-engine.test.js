@@ -81,7 +81,6 @@ test('named configs are the reference values', () => {
 
 import { interpolate, triggerProgress } from '../site/js/engine/scroll.js';
 import { splitUnits } from '../site/js/engine/reveal.js';
-import { recede } from '../site/js/engine/stack.js';
 
 test('triggerProgress endpoints', () => {
   const vh = 800;
@@ -100,19 +99,4 @@ test('interpolate units', () => {
 test('splitUnits', () => {
   assert.deepEqual(splitUnits('next race', 'letter'), [['n', 'e', 'x', 't'], ['r', 'a', 'c', 'e']]);
   assert.deepEqual(splitUnits('a b', 'word'), [['a'], ['b']]);
-});
-
-test('recede', () => {
-  const vh = 800;
-  assert.deepEqual(
-    (({ transform, shade, visible }) => ({ transform, shade, visible }))(recede(vh, vh, false)),
-    { transform: '', shade: 0, visible: true },
-  );
-  assert.deepEqual(
-    (({ transform, shade, visible }) => ({ transform, shade, visible }))(recede(0, vh, false)),
-    { transform: 'scale(0.9)', shade: 0.55, visible: false },
-  );
-  const phone = recede(vh / 2, vh, true);
-  assert.equal(phone.transform, '');
-  assert.equal(phone.shade, 0.275);
 });

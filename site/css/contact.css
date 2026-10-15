@@ -99,8 +99,8 @@
   font-size: calc(var(--cta-h) * 20 / 50);
 }
 .cta--hollow .cta-arrow { width: calc(var(--cta-h) * 13.71 / 50); height: calc(var(--cta-h) * 10.71 / 50); }
-/* Hollow per the spec, with a faint ink ground so the label stays steady: ink at 72%. */
-.cta-frame--hollow .cta-body { fill: rgb(9 10 11 / 0.72); }
+/* Hollow per the spec: the plain panel shows through. */
+.cta-frame--hollow .cta-body { fill: none; }
 .cta-frame--hollow .cta-line { fill: none; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
 
 .contact-links {

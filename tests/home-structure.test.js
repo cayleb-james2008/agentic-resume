@@ -11,28 +11,51 @@ const content = JSON.parse(read('site/content.json'));
 const count = (pattern) => (home.match(pattern) || []).length;
 const sectionBodies = () => [...home.matchAll(/<section\b[^>]*>([\s\S]*?)<\/section>/g)].map((m) => m[0]);
 
-test('one h1 holding the full name for assistive technology', () => {
+test('one h1, in the story, holding the full name for assistive technology', () => {
   assert.equal(count(/<h1\b/g), 1);
   const h1 = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)[1];
   assert.match(h1, /<span class="sr-only">Cayleb Alvarez-James<\/span>/);
-  const hero = sectionBodies().find((s) => s.includes('data-hero'));
-  assert.ok(hero.includes('<h1'), 'the h1 lives in the hero section');
+  const story = sectionBodies().find((s) => /^<section\b[^>]*\sdata-story[\s>]/.test(s));
+  assert.ok(story, 'the story section');
+  assert.ok(story.includes('<h1'), 'the h1 lives in the story section');
 });
 
-test('six sections (value joined 2026-10-13), the other five each with one h2', () => {
-  const sections = sectionBodies();
-  assert.equal(sections.length, 6);
-  for (const section of sections.filter((s) => !s.includes('data-hero'))) {
-    assert.equal((section.match(/<h2\b/g) || []).length, 1);
-  }
+test('five sections: the story, the résumé\'s three and contact; all but the story with one h2', () => {
+  // Split on "<section": no section sits inside another, so each closes before the next opens.
+  const chunks = home.split('<section').slice(1);
+  assert.equal(count(/<\/section>/g), chunks.length, 'every section closes');
+  const sections = chunks.map((chunk) => {
+    const end = chunk.indexOf('</section>');
+    assert.ok(end >= 0, 'a section closes before the next opens');
+    return `<section${chunk.slice(0, end)}`;
+  });
+  assert.deepEqual(sections.map((s) => s.match(/^<section\b[^>]*\sid="([^"]+)"/)?.[1]),
+    ['home', 'experience', 'work', 'education', 'contact']);
+  assert.match(sections[0], /^<section class="story" data-story id="home"/);
+  for (const section of sections.slice(1)) assert.equal((section.match(/<h2\b/g) || []).length, 1, section.slice(0, 60));
 });
 
-test('section ids exist and are unique', () => {
-  for (const id of ['home', 'approach', 'experience', 'work', 'suite', 'contact']) {
-    assert.equal(count(new RegExp(`id="${id}"`, 'g')), 1, id);
+test('ids for the story, the résumé and each section exist and are unique', () => {
+  for (const id of ['home', 'resume', 'experience', 'work', 'education', 'contact']) {
+    assert.equal(count(new RegExp(`\\sid="${id}"`, 'g')), 1, id);
   }
   const ids = [...home.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
   assert.equal(new Set(ids).size, ids.length, 'ids are unique');
+});
+
+test('one banner and one main: the masthead, then the story and the résumé; the skip link goes to the résumé', () => {
+  assert.equal(count(/<main\b/g), 1);
+  const main = home.slice(home.indexOf('<main'), home.indexOf('</main>'));
+  assert.ok(main.includes('data-story') && main.includes('class="resume-half" id="resume"'), 'the story and the résumé sit in main');
+  // The résumé half's own <header> is a banner landmark only outside <main>.
+  const outside = home.slice(0, home.indexOf('<main')) + home.slice(home.indexOf('</main>'));
+  assert.equal((outside.match(/<header\b/g) || []).length, 1, 'the masthead is the only banner');
+  assert.match(outside, /<header class="masthead" data-masthead>/);
+  assert.match(home, /<a class="skip-link" href="#resume">Skip to résumé<\/a>/);
+});
+
+test('no <img> on the homepage', () => {
+  assert.equal(count(/<img\b/g), 0);
 });
 
 test('project-page anchors resolve', () => {

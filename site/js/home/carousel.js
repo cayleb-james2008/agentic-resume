@@ -9,6 +9,8 @@ const AUTO_MS = 4200;
  */
 export function mount(row, { onReady, reduced }) {
   const items = [...row.querySelectorAll('.hc-item')];
+  // One item shows at a time once scripted; without a script all four read (no aria-hidden in the markup).
+  items.forEach((it, k) => { if (k) it.setAttribute('aria-hidden', 'true'); });
   const dots = [...row.querySelectorAll('.hc-dots i')];
   const slot = row.querySelector('.hc-slot');
   let i = 0, timer = 0, touched = false;

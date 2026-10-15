@@ -15,7 +15,7 @@ def _cta(c: dict) -> str:
 def _carousel(h: dict) -> str:
     items = []
     for i, c in enumerate(h["carousel"]):
-        state = ' class="hc-item on"' if i == 0 else ' class="hc-item" aria-hidden="true"'
+        state = ' class="hc-item on"' if i == 0 else ' class="hc-item"'
         items.append(f'<div{state}><p class="hc-cap">{text(c["caption"])}</p><p class="hc-title">{text(c["title"])}</p></div>')
     dots = "".join('<i class="on"></i>' if i == 0 else "<i></i>" for i in range(len(h["carousel"])))
     label = attr(h["carouselLabel"])

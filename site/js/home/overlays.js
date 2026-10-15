@@ -102,6 +102,7 @@ export function mountModal(root, ctx) {
   let topic = '', mail = null, resetTimer = 0;
   const reset = () => {
     resetTimer = 0;
+    root.setAttribute('aria-labelledby', 'md-title');
     form.reset();
     fields.msg.placeholder = d.defaultPh;
     for (const k of Object.keys(fields)) { fields[k].removeAttribute('aria-invalid'); root.querySelector(`#e-${k}`).hidden = true; }
@@ -136,6 +137,7 @@ export function mountModal(root, ctx) {
     try { a.click(); } catch { /* the Copy button covers it */ }
     wrap.hidden = true;
     done.hidden = false;
+    root.setAttribute('aria-labelledby', 'md-done-title');
     doneTitle.focus({ preventScroll: true });
   });
   copy.addEventListener('click', async () => {
@@ -169,6 +171,9 @@ export function land(target, id, hist = window.history) {
   hist.pushState(null, '', `#${id}`);
 }
 
+/** A plain primary click; Ctrl, Cmd, Shift, Alt and other buttons keep the browser's own link behaviour (new tab, window). */
+export const plainClick = (e) => e.button === 0 && !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey);
+
 /** Every [data-go] scrolls to its section, every [data-modal] opens the composer, every [data-copy] copies. */
 export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
   const go = (id) => {
@@ -180,7 +185,7 @@ export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
   };
   doc.addEventListener('click', async (e) => {
     const t = e.target.closest('[data-go], [data-modal], [data-menu-close], [data-modal-close], [data-copy]');
-    if (!t) return;
+    if (!t || (t.tagName === 'A' && !plainClick(e))) return;
     if (t.matches('[data-copy]')) {
       const label = t.querySelector('span');
       const ok = await copyText(t.dataset.copy);
@@ -196,4 +201,12 @@ export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
     else run();
   });
   doc.querySelectorAll('[data-copy]').forEach((b) => { b.dataset.label = b.querySelector('span').textContent; });
+  // Back and Forward walk the jumps land() recorded; scroll restoration is manual, so scroll there ourselves.
+  window.addEventListener('popstate', () => {
+    const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    if (lenis) lenis.scrollTo(target || 0, { duration: 1.2 });
+    else if (target) target.scrollIntoView({ block: 'start' });
+    else window.scrollTo(0, 0);
+    target?.focus?.({ preventScroll: true });
+  });
 }

@@ -18,6 +18,15 @@ export function wirePath(mode, hub, target, mark) {
   return `M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;
 }
 
+/** The card a test ticket goes to: `start`, or the next one round that isn't busy with a routine; -1 if all are. */
+export function ticketCard(start, busy) {
+  for (let k = 0; k < busy.length; k++) {
+    const i = (start + k) % busy.length;
+    if (!busy[i]) return i;
+  }
+  return -1;
+}
+
 export function nextTeam(names, current, delta) {
   const i = names.indexOf(current);
   return names[(i + delta + names.length) % names.length];

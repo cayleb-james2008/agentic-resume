@@ -33,7 +33,7 @@ def render(content: dict) -> str:
         f'<div class="md-row"><p class="md-note">{text(m["note"])}</p>'
         f'<button class="pill dark arrow" type="submit">{text(m["submit"])}<span class="pb">{icon("upright")}</span></button></div>'
         "</form></div>"
-        f'<div class="md-done" data-md-done hidden>{mk("md-badge")}<h2 tabindex="-1" data-md-done-title>{text(m["doneTitle"])}</h2>'
+        f'<div class="md-done" data-md-done hidden>{mk("md-badge")}<h2 tabindex="-1" id="md-done-title" data-md-done-title>{text(m["doneTitle"])}</h2>'
         f'<p>{text(m["doneText"])} <span class="sel">{text(email)}</span>.</p>'
         f'<textarea class="md-raw" data-md-raw readonly rows="6" aria-label="{attr(m["rawLabel"])}" hidden></textarea>'
         f'<div class="md-acts"><button class="pill light" type="button" data-md-copy data-copied="{attr(m["copied"])}" data-failed="{attr(m["copyFailed"])}">{text(m["copy"])}</button>'

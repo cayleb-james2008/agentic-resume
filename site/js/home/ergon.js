@@ -7,7 +7,7 @@
  * only what the visitor started.
  */
 import { ticker } from '../engine/ticker.js';
-import { ladderStop, nextTeam, wirePath } from './graph.js';
+import { ladderStop, nextTeam, ticketCard, wirePath } from './graph.js';
 import { term } from './text.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -114,11 +114,13 @@ export function mount(figure, { reduced }) {
 
   async function ticket(announce = false) {
     if (ticketBusy) return;
+    const n = cards().length;
+    const i = ticketCard(((tickets + 1) * 2) % n, cards().map((c) => c.classList.contains('busy')));
+    if (i < 0) return;
     ticketBusy = true;
     button.setAttribute('aria-disabled', 'true'); // not `disabled`: that would drop the visitor's focus
     button.textContent = f.busy;
     tickets += 1;
-    const n = cards().length, i = (tickets * 2) % n;
     const card = cards()[i], T = data.teams[team];
     const issue = T.tickets[tickets % T.tickets.length];
     card.classList.add('tk');
@@ -201,7 +203,7 @@ export function mount(figure, { reduced }) {
   }
   new ResizeObserver(() => layout()).observe(stage);
   narrow.addEventListener?.('change', layout);
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; loop(); }, { threshold: 0.25 }).observe(stage);
+  new IntersectionObserver(([e]) => { visible = e.intersectionRatio >= 0.25; loop(); }, { threshold: [0, 0.25] }).observe(stage);
   document.addEventListener('visibilitychange', loop);
   layout();
 }

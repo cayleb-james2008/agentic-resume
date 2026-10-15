@@ -192,3 +192,18 @@ test('a service topic reads naturally mid-sentence: lower-case first word, acron
   assert.equal(topicPhrase('AI everything'), 'AI everything');
   assert.equal(topicPhrase('Remote support'), 'remote support');
 });
+
+test('a test ticket goes to the next person who is not busy, or waits if everyone is', async () => {
+  const { ticketCard } = await import('../site/js/home/graph.js');
+  assert.equal(ticketCard(2, [false, false, false, false, false]), 2);
+  assert.equal(ticketCard(2, [false, false, true, false, false]), 3, 'the planned card is busy with a routine');
+  assert.equal(ticketCard(4, [false, true, false, false, true]), 0, 'wraps round');
+  assert.equal(ticketCard(1, [true, true, true]), -1);
+});
+
+test('only a plain primary click is taken over; Ctrl, Cmd, Shift, Alt and middle clicks keep the browser\'s own behaviour', async () => {
+  const { plainClick } = await import('../site/js/home/overlays.js');
+  assert.equal(plainClick({ button: 0 }), true);
+  for (const k of ['ctrlKey', 'metaKey', 'shiftKey', 'altKey']) assert.equal(plainClick({ button: 0, [k]: true }), false, k);
+  assert.equal(plainClick({ button: 1 }), false);
+});

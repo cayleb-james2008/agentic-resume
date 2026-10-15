@@ -154,3 +154,34 @@ test('a generic open of the composer puts back the generic prompt', () => {
   const open = body(read('site/js/home/overlays.js'), '    open(t = \'\') {');
   assert.match(open, /fields\.msg\.placeholder = t \? [^;]+ : d\.defaultPh;/);
 });
+
+// Codex, second pass (2026-10-15).
+test('Back and Forward after in-page jumps scroll to the section in the URL', () => {
+  const js = read('site/js/home/overlays.js');
+  assert.match(js, /window\.addEventListener\('popstate', /);
+  assert.match(body(js, "window.addEventListener('popstate', "), /location\.hash/);
+});
+
+test('the composer is named by whichever heading it shows', () => {
+  assert.match(home, /<h2 tabindex="-1" id="md-done-title" data-md-done-title>/);
+  const js = read('site/js/home/overlays.js');
+  assert.match(js, /root\.setAttribute\('aria-labelledby', 'md-done-title'\)/);
+  assert.match(body(js, '  const reset = () => {'), /root\.setAttribute\('aria-labelledby', 'md-title'\)/);
+});
+
+test('without JS every carousel item is readable by everyone; the script hides the inactive ones', () => {
+  const items = [...home.matchAll(/<div class="hc-item[^"]*"[^>]*>/g)].map((m) => m[0]);
+  assert.ok(items.length === 4, items.join());
+  for (const tag of items) assert.doesNotMatch(tag, /aria-hidden/);
+  assert.match(read('site/js/home/carousel.js'), /items\.forEach\(\(it, k\) => \{ if \(k\) it\.setAttribute\('aria-hidden', 'true'\); \}\)/);
+});
+
+test('Ergon autoplays only while at least a quarter of the figure is on screen', () => {
+  assert.match(read('site/js/home/ergon.js'), /visible = e\.intersectionRatio >= 0\.25/);
+});
+
+test('Lenis leaves link clicks alone: our handler scrolls plain clicks, the browser keeps Ctrl/Cmd-click and the skip link', () => {
+  const main = read('site/js/main.js');
+  assert.match(main, /new Lenis\(\{ smoothWheel: true \}\)/);
+  assert.doesNotMatch(main, /anchors:\s*true/);
+});

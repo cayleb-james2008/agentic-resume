@@ -28,7 +28,8 @@ const MOUNTS = [
 
 function startLenis(reduced) {
   if (reduced) return null;
-  const lenis = new Lenis({ smoothWheel: true, anchors: true });
+  // No `anchors`: it would scroll on Ctrl/Cmd-clicks too; mountActions scrolls plain clicks on [data-go].
+  const lenis = new Lenis({ smoothWheel: true });
   ticker.subscribe((time) => lenis.raf(time), () => 0);
   return lenis;
 }

@@ -32,7 +32,19 @@
 <section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">Our team</h1>
   <p class="lead rise" style="--i:3">From the account executive who takes your first call to the crew that installs the furniture, these are the people who will work on your project.</p>
-  <nav class="jump rise" style="--i:4" aria-label="Team sections"><a href="#leadership">Leadership</a><a href="#architectural-products">Architectural products</a><a href="#furniture">Furniture</a><a href="#installers">Installers</a><a href="/contact#find">Find your account executive</a></nav>
+  <nav class="jump rise" style="--i:4" aria-label="Team sections"><a href="#find">Find your account executive</a><a href="#leadership">Leadership</a><a href="#architectural-products">Architectural products</a><a href="#furniture">Furniture</a><a href="#installers">Installers</a></nav>
+</section>
+<section class="wrap sec" id="find" aria-labelledby="find-h">
+  <div class="finder">
+    <div class="fh"><h2 id="find-h">Find your account executive</h2><p>Most of New England has one account executive for furniture and one for bleachers, seating and gym equipment. Pick where your building is.</p><noscript><p><a href="/team">See every account executive and the areas they cover</a></p></noscript></div>
+    <div class="fc" id="finder">
+      <div class="pick">
+        <div class="field"><label for="f-state">State</label><select id="f-state"><option value="">Choose a state</option><option value="CT">Connecticut</option><option value="MA">Massachusetts</option><option value="RI">Rhode Island</option><option value="ME">Maine</option><option value="NH">New Hampshire</option><option value="VT">Vermont</option></select></div>
+        <div class="field" id="f-county-wrap" hidden><label for="f-county">County</label><select id="f-county"></select></div>
+      </div>
+      <div class="reps" id="f-out" aria-live="polite"></div>
+    </div>
+  </div>
 </section>
 <div class="wrap">
 <section class="group" id="leadership" aria-labelledby="leadership-h"><h2 id="leadership-h" data-reveal>Leadership</h2><div class="people">
@@ -86,6 +98,7 @@
   <div class="f-word"><img src="/assets/rhl-logo.svg" width="352" height="53" alt="Robert H. Lord Co."></div>
   <a class="f-go" href="/contact"><span>Start a project</span><svg viewBox="0 0 40 40" width="64" height="64" aria-hidden="true"><path d="M9 31 31 9M13 9h18v18" fill="none" stroke="currentColor" stroke-width="3.5"/></svg></a>
 </footer>
+<script type="application/json" id="data">{"reps": {"people": [{"slug": "jon-lord", "name": "Jon Lord", "phone": "860.729.9215", "photo": "assets/img/team/jon-lord.jpg", "div": "arch", "areas": {"CT": ["Tolland", "Windham"], "MA": ["Barnstable", "Bristol", "Dukes", "Nantucket", "Norfolk", "Plymouth", "Worcester"], "RI": "all"}}, {"slug": "jim-mcevoy", "name": "Jim McEvoy", "phone": "860.483.1745", "photo": "assets/img/team/jim-mcevoy.jpg", "div": "arch", "areas": {"CT": ["Fairfield", "Hartford", "Litchfield", "Middlesex", "New Haven", "New London"]}}, {"slug": "ed-marshall", "name": "Ed Marshall", "phone": "617.991.7539", "photo": "assets/img/team/ed-marshall.jpg", "div": "arch", "areas": {"MA": ["Essex", "Middlesex", "Suffolk"]}}, {"slug": "mike-ward", "name": "Mike Ward", "phone": "603.232.0777", "photo": "assets/img/team/mike-ward.jpg", "div": "arch", "areas": {"ME": "all", "MA": ["Berkshire", "Franklin", "Hampden", "Hampshire"], "NH": "all", "VT": "all"}}, {"slug": "julie-norris", "name": "Julie Norris", "phone": "860.908.7803", "photo": "assets/img/team/julie-norris.jpg", "div": "furn", "areas": {"CT": ["Hartford", "Middlesex", "New London", "Tolland", "Windham"], "MA": ["Franklin", "Hampden", "Hampshire"]}}, {"slug": "linda-bianchi", "name": "Linda Bianchi", "phone": "860.338.3566", "photo": "assets/img/team/linda-bianchi.jpg", "div": "furn", "areas": {"CT": ["Fairfield", "Litchfield", "New Haven"], "MA": ["Berkshire"], "VT": "all"}}, {"slug": "tom-lord", "name": "Tom Lord", "phone": "860.209.1115", "photo": "assets/img/team/tom-lord.jpg", "div": "furn", "areas": {"MA": ["Worcester", "Norfolk", "Plymouth", "Bristol", "Suffolk"], "RI": "all"}}, {"slug": "mike-churchill", "name": "Mike Churchill", "phone": "508.840.9927", "photo": "assets/img/team/mike-churchill.jpg", "div": "furn", "areas": {"MA": ["Essex", "Middlesex"], "ME": "all", "NH": "all"}}], "counties": {"CT": ["Fairfield", "Hartford", "Litchfield", "Middlesex", "New Haven", "New London", "Tolland", "Windham"], "MA": ["Barnstable", "Berkshire", "Bristol", "Dukes", "Essex", "Franklin", "Hampden", "Hampshire", "Middlesex", "Nantucket", "Norfolk", "Plymouth", "Suffolk", "Worcester"]}}}</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

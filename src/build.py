@@ -11,8 +11,8 @@ SITE = 'https://rhl-concept.vercel.app'
 PHONE, FAX = '860.645.8700', '860.645.9100'
 
 NAV = [('How we work', '/how-we-work'), ('Projects', '/projects'), ('Lines', '/lines'), ('Team', '/team'), ('About', '/about')]
-CATS = [('k-12', 'K-12 schools'), ('private-schools', 'Private schools'), ('colleges-universities', 'Colleges'),
-        ('libraries', 'Libraries'), ('auditoriums', 'Auditoriums'), ('athletic-facilities', 'Gyms and field houses'),
+CATS = [('libraries', 'Libraries'), ('k-12', 'K-12 schools'), ('private-schools', 'Private schools'), ('colleges-universities', 'Colleges'),
+        ('auditoriums', 'Auditoriums'), ('athletic-facilities', 'Gyms and field houses'),
         ('corporate', 'Offices and civic')]
 CAT = dict(CATS)
 ARROW = '<svg viewBox="0 0 40 40" width="64" height="64" aria-hidden="true"><path d="M9 31 31 9M13 9h18v18" fill="none" stroke="currentColor" stroke-width="3.5"/></svg>'
@@ -250,7 +250,7 @@ def areas(a):
     return '; '.join(f'<b>{STATES[s]}</b>' + ('' if c == 'all' else ': ' + ', '.join(c)) for s, c in a.items())
 
 def build_team():
-    jump = ''.join(f'<a href="#{gid}">{t}</a>' for _, gid, t, _ in GROUPS) + '<a href="/contact#find">Find your account executive</a>'
+    jump = '<a href="#find">Find your account executive</a>' + ''.join(f'<a href="#{gid}">{t}</a>' for _, gid, t, _ in GROUPS)
     secs = ''
     for g, gid, title, blurb in GROUPS:
         cards = ''
@@ -269,10 +269,14 @@ def build_team():
   <p class="lead rise" style="--i:3">From the account executive who takes your first call to the crew that installs the furniture, these are the people who will work on your project.</p>
   <nav class="jump rise" style="--i:4" aria-label="Team sections">{jump}</nav>
 </section>
+<section class="wrap sec" id="find" aria-labelledby="find-h">
+  {finder_html()}
+</section>
 <div class="wrap">
 {secs}</div>
 {cta('Want to talk to someone?')}'''
-    write('/team', 'Our team', 'Meet the Robert H. Lord Co. team: leadership, account executives, project managers, estimators and the in-house install crew.', body)
+    write('/team', 'Our team', 'Meet the Robert H. Lord Co. team: leadership, account executives, project managers, estimators and the in-house install crew.', body,
+          data=finder_data())
 
 # ---------------------------------------------------------------- lines
 def build_lines():
@@ -450,12 +454,31 @@ def build_about():
     write('/about', 'About us', 'Robert H. Lord Co. was founded in 1967 by Robert “Bob” Lord. Two divisions, furniture and architectural products, an 8,000 sq ft showroom in Manchester, CT, and an in-house install crew.', body)
 
 # ---------------------------------------------------------------- contact
-def build_contact():
+COUNTIES = {'CT': ['Fairfield', 'Hartford', 'Litchfield', 'Middlesex', 'New Haven', 'New London', 'Tolland', 'Windham'],
+            'MA': ['Barnstable', 'Berkshire', 'Bristol', 'Dukes', 'Essex', 'Franklin', 'Hampden', 'Hampshire', 'Middlesex', 'Nantucket', 'Norfolk', 'Plymouth', 'Suffolk', 'Worcester']}
+
+
+def finder_data():
     reps = [dict(slug=p['slug'], name=p['name'], phone=p['phone'], photo=p['photo'], div=p['group'], areas=p['areas'])
             for p in TEAM if p.get('areas')]
-    counties = {'CT': ['Fairfield', 'Hartford', 'Litchfield', 'Middlesex', 'New Haven', 'New London', 'Tolland', 'Windham'],
-                'MA': ['Barnstable', 'Berkshire', 'Bristol', 'Dukes', 'Essex', 'Franklin', 'Hampden', 'Hampshire', 'Middlesex', 'Nantucket', 'Norfolk', 'Plymouth', 'Suffolk', 'Worcester']}
+    return {'reps': {'people': reps, 'counties': COUNTIES}}
+
+
+def finder_html():
     opts = ''.join(f'<option value="{k}">{v}</option>' for k, v in STATES.items())
+    return f'''<div class="finder">
+    <div class="fh"><h2 id="find-h">Find your account executive</h2><p>Most of New England has one account executive for furniture and one for bleachers, seating and gym equipment. Pick where your building is.</p><noscript><p><a href="/team">See every account executive and the areas they cover</a></p></noscript></div>
+    <div class="fc" id="finder">
+      <div class="pick">
+        <div class="field"><label for="f-state">State</label><select id="f-state"><option value="">Choose a state</option>{opts}</select></div>
+        <div class="field" id="f-county-wrap" hidden><label for="f-county">County</label><select id="f-county"></select></div>
+      </div>
+      <div class="reps" id="f-out" aria-live="polite"></div>
+    </div>
+  </div>'''
+
+
+def build_contact():
     to = ''.join(f'<option value="{p["slug"]}">{e(p["name"])}, {e(p["title"])}</option>' for p in TEAM if p['group'] != 'install')
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">Start a project</h1>
@@ -472,16 +495,7 @@ def build_contact():
   </div>
 </section>
 <section class="wrap sec" id="find" aria-labelledby="find-h">
-  <div class="finder">
-    <div class="fh"><h2 id="find-h">Find your account executive</h2><p>Most of New England has one account executive for furniture and one for bleachers, seating and gym equipment. Pick where your building is.</p><noscript><p><a href="/team">See every account executive and the areas they cover</a></p></noscript></div>
-    <div class="fc" id="finder">
-      <div class="pick">
-        <div class="field"><label for="f-state">State</label><select id="f-state"><option value="">Choose a state</option>{opts}</select></div>
-        <div class="field" id="f-county-wrap" hidden><label for="f-county">County</label><select id="f-county"></select></div>
-      </div>
-      <div class="reps" id="f-out" aria-live="polite"></div>
-    </div>
-  </div>
+  {finder_html()}
 </section>
 <section class="wrap sec" id="message" aria-labelledby="msg-h">
   <div class="cform">
@@ -499,7 +513,7 @@ def build_contact():
   </div>
 </section>'''
     write('/contact', 'Contact', 'Call Robert H. Lord Co. at 860.645.8700, visit the showroom at 220 Chapel Road in Manchester, CT, or find the account executive for your area.', body,
-          data={'reps': {'people': reps, 'counties': counties}})
+          data=finder_data())
 
 def build_404():
     body = f'''<section class="wrap page-top" aria-labelledby="h1" style="padding-bottom:var(--sec)">

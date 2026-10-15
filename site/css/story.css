@@ -6,7 +6,8 @@
    every selector of it starting .js:not(.reveal-failsafe) and ending up on .story:not(.story--static). */
 
 .story {
-  --headline: clamp(2.4rem, 5.2vw, 5.5rem);
+  /* The hero headline: 5.2vw, but never so tall that a short stage (a short window) runs it into the pool. */
+  --headline: clamp(2.4rem, min(5.2vw, 9.5svh), 5.5rem);
   /* The radii of a team node and a ticket gate, in stage heights (NODE_R and GATE_R in shapes.js; a test
      holds them to those). A stage is 100svh high, so 3.2svh is 0.032 of it. */
   --node-r: 3.2svh;
@@ -136,6 +137,12 @@
     display: block; position: absolute; inset: 0; opacity: 0; pointer-events: none;
   }
   .js:not(.reveal-failsafe) .story:not(.story--static) .story-art { display: none; }
+}
+
+/* A phone on its side: the hero line spreads over the pool's empty top so it ends above the water. Only the
+   hero's: every later caption shares the stage with the water's shapes on its right. */
+@media (prefers-reduced-motion: no-preference) and (max-height: 500px) and (min-aspect-ratio: 3/2) {
+  .js:not(.reveal-failsafe) .story:not(.story--static) [data-caption="hero"] { max-width: min(48rem, 72vw); }
 }
 
 /* On a phone the caption spans the top, above the water. */

@@ -232,7 +232,8 @@ test('the label offsets in story.css are the layout\'s radii, and no position is
   const others = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([\w-]+):[^;{}]*?([\d.]+)svh/g)]
     .filter(([, property]) => !['--node-r', '--gate-r'].includes(property))
     .map(([, property, value]) => `${property} ${value}`);
-  assert.deepEqual(others.sort(), ['font-size 15', 'height 100', 'height 100'].sort(), 'no radius is copied into a rule');
+  // (The headline's 9.5svh is its cap on a short stage, so the hero line clears the pool.)
+  assert.deepEqual(others.sort(), ['--headline 9.5', 'font-size 15', 'height 100', 'height 100'].sort(), 'no radius is copied into a rule');
   // Nothing places a label by a number worked out from the layout: no percentages on an item, no orientation switch.
   assert.doesNotMatch(css, /orientation/);
   const rules = rulesOf('site/css/story.css');
@@ -341,9 +342,17 @@ test('the headline flips over the water, with a plain fallback', () => {
   assert.ok(phone.every((r) => r.parts.every((p) => p.startsWith(GUARD) && p.includes(RUNWAY))));
   assert.ok(phone.some((r) => /right:\s*var\(--gutter\)/.test(r.body)));
 
+  // A phone on its side: only the hero line runs wider, so it ends above the pool.
+  const short = rules.filter((r) => r.at.some((a) => a.includes('max-height: 500px')));
+  assert.equal(short.length, 1);
+  assert.ok(short[0].at.some((a) => a.includes('prefers-reduced-motion: no-preference')));
+  assert.ok(short[0].parts.every((p) => p.startsWith(GUARD) && p.includes(RUNWAY) && p.endsWith('[data-caption="hero"]')), short[0].selector);
+  assert.match(short[0].body, /max-width:\s*min\(48rem, 72vw\)/);
+
   // Type: Oswald headlines, the hero's the biggest, the rest 70% of it; lines in body size and muted.
   const css = read('site/css/story.css');
-  assert.match(css, /clamp\(2\.4rem, 5\.2vw, 5\.5rem\)/);
+  // The hero size scales with the width, and is held under 9.5svh so a short stage keeps it above the pool.
+  assert.match(css, /clamp\(2\.4rem, min\(5\.2vw, 9\.5svh\), 5\.5rem\)/);
   assert.match(css, /\.story-caption h2[^{]*\{[^}]*var\(--font-display\)/);
   assert.match(css, /\.story-caption p[^{]*\{[^}]*var\(--type-body\)[^}]*var\(--foreground-muted\)/);
 });

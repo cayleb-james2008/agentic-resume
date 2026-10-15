@@ -168,15 +168,17 @@ test('the hero droplet has no core under its eyes; a cyan rim lights its foot', 
   assert.match(js, /name = "rim"/);
 });
 
-test('the guide droplet matches: no core disc, a rim along the foot', () => {
+test('the guide bead is ink with a cyan rim and no face', () => {
+  const css = read('site/css/guide.css');
+  assert.match(css, /\.guide-bead-body\s*\{[^}]*fill:\s*var\(--raw-color-ink-900\)/);
+  assert.match(css, /\.guide-bead-rim\s*\{[^}]*stroke:\s*var\(--raw-color-cyan-400\)/);
+  assert.doesNotMatch(css, /@keyframes/);
+  const py = read('scripts/home/templates/guide.py');
+  assert.doesNotMatch(py, /eyes|glint/);
   const home = read('index.html');
-  assert.doesNotMatch(home, /guide-droplet-core/);
-  // The rim is the body's own outline filled with a glow that rises from the foot.
-  const body = home.match(/<path class="guide-droplet-body" d="([^"]+)"/)[1];
-  assert.ok(home.includes(`<path class="guide-droplet-rim" d="${body}"/>`));
-  assert.match(home, /<linearGradient id="guide-foot"[^>]*>(<stop[^>]*>){2}<\/linearGradient>/);
-  assert.match(read('site/css/guide.css'), /\.guide-droplet-rim\s*\{\s*fill:\s*url\(#guide-foot\)/);
-  assert.doesNotMatch(read('site/css/guide.css'), /guide-droplet-core/);
+  assert.match(home, /<svg class="guide-bead"/);
+  assert.doesNotMatch(home, /guide-droplet/);
+  assert.doesNotMatch(home, /guide-glass|guide-foot/);
 });
 
 // --- Weight ----------------------------------------------------------------------------

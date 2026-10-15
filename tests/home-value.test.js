@@ -167,8 +167,9 @@ test('the receipt on the page shows every line, the totals and the yearly saving
 });
 
 test('the agent has a line for the value section', () => {
+  // The guide's SECTIONS no longer list "value" (the water story drops that section in Task 6,
+  // which also drops this line); only the line's own length is checked until then.
   assert.ok(content.guide.lines.value && words(content.guide.lines.value) <= 12);
-  assert.match(read('site/js/guide/guide.js'), /const SECTIONS = \[[^\]]*'value'/);
 });
 
 test('every system row names human approval, review or flags', () => {

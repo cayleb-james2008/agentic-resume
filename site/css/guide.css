@@ -1,4 +1,4 @@
-/* The guide: Cayleb's droplet agent in the corner, its speech bubble and the
+/* The guide: a faceless ink bead in the corner, its speech bubble and the
    "Ask my agent" panel (spec 2026-10-12-droplet-agent-guide-design). Above
    content, below the menu sheet and veil (50) and the asset banner (70). */
 
@@ -14,19 +14,17 @@
 .guide-dock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; pointer-events: none; }
 .guide-dock > * { pointer-events: auto; }
 
-/* The droplet button. */
+/* The bead button. */
 .guide-agent {
   width: 4rem; height: 4.5rem; padding: 0; border-radius: 50%;
   filter: drop-shadow(0 0.4rem 0.9rem rgb(9 10 11 / 0.28));
 }
 @media (max-width: 639px) { .guide-agent { width: 3.25rem; height: 3.65rem; } }
 .guide-agent:focus-visible { outline-offset: 4px; }
-.guide-droplet { width: 100%; height: 100%; overflow: visible; }
-.guide-droplet-body { fill: url(#guide-glass); stroke: var(--accent); stroke-width: 1.5; }
-.guide-droplet-rim { fill: url(#guide-foot); }
-.guide-droplet-eyes ellipse { fill: #0b0d10; }
-.guide-droplet-glint { fill: #fff; }
-.guide-droplet-shine { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; opacity: 0.85; }
+.guide-bead { width: 100%; height: 100%; overflow: visible; }
+.guide-bead-body { fill: var(--raw-color-ink-900); }
+.guide-bead-rim { fill: none; stroke: var(--raw-color-cyan-400); stroke-width: 1.5; }
+.guide-bead-shine { fill: none; stroke: var(--raw-color-ice-50); stroke-width: 2.5; stroke-linecap: round; opacity: 0.35; }
 
 /* The speech bubble: a line per section, decoration for screen readers. */
 .guide-bubble {
@@ -88,7 +86,7 @@
     border-left: 0; border-right: 0; border-bottom: 0;
     padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
   }
-  /* The sheet has its own close button; the droplet would sit on its last row. */
+  /* The sheet has its own close button; the bead would sit on its last row. */
   .js:not(.reveal-failsafe) .guide-panel:not([hidden]) + .guide-dock { visibility: hidden; }
 }
 

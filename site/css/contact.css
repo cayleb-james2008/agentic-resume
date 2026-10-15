@@ -1,7 +1,6 @@
 /* Contact footer — the reference's sign-off (spec §L5275–5476). A cyan page
-   edge around a near-black panel holding the contour backdrop; the figure on
-   the section (it hangs past the foot to cover the edge); the copy on the
-   section in frame coordinates. Below 640: a stacked phone footer. */
+   edge around a plain near-black panel; the copy on the section in frame
+   coordinates. Below 640: a stacked phone footer. */
 
 .contact {
   container-type: inline-size; position: relative; isolation: isolate;
@@ -19,7 +18,7 @@
 }
 @media (min-width: 640px) and (max-width: 1023px) {
   .contact {
-    --foot-h: 104cqw; --fig-scale: 0.87; --fig-shift: 14%; --logo-h: 24px;
+    --foot-h: 104cqw; --logo-h: 24px;
     --nav-size: 36px; --nav-gap: 12px; --nav-row: 34px;
     --cta-left: 50%; --cta-shift: -50%; --foot-copy-min: 200px;
   }
@@ -35,22 +34,9 @@
   }
 }
 
-/* The panel inset 16 on every side, with the contour backdrop. */
+/* The panel inset 16 on every side: plain near-black, no backdrop. */
 .contact-panel {
   position: absolute; inset: 1.1111cqw; overflow: hidden; background: var(--surface-black);
-}
-
-/* --- The figure: one plate, sized off the block's height --------------- */
-.contact-figure-group {
-  position: absolute; inset: 0; z-index: 10; pointer-events: none;
-  transform-origin: bottom; scale: var(--fig-scale, 1); translate: var(--fig-shift, 0);
-}
-@media (max-width: 639px) { .contact-figure-group { display: none; } }
-.contact-figure-layer { position: absolute; left: 0; right: 0; top: 0; height: 100%; }
-.contact-figure {
-  position: absolute; left: 50%; bottom: -1.225%; height: 96.078%;
-  width: auto; max-width: none; aspect-ratio: 1.5; transform: translateX(-50%);
-  object-fit: cover; user-select: none; -webkit-user-select: none;
 }
 
 /* --- Copy, on the section ---------------------------------------------- */
@@ -113,7 +99,7 @@
   font-size: calc(var(--cta-h) * 20 / 50);
 }
 .cta--hollow .cta-arrow { width: calc(var(--cta-h) * 13.71 / 50); height: calc(var(--cta-h) * 10.71 / 50); }
-/* Hollow per the spec, but over the figure the label needs a ground: ink at 72%. */
+/* Hollow per the spec, with a faint ink ground so the label stays steady: ink at 72%. */
 .cta-frame--hollow .cta-body { fill: rgb(9 10 11 / 0.72); }
 .cta-frame--hollow .cta-line { fill: none; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
 

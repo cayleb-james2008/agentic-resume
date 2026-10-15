@@ -1,11 +1,9 @@
-"""Contact footer — the reference's sign-off (§L5275–5476) with Cayleb's links."""
-from markup import SLAB_ARROW, attr, chamfer_frame, link, reveal, text
-from templates.approach import heading
+"""Contact footer — the reference's sign-off (§L5275–5476) with Cayleb's links, on a plain dark panel."""
+from markup import SLAB_ARROW, attr, chamfer_frame, heading, link, reveal, text
 
 LOGO = 120
 NAV, NAV_STEP = 260, 80
 FOOT = (640, 720, 800)
-FIGURE_SIZE = (1536, 1024)
 
 
 def render(content: dict) -> str:
@@ -17,13 +15,9 @@ def render(content: dict) -> str:
         for i, n in enumerate(c["nav"])
     )
     links = "".join(f"<li>{link(l['href'], l['label'])}</li>" for l in c["links"])
-    figure = c["figure"]
     return (
         '<section class="contact" data-contact id="contact" aria-labelledby="contact-title">'
-        '<div class="contact-panel"><canvas class="contours" data-contours="--footer-contour" aria-hidden="true"></canvas></div>'
-        '<div class="contact-figure-group"><div class="contact-figure-layer" data-figure-layer>'
-        f'<img class="contact-figure" src="{attr(figure["image"])}" alt="{attr(figure["alt"])}" '
-        f'width="{FIGURE_SIZE[0]}" height="{FIGURE_SIZE[1]}" loading="lazy" decoding="async"></div></div>'
+        '<div class="contact-panel"></div>'
         f'<a class="contact-wordmark" href="./" data-fade data-delay="{LOGO}" aria-label="Cayleb Alvarez-James, home">'
         f'{text(content["wordmark"])}</a>'
         f'{heading(c["lines"], "contact-title", "contact-title", "heading-stop--white")}'

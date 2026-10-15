@@ -1,0 +1,403 @@
+[
+ {
+  "group": "exec",
+  "slug": "peter-lord",
+  "name": "Peter Lord",
+  "title": "President & CEO",
+  "phone": "617.331.5910",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": "Peter joined the company in 1989, became Vice President in 2000 and took over as President & CEO in 2023. He works to build and keep strong relationships with our business partners as the company grows. Every day he works with architects, designers and clients, alongside RHL's project managers, designers, estimators and installers, to carry each project from concept to completion. He recently finished his fourth Pan-Mass Challenge, a 192-mile, two-day ride from Sturbridge to Provincetown, as part of Team Perseverance, a 30-member team that has raised over a million dollars for cancer research since 2009. A cancer survivor, Peter gives back to the Dana-Farber Cancer Institute. He is a graduate of St. Anselm College.",
+  "photo": "assets/img/team/peter-lord.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/PL%201%20bw%207-28-11(1).jpg"
+ },
+ {
+  "group": "exec",
+  "slug": "roy-mcnally",
+  "name": "Roy McNally",
+  "title": "Vice President of Operations & Architectural Products",
+  "phone": "860.512.2128",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": "Roy joined the company in 2003 to oversee the Architectural Products division. He brings more than 30 years of estimating and project management experience in commercial contracting and construction management. He is a member of the Construction Institute and holds degrees from Hartford State Technical College in Construction Management, Porter & Chester Institute in Architectural Design, and Manchester Community College in Business Management and Marketing.",
+  "photo": "assets/img/team/roy-mcnally.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/RM%201%20bw%207-29-11.jpg"
+ },
+ {
+  "group": "exec",
+  "slug": "rob-romay",
+  "name": "Rob Romay",
+  "title": "Vice President of Furniture, Fixtures & Equipment",
+  "phone": "860.512.2126",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": "Rob joined the company in 1999. He runs the day-to-day operations of the Furniture Division: sales management, estimating, project management and installation. He works closely with the architecture and design community and has built strong relationships with designers.",
+  "photo": "assets/img/team/rob-romay.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Contact/Rob-Romay-2018.jpg"
+ },
+ {
+  "group": "exec",
+  "slug": "susan-duva",
+  "name": "Susan Duva",
+  "title": "Vice President of Finance",
+  "phone": "860.512.2121",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/susan-duva.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/susan-duva.png?v=1672258049973"
+ },
+ {
+  "group": "arch",
+  "slug": "jon-lord",
+  "name": "Jon Lord",
+  "title": "Account Executive",
+  "phone": "860.729.9215",
+  "cell": null,
+  "areas": {
+   "CT": [
+    "Tolland",
+    "Windham"
+   ],
+   "MA": [
+    "Barnstable",
+    "Bristol",
+    "Dukes",
+    "Nantucket",
+    "Norfolk",
+    "Plymouth",
+    "Worcester"
+   ],
+   "RI": "all"
+  },
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/jon-lord.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/LJ%201%20bw%207-28-11.jpg"
+ },
+ {
+  "group": "arch",
+  "slug": "jim-mcevoy",
+  "name": "Jim McEvoy",
+  "title": "Account Executive",
+  "phone": "860.483.1745",
+  "cell": null,
+  "areas": {
+   "CT": [
+    "Fairfield",
+    "Hartford",
+    "Litchfield",
+    "Middlesex",
+    "New Haven",
+    "New London"
+   ]
+  },
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/jim-mcevoy.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Contact/Jim%20McEvoy%2002-21-2018.jpg"
+ },
+ {
+  "group": "arch",
+  "slug": "ed-marshall",
+  "name": "Ed Marshall",
+  "title": "Account Executive",
+  "phone": "617.991.7539",
+  "cell": null,
+  "areas": {
+   "MA": [
+    "Essex",
+    "Middlesex",
+    "Suffolk"
+   ]
+  },
+  "focus": null,
+  "bio": "Ed joined RHL in 2017 as an account executive, with long experience in K-12 and higher education from Follett School Solutions and the Nebraska Book Company. He focuses on new construction and renovations at private and public schools. Recent projects include Belmont Middle High School, Arlington High School, Rivers School, Lawrence Academy, Boston College and MIT. He has a degree in Communication Arts from Villanova University and a master's in Education from UMass Boston. Ed lives in Westwood with his wife Jaime, his son Ryan and their rescue dog Murphy.",
+  "photo": "assets/img/team/ed-marshall.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Contact/Ed%20Marshall-2.jpg"
+ },
+ {
+  "group": "arch",
+  "slug": "mike-ward",
+  "name": "Mike Ward",
+  "title": "Account Executive",
+  "phone": "603.232.0777",
+  "cell": "603.341.6967",
+  "areas": {
+   "ME": "all",
+   "MA": [
+    "Berkshire",
+    "Franklin",
+    "Hampden",
+    "Hampshire"
+   ],
+   "NH": "all",
+   "VT": "all"
+  },
+  "focus": null,
+  "bio": "Before joining RHL in 2016, Mike had sold, promoted and installed Porter Athletic equipment since 1997. That product knowledge lets him help designers, owners and contractors design and specify the right gym equipment for new construction and renovations. He has a bachelor's degree in Physical Education from Plymouth State College, is a longtime member of the Hooksett Youth Athletic Association and coaches soccer in his hometown of Hooksett, New Hampshire. Away from his desk you might find him boating on Lake Winnipesaukee or skiing in the White and Green Mountains.",
+  "photo": "assets/img/team/mike-ward.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Contact/MIke%20Ward(1).jpg"
+ },
+ {
+  "group": "arch",
+  "slug": "mark-cowee",
+  "name": "Mark Cowee",
+  "title": "Senior Project Manager",
+  "phone": "860.512.2123",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/mark-cowee.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Mark%20Cowee%2001-31-2018.jpg"
+ },
+ {
+  "group": "arch",
+  "slug": "tom-leone",
+  "name": "Tom Leone",
+  "title": "Project Manager",
+  "phone": "860.512.2119",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/tom-leone.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Contact/Tom-Leone.jpg"
+ },
+ {
+  "group": "arch",
+  "slug": "stefanie-jordan",
+  "name": "Stefanie Jordan",
+  "title": "Project Manager",
+  "phone": "860.966.2054",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/stefanie-jordan.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/img_5585jpeg.jpg?v=1750435967428"
+ },
+ {
+  "group": "arch",
+  "slug": "dylan-johnson",
+  "name": "Dylan Johnson",
+  "title": "Project Manager",
+  "phone": "860.645.8700",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/dylan-johnson.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/img_0249.png?v=1784921026748"
+ },
+ {
+  "group": "arch",
+  "slug": "lorelei-amuso",
+  "name": "Lorelei Amuso",
+  "title": "Project Accountant",
+  "phone": "860.512.2133",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/lorelei-amuso.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/img_5588jpeg.jpg?v=1750436632352"
+ },
+ {
+  "group": "arch",
+  "slug": "dwight-ballard",
+  "name": "Dwight Ballard",
+  "title": "Estimator",
+  "phone": "860.512.2130",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": "Dwight joined RHL in 2001 as an estimator for the Architectural Products division. Before that he held drafting, estimating and pre-sales positions at Hussey Seating and worked for several Hussey dealerships. His product knowledge, and his grasp of product limits, codes and project variables, help designers, owners and contractors when they estimate, negotiate and process a project. He holds an Architectural Drafting degree from Northern Maine Technical College.",
+  "photo": "assets/img/team/dwight-ballard.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/_DSC5406.jpg"
+ },
+ {
+  "group": "furn",
+  "slug": "julie-norris",
+  "name": "Julie Norris",
+  "title": "Director of Sales, Furniture Division",
+  "phone": "860.908.7803",
+  "cell": null,
+  "areas": {
+   "CT": [
+    "Hartford",
+    "Middlesex",
+    "New London",
+    "Tolland",
+    "Windham"
+   ],
+   "MA": [
+    "Franklin",
+    "Hampden",
+    "Hampshire"
+   ]
+  },
+  "focus": null,
+  "bio": "Julie joined RHL in 2013 with more than 25 years of interior design experience. She keeps up with the latest trends and best practices for schools, and she has designed many school interiors herself, so she can offer furniture that suits 21st-century learning spaces and better workplaces. Julie assesses each project with the client and presents furniture options and costs that fit. She coordinates with designers and architects, and with RHL's estimators, designers, project managers and installers, to see each project through.",
+  "photo": "assets/img/team/julie-norris.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/img_5606.jpg?v=1750441333260"
+ },
+ {
+  "group": "furn",
+  "slug": "linda-bianchi",
+  "name": "Linda Bianchi",
+  "title": "Account Executive",
+  "phone": "860.338.3566",
+  "cell": null,
+  "areas": {
+   "CT": [
+    "Fairfield",
+    "Litchfield",
+    "New Haven"
+   ],
+   "MA": [
+    "Berkshire"
+   ],
+   "VT": "all"
+  },
+  "focus": "Corporate",
+  "bio": "Linda joined RHL in November 2019, bringing more than 30 years as a furniture dealership account executive and a background in workspace consulting and design. She has worked with corporate workplaces, healthcare, education and hospitality clients. At RHL she works closely with designers and end users, especially on K-12 projects, and she secures the details with her RHL support team so each project goes smoothly from concept to completion. Linda has a BA in Art & Design from Mt. Vernon College in Washington, DC, volunteers for American Heart Association and Susan G. Komen fundraisers, and lives in Connecticut.",
+  "photo": "assets/img/team/linda-bianchi.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/linda_bianchi_head_shot.jpg?v=1594992300236"
+ },
+ {
+  "group": "furn",
+  "slug": "tom-lord",
+  "name": "Tom Lord",
+  "title": "Account Executive",
+  "phone": "860.209.1115",
+  "cell": null,
+  "areas": {
+   "MA": [
+    "Worcester",
+    "Norfolk",
+    "Plymouth",
+    "Bristol",
+    "Suffolk"
+   ],
+   "RI": "all"
+  },
+  "focus": "Higher education",
+  "bio": null,
+  "photo": "assets/img/team/tom-lord.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/getattachmentthumbnail.jpg?v=1750441213523"
+ },
+ {
+  "group": "furn",
+  "slug": "mike-churchill",
+  "name": "Mike Churchill",
+  "title": "Account Executive",
+  "phone": "508.840.9927",
+  "cell": null,
+  "areas": {
+   "MA": [
+    "Essex",
+    "Middlesex"
+   ],
+   "ME": "all",
+   "NH": "all"
+  },
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/mike-churchill.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/mikec.jpg?v=1750442899032"
+ },
+ {
+  "group": "furn",
+  "slug": "janis-stewart",
+  "name": "Janis Stewart",
+  "title": "Senior Estimator & Project Manager",
+  "phone": "860.512.2129",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": "In more than 20 years as an estimator at RHL, Janis has built a detailed knowledge of the Connecticut State Contract, the Massachusetts Higher Education Consortium (MHEC) and other purchasing contracts. She works with clients and RHL account executives through the sales process to price budgets, bids, proposals and final quotes.",
+  "photo": "assets/img/team/janis-stewart.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/Contact/_DSC5375(1).jpg"
+ },
+ {
+  "group": "install",
+  "slug": "raymond-ballard",
+  "name": "Raymond Ballard",
+  "title": "Head Installer",
+  "phone": "860.645.8700",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/raymond-ballard.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/ray-ballard.png?v=1672258154033"
+ },
+ {
+  "group": "install",
+  "slug": "giovannie-berrato",
+  "name": "Giovannie Berrato",
+  "title": "Installer",
+  "phone": "860.645.8700",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/giovannie-berrato.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/giovannieb.jpg?v=1750443171637"
+ },
+ {
+  "group": "install",
+  "slug": "carlos-feliciano",
+  "name": "Carlos Feliciano",
+  "title": "Installer",
+  "phone": "860.645.8700",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/carlos-feliciano.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/carlosf.jpg?v=1750443259118"
+ },
+ {
+  "group": "install",
+  "slug": "lexus-alamo",
+  "name": "Lexus Alamo",
+  "title": "Installer",
+  "phone": "860.645.8700",
+  "cell": null,
+  "areas": null,
+  "focus": null,
+  "bio": null,
+  "photo": "assets/img/team/lexus-alamo.jpg",
+  "size": 480,
+  "src": "https://rhlco.com/uploads/images/lexusa.jpg?v=1750864143132"
+ }
+]

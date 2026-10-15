@@ -29,6 +29,7 @@ See the spec's "Decisions" list. These are the ones that bind the code:
 - "About $100 a person a month".
 - Faceless guide.
 - Tilt only where no permission prompt is needed.
+- The other jobs are shown as **work ethic**, under that label. **No certifications** section: anyone can have an agent earn one.
 
 ## Global Constraints
 
@@ -512,14 +513,15 @@ git commit -m "feat(story): story and masthead markup, static fallbacks and runw
 - Test: `tests/home-resume-half.test.js`
 
 **Interfaces:**
-- Consumes: `resume/resume-content.json` (`full_name`, `headline`, `location`, `work_preference`, `experience`, `additional_experience`, `projects[]` with `slug`, `name`, `stack`, `bullets`, `links`, `education`, `skills`, optional `certifications`); `content["resumeHalf"]` (below); `content["meta"]` (the PDFs and `siteUrl`).
+- Consumes: `resume/resume-content.json` (`full_name`, `headline`, `location`, `work_preference`, `experience`, `additional_experience`, `projects[]` with `slug`, `name`, `stack`, `bullets`, `links`, `education`, `skills`); `content["resumeHalf"]` (below); `content["meta"]` (the PDFs and `siteUrl`).
 - Produces: `resume_half.render(content, resume) -> str`, a `<div class="resume-half" id="resume">` holding `section#experience`, `section#work` and `section#education`, each with exactly one `h2`.
 
 ```json
 "resumeHalf": {
   "kicker": "Résumé",
   "experience": "Experience", "projects": "Projects", "education": "Education and skills",
-  "certifications": "Certifications", "skills": "Skills", "caseStudy": "Case study",
+  "skills": "Skills", "caseStudy": "Case study",
+  "workEthic": { "title": "Work ethic", "line": "Real jobs, real hours. Where I learned how teams actually work." },
   "status": { "ergon": "Windows pilot · live checks pending" },
   "lab": { "label": "See the lab", "sub": "10 recorded demos", "href": "lab/" },
   "downloads": [ { "label": "Résumé PDF", "href": "Cayleb-James-polished-resume.pdf" },
@@ -533,8 +535,9 @@ git commit -m "feat(story): story and masthead markup, static fallbacks and runw
 test('the résumé half reads like the résumé: name, title, place, both PDFs', () => {
   // contains resume.full_name, "Forward Thinking Engineer · Connecticut, USA · Remote-only", href="<pdf>" download for both PDFs
 });
-test('experience lists the main role and every additional job with dates', () => {
-  // resume.experience.title with "&" escaped and its dates; each additional_experience organization (split on " — ") and dates
+test('experience lists the main role, then the other jobs as work ethic', () => {
+  // resume.experience.title with "&" escaped and its dates
+  // an <h3> "Work ethic" and its line, followed by each additional_experience organization (split on " — ") and dates
 });
 test('projects come in résumé order with Ergon first, each linking its case study', () => {
   // the first <article class="resume-project"> is Ergon and carries "Windows pilot · live checks pending"
@@ -542,9 +545,9 @@ test('projects come in résumé order with Ergon first, each linking its case st
   // GitHub repo links from resume links are kept; links starting with meta.siteUrl are made relative
   // href="lab/" with "See the lab"
 });
-test('education, skills and certifications only when on record', () => {
+test('education and skills, and never certifications', () => {
   // resume.education.school and coursework; every skills row label and value
-  // no class="resume-certifications" when resume.certifications is undefined; with a fixture certifications [{name:"X",issuer:"Y",date:"2026"}] it renders
+  // no /certif/i anywhere in the rendered half, even with a fixture resume.certifications [{name:"X"}] (Cayleb: certificates prove nothing)
 });
 test('three sections, one h2 each, ids for deep links', () => {
   // ids experience, work, education; each <section> has exactly one <h2>; no <h1>; no <img>
@@ -560,9 +563,9 @@ Expected: FAIL because `templates.resume_half` cannot be imported.
   - Map case-study pages with `CASE_PAGES = {"suite": "projects/industry-ai-suite.html"}`, defaulting to `projects/{slug}.html`.
   - Escape everything with `text` and `attr`.
   - The head is `p.resume-half-kicker`, `p.resume-half-name`, `p.resume-half-meta` and `ul.resume-half-downloads`.
-  - Experience is `article.resume-entry` (h3, `p.resume-dates`, p) plus `ul.resume-jobs` (li > `span.resume-org` + `span.resume-dates`).
+  - Experience is `article.resume-entry` (h3, `p.resume-dates`, p), then `div.resume-ethic` with `h3` = `resumeHalf.workEthic.title`, `p` = its line, and `ul.resume-jobs` (li > `span.resume-org` + `span.resume-dates`).
   - Each project is `article.resume-project` (the first also gets `resume-project--lead`): h3 name, `p.resume-stack`, an optional `p.resume-status` from `resumeHalf.status[slug]`, `ul` bullets, and `p.resume-links`.
-  - Education and skills: `div.resume-edu`, then an optional `div.resume-certifications`, then `dl.resume-skills`.
+  - Education and skills: `div.resume-edu`, then `dl.resume-skills`. Certifications are never rendered.
 
 - [ ] **Step 4: Implement `resume-half.css`.**
   - A white sheet on `--background`, max-width 72rem, with gutters as in `site/css/resume.css`.
@@ -740,6 +743,8 @@ Expected: FAIL in `home-structure`, `home-content`, `home-few-words`, `home-wort
   - `story.beats[].ladder[]`: 12
   - `story.intro.cue`: 10
   - `resumeHalf.kicker`: 12
+  - `resumeHalf.workEthic.title`: 16
+  - `resumeHalf.workEthic.line`: 80
 
 - [ ] **Step 5: Wire the build.**
   - **`build-home.py`:**

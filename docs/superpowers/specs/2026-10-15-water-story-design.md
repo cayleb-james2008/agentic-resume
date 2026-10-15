@@ -26,7 +26,9 @@ The new homepage has two halves:
    - What it is: a personal assistant per employee, built around the apps they already use; remote management of every computer; support tickets fixed by an agent with full remote screen control.
    - Escalation is shown in plain words: **Agent → Senior agent → Person**. No model names, because the repo currently routes Haiku 5.5 → Opus 5.5 → a person and that may change.
    - Price: **about $100 a person a month**, sized per company.
-9. **The résumé half holds:** experience; projects with Ergon first; education plus certifications; skills plus downloads.
+9. **The résumé half holds:** experience; projects with Ergon first; education; skills plus downloads.
+   - The other jobs (Dunkin', Tommy's Pizza, moving crew, plaster) are there to show **work ethic**, and are labelled that way.
+   - **No certifications** (Cayleb, 2026-10-15): anyone can have an agent earn one, so they prove nothing. The section is not built.
 10. **Guide:** kept, without its face. It becomes a plain ink bead with a cyan rim and no eyes, blinking or gaze.
 11. **Phone tilt:** only where no permission prompt is needed (Android). Nothing is asked on iOS.
 
@@ -43,7 +45,7 @@ masthead (fixed, slim; fades in at the end of the intro)  CAYLEB.AJ · Experienc
 <div.resume-half#resume>  "Résumé" kicker + name, title, Remote-only, Connecticut
    <section#experience>  official experience + additional experience
    <section#work>        projects, Ergon first: name, stack, bullets, status, case study / repo links, lab link
-   <section#education>   education, certifications (only if any are on record), skills, downloads
+   <section#education>   education, skills, downloads (no certifications)
 <footer><section#contact>  email, GitHub, PDFs, ©. No figure, no contours.
 guide (faceless bead), shown only in the résumé half
 ```
@@ -102,10 +104,9 @@ Everything runs on the vendored three.js and the existing engine. There are no n
 ## The résumé half (official)
 
 Rendered by **`scripts/home/templates/resume_half.py`** from **`resume/resume-content.json`**, the same source as the PDFs:
-- **Experience:** `experience` (title, dates, intro) plus `additional_experience`.
+- **Experience:** `experience` (title, dates, intro), then `additional_experience` under an h3 "Work ethic" with one plain line ("Real jobs, real hours. Where I learned how teams actually work.").
 - **Projects:** `projects` in file order, which already puts Ergon first. Each shows name, stack, bullets, a case-study link (`projects/{slug}.html`, all five exist) or a repo link, and the lab link.
 - **Education:** `education`.
-- **Certifications:** rendered only if a `certifications` list exists. None is on record, so none is invented.
 - **Skills and downloads:** `skills`, plus both PDFs.
 
 The PDFs and `resume/*` files are untouched. The jargon ban in `home-few-words` still covers only the story copy in `content.json`. The official skills list naming Python, Rust and React is expected there.
@@ -162,7 +163,7 @@ The PDFs and `resume/*` files are untouched. The jargon ban in `home-few-words` 
     - markup: one h1, beat h2s, a static SVG per beat;
     - the runway CSS sits under both the failsafe selector and the motion query;
     - `index.html` has **no `<img>`** and no `assets/home/` or "Illustration" anywhere in served pages.
-  - `home-resume-half.test.js`: Ergon first; every case-study link resolves; education matches `resume-content.json`; no certifications block when none exist; skills present; both PDFs linked.
+  - `home-resume-half.test.js`: Ergon first; every case-study link resolves; education matches `resume-content.json`; a "Work ethic" h3 over the other jobs; no certifications markup at all; skills present; both PDFs linked.
 
 ## Execution
 
@@ -194,6 +195,5 @@ The PDFs and `resume/*` files are untouched. The jargon ban in `home-few-words` 
 
 ## Open items (not blocking)
 
-- **Certifications:** none on record. Cayleb names real ones and they render, or the slot stays hidden.
 - **Ergon résumé and PDF bullets** stay as they are. A follow-up could add the ticket escalation and remote screen control once the other session lands them.
 - **Projects and contact imagery:** both are gone with the figures. If a visual is wanted later, it can be a water motif, never a picture of him.

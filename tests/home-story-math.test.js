@@ -4,7 +4,7 @@ import { getStoryTier, CAP_60 } from '../site/js/story/tier.js';
 import { createRipple, rippleSize } from '../site/js/story/ripple.js';
 import { CAPTION_BOX, MAX_SLOTS, layoutFor, slotsFor, overlaysFor } from '../site/js/story/shapes.js';
 import { BEATS, RUNWAY_SCREENS, beatAt, storyState } from '../site/js/story/timeline.js';
-import { shouldRetune, renderSize, toPercent } from '../site/js/story/view.js';
+import { RIPPLE_STEP_MS, RIPPLE_START_OWED, shouldRetune, renderSize, stepsFor, toPercent } from '../site/js/story/view.js';
 
 /** A stand-in for window: width, pointer class, reduced motion, save-data, memory. */
 const env = ({ width, coarse = false, reduced = false, saveData = false, memory = 8 }) => ({
@@ -352,4 +352,38 @@ test('render size respects the pixel cap', () => {
 
 test('stage units map to overlay percentages', () => {
   assert.deepEqual(toPercent({ x: 0.8, y: 0.25 }, 1.6), { left: 50, top: 75 });
+});
+
+test('the ripple clock takes a steady number of steps per frame, jitter and all', () => {
+  // rAF timestamps sit on the display's grid give or take a little jitter (seeded, so the test is repeatable).
+  let seed = 7;
+  const jitter = (amp) => ((seed = (seed * 16807) % 2147483647) / 2147483647 * 2 - 1) * amp;
+  const run = (hz, amp, frames = 600) => {
+    const period = 1000 / hz, counts = [];
+    let owed = RIPPLE_START_OWED, last = 0;
+    for (let i = 1; i <= frames; i++) {
+      const time = i * period + jitter(amp);
+      const r = stepsFor(owed, time - last, RIPPLE_STEP_MS, 4);
+      counts.push(r.steps);
+      owed = r.owed;
+      last = time;
+    }
+    return counts;
+  };
+  assert.equal(RIPPLE_STEP_MS, 1000 / 120);
+  assert.equal(RIPPLE_START_OWED, RIPPLE_STEP_MS / 2);
+  assert.ok(run(60, 0.05).every((n) => n === 2), '60Hz: two steps every frame');
+  assert.ok(run(120, 0.2).every((n) => n === 1), '120Hz: one step every frame');
+
+  // After a pause it catches up at most maxSteps, back on the half-step phase, then runs steady again.
+  const pause = stepsFor(RIPPLE_START_OWED, 1500, RIPPLE_STEP_MS, 4);
+  assert.deepEqual(pause, { steps: 4, owed: RIPPLE_START_OWED });
+  let owed = pause.owed;
+  for (let i = 0; i < 60; i++) {
+    const r = stepsFor(owed, 1000 / 60 + jitter(0.05), RIPPLE_STEP_MS, 4);
+    assert.equal(r.steps, 2, `frame ${i} after the pause`);
+    owed = r.owed;
+  }
+  // Time never runs backwards.
+  assert.deepEqual(stepsFor(RIPPLE_START_OWED, -5, RIPPLE_STEP_MS, 4), { steps: 0, owed: RIPPLE_START_OWED });
 });

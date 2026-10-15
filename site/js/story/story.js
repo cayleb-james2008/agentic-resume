@@ -23,17 +23,15 @@ import { createRipple, rippleSize } from './ripple.js';
 import { layoutFor, overlaysFor } from './shapes.js';
 import { getStoryTier } from './tier.js';
 import { storyState } from './timeline.js';
-import { shouldRetune, toPercent } from './view.js';
+import { RIPPLE_START_OWED, RIPPLE_STEP_MS, shouldRetune, stepsFor, toPercent } from './view.js';
 
 /** The water's colours, read off the page so they always match it. */
 const COLOR_TOKENS = { ink: '--raw-color-ink-900', deep: '--raw-color-ink-950', rim: '--raw-color-cyan-400', bg: '--raw-color-ice-50' };
 
 /**
- * The ripple runs on its own clock, two steps per 60Hz frame, so a 120 or
- * 144Hz screen does not run the water faster. After a pause it catches up at
- * most this many steps instead of all at once.
+ * The ripple runs on its own 120Hz clock (view.js `stepsFor`). After a pause
+ * it catches up at most this many steps instead of all at once.
  */
-const STEP_MS = 1000 / 120;
 const MAX_STEPS = 4;
 /** Below this the surface is still: no need to draw it again. */
 const STILL = 1e-4;
@@ -121,7 +119,7 @@ export function mount(section) {
     let force = true;              // draw the next frame whatever changed
     let lastProgress = null;
     let clock = null;
-    let owed = 0;                  // ripple time not yet stepped, in ms
+    let owed = RIPPLE_START_OWED;  // ripple time not yet stepped, in ms: half a step in, so frames step evenly
     let rippled = true;            // the ripple has changed since its bytes were taken
     const tilt = [0, 0];
     let drawnTilt = 0;
@@ -185,7 +183,12 @@ export function mount(section) {
       }
     };
 
-    const draw = (time) => {
+    /**
+     * One frame. Only the ticker's own frames (`tick`) advance the ripple
+     * clock: a frame drawn out of turn (on resize, or as the stage leaves
+     * view) would shift where the clock sits between steps.
+     */
+    const draw = (time, tick) => {
       const progress = triggerProgress(section.getBoundingClientRect(), window.innerHeight, 'top top', 'bottom bottom');
       const s = storyState(progress, layout);
 
@@ -195,14 +198,14 @@ export function mount(section) {
           ripple.poke(0.5, 0.1, 0.9, 4);
           rippled = true;
         }
-        owed = Math.min(owed + (clock === null ? 0 : Math.max(0, time - clock)), MAX_STEPS * STEP_MS);
-        while (owed >= STEP_MS) {
-          ripple.step();
-          owed -= STEP_MS;
-          rippled = true;
+        if (tick) {
+          const due = stepsFor(owed, clock === null ? 0 : time - clock, RIPPLE_STEP_MS, MAX_STEPS);
+          owed = due.owed;
+          for (let i = 0; i < due.steps; i++) ripple.step();
+          if (due.steps) rippled = true;
         }
       }
-      clock = time;
+      if (tick) clock = time;
 
       writePage(s);
 
@@ -219,15 +222,18 @@ export function mount(section) {
       lastProgress = progress;
     };
 
-    /** One tick. A failure here turns the story static rather than leave a blank runway. */
-    const frame = (time) => {
+    /**
+     * A frame: the ticker's (`tick` true), or one drawn out of turn. A failure
+     * here turns the story static rather than leave a blank runway.
+     */
+    const frame = (time, tick = true) => {
       if (ended) return;
       if (root.classList.contains('reveal-failsafe')) {
         toStatic();
         return;
       }
       try {
-        draw(time);
+        draw(time, tick);
       } catch (error) {
         toStatic();
         console.error(error);
@@ -236,7 +242,9 @@ export function mount(section) {
 
     // --- input: ripples only, never a blocked scroll --------------------------
 
+    // A frozen tier steps no ripple, so a poke there would be a dent that never settles.
     const pokeAt = (event, strength) => {
+      if (tier.freeze) return;
       const r = stage.getBoundingClientRect();
       const u = (event.clientX - r.left) / r.width;
       const v = 1 - (event.clientY - r.top) / r.height;
@@ -247,7 +255,7 @@ export function mount(section) {
 
     let last = null;
     const onPointerMove = (event) => {
-      if (!tier.pointerEnabled) return;
+      if (!tier.pointerEnabled || tier.freeze) return;
       if (last) {
         const dt = Math.max(1, event.timeStamp - last.t);
         const speed = (Math.hypot(event.clientX - last.x, event.clientY - last.y) / dt) * 1000;   // px/s
@@ -256,7 +264,8 @@ export function mount(section) {
       last = { x: event.clientX, y: event.clientY, t: event.timeStamp };
     };
     const onPointerDown = (event) => {
-      if (!tier.freeze) pokeAt(event, 0.8);
+      if (tier.freeze) return;
+      pokeAt(event, 0.8);
     };
     // Tilt only where it needs no permission prompt (Android); iOS is never asked.
     const tiltFree = typeof DeviceOrientationEvent !== 'undefined'
@@ -287,14 +296,14 @@ export function mount(section) {
         console.error(error);
         return;
       }
-      frame(performance.now());   // the resize cleared the canvas: fill it before it is shown
+      frame(performance.now(), false);   // the resize cleared the canvas: fill it before it is shown
     });
 
     // The loop runs while the stage is in view. Out of view (the résumé, or a
     // deep link straight to it), one frame leaves the story's end state behind
     // with the masthead shown.
     const offscreen = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) frame(performance.now());
+      if (!entry.isIntersecting) frame(performance.now(), false);
     });
 
     let stopLoop = noop;
@@ -325,7 +334,7 @@ export function mount(section) {
     resizer.observe(stage);
     offscreen.observe(stage);
     stopLoop = runWhileVisible(stage, frame, () => tier.frameInterval);
-    frame(performance.now());
+    frame(performance.now(), false);
   };
 
   start();

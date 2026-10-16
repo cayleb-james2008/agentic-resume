@@ -184,6 +184,26 @@ test('Back and Forward after in-page jumps scroll to the section in the URL', ()
   assert.match(pop, /if \(location\.hash === '#ask' && ask\) \{ window\.setTimeout\(\(\) => ask\.focus\(\), 0\); return; \}/);
 });
 
+test('Ergon\'s controls appear only once its script runs; without it the sample team still reads', () => {
+  const ergon = home.slice(home.indexOf('<section class="ergon"'), home.indexOf('</section>', home.indexOf('<section class="ergon"')));
+  assert.match(ergon, /<p class="eg-lbl" id="team-label" hidden>/);
+  assert.match(ergon, /<div class="seg" role="radiogroup" aria-labelledby="team-label" data-seg hidden>/);
+  assert.match(ergon, /<div class="eg-ctl" hidden>/);
+  assert.equal((ergon.match(/<button class="eg-person" type="button" disabled /g) || []).length, (ergon.match(/class="eg-person"/g) || []).length);
+  const mount = read('site/js/home/ergon.js');
+  assert.match(mount, /for \(const el of \[label, seg, ctl\]\) el\.hidden = false;/);
+  assert.match(mount, /cards\(\)\.forEach\(\(c\) => \{ c\.disabled = false; \}\);/);
+});
+
+test('symmetric gutters clear whichever side has the notch', () => {
+  for (const file of ['site/css/resume-half.css', 'site/css/subpage.css', 'site/css/resume.css']) {
+    const defs = [...strip(read(file)).matchAll(/--g:\s*([^;]+);/g)].map((m) => m[1]);
+    assert.ok(defs.length >= 1, file);
+    for (const d of defs) assert.match(d, /safe-area-inset-left[^;]*safe-area-inset-right/, `${file}: ${d}`);
+  }
+  assert.match(strip(read('lab/lab.css')), /\.lab-strip\s*\{[^}]*env\(safe-area-inset-right, 0px\)/);
+});
+
 test('the homepage masthead and menu sheet clear a notch or status bar', () => {
   const css = strip(read('site/css/masthead.css'));
   assert.match(css, /\.masthead\s*\{[^}]*padding-top:\s*env\(safe-area-inset-top, 0px\)/);

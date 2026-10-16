@@ -2,7 +2,7 @@
    type, the wordmark with its blue full stop, pill buttons, plain sentence case. Each page's own content is
    kept exactly as written; only its frame and its look change. */
 
-body { --g: max(var(--gutter), env(safe-area-inset-left, 0px)); }
+body { --g: max(var(--gutter), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)); }
 
 /* --- Masthead ---------------------------------------------------------- */
 .sub-masthead {

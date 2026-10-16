@@ -878,6 +878,14 @@
           "paperwork",
           "what can he build"
         ],
+        "phrases": [
+          "build an app",
+          "build apps",
+          "build app",
+          "make an app",
+          "make apps",
+          "make app"
+        ],
         "sources": [
           {
             "label": "Work with me",
@@ -890,6 +898,7 @@
         "a": "Not yet as a paid rollout. He has worked moving, plaster and shop jobs firsthand, and built 5 systems with 3,300+ passing checks.",
         "keywords": [
           "company",
+          "job",
           "rollout",
           "paid",
           "track record",
@@ -924,6 +933,12 @@
           "approval",
           "sign off",
           "control"
+        ],
+        "avoid": [
+          "know",
+          "knows",
+          "skill",
+          "skills"
         ],
         "sources": [
           {
@@ -1020,7 +1035,18 @@
           "where did he go",
           "high school",
           "learn",
-          "learned"
+          "learned",
+          "cybersecurity"
+        ],
+        "phrases": [
+          "know security",
+          "knows security",
+          "know about security",
+          "knows about security",
+          "good at security",
+          "security background",
+          "study security",
+          "studied security"
         ],
         "sources": [
           {
@@ -1081,11 +1107,13 @@
         "q": "Will it take anyone's job?",
         "a": "It's built not to. It takes the busywork, not the person: your team gets time back for more work, and a person always has the last word.",
         "keywords": [
-          "job",
+          "replace",
           "anyone's job",
           "people",
           "my staff",
-          "my team's jobs"
+          "my team's jobs",
+          "take jobs",
+          "lose jobs"
         ],
         "sources": [
           {
@@ -1104,6 +1132,20 @@
           "spreadsheet",
           "shared files",
           "the apps we use"
+        ],
+        "avoid": [
+          "build",
+          "builds",
+          "building",
+          "built",
+          "make",
+          "makes",
+          "made",
+          "making",
+          "create",
+          "created",
+          "develop",
+          "developed"
         ],
         "sources": [
           {

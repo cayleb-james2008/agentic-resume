@@ -21,7 +21,8 @@ button:disabled { cursor: wait; opacity: 0.6; }
 /* The strip under the masthead: what this is, and that it is read only. */
 .lab-strip {
   display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  padding: 10px max(var(--gutter), env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--lab-line);
+  padding: 10px max(var(--gutter), env(safe-area-inset-right, 0px)) 10px max(var(--gutter), env(safe-area-inset-left, 0px));
+  border-bottom: 1px solid var(--lab-line);
   background: var(--lab-panel-2); font-size: var(--step--1); line-height: 1.4; color: var(--lab-muted);
 }
 .lab-strip__status { font-weight: 560; color: var(--warn); }

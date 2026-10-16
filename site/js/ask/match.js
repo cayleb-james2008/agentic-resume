@@ -16,7 +16,7 @@
 export const STOP = new Set(`a an the is are was were be been am do does did doing you your yours he his him cayleb
   cayleb's what what's whats how can could would should will i me my we our us of to for in on at it its it's and or
   with about this that these those there any some tell please have has had get so if by as from just like know want
-  need into than then them they their i'm im ok okay hi hello hey`.split(/\s+/).filter(Boolean));
+  need into than then them they their i'm im ok okay hi hello hey make makes`.split(/\s+/).filter(Boolean));
 
 /**
  * What a visitor might type, mapped to the words the written questions use. Kept here, in code, and never shown:
@@ -31,14 +31,15 @@ export const SYNONYMS = {
   cheap: 'cost', budget: 'cost', costs: 'cost', charge: 'rate', charges: 'rate',
   // His own rate is its own question, never Ergon's price.
   rate: 'rate', rates: 'rate', hourly: 'rate', wage: 'rate', wages: 'rate', salary: 'rate', compensation: 'rate',
-  quote: 'rate', quotes: 'rate', freelance: 'hire',
+  quote: 'rate', quotes: 'rate', freelance: 'hire', remotely: 'remote',
   onsite: 'office', hybrid: 'office', relocate: 'office', relocation: 'office', commute: 'office',
   monthly: 'month', subscription: 'month',
   cv: 'resume', 'résumé': 'resume', resumes: 'resume',
   available: 'hire', availability: 'hire', hiring: 'hire', hired: 'hire', recruit: 'hire', recruiting: 'hire',
   recruiter: 'hire', employ: 'hire', position: 'hire', opening: 'hire', candidate: 'hire', interview: 'hire',
-  replace: 'job', replaces: 'job', replacing: 'job', replaced: 'job', layoff: 'job', layoffs: 'job', fire: 'job',
-  fired: 'job', headcount: 'job', unemployment: 'job', jobs: 'job',
+  // Losing jobs is its own signal; "job" alone is his work history.
+  replace: 'replace', replaces: 'replace', replacing: 'replace', replaced: 'replace', layoff: 'replace',
+  layoffs: 'replace', fire: 'replace', fired: 'replace', headcount: 'replace', unemployment: 'replace', jobs: 'job',
   python: 'stack', rust: 'stack', react: 'stack', tauri: 'stack', typescript: 'stack', javascript: 'stack',
   api: 'stack', apis: 'stack', sdk: 'stack', cli: 'stack', runtime: 'stack', framework: 'stack', frameworks: 'stack',
   language: 'stack', languages: 'stack', tech: 'stack', technology: 'stack', technologies: 'stack', node: 'stack',

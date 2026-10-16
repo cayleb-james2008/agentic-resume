@@ -25,6 +25,8 @@ export function mount(figure, { reduced }) {
   const ladder = [...document.querySelectorAll('[data-ladder] li')];
   const seg = document.querySelector('[data-seg]');
   const button = figure.querySelector('[data-ticket]');
+  const label = figure.querySelector('#team-label');
+  const ctl = figure.querySelector('.eg-ctl');
   const narrow = window.matchMedia('(max-width: 767.98px)');
   const cards = () => [...list.querySelectorAll('.eg-person')];
   let team = data.teamOrder[0], wires = [], packets = [], stopPackets = null;
@@ -188,6 +190,9 @@ export function mount(figure, { reduced }) {
     if (card) routine(cards().indexOf(card), true);
   });
   button.addEventListener('click', () => ticket(true));
+  // The controls ship hidden or disabled (a page whose script never runs has nothing here to press); on now.
+  for (const el of [label, seg, ctl]) el.hidden = false;
+  cards().forEach((c) => { c.disabled = false; });
 
   function loop() {
     window.clearTimeout(timer);

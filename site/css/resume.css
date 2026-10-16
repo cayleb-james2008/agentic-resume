@@ -1,7 +1,7 @@
 /* The résumé page: one reading column in the homepage's language (the same ground and type, the wordmark with
    its blue full stop, pills for the downloads), and a print sheet: black on white, the sheet alone. */
 
-.resume-page { --g: max(var(--gutter), env(safe-area-inset-left, 0px)); }
+.resume-page { --g: max(var(--gutter), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)); }
 
 /* --- Masthead ---------------------------------------------------------- */
 .resume-masthead {

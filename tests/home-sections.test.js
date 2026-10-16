@@ -89,7 +89,7 @@ test('the team graph is a captioned figure with a quiet log and a person button 
   assert.match(ergon, /<figcaption class="sr-only" id="eg-caption">/);
   assert.match(ergon, /<div class="eg-log" role="log" aria-live="off" aria-label="[^"]+">/);
   for (const line of content.ergon.figure.log) assert.ok(ergon.includes(`<p>${line.replace(/'/g, '&#x27;')}</p>`) || ergon.includes(`<p>${line}</p>`), line);
-  const people = [...ergon.matchAll(/<button class="eg-person" type="button" aria-label="([^"]+)">/g)];
+  const people = [...ergon.matchAll(/<button class="eg-person" type="button" disabled aria-label="([^"]+)">/g)];
   assert.equal(people.length, content.ergon.teams.office.people.length);
   assert.ok(people.every((p) => /assistant connected to/.test(p[1])));
   for (const step of content.ergon.ladder) assert.ok(ergon.includes(`<li>${step}</li>`), step);

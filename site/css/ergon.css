@@ -66,7 +66,9 @@
   padding: 14px 6px 12px; border-radius: 12px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); text-align: center;
   transition: background-color var(--ui) ease, box-shadow var(--ui) ease, transform var(--press) var(--ease-out), opacity 180ms ease;
 }
-.eg-person:active { transform: scale(0.97); }
+.eg-person:not(:disabled):active { transform: scale(0.97); }
+/* Disabled only until the script runs: the card is there to read. */
+.eg-person:disabled { cursor: default; }
 .eg-person .av { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--sunk); }
 .eg-person .av .icon { width: 18px; height: 18px; color: var(--fg-2); }
 .eg-person .who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -111,5 +113,5 @@
 }
 @media (hover: hover) and (pointer: fine) {
   .seg button:not([aria-checked="true"]):hover { color: var(--fg); }
-  .eg-person:hover { box-shadow: 0 0 0 1px var(--line-strong); }
+  .eg-person:not(:disabled):hover { box-shadow: 0 0 0 1px var(--line-strong); }
 }

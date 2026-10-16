@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { SYNONYMS, ask, buildIndex, decide, normalize, oneEdit, rank, stem, tokens } from '../site/js/ask/match.js';
+import { STOP, SYNONYMS, ask, buildIndex, decide, normalize, oneEdit, rank, stem, tokens } from '../site/js/ask/match.js';
 
 const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf8');
 const content = JSON.parse(read('site/content.json'));
@@ -80,6 +80,24 @@ const CASES = [
   ['Is he open to on-site work?', 'Can I hire Cayleb?'],
   ['Is he open to hybrid?', 'Can I hire Cayleb?'],
   ['Can he relocate?', 'Can I hire Cayleb?'],
+  // Codex, third pass: what he makes is his work, not the apps Ergon connects to or a tool's mistakes; his past
+  // jobs are his experience, not job loss; his security know-how is his schooling, not product safety.
+  ['Does he work remotely?', 'Can I hire Cayleb?'],
+  ['Can he build an app?', 'What kind of tools?'],
+  ['Does he build apps?', 'What kind of tools?'],
+  ['What apps has he built?', 'What has he built?'],
+  ['does it work with gmail', 'What apps does it work with?'],
+  ['can it connect to my accounting app', 'What apps does it work with?'],
+  ['What jobs has he had?', 'Done this for a company?'],
+  ['What is his job?', 'Done this for a company?'],
+  ['Will AI take my job?', "Will it take anyone's job?"],
+  ['Is he going to replace my team?', "Will it take anyone's job?"],
+  ['layoffs?', "Will it take anyone's job?"],
+  ['Does he know security?', 'Where did he study?'],
+  ['Is he good at cybersecurity?', 'Where did he study?'],
+  ['is my data secure', 'What if a tool makes a mistake?'],
+  ['what about security', 'What if a tool makes a mistake?'],
+  ['what if it makes a mistake', 'What if a tool makes a mistake?'],
 ];
 for (const [query, expected] of CASES) {
   test(`"${query}" finds "${expected}"`, () => assert.equal(answerFor(query), expected));
@@ -102,6 +120,13 @@ test('Ergon\'s price is never the answer for another product, or for what Cayleb
 test('his age has no written answer, so an age question says so rather than answering about school', () => {
   assert.ok(!('age' in SYNONYMS) && !('old' in SYNONYMS));
   for (const query of ['How old is Cayleb?', 'how old is he', 'what is his age']) {
+    assert.equal(answerFor(query), 'fallback', query);
+  }
+});
+
+test('"make" names nothing on its own: what he makes, with no written answer, says so', () => {
+  assert.ok(STOP.has('make') && STOP.has('makes'));
+  for (const query of ['Can he make websites?', 'Does he make mobile apps?']) {
     assert.equal(answerFor(query), 'fallback', query);
   }
 });

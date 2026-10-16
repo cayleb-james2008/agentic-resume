@@ -29,8 +29,13 @@ function boot() {
   const ergon = document.querySelector('[data-ergon]');
   if (ergon) mountErgon(ergon, ctx);
   mountActions(document, ctx, { menu, modal, ask });
-  // Pages one level down link to index.html#ask: arrive with the field focused.
-  if (location.hash === '#ask') ask?.focus();
+  // Pages one level down link to index.html#ask: arrive with the field focused. The browser's own jump to the
+  // fragment resets focus (its target box is not focusable), so focus the field once that jump is done.
+  if (location.hash === '#ask' && ask) {
+    const arrive = () => window.setTimeout(() => ask.focus(), 0);
+    if (document.readyState === 'complete') arrive();
+    else window.addEventListener('load', arrive, { once: true });
+  }
   window.__homeBooted = true;
 }
 

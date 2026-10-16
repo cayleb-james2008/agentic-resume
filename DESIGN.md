@@ -1,4 +1,35 @@
+# "Sign-off" homepage (2026-10-16)
+
+**Source.** The spec is `docs/superpowers/specs/2026-10-16-sign-off-design.md`; the plan is `docs/superpowers/plans/2026-10-16-sign-off.md`. It is an original design, built with three design skills: frontend-design (subject-grounded art direction), design-taste-frontend (anti-template rules and its pre-flight checklist) and emil-design-eng (motion and interaction polish). It replaces the tech-studio homepage below, which is recoverable at commit `851ba6c`.
+
+**Readers.** Two at once: hiring managers at frontier tech companies, and owners of teams who want AI to take busywork off their people. The hero gives each a door: "I'm hiring" (to the résumé) and "I run a team" (to Work with me).
+
+**Idea.** In everything Cayleb builds, a person signs off. The page is calm and precise, and its one accent is the blue of signature ink, used where a person decides: primary actions, links, the Person step on Ergon's ladder, the last step of Work with me. One element is bold: the headline, set wide.
+
+**Structure.** Sticky masthead (wordmark, sections, Ask) → hero (title, headline in two lines, one plain line, two doors, the Ask bar) → Built and tested (Ergon featured, then an index of four with a preview frame on wide screens) → Work with me (Shadow, Map, Build, Teach; the offers; Get in touch) → Ergon (copy, price, status, ladder beside the live team graph) → the résumé half (PDFs and the track record at its head) → contact footer. A phone menu sheet and the composer are the only overlays. One `<h1>`; one `<h2>` per section after it.
+
+**The Ask bar.** A field, four suggestions and, once asked, the answer under the question it was matched to, then where it comes from. `site/js/ask/match.js` scores the words a visitor typed against each written question (keywords, the question, the answer; rarer words count more; one-letter typos still count) and answers only when one is clearly ahead; otherwise it offers the closest questions and Get in touch, with the question drafted into the email. It runs in the browser on the page's own data: no model, no key, no request. The greeting says where answers come from. Words the copy rules keep out of the content (client, pilot) are heard through synonyms in code and never shown. Without scripts the field is hidden and every question and answer is listed.
+
+**Look.** Tokens in `site/css/tokens.css`, re-pointed for dark mode in one place:
+- Paper `#f5f6f8`, raised white `#ffffff`, midnight text `#121a2b`, graphite `#4a5468`, hairline `#dce0e7`, control border `#7c8598`, signature blue `#2340d8`. At night: midnight ground, `#1a2338` raised, `#e9ecf2` text, `#a7b0c2` secondary, periwinkle `#8c9bff` accent.
+- Every text pair is 4.5:1 or better and every control border 3:1 or better, in both modes (`tests/home-polish.test.js`).
+- One family: Mona Sans, variable (width 75–125, weight 200–900), vendored. Display runs at 118% width, body at 100%. No monospace except code in the kept project pages, no uppercase labels, no eyebrows bar the hero's title.
+- Radius: 16px for panels, pills for anything you press.
+
+**Motion.**
+- One orchestrated moment: the hero's pieces rise 12px and fade in, in order (600ms, `cubic-bezier(0.23, 1, 0.32, 1)`, 70ms apart), started by the head script so a slow module never holds the headline back.
+- Everything else answers the visitor: answers stream a few characters a tick (a hidden copy of the full answer sizes the box first, so nothing shifts; the live region hears it once); the work preview wipes in on point or focus; buttons press to 97%; the Ergon graph plays once on screen and then on request.
+- Transitions and the Web Animations API, no keyframes. Hover only under a fine pointer. With motion reduced or scripts off, nothing moves and nothing hides.
+
+**Claims.** Unchanged: the ladder has no model names; the price, about $100 a person a month, is Cayleb's own figure; Ergon is a Windows pilot with live checks pending, shown beside its claims; the other jobs are "Work ethic"; no certifications; no clients, hours, pay or people as the source of savings. The tests that hold these are unchanged (`tests/home-content.test.js`, `tests/home-worth.test.js`, `tests/home-guide.test.js`, `tests/recruiter-*.test.js`, `tests/candidate-resume.test.js`).
+
+**Removed.** The loader, the liquid canvas and its picture layers, the carousel, the Built with strip, the clock, the About band, the count-up, Lenis, the terminal styling and `>_` tile, the full-screen menu and the floating "Ask my agent" pill. Onest and JetBrains Mono are gone; they exist at `851ba6c`.
+
+---
+
 # Tech-studio homepage (2026-10-15)
+
+> **Superseded 2026-10-16** by the "Sign-off" homepage above. The tech-studio homepage is recoverable at commit `851ba6c`; its loader, liquid reveal, hero layers, carousel, Lenis, Onest and JetBrains Mono exist only there.
 
 **Source.** The design is `docs/superpowers/specs/2026-10-15-lumora-design.md`; the plan is `docs/superpowers/plans/2026-10-15-lumora.md`. The layout, components and motion come from a third-party "recreate this site" spec for a studio page, kept locally and git-ignored like the 2026-10-12 one; none of its names, copy, marks, stats or images are used. It replaces the water story below, which is recoverable at commit `b0763a3`.
 

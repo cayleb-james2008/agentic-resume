@@ -97,6 +97,40 @@ test('the composer keeps a draft the visitor dismissed, and a failed copy shows 
   assert.match(js, /raw\.select\(\)/);
 });
 
+test('tabbing into the sticky masthead never scrolls the page; jumps and focus land clear of it', () => {
+  const base = strip(read('site/css/base.css'));
+  assert.doesNotMatch(base, /scroll-padding/, 'scroll-padding on <html> makes focus in the sticky bar scroll the page');
+  assert.match(base, /\[id\], main :focus\s*\{[^}]*scroll-margin-top:\s*calc\(var\(--masthead-h\)/);
+  // The Ask link checks the field against the masthead's bottom edge, not the top of the window.
+  assert.match(read('site/js/ask/ask.js'), /querySelector\('\[data-masthead\]'\)\?\.getBoundingClientRect\(\)\.bottom/);
+});
+
+test('in the Ask bar, choosing a suggestion keeps focus, and a finished answer is readable later', () => {
+  const ask = read('site/js/ask/ask.js');
+  assert.match(ask, /input\.focus\(\{ preventScroll: true \}\); show\(i\);/);
+  assert.match(body(ask, '    const finish = () => {'), /typed\.removeAttribute\('aria-hidden'\)/);
+  assert.match(strip(read('site/css/ask.css')), /\.js:not\(\.reveal-failsafe\) \.ask-after:not\(\.in\)\s*\{[^}]*opacity:\s*0/);
+});
+
+test('the composer takes the newest unanswered question unless the visitor has written their own', () => {
+  const draft = body(read('site/js/home/overlays.js'), '  function draft(text) {');
+  assert.match(draft, /current === drafted/);
+});
+
+test('the work preview frame shows only in preview mode, and the rows keep their pictures for assistive technology', () => {
+  const css = strip(read('site/css/built.css'));
+  assert.match(css, /\.index:not\(\.index--preview\) > \.index-preview\s*\{\s*display:\s*none/);
+  const hidden = css.match(/\.index--preview \.row-in > \.row-shot\s*\{([^}]*)\}/)[1];
+  assert.doesNotMatch(hidden, /display:\s*none/);
+  assert.match(hidden, /clip-path:\s*inset\(50%\)/);
+});
+
+test('on phones the sub-page and résumé navs scroll inside their row instead of widening the page', () => {
+  assert.match(strip(read('site/css/subpage.css')), /\.sub-masthead nav\s*\{[^}]*min-width:\s*0/);
+  assert.match(strip(read('site/css/resume.css')), /\.resume-masthead nav\s*\{[^}]*min-width:\s*0/);
+  assert.match(strip(read('site/css/resume-half.css')), /\.resume-half-record\s*\{[^}]*repeat\(3, minmax\(0, max-content\)\)/);
+});
+
 test('locking scroll for an overlay keeps the scrollbar\'s room, so the page never jumps sideways', () => {
   assert.match(strip(read('site/css/base.css')), /html\s*\{[^}]*scrollbar-gutter:\s*stable/);
 });

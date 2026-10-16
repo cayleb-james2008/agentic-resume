@@ -54,7 +54,13 @@
 /* Wide screens, scripted: list and preview. */
 .index--preview { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; }
 .index--preview .index-rows { gap: 4px; }
-.index--preview .row-in > .row-shot { display: none; }
+.index:not(.index--preview) > .index-preview { display: none; }
+/* The row keeps its own picture (with its description, or Asmodeus's checklist) for assistive technology; only the
+   frame shows. */
+.index--preview .row-in > .row-shot {
+  position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.index--preview .row-in { position: relative; }
 .index--preview .row-in { padding: 22px 24px; border-radius: var(--radius); transition: background-color var(--ui) ease, box-shadow var(--ui) ease; }
 .index--preview .row.on .row-in { background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
 .index-preview {

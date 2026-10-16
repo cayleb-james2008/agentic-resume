@@ -657,7 +657,9 @@
           "contract",
           "remote",
           "based",
-          "salary",
+          "office",
+          "on site",
+          "in person",
           "work for us",
           "join our team"
         ],
@@ -755,7 +757,7 @@
       },
       {
         "q": "What does Cayleb do?",
-        "a": "He learns how your people actually work, then builds AI and automation around the apps they already use. It saves time, raises quality, and he teaches the team to run it.",
+        "a": "He learns how your people actually work, then builds AI and automation around the apps they already use, aiming to save time and raise quality. He teaches the team to run it.",
         "keywords": [
           "background",
           "overview",
@@ -825,7 +827,11 @@
           "track record",
           "real world",
           "experience",
-          "worked with"
+          "worked with",
+          "last job",
+          "previous job",
+          "past jobs",
+          "work history"
         ],
         "sources": [
           {
@@ -840,7 +846,7 @@
       },
       {
         "q": "What if a tool makes a mistake?",
-        "a": "People approve before anything goes out, every connection has an undo step, and files stay on the company's own computers.",
+        "a": "People approve before anything goes out, every connection has an undo step, and contacts and settings stay protected on each computer.",
         "keywords": [
           "mistake",
           "safe",
@@ -923,7 +929,7 @@
       },
       {
         "q": "What does he build with?",
-        "a": "TypeScript, JavaScript, C#, Node.js and SQLite, among others. The skills list in his résumé names every language and tool.",
+        "a": "TypeScript, JavaScript and SQLite, among others. The skills list in his résumé names every language and tool he works in.",
         "keywords": [
           "stack",
           "built with",
@@ -961,9 +967,9 @@
         "keywords": [
           "demo",
           "lab",
+          "see it working",
           "see it",
           "try",
-          "working",
           "live"
         ],
         "sources": [
@@ -1005,7 +1011,7 @@
       },
       {
         "q": "Will it take anyone's job?",
-        "a": "No. It takes the busywork, not the person. Your team gets time back for more work, and a person always has the last word.",
+        "a": "It's built not to. It takes the busywork, not the person: your team gets time back for more work, and a person always has the last word.",
         "keywords": [
           "job",
           "anyone's job",

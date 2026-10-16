@@ -26,7 +26,10 @@ export const SYNONYMS = {
   pilot: 'rollout', pilots: 'rollout', deploy: 'rollout', deployed: 'rollout', deployment: 'rollout',
   production: 'rollout', shipped: 'built',
   price: 'cost', prices: 'cost', pricing: 'cost', priced: 'cost', fee: 'cost', fees: 'cost', expensive: 'cost',
-  cheap: 'cost', budget: 'cost', charge: 'cost', charges: 'cost', costs: 'cost', rate: 'cost', rates: 'cost',
+  cheap: 'cost', budget: 'cost', charge: 'cost', charges: 'cost', costs: 'cost',
+  // His own rate is a hiring question, not Ergon's price.
+  rate: 'hire', rates: 'hire', hourly: 'hire', wage: 'hire', wages: 'hire', salary: 'hire', freelance: 'hire',
+  onsite: 'office', hybrid: 'office', relocate: 'office', relocation: 'office', commute: 'office',
   monthly: 'month', subscription: 'month',
   cv: 'resume', 'résumé': 'resume', resumes: 'resume',
   available: 'hire', availability: 'hire', hiring: 'hire', hired: 'hire', recruit: 'hire', recruiting: 'hire',

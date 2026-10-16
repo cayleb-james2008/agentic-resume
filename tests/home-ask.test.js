@@ -64,6 +64,14 @@ const CASES = [
   ['how do we start', 'How would he start with my team?'],
   ['does it work with quickbooks', 'What apps does it work with?'],
   ['what can you automate', 'What kind of tools?'],
+  // From the 2026-10-16 review: his rate is a hiring question, a past job is his experience, place is hiring.
+  ['What is his hourly rate?', 'Can I hire Cayleb?'],
+  ['What are his rates?', 'Can I hire Cayleb?'],
+  ['What was his last job?', 'Done this for a company?'],
+  ['Would he work in our office?', 'Can I hire Cayleb?'],
+  ['Is he open to on-site work?', 'Can I hire Cayleb?'],
+  ['Is he open to hybrid?', 'Can I hire Cayleb?'],
+  ['Can he relocate?', 'Can I hire Cayleb?'],
 ];
 for (const [query, expected] of CASES) {
   test(`"${query}" finds "${expected}"`, () => assert.equal(answerFor(query), expected));

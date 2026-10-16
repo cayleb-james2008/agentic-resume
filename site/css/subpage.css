@@ -38,7 +38,7 @@ body { --g: max(var(--gutter), env(safe-area-inset-left, 0px)); }
 .sub-ask:active, .sub-resume:active { transform: scale(0.97); }
 @media (max-width: 899px) {
   .sub-masthead { position: static; }
-  .sub-masthead nav { order: 3; flex-basis: 100%; margin-left: 0; }
+  .sub-masthead nav { order: 3; flex-basis: 100%; min-width: 0; margin-left: 0; }
   .sub-ask { margin-left: auto; }
 }
 /* A phone: the links on one row that scrolls sideways, rather than four and a stray. */

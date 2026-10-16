@@ -105,7 +105,7 @@ test('subpages and the résumé page carry the wordmark, its full stop in signat
   for (const page of ['projects/ergon.html', 'projects/industry-ai-suite.html', 'lab/index.html']) {
     const html = readFileSync(new URL(`../${page}`, import.meta.url), 'utf8');
     assert.ok(html.includes(`<a class="sub-wordmark" href="../index.html" aria-label="Cayleb Alvarez-James, home">${mark}`), page);
-    assert.match(html, /<a class="sub-ask" href="\.\.\/index\.html#ask">/, page);
+    assert.match(html, /<a class="sub-ask" href="\.\.\/index\.html#ask" aria-label="Ask about Cayleb">/, page);
     assert.doesNotMatch(html, /class="mk\b|&gt;_/, `${page} still carries the old >_ tile`);
   }
   const resume = readFileSync(new URL('../resume.html', import.meta.url), 'utf8');

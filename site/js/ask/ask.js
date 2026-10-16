@@ -63,6 +63,10 @@ export function mount(root, { reduced, modal }) {
       window.clearInterval(timer);
       typed.textContent = text;
       typed.classList.add('done');
+      // Whole now: the text joins the page for anyone reading it later (the live region has already said it
+      // once), and the sizing copy goes; the box keeps its size.
+      typed.removeAttribute('aria-hidden');
+      ghost.remove();
       streaming = null;
       onDone?.();
     };
@@ -83,7 +87,6 @@ export function mount(root, { reduced, modal }) {
     return () => {
       after.inert = false;
       after.classList.add('in');
-      if (!reduced) after.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
     };
   }
 
@@ -123,7 +126,8 @@ export function mount(root, { reduced, modal }) {
       b.type = 'button';
       b.className = 'ask-chip';
       b.textContent = items[i].q;
-      b.addEventListener('click', () => { input.value = items[i].q; show(i); });
+      // The answer replaces this button, so focus moves to the field first rather than falling to the page.
+      b.addEventListener('click', () => { input.value = items[i].q; input.focus({ preventScroll: true }); show(i); });
       list.append(b);
     }
     const direct = anchor({ label: data.fallbackContact, href: '#contact' });
@@ -165,7 +169,8 @@ export function mount(root, { reduced, modal }) {
   /** Bring the field into view and focus it. Keyboard and the shortcut jump; a pointer click may glide. */
   function focusField(smooth) {
     const r = form.getBoundingClientRect();
-    if (r.top < 0 || r.bottom > window.innerHeight) {
+    const covered = document.querySelector('[data-masthead]')?.getBoundingClientRect().bottom ?? 0;
+    if (r.top < covered || r.bottom > window.innerHeight) {
       form.scrollIntoView({ block: 'center', behavior: smooth && !reduced ? 'smooth' : 'auto' });
     }
     input.focus({ preventScroll: true });

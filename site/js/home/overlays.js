@@ -151,10 +151,15 @@ export function mountModal(root, ctx) {
     raw.focus({ preventScroll: true });
     raw.select();
   });
-  /** Opens the composer with `text` already in the message, e.g. a question the Ask bar had no answer for. */
+  /**
+   * Opens the composer with `text` already in the message, e.g. a question the Ask bar had no answer for. A draft
+   * the visitor has written stays; one this put there and they left alone gives way to the newer question.
+   */
+  let drafted = '';
   function draft(text) {
     api.open('');
-    if (text && !fields.msg.value.trim()) fields.msg.value = text;
+    const current = fields.msg.value.trim();
+    if (text && (!current || current === drafted)) { fields.msg.value = text; drafted = text; }
   }
   const api = {
     open(t = '') {

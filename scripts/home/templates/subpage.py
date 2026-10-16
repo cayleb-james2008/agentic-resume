@@ -24,7 +24,8 @@ def masthead(content: dict, root: str = "../", tagline: str = "") -> str:
         f'<a class="sub-wordmark" href="{attr(root)}index.html" aria-label="Cayleb Alvarez-James, home">'
         f"{wordmark(content['wordmark'])}</a>{tag}"
         f'<nav aria-label="Primary"><ul>{items}</ul></nav>'
-        f'<a class="sub-ask" href="{attr(root)}index.html#ask">{icon("search")}<span>{text(m["askLabel"])}</span></a>'
+        f'<a class="sub-ask" href="{attr(root)}index.html#ask" aria-label="{attr(m["askLabel"])}">{icon("search")}'
+        f'<span>{text(m["askLabel"])}</span></a>'
         f'<a class="sub-resume" href="{attr(root + content["meta"]["resumePdf"])}" download>Résumé PDF</a>'
         "</header>"
     )

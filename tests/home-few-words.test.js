@@ -11,18 +11,22 @@ const within = (label, text, max) => assert.ok(words(text) <= max, `${label}: ${
 test('the page says it in few words', () => {
   within('meta.description', content.meta.description, 16);
   within('hero headline', content.hero.headline, 10);
-  within('hero lead', content.hero.lead, 24);
-  within('about statement', `${content.about.lead} ${content.about.rest}`, 30);
+  within('hero lead', content.hero.lead, 20);
+  within('services lead', content.services.lead, 24);
+  within('built lead', content.built.lead, 16);
   within('ergon body', content.ergon.body, 40);
+  for (const door of content.hero.doors) within('door', door.label, 4);
   for (const [label, line] of [
     ['ergon', content.ergon.headline], ['built', content.built.headline], ['services', content.services.headline],
-    ['stats', content.stats.headline], ['contact', content.contact.headline], ['modal', content.modal.headline],
+    ['contact', content.contact.headline], ['modal', content.modal.headline],
   ]) within(`${label} headline`, line, 8);
   const lines = [
     ...content.built.cards.map((c) => c.text), ...content.services.rows.map((r) => r.text),
-    ...content.stats.items.map((i) => i.label), ...content.hero.carousel.map((c) => c.title), content.ergon.ladderNote,
+    ...content.services.steps.map((st) => st.text), ...content.record.items.map((i) => i.label),
+    content.ergon.ladderNote, content.services.more,
   ];
   for (const line of lines) within('line', line, 24);
+  for (const check of content.built.cards.flatMap((c) => c.checks ?? [])) within('check', check, 6);
 });
 
 test('every role, app and ladder step is a word or two', () => {
@@ -46,10 +50,11 @@ test('the agent talks plainly and briefly — no caveman voice, no meta lines', 
 });
 
 // Plain words for the people who hire: no developer jargon in the homepage copy. Cayleb (2026-10-15): tech names
-// may appear in the Built with list, the work cards' tags and terminal text (`builtWith`, `tags`, `terminal`, `cmd`).
+// may appear in the work cards' tags (`tags`). The Ask bar hears tech names a visitor types through the synonyms in
+// site/js/ask/match.js, which are never shown, so its keywords stay plain too.
 const JARGON = /\b(loopback|daemon|JSON-RPC|Tauri|axum|Rust|React|Python|LLMs?|Clippy|SHA|provenance|deterministic|repo|PR|API|CLI|workbench|pipeline|IPC|SDK|runtime)\b/i;
 test('homepage copy has no developer jargon', () => {
-  const skip = new Set(['href', 'repo', 'image', 'alt', 'icon', 'marker', 'id', 'resumePdf', 'onePagePdf', 'email', 'github', 'siteUrl', 'shareImage', 'builtWith', 'tags', 'terminal', 'cmd']);
+  const skip = new Set(['href', 'repo', 'image', 'alt', 'icon', 'marker', 'id', 'resumePdf', 'onePagePdf', 'email', 'github', 'siteUrl', 'shareImage', 'tags']);
   const walk = (o, path) => Object.entries(o).flatMap(([k, v]) =>
     skip.has(k) ? [] : typeof v === 'string' ? [[`${path}.${k}`, v]] : v && typeof v === 'object' ? walk(v, `${path}.${k}`) : []);
   for (const [path, text] of walk(content, 'content')) assert.doesNotMatch(text, JARGON, `${path}: "${text}"`);
@@ -57,7 +62,7 @@ test('homepage copy has no developer jargon', () => {
 
 test('every tech name the page shows is one the résumé names', () => {
   const resume = readFileSync(new URL('../resume/resume-content.json', import.meta.url), 'utf8');
-  const names = [...content.hero.builtWith, ...content.built.cards.flatMap((c) => c.tags).filter((t) => JARGON.test(t) || /TypeScript|Node|C#|SQLite|Windows/.test(t))];
-  assert.ok(names.length >= 8);
+  const names = content.built.cards.flatMap((c) => c.tags).filter((t) => JARGON.test(t) || /TypeScript|Node|C#|SQLite|Windows/.test(t));
+  assert.ok(names.length >= 6);
   for (const name of names) assert.ok(resume.includes(name), `"${name}" is in resume-content.json`);
 });

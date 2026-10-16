@@ -1,105 +1,12 @@
-// The Lumora homepage's pure helpers (2026-10-15): every number that moves or decides is tested here,
-// so the mounts in site/js/home/* only wire them to the DOM.
+// The homepage's pure helpers (2026-10-16): every number that moves or decides is tested here, so the mounts in
+// site/js/home/* only wire them to the DOM. The Ask bar's matcher has its own file (home-ask.test.js).
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { rootFontSize } from '../site/js/home/grid.js';
-import { counterLabel, easeInOutCubic, FILL_MS, shouldPlay } from '../site/js/home/loader.js';
-import { BRUSH_RADIUS, coverRect, DECAY, FADE_FRAMES, fadeFor, trailPoints } from '../site/js/home/liquid.js';
-import { lineIndexes } from '../site/js/home/reveal.js';
-import { step } from '../site/js/home/carousel.js';
-import { formatClock } from '../site/js/home/clock.js';
-import { countProgress, formatCount, splitFigure } from '../site/js/home/count.js';
 import { ladderStop, nextTeam, wirePath } from '../site/js/home/graph.js';
 import { createScrollLock } from '../site/js/home/overlays.js';
 import { composeMail, validate } from '../site/js/home/mail.js';
-import { term } from '../site/js/home/text.js';
 
-const close = (a, b, eps = 1e-3) => assert.ok(Math.abs(a - b) < eps, `${a} ≈ ${b}`);
 const points = (d) => [...d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
-
-test('the rem grid leaves 1920px and below to CSS and scales up above it', () => {
-  assert.equal(rootFontSize(1440), null);
-  assert.equal(rootFontSize(1920), null);
-  close(rootFontSize(2560), 19.5552);
-});
-
-test('the loader counts 000 to 100 over 1.3s with easeInOutCubic', () => {
-  assert.equal(FILL_MS, 1300);
-  assert.equal(counterLabel(0), '000');
-  assert.equal(counterLabel(7), '007');
-  assert.equal(counterLabel(100), '100');
-  assert.equal(easeInOutCubic(0), 0);
-  assert.equal(easeInOutCubic(1), 1);
-  close(easeInOutCubic(0.5), 0.5);
-  close(easeInOutCubic(0.25), 0.0625);
-});
-
-test('the loader plays only on a first, plain, motion-allowed visit', () => {
-  assert.equal(shouldPlay({ reduced: false, hash: '', seen: false }), true);
-  assert.equal(shouldPlay({ reduced: true, hash: '', seen: false }), false);
-  assert.equal(shouldPlay({ reduced: false, hash: '#experience', seen: false }), false);
-  assert.equal(shouldPlay({ reduced: false, hash: '', seen: true }), false);
-});
-
-test('the liquid trail fills gaps between pointer moves, at most 60 points per move', () => {
-  assert.equal(BRUSH_RADIUS, 143);
-  assert.equal(DECAY, 0.016);
-  assert.equal(FADE_FRAMES, 120);
-  assert.deepEqual(trailPoints(null, { x: 5, y: 5 }, 143), [{ x: 5, y: 5 }]);
-  const near = trailPoints({ x: 0, y: 0 }, { x: 100, y: 0 }, 143);
-  assert.equal(near.length, Math.ceil(100 / (143 * 0.3)));
-  const far = trailPoints({ x: 0, y: 0 }, { x: 10000, y: 0 }, 143);
-  assert.equal(far.length, 60);
-  assert.deepEqual(far.at(-1), { x: 10000, y: 0 });
-  assert.equal(trailPoints({ x: 0, y: 0 }, { x: 0.2, y: 0 }, 0.5).length, 1, 'a tiny radius still steps at least 1px');
-});
-
-test('the trail fades at the base rate while drawing and faster once idle, capped at 0.5', () => {
-  assert.equal(fadeFor(true, 9), 0.016);
-  close(fadeFor(false, 10), 0.056);
-  assert.equal(fadeFor(false, 200), 0.5);
-});
-
-test('the blueprint covers the hero like object-fit: cover', () => {
-  const r = coverRect(1920, 1080, 390, 900);
-  close(r.h, 900);
-  close(r.w, 1600);
-  close(r.x, (390 - 1600) / 2);
-  close(r.y, 0);
-});
-
-test('words that share a top share a line', () => {
-  assert.deepEqual(lineIndexes([0, 0, 40, 40, 80]), [0, 0, 1, 1, 2]);
-  assert.deepEqual(lineIndexes([10, 12, 13]), [0, 0, 0], 'within the tolerance');
-  assert.deepEqual(lineIndexes([]), []);
-});
-
-test('the carousel wraps both ways', () => {
-  assert.equal(step(3, 1, 4), 0);
-  assert.equal(step(0, -1, 4), 3);
-  assert.equal(step(1, 1, 4), 2);
-});
-
-test('the clock reads Connecticut time', () => {
-  assert.deepEqual(formatClock(new Date('2026-10-15T20:22:00Z')), { time: '4:22pm', date: '15 October, 2026' });
-  assert.deepEqual(formatClock(new Date('2026-01-05T05:07:00Z')), { time: '12:07am', date: '5 January, 2026' });
-});
-
-test('count-up runs from the top at the viewport bottom to the centre at the viewport centre', () => {
-  const vh = 900, h = 100;
-  assert.equal(countProgress(vh, h, vh), 0);
-  assert.equal(countProgress(vh + 50, h, vh), 0);
-  close(countProgress(vh / 2 - h / 2, h, vh), 1);
-  assert.equal(countProgress(-500, h, vh), 1);
-});
-
-test('stat figures split into prefix, value and suffix', () => {
-  assert.deepEqual(splitFigure('3,300+'), { prefix: '', value: 3300, suffix: '+', comma: true });
-  assert.deepEqual(splitFigure('$100/mo'), { prefix: '$', value: 100, suffix: '/mo', comma: false });
-  assert.deepEqual(splitFigure('5'), { prefix: '', value: 5, suffix: '', comma: false });
-  assert.equal(formatCount(3300, true), '3,300');
-  assert.equal(formatCount(1234, false), '1234');
-});
 
 test('most tickets stop at the agent; some climb to the senior agent; a few reach a person', () => {
   const stops = Array.from({ length: 21 }, (_, i) => ladderStop(i + 1));
@@ -159,13 +66,6 @@ test('the mail draft carries any characters intact and names the topic', () => {
   assert.equal(query.get('body'), m.body);
   assert.equal(m.text, `To: me@example.com\nSubject: ${m.subject}\n\n${m.body}`);
   assert.equal(composeMail({ name: 'Sam', email: 'a@b.co', msg: 'x', topic: '' }, 'me@example.com').subject, 'Project: Sam');
-});
-
-test('terminal lines colour the prompt, ticks and ticket flags, and escape everything else', () => {
-  assert.equal(term(['$ ergon shape --team shop']), '<span class="c">$</span> ergon shape --team shop');
-  assert.equal(term(['› front desk · done ✓']), '<span class="c">›</span> front desk · done <span class="g">✓</span>');
-  assert.equal(term(['⚑ ticket · <b>&']), '<span class="w">⚑</span> ticket · &lt;b&gt;&amp;');
-  assert.equal(term(['a', 'b']), 'a\nb');
 });
 
 test('an overlay that hands off to another (menu → Contact) gives focus back before the next one opens', async () => {

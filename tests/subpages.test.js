@@ -100,24 +100,27 @@ test('every project page opens with a plain line', () => {
   }
 });
 
-test('subpages and the résumé page carry the >_ tile beside the wordmark', () => {
-  const mark = '<span class="mk" aria-hidden="true">&gt;_</span>Cayleb.AJ</a>';
+test('subpages and the résumé page carry the wordmark, its full stop in signature blue, and a way back to Ask', () => {
+  const mark = 'Cayleb<span class="wm-dot">.</span>AJ</a>';
   for (const page of ['projects/ergon.html', 'projects/industry-ai-suite.html', 'lab/index.html']) {
     const html = readFileSync(new URL(`../${page}`, import.meta.url), 'utf8');
-    assert.match(html, /<a class="sub-wordmark" href="\.\.\/index\.html" aria-label="Cayleb Alvarez-James, home"><span class="mk"/, page);
-    assert.ok(html.includes(mark), page);
+    assert.ok(html.includes(`<a class="sub-wordmark" href="../index.html" aria-label="Cayleb Alvarez-James, home">${mark}`), page);
+    assert.match(html, /<a class="sub-ask" href="\.\.\/index\.html#ask">/, page);
+    assert.doesNotMatch(html, /class="mk\b|&gt;_/, `${page} still carries the old >_ tile`);
   }
   const resume = readFileSync(new URL('../resume.html', import.meta.url), 'utf8');
   assert.ok(resume.includes(`<a class="resume-wordmark" href="./" aria-label="Cayleb Alvarez-James, home">${mark}`));
+  assert.match(read('site/css/base.css'), /\.wm-dot\s*\{[^}]*color:\s*var\(--accent\)/);
 });
 
 test('the pages one level down speak the homepage\'s look: sentence case and pill buttons, no chamfered slabs', () => {
-  for (const sheet of ['site/css/subpage.css', 'site/css/resume.css']) {
+  for (const sheet of ['site/css/subpage.css', 'site/css/resume.css', 'lab/lab.css']) {
     const css = read(sheet).replace(/\/\*[\s\S]*?\*\//g, '');
     assert.doesNotMatch(css, /text-transform:\s*uppercase/, `${sheet} sets type in capitals`);
     assert.doesNotMatch(css, /clip-path:\s*polygon/, `${sheet} still cuts a chamfer`);
+    assert.doesNotMatch(css, /var\(--font-mono\)|JetBrains|Onest/, `${sheet} names a retired face`);
   }
-  assert.match(read('site/css/subpage.css'), /\.btn\s*\{[^}]*border-radius:\s*var\(--radius-pill\)/);
+  assert.match(read('site/css/base.css'), /\.btn\s*\{[^}]*border-radius:\s*var\(--radius-pill\)/);
   assert.match(read('site/css/resume.css'), /\.resume-actions \.button\s*\{[^}]*border-radius:\s*var\(--radius-pill\)/);
 });
 

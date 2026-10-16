@@ -1,7 +1,7 @@
+// The page's one animation loop (site/js/engine/ticker.js), which moves the Ergon graph's packets.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createTicker } from '../site/js/engine/ticker.js';
-import { CONFIGS, Spring, Tween, easings } from '../site/js/engine/spring.js';
 
 /** A ticker driven by hand at a fixed frame spacing. */
 const fakeTicker = () => {
@@ -41,57 +41,3 @@ test('ticker stops on last unsubscribe', () => {
   b();
   assert.equal(cancelled(), 1);
 });
-
-test('spring settles', () => {
-  const spring = new Spring({ ...CONFIGS.REVEAL });
-  spring.set(1);
-  let elapsed = 0;
-  while (spring.step(16)) {
-    elapsed += 16;
-    assert.ok(elapsed < 3000, 'settles within 3s');
-  }
-  assert.ok(Math.abs(spring.value - 1) < 0.01);
-});
-
-test('spring caps a long frame', () => {
-  const a = new Spring({ ...CONFIGS.ITEM });
-  const b = new Spring({ ...CONFIGS.ITEM });
-  a.set(1);
-  b.set(1);
-  a.step(1000);
-  b.step(64);
-  assert.equal(a.value, b.value);
-  assert.equal(a.velocity, b.velocity);
-});
-
-test('tween ends exactly', () => {
-  const tween = new Tween({ from: 0, to: 1, duration: 6000, easing: easings.easeInOutSine });
-  let moving = true;
-  for (let i = 0; i < 400 && moving; i += 1) moving = tween.step(16);
-  assert.equal(moving, false);
-  assert.equal(tween.value, 1);
-});
-
-test('named configs are the reference values', () => {
-  assert.deepEqual(CONFIGS.REVEAL, { tension: 90, friction: 26 });
-  assert.deepEqual(CONFIGS.VEIL, { tension: 70, friction: 24 });
-  assert.deepEqual(CONFIGS.YEAR_SETTLE, { tension: 32, friction: 26 });
-  assert.deepEqual(CONFIGS.TRIGGER, { tension: 140, friction: 30 });
-});
-
-import { interpolate, triggerProgress } from '../site/js/engine/scroll.js';
-
-test('triggerProgress endpoints', () => {
-  const vh = 800;
-  const rect = (top) => ({ top, height: 400, bottom: top + 400 });
-  assert.equal(triggerProgress(rect(vh), vh, 'top bottom', 'top top'), 0);
-  assert.equal(triggerProgress(rect(0), vh, 'top bottom', 'top top'), 1);
-  assert.equal(triggerProgress(rect(vh / 2), vh, 'top bottom', 'top top'), 0.5);
-});
-
-test('interpolate units', () => {
-  assert.equal(interpolate('0cqw', '-3.3334cqw', 0.5), '-1.6667cqw');
-  assert.equal(interpolate('translateY(0.75rem)', 'translateY(0rem)', 0.5), 'translateY(0.375rem)');
-  assert.equal(interpolate(0, 10, 0.25), 2.5);
-});
-

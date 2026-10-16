@@ -46,10 +46,11 @@ test('numbers trace to the résumé', () => {
   }
 });
 
-test("the page's parts each have their copy, and the water story is gone", () => {
-  for (const key of ['loader', 'masthead', 'menu', 'hero', 'about', 'band', 'ergon', 'built', 'services', 'stats', 'resumeHalf', 'contact', 'modal', 'guide']) {
+test("the page's parts each have their copy, and the retired ones are gone", () => {
+  for (const key of ['masthead', 'menu', 'hero', 'built', 'services', 'ergon', 'record', 'resumeHalf', 'contact', 'modal', 'guide']) {
     assert.ok(content[key], `content.${key}`);
   }
+  for (const key of ['loader', 'about', 'band', 'stats']) assert.equal(content[key], undefined, `content.${key} is retired`);
   assert.equal(content.story, undefined);
   assert.equal(content.navAction, undefined);
   assert.equal(content.wordmark, 'Cayleb.AJ');

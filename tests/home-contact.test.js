@@ -40,8 +40,9 @@ test('the copyright is the content line, without an illustration credit', () => 
   assert.equal(p[1], escape(content.contact.copyright));
 });
 
-test('the footer\'s watermark is decorative and the footer keeps no scroll offsets of its own', () => {
-  assert.match(footer, /<div class="ft-wm" aria-hidden="true">/);
+test('the footer carries no watermark and keeps no scroll offsets of its own', () => {
+  assert.doesNotMatch(footer, /class="ft-wm"/);
+  assert.equal(content.contact.watermark, undefined);
   const css = read('site/css/contact.css').replace(/\/\*[\s\S]*?\*\//g, '');
   assert.doesNotMatch(css, /scroll-margin|scroll-padding/);
   assert.match(css, /\.foot-in\s*\{[^}]*padding-bottom:\s*calc\([^;]*env\(safe-area-inset-bottom/, 'the legal line clears a phone\'s home bar');

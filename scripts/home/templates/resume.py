@@ -1,7 +1,7 @@
 """The résumé page: the homepage's masthead, the generated candidate fragment
 (resume/candidate-fragment.html, built by resume/build_resume.py) and a slim
 footer. No script: it reads the same with or without JavaScript, and prints."""
-from markup import attr, link, text, wordmark
+from markup import attr, icon, link, text, wordmark
 from templates import social
 
 STYLES = ("tokens", "base", "resume")
@@ -23,6 +23,8 @@ def masthead(content: dict) -> str:
         '<header class="resume-masthead">'
         f'<a class="resume-wordmark" href="./" aria-label="Cayleb Alvarez-James, home">{wordmark(content["wordmark"])}</a>'
         f'<nav aria-label="Primary"><ul>{items}</ul></nav>'
+        f'<a class="resume-ask" href="./#ask" aria-label="{attr(content["masthead"]["askLabel"])}">{icon("search")}'
+        f'<span>{text(content["masthead"]["askLabel"])}</span></a>'
         f'<a class="resume-download" href="{attr(content["meta"]["onePagePdf"])}" download>One-page PDF</a>'
         "</header>"
     )

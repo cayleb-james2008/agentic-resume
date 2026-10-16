@@ -790,10 +790,78 @@
           "month",
           "how much"
         ],
+        "phrases": [
+          "ergon charge",
+          "ergon charges",
+          "charge for ergon"
+        ],
         "sources": [
           {
             "label": "Ergon",
             "href": "#team"
+          }
+        ],
+        "avoid": [
+          "dotz",
+          "sophos",
+          "suite",
+          "asmodeus",
+          "lab",
+          "he",
+          "his",
+          "him",
+          "cayleb",
+          "you",
+          "your"
+        ]
+      },
+      {
+        "q": "What does Cayleb charge?",
+        "a": "Services are priced to what you're asking for, so every quote is different. For a full-time role, his range is $130K to $200K a year.",
+        "keywords": [
+          "rate",
+          "charge",
+          "salary",
+          "compensation",
+          "quote",
+          "full-time pay"
+        ],
+        "phrases": [
+          "he charge",
+          "you charge",
+          "cayleb charge",
+          "his price",
+          "his prices",
+          "his pricing",
+          "your price",
+          "your prices",
+          "your pricing",
+          "services cost",
+          "cost to hire",
+          "price to hire"
+        ],
+        "avoid": [
+          "ergon",
+          "dotz",
+          "sophos",
+          "suite",
+          "asmodeus",
+          "lab"
+        ],
+        "sources": [
+          {
+            "label": "Work with me",
+            "href": "#services"
+          },
+          {
+            "label": "Contact",
+            "href": "#contact"
+          }
+        ],
+        "links": [
+          {
+            "label": "Email Cayleb",
+            "href": "mailto:caylebalvarezjames@gmail.com"
           }
         ]
       },

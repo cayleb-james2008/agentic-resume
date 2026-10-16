@@ -16,6 +16,13 @@
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius-pill);
   font-size: var(--step--1); font-weight: 520; color: var(--fg-2); white-space: nowrap; transition: color var(--ui) ease, background-color var(--ui) ease;
 }
+.resume-ask {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong); background: var(--surface); font-size: var(--step--1); font-weight: 560; white-space: nowrap;
+  transition: transform var(--press) var(--ease-out), border-color var(--ui) ease;
+}
+.resume-ask .icon { width: 16px; height: 16px; color: var(--accent); }
+.resume-ask:active { transform: scale(0.97); }
 .resume-download {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: var(--radius-pill);
   background: var(--accent); color: var(--on-accent); font-size: var(--step--1); font-weight: 560; white-space: nowrap;
@@ -24,8 +31,11 @@
 .resume-download:active { transform: scale(0.97); }
 @media (max-width: 899px) {
   .resume-masthead nav { order: 3; flex-basis: 100%; min-width: 0; margin-left: 0; }
+  .resume-ask { margin-left: auto; }
 }
 @media (max-width: 639px) {
+  .resume-ask { width: 44px; padding: 0; justify-content: center; }
+  .resume-ask span { display: none; }
   .resume-masthead nav ul { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -12px; }
 }
 
@@ -93,13 +103,14 @@
 @media (hover: hover) and (pointer: fine) {
   .resume-masthead nav a:hover { color: var(--fg); background: var(--sunk); }
   .resume-download:hover, .resume-actions .button:hover { background: var(--accent-press); }
+  .resume-ask:hover { border-color: var(--fg); }
   .resume-contact a:hover, .resume-selected a:hover, .resume-actions .quiet:hover { text-decoration-thickness: 2px; }
   .resume-footer a:hover { color: var(--fg); }
 }
 
 /* --- Print: the sheet alone, black on white ---------------------------- */
 @media print {
-  .resume-masthead, .resume-footer, .skip-link, .resume-actions { display: none; }
+  .resume-masthead, .resume-footer, .skip-link, .resume-actions, .resume-ask { display: none; }
   .resume-page, .resume-page body { background: #fff; color: #000; font-size: 10.5pt; }
   .resume-sheet p, .resume-stack, .resume-date, .resume-jobs span, .resume-heading p, .resume-heading .eyebrow { color: #333; }
   .resume-sheet h1, .resume-sheet h2, .resume-sheet h3, .resume-jobs p { color: #000; }

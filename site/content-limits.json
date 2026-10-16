@@ -41,6 +41,8 @@
   "guide.questions[].q": 40,
   "guide.questions[].a": 280,
   "guide.questions[].keywords[]": 28,
+  "guide.questions[].avoid[]": 24,
+  "guide.questions[].phrases[]": 28,
   "guide.questions[].sources[].label": 32,
   "resumeHalf.kicker": 12,
   "resumeHalf.title": 28,

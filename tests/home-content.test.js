@@ -35,12 +35,16 @@ const select = (value, pattern) => {
   return nodes;
 };
 
+// Cayleb's own figures, the only numbers not traced to the résumé: Ergon's per-person monthly price (2026-10-15),
+// written only as "$100", and his range for a full-time role (2026-10-16), written only as "$130K" and "$200K".
+const OWN_FIGURES = new Set(['$100', '$130K', '$200K']);
+
 test('numbers trace to the résumé', () => {
   const allowed = new Set([...resumeText.matchAll(/\d+(?:,\d{3})*/g)].map((m) => m[0]));
   for (const [path, text] of strings(content)) {
     for (const m of text.matchAll(/\d+(?:,\d{3})*/g)) {
-      // Cayleb's stated per-person monthly price, 2026-10-15, written only as "$100".
-      if (m[0] === '100' && text[m.index - 1] === '$') continue;
+      const written = text.slice(Math.max(0, m.index - 1), m.index + m[0].length + 1).replace(/[^$\dK]+$/, '');
+      if (OWN_FIGURES.has(written)) continue;
       assert.ok(allowed.has(m[0]), `${path}: "${m[0]}" does not appear in resume-content.json`);
     }
   }

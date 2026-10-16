@@ -64,9 +64,17 @@ const CASES = [
   ['how do we start', 'How would he start with my team?'],
   ['does it work with quickbooks', 'What apps does it work with?'],
   ['what can you automate', 'What kind of tools?'],
-  // From the 2026-10-16 review: his rate is a hiring question, a past job is his experience, place is hiring.
-  ['What is his hourly rate?', 'Can I hire Cayleb?'],
-  ['What are his rates?', 'Can I hire Cayleb?'],
+  // From the 2026-10-16 reviews: his rate is its own answer, never Ergon's price; a past job is his experience;
+  // place is hiring.
+  ['What is his hourly rate?', 'What does Cayleb charge?'],
+  ['What are his rates?', 'What does Cayleb charge?'],
+  ['salary expectations', 'What does Cayleb charge?'],
+  ['What does Cayleb charge?', 'What does Cayleb charge?'],
+  ['how much does he charge', 'What does Cayleb charge?'],
+  ['What do you charge?', 'What does Cayleb charge?'],
+  ['How much do your services cost?', 'What does Cayleb charge?'],
+  ['can I get a quote', 'What does Cayleb charge?'],
+  ['how much per person per month', 'What does Ergon cost?'],
   ['What was his last job?', 'Done this for a company?'],
   ['Would he work in our office?', 'Can I hire Cayleb?'],
   ['Is he open to on-site work?', 'Can I hire Cayleb?'],
@@ -76,6 +84,20 @@ const CASES = [
 for (const [query, expected] of CASES) {
   test(`"${query}" finds "${expected}"`, () => assert.equal(answerFor(query), expected));
 }
+
+test('Ergon\'s price is never the answer for another product, or for what Cayleb charges', () => {
+  for (const query of ['How much is dotz?', 'What does Sophos cost?', 'What does Sophos charge?', 'How much is the suite?',
+    'What does Cayleb charge?', 'how much does he charge', 'What do you charge?', 'what are your prices']) {
+    assert.notEqual(answerFor(query), 'What does Ergon cost?', query);
+  }
+  for (const query of ['How much is dotz?', 'What does Sophos cost?', 'How much is the suite?']) {
+    assert.equal(answerFor(query), 'fallback', `${query}: no written answer, so it says so`);
+  }
+  // Ergon's own price, asked with "charge": the price answer, or the price offered first.
+  const ergon = ask(index, 'What does Ergon charge?', chips);
+  const first = ergon.kind === 'answer' ? ergon.i : ergon.suggestions[0];
+  assert.equal(questions[first].q, 'What does Ergon cost?');
+});
 
 test('a question with no written answer says so and offers the closest ones, or the suggestions', () => {
   assert.deepEqual(ask(index, '', chips), { kind: 'empty' });

@@ -5,8 +5,10 @@
  *
  * A question is scored by the words it shares with each written question, weighted by how rare the word is
  * across all of them (idf) and by where it appears: a one-word keyword counts most, the words of a keyword
- * phrase and of the question itself next, the answer's words a little. A misspelt word one letter off a known word still counts, a little less. Whole
- * keyword phrases ("anyone's job") add a bonus, and typing a written question exactly always picks it.
+ * phrase and of the question itself next, the answer's words a little. A misspelt word one letter off a known
+ * word still counts, a little less. Whole keyword phrases ("anyone's job") add a bonus, and typing a written
+ * question exactly always picks it. A question steps aside when the query names a subject it does not answer
+ * for (its `avoid` words): Ergon's price is never the answer to "How much is dotz?" or "What does he charge?".
  * `decide()` answers only when one question is clearly ahead; otherwise it offers the closest ones.
  */
 
@@ -26,9 +28,10 @@ export const SYNONYMS = {
   pilot: 'rollout', pilots: 'rollout', deploy: 'rollout', deployed: 'rollout', deployment: 'rollout',
   production: 'rollout', shipped: 'built',
   price: 'cost', prices: 'cost', pricing: 'cost', priced: 'cost', fee: 'cost', fees: 'cost', expensive: 'cost',
-  cheap: 'cost', budget: 'cost', charge: 'cost', charges: 'cost', costs: 'cost',
-  // His own rate is a hiring question, not Ergon's price.
-  rate: 'hire', rates: 'hire', hourly: 'hire', wage: 'hire', wages: 'hire', salary: 'hire', freelance: 'hire',
+  cheap: 'cost', budget: 'cost', costs: 'cost', charge: 'rate', charges: 'rate',
+  // His own rate is its own question, never Ergon's price.
+  rate: 'rate', rates: 'rate', hourly: 'rate', wage: 'rate', wages: 'rate', salary: 'rate', compensation: 'rate',
+  quote: 'rate', quotes: 'rate', freelance: 'hire',
   onsite: 'office', hybrid: 'office', relocate: 'office', relocation: 'office', commute: 'office',
   monthly: 'month', subscription: 'month',
   cv: 'resume', 'résumé': 'resume', resumes: 'resume',
@@ -109,8 +112,11 @@ export function buildIndex(questions) {
     add(item.q, WEIGHT.question);
     // A one-word keyword is the strongest signal; a phrase's words count like the question's own.
     for (const k of item.keywords ?? []) add(k, normalize(k).includes(' ') ? WEIGHT.phrase : WEIGHT.keyword);
-    const phrases = (item.keywords ?? []).map(normalize).filter((p) => p.includes(' '));
-    return { weights, phrases, exact: normalize(item.q) };
+    // Keyword phrases add their words and a bonus; `phrases` add only the bonus, so a phrase such as "he charge"
+    // can point at hiring without making every price question look like one.
+    const phrases = [...(item.keywords ?? []).map(normalize).filter((p) => p.includes(' ')), ...(item.phrases ?? []).map(normalize)];
+    const avoid = new Set((item.avoid ?? []).map(normalize));
+    return { weights, phrases, avoid, exact: normalize(item.q) };
   });
   const df = new Map();
   for (const d of docs) for (const t of d.weights.keys()) df.set(t, (df.get(t) ?? 0) + 1);
@@ -145,7 +151,10 @@ export function rank(index, query) {
     return near ? [near, TYPO_FACTOR] : [w, 0];
   });
   const padded = ` ${norm} `;
+  // Whole words as typed, stop words kept: "he", "his" and "cayleb" name a subject even though they score nothing.
+  const said = new Set(norm.split(' ').map((w) => w.replace(/'s$/, '')));
   return index.docs.map((doc, i) => {
+    if ([...doc.avoid].some((w) => said.has(w))) return { i, score: 0 };
     let score = 0;
     for (const [w, factor] of resolved) score += factor * (index.idf.get(w) ?? 0) * (doc.weights.get(w) ?? 0);
     for (const p of doc.phrases) if (padded.includes(` ${p} `)) score += PHRASE_BONUS;

@@ -193,7 +193,12 @@ export const plainClick = (e) => e.button === 0 && !(e.ctrlKey || e.metaKey || e
  */
 export function mountActions(doc, { reduced }, { menu, modal, ask }) {
   const go = (id) => {
-    if (id === 'ask' && ask) { ask.focus(true); return; }
+    if (id === 'ask' && ask) {
+      // The address names where the visitor now is, as a native jump would; focus stays in the field.
+      ask.focus(true);
+      if (location.hash !== '#ask') window.history.pushState(null, '', '#ask');
+      return;
+    }
     const target = document.getElementById(id);
     if (!target) return;
     target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });

@@ -69,7 +69,7 @@ test('every small control has a 44px touch target', () => {
     ['site/css/contact.css', '.copy'], ['site/css/contact.css', '.contact-nav a'],
     ['site/css/resume-half.css', '.resume-link'], ['site/css/resume-half.css', '.resume-half-download'],
     ['site/css/subpage.css', '.sub-masthead nav a'], ['site/css/subpage.css', '.sub-ask'], ['site/css/subpage.css', '.sub-footer a'],
-    ['site/css/resume.css', '.resume-masthead nav a'], ['site/css/resume.css', '.resume-download'],
+    ['site/css/resume.css', '.resume-masthead nav a'], ['site/css/resume.css', '.resume-download'], ['site/css/resume.css', '.resume-ask'],
     ['site/css/resume.css', '.resume-actions .button'], ['site/css/resume.css', '.resume-footer a'],
     ['lab/lab.css', '.source-links a'],
   ];
@@ -103,6 +103,14 @@ test('tabbing into the sticky masthead never scrolls the page; jumps and focus l
   assert.match(base, /\[id\], main :focus\s*\{[^}]*scroll-margin-top:\s*calc\(var\(--masthead-h\)/);
   // The Ask link checks the field against the masthead's bottom edge, not the top of the window.
   assert.match(read('site/js/ask/ask.js'), /querySelector\('\[data-masthead\]'\)\?\.getBoundingClientRect\(\)\.bottom/);
+});
+
+test('Ask is one step away from every page, and a jump to it puts #ask in the address', () => {
+  const go = body(read('site/js/home/overlays.js'), "    if (id === 'ask' && ask) {");
+  assert.match(go, /ask\.focus\(true\)/);
+  assert.match(go, /window\.history\.pushState\(null, '', '#ask'\)/);
+  assert.match(read('resume.html'), /<a class="resume-ask" href="\.\/#ask" aria-label="Ask about Cayleb">/);
+  assert.match(read('404.html'), /href="index\.html#ask"/);
 });
 
 test('in the Ask bar, choosing a suggestion keeps focus, and a finished answer is readable later', () => {

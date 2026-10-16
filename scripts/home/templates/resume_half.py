@@ -38,7 +38,16 @@ def section(section_id: str, title: str, body: str) -> str:
     )
 
 
-def head(half: dict, resume: dict) -> str:
+def record(rec: dict | None) -> str:
+    """The track record under the name: three counts from the résumé, and the note on what they do not show."""
+    if not rec:
+        return ""
+    items = "".join(f'<div><dt>{text(i["label"])}</dt><dd>{text(i["figure"])}</dd></div>' for i in rec["items"])
+    return (f'<dl class="resume-half-record" aria-label="{attr(rec["label"])}">{items}</dl>'
+            f'<p class="resume-half-note">{text(rec["note"])}</p>')
+
+
+def head(half: dict, resume: dict, rec: dict | None = None) -> str:
     place = " · ".join((resume["headline"], resume["location"], resume["work_preference"]))
     downloads = "".join(
         f'<li>{link(d["href"], d["label"], "resume-half-download")}</li>' for d in half["downloads"]
@@ -49,7 +58,7 @@ def head(half: dict, resume: dict) -> str:
         f'<p class="resume-half-title">{text(half["title"])}</p>'
         f'<p class="resume-half-name">{text(resume["full_name"])}</p>'
         f'<p class="resume-half-meta">{text(place)}</p>'
-        f'<ul class="resume-half-downloads">{downloads}</ul></header>'
+        f'<ul class="resume-half-downloads">{downloads}</ul>{record(rec)}</header>'
     )
 
 
@@ -122,6 +131,6 @@ def render(content: dict, resume: dict) -> str:
     site_url = content["meta"]["siteUrl"]
     return (
         '<div class="resume-half" id="resume">'
-        f"{head(half, resume)}{experience(half, resume)}{work(half, resume, site_url)}{education(half, resume)}"
+        f"{head(half, resume, content.get('record'))}{experience(half, resume)}{work(half, resume, site_url)}{education(half, resume)}"
         "</div>"
     )

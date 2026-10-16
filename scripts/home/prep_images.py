@@ -2,8 +2,8 @@
 
     python3 scripts/home/prep_images.py <dir holding the dotz, sophos and industry-ai-suite checkouts>
 
-The screenshots are Cayleb's own product UI, taken from his repositories at the commits below. The hero
-layers are rendered by scripts/home/render_hero.mjs. No image on the site shows a person.
+The screenshots are Cayleb's own product UI, taken from his repositories at the commits below. They are the
+only images on the site, and none shows a person.
 """
 import hashlib
 import json
@@ -26,7 +26,6 @@ WORK = {
         "file": "session-artifacts/industry-ai-suite-full-workflows-20260926/workbench-before.png", "crop": [0, 0, 1440, 900]},
 }
 CHECKOUT = {"assets/work/dotz.jpg": "dotz", "assets/work/sophos.jpg": "sophos", "assets/work/suite.jpg": "industry-ai-suite"}
-HERO_SOURCE = "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json"
 
 
 def crop_work(checkouts: Path) -> None:
@@ -40,12 +39,11 @@ def crop_work(checkouts: Path) -> None:
 
 def manifest() -> dict:
     entries = {}
-    for path in sorted([*ROOT.glob("assets/hero/*.jpg"), *ROOT.glob("assets/work/*.jpg")]):
+    for path in sorted(ROOT.glob("assets/work/*.jpg")):
         rel = path.relative_to(ROOT).as_posix()
         with Image.open(path) as im:
             width, height = im.size
-        record = {"source": HERO_SOURCE} if rel.startswith("assets/hero/") else {
-            "source": f"Cayleb's own product screenshot: {WORK[rel]['repo']} @ {WORK[rel]['commit'][:7]}", **WORK[rel]}
+        record = {"source": f"Cayleb's own product screenshot: {WORK[rel]['repo']} @ {WORK[rel]['commit'][:7]}", **WORK[rel]}
         entries[rel] = {**record, "width": width, "height": height,
                         "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     return entries

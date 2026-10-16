@@ -1,0 +1,91 @@
+/* The Ask bar: a raised panel with a title, the field, four suggestions and, once asked, the answer under the
+   question it was matched to, then where it comes from. The answer box is sized by a hidden copy of the full
+   answer (ask.js), so the text streams in without moving anything. Below it, every question, folded.
+   Without the script only the folded list shows, open. */
+
+.ask {
+  display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: clamp(18px, 2vw, 24px);
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
+}
+.ask-top { display: flex; flex-direction: column; gap: 2px; }
+.ask-title { font-size: var(--step-1); font-weight: 620; font-stretch: var(--wide); letter-spacing: -0.015em; }
+.ask-greet { font-size: var(--step--1); color: var(--fg-2); }
+
+.ask-form {
+  display: flex; align-items: center; gap: 8px; padding: 5px 5px 5px 20px; border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong); background: var(--bg);
+  transition: border-color var(--ui) ease, box-shadow var(--ui) ease;
+}
+.ask-form:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+.ask-input {
+  flex: 1; min-width: 0; height: 44px; padding: 0; border: 0; background: transparent; outline: none;
+  font-size: max(16px, var(--step-0)); color: var(--fg);
+}
+.ask-input::placeholder { color: var(--fg-2); opacity: 1; }
+.ask-input:focus-visible { outline: none; }
+.ask-kbd {
+  display: none; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 6px;
+  background: var(--sunk); color: var(--fg-2); font-size: 0.8125rem; font-weight: 520;
+}
+@media (pointer: fine) { .ask-kbd { display: inline-grid; } .ask-form:focus-within .ask-kbd { display: none; } }
+.ask-submit { flex: none; }
+
+.ask-chips { display: flex; flex-direction: column; gap: 8px; }
+.ask-chips-l { font-size: var(--step--1); color: var(--fg-2); }
+.ask-chips ul, .ask-suggest { display: flex; flex-wrap: wrap; gap: 8px; }
+.ask-chip {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: var(--radius-pill);
+  background: var(--sunk); font-size: var(--step--1); font-weight: 540; line-height: 1.25; text-align: left;
+  transition: transform var(--press) var(--ease-out), background-color var(--ui) ease, color var(--ui) ease;
+}
+.ask-chip:active { transform: scale(0.97); }
+
+/* The answer: what it was matched to, the text, then its sources. */
+.ask-answer { display: grid; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); min-height: 9rem; align-content: start; }
+.ask-matched { font-size: var(--step--1); font-weight: 560; color: var(--fg-2); }
+.ask-answer.fallback .ask-matched::before { content: "\201C"; }
+.ask-answer.fallback .ask-matched::after { content: "\201D"; }
+.ask-body { display: grid; font-size: var(--step-0); line-height: 1.55; }
+.ask-body > * { grid-area: 1 / 1; }
+.js:not(.reveal-failsafe) .ask-ghost { visibility: hidden; }
+/* A plain caret while the answer streams; it goes when the text is whole. */
+.ask-typed:not(.done)::after {
+  content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.15em; background: var(--accent);
+}
+.ask-after { display: flex; flex-direction: column; gap: 10px; }
+.ask-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: var(--step--1); }
+.ask-sources span { margin-right: 4px; color: var(--fg-2); }
+.ask-sources a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: var(--radius-pill);
+  border: 1px solid var(--line); color: var(--accent); font-weight: 560;
+  transition: border-color var(--ui) ease, transform var(--press) var(--ease-out);
+}
+.ask-sources a:active { transform: scale(0.97); }
+.ask-links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Every question, folded under the field (open, and the only thing here, without the script). */
+.ask-all { border-top: 1px solid var(--line); }
+.ask-all > summary, .ask-item > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; cursor: pointer; list-style: none;
+}
+.ask-all > summary::-webkit-details-marker, .ask-item > summary::-webkit-details-marker { display: none; }
+.ask-all > summary { font-size: var(--step--1); font-weight: 560; color: var(--fg-2); }
+.ask-all > summary::after, .ask-item > summary::after {
+  content: ""; flex: none; width: 7px; height: 7px; margin-right: 4px; border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform var(--ui) var(--ease-out);
+}
+.ask-all[open] > summary::after, .ask-item[open] > summary::after { transform: translateY(2px) rotate(225deg); }
+.ask-list { max-height: 24rem; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
+.ask-item { border-top: 1px solid var(--line); }
+.ask-item > summary { padding-block: 6px; font-weight: 540; }
+.ask-item-b { display: grid; gap: 10px; padding: 2px 0 16px; color: var(--fg-2); }
+.ask-item-b .ask-sources a, .ask-item-b .ask-links a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: var(--radius-pill);
+  border: 1px solid var(--line); color: var(--accent); font-weight: 560;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ask-chip:hover { background: var(--accent-wash); color: var(--accent); }
+  .ask-sources a:hover, .ask-item-b a:hover { border-color: var(--accent); }
+  .ask-all > summary:hover, .ask-item > summary:hover { color: var(--fg); }
+}

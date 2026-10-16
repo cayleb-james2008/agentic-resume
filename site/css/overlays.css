@@ -1,57 +1,50 @@
-/* The request modal: a white panel over a blurred page. It composes an email; it never claims to send one. */
+/* The composer: a panel over a dimmed page. It writes an email for you to send; it never claims to send one. */
 
 .modal {
-  position: fixed; inset: 0; z-index: 110; display: flex; align-items: flex-end; justify-content: center;
-  padding: max(1rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-right, 0px)) max(1rem, env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px));
-  background: var(--raw-color-ink-alpha-35); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-  transition: opacity 0.35s var(--ease-spring);
+  position: fixed; inset: 0; z-index: var(--z-overlay); display: flex; align-items: flex-end; justify-content: center;
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background: rgb(18 26 43 / 0.42); transition: opacity var(--ui) ease;
 }
 @media (min-width: 640px) { .modal { align-items: center; } }
 .js:not(.reveal-failsafe) .modal:not(.open) { opacity: 0; }
-/* taste-skill-ignore: a real dialog over the page earns its shadow */
 .md-panel {
-  position: relative; width: 100%; max-width: 32rem; max-height: 100%; overflow: auto; overscroll-behavior: contain; padding: 1.5rem; border-radius: var(--radius-card);
-  background: var(--background); box-shadow: 0 25px 50px -12px var(--raw-color-ink-alpha-35), 0 0 0 1px var(--line);
-  transition: transform 0.45s var(--ease-spring);
+  position: relative; width: 100%; max-width: 32rem; max-height: 100%; overflow: auto; overscroll-behavior: contain;
+  padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  box-shadow: 0 24px 64px -16px rgb(18 26 43 / 0.4);
+  transition: transform var(--ui) var(--ease-out);
 }
-@media (min-width: 640px) { .md-panel { padding: 2rem; } }
-.modal:not(.open) .md-panel { transform: translateY(28px); }
-.modal.closing .md-panel { transform: translateY(18px); }
+.modal:not(.open) .md-panel { transform: translateY(16px) scale(0.98); }
 .md-x {
-  position: absolute; right: 1rem; top: 1rem; display: grid; place-items: center; width: max(44px, 2.5rem); height: max(44px, 2.5rem); border-radius: 50%;
-  background: var(--surface); color: var(--text-67); transition: background-color 0.18s, color 0.18s;
+  position: absolute; right: 12px; top: 12px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  color: var(--fg-2); transition: background-color var(--ui) ease, color var(--ui) ease;
 }
-.md-x .icon { width: 1rem; height: 1rem; }
-.md-head { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 1.5rem; padding-right: 2.75rem; }
-.md-eb { display: inline-flex; align-items: center; gap: 0.5rem; font-size: max(12px, 0.875rem); font-weight: 500; color: var(--text-67); }
-.md-eb i { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--accent-ink); }
-.md-head h2 { font-size: 1.5rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
-@media (min-width: 640px) { .md-head h2 { font-size: 1.875rem; } }
-.md-form { display: flex; flex-direction: column; gap: 1rem; }
-.md-form label {
-  display: flex; flex-direction: column; gap: 0.375rem; font-size: max(12px, 0.75rem); font-weight: 500; text-transform: uppercase;
-  letter-spacing: 0.03em; color: var(--text-63);
-}
+.md-x .icon { width: 16px; height: 16px; }
+.md-head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; padding-right: 44px; }
+.md-eb { font-size: var(--step--1); font-weight: 560; color: var(--fg-2); }
+.md-head h2 { font-size: var(--step-2); font-stretch: var(--wide); font-weight: 640; line-height: 1.15; letter-spacing: -0.02em; }
+.md-form { display: flex; flex-direction: column; gap: 16px; }
+.md-form label { display: flex; flex-direction: column; gap: 6px; font-size: var(--step--1); font-weight: 560; }
 .md-form input, .md-form textarea {
-  width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: var(--radius-control); outline: none;
-  background: var(--surface); color: var(--foreground); font: inherit; font-size: 1rem; text-transform: none; letter-spacing: normal;
-  transition: border-color 0.18s, background-color 0.18s;
+  width: 100%; padding: 12px 16px; border: 1px solid var(--line-strong); border-radius: 12px; outline: none;
+  background: var(--bg); color: var(--fg); font-size: max(16px, var(--step-0)); font-weight: 400;
+  transition: border-color var(--ui) ease, box-shadow var(--ui) ease;
 }
-.md-form textarea { resize: none; line-height: 1.5; }
-.md-form input:focus, .md-form textarea:focus { border-color: var(--raw-color-ink-alpha-35); background: var(--background); }
-.md-form input:focus-visible, .md-form textarea:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
-.md-form [aria-invalid="true"] { border-color: var(--danger); }
-.md-err { font-size: max(12px, 0.8125rem); text-transform: none; letter-spacing: 0; color: var(--danger); }
-.md-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.5rem; }
-.md-note { font-size: max(12px, 0.8125rem); color: var(--text-63); }
-.md-done { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-block: 2rem; text-align: center; }
-.md-done .md-badge { width: 3.5rem; height: 3.5rem; border-radius: 50%; font-size: 1.125rem; }
-.md-done h2 { font-size: 1.5rem; font-weight: 600; }
-.md-done p { max-width: 34ch; font-size: max(12px, 0.875rem); color: var(--text-74); }
-.md-done .sel { user-select: all; overflow-wrap: anywhere; font-weight: 600; color: var(--foreground); }
-.md-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
+.md-form input::placeholder, .md-form textarea::placeholder { color: var(--fg-2); opacity: 1; }
+.md-form textarea { resize: vertical; min-height: 6.5rem; line-height: 1.5; }
+.md-form input:focus, .md-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+.md-form [aria-invalid="true"] { border-color: var(--warn); }
+.md-err { font-size: var(--step--1); font-weight: 520; color: var(--warn); }
+.md-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; }
+.md-note { font-size: var(--step--1); color: var(--fg-2); }
+.md-done { display: flex; flex-direction: column; align-items: center; gap: 16px; padding-block: 24px; text-align: center; }
+.md-badge { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--ok-wash); color: var(--ok); }
+.md-badge .icon { width: 24px; height: 24px; }
+.md-done h2 { font-size: var(--step-2); font-weight: 640; }
+.md-done p { max-width: 34ch; font-size: var(--step--1); color: var(--fg-2); }
+.md-done .sel { user-select: all; overflow-wrap: anywhere; font-weight: 620; color: var(--fg); }
+.md-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
 .md-raw {
-  width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: var(--radius-control); resize: none;
-  background: var(--surface); color: var(--foreground); font: 400 max(12px, 0.8125rem)/1.55 var(--font-mono); text-align: left;
+  width: 100%; padding: 12px 16px; border: 1px solid var(--line-strong); border-radius: 12px; resize: none;
+  background: var(--bg); color: var(--fg); font: 400 var(--step--1)/1.55 var(--font); text-align: left;
 }
-@media (hover: hover) and (pointer: fine) { .md-x:hover { background: var(--surface-2); color: var(--foreground); } }
+@media (hover: hover) and (pointer: fine) { .md-x:hover { background: var(--sunk); color: var(--fg); } }

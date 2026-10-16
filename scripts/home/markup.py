@@ -1,8 +1,7 @@
-"""Markup helpers shared by the homepage templates (the 2026-10-15 layout).
+"""Markup helpers shared by the page templates (the "Sign-off" look, 2026-10-16).
 
 Every value that reaches the page goes through `text()` or `attr()`. Icons are inline stroke SVGs in one
-weight; the `>_` tile is the wordmark's mark. Terminal lines are plain strings in content.json: `term()`
-colours a leading `$` or `›` and every `✓`, and nothing else.
+weight, always decorative (`aria-hidden`); the words beside them carry the meaning.
 """
 import json
 from html import escape
@@ -52,6 +51,10 @@ ICONS = {
              '<path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>'),
     "person": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
     "check": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2.2"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    "search": (f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><circle cx="11" cy="11" r="6.5"/>'
+               '<path d="M20 20l-4.2-4.2"/></svg>'),
+    "down": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg>',
+    "send": f'<svg class="icon" viewBox="0 0 24 24" {_STROKE} stroke-width="2"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
 }
 
 
@@ -59,35 +62,10 @@ def icon(name: str) -> str:
     return ICONS[name]
 
 
-def mk(cls: str = "") -> str:
-    """The `>_` tile."""
-    return f'<span class="mk{" " + cls if cls else ""}" aria-hidden="true">&gt;_</span>'
-
-
-def rv(kind: str = "", delay: int = 0, extra: str = "") -> str:
-    """Reveal attributes: `data-rv` (with a kind) and its delay."""
-    kind_attr = f' data-rv="{kind}"' if kind else " data-rv"
-    style = f"--d:{delay}ms;{extra}" if delay or extra else ""
-    return kind_attr + (f' style="{style}"' if style else "")
-
-
-def eyebrow(label: str, cls: str = "", reveal: str = "") -> str:
-    klass = f"eyebrow {cls}".strip()
-    return f'<p class="{klass}"{reveal}><i></i>{text(label)}</p>'
-
-
-def term_line(line: str) -> str:
-    """One terminal line: a leading prompt and every tick coloured, the rest as written."""
-    body = text(line)
-    for prompt in ("$", "›"):
-        if line.startswith(prompt):
-            body = f'<span class="c">{prompt}</span>{text(line[len(prompt):])}'
-            break
-    return body.replace("✓", '<span class="g">✓</span>')
-
-
-def term(lines: list[str]) -> str:
-    return "\n".join(term_line(line) for line in lines)
+def wordmark(name: str) -> str:
+    """The wordmark, "Cayleb.AJ", with its full stop in signature blue. It replaces the old `>_` tile."""
+    first, dot, rest = name.partition(".")
+    return f'{text(first)}<span class="wm-dot">.</span>{text(rest)}' if dot else text(name)
 
 
 def image_size(src: str) -> tuple[int, int]:

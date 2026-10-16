@@ -1,9 +1,9 @@
-"""The masthead and footer shared by the pages one level down (projects/*, lab/).
+"""The masthead and footer shared by the pages one level down (projects/*, lab/) and the 404 page.
 
-Same wordmark, nav and footer credit as the homepage, with every link made
-relative to the page's folder.
+Same wordmark, sections and footer credit as the homepage, with every link made relative to the page's folder,
+plus Ask, which opens the homepage at its Ask bar with the field focused (site/js/main.js reads `#ask`).
 """
-from markup import attr, link, mk, text
+from markup import attr, icon, link, text, wordmark
 
 
 def _href(href: str, root: str) -> str:
@@ -18,11 +18,13 @@ def _href(href: str, root: str) -> str:
 def masthead(content: dict, root: str = "../", tagline: str = "") -> str:
     items = "".join(f"<li>{link(_href(n['href'], root), n['label'])}</li>" for n in content["nav"])
     tag = f'<span class="sub-tagline">{text(tagline)}</span>' if tagline else ""
+    m = content["masthead"]
     return (
         '<header class="sub-masthead">'
         f'<a class="sub-wordmark" href="{attr(root)}index.html" aria-label="Cayleb Alvarez-James, home">'
-        f"{mk()}{text(content['wordmark'])}</a>{tag}"
+        f"{wordmark(content['wordmark'])}</a>{tag}"
         f'<nav aria-label="Primary"><ul>{items}</ul></nav>'
+        f'<a class="sub-ask" href="{attr(root)}index.html#ask">{icon("search")}<span>{text(m["askLabel"])}</span></a>'
         f'<a class="sub-resume" href="{attr(root + content["meta"]["resumePdf"])}" download>Résumé PDF</a>'
         "</header>"
     )

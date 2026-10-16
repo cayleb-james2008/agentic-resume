@@ -16,9 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
-from markup import attr, mk, text  # noqa: E402
+from markup import attr, text  # noqa: E402
 from templates import social, subpage  # noqa: E402
-from templates.shell import THEME_COLOR  # noqa: E402
 
 RETIRED_PDFS = {
     "Cayleb-James-resume.pdf": "Cayleb-James-polished-resume.pdf",
@@ -46,7 +45,7 @@ def convert(page: str, content: dict, name: str) -> str:
         f"<title>{title}</title>"
         f'<meta name="description" content="{description}">'
         f"{social.tags(content['meta'], f'projects/{name}', html.unescape(title), html.unescape(description))}"
-        f'<meta name="theme-color" content="{THEME_COLOR}">'
+        f"{social.theme()}"
         '<link rel="icon" href="../favicon.svg" type="image/svg+xml">'
         f"{subpage.stylesheets('../')}</head>"
         '<body class="project-page">'
@@ -59,8 +58,8 @@ def convert(page: str, content: dict, name: str) -> str:
 
 
 LAB_STRIP = (
-    '<aside class="lab-strip" aria-label="Lab status"><span class="lab-strip__edition">Industry AI Suite · recorded journeys / 01</span>'
-    '<span class="lab-strip__status"><span class="live-dot" aria-hidden="true"></span>Recorded · read only</span></aside>'
+    '<aside class="lab-strip" aria-label="Lab status"><span class="lab-strip__edition">Industry AI Suite, recorded journeys</span>'
+    '<span class="lab-strip__status">Recorded, read only</span></aside>'
 )
 
 
@@ -83,7 +82,10 @@ def convert_lab(page: str, content: dict) -> str:
                         '<link rel="icon" href="../favicon.svg" type="image/svg+xml">', 1)
     if LAB_DESCRIPTION not in html.unescape(head):
         raise SystemExit("lab/index.html: title changed; update LAB_TITLE")
-    head = re.sub(r'<meta name="theme-color" content="[^"]*">', f'<meta name="theme-color" content="{THEME_COLOR}">', head)
+    # Theme metas are rebuilt every run too (the pair carries `media`, so match any theme-color meta).
+    head = re.sub(r'\s*<meta name="(?:theme-color|color-scheme)"[^>]*>', "", head)
+    head = head.replace('<link rel="icon" href="../favicon.svg" type="image/svg+xml">',
+                        f'{social.theme()}<link rel="icon" href="../favicon.svg" type="image/svg+xml">', 1)
     head += "\n  " + subpage.stylesheets("../") + '<link rel="stylesheet" href="lab.css">\n'
     body = page[head_end:]
     top = re.compile(r'<header class="(?:topbar|sub-masthead)">.*?</header>'
@@ -99,7 +101,7 @@ def convert_lab(page: str, content: dict) -> str:
 
 def not_found(content: dict) -> str:
     """404.html. GitHub Pages serves it for any missing path at any depth, so every link is
-    relative to the site root through <base> — and the page has no #-links, which <base>
+    relative to the site root through <base>, and the page has no bare #-links, which <base>
     would send to the homepage."""
     site = content["meta"]["siteUrl"]
     return (
@@ -108,21 +110,21 @@ def not_found(content: dict) -> str:
         f'<base href="{attr(site)}">'
         "<title>Page not found · Cayleb Alvarez-James</title>"
         '<meta name="robots" content="noindex">'
-        f'<meta name="theme-color" content="{THEME_COLOR}">'
+        f"{social.theme()}"
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
         f"{subpage.stylesheets('')}</head>"
         '<body class="project-page not-found-page">'
         f"{subpage.masthead(content, '')}"
-        '<main class="not-found">'
-        f'<div class="not-found-agent" aria-hidden="true">{mk("mk--xl")}</div>'
+        '<main class="not-found" id="main">'
         '<p class="not-found-code">404</p>'
-        '<h1 class="not-found-title">Page not found<span class="not-found-stop">.</span></h1>'
-        "<p class=\"not-found-copy\">Cayleb's agent looked everywhere. This page isn't here; it may have moved.</p>"
+        '<h1 class="not-found-title">Page not found<span class="wm-dot">.</span></h1>'
+        "<p class=\"not-found-copy\">This page isn't here. It may have moved, or the link may be old.</p>"
         '<ul class="not-found-links">'
-        '<li><a href="index.html">Home</a></li>'
-        '<li><a href="resume.html">Résumé</a></li>'
-        '<li><a href="index.html#built">Work</a></li>'
-        '<li><a href="lab/">Lab</a></li></ul>'
+        '<li><a class="btn btn--primary" href="index.html">Home</a></li>'
+        '<li><a class="btn btn--ghost" href="resume.html">Résumé</a></li>'
+        '<li><a class="btn btn--ghost" href="index.html#built">Work</a></li>'
+        '<li><a class="btn btn--ghost" href="lab/">Lab</a></li>'
+        '<li><a class="btn btn--ghost" href="index.html#ask">Ask about Cayleb</a></li></ul>'
         "</main>"
         f"{subpage.footer(content, '')}"
         "</body></html>\n"
@@ -136,17 +138,24 @@ def sitemap(content: dict) -> str:
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
 
+def write(path: Path, body: str) -> None:
+    """Write through a temporary file, so a reader never sees half a page."""
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(body)
+    tmp.replace(path)
+
+
 def main() -> list[Path]:
     content = json.loads((ROOT / "site/content.json").read_text())
     written = []
     for path in sorted((ROOT / "projects").glob("*.html")):
-        path.write_text(convert(path.read_text(), content, path.name))
+        write(path, convert(path.read_text(), content, path.name))
         written.append(path)
     lab = ROOT / "lab/index.html"
-    lab.write_text(convert_lab(lab.read_text(), content))
+    write(lab, convert_lab(lab.read_text(), content))
     written.append(lab)
     for name, body in (("404.html", not_found(content)), ("sitemap.xml", sitemap(content))):
-        (ROOT / name).write_text(body)
+        write(ROOT / name, body)
         written.append(ROOT / name)
     return written
 

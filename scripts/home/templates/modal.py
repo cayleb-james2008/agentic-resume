@@ -1,6 +1,6 @@
 """The request modal: it composes an email to Cayleb (site/js/home/mail.js). Nothing is sent from the
 page, and it never says otherwise; his address is shown as text in case the mail link does nothing."""
-from markup import attr, icon, mk, text
+from markup import attr, icon, text
 
 
 def _field(key: str, f: dict) -> str:
@@ -24,19 +24,19 @@ def render(content: dict) -> str:
     )
     return (
         f'<div class="modal" id="modal" data-modal-root{data} role="dialog" aria-modal="true" aria-labelledby="md-title" hidden>'
-        '<div class="md-panel" data-lenis-prevent>'
+        '<div class="md-panel">'
         f'<button class="md-x" type="button" data-modal-close aria-label="{attr(m["close"])}">{icon("x")}</button>'
         '<div data-md-form-wrap>'
-        f'<div class="md-head"><p class="md-eb"><i></i><span data-md-topic>{text(m["eyebrow"])}</span></p>'
+        f'<div class="md-head"><p class="md-eb"><span data-md-topic>{text(m["eyebrow"])}</span></p>'
         f'<h2 id="md-title">{text(m["headline"])}</h2></div>'
         f'<form class="md-form" data-md-form novalidate>{fields}'
         f'<div class="md-row"><p class="md-note">{text(m["note"])}</p>'
-        f'<button class="pill dark arrow" type="submit">{text(m["submit"])}<span class="pb">{icon("upright")}</span></button></div>'
+        f'<button class="btn btn--primary btn--lg" type="submit">{text(m["submit"])}</button></div>'
         "</form></div>"
-        f'<div class="md-done" data-md-done hidden>{mk("md-badge")}<h2 tabindex="-1" id="md-done-title" data-md-done-title>{text(m["doneTitle"])}</h2>'
+        f'<div class="md-done" data-md-done hidden><span class="md-badge" aria-hidden="true">{icon("check")}</span><h2 tabindex="-1" id="md-done-title" data-md-done-title>{text(m["doneTitle"])}</h2>'
         f'<p>{text(m["doneText"])} <span class="sel">{text(email)}</span>.</p>'
         f'<textarea class="md-raw" data-md-raw readonly rows="6" aria-label="{attr(m["rawLabel"])}" hidden></textarea>'
-        f'<div class="md-acts"><button class="pill light" type="button" data-md-copy data-copied="{attr(m["copied"])}" data-failed="{attr(m["copyFailed"])}">{text(m["copy"])}</button>'
-        f'<button class="pill dark" type="button" data-modal-close>{text(m["close"])}</button></div></div>'
+        f'<div class="md-acts"><button class="btn btn--ghost" type="button" data-md-copy data-copied="{attr(m["copied"])}" data-failed="{attr(m["copyFailed"])}">{text(m["copy"])}</button>'
+        f'<button class="btn btn--ink" type="button" data-modal-close>{text(m["close"])}</button></div></div>'
         "</div></div>"
     )

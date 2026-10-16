@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "home"))
 
 from templates import (  # noqa: E402
-    about, built, contact, ergon, guide, hero, loader, masthead, modal, resume, resume_half, services, shell, stats,
+    built, contact, ergon, hero, masthead, modal, resume, resume_half, services, shell,
 )
 
 
@@ -57,19 +57,15 @@ def build() -> str:
         raise SystemExit("content.json does not fit its frames:\n  " + "\n  ".join(problems))
     resume_data = json.loads((ROOT / "resume/resume-content.json").read_text())
     blocks = {
-        "loader": loader.render(content),
         "masthead": masthead.render(content),
         "hero": hero.render(content),
-        "about": about.render(content),
-        "ergon": ergon.render(content),
         "built": built.render(content),
         "services": services.render(content),
-        "stats": stats.render(content),
+        "ergon": ergon.render(content),
         "resume_half": resume_half.render(content, resume_data),
         "contact": contact.render(content),
         "menu": masthead.menu(content),
         "modal": modal.render(content),
-        "guide": guide.render(content),
     }
     assert set(blocks) == set(shell.BLOCKS), "every block the shell places is rendered"
     return shell.render(content, blocks)
@@ -80,7 +76,14 @@ def build_resume() -> str:
     return resume.render(content, (ROOT / "resume/candidate-fragment.html").read_text())
 
 
+def write(path: Path, body: str) -> None:
+    """Write through a temporary file, so a reader (a test running alongside) never sees half a page."""
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(body)
+    tmp.replace(path)
+
+
 if __name__ == "__main__":
-    (ROOT / "index.html").write_text(build())
-    (ROOT / "resume.html").write_text(build_resume())
+    write(ROOT / "index.html", build())
+    write(ROOT / "resume.html", build_resume())
     print("Built index.html and resume.html from site/content.json")

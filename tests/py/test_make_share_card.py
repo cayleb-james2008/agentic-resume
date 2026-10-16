@@ -26,6 +26,14 @@ class ShareCard(unittest.TestCase):
             second = make_share_card.main(Path(tmp) / "b.png").read_bytes()
         self.assertEqual(first, second)
 
+    def test_the_card_draws_with_the_vendored_face_only(self):
+        import json
+        provenance = json.loads((ROOT / "vendor" / "PROVENANCE.json").read_text())
+        self.assertIn(make_share_card.MONA.relative_to(ROOT).as_posix(), provenance)
+        source = (ROOT / "scripts" / "home" / "make_share_card.py").read_text()
+        for retired in ("onest", "jetbrains", "MONO ="):
+            self.assertNotIn(retired, source.lower() if retired.islower() else source)
+
 
 if __name__ == "__main__":
     unittest.main()

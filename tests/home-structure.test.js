@@ -1,5 +1,5 @@
-// The Lumora homepage's outline (2026-10-15): one h1 (the headline), a section per part of the pitch, the
-// official résumé's three sections, and the contact footer. Images are Cayleb's own product UI only.
+// The homepage's outline (the "Sign-off" look, 2026-10-16): one h1 (the headline), a section per part of the pitch,
+// the official résumé's three sections, and the contact footer. Images are Cayleb's own product UI only.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
@@ -31,16 +31,16 @@ test('one h1: the headline, in the hero', () => {
   assert.ok(sections()[0].includes('<h1'), 'the h1 lives in the hero');
 });
 
-test('the sections run hero, about, Ergon\'s team, work, services, stats, the résumé\'s three, contact; one h2 each after the hero', () => {
+test('the sections run hero, work, work with me, Ergon, the résumé\'s three, contact; one h2 each after the hero', () => {
   const list = sections();
   assert.deepEqual(list.map((s) => s.match(/^<section\b[^>]*\sid="([^"]+)"/)?.[1]),
-    ['home', 'about', 'team', 'built', 'services', 'stats', 'experience', 'work', 'education', 'contact']);
+    ['home', 'built', 'services', 'team', 'experience', 'work', 'education', 'contact']);
   assert.match(list[0], /^<section class="hero" id="home"/);
   for (const section of list.slice(1)) assert.equal((section.match(/<h2\b/g) || []).length, 1, section.slice(0, 70));
 });
 
 test('ids for every section and the résumé exist once, and every id is unique', () => {
-  for (const id of ['home', 'about', 'team', 'built', 'services', 'stats', 'resume', 'experience', 'work', 'education', 'contact']) {
+  for (const id of ['home', 'ask', 'built', 'services', 'team', 'resume', 'experience', 'work', 'education', 'contact']) {
     assert.equal(count(new RegExp(`\\sid="${id}"`, 'g')), 1, id);
   }
   const ids = [...home.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
@@ -62,10 +62,10 @@ test('one banner and one main; the skip link goes to main', () => {
 
 test('images are Cayleb\'s own product UI, each listed with its provenance', () => {
   const tags = [...home.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
-  assert.ok(tags.length >= 4, 'the hero surface and three screenshots');
+  assert.ok(tags.length >= 3, 'three product screenshots');
   for (const tag of tags) {
     const src = tag.match(/\ssrc="([^"]+)"/)[1];
-    assert.match(src, /^assets\/(hero|work)\//, src);
+    assert.match(src, /^assets\/work\//, src);
     assert.ok(images[src], `${src} is listed in assets/IMAGES.json`);
     const alt = tag.match(/\salt="([^"]*)"/);
     assert.ok(alt, `${src} has an alt attribute`);

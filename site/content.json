@@ -8,25 +8,21 @@
     "github": "https://github.com/cayleb-james2008",
     "siteUrl": "https://cayleb-james2008.github.io/agentic-resume/",
     "shareImage": "assets/og/card.png",
-    "shareAlt": "Share card: Cayleb Alvarez-James · Forward Thinking Engineer, with the headline Show me how you work. I'll find where AI fits."
+    "shareAlt": "Share card: Cayleb.AJ, Forward Thinking Engineer, with the headline Show me how you work. I'll find where AI fits. and an Ask bar with suggested questions."
   },
   "wordmark": "Cayleb.AJ",
   "nav": [
-    {
-      "label": "Home",
-      "href": "#home"
-    },
-    {
-      "label": "Ergon",
-      "href": "#team"
-    },
     {
       "label": "Work",
       "href": "#built"
     },
     {
-      "label": "What I do",
+      "label": "Work with me",
       "href": "#services"
+    },
+    {
+      "label": "Ergon",
+      "href": "#team"
     },
     {
       "label": "Résumé",
@@ -37,132 +33,180 @@
       "href": "#contact"
     }
   ],
-  "loader": {
-    "tagline": "Show me how you work. I'll find where AI fits.",
-    "label": "Loading",
-    "terminal": [
-      "$ hello --from cayleb",
-      "› loading the work ......... ok",
-      "› loading ergon ............ ok",
-      "› ready"
-    ]
-  },
   "masthead": {
-    "place": "Connecticut",
-    "timeFallback": "Eastern time",
-    "dateFallback": "Remote-only",
+    "home": "Cayleb.AJ, back to top",
+    "skip": "Skip to content",
     "menu": "Menu",
     "menuOpen": "Open menu",
-    "home": "Cayleb.AJ, back to top",
-    "skip": "Skip to content"
+    "ask": "Ask",
+    "askLabel": "Ask about Cayleb"
   },
   "menu": {
     "label": "Menu",
-    "close": "Close",
-    "routes": [
-      "/",
-      "/ergon",
-      "/work",
-      "/build",
-      "/resume",
-      "/contact"
-    ],
-    "start": "Start a project →",
-    "place": "Connecticut"
+    "close": "Close"
   },
   "hero": {
     "eyebrow": "Forward Thinking Engineer",
     "headline": "Show me how you work. I'll find where AI fits.",
-    "lead": "I come into your business, learn how your team works, and build AI around it: AI employees, workflows and automations.",
-    "proof": [
-      "3,300+ automated checks",
-      "5 systems"
-    ],
-    "ctas": [
+    "lead": "I learn how your team works, then build AI employees, workflows and automations around it.",
+    "doorsLabel": "Where to start",
+    "doors": [
       {
-        "label": "Let's talk",
-        "modal": true
+        "label": "I'm hiring",
+        "href": "#resume"
       },
       {
-        "label": "View work",
-        "href": "#built"
+        "label": "I run a team",
+        "href": "#services"
       }
-    ],
-    "hint": "› move your cursor to see how it's built",
-    "carouselLabel": "What I build",
-    "next": "Next",
-    "previous": "Previous",
-    "carousel": [
-      {
-        "caption": "AI employees",
-        "title": "An assistant at every desk."
-      },
-      {
-        "caption": "AI workflows",
-        "title": "Built around how you work."
-      },
-      {
-        "caption": "AI automations",
-        "title": "The busywork, handled."
-      },
-      {
-        "caption": "AI everything",
-        "title": "If it runs on a computer, yes."
-      }
-    ],
-    "builtWithLabel": "Built with",
-    "builtWith": [
-      "TypeScript",
-      "Rust",
-      "Python",
-      "Tauri",
-      "Node.js",
-      "C#",
-      "SQLite",
-      "Windows"
-    ],
-    "status": [
-      "Building since Oct 2025",
-      "Remote-only · Connecticut",
-      "Scroll to explore ↓"
-    ],
-    "watermark": "CAYLEB"
+    ]
   },
-  "about": {
-    "eyebrow": "About",
-    "caption": "One engineer. Remote-only, based in Connecticut.",
-    "lead": "I come into your business and learn how your team really works,",
-    "rest": "then build AI employees, workflows and automations around it, on the apps you already use.",
-    "online": "Find me online",
-    "links": [
+  "built": {
+    "headline": "Built and tested",
+    "lead": "Five systems, each with its own tests. Real screenshots, real counts.",
+    "caseLabel": "Case study",
+    "codeLabel": "Code on GitHub",
+    "cards": [
       {
-        "label": "GitHub",
-        "href": "https://github.com/cayleb-james2008",
-        "icon": "code"
+        "slug": "ergon",
+        "category": "AI assistants · Windows",
+        "title": "Ergon",
+        "text": "A personal AI assistant for every employee, set up around the apps they already use. Remote management, and tickets fixed right on the computer.",
+        "tags": [
+          "Signed installer",
+          "Remote repair",
+          "Approval gates"
+        ],
+        "count": "622 tests",
+        "href": "projects/ergon.html",
+        "checks": [
+          "Signed installer",
+          "Live update feed",
+          "Your data kept on update",
+          "Connects to the apps you use",
+          "Repairs scoped to a ticket",
+          "Undo for every step",
+          "A person signs off"
+        ],
+        "status": true
       },
       {
-        "label": "Email",
-        "modal": true,
-        "icon": "mail"
+        "slug": "dotz",
+        "category": "Desktop app · Windows, macOS, Linux",
+        "title": "dotz",
+        "text": "A desktop app that runs and supervises AI coding agents, with safe cleanup and clear failure states.",
+        "tags": [
+          "Rust",
+          "Tauri",
+          "SQLite"
+        ],
+        "count": "828+ tests",
+        "href": "projects/dotz.html",
+        "code": "https://github.com/cayleb-james2008/dotz",
+        "image": {
+          "src": "assets/work/dotz.jpg",
+          "alt": "The dotz dashboard: a dark window with a prompt box for AI coding agents"
+        }
       },
       {
-        "label": "Résumé PDF",
-        "href": "Cayleb-James-polished-resume.pdf",
-        "icon": "doc"
+        "slug": "sophos",
+        "category": "Desktop app · Windows",
+        "title": "Sophos",
+        "text": "A coding-agent desktop app with saved agent profiles, local AI models, and sessions that survive restarts.",
+        "tags": [
+          "TypeScript",
+          "Tauri"
+        ],
+        "count": "1,224 checks",
+        "href": "projects/sophos.html",
+        "code": "https://github.com/cayleb-james2008/sophos",
+        "image": {
+          "src": "assets/work/sophos.jpg",
+          "alt": "Sophos welcome screen: A quieter way to think, with a Get started button"
+        }
+      },
+      {
+        "slug": "suite",
+        "category": "Review tools · 10 local tools",
+        "title": "Industry AI Suite",
+        "text": "Ten local tools that review finance, research, security and operations files. Every finding shows its source, and a person decides.",
+        "tags": [
+          "Python",
+          "Local AI"
+        ],
+        "count": "382 tests",
+        "href": "projects/industry-ai-suite.html",
+        "code": "https://github.com/cayleb-james2008/industry-ai-suite",
+        "image": {
+          "src": "assets/work/suite.jpg",
+          "alt": "Industry AI Suite: the LedgerBridge review tool, with its inputs on the left and the result below"
+        }
+      },
+      {
+        "slug": "asmodeus",
+        "category": "Research tool · past data",
+        "title": "Asmodeus",
+        "text": "A private research tool that tests trading ideas on real past market data, in strict time order, with no real money.",
+        "tags": [
+          "Rust",
+          "Past data"
+        ],
+        "count": "1,111 tests",
+        "href": "projects/asmodeus.html",
+        "checks": [
+          "Strict time order",
+          "No peeking ahead",
+          "Fees included",
+          "No real money",
+          "Recovers from restarts"
+        ]
+      }
+    ]
+  },
+  "services": {
+    "headline": "Work with me",
+    "lead": "I come into your business, learn how your team really works, and build AI around it.",
+    "stepsLabel": "How it goes",
+    "steps": [
+      {
+        "title": "Shadow",
+        "text": "I sit with your team and watch how the work really moves."
+      },
+      {
+        "title": "Map",
+        "text": "Together we find the slow, repeated steps worth handing off."
+      },
+      {
+        "title": "Build",
+        "text": "AI employees, workflows and automations, on the apps you already use."
+      },
+      {
+        "title": "Teach",
+        "text": "Your team learns to run it. A person approves anything that matters."
       }
     ],
-    "cta": {
-      "label": "Read my résumé",
-      "href": "#resume"
-    }
+    "offersLabel": "What I build",
+    "rows": [
+      {
+        "title": "AI employees",
+        "text": "An assistant for every person on your team, set up around the apps they already use."
+      },
+      {
+        "title": "AI workflows",
+        "text": "I shadow your team, map how the work moves, then build AI into the slow steps."
+      },
+      {
+        "title": "AI automations",
+        "text": "Repeat work runs on its own, and a person approves anything that matters."
+      },
+      {
+        "title": "Remote support",
+        "text": "I manage every computer remotely. Tickets get fixed right on the machine."
+      }
+    ],
+    "more": "If it runs on a computer, I can build around it."
   },
-  "band": [
-    "AI",
-    "built",
-    "around you"
-  ],
   "ergon": {
-    "eyebrow": "Ergon",
     "headline": "One assistant per person. Shaped to your team.",
     "body": "Ergon gives everyone on your team their own AI assistant, set up around the apps they already use. I manage every computer remotely, and when something breaks, a support agent fixes it right on the machine.",
     "tryLabel": "Try it on a team",
@@ -382,181 +426,40 @@
     "status": "Windows pilot · live checks pending",
     "figure": {
       "caption": "Sample team: Ergon connects to each person's assistant, and each assistant works in that person's apps.",
-      "prompt": "ergon › team view",
       "sample": "Sample team",
       "hub": "Ergon",
       "hubSub": "Managed remotely",
       "assistantOn": "assistant on",
-      "working": "working…",
-      "fixed": "fixed ✓",
+      "working": "working",
+      "fixed": "fixed",
       "ticket": "Ticket",
       "button": "Send a test ticket",
       "busy": "Fixing…",
       "tap": "Tap a person to see their assistant.",
       "logLabel": "Ergon activity",
-      "terminal": [
-        "$ ergon shape --team office",
-        "✓ assistants set up around every person's apps",
-        "› front desk · drafted replies, waiting for approval",
-        "› bookkeeping · matched invoices to payments"
+      "log": [
+        "Assistants set up around each person's apps.",
+        "Front desk: drafted replies, waiting for approval.",
+        "Bookkeeping: matched invoices to payments."
       ],
-      "shape": "$ ergon shape --team",
-      "shaped": "✓ assistants set up around every person's apps",
-      "flag": "⚑ ticket",
+      "routineLine": "{role}: {task}.",
+      "ticketLine": "{role} sent a ticket: {issue}.",
+      "teamLine": "Switched to the {team} team. Assistants set up around each person's apps.",
       "outcomes": [
-        "✓ agent fixed it on the computer",
-        "✓ senior agent fixed it after a closer look",
-        "✓ handed to a person, with notes"
+        "The agent fixed it on the computer.",
+        "The senior agent fixed it after a closer look.",
+        "Handed to a person, with notes."
       ],
       "personLabel": "{role}: assistant connected to {apps}",
       "appsJoin": " and "
     }
   },
-  "built": {
-    "eyebrow": "Work",
-    "headline": "What I've built so far",
-    "cards": [
-      {
-        "slug": "ergon",
-        "category": "AI assistants · Windows",
-        "title": "Ergon",
-        "wide": true,
-        "status": true,
-        "href": "projects/ergon.html",
-        "text": "A personal AI assistant for every employee, set up around the apps they already use. Remote management, and tickets fixed right on the computer.",
-        "tags": [
-          "Signed installer",
-          "Remote repair",
-          "Approval gates"
-        ],
-        "count": "622 tests",
-        "terminal": [
-          "$ ergon status",
-          "  installer    signed ✓",
-          "  updates      live feed ✓",
-          "  your data    kept on update ✓",
-          "  connectors   your apps ✓",
-          "  repairs      ticket-scoped ✓",
-          "  undo         every step ✓",
-          "  approvals    person signs off ✓",
-          "  tests        622 passing"
-        ]
-      },
-      {
-        "slug": "dotz",
-        "category": "Desktop app · Windows, macOS, Linux",
-        "title": "dotz",
-        "href": "https://github.com/cayleb-james2008/dotz",
-        "text": "A desktop app that runs and supervises AI coding agents, with safe cleanup and clear failure states.",
-        "tags": [
-          "Rust",
-          "Tauri",
-          "SQLite"
-        ],
-        "count": "828+ tests",
-        "image": {
-          "src": "assets/work/dotz.jpg",
-          "alt": "The dotz dashboard: a dark window with a prompt box for AI coding agents"
-        }
-      },
-      {
-        "slug": "sophos",
-        "category": "Desktop app · Windows",
-        "title": "Sophos",
-        "href": "https://github.com/cayleb-james2008/sophos",
-        "text": "A coding-agent desktop app with saved agent profiles, local AI models, and sessions that survive restarts.",
-        "tags": [
-          "TypeScript",
-          "Tauri"
-        ],
-        "count": "1,224 checks",
-        "image": {
-          "src": "assets/work/sophos.jpg",
-          "alt": "Sophos welcome screen: A quieter way to think, with a Get started button"
-        }
-      },
-      {
-        "slug": "suite",
-        "category": "Review tools · 10 local tools",
-        "title": "Industry AI Suite",
-        "href": "https://github.com/cayleb-james2008/industry-ai-suite",
-        "text": "Ten local tools that review finance, research, security and operations files. Every finding shows its source, and a person decides.",
-        "tags": [
-          "Python",
-          "Local AI"
-        ],
-        "count": "382 tests",
-        "image": {
-          "src": "assets/work/suite.jpg",
-          "alt": "Industry AI Suite: the LedgerBridge review tool, with its inputs on the left and the result below"
-        }
-      },
-      {
-        "slug": "asmodeus",
-        "category": "Research tool · past data",
-        "title": "Asmodeus",
-        "href": "projects/asmodeus.html",
-        "text": "A private research tool that tests trading ideas on real past market data, in strict time order, with no real money.",
-        "tags": [
-          "Rust",
-          "Past data"
-        ],
-        "count": "1,111 tests",
-        "terminal": [
-          "$ asmodeus replay --past-data",
-          "  time order       strict ✓",
-          "  future peeking   blocked ✓",
-          "  fees             included ✓",
-          "  real money       none",
-          "  restarts         recovered ✓",
-          "  tests            1,111 + 33 ✓"
-        ]
-      }
-    ]
-  },
-  "services": {
-    "eyebrow": "What I do",
-    "headline": "AI built around how you work",
-    "rows": [
-      {
-        "route": "/employees",
-        "title": "AI employees",
-        "text": "An assistant for every person on your team, set up around the apps they already use.",
-        "topic": "AI employees"
-      },
-      {
-        "route": "/workflows",
-        "title": "AI workflows",
-        "text": "I shadow your team, map how the work moves, then build AI into the slow steps.",
-        "topic": "AI workflows"
-      },
-      {
-        "route": "/automations",
-        "title": "AI automations",
-        "text": "Repeat work runs on its own, and a person approves anything that matters.",
-        "topic": "AI automations"
-      },
-      {
-        "route": "/support",
-        "title": "Remote support",
-        "text": "I manage every computer remotely. Tickets get fixed right on the machine.",
-        "topic": "Remote support"
-      },
-      {
-        "route": "/everything",
-        "title": "AI everything",
-        "text": "If it runs on a computer, I can build around it. Show me how you work.",
-        "topic": "Something else"
-      }
-    ]
-  },
-  "stats": {
-    "eyebrow": "Track record",
-    "headline": "Tested before it ships.",
+  "record": {
+    "label": "Track record",
     "items": [
       {
         "figure": "3,300+",
-        "label": "Automated checks across my systems"
+        "label": "Automated checks"
       },
       {
         "figure": "5",
@@ -565,10 +468,6 @@
       {
         "figure": "10",
         "label": "Recorded demos in the lab"
-      },
-      {
-        "figure": "$100/mo",
-        "label": "Ergon, about a person a month"
       }
     ],
     "note": "Counts come from each project's own test runs. Ergon's live checks are still pending, and it hasn't had a paid rollout yet."
@@ -616,16 +515,16 @@
     "siteTitle": "Site",
     "nav": [
       {
-        "label": "Ergon",
-        "href": "#team"
-      },
-      {
         "label": "Work",
         "href": "#built"
       },
       {
-        "label": "What I do",
+        "label": "Work with me",
         "href": "#services"
+      },
+      {
+        "label": "Ergon",
+        "href": "#team"
       },
       {
         "label": "Résumé",
@@ -699,8 +598,7 @@
         "label": "One-page PDF",
         "href": "Cayleb-James-polished-one-page.pdf"
       }
-    ],
-    "watermark": "CAYLEB"
+    ]
   },
   "modal": {
     "eyebrow": "Start a project",
@@ -737,50 +635,545 @@
     "otherTopic": "Something else"
   },
   "guide": {
-    "label": "Ask my agent",
-    "title": "cayleb.aj › ask",
-    "greeting": "Hi, I'm Cayleb's agent. Pick a question.",
-    "close": "Close",
+    "greeting": "Answers come from Cayleb's résumé and work. Ask away.",
+    "fieldLabel": "Ask about Cayleb",
+    "placeholder": "Ask about hiring or Ergon",
+    "submit": "Ask",
+    "chipsLabel": "Try asking",
+    "matched": "Answering",
+    "sourcesLabel": "From",
+    "browse": "Browse every question",
+    "fallback": "Cayleb hasn't written an answer to that yet. Closest questions:",
+    "fallbackContact": "Get in touch",
     "questions": [
       {
-        "q": "What does Cayleb do?",
-        "cmd": "whoami",
-        "a": "He learns how your people actually work, then builds AI and automation around the apps they already use. It saves time, raises quality, and he teaches the team to run it."
+        "q": "Can I hire Cayleb?",
+        "a": "Yes, for a role or a project. He works remote-only from Connecticut. The résumé and both PDFs are on this page, and email reaches him fastest.",
+        "keywords": [
+          "hire",
+          "résumé",
+          "role",
+          "full-time",
+          "contract",
+          "remote",
+          "based",
+          "office",
+          "on site",
+          "in person",
+          "work for us",
+          "join our team"
+        ],
+        "sources": [
+          {
+            "label": "The résumé",
+            "href": "#resume"
+          }
+        ],
+        "links": [
+          {
+            "label": "Email Cayleb",
+            "href": "mailto:caylebalvarezjames@gmail.com"
+          },
+          {
+            "label": "One-page PDF",
+            "href": "Cayleb-James-polished-one-page.pdf"
+          },
+          {
+            "label": "Résumé PDF",
+            "href": "Cayleb-James-polished-resume.pdf"
+          }
+        ],
+        "chip": true
+      },
+      {
+        "q": "What has he built?",
+        "a": "Five systems, each with its own tests: Ergon (622), dotz (828+), Sophos (1,224 checks), the Industry AI Suite (382) and Asmodeus (1,111).",
+        "keywords": [
+          "built",
+          "projects",
+          "portfolio",
+          "made",
+          "systems",
+          "what has he made",
+          "show me his work"
+        ],
+        "sources": [
+          {
+            "label": "Built and tested",
+            "href": "#built"
+          },
+          {
+            "label": "Projects in the résumé",
+            "href": "#work"
+          }
+        ],
+        "chip": true
       },
       {
         "q": "What's Ergon?",
-        "cmd": "ergon --about",
-        "a": "A personal assistant for every employee, built around their apps. Tickets get fixed by an agent right on the computer; hard ones go up to a person. Windows pilot, live checks pending."
+        "a": "A personal assistant for every employee, built around their apps. Tickets get fixed by an agent right on the computer; hard ones go up to a person. Windows pilot, live checks pending.",
+        "keywords": [
+          "ergon",
+          "assistant",
+          "assistants",
+          "every employee",
+          "remote support",
+          "help desk",
+          "tickets",
+          "it support"
+        ],
+        "sources": [
+          {
+            "label": "Ergon",
+            "href": "#team"
+          },
+          {
+            "label": "Ergon case study",
+            "href": "projects/ergon.html"
+          }
+        ],
+        "chip": true
+      },
+      {
+        "q": "How would he start with my team?",
+        "a": "He shadows your team, maps how the work moves, builds AI into the slow steps, then teaches everyone to run it. A person approves anything that matters.",
+        "keywords": [
+          "start",
+          "first step",
+          "how it works",
+          "shadow",
+          "work together",
+          "get started",
+          "my team",
+          "our team"
+        ],
+        "sources": [
+          {
+            "label": "Work with me",
+            "href": "#services"
+          }
+        ],
+        "chip": true
+      },
+      {
+        "q": "What does Cayleb do?",
+        "a": "He learns how your people actually work, then builds AI and automation around the apps they already use, aiming to save time and raise quality. He teaches the team to run it.",
+        "keywords": [
+          "background",
+          "overview",
+          "summary",
+          "who",
+          "forward thinking engineer",
+          "what does he do",
+          "what do you do",
+          "who is he",
+          "who are you"
+        ],
+        "sources": [
+          {
+            "label": "Work with me",
+            "href": "#services"
+          },
+          {
+            "label": "The résumé",
+            "href": "#resume"
+          }
+        ]
       },
       {
         "q": "What does Ergon cost?",
-        "cmd": "ergon --price",
-        "a": "About $100 a person a month."
+        "a": "About $100 a person a month.",
+        "keywords": [
+          "cost",
+          "much",
+          "per person",
+          "month",
+          "how much"
+        ],
+        "phrases": [
+          "ergon charge",
+          "ergon charges",
+          "charge for ergon"
+        ],
+        "sources": [
+          {
+            "label": "Ergon",
+            "href": "#team"
+          }
+        ],
+        "avoid": [
+          "dotz",
+          "sophos",
+          "suite",
+          "asmodeus",
+          "lab",
+          "he",
+          "his",
+          "him",
+          "cayleb",
+          "you",
+          "your"
+        ]
+      },
+      {
+        "q": "What does Cayleb charge?",
+        "a": "Services are priced to what you're asking for, so every quote is different. For a full-time role, his range is $130K to $200K a year.",
+        "keywords": [
+          "rate",
+          "charge",
+          "salary",
+          "compensation",
+          "quote",
+          "full-time pay"
+        ],
+        "phrases": [
+          "he charge",
+          "you charge",
+          "cayleb charge",
+          "his price",
+          "his prices",
+          "his pricing",
+          "your price",
+          "your prices",
+          "your pricing",
+          "services cost",
+          "cost to hire",
+          "price to hire"
+        ],
+        "avoid": [
+          "ergon",
+          "dotz",
+          "sophos",
+          "suite",
+          "asmodeus",
+          "lab"
+        ],
+        "sources": [
+          {
+            "label": "Work with me",
+            "href": "#services"
+          },
+          {
+            "label": "Contact",
+            "href": "#contact"
+          }
+        ],
+        "links": [
+          {
+            "label": "Email Cayleb",
+            "href": "mailto:caylebalvarezjames@gmail.com"
+          }
+        ]
       },
       {
         "q": "What kind of tools?",
-        "cmd": "tools --list",
-        "a": "Anything digital a team wants automated: quoting, dispatch, ordering, scheduling, paperwork. Built around their apps, with human sign-off and undo."
+        "a": "Anything digital a team wants automated: quoting, dispatch, ordering, scheduling, paperwork. Built around their apps, with human sign-off and undo.",
+        "keywords": [
+          "tools",
+          "automation",
+          "quoting",
+          "dispatch",
+          "ordering",
+          "scheduling",
+          "paperwork",
+          "what can he build"
+        ],
+        "phrases": [
+          "build an app",
+          "build apps",
+          "build app",
+          "make an app",
+          "make apps",
+          "make app"
+        ],
+        "sources": [
+          {
+            "label": "Work with me",
+            "href": "#services"
+          }
+        ]
       },
       {
         "q": "Done this for a company?",
-        "cmd": "history --rollouts",
-        "a": "Not yet as a paid rollout. He has worked moving, plaster and shop jobs firsthand, and built 5 systems with 3,300+ passing checks."
+        "a": "Not yet as a paid rollout. He has worked moving, plaster and shop jobs firsthand, and built 5 systems with 3,300+ passing checks.",
+        "keywords": [
+          "company",
+          "job",
+          "rollout",
+          "paid",
+          "track record",
+          "real world",
+          "experience",
+          "worked with",
+          "last job",
+          "previous job",
+          "past jobs",
+          "work history"
+        ],
+        "sources": [
+          {
+            "label": "Experience",
+            "href": "#experience"
+          },
+          {
+            "label": "Built and tested",
+            "href": "#built"
+          }
+        ]
       },
       {
         "q": "What if a tool makes a mistake?",
-        "cmd": "safety --check",
-        "a": "People approve before anything goes out, every connection has an undo step, and files stay on the company's own computers."
+        "a": "People approve before anything goes out, every connection has an undo step, and contacts and settings stay protected on each computer.",
+        "keywords": [
+          "mistake",
+          "safe",
+          "data",
+          "undo",
+          "approve",
+          "approval",
+          "sign off",
+          "control"
+        ],
+        "avoid": [
+          "know",
+          "knows",
+          "skill",
+          "skills"
+        ],
+        "sources": [
+          {
+            "label": "Ergon case study",
+            "href": "projects/ergon.html"
+          }
+        ]
       },
       {
         "q": "What's Asmodeus?",
-        "cmd": "asmodeus --about",
-        "a": "A private research project that tests trading ideas on past market data. No real money, and no performance claims."
+        "a": "A private research project that tests trading ideas on past market data. No real money, and no performance claims.",
+        "keywords": [
+          "asmodeus",
+          "trading",
+          "market",
+          "backtesting",
+          "research"
+        ],
+        "sources": [
+          {
+            "label": "Asmodeus case study",
+            "href": "projects/asmodeus.html"
+          }
+        ]
+      },
+      {
+        "q": "How does he test his work?",
+        "a": "Automated tests on every system: 3,300+ checks across 5 systems. Each project page keeps what is verified apart from what still needs live checks.",
+        "keywords": [
+          "test",
+          "how do you test",
+          "verified",
+          "evidence"
+        ],
+        "sources": [
+          {
+            "label": "Built and tested",
+            "href": "#built"
+          },
+          {
+            "label": "Projects in the résumé",
+            "href": "#work"
+          }
+        ]
+      },
+      {
+        "q": "Does he use AI to code?",
+        "a": "Yes, openly. He is an AI-assisted developer, and two of his projects, dotz and Sophos, are desktop apps for running AI coding agents.",
+        "keywords": [
+          "coding",
+          "ai to code",
+          "ai-assisted",
+          "coding agents",
+          "write code",
+          "agents"
+        ],
+        "sources": [
+          {
+            "label": "Experience",
+            "href": "#experience"
+          },
+          {
+            "label": "dotz on GitHub",
+            "href": "https://github.com/cayleb-james2008/dotz"
+          },
+          {
+            "label": "Sophos on GitHub",
+            "href": "https://github.com/cayleb-james2008/sophos"
+          }
+        ]
+      },
+      {
+        "q": "What does he build with?",
+        "a": "TypeScript, JavaScript and SQLite, among others. The skills list in his résumé names every language and tool he works in.",
+        "keywords": [
+          "stack",
+          "built with",
+          "code in",
+          "skills",
+          "tools he uses"
+        ],
+        "sources": [
+          {
+            "label": "Education and skills",
+            "href": "#education"
+          }
+        ]
+      },
+      {
+        "q": "Where did he study?",
+        "a": "Portland High School in Connecticut: cybersecurity and AP Computer Science, graduated 2026. He has built on his own since Oct 2025.",
+        "keywords": [
+          "study",
+          "where did he go",
+          "high school",
+          "learn",
+          "learned",
+          "cybersecurity"
+        ],
+        "phrases": [
+          "know security",
+          "knows security",
+          "know about security",
+          "knows about security",
+          "good at security",
+          "security background",
+          "study security",
+          "studied security"
+        ],
+        "sources": [
+          {
+            "label": "Education and skills",
+            "href": "#education"
+          }
+        ]
+      },
+      {
+        "q": "Can I see it working?",
+        "a": "The lab replays 10 recorded demos of the Industry AI Suite. Each shows its source, the output and the call left to a person.",
+        "keywords": [
+          "demo",
+          "lab",
+          "see it working",
+          "see it",
+          "try",
+          "live"
+        ],
+        "sources": [
+          {
+            "label": "The lab",
+            "href": "lab/"
+          },
+          {
+            "label": "Industry AI Suite",
+            "href": "projects/industry-ai-suite.html"
+          }
+        ]
+      },
+      {
+        "q": "Is the code public?",
+        "a": "dotz, Sophos and the Industry AI Suite are public on GitHub. Ergon and Asmodeus are private; their pages show what was built and what is still unproven.",
+        "keywords": [
+          "code",
+          "public",
+          "github",
+          "open source",
+          "source code",
+          "see the code"
+        ],
+        "sources": [
+          {
+            "label": "dotz",
+            "href": "https://github.com/cayleb-james2008/dotz"
+          },
+          {
+            "label": "Sophos",
+            "href": "https://github.com/cayleb-james2008/sophos"
+          },
+          {
+            "label": "Industry AI Suite",
+            "href": "https://github.com/cayleb-james2008/industry-ai-suite"
+          }
+        ]
+      },
+      {
+        "q": "Will it take anyone's job?",
+        "a": "It's built not to. It takes the busywork, not the person: your team gets time back for more work, and a person always has the last word.",
+        "keywords": [
+          "replace",
+          "anyone's job",
+          "people",
+          "my staff",
+          "my team's jobs",
+          "take jobs",
+          "lose jobs"
+        ],
+        "sources": [
+          {
+            "label": "Work with me",
+            "href": "#services"
+          }
+        ]
+      },
+      {
+        "q": "What apps does it work with?",
+        "a": "The ones your team already uses: email, calendars, invoices, schedules, shared files. If it runs on a computer, he can build around it.",
+        "keywords": [
+          "apps",
+          "calendar",
+          "invoices",
+          "spreadsheet",
+          "shared files",
+          "the apps we use"
+        ],
+        "avoid": [
+          "build",
+          "builds",
+          "building",
+          "built",
+          "make",
+          "makes",
+          "made",
+          "making",
+          "create",
+          "created",
+          "develop",
+          "developed"
+        ],
+        "sources": [
+          {
+            "label": "Ergon",
+            "href": "#team"
+          },
+          {
+            "label": "Work with me",
+            "href": "#services"
+          }
+        ]
       },
       {
         "q": "How do I reach him?",
-        "cmd": "contact",
         "a": "Email is fastest, or grab the résumé.",
+        "keywords": [
+          "contact",
+          "email",
+          "get in touch",
+          "talk",
+          "reach out"
+        ],
+        "sources": [
+          {
+            "label": "Contact",
+            "href": "#contact"
+          }
+        ],
         "links": [
           {
             "label": "Email Cayleb",

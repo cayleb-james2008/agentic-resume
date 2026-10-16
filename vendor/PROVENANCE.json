@@ -1,37 +1,8 @@
 {
-  "vendor/lenis-1.3.26/lenis.mjs": {
-    "package": "lenis@1.3.26",
-    "source": "dist/lenis.mjs",
-    "sha256": "b7a2f6896b9ce086d8192ff17c91aad457447976764971fe5011c42169602e9e"
-  },
-  "assets/fonts/onest-latin-400-normal.woff2": {
-    "package": "@fontsource/onest@5.3.1",
-    "source": "files/onest-latin-400-normal.woff2",
-    "sha256": "93dfb945d217bb541c46e5cdef85bb86095009522fcede783215827e7ca14439"
-  },
-  "assets/fonts/onest-latin-500-normal.woff2": {
-    "package": "@fontsource/onest@5.3.1",
-    "source": "files/onest-latin-500-normal.woff2",
-    "sha256": "83c1e1616618edcbcf5aa77155d4e4aa3b84d772df33fb4f2f10fba919d863f3"
-  },
-  "assets/fonts/onest-latin-600-normal.woff2": {
-    "package": "@fontsource/onest@5.3.1",
-    "source": "files/onest-latin-600-normal.woff2",
-    "sha256": "a56e6d2dcc2d24fe160cbc8c08adbca5a9da776237460704f6f24e1b5f7cba36"
-  },
-  "assets/fonts/onest-latin-700-normal.woff2": {
-    "package": "@fontsource/onest@5.3.1",
-    "source": "files/onest-latin-700-normal.woff2",
-    "sha256": "d48e1aee8027a82b7b156b734ff2efa1e8839e4365a305f0323f5e0b41a230fb"
-  },
-  "assets/fonts/jetbrains-mono-latin-400-normal.woff2": {
-    "package": "@fontsource/jetbrains-mono@5.3.0",
-    "source": "files/jetbrains-mono-latin-400-normal.woff2",
-    "sha256": "14425ba9c695763c1547f48a206b7aa60350a33ae23de09f0407877f3fcd89eb"
-  },
-  "assets/fonts/jetbrains-mono-latin-500-normal.woff2": {
-    "package": "@fontsource/jetbrains-mono@5.3.0",
-    "source": "files/jetbrains-mono-latin-500-normal.woff2",
-    "sha256": "cb182feeed4d798ff6961d3c79f7026279448fca0676438aaecb21f3fc39553a"
+  "assets/fonts/mona-sans-latin-wdth-normal.woff2": {
+    "package": "@fontsource-variable/mona-sans@5.3.0",
+    "source": "files/mona-sans-latin-standard-normal.woff2",
+    "axes": "wdth 75-125, wght 200-900",
+    "sha256": "5ea3740633e5ac7af56c13d7e8ec32bcae12e7723e53d34284469a8947ccb2f3"
   }
 }

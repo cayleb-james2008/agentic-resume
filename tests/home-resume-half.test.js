@@ -283,17 +283,17 @@ test('the stylesheet sets the half as the official sheet, within the house rules
     assert.ok(found.length, `a rule for ${selector}`);
     return found.map((m) => m[2]).join(';');
   };
-  // A cool-grey card with the reference's 2rem radius; from 1024px the sections sit in two columns.
+  // One raised sheet in the site's radius; from 1024px the sections sit in two columns.
   assert.match(rule('.resume-half'), /background:\s*var\(--surface\)/);
-  assert.match(rule('.resume-half'), /border-radius:\s*var\(--radius-card\)/);
+  assert.match(rule('.resume-half'), /border-radius:\s*var\(--radius\)/);
   assert.match(css, /grid-template-areas:\s*"head head"\s*"exp edu"\s*"work edu"/);
-  assert.match(rule('.resume-half h2'), /text-transform:\s*uppercase/);
+  assert.doesNotMatch(css, /text-transform/, 'section labels in sentence case');
   assert.match(rule('.resume-project--lead'), /border-left:\s*2px solid var\(--accent\)/);
-  assert.match(css, /color:\s*var\(--accent-ink\)/, 'link hover is the accent ink');
+  assert.match(rule('.resume-link'), /color:\s*var\(--accent\)/, 'links are the accent ink');
 
   assert.doesNotMatch(css, /@keyframes/);
   assert.doesNotMatch(css, /opacity|visibility/, 'nothing here hides content');
-  for (const [, value] of css.matchAll(/transition:\s*([^;]+);/g)) assert.match(value, /^(?:color\b|none$)/, 'transitions are hover colour only');
+  for (const [, value] of css.matchAll(/transition:\s*([^;]+);/g)) assert.match(value, /^(?:(?:background-)?color\b|none$)/, 'transitions are hover colour only');
   assert.doesNotMatch(css, /#[0-9a-f]{3,8}\b/i, 'colours come from tokens');
 });
 

@@ -1,28 +1,4 @@
 {
-  "assets/hero/blueprint-tall.jpg": {
-    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
-    "width": 1080,
-    "height": 2800,
-    "sha256": "3d36c41b86a3b383d15c0a35c7d05cbf24812230e3cb7463e5441aaa86fccc47"
-  },
-  "assets/hero/blueprint-wide.jpg": {
-    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
-    "width": 2560,
-    "height": 1440,
-    "sha256": "7c3cab08f6c51c170f6640697d067ebdb0d3af3e8d67b3d8f5cf07f22b63538d"
-  },
-  "assets/hero/surface-tall.jpg": {
-    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
-    "width": 1080,
-    "height": 2800,
-    "sha256": "b3c68c3df6780b2102f7173a9f67cd2ae2f41e063ac44c183ffe4fe3c15d5d47"
-  },
-  "assets/hero/surface-wide.jpg": {
-    "source": "Rendered by scripts/home/render_hero.mjs from scripts/home/hero_scene.html; counts read from resume/resume-content.json",
-    "width": 2560,
-    "height": 1440,
-    "sha256": "f8261c2f3dd509169ebddb9e9cf3ec0f5ff71a3978244f137f810f97a27cecbc"
-  },
   "assets/work/dotz.jpg": {
     "source": "Cayleb's own product screenshot: https://github.com/cayleb-james2008/dotz @ 2139526",
     "repo": "https://github.com/cayleb-james2008/dotz",

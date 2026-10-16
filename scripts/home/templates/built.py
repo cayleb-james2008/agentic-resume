@@ -1,36 +1,74 @@
-"""What I've built: five black cards. Real product screenshots for dotz, Sophos and the Suite; small
-terminals for Ergon and Asmodeus. Each card links to its case study or repository."""
-from markup import attr, external, icon, image_size, rv, term, text
+"""Built and tested: Ergon featured on top, with its checklist and its honest status; then an index of the other
+four. Each row is the project's name (linking its case study), a line on what it is, its test count, its tags and,
+where the code is public, a link to it. Each carries one real screenshot, or for Asmodeus, which is private, its
+checklist.
 
-DELAYS = (0, 90, 180, 0, 90)
+On a wide screen with the script, site/js/home/work.js turns the index into a list beside one preview frame that
+follows the row you point at or tab to; everywhere else each row shows its own picture."""
+from markup import attr, external, icon, image_size, link, text
 
 
-def card(c: dict, delay: int, status: str) -> str:
-    tags = "".join(f"<li>{text(t)}</li>" for t in c["tags"]) + f'<li class="n">{text(c["count"])}</li>'
-    chip = f'<span class="status mono">{text(status)}</span>' if c.get("status") else ""
-    words = f'<div class="wc-text"><h3>{text(c["title"])}</h3><p>{text(c["text"])}</p><ul class="tags">{tags}</ul>{chip}</div>'
-    shell = f'<pre class="wc-term mono">{term(c["terminal"])}</pre>' if c.get("terminal") else ""
-    picture = ""
+def checks(items: list[str], cls: str = "checks") -> str:
+    rows = "".join(f"<li>{icon('check')}<span>{text(c)}</span></li>" for c in items)
+    return f'<ul class="{cls}">{rows}</ul>'
+
+
+def tags(c: dict) -> str:
+    return f'<ul class="tags">{"".join(f"<li>{text(t)}</li>" for t in c["tags"])}</ul>'
+
+
+def code_link(c: dict, label: str) -> str:
+    if not c.get("code"):
+        return ""
+    return (f'<a class="row-code" href="{attr(c["code"])}"{external(c["code"])}>'
+            f'<span>{text(label)}</span>{icon("upright")}</a>')
+
+
+def feature(c: dict, b: dict, status: str) -> str:
+    chip = f'<p class="status">{text(status)}</p>' if c.get("status") else ""
+    return (
+        f'<article class="feature" id="work-{attr(c["slug"])}">'
+        '<div class="feature-text">'
+        f'<p class="feature-cat">{text(c["category"])}</p>'
+        f'<h3 class="feature-h"><a href="{attr(c["href"])}">{text(c["title"])}</a></h3>'
+        f'<p class="feature-p">{text(c["text"])}</p>{chip}'
+        f'<p class="feature-foot"><span class="count">{text(c["count"])}</span>'
+        f'{link(c["href"], b["caseLabel"], "btn btn--ghost")}</p>'
+        "</div>"
+        f'{checks(c.get("checks", []), "checks checks--feature")}'
+        "</article>"
+    )
+
+
+def row(c: dict, b: dict) -> str:
     if c.get("image"):
         width, height = image_size(c["image"]["src"])
-        picture = (f'<figure class="wc-shot"><img src="{attr(c["image"]["src"])}" alt="{attr(c["image"]["alt"])}" '
-                   f'width="{width}" height="{height}" loading="lazy" decoding="async"></figure>')
-    body = f'<div class="wc-body">{words}{shell}</div>' if c.get("wide") else f"{picture}{shell}{words}"
+        visual = (f'<figure class="row-shot"><img src="{attr(c["image"]["src"])}" alt="{attr(c["image"]["alt"])}" '
+                  f'width="{width}" height="{height}" loading="lazy" decoding="async"></figure>')
+    else:
+        visual = f'<div class="row-shot row-shot--checks">{checks(c.get("checks", []))}</div>'
     return (
-        f'<li class="wc{" wide" if c.get("wide") else ""}"{rv("card2", delay)}>'
-        f'<a class="wc-a" href="{attr(c["href"])}"{external(c["href"])}><article class="wc-art dark-ctx">'
-        f'<div class="wc-meta"><span>{text(c["category"])}</span><span class="wc-badge">{icon("upright")}</span></div>'
-        f"{body}</article></a></li>"
+        f'<li class="row" data-row><article class="row-in" id="work-{attr(c["slug"])}">'
+        '<div class="row-text">'
+        f'<h3 class="row-h"><a class="row-link" href="{attr(c["href"])}">{text(c["title"])}</a></h3>'
+        f'<p class="row-cat">{text(c["category"])}</p>'
+        f'<p class="row-p">{text(c["text"])}</p>'
+        f'<div class="row-meta"><span class="count">{text(c["count"])}</span>{tags(c)}</div>'
+        f'{code_link(c, b["codeLabel"])}'
+        f"</div>{visual}</article></li>"
     )
 
 
 def render(content: dict) -> str:
     b = content["built"]
     status = content["ergon"]["status"]
-    cards = "".join(card(c, DELAYS[i % len(DELAYS)], status) for i, c in enumerate(b["cards"]))
+    first, rest = b["cards"][0], b["cards"][1:]
+    rows = "".join(row(c, b) for c in rest)
     return (
         '<section class="built" id="built" aria-labelledby="built-title"><div class="shell">'
-        f'<div class="sec-head"><p class="eyebrow pillish"{rv()}><i></i>{text(b["eyebrow"])}</p>'
-        f'<h2 class="h2" id="built-title" data-lines style="--d:120ms">{text(b["headline"])}</h2></div>'
-        f'<ul class="cards">{cards}</ul></div></section>'
+        f'<div class="sec-head"><h2 class="sec-h" id="built-title">{text(b["headline"])}</h2>'
+        f'<p class="sec-lead">{text(b["lead"])}</p></div>'
+        f"{feature(first, b, status)}"
+        f'<div class="index" data-index><ul class="index-rows">{rows}</ul></div>'
+        "</div></section>"
     )

@@ -1,9 +1,23 @@
-"""What a page tells search engines and link previews: its canonical address and the share card.
+"""What a page tells search engines, link previews and the browser: its canonical address, the share card and
+its theme colours.
 
 Every page gets the same card (assets/og/card.png, made by make_share_card.py) with its own
 title, description and address.
 """
 from markup import attr
+
+# The browser chrome follows the page: paper by day, midnight by night (site/css/tokens.css).
+THEME_LIGHT = "#f5f6f8"
+THEME_DARK = "#121a2b"
+
+
+def theme() -> str:
+    """Colour-scheme support and the two theme colours, for every page's head."""
+    return (
+        '<meta name="color-scheme" content="light dark">'
+        f'<meta name="theme-color" media="(prefers-color-scheme: light)" content="{THEME_LIGHT}">'
+        f'<meta name="theme-color" media="(prefers-color-scheme: dark)" content="{THEME_DARK}">'
+    )
 
 
 def tags(meta: dict, path: str, title: str, description: str) -> str:

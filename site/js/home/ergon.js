@@ -1,17 +1,16 @@
 /**
  * The Ergon team graph: wires from the hub to each person, updates travelling down them, tickets climbing
- * the ladder Agent → Senior agent → Person. The team switch reshapes every card to another sample team.
+ * the ladder Agent, Senior agent, Person. The team switch reshapes every card to another sample team.
  *
  * Autoplay runs only while the figure is on screen and the tab is visible, and never with motion reduced;
  * the switch, the test ticket and a tap on a person still work then, with instant steps. The log announces
- * only what the visitor started.
+ * only what the visitor started. Its lines are plain sentences from content.json (ergon.figure).
  */
 import { ticker } from '../engine/ticker.js';
 import { ladderStop, nextTeam, ticketCard, wirePath } from './graph.js';
-import { term } from './text.js';
 
 const NS = 'http://www.w3.org/2000/svg';
-const TICK_MS = 2300;
+const TICK_MS = 3200;
 const LOG_LINES = 4;
 const STEP_MS = 650;
 
@@ -26,6 +25,8 @@ export function mount(figure, { reduced }) {
   const ladder = [...document.querySelectorAll('[data-ladder] li')];
   const seg = document.querySelector('[data-seg]');
   const button = figure.querySelector('[data-ticket]');
+  const label = figure.querySelector('#team-label');
+  const ctl = figure.querySelector('.eg-ctl');
   const narrow = window.matchMedia('(max-width: 767.98px)');
   const cards = () => [...list.querySelectorAll('.eg-person')];
   let team = data.teamOrder[0], wires = [], packets = [], stopPackets = null;
@@ -34,9 +35,11 @@ export function mount(figure, { reduced }) {
   const wait = (ms) => new Promise((r) => window.setTimeout(r, reduced ? Math.min(ms, 120) : ms));
   const rect = (el, s) => { const r = el.getBoundingClientRect(); return { left: r.left - s.left, top: r.top - s.top, width: r.width, height: r.height }; };
 
+  const fill = (template, values) => template.replace(/\{(\w+)\}/g, (_, k) => values[k] ?? '');
+
   function line(text, announce) {
     const p = document.createElement('p');
-    p.innerHTML = term([text]);
+    p.textContent = text;
     if (announce) log.setAttribute('aria-live', 'polite');
     log.append(p);
     while (log.children.length > LOG_LINES) log.firstElementChild.remove();
@@ -52,7 +55,7 @@ export function mount(figure, { reduced }) {
     packets = [];
     svg.replaceChildren();
     const mode = narrow.matches ? 'rows' : 'cols';
-    const h = rect(hub, s), mark = rect(hub.querySelector('.mk'), s);
+    const h = rect(hub, s), mark = rect(hub.querySelector('[data-hub-mark]'), s);
     wires = cards().map((card) => {
       const c = rect(card, s);
       const av = rect(card.querySelector('.av'), s);
@@ -106,7 +109,7 @@ export function mount(figure, { reduced }) {
     await packet(i, 1, '', 850);
     // Read the person now: a team switch during the packet reshapes this card into someone else.
     const person = data.teams[team].people[i];
-    line(`› ${person.role.toLowerCase()} · ${person.task}`, announce);
+    line(fill(f.routineLine, { role: person.role, task: person.task }), announce);
     await wait(500);
     card.classList.remove('busy');
     status.textContent = f.assistantOn;
@@ -124,7 +127,7 @@ export function mount(figure, { reduced }) {
     const card = cards()[i], T = data.teams[team];
     const issue = T.tickets[tickets % T.tickets.length];
     card.classList.add('tk');
-    line(`${f.flag} · ${T.people[i].role.toLowerCase()} · ${issue.toLowerCase()}`, announce);
+    line(fill(f.ticketLine, { role: T.people[i].role, issue }), announce);
     await packet(i, -1, 'tk', 950);
     hub.classList.add('hot');
     const stop = ladderStop(tickets);
@@ -158,7 +161,7 @@ export function mount(figure, { reduced }) {
       b.setAttribute('aria-checked', String(on));
       b.tabIndex = on ? 0 : -1;
     });
-    line(`${f.shape} ${next}`, true);
+    line(fill(f.teamLine, { team: data.teams[next].label.toLowerCase() }), true);
     list.classList.add('swap');
     await wait(180);
     data.teams[next].people.forEach((p, k) => {
@@ -171,7 +174,6 @@ export function mount(figure, { reduced }) {
     list.classList.remove('swap');
     window.requestAnimationFrame(layout);
     window.setTimeout(() => { cards().forEach((c) => { c.style.transitionDelay = ''; }); layout(); }, 420);
-    line(f.shaped, false);
   }
 
   seg.addEventListener('click', (e) => { const b = e.target.closest('[data-team]'); if (b) shape(b.dataset.team); });
@@ -188,6 +190,9 @@ export function mount(figure, { reduced }) {
     if (card) routine(cards().indexOf(card), true);
   });
   button.addEventListener('click', () => ticket(true));
+  // The controls ship hidden or disabled (a page whose script never runs has nothing here to press); on now.
+  for (const el of [label, seg, ctl]) el.hidden = false;
+  cards().forEach((c) => { c.disabled = false; });
 
   function loop() {
     window.clearTimeout(timer);

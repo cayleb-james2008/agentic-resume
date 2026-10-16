@@ -1,4 +1,5 @@
-/** The menu and the request modal. The scroll lock is counted so stacked overlays release it once. */
+/** The phone menu sheet and the request composer, and the page's clicks: in-page jumps, the composer, copying.
+ * The scroll lock is counted so stacked overlays release it once. */
 
 import { composeMail, topicPhrase, validate } from './mail.js';
 
@@ -12,7 +13,7 @@ export function createScrollLock({ stop, start }) {
 }
 
 
-const CLOSE_MS = 380;
+const CLOSE_MS = 200;
 const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])';
 
 /** Keeps Tab inside an open overlay. */
@@ -150,7 +151,17 @@ export function mountModal(root, ctx) {
     raw.focus({ preventScroll: true });
     raw.select();
   });
-  return {
+  /**
+   * Opens the composer with `text` already in the message, e.g. a question the Ask bar had no answer for. A draft
+   * the visitor has written stays; one this put there and they left alone gives way to the newer question.
+   */
+  let drafted = '';
+  function draft(text) {
+    api.open('');
+    const current = fields.msg.value.trim();
+    if (text && (!current || current === drafted)) { fields.msg.value = text; drafted = text; }
+  }
+  const api = {
     open(t = '') {
       // Reopened before the last written email's reset ran: reset now, so the form shows, not the old done view.
       if (resetTimer) { window.clearTimeout(resetTimer); resetTimer = 0; reset(); }
@@ -159,9 +170,11 @@ export function mountModal(root, ctx) {
       fields.msg.placeholder = t ? (t === d.otherTopic ? d.otherPh : d.topicPh.replace('{topic}', topicPhrase(t))) : d.defaultPh;
       modal.show();
     },
+    draft,
     close: () => modal.close(),
     get isOpen() { return modal.open; },
   };
+  return api;
 }
 
 /** After an in-page jump: the next Tab starts from the section, and its address is in the URL, as a native link would leave it. */
@@ -174,13 +187,21 @@ export function land(target, id, hist = window.history) {
 /** A plain primary click; Ctrl, Cmd, Shift, Alt and other buttons keep the browser's own link behaviour (new tab, window). */
 export const plainClick = (e) => e.button === 0 && !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey);
 
-/** Every [data-go] scrolls to its section, every [data-modal] opens the composer, every [data-copy] copies. */
-export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
+/**
+ * Every [data-go] scrolls to its section (Ask focuses the hero's field instead), every [data-modal] opens the
+ * composer, every [data-copy] copies.
+ */
+export function mountActions(doc, { reduced }, { menu, modal, ask }) {
   const go = (id) => {
+    if (id === 'ask' && ask) {
+      // The address names where the visitor now is, as a native jump would; focus stays in the field.
+      ask.focus(true);
+      if (location.hash !== '#ask') window.history.pushState(null, '', '#ask');
+      return;
+    }
     const target = document.getElementById(id);
     if (!target) return;
-    if (lenis) lenis.scrollTo(target, { duration: 1.2 });
-    else target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     land(target, id);
   };
   doc.addEventListener('click', async (e) => {
@@ -201,11 +222,13 @@ export function mountActions(doc, { lenis, reduced }, { menu, modal }) {
     else run();
   });
   doc.querySelectorAll('[data-copy]').forEach((b) => { b.dataset.label = b.querySelector('span').textContent; });
-  // Back and Forward walk the jumps land() recorded; scroll restoration is manual, so scroll there ourselves.
+  // Back and Forward walk the jumps land() recorded: go back to the section in the address, focus and all.
   window.addEventListener('popstate', () => {
+    // Back to #ask lands in the field, as the jump there did: once the browser has finished its own fragment
+    // focusing for this step, which would otherwise drop focus to the page (the section itself isn't focusable).
+    if (location.hash === '#ask' && ask) { window.setTimeout(() => ask.focus(), 0); return; }
     const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
-    if (lenis) lenis.scrollTo(target || 0, { duration: 1.2 });
-    else if (target) target.scrollIntoView({ block: 'start' });
+    if (target) target.scrollIntoView({ block: 'start' });
     else window.scrollTo(0, 0);
     target?.focus?.({ preventScroll: true });
   });

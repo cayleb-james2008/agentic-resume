@@ -3,6 +3,8 @@
 
 .masthead {
   position: sticky; top: 0; z-index: var(--z-masthead);
+  /* Clear of a notch or status bar (the page draws edge to edge); the 64px row sits below it. */
+  padding-top: env(safe-area-inset-top, 0px);
   background: var(--bg); border-bottom: 1px solid var(--line);
 }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
@@ -53,15 +55,16 @@
   .nav::-webkit-scrollbar { display: none; }
   .nav-ask { width: 44px; padding: 0; justify-content: center; }
   .nav-ask span, .nav-ask kbd { display: none; }
-  .js .nav { display: none; }
-  .js .menu-btn { display: inline-grid; }
-  .js .mh-r { margin-left: auto; }
+  /* Only once the script runs: if it never boots, the failsafe keeps the plain links and drops the dead button. */
+  .js:not(.reveal-failsafe) .nav { display: none; }
+  .js:not(.reveal-failsafe) .menu-btn { display: inline-grid; }
+  .js:not(.reveal-failsafe) .mh-r { margin-left: auto; }
 }
 
 /* --- The phone menu sheet ----------------------------------------------------- */
 .menu-sheet {
   position: fixed; inset: 0; z-index: var(--z-overlay); display: flex; flex-direction: column;
-  padding: 0 max(var(--gutter), env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding: env(safe-area-inset-top, 0px) max(var(--gutter), env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
   background: var(--bg); overflow-y: auto; overscroll-behavior: contain;
   transition: opacity var(--ui) ease, transform var(--ui) var(--ease-out);
 }

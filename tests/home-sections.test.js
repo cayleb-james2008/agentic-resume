@@ -112,7 +112,10 @@ test('the phone menu is a modal sheet, hidden until opened; its button shows onl
   assert.match(home, /<button class="menu-btn" id="menu-btn" type="button" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false">/);
   const css = read('site/css/masthead.css').replace(/\/\*[\s\S]*?\*\//g, '');
   assert.match(css, /\.menu-btn\s*\{[^}]*display:\s*none/);
-  assert.match(css, /\.js \.menu-btn\s*\{[^}]*display:\s*inline-grid/);
+  // If the script never boots, the failsafe brings the plain links back and puts the dead button away.
+  assert.match(css, /\.js:not\(\.reveal-failsafe\) \.menu-btn\s*\{[^}]*display:\s*inline-grid/);
+  assert.match(css, /\.js:not\(\.reveal-failsafe\) \.nav\s*\{[^}]*display:\s*none/);
+  assert.doesNotMatch(css, /\.js \.(nav|menu-btn|mh-r)\b/);
 });
 
 test('the résumé half carries its title line', () => {

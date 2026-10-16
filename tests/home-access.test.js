@@ -178,7 +178,17 @@ test('a generic open of the composer puts back the generic prompt', () => {
 test('Back and Forward after in-page jumps scroll to the section in the URL', () => {
   const js = read('site/js/home/overlays.js');
   assert.match(js, /window\.addEventListener\('popstate', /);
-  assert.match(body(js, "window.addEventListener('popstate', "), /location\.hash/);
+  const pop = body(js, "window.addEventListener('popstate', ");
+  assert.match(pop, /location\.hash/);
+  // Back to #ask lands in the field, as the jump there did.
+  assert.match(pop, /if \(location\.hash === '#ask' && ask\) \{ window\.setTimeout\(\(\) => ask\.focus\(\), 0\); return; \}/);
+});
+
+test('the homepage masthead and menu sheet clear a notch or status bar', () => {
+  const css = strip(read('site/css/masthead.css'));
+  assert.match(css, /\.masthead\s*\{[^}]*padding-top:\s*env\(safe-area-inset-top, 0px\)/);
+  assert.match(css, /\.menu-sheet\s*\{[^}]*padding:\s*env\(safe-area-inset-top, 0px\)/);
+  assert.match(strip(read('site/css/base.css')), /scroll-margin-top:\s*calc\(var\(--masthead-h\) \+ env\(safe-area-inset-top, 0px\) \+ 16px\)/);
 });
 
 test('the composer is named by whichever heading it shows', () => {

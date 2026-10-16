@@ -8,7 +8,7 @@ html {
 }
 /* Jumps and focus land clear of the sticky masthead. (Not scroll-padding on <html>: with it, tabbing into the
    masthead itself would scroll the page, since the browser counts the bar as covering the padded edge.) */
-[id], main :focus { scroll-margin-top: calc(var(--masthead-h) + 16px); }
+[id], main :focus { scroll-margin-top: calc(var(--masthead-h) + env(safe-area-inset-top, 0px) + 16px); }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
   font-family: var(--font); font-size: var(--step-0); line-height: 1.55; font-weight: 400;

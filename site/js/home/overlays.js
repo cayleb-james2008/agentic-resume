@@ -224,6 +224,9 @@ export function mountActions(doc, { reduced }, { menu, modal, ask }) {
   doc.querySelectorAll('[data-copy]').forEach((b) => { b.dataset.label = b.querySelector('span').textContent; });
   // Back and Forward walk the jumps land() recorded: go back to the section in the address, focus and all.
   window.addEventListener('popstate', () => {
+    // Back to #ask lands in the field, as the jump there did: once the browser has finished its own fragment
+    // focusing for this step, which would otherwise drop focus to the page (the section itself isn't focusable).
+    if (location.hash === '#ask' && ask) { window.setTimeout(() => ask.focus(), 0); return; }
     const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
     if (target) target.scrollIntoView({ block: 'start' });
     else window.scrollTo(0, 0);

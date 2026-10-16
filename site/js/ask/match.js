@@ -49,7 +49,7 @@ export const SYNONYMS = {
   vibe: 'coding', llm: 'coding', llms: 'coding',
   demos: 'demo', example: 'demo', examples: 'demo', proof: 'demo', screenshot: 'demo', screenshots: 'demo',
   school: 'study', studied: 'study', education: 'study', degree: 'study', college: 'study', university: 'study',
-  graduate: 'study', graduated: 'study', diploma: 'study', age: 'study', old: 'study',
+  graduate: 'study', graduated: 'study', diploma: 'study',
   qa: 'test', tested: 'test', tests: 'test', testing: 'test', bug: 'test', bugs: 'test', reliable: 'test',
   quality: 'test', checks: 'test',
   privacy: 'data', private: 'data', secure: 'safe', security: 'safe', risk: 'safe', risky: 'safe', trust: 'safe',

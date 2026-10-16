@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { ask, buildIndex, decide, normalize, oneEdit, rank, stem, tokens } from '../site/js/ask/match.js';
+import { SYNONYMS, ask, buildIndex, decide, normalize, oneEdit, rank, stem, tokens } from '../site/js/ask/match.js';
 
 const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf8');
 const content = JSON.parse(read('site/content.json'));
@@ -97,6 +97,13 @@ test('Ergon\'s price is never the answer for another product, or for what Cayleb
   const ergon = ask(index, 'What does Ergon charge?', chips);
   const first = ergon.kind === 'answer' ? ergon.i : ergon.suggestions[0];
   assert.equal(questions[first].q, 'What does Ergon cost?');
+});
+
+test('his age has no written answer, so an age question says so rather than answering about school', () => {
+  assert.ok(!('age' in SYNONYMS) && !('old' in SYNONYMS));
+  for (const query of ['How old is Cayleb?', 'how old is he', 'what is his age']) {
+    assert.equal(answerFor(query), 'fallback', query);
+  }
 });
 
 test('a question with no written answer says so and offers the closest ones, or the suggestions', () => {

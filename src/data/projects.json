@@ -359,7 +359,7 @@
   "name": "Harvard Bright-Landry Hockey Center",
   "place": "Boston, MA",
   "scope": "Renovation of and addition to a 3,000-plus seat ice hockey arena.",
-  "photo_credit": "Gaston Electric",
+  "photo_credit": "Courtesy of Gaston Electric",
   "home": true,
   "cover": {
    "src": "assets/img/l/harvard-bl-0.jpg",
@@ -616,7 +616,7 @@
     "Batting and throwing cages"
    ],
    [
-    "Gill Athletic",
+    "Gill Athletics",
     "Sand pit"
    ]
   ],
@@ -837,7 +837,7 @@
   "name": "Orchard Hill School",
   "place": "South Windsor, CT",
   "scope": "Furnishings for a new 72,000 sq ft school for 560 students.",
-  "photo_credit": "Greg Premru Photography",
+  "photo_credit": "Greg Premru Photography Inc.",
   "home": true,
   "cover": {
    "src": "assets/img/l/orchard-hill-0.jpg",
@@ -888,7 +888,7 @@
   "credits": [
    [
     "Architect",
-    "Tuthill & Wells"
+    "Tuttle & Wells"
    ],
    [
     "Interior design",
@@ -1331,10 +1331,7 @@
    "corporate"
   ],
   "source": "https://rhlco.com/portfolio/colleges-universities/uconn-ipb",
-  "about": [
-   "We furnished the Eversource and UTC tenant spaces in UConn's new Innovation Partnership Building, a 115,000 sq ft research building in the university's Technology Park, designed by Skidmore, Owings & Merrill.",
-   "The spaces run from private offices to open team areas, an operation room and project rooms. Private offices got Haworth Masters case goods in wood and laminate. The open team areas got Haworth Reside desking, set up for working together."
-  ],
+  "about": [],
   "credits": [
    [
     "Architect",

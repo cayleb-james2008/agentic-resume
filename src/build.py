@@ -77,7 +77,7 @@ def foot(path):
     cur = lambda h: ' aria-current="page"' if path == h else ''
     links = ''.join(f'<a href="{h}"{cur(h)}>{t}</a>' for t, h in NAV + [('Contact', '/contact')])
     return f'''<footer class="foot">
-  <div class="f-st"><p>Robert H. Lord Co. supplies, designs and installs furniture and architectural products for schools, campuses, libraries, offices and athletic facilities across New England.</p><p class="legal">&copy; 2026 Robert H. Lord Co. An Equal Opportunity Employer. Website concept.</p></div>
+  <div class="f-st"><p>Robert H. Lord Co. provides furniture and architectural products for schools, campuses, libraries, offices and athletic facilities across New England.</p><p class="legal">&copy; 2026 Robert H. Lord Co. An Equal Opportunity Employer. Website concept.</p></div>
   <nav class="f-nav" aria-label="Footer">{links}</nav>
   <div class="f-place"><p>220 Chapel Road<br>Manchester, CT 06042</p></div>
   <div class="f-call"><a href="tel:+18606458700">{PHONE}</a><span class="num">Fax {FAX}</span></div>
@@ -170,7 +170,7 @@ def build_home():
     card = sum(l['card'] for l in LINES)
     src = src.replace('See all 36 projects', f'See all {len(PROJECTS)} projects').replace('All 161 lines', f'All {card} lines').replace('See all 161 lines', f'See all {card} lines').replace('line card has 161 lines', f'line card has {card} lines')
     src = src.replace('src="assets/', 'src="/assets/').replace('data-prev="assets/', 'data-prev="/assets/')
-    write('/', 'Home', 'Robert H. Lord Co. designs, supplies and installs furniture, bleachers and gym equipment for schools, colleges, libraries and offices across New England, with one account executive from start to finish and our own install crew.',
+    write('/', 'Home', 'Robert H. Lord Co. provides furniture and architectural products across New England, with one account executive from start to finish, an in-house furniture crew and manufacturer-certified installers for architectural products.',
           src, data=concept, dialog=True)
 
 # ---------------------------------------------------------------- projects
@@ -272,7 +272,7 @@ def build_team():
 <div class="wrap">
 {secs}</div>
 {cta('Want to talk to someone?')}'''
-    write('/team', 'Our team', 'Meet the Robert H. Lord Co. team: leadership, account executives, project managers, estimators and the in-house install crew.', body)
+    write('/team', 'Our team', 'Meet the Robert H. Lord Co. team: leadership, account executives, project managers, estimators and the in-house furniture install crew.', body)
 
 # ---------------------------------------------------------------- lines
 def build_lines():
@@ -292,7 +292,7 @@ def build_lines():
         items += f'<li data-c="{" ".join(tags)}">{e(l["name"])}{f"<span>{sub}</span>" if sub else ""}</li>\n'
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">The lines we carry</h1>
-  <p class="lead wide rise" style="--i:3">{len(card)} manufacturers on our line card, from classroom chairs to telescopic bleachers. {mhec} are on the Connecticut DAS / MHEC contract and {clc} on the Connecticut Library Consortium contract.</p>
+  <p class="lead wide rise" style="--i:3">{len(card)} manufacturers on our line card, from classroom chairs to telescopic bleachers. Our published lists include {mhec} DAS / MHEC entries and {clc} Connecticut Library Consortium entries.</p>
 </section>
 <section id="contracts" class="paper-field" aria-labelledby="con-h">
   <div class="wrap con">
@@ -323,17 +323,17 @@ def build_lines():
   <h2 id="all-h" class="head" data-reveal>Every line, A to Z</h2>
   <div class="lfilter" id="lfilter" role="group" aria-label="Filter lines">
     <button type="button" class="chip" data-f="all" aria-pressed="true">All <span class="n">{len(LINES)}</span></button>
-    <button type="button" class="chip" data-f="mhec" aria-pressed="false">On DAS / MHEC <span class="n">{mhec}</span></button>
-    <button type="button" class="chip" data-f="clc" aria-pressed="false">On CLC <span class="n">{clc}</span></button>
+    <button type="button" class="chip" data-f="mhec" aria-pressed="false">DAS / MHEC list <span class="n">{mhec}</span></button>
+    <button type="button" class="chip" data-f="clc" aria-pressed="false">CLC list <span class="n">{clc}</span></button>
     <label class="sr" for="lsearch">Search lines</label><input class="lsearch" id="lsearch" type="search" placeholder="Search by name" autocomplete="off">
     <span class="count num" id="lcount" aria-live="polite">{len(LINES)} lines</span>
   </div>
-  <p class="muted" style="margin-top:14px;max-width:62ch;font-size:var(--step-small)">The line card lists {len(card)} lines. Four more appear only on the DAS / MHEC contract list, for {len(LINES)} in all, as published on rhlco.com.</p>
+  <p class="muted" style="margin-top:14px;max-width:62ch;font-size:var(--step-small)">The line card lists {len(card)} lines. Four more appear only on RHL's published DAS / MHEC list, for {len(LINES)} in all. Contract labels follow the lists on <a href="https://rhlco.com/manufacturers">rhlco.com</a>; ask your account executive to confirm coverage for your order.</p>
   <ul class="lgrid" id="lgrid">
 {items}  </ul>
 </section>
 {cta()}'''
-    write('/lines', 'Lines and contracts', f'The {len(card)} manufacturer lines Robert H. Lord Co. carries, which ones are on the Connecticut DAS / MHEC and CLC purchasing contracts, and how buying on contract skips the bid process.', body)
+    write('/lines', 'Lines and contracts', f'The {len(card)} manufacturer lines Robert H. Lord Co. carries, the published DAS / MHEC and CLC lists, and how eligible buyers can purchase on contract.', body)
 
 # ---------------------------------------------------------------- how we work
 def build_how():
@@ -354,10 +354,10 @@ def build_how():
         ('Project managers', 'Project managers place every order promptly and accurately, and plan the logistics of each installation with you and our installers.',
          'At Middlebury College’s Virtue Field House they verified the construction dimensions, assisted with the shop drawing approvals, and provided oversight and coordination for the installation. <a href="/projects/middlebury-college-virtue-field-house">See the project</a>',
          ('assets/img/l/middlebury-0.jpg', 1000, 667, 'Overhead batting cages in Middlebury College Virtue Field House'), ''),
-        ('Installers', 'Our in-house team of trained furniture installers assembles and sets the furniture we sell, efficiently and on time. Bleachers, seating and gym equipment go in with our manufacturer-certified installers. Our project managers and installation crews coordinate each installation from scheduling to occupancy.',
+        ('Installers', 'Our in-house team of trained furniture installers assembles and sets the furniture we sell, efficiently and on time. Bleachers, seating and gym equipment go in with our manufacturer-certified installers. Our project managers work with clients and installers to plan the logistics of each installation.',
          '<a href="/team#installers">Meet the install crew</a>',
          ('assets/img/r/4.jpg', 534, 667, 'Installers and equipment on the floor of Harvard’s Lavietes Pavilion mid-project'), ''),
-        ('Service team', 'Telescoping bleachers, overhead basketball backboards and operable partitions are large, heavy equipment, and they can be dangerous if nobody inspects and maintains them. Our service team inspects your equipment, does the maintenance and makes the repairs that keep people safe.',
+        ('Service team', 'Telescoping bleachers, overhead basketball backboards and operable partitions are large, heavy equipment that can pose a risk without regular inspection and maintenance. Our service team can inspect your equipment, perform maintenance and make needed repairs to help keep your team safe.',
          'Safety is the first and last word with this equipment.',
          ('assets/img/r/7.jpg', 534, 667, 'Telescopic bleachers at Biddeford High School printed with the school’s values'), ''),
     ]
@@ -369,7 +369,7 @@ def build_how():
                  f'<figure class="rp{" flat" if flat else ""}">{img(src, w, hh, alt)}{cap}</figure></li>\n')
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">One company, start to finish</h1>
-  <p class="lead wide rise" style="--i:3">We do more than sell furniture. The same company designs the rooms, prices them on contract, orders everything and installs it with our own crew. Our service team looks after bleachers, backboards and partitions for years after.</p>
+  <p class="lead wide rise" style="--i:3">We do more than sell furniture. Our team supports design, contract pricing, ordering and installation. Our in-house crew installs furniture, and manufacturer-certified installers handle architectural products. Our service team can inspect, maintain and repair architectural equipment.</p>
 </section>
 <section class="wrap sec roles" aria-labelledby="roles-h" style="padding-top:clamp(56px,6vw,96px)">
   <h2 id="roles-h" class="sr">Who works on your project</h2>
@@ -378,7 +378,7 @@ def build_how():
 </section>
 <section class="wrap sec" aria-labelledby="crew-h">
   <div class="crew">
-    <div class="crew-text"><h2 id="crew-h" data-reveal>Installed by our own crew</h2><p data-reveal style="--i:1">The people who set your furniture on install day work for RHL. That is our head installer and our installers below.</p><a class="link" href="/team#installers" data-reveal style="--i:2">The whole team</a></div>
+    <div class="crew-text"><h2 id="crew-h" data-reveal>Our in-house furniture crew</h2><p data-reveal style="--i:1">The people who set your furniture on install day work for RHL. That is our head installer and our installers below.</p><a class="link" href="/team#installers" data-reveal style="--i:2">The whole team</a></div>
     <div class="faces" data-reveal>{faces}</div>
   </div>
 </section>
@@ -386,11 +386,8 @@ def build_how():
   <div class="sec-head"><h2 id="boards-h" class="head" data-reveal>Design you can see first</h2><p data-reveal style="--i:1">Our renderings and proposal boards for the Malden Police Department: each room laid out with the desks, chairs and finishes we proposed.</p></div>
   <div class="boards" data-reveal>{boards}</div>
 </section>
-<section class="wrap sec" aria-labelledby="open-h">
-  <div class="todo-box" data-reveal><p>{TODO}Things we have heard but can't show from rhlco.com yet. If they're true, send us the details and we'll add them here:</p><p>How many install crews RHL runs, and whether the bleacher and seating installers are RHL staff too. Anything else about the full-service side that rhlco.com doesn’t say yet, such as delivery or storage.</p></div>
-</section>
 {cta()}'''
-    write('/how-we-work', 'How we work', 'One company from the first call to opening day: account executives, interior designers, estimators, project managers, an in-house install crew and a service team at Robert H. Lord Co.', body)
+    write('/how-we-work', 'How we work', 'One company from start to finish: account executives, interior designers, estimators, project managers, an in-house furniture crew and a service team at Robert H. Lord Co.', body)
 
 # ---------------------------------------------------------------- about
 def build_about():
@@ -404,7 +401,7 @@ def build_about():
           ('2003', 'Roy McNally joins to oversee the Architectural Products division.'),
           ('2014', 'We renovate our Manchester headquarters: an 8,000 sq ft showroom and open office.'),
           ('2023', 'Peter Lord becomes President & CEO.'),
-          ('2026', 'Connecticut DAS adopts the MHEC purchasing contract. 102 of our lines are on it.')]
+          ('2026', 'Connecticut DAS adopts the MHEC purchasing contract. Our published list names 102 manufacturers.')]
     tlh = ''.join(f'<li><span class="y">{y}</span><span>{e(t)}</span></li>' for y, t in tl)
     markets = ['Higher education', 'K-12', 'Independent schools', 'Libraries', 'Corporate', 'Municipal', 'Athletic', 'Healthcare']
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
@@ -432,7 +429,7 @@ def build_about():
 <section class="wrap sec" id="showroom" aria-labelledby="show-h">
   <div class="sec-head"><h2 id="show-h" class="head" data-reveal>Our showroom</h2><p data-reveal style="--i:1">In 2014 we renovated our headquarters at 220 Chapel Road in Manchester. We designed it and acted as our own general contractor. The 8,000 sq ft showroom and open office are furnished with lines we carry.</p></div>
   <div class="shots" data-reveal>{shots}</div>
-  <div class="todo-box" style="margin-top:24px" data-reveal><p>{TODO}Showroom hours, and whether visits are walk-in or by appointment. rhlco.com doesn’t list them.</p></div>
+  <div class="todo-box" style="margin-top:24px" data-reveal><p>{TODO}Confirm showroom hours and whether visits are walk-in or by appointment.</p></div>
 </section>
 <section class="wrap sec" aria-labelledby="tl-h">
   <div class="split">
@@ -443,11 +440,11 @@ def build_about():
 <section class="wrap sec" aria-labelledby="jobs-h">
   <div class="split">
     <div class="a"><h2 id="jobs-h" class="head" data-reveal>Working here</h2></div>
-    <div class="b prose" data-reveal><p>Robert H. Lord Co. is an Equal Opportunity Employer.</p><div class="todo-box" style="margin-top:16px"><p>{TODO}rhlco.com has no careers page. If RHL wants one, send the open roles and how to apply.</p></div></div>
+    <div class="b prose" data-reveal><p>Robert H. Lord Co. is an Equal Opportunity Employer.</p><div class="todo-box" style="margin-top:16px"><p>{TODO}Confirm current openings and how to apply.</p></div></div>
   </div>
 </section>
 {cta()}'''
-    write('/about', 'About us', 'Robert H. Lord Co. was founded in 1967 by Robert “Bob” Lord. Two divisions, furniture and architectural products, an 8,000 sq ft showroom in Manchester, CT, and an in-house install crew.', body)
+    write('/about', 'About us', 'Robert H. Lord Co. was founded in 1967 by Robert “Bob” Lord. Two divisions, furniture and architectural products, an 8,000 sq ft showroom in Manchester, CT, and an in-house furniture crew.', body)
 
 # ---------------------------------------------------------------- contact
 def build_contact():
@@ -459,7 +456,7 @@ def build_contact():
     to = ''.join(f'<option value="{p["slug"]}">{e(p["name"])}, {e(p["title"])}</option>' for p in TEAM if p['group'] != 'install')
     body = f'''<section class="wrap page-top" aria-labelledby="h1">
   <h1 id="h1" class="disp rise" style="--i:2">Start a project</h1>
-  <p class="lead wide rise" style="--i:3">Call us, or send a note and we’ll be in touch.</p>
+  <p class="lead wide rise" style="--i:3">Call us or find the account executive for your area.</p>
   <div class="cgrid">
     <div class="call rise" style="--i:4">
       <a class="tel" href="tel:+18606458700">{PHONE}</a>
@@ -485,7 +482,7 @@ def build_contact():
 </section>
 <section class="wrap sec" id="message" aria-labelledby="msg-h">
   <div class="cform">
-    <div class="fh"><h2 id="msg-h">Send a message</h2><p class="muted">Tell us about the building and the rooms, and when you need them ready.</p><div class="todo-box"><p>{TODO}This demo form doesn’t send anything yet. On the live site it would go to RHL’s inbox. rhlco.com publishes no email address, so RHL needs to say where messages should go.</p></div></div>
+    <div class="fh"><h2 id="msg-h">Send a message</h2><p class="muted">Tell us about the building and the rooms, and when you need them ready.</p><div class="todo-box"><p>{TODO}This demo form doesn’t send messages. Use <a href="https://rhlco.com/contact/general-inquiries-form">RHL’s official general inquiries form</a> or call {PHONE}. Confirm the destination before connecting this form.</p></div></div>
     <form id="cform" novalidate>
       <div class="field full"><label for="c-to">Send to</label><select id="c-to" name="to"><option value="general">General inquiry</option>{to}</select></div>
       <div class="field"><label for="c-name">Name <span class="req">(required)</span></label><input id="c-name" name="name" autocomplete="name" required></div>

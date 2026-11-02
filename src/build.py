@@ -1,11 +1,21 @@
 """Builds the static RHL site from src/data/*.json and src/home.html into the repo root.
 Run: python3 src/build.py   (no dependencies)"""
-import json, os, re
+import base64, json, os, re
 from html import escape as e
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 J = lambda n: json.load(open(os.path.join(ROOT, 'src/data', n), encoding='utf-8'))
 PROJECTS, TEAM, LINES = J('projects.json'), J('team.json'), J('lines.json')
+# One config file drives the quote form, the answers it stores and the watcher's routing (docs/QUOTE-WATCH.md).
+# The key is the project's publishable (anon) key, never a secret or service key. Routing stays off the public page.
+QUOTE_CFG = {**J('quote.json'), **{k: os.environ['RHL_QUOTE_' + k.upper()] for k in ('url', 'key') if 'RHL_QUOTE_' + k.upper() in os.environ}}
+QUOTE = {k: QUOTE_CFG[k] for k in ('url', 'key', 'fields')}
+QUOTE['url'] = QUOTE['url'].rstrip('/')
+def _is_secret(k):  # a key published in the page reaches every visitor, so refuse one that is not the publishable key
+    if k.startswith('sb_secret_'): return True
+    try: return k.startswith('eyJ') and json.loads(base64.urlsafe_b64decode(k.split('.')[1] + '=' * (-len(k.split('.')[1]) % 4))).get('role') == 'service_role'
+    except (ValueError, IndexError): return False
+if _is_secret(QUOTE['key']): raise SystemExit('The quote key is a secret/service key. Use the publishable (anon) key.')
 BY_ID = {p['id']: p for p in PROJECTS}
 SITE = 'https://rhl-concept.vercel.app'
 PHONE, FAX = '860.645.8700', '860.645.9100'
@@ -447,7 +457,20 @@ def build_about():
     write('/about', 'About us', 'Robert H. Lord Co. was founded in 1967 by Robert “Bob” Lord. Two divisions, furniture and architectural products, an 8,000 sq ft showroom in Manchester, CT, and an in-house furniture crew.', body)
 
 # ---------------------------------------------------------------- contact
+def quote_field(f):
+    i, kind = f['id'], f['type']
+    attrs = f'id="q-{i}" name="{i}" aria-describedby="q-{i}-e"' + (' required' if f.get('required') else '')
+    if f.get('autocomplete'): attrs += f' autocomplete="{e(f["autocomplete"])}"'
+    if f.get('max') and kind != 'select': attrs += f' maxlength="{int(f["max"])}"'
+    if kind == 'textarea': control = f'<textarea {attrs}></textarea>'
+    elif kind == 'select': control = f'<select {attrs}><option value="">Choose one</option>' + ''.join(f'<option value="{e(o["value"])}">{e(o["label"])}</option>' for o in f['options']) + '</select>'
+    else: control = f'<input {attrs}>'
+    req = ' <span class="req">(required)</span>' if f.get('required') else ''
+    return f'<div class="field{" full" if f.get("full") else ""}"><label for="q-{i}">{e(f["label"])}{req}</label>{control}<p class="err" id="q-{i}-e" hidden></p></div>'
+
 def build_contact():
+    PL = f'<a class="link" href="{tel(PHONE)}">{PHONE}</a>'
+    qfields = '\n      '.join(quote_field(f) for f in QUOTE['fields'])
     reps = [dict(slug=p['slug'], name=p['name'], phone=p['phone'], photo=p['photo'], div=p['group'], areas=p['areas'])
             for p in TEAM if p.get('areas')]
     counties = {'CT': ['Fairfield', 'Hartford', 'Litchfield', 'Middlesex', 'New Haven', 'New London', 'Tolland', 'Windham'],
@@ -466,6 +489,19 @@ def build_contact():
       <p class="muted" style="font-size:var(--step-small)">{TODO}Office and showroom hours</p>
     </div>
     <figure class="rise" style="--i:5">{img(BY_ID['rhl-co']['photos'][2]['v'], BY_ID['rhl-co']['photos'][2]['w'], BY_ID['rhl-co']['photos'][2]['h'], 'Lounge chairs around a low table in the RHL showroom', lazy=False)}<figcaption>Our showroom in Manchester</figcaption></figure>
+  </div>
+</section>
+<section class="wrap sec" id="quote" aria-labelledby="quote-h">
+  <div class="cform">
+    <div class="fh"><h2 id="quote-h">Request a quote</h2><p class="muted">Tell us what you need priced. A sentence is enough, we’ll ask for anything else.</p><div class="todo-box"><p>{TODO}This demo saves requests to a test database table and doesn’t email anyone. For a real quote today, call {PL}. Confirm who is notified, and how quickly RHL replies, before going live.</p></div></div>
+    <noscript><p class="sent">This form needs JavaScript. To ask for a quote, call {PL}.</p></noscript>
+    <form id="qform" method="post" action="/contact" novalidate>
+      {qfields}
+      <div class="sr" aria-hidden="true"><label>Leave this field empty<input name="hp_check" tabindex="-1" autocomplete="off"></label></div>
+      <div class="full"><button class="btn" type="submit">Request a quote</button></div>
+      <p class="sent" id="q-done" tabindex="-1" role="status" hidden>Thank you<span id="q-who"></span>. We have your quote request, and the right person on our team will be in touch. If it’s urgent, call {PL}.</p>
+      <p class="sent fail" id="q-fail" tabindex="-1" role="alert" hidden>We couldn’t send your request. Please try again, or call {PL}.</p>
+    </form>
   </div>
 </section>
 <section class="wrap sec" id="find" aria-labelledby="find-h">
@@ -496,7 +532,7 @@ def build_contact():
   </div>
 </section>'''
     write('/contact', 'Contact', 'Call Robert H. Lord Co. at 860.645.8700, visit the showroom at 220 Chapel Road in Manchester, CT, or find the account executive for your area.', body,
-          data={'reps': {'people': reps, 'counties': counties}})
+          data={'reps': {'people': reps, 'counties': counties}, 'quote': QUOTE})
 
 def build_404():
     body = f'''<section class="wrap page-top" aria-labelledby="h1" style="padding-bottom:var(--sec)">

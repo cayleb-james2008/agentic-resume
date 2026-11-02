@@ -248,4 +248,65 @@
       var msg = $('c-sent'); msg.hidden = false; msg.focus();
     });
   }
+
+  /* ---------- contact: quote request, saved as one row in rhl_demo.quote_requests (see docs/QUOTE-WATCH.md) ---------- */
+  /* Fields come from D.quote.fields (src/data/quote.json): a field with a `column` fills that column, any other lands in `extra`. */
+  var qf = $('qform');
+  if(qf){
+    var Q = D.quote || {}, fields = Q.fields || [], qbtn = qf.querySelector('button[type=submit]'), qbusy = false;
+    var bad = function(id, msg){
+      var inp = $('q-' + id), er = $('q-' + id + '-e');
+      er.textContent = msg; er.hidden = !msg; inp.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      return msg ? inp : null;
+    };
+    var reachable = function(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) || s.replace(/\D/g, '').length >= 7; };
+    var wrong = function(f, v){
+      if(!v) return !!f.required;
+      if(f.type === 'email-or-phone') return !reachable(v);
+      if(f.type === 'select') return !f.options.some(function(o){ return o.value === v; });
+      return false;
+    };
+    var finish = function(ok, who){
+      var box = $(ok ? 'q-done' : 'q-fail');
+      if(ok){ $('q-who').textContent = who ? ', ' + who : ''; qf.classList.add('done'); qf.reset(); }
+      box.hidden = false; box.focus();
+    };
+    qf.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      if(qbusy) return;
+      $('q-fail').hidden = true;
+      var body = {}, extra = {}, who = [], firstBad = null;
+      fields.forEach(function(f){
+        var v = qf.elements[f.id].value.trim(), inp = bad(f.id, wrong(f, v) ? (f.error || 'Check this field.') : '');
+        if(inp && !firstBad) firstBad = inp;
+        if(f.column) body[f.column] = v || null; else if(v) extra[f.id] = v;
+        if(f.greet && v) who.push(v);
+      });
+      if(firstBad){ firstBad.focus(); return; }
+      if(Object.keys(extra).length) body.extra = extra;
+      who = who.join(' ');
+      if(qf.elements.hp_check.value){ finish(true, who); return; } /* bot filled the hidden field: look done, save nothing */
+      if(!Q.url || !Q.key){ console.warn('Quote form is not connected: no url/key in the page data'); finish(false); return; }
+      qbusy = true; qbtn.disabled = true; qbtn.textContent = 'Sending…';
+      var ctl = new AbortController(), timer = setTimeout(function(){ ctl.abort(); }, 15000);
+      fetch(Q.url + '/quote_requests', {
+        signal: ctl.signal,
+        method: 'POST',
+        headers: {'apikey': Q.key, 'Content-Type': 'application/json', 'Content-Profile': 'rhl_demo', 'Prefer': 'return=minimal'},
+        body: JSON.stringify(body)
+      }).then(function(r){
+        if(r.status !== 201) throw new Error('HTTP ' + r.status);
+        finish(true, who);
+      }).catch(function(err){
+        console.warn('Quote request not sent:', err.message);
+        finish(false);
+      }).then(function(){ clearTimeout(timer); qbusy = false; qbtn.disabled = false; qbtn.textContent = 'Request a quote'; });
+    });
+    /* a field's message goes away as soon as what is typed is acceptable */
+    var recheck = function(ev){
+      var f = fields.filter(function(x){ return x.id === ev.target.name; })[0];
+      if(f && ev.target.getAttribute('aria-invalid') === 'true') bad(f.id, wrong(f, ev.target.value.trim()) ? (f.error || 'Check this field.') : '');
+    };
+    qf.addEventListener('input', recheck); qf.addEventListener('change', recheck);
+  }
 })();

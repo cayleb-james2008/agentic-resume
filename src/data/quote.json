@@ -1,0 +1,17 @@
+{
+  "url": "https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1",
+  "key": "",
+  "fields": [
+    {"id": "name", "column": "name", "type": "text", "label": "Name", "required": true, "max": 120, "autocomplete": "name", "greet": true, "error": "Enter your name."},
+    {"id": "company", "column": "company", "type": "text", "label": "Company", "max": 160, "autocomplete": "organization"},
+    {"id": "contact", "column": "contact", "type": "email-or-phone", "label": "Email or phone", "required": true, "max": 200, "autocomplete": "email", "full": true, "error": "Enter an email address or a phone number we can reach you on."},
+    {"id": "details", "column": "details", "type": "textarea", "label": "What do you need quoted?", "required": true, "max": 4000, "full": true, "error": "Tell us what you need quoted."}
+  ],
+  "routing": {
+    "default": "agent:sales-desk",
+    "rules": [
+      {"to": "agent:architectural-ae", "field": "details", "keywords": ["bleacher", "gym", "gymnasium", "basketball", "backboard", "partition", "locker", "scoreboard", "auditorium", "athletic", "field house", "inspection"]},
+      {"to": "agent:furniture-ae", "field": "details", "keywords": ["furniture", "chair", "desk", "table", "library", "libraries", "classroom", "lounge", "shelving", "cafeteria", "office", "casework"]}
+    ]
+  }
+}

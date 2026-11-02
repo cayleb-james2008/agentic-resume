@@ -7,7 +7,7 @@
   color-scheme:dark;
   --bg:#1F1C1D; --surface:#2A2627; --surface-2:#342F30; --ink:#EDECE9; --muted:#A8A29F; --dim:#77716E;
   --paper:#E8E7E3; --paper-2:#DCDAD5; --paper-ink:#231F20; --paper-muted:#5F5A57;
-  --accent:#88AE3F; --accent-strong:#9BC250; --accent-ink:#191A12;
+  --accent:#88AE3F; --accent-strong:#9BC250; --accent-ink:#191A12; --err:#F2A394;
   --font:"Archivo","Helvetica Neue",Arial,sans-serif;
   --step-small:clamp(.8125rem,.79rem + .1vw,.875rem);
   --step-body:clamp(1.0625rem,1rem + .25vw,1.1875rem);
@@ -640,7 +640,13 @@ dialog.room[open]::backdrop{animation:fade 260ms ease}
 .cform form{grid-column:6/span 7;display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cform .full{grid-column:1/-1}
 .cform .req{color:var(--muted)}
-.cform .sent{grid-column:1/-1;background:var(--surface);padding:16px 18px}
+.cform .sent{grid-column:1/-1;background:var(--surface);padding:16px 18px;overflow-wrap:anywhere}
+.cform .err{font-size:var(--step-small);color:var(--err)}
+.cform .field [aria-invalid="true"]{border-bottom-color:var(--err)}
+.cform .sent.fail{color:var(--err)}
+html:not(.js) #qform{display:none}
+.cform form.done{align-content:start}
+.cform form.done>:not(.sent){display:none}
 @media (max-width:899px){.cform .fh,.cform form{grid-column:1/-1}}
 @media (max-width:699px){.cform form{grid-template-columns:1fr}}
 

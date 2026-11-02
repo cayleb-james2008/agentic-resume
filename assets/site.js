@@ -268,7 +268,7 @@
     };
     var finish = function(ok, who){
       var box = $(ok ? 'q-done' : 'q-fail');
-      if(ok){ $('q-who').textContent = who ? ', ' + who : ''; qf.classList.add('done'); qf.reset(); }
+      if(ok){ $('q-who').textContent = who ? ', ' + who : ''; qf.classList.add('done'); HTMLFormElement.prototype.reset.call(qf); }
       box.hidden = false; box.focus();
     };
     qf.addEventListener('submit', function(ev){
@@ -277,7 +277,7 @@
       $('q-fail').hidden = true;
       var body = {}, extra = {}, who = [], firstBad = null;
       fields.forEach(function(f){
-        var v = qf.elements[f.id].value.trim(), inp = bad(f.id, wrong(f, v) ? (f.error || 'Check this field.') : '');
+        var v = $('q-' + f.id).value.trim(), inp = bad(f.id, wrong(f, v) ? (f.error || 'Check this field.') : '');
         if(inp && !firstBad) firstBad = inp;
         if(f.column) body[f.column] = v || null; else if(v) extra[f.id] = v;
         if(f.greet && v) who.push(v);
@@ -285,7 +285,7 @@
       if(firstBad){ firstBad.focus(); return; }
       if(Object.keys(extra).length) body.extra = extra;
       who = who.join(' ');
-      if(qf.elements.hp_check.value){ finish(true, who); return; } /* bot filled the hidden field: look done, save nothing */
+      if(qf.querySelector('[name=hp_check]').value){ finish(true, who); return; } /* bot filled the hidden field: look done, save nothing */
       if(!Q.url || !Q.key){ console.warn('Quote form is not connected: no url/key in the page data'); finish(false); return; }
       qbusy = true; qbtn.disabled = true; qbtn.textContent = 'Sending…';
       var ctl = new AbortController(), timer = setTimeout(function(){ ctl.abort(); }, 15000);

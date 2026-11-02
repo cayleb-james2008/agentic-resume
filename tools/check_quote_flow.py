@@ -39,16 +39,20 @@ check('route: equals on an extra answer', route({'details': 'desk', 'extra': {'t
 check('route: keyword is a whole word, plural allowed', route({'details': 'six Desks', 'extra': {}}, R) == 'b')
 check('route: "tablet" is not "table"', route({'details': 'ten tablets', 'extra': {}}, R) == 'd')
 check('route: no match -> default', route({'details': 'sofa', 'extra': {}}, R) == 'd')
+check('route: a keyword like "c++" matches', route({'details': 'we write c++ here'}, {'default': 'd', 'rules': [{'to': 'a', 'keywords': ['c++']}]}) == 'a')
 try:
     validate_routing(CFG['routing']); ok = True
 except SystemExit:
     ok = False
 check('config routing targets look valid', ok)
-try:
-    validate_routing({'default': 'kelli@rhl.example', 'rules': []}); ok = False
-except SystemExit:
-    ok = True
-check('a routing target the table would refuse is rejected at start-up', ok)
+def refused(routing):
+    try:
+        validate_routing(routing); return False
+    except SystemExit:
+        return True
+check('a routing target the table would refuse is rejected at start-up', refused({'default': 'kelli@rhl.example', 'rules': []}))
+check('a target with a trailing newline is rejected at start-up', refused({'default': 'agent:x\n', 'rules': []}))
+check('an empty keyword (matches everything) is rejected at start-up', refused({'default': 'd', 'rules': [{'to': 'a', 'keywords': ['desk', ' ']}]}))
 check('a network failure comes back as status 0, not an exception', call('http://127.0.0.1:1', 'k', 'GET')[0] == 0)
 os.environ['RHL_QUOTE_SERVICE_KEY'] = 'SECRET-VALUE'
 try:
@@ -84,6 +88,19 @@ with contextlib.redirect_stderr(io.StringIO()):
     except PollError:
         ok = True
     check('an unreadable table raises PollError (the loop survives it)', ok)
+    api, calls = fake((200, [ROW]), (504, None), (204, None))
+    run_once('u', 'k', R, api=api)
+    check('a gateway error (504) on a claim -> ticket put back to new', calls[-1] == ('PATCH', {'status': 'new', 'relevant_to': None}))
+    api, calls = fake((200, [ROW]), (400, None))
+    run_once('u', 'k', R, api=api)
+    check('a refused claim (400) is not "put back" (nothing was claimed)', len(calls) == 2)
+    def stopped(msg): raise KeyboardInterrupt
+    api, calls = fake((200, [ROW]), (200, [ROW]), (204, None))
+    try:
+        run_once('u', 'k', R, stopped, api=api); ok = False
+    except KeyboardInterrupt:
+        ok = calls[-1] == ('PATCH', {'status': 'new', 'relevant_to': None})
+    check('being stopped (SIGTERM / Ctrl-C) mid-delivery puts the ticket back, then stops', ok)
 
 # ---- the anonymous visitor ----------------------------------------------------------------------------------------
 check('anon can insert a ticket (what the form sends) -> 201', post(visitor)[0] == 201)
@@ -98,8 +115,10 @@ check('details padded with spaces past the limit -> 400', post({**visitor, 'deta
 check('answers kept in extra (an object) -> 201', post({**visitor, 'extra': {'topic': 'bleachers'}})[0] == 201)
 check('extra that is not an object -> 400', post({**visitor, 'extra': ['x']})[0] == 400)
 check('extra over 8 KB -> 400', post({**visitor, 'extra': {'k': 'a' * 9000}})[0] == 400)
+for label, bad_extra in (('a number', {'n': 5}), ('a nested object', {'a': {'b': 'c'}}), ('an array', {'a': ['b']}), ('null', {'a': None})):
+    check(f'extra holding {label} is refused (answers are text only) -> 400', post({**visitor, 'extra': bad_extra})[0] == 400)
 bulk = [{**visitor, 'details': f'{MARK} bulk {i}'} for i in range(31)]
-check('one request with 31 tickets is refused by the flood guard', post(bulk)[0] >= 400)
+check('one request with 31 tickets is refused by the flood guard -> 429', post(bulk)[0] == 429)
 # The form config and the table must agree: every configured column limit is accepted at max and refused one over.
 for f in CFG['fields']:
     if f.get('column') and f.get('max'):

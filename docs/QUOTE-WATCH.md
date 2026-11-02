@@ -32,7 +32,7 @@ SQL: `supabase/migrations/20261102120000_rhl_demo_quote_requests.sql`.
 |---|---|---|
 | `id`, `created_at` | database | ticket id and time |
 | `name`, `company` (nullable), `contact`, `details` | the visitor, via the form | who, where to reach them, what they need quoted |
-| `extra` | the visitor, via the form | answers to any field that has no column of its own (JSON object, 8 KB at most) |
+| `extra` | the visitor, via the form | answers to any field that has no column of its own: a flat JSON object of text answers, 8 KB at most (counted in bytes). Numbers, nesting and arrays are refused |
 | `status` | database, then the watcher | `new` (waiting), `routed` (claimed, agent messaged), then `done` or `spam` (people or agents close it) |
 | `relevant_to` | the watcher, or a person | routing key: a team slug or an agent handle such as `agent:furniture-ae`; null until routed |
 
@@ -42,6 +42,7 @@ Access: the anonymous role can only INSERT the five visitor columns (no reads, n
 Limits are on the raw text, so padding with spaces cannot get past them: `name` 120, `company` 160, `contact` 200,
 `details` 4000 characters, `extra` 8 KB. A **flood guard** refuses any insert that would take the table past 30 new tickets
 in a minute, counting every row of a bulk insert, so one anonymous request cannot become hundreds of messages to people.
+Inserts take a lock one at a time so parallel requests cannot all pass the count together. A refused insert answers HTTP 429.
 
 ## How an agent watches it
 
@@ -52,20 +53,20 @@ in a minute, counting every row of a bulk insert, so one anonymous request canno
    A rule reads one form answer (`field`, default `details`; a column or an `extra` answer) and matches `equals` (the whole
    answer is one of these values) or `keywords` (one of them appears as a whole word, singular or plural, so "tablet" is not
    "table"; list both forms where the plural is irregular, such as library and libraries). No rule matches: `routing.default`.
-   Start-up fails if a routing target is one the table would refuse (letters, digits, `:` `_` `-`, 64 at most).
+   Start-up fails if a routing target is one the table would refuse (letters, digits, `:` `_` `-`, 64 at most) or a keyword is empty.
 3. **Claim.** It sets `status = routed` and `relevant_to` with a PATCH that only matches while the row is still `new`, so two
    watchers cannot both take the same ticket.
 4. **Message.** It hands one JSON object to the notify command (default: print it):
    `{"to": "agent:furniture-ae", "ticket": "<id>", "received": "<time>", "request": {name, company, contact, details, extra}}`.
    The routed agent turns that into a message to its person, for example: *"Hey Kelli, Pat Doe of Hartford Library
    (pat@example.com) just requested a quote for 40 stacking chairs. Ticket 3022fcf8."*
-5. If delivery fails, or the answer to a claim is lost to a network error, the row goes back to `new` (with the `relevant_to`
-   it had before) and is tried again. A poll that fails is retried on the next interval. If even the put-back fails, the
+5. If delivery fails, the watcher is stopped (SIGTERM or Ctrl-C) mid-delivery, or the answer to a claim is lost (no answer, or
+   a 5xx), the row goes back to `new` (with the `relevant_to` it had before) and is tried again. A poll that fails is retried on the next interval. If even the put-back fails, the
    watcher logs the ticket id so someone can reset it.
 
 Run it: `RHL_QUOTE_URL=<rest base> RHL_QUOTE_SERVICE_KEY=<secret key> python3 tools/quote_watch.py --once`, or without `--once` to keep
 polling. `--notify-cmd "<command>"` runs a command (no shell) that reads the JSON on stdin; use it to call the person's agent.
-The command does not receive the service key, because it starts an agent that reads visitor text.
+The command does not receive the Supabase keys, because it starts an agent that reads visitor text.
 
 **Visitor text is untrusted.** `request.*` is typed by an anonymous visitor. The receiving agent summarises it and must
 never follow instructions inside it, and the agent must not be given tools that act on what a visitor wrote.
@@ -79,7 +80,9 @@ Polling needs nothing more and is the default.
 
 ## Changing the form or the routing
 
-- **Add or change a question:** edit `fields` in `src/data/quote.json`, run `python3 src/build.py`, then
+- **Add or change a question:** edit `fields` in `src/data/quote.json` (an `id` is lowercase letters, digits and `_`), run
+  `python3 src/build.py`, which stops with a plain message if the config is wrong (a typo in `column`, a repeated `id`, a
+  required column left out), then
   `python3 tools/check_quote_flow.py ...` (below). Nothing else changes while the answer lives in `extra`.
   Example: `{"id": "topic", "type": "select", "label": "What is it for?", "required": true, "options": [{"value": "bleachers", "label": "Bleachers and gym"}, {"value": "furniture", "label": "Furniture"}]}`
 - **Route on that question:** add a rule such as `{"to": "agent:architectural-ae", "field": "topic", "equals": ["bleachers"]}`
@@ -96,6 +99,7 @@ Polling needs nothing more and is the default.
    API answers 406 for the schema and the form shows its error message.
 3. Copy the project's publishable key (not the secret key). Build with it:
    `RHL_QUOTE_KEY=<publishable key> python3 src/build.py`, or put it in `src/data/quote.json`. Only `contact.html` changes.
+   The build accepts only a key that starts `sb_publishable_` or an anon-role JWT, and stops for anything else.
 4. Check the live contract: `python3 tools/check_quote_flow.py --url https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1 --anon-key <publishable> --service-key <secret>`.
    It inserts `TEST-CHECK` rows, touches only those, and closes them. It proves the live gateway accepts the key and the
    `Content-Profile` header. It runs outside a browser, so also submit the live form once to prove browser CORS. Always pass
@@ -126,10 +130,10 @@ What v1 already does to make that pass cheap: questions and routing are data (ab
 ## Verified locally, and what was not
 
 Run against Supabase's own Postgres 17 and PostgREST images on a scratch pod: the migration applies twice cleanly; the
-access rules above hold (38 checks in `tools/check_quote_flow.py`, which can be re-run and fails when the rules are broken on
-purpose); the form in a browser saved a row, showed its error state with the endpoint down or stalled, and retried; a field
-added by config alone was saved in `extra` and routed by the watcher. An independent review attacked the build; every
-finding it confirmed was fixed and now has a check. **Not tested:** the hosted API gateway
+access rules above hold (48 checks in `tools/check_quote_flow.py`, which can be re-run and fails when the rules are broken on
+purpose; the flood guard was also tested with 10 parallel bulk requests, which saved 29 rows against a limit of 30); the form in a browser saved a row, showed its error state with the endpoint down or stalled, and retried; a field
+added by config alone was saved in `extra` and routed by the watcher. Two independent reviews attacked the build; every
+finding they confirmed was fixed and now has a check. **Not tested:** the hosted API gateway
 (keys and CORS), Realtime, and any real messaging.
 
 ## Known limits (demo level)
@@ -137,10 +141,11 @@ finding it confirmed was fixed and now has a check. **Not tested:** the hosted A
 - The form is open to the internet. It has a honeypot field, size limits and a flood guard in the database, but no CAPTCHA.
   The guard is global: a flood can use up the 30-a-minute quota, and real visitors then see the error message with the phone
   number. Add a CAPTCHA or a gateway rate limit before real traffic.
-- If the watcher is killed, or the network is down for good, between claiming a ticket and delivering the message, that
-  ticket stays `routed` and is not retried. Someone resets it to `new`. (Failed deliveries and lost answers, as opposed to a
-  crash, are put back automatically.)
+- If the watcher is hard-killed (SIGKILL, power loss), or the network is down for good, between claiming a ticket and
+  delivering the message, that ticket stays `routed` and is not retried. Someone resets it to `new`. (Failed deliveries, lost
+  answers and a normal stop are put back automatically.)
 - Keyword routing is crude: it matches whole words anywhere in the text and ignores state and county. A person or a smarter triage agent can set `relevant_to`.
-- Answers in `extra` are not type-checked by the database (only that it is a JSON object under 8 KB); the form validates them.
+- The database does not know a field's own limit or type for answers kept in `extra` (only text, 8 KB in all); the form
+  enforces each field's `max` and `type`.
 - The contact page still has the older "Send a message" demo form, which is not connected to anything.
 - The thank-you text promises a reply from "the right person" and no time frame. RHL has to say what it can promise.

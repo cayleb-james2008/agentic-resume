@@ -26,7 +26,7 @@ create table if not exists rhl_demo.quote_requests (
   details     text        not null,   -- what they need quoted, free text
   status      text        not null default 'new',
   relevant_to text,                   -- routing key: team slug or agent handle; null until routed
-  extra       jsonb       not null default '{}'::jsonb,  -- answers to form fields that have no column of their own
+  extra       jsonb       not null default '{}'::jsonb,  -- answers to form fields that have no column of their own: {"field id": "text"}
   constraint quote_requests_pkey          primary key (id),
   -- Limits apply to the raw text (padding with spaces cannot get past them) and a minimum applies to the trimmed text.
   constraint quote_requests_name_check    check (char_length(name) <= 120  and char_length(btrim(name)) >= 1),
@@ -35,7 +35,10 @@ create table if not exists rhl_demo.quote_requests (
   constraint quote_requests_details_check check (char_length(details) <= 4000 and char_length(btrim(details)) >= 1),
   constraint quote_requests_status_check  check (status in ('new', 'routed', 'done', 'spam')),
   constraint quote_requests_relevant_check check (relevant_to is null or relevant_to ~ '^[A-Za-z0-9:_-]{1,64}$'),
-  constraint quote_requests_extra_check   check (jsonb_typeof(extra) = 'object' and octet_length(extra::text) <= 8192)
+  -- extra is a flat object whose values are all text (no numbers, no nesting, no arrays) and at most 8192 bytes.
+  -- (jsonpath `strict`: the default lax mode unwraps an array value and would let ["text"] through.)
+  constraint quote_requests_extra_check   check (jsonb_typeof(extra) = 'object' and octet_length(extra::text) <= 8192
+                                                 and not jsonb_path_exists(extra, 'strict $.* ? (@.type() != "string")'))
 );
 
 alter table rhl_demo.quote_requests enable row level security;
@@ -47,13 +50,15 @@ create policy quote_requests_anon_insert on rhl_demo.quote_requests
 
 -- Flood guard: at most 30 tickets in any minute, counting every row of a bulk insert, so one anonymous request cannot
 -- create hundreds of tickets (each becomes a message to a person). The whole statement is refused and nothing is saved.
--- Trade-off: a flood can use up the quota, and real visitors then see the form's error message (which gives the phone number).
--- SECURITY DEFINER because anon has no SELECT; it only counts.
+-- Inserts take a lock one at a time, so parallel requests cannot all count the same committed rows and each pass.
+-- Answers HTTP 429 (PostgREST maps SQLSTATE PT429). Trade-off: a flood can use up the quota, and real visitors then see
+-- the form's error message (which gives the phone number). SECURITY DEFINER because anon has no SELECT; it only counts.
 create or replace function rhl_demo.quote_requests_throttle() returns trigger
 language plpgsql security definer set search_path = pg_catalog as $$
 begin
+  perform pg_advisory_xact_lock(hashtext('rhl_demo.quote_requests'));
   if (select count(*) from rhl_demo.quote_requests where created_at > now() - interval '1 minute') >= 30 then
-    raise exception 'quote_requests: too many requests, try again in a minute' using errcode = '54000';
+    raise exception 'quote_requests: too many requests, try again in a minute' using errcode = 'PT429';
   end if;
   return new;
 end

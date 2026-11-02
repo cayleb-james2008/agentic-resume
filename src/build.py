@@ -11,11 +11,30 @@ PROJECTS, TEAM, LINES = J('projects.json'), J('team.json'), J('lines.json')
 QUOTE_CFG = {**J('quote.json'), **{k: os.environ['RHL_QUOTE_' + k.upper()] for k in ('url', 'key') if 'RHL_QUOTE_' + k.upper() in os.environ}}
 QUOTE = {k: QUOTE_CFG[k] for k in ('url', 'key', 'fields')}
 QUOTE['url'] = QUOTE['url'].rstrip('/')
-def _is_secret(k):  # a key published in the page reaches every visitor, so refuse one that is not the publishable key
-    if k.startswith('sb_secret_'): return True
-    try: return k.startswith('eyJ') and json.loads(base64.urlsafe_b64decode(k.split('.')[1] + '=' * (-len(k.split('.')[1]) % 4))).get('role') == 'service_role'
+QUOTE['key'] = QUOTE['key'].strip()
+def _publishable(k):  # a key in the page reaches every visitor: only the publishable key (or none yet) is allowed
+    if not k or k.startswith('sb_publishable_'): return True
+    try:
+        seg = k.split('.')[1]
+        return k.startswith('eyJ') and json.loads(base64.urlsafe_b64decode(seg + '=' * (-len(seg) % 4))).get('role') == 'anon'
     except (ValueError, IndexError): return False
-if _is_secret(QUOTE['key']): raise SystemExit('The quote key is a secret/service key. Use the publishable (anon) key.')
+if not _publishable(QUOTE['key']): raise SystemExit('The quote key must be the publishable (anon) key: sb_publishable_... or an anon-role JWT.')
+NOT_NULL = {'name': True, 'company': False, 'contact': True, 'details': True}  # the table's columns a field may fill, and whether each is NOT NULL
+def _check_quote_fields(fields):  # a typo here would build fine and then fail for every visitor, so stop at build time
+    ids = [f.get('id') for f in fields]
+    for f in fields:
+        i, c = f.get('id'), f.get('column')
+        def bad(why): raise SystemExit(f'quote.json field {i!r}: {why}')
+        if not (isinstance(i, str) and re.fullmatch(r'[a-z][a-z0-9_]{0,31}', i)): bad('id must be a-z, 0-9 or _, starting with a letter')
+        if i in ('done', 'fail', 'who', 'hp_check') or ids.count(i) > 1: bad('id is reserved or repeated')
+        if f.get('type') not in ('text', 'textarea', 'select', 'email-or-phone') or not f.get('label'): bad('needs a label and a type of text, textarea, select or email-or-phone')
+        if c is not None and c not in NOT_NULL: bad(f'column must be one of {sorted(NOT_NULL)} (leave it out to store the answer in "extra")')
+        if NOT_NULL.get(c) and not f.get('required'): bad(f'fills the NOT NULL column {c}, so it must be required')
+        if f['type'] == 'select' and not (f.get('options') and all(o.get('value') and o.get('label') for o in f['options'])): bad('a select needs options with a value and a label')
+    cols = [f['column'] for f in fields if f.get('column')]
+    missing = [c for c, nn in NOT_NULL.items() if nn and c not in cols]
+    if missing or len(cols) != len(set(cols)): raise SystemExit(f'quote.json: the fields must fill each of {missing or "the columns"} exactly once')
+_check_quote_fields(QUOTE['fields'])
 BY_ID = {p['id']: p for p in PROJECTS}
 SITE = 'https://rhl-concept.vercel.app'
 PHONE, FAX = '860.645.8700', '860.645.9100'

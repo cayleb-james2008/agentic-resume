@@ -69,8 +69,31 @@ prose:
    in the agent payload (routing reads the real column first, so it cannot misroute, but the consuming agent sees both); no PII
    retention rule (rows cannot be deleted at all).
 
-## 3. What Nox runs (the schema step is his) — exact order
+## 2c. Idempotency proved by re-applying, because Nox may have to retry
 
+Nox applies this migration on a project that already has schemas and data; a first attempt that fails half-way, or a second
+apply after a change of mind, must not fail or duplicate objects. Proven, not asserted (transcript:
+`evidence/quote-migration-idempotency-20261104.log` on the ERGON side):
+
+- Fresh `public.ecr.aws/supabase/postgres:17.11.0.006` pod (it carries `anon`, `authenticated`, `service_role`); the migration
+  applied **three times**: `psql exit=0, ERROR lines=0` each time.
+- Objects afterwards, counted from the catalogs: **1** trigger, **1** policy, **7** check constraints, **3** indexes, anon
+  **5** insert columns and **0** select columns, `service_role` **select+update**. Nothing duplicated by the re-applies.
+- Behaviour as `role anon` on that re-applied schema: whitespace-only `name` → `quote_requests_name_check`; newline-only
+  `details` → `quote_requests_details_check`; a read → `permission denied`; setting `status` → `permission denied`; a real
+  answer → accepted, and the table then holds exactly one row.
+
+Two operational notes this run adds:
+1. **Apply it to a Supabase project, not bare Postgres** — the `revoke … from public, anon, authenticated` line needs those
+   roles to exist. That is a property of the hosted target, not a defect, but a bare `postgres:17` container stops there.
+2. **`Prefer: return=representation` is refused for `anon` by design** (the insert returns, then reading the row back needs
+   SELECT, which anon does not have). The form submits with the default minimal return, so this is only a trap for anyone
+   testing with `return=representation` and reading a failure as "insert broken".
+3. The `if not exists` clauses make re-application safe **for this schema as written**; they would not retrofit a changed CHECK
+   constraint onto a table that an older version of this file had already created. Nothing is applied anywhere yet, so that
+   case does not exist today; it matters only if this file is edited after Nox applies it.
+
+## 3. What Nox runs (the schema step is his) — exact order
 1. **Create/confirm the schema on the hosted project** (`yhpjpjeedpuvcgnvfpka`), schema **`rhl_demo` only**. Apply
    `supabase/migrations/20261102120000_rhl_demo_quote_requests.sql` as **one transaction** (it is idempotent). It never
    references `ergon_warehouse`.

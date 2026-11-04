@@ -111,6 +111,52 @@ Two operational notes this run adds:
 
 Nothing in steps 1–6 was run against any hosted project from this seat.
 
+## 3b. Check it landed, and how to undo it (counts only — never a row)
+
+Run these after step 1 and step 2. They read **catalogues and counts**, never a ticket's contents, so they are safe on the real
+project and they prove the objects exist without trusting this document.
+
+```sql
+-- one table, and nothing else in the schema
+select count(*) as tables from information_schema.tables where table_schema = 'rhl_demo';              -- expect 1
+-- the seven CHECK constraints (the blank guards among them)
+select conname from pg_constraint
+ where conrelid = 'rhl_demo.quote_requests'::regclass and contype = 'c' order by 1;                    -- expect 7
+-- one trigger, one policy, three indexes
+select count(*) from pg_trigger where tgrelid = 'rhl_demo.quote_requests'::regclass and not tgisinternal;  -- expect 1
+select count(*) from pg_policy  where polrelid = 'rhl_demo.quote_requests'::regclass;                      -- expect 1
+select count(*) from pg_indexes where schemaname = 'rhl_demo';                                             -- expect 3
+-- the access model: anon may INSERT only (on those five columns); service_role may SELECT and UPDATE
+-- (anon's INSERT is a COLUMN grant, so it shows up in column_privileges, not role_table_grants — the first draft of this
+-- checklist looked in the wrong view and reported anon as having nothing at all)
+select grantee, string_agg(distinct privilege_type, ',' order by privilege_type) as privs
+  from information_schema.column_privileges
+ where table_schema = 'rhl_demo' and grantee in ('anon', 'service_role') group by grantee order by grantee;
+-- expect: anon -> INSERT ; service_role -> SELECT,UPDATE
+select string_agg(column_name, ',' order by column_name) as anon_insert_columns
+  from information_schema.column_privileges
+ where table_schema = 'rhl_demo' and grantee = 'anon' and privilege_type = 'INSERT';
+-- expect: company,contact,details,extra,name   (five; and anon has 0 SELECT columns)
+```
+
+All nine lines were run against a fresh `public.ecr.aws/supabase/postgres:17.11.0.006` pod with this migration applied, and every
+expectation above is that run's output.
+
+Then the functional check is step 4's `check_quote_flow.py` (**48/48** expected; it inserts and closes its own `TEST-CHECK-…` rows).
+
+**Undo**, if the decision goes the other way — this destroys tickets, so export them first:
+
+```sql
+drop schema if exists rhl_demo cascade;   -- the table, its indexes, trigger, policy and constraints go with it
+```
+
+and remove `rhl_demo` from Data API → Exposed schemas (step 2 reversed). Nothing outside `rhl_demo` is touched by either direction;
+the migration never references `ergon_warehouse` and the drop is scoped to the schema.
+
+**The undo was run too, not just written down:** on the same pod, `drop schema if exists rhl_demo cascade` -> `NOTICE: drop cascades to
+2 other objects` (the policy and trigger), then `tables left in rhl_demo: 0`, and `ergon_warehouse` still absent. So the rollback is
+one statement, it takes the objects with it, and it cannot reach another schema.
+
 ## 4. The watcher model (governs the ticket lifecycle)
 
 `tools/quote_watch.py` is the demo agent loop, stdlib only, and it is the only thing that may route a ticket:

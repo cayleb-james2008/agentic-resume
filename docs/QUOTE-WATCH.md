@@ -139,8 +139,23 @@ finding they confirmed was fixed and now has a check. **Not tested:** the hosted
 ## Known limits (demo level)
 
 - The form is open to the internet. It has a honeypot field, size limits and a flood guard in the database, but no CAPTCHA.
-  The guard is global: a flood can use up the 30-a-minute quota, and real visitors then see the error message with the phone
-  number. Add a CAPTCHA or a gateway rate limit before real traffic.
+  **The guard is one global bucket with no attribution.** It allows 30 rows in a minute for the whole table: one anonymous
+  caller sending 30 rows spends the minute's quota, and every real visitor in that minute is refused (they see the form's
+  error with the phone number, so it degrades gracefully but it is a trivial denial of intake at a cost of one request a
+  minute). There is no per-IP, per-key or per-contact dimension. Put a CAPTCHA or a gateway rate limit in front before real
+  traffic; this is the first hardening item, not a nicety.
+- A blank answer must not count as an answer. The constraints require at least one non-whitespace character in `name`,
+  `contact` and `details` (`~ '[^[:space:]]'`), because `btrim` strips spaces only and a name of tabs or newlines used to pass
+  a plain length check. Found by the independent check of 4 Nov, fixed in the migration before it was applied anywhere.
+- `contact` has no server-side format check (email or phone is enforced only by the page script), so a direct API insert can
+  carry any text up to 200 characters. Acceptable for a demo; a check belongs in the FU-1 pass.
+- `extra` can carry a key with the same name as a real column (`{"extra":{"details": "..."}}`); routing reads the real column
+  first, so it cannot misroute, but the consuming agent sees both and the only guard is the untrusted-text warning. A
+  denylist of reserved keys belongs in the FU-1 pass.
+- Rows are never deleted (the service role may only select and update), so names and contact details are kept forever: a PII
+  retention rule is an owner decision.
+- Indices on `created_at` and `(status, created_at)` cover the flood guard's count and the watcher's poll. Without them both
+  scan the table, which is negligible at demo size and an amplification knob as it grows.
 - If the watcher is hard-killed (SIGKILL, power loss), or the network is down for good, between claiming a ticket and
   delivering the message, that ticket stays `routed` and is not retried. Someone resets it to `new`. (Failed deliveries, lost
   answers and a normal stop are put back automatically.)

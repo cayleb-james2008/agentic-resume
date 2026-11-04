@@ -27,7 +27,7 @@ The migration applied from this repo unchanged (`supabase/migrations/20261102120
 
 | Check | Result |
 |---|---|
-| `python3 tools/check_quote_flow.py --url http://127.0.0.1:3001 …` | **48/48 PASS** ("ALL CHECKS PASSED") |
+| `python3 tools/check_quote_flow.py --url http://127.0.0.1:3001 …` | **48/48 PASS** ("ALL CHECKS PASSED"), re-run after the guard fix below (48/48 again) |
 | of which: watcher logic offline (routing, refusals, put-back, 504/lost-answer, SIGTERM) | 19/19 PASS |
 | of which: access model (anon insert only; no read/update/delete/status/relevant_to; empty name and space-padding refused) | PASS |
 | of which: `extra` rules (object of text only, 8 KB; number/nested/array/null refused) | PASS |
@@ -46,8 +46,28 @@ The migration applied from this repo unchanged (`supabase/migrations/20261102120
    became `status=routed`, `relevant_to=agent:sales-desk`.
 4. A failed notify (bad `--notify-cmd`) put the ticket **back to `new`** instead of stranding it — observed, not assumed.
 
-Limits of this proof: it is **not** the hosted gateway (no CORS, no hosted keys), not Realtime, and not any real messaging.
-Those stay on the hosted-step list below.
+Limits of this proof: it is **not** the hosted gateway (no hosted keys, no hosted CORS configuration), not Realtime, and not
+any real messaging. Those stay on the hosted-step list below. (The local PostgREST does enable CORS, so the browser proof does
+exercise a real preflight; the hosted project's CORS config is still unproven.)
+
+## 2b. Corrections from the independent check (4 Nov, after the first filing)
+
+A fresh checker reproduced every claim above on its own pod and found three things worth fixing in the artifact, not just the
+prose:
+
+1. **Blank answers (fixed in the migration).** `btrim(x)` strips spaces only, so a name of tabs or newlines passed the "not
+   blank" check (reproduced: `"\t\t\t"` -> 201). The constraints now require at least one non-whitespace character
+   (`~ '[^[:space:]]'`) in `name`, `contact` and `details`; spaces, tabs and newlines are all refused (re-verified: 400 for each,
+   201 for a real answer). The migration is not applied anywhere yet, so the correction costs nothing.
+2. **The flood guard's trade-off was understated (fixed in `docs/QUOTE-WATCH.md`).** It is one **global** bucket with no
+   attribution: 30 rows in a minute, whoever sends them. One anonymous caller can spend the whole minute's quota with a single
+   request a minute and lock the form for real visitors until the minute turns (they see the error with the phone number). This
+   is the first hardening item for real traffic, not a nuance.
+3. **Indices added.** The throttle counts `created_at` on every insert and the watcher polls `status = new` ordered by
+   `created_at`; rows are never deleted. `created_at` and `(status, created_at)` are now indexed (idempotent).
+4. Reported, not changed here (FU-1 scope): `contact` has no server-side format check; `extra` can shadow a real column's name
+   in the agent payload (routing reads the real column first, so it cannot misroute, but the consuming agent sees both); no PII
+   retention rule (rows cannot be deleted at all).
 
 ## 3. What Nox runs (the schema step is his) — exact order
 

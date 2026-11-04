@@ -29,10 +29,10 @@ create table if not exists rhl_demo.quote_requests (
   extra       jsonb       not null default '{}'::jsonb,  -- answers to form fields that have no column of their own: {"field id": "text"}
   constraint quote_requests_pkey          primary key (id),
   -- Limits apply to the raw text (padding with spaces cannot get past them) and a minimum applies to the trimmed text.
-  constraint quote_requests_name_check    check (char_length(name) <= 120  and char_length(btrim(name)) >= 1),
+  constraint quote_requests_name_check    check (char_length(name) <= 120  and name ~ '[^[:space:]]'),
   constraint quote_requests_company_check check (company is null or char_length(company) <= 160),
-  constraint quote_requests_contact_check check (char_length(contact) <= 200 and char_length(btrim(contact)) >= 3),
-  constraint quote_requests_details_check check (char_length(details) <= 4000 and char_length(btrim(details)) >= 1),
+  constraint quote_requests_contact_check check (char_length(contact) <= 200 and contact ~ '[^[:space:]]' and char_length(btrim(contact)) >= 3),
+  constraint quote_requests_details_check check (char_length(details) <= 4000 and details ~ '[^[:space:]]'),
   constraint quote_requests_status_check  check (status in ('new', 'routed', 'done', 'spam')),
   constraint quote_requests_relevant_check check (relevant_to is null or relevant_to ~ '^[A-Za-z0-9:_-]{1,64}$'),
   -- extra is a flat object whose values are all text (no numbers, no nesting, no arrays) and at most 8192 bytes.
@@ -41,6 +41,9 @@ create table if not exists rhl_demo.quote_requests (
                                                  and not jsonb_path_exists(extra, 'strict $.* ? (@.type() != "string")'))
 );
 
+-- A blank answer must not count as an answer: `btrim(x)` strips spaces only, so a value of tabs or newlines would pass a
+-- plain length check. `~ '[^[:space:]]'` requires at least one character that is not whitespace, whatever kind it is.
+-- (Unicode spaces other than ASCII are not covered; the form never sends them, and the length limits still apply.)
 alter table rhl_demo.quote_requests enable row level security;
 
 -- Anonymous visitors may add a row, and only as a new ticket.
@@ -68,6 +71,11 @@ revoke all on function rhl_demo.quote_requests_throttle() from public;
 drop trigger if exists quote_requests_throttle on rhl_demo.quote_requests;
 create trigger quote_requests_throttle before insert on rhl_demo.quote_requests
   for each row execute function rhl_demo.quote_requests_throttle();
+
+-- The flood guard counts by created_at on every insert and the watcher polls status = new ordered by created_at; rows are
+-- never deleted, so both want an index once the table grows past a handful of rows.
+create index if not exists quote_requests_created_idx        on rhl_demo.quote_requests (created_at);
+create index if not exists quote_requests_status_created_idx on rhl_demo.quote_requests (status, created_at);
 
 -- Start from nothing, whatever default privileges the project grants, then add back exactly what is needed.
 revoke all on schema rhl_demo from public, anon, authenticated;

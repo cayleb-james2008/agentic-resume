@@ -19,6 +19,11 @@ def _publishable(k):  # a key in the page reaches every visitor: only the publis
         return k.startswith('eyJ') and json.loads(base64.urlsafe_b64decode(seg + '=' * (-len(seg) % 4))).get('role') == 'anon'
     except (ValueError, IndexError): return False
 if not _publishable(QUOTE['key']): raise SystemExit('The quote key must be the publishable (anon) key: sb_publishable_... or an anon-role JWT.')
+QUOTE_REF = 'yhpjpjeedpuvcgnvfpka'  # the project whose rhl_demo schema holds the tickets (docs/QUOTE-WATCH.md)
+def _endpoint(u):  # the page publishes this address to every visitor, so a scratch or stale host must not build
+    return bool(re.fullmatch(r'http://(127\.0\.0\.1|localhost|\[::1\])(:\d+)?(/rest/v1)?/?', u)) or u == f'https://{QUOTE_REF}.supabase.co/rest/v1'
+if not _endpoint(QUOTE['url']):
+    raise SystemExit(f"The quote URL must be https://{QUOTE_REF}.supabase.co/rest/v1, or a loopback host for a local test: got {QUOTE['url']!r}.")
 NOT_NULL = {'name': True, 'company': False, 'contact': True, 'details': True}  # the table's columns a field may fill, and whether each is NOT NULL
 def _check_quote_fields(fields):  # a typo here would build fine and then fail for every visitor, so stop at build time
     ids = [f.get('id') for f in fields]

@@ -1,0 +1,50 @@
+PASS  route: relevant_to wins
+PASS  route: equals on an extra answer
+PASS  route: keyword is a whole word, plural allowed
+PASS  route: "tablet" is not "table"
+PASS  route: no match -> default
+PASS  route: a keyword like "c++" matches
+PASS  config routing targets look valid
+PASS  a routing target the table would refuse is rejected at start-up
+PASS  a target with a trailing newline is rejected at start-up
+PASS  an empty keyword (matches everything) is rejected at start-up
+PASS  a network failure comes back as status 0, not an exception
+PASS  the notify command does not receive the service key
+PASS  claim answer lost -> ticket put back to new, no crash
+PASS  failed delivery and failed put-back are logged, not fatal
+PASS  put-back restores the relevant_to the ticket had
+PASS  an unreadable table raises PollError (the loop survives it)
+PASS  a gateway error (504) on a claim -> ticket put back to new
+PASS  a refused claim (400) is not "put back" (nothing was claimed)
+PASS  being stopped (SIGTERM / Ctrl-C) mid-delivery puts the ticket back, then stops
+PASS  anon can insert a ticket (what the form sends) -> 201
+PASS  anon cannot ask for the row back (return=representation) -> denied
+PASS  anon cannot read tickets -> denied
+PASS  anon cannot set status -> denied
+PASS  anon cannot set relevant_to -> denied
+PASS  anon cannot update -> denied
+PASS  anon cannot delete -> denied
+PASS  empty name -> 400
+PASS  details padded with spaces past the limit -> 400
+PASS  answers kept in extra (an object) -> 201
+PASS  extra that is not an object -> 400
+PASS  extra over 8 KB -> 400
+PASS  extra holding a number is refused (answers are text only) -> 400
+PASS  extra holding a nested object is refused (answers are text only) -> 400
+PASS  extra holding an array is refused (answers are text only) -> 400
+PASS  extra holding null is refused (answers are text only) -> 400
+PASS  one request with 31 tickets is refused by the flood guard -> 429
+PASS  config name: 120 chars accepted, 121 refused
+PASS  config company: 160 chars accepted, 161 refused
+PASS  config contact: 200 chars accepted, 201 refused
+PASS  config details: 4000 chars accepted, 4001 refused
+PASS  service role sees the new ticket
+PASS  the refused bulk request saved nothing
+PASS  watcher routed bleachers to the architectural agent
+PASS  watcher message carries the answers and an untrusted-text warning
+PASS  claimed row is now status=routed with relevant_to set
+PASS  every routing target in the config is accepted by the table
+PASS  a second pass does not notify again
+PASS  failed delivery puts the ticket back to new, without a stale relevant_to
+
+ALL CHECKS PASSED

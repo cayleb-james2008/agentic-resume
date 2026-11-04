@@ -1,6 +1,8 @@
 # Quote form — corrected resubmission, agent-side complete (3–4 Nov 2026)
 
 Status: **agent-side ready and re-proven tonight; the hosted schema step is Nox's; the deploy is the site owner's yes.**
+**4 Nov 2026:** §6 audits this package line by line against disk and lists what was corrected. To *execute*, use the clean
+standalone `docs/RESUBMISSION-20261104.md`, which supersedes §3 below (the history here is kept as written).
 Written by the ERGON stream lead (opencode-go/deepseek-v4.1-flash) under Nox's overnight order
 (`inbox/2026-11/20261104T035300Z` §2: "quote-form corrected resubmission through Nox's gated steps as far as agent-side goes").
 
@@ -139,7 +141,7 @@ select string_agg(column_name, ',' order by column_name) as anon_insert_columns
 -- expect: company,contact,details,extra,name   (five; and anon has 0 SELECT columns)
 ```
 
-All nine lines were run against a fresh `public.ecr.aws/supabase/postgres:17.11.0.006` pod with this migration applied, and every
+All seven queries were run against a fresh `public.ecr.aws/supabase/postgres:17.11.0.006` pod with this migration applied, and every
 expectation above is that run's output.
 
 Then the functional check is step 4's `check_quote_flow.py` (**48/48** expected; it inserts and closes its own `TEST-CHECK-…` rows).
@@ -182,3 +184,153 @@ not retried; a person resets it to `new`.
 - **Agent handles** `agent:sales-desk`, `agent:architectural-ae`, `agent:furniture-ae` are placeholders; map them to real
   Ergon agents before this is shown as live.
 - **Deploy** to the shared RHL link: site owner's yes only.
+
+---
+
+## 6. Audit, 4 November 2026 — this package checked against disk
+
+Method: static reading of every file named below plus one consistency script (`tools/check_package.py`). **Nothing hosted was
+read or written.** The 48/48 run and the three-times idempotency run are **reused, not re-run**: they are recorded evidence,
+independently checked, and their logs are now in the repo. Line numbers are the tree as committed after this audit.
+
+**What the package says, and what is true:** every headline claim holds on disk — demo-grade, connected to nothing, not
+deployed, publishable key empty, 48/48 contract checks, three clean applications of the migration, a browser submit that saved
+a row, and a watcher that claimed, routed and put a ticket back. What did not hold were details and one gap: the authority doc
+misdescribed three things (6.1), the build accepted any endpoint silently (6.2), and the hosted instruction named an
+unverified schema list (6.3). All are corrected below; none of the recorded proof was invalidated.
+
+### 6.1 Invariant 1 — the watcher model governs, and the code agrees
+
+`docs/QUOTE-WATCH.md` is the authority. Its clauses and `tools/quote_watch.py` were compared one by one:
+
+| clause in QUOTE-WATCH.md | code | verdict |
+|---|---|---|
+| polls `status = new`, oldest first, 30 s | `quote_watch.py:108` (`?status=eq.new&order=created_at.asc&limit=50`), `:138` (interval 30) | agree |
+| `relevant_to` wins, else the first matching rule, else `routing.default`; `equals` on a whole answer, `keywords` as whole words singular/plural | `quote_watch.py:57-67` | agree |
+| start-up fails on a target the table would refuse or an empty keyword | `quote_watch.py:70-76`; the table's own rule is `migration:37` | agree |
+| claim only while the row is still `new`, so two watchers cannot take one | `quote_watch.py:115-118` | agree |
+| one JSON message per ticket, visitor text labelled untrusted | `quote_watch.py:81-82` (carries `warning`) | **doc sample omitted `warning` — fixed** (QUOTE-WATCH.md:61-62) |
+| failed delivery, lost answer, SIGTERM, 5xx on the claim → back to `new` with the previous `relevant_to`; a refused claim is not put back | `quote_watch.py:97-132` | agree |
+| a hard kill between claim and delivery leaves the ticket `routed`; a person resets it | no recovery code, by design | consistent, and stated as a known limit (QUOTE-WATCH.md:165-167) |
+| `status` ∈ `new/routed/done/spam`; `relevant_to` is `[A-Za-z0-9:_-]{1,64}` | `migration:36-37` | agree with QUOTE-WATCH.md:36-37, 56 |
+
+**No watcher code changed.** The code was already right; the authority document was not, in two places, and was silent in a
+third. Corrections, all doc-side and all justified by the doc's own statements:
+
+1. **The payload sample omitted `warning`** (QUOTE-WATCH.md:59-60 before). The code sends it (`quote_watch.py:81-82`), §4 of
+   this document lists it, and the doc's own untrusted-text paragraph (:73-74) requires it. An agent's parser written from the
+   sample would have dropped the one guard the design depends on. Fixed at :61-62.
+2. **The table's `contact` minimum was undocumented.** `migration:34` requires `char_length(btrim(contact)) >= 3` as well as
+   the 200 maximum; QUOTE-WATCH.md:42 listed maxima only. Fixed at :42-43.
+3. **"30 new tickets in a minute" read as `status = new`.** The trigger counts tickets *created* in the minute whatever their
+   status afterwards (`migration:63`). One word could have implied a weaker guard than the one installed. Fixed at :43-45.
+4. **"the migration applies twice cleanly" was stale** (QUOTE-WATCH.md:136 before): the proof is three applications
+   (`evidence/quote-migration-idempotency-20261104.log`; §2c above). Fixed at :136.
+5. **An unsourced number was removed.** The doc claimed a "10 parallel bulk requests, which saved 29 rows against a limit of
+   30" run. No transcript exists in this repo or in `~/fleet-scratch/overnight/evidence/`, so the audit cannot stand behind it.
+   The evidenced result (one 31-row bulk insert → 429, nothing saved; `evidence/quote-flow-48-checks-v2.log`) replaced it at
+   :136-141. The `pg_advisory_xact_lock` in `migration:62` is still the reason parallel inserts cannot all pass the count.
+6. **The build's new URL guard is documented** where the key rule already was (QUOTE-WATCH.md:104-106), so the doc and the
+   code still describe the same build.
+
+### 6.2 Invariant 2 — the endpoint was already right; it is now enforced
+
+Already correct, verified at three places: `src/data/quote.json:2` is
+`https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1`; the built `contact.html:98` carries the same string; `src/build.py:11` has
+**no** hardcoded default host (it merges `quote.json` with `RHL_QUOTE_URL`/`RHL_QUOTE_KEY` only) and `:13` strips a trailing
+slash. `grep` for `localhost`, `127.0.0.1` and `<20 chars>.supabase.co` across every page, script, style and config found no
+scratch host and no second ref. Rebuilding the site produced a byte-identical tree (`git status` clean), so the pages on disk
+are exactly what the config generates.
+
+**Genuine defect found:** nothing enforced it. Any `RHL_QUOTE_URL` — including the scratch host this document's own §2 step 1
+used (`http://127.0.0.1:3001`) — built silently into the page, and the committed page was correct only because the last build
+happened to use the right config. A stale ref would have shipped with no warning. **Fixed** at `src/build.py:22-26`: the build
+now stops unless the URL is this project's REST endpoint or a loopback host for a local test. Tested both ways: a stale ref →
+`SystemExit` with the expected endpoint in the message; loopback → builds (the browser proof in §2 still runs).
+`tools/check_package.py` (6.5) also fails if the config or the built page names any other ref.
+
+### 6.3 Invariant 3 — `rhl_demo` only, in code and in the instructions
+
+- **The page:** `assets/site.js:295` sends `'Content-Profile': 'rhl_demo'` on the one POST; no other profile string exists in
+  the file; every built page loads that same file (`src/build.py:154`).
+- **The watcher:** `tools/quote_watch.py:30` sets `Content-Profile` and `Accept-Profile` to `rhl_demo` on every call.
+- **The migration:** creates `rhl_demo` and nothing else (`migration:18`); its only mention of `ergon_warehouse` is the comment
+  saying it is not touched (`migration:3`); grants are on `rhl_demo.quote_requests` only (`:81-86`).
+- **Shipped files contain no `public`, `ergon_warehouse`, `service_role` or `sb_secret` string** — machine-checked (6.5 b, c2).
+- **The hosted instruction:** "append, keep the schemas already listed" was already right (§3 step 2), but it went on to name
+  the current list as `public,graphql_public,ergon_warehouse` with no hosted read behind it. If that guess were wrong, a
+  literal-minded operator could have removed a live schema. The new package states the rule without the guess, and requires
+  the current list to be recorded **before** editing (`RESUBMISSION-20261104.md` §1.3, §2 step 2).
+
+### 6.4 The other checks asked for
+
+- **Field limits match the CHECKs exactly:** `quote.json:5-8` → 120 / 160 / 200 / 4000; `migration:32-35` → 120 / 160 / 200 /
+  4000. Machine-checked per column, not by eye (6.5 d).
+- **Routing rules and default agree:** `quote.json:10-16` (default `agent:sales-desk`; architectural keywords; furniture
+  keywords) is read by `quote_watch.py:57-76`, which does exactly what QUOTE-WATCH.md:53-57 describes. The doc does not name
+  the default's value because it is data, not behaviour; §2 step 3 records the observed route to `agent:sales-desk` for an
+  answer with no keyword. No change needed.
+- **The flood-guard trade-off is stated as a limit, not a feature:** QUOTE-WATCH.md:145-151 ("one global bucket with no
+  attribution… a trivial denial of intake at a cost of one request a minute… the first hardening item") and
+  `migration:57-58`. The §2 table row "flood guard (31 tickets → 429)" is about the guard working, not a claim that it scales.
+  The one unsourced *concurrency* number was handled in 6.1(5).
+- **The "not proved" list is still accurate:** QUOTE-WATCH.md:142-143 and this document's §2 ("not the hosted gateway… not
+  Realtime… not any real messaging") remain true — this audit made no hosted call and holds no hosted key. The nuance added
+  to the new package: hosted CORS cannot be configured or proved by SQL, only by one submit from the real origin
+  (`RESUBMISSION-20261104.md` §7.2).
+
+### 6.5 The consistency script, and proof that it can fail
+
+`tools/check_package.py` (stdlib only, no network) fails when: (a) the quote endpoint is not
+`https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1` in the config or the built page; (b) any shipped page, script or style names
+`ergon_warehouse`, `service_role` or `sb_secret`; (c) the POST's `Content-Profile` is not `rhl_demo` or any other profile is
+present; (d) a form maximum differs from the migration's CHECK maximum; (e) any doc or built page names another Supabase ref;
+(f) the built page's quote block differs from `quote.json` (the way a stale endpoint really ships); (g) the published key is
+neither empty nor publishable.
+
+Clean tree:
+
+```
+PASS  a1 quote.json url is the project REST endpoint
+PASS  a2 built contact.html carries the same endpoint
+PASS  b  no shipped file names ergon_warehouse, service_role or sb_secret
+PASS  c1 site.js sends Content-Profile: rhl_demo
+PASS  c2 site.js sends no other Content-Profile
+PASS  c3 built pages load that same site.js
+PASS  d  name: form max 120 == table max 120
+PASS  d  company: form max 160 == table max 160
+PASS  d  contact: form max 200 == table max 200
+PASS  d  details: form max 4000 == table max 4000
+PASS  e  docs/ and the built pages name only this project ref
+PASS  f  built contact.html quote block matches quote.json
+PASS  g  quote.json key is empty or publishable
+PASS  g  contact.html key is empty or publishable
+
+PACKAGE CONSISTENT
+```
+
+Mutated copy (`/tmp`, four changes at once — stale ref and a secret-shaped key in `quote.json`, `details` CHECK 4000→3999,
+`Content-Profile`→`public` plus a `service_role` comment in `site.js`, another ref in `QUOTE-WATCH.md`): **8 FAILED**, exit 1,
+covering a1, b, c1, c2, d(details), e, f, g. A second copy with a stale ref hand-edited into `contact.html` alone: **3 FAILED**
+(a2, e, f) — and the same stale endpoint fed to the build
+(`RHL_QUOTE_URL=https://not-this-project.supabase.co/rest/v1 python3 src/build.py`) is refused, so the build cannot produce it.
+
+### 6.6 Other corrections made in this pass
+
+1. **The evidence path did not resolve.** §2c cited `evidence/quote-migration-idempotency-20261104.log`, but the repo had no
+   `evidence/` directory; the transcript lived in `~/fleet-scratch/overnight/evidence/`. Both cited transcripts are now in
+   `evidence/` (the idempotency log and the 48-check log), and `evidence` was added to `.vercelignore` so agent-side logs are
+   not published by the static deploy.
+2. **"All nine lines were run…"** (§3b) — the block is seven statements. Corrected, and the seven expectations are the ones the
+   new package carries.
+3. **A compiled `.pyc` was tracked** (`tools/__pycache__/quote_watch.cpython-314.pyc`). Untracked and removed; `.gitignore` now
+   ignores `__pycache__/` and `*.pyc`.
+4. **This document is superseded for execution** by `docs/RESUBMISSION-20261104.md` (noted at the top); the history above is
+   kept as written.
+
+### 6.7 Still not proved (unchanged by this audit)
+
+The hosted gateway's acceptance of the publishable key, hosted browser CORS, the exposed-schema change taking effect, the
+project's role set, Realtime (unused), real messaging, and the rollback's raw transcript (the cascade output is quoted in §3b;
+the transcript is not on disk). All of those need Nox's run, not another agent-side pass.
+

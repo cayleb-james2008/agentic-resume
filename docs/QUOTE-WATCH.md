@@ -40,8 +40,9 @@ Access: the anonymous role can only INSERT the five visitor columns (no reads, n
 `relevant_to`). Only the service role reads and updates. The service key lives with the watcher and never in the site.
 
 Limits are on the raw text, so padding with spaces cannot get past them: `name` 120, `company` 160, `contact` 200,
-`details` 4000 characters, `extra` 8 KB. A **flood guard** refuses any insert that would take the table past 30 new tickets
-in a minute, counting every row of a bulk insert, so one anonymous request cannot become hundreds of messages to people.
+`details` 4000 characters, `extra` 8 KB; `contact` must also keep at least 3 characters once trimmed. A **flood guard**
+refuses any insert that would take the table past 30 tickets created in a minute (whatever their status afterwards, not just
+`new`), counting every row of a bulk insert, so one anonymous request cannot become hundreds of messages to people.
 Inserts take a lock one at a time so parallel requests cannot all pass the count together. A refused insert answers HTTP 429.
 
 ## How an agent watches it
@@ -57,7 +58,8 @@ Inserts take a lock one at a time so parallel requests cannot all pass the count
 3. **Claim.** It sets `status = routed` and `relevant_to` with a PATCH that only matches while the row is still `new`, so two
    watchers cannot both take the same ticket.
 4. **Message.** It hands one JSON object to the notify command (default: print it):
-   `{"to": "agent:furniture-ae", "ticket": "<id>", "received": "<time>", "request": {name, company, contact, details, extra}}`.
+   `{"to": "agent:furniture-ae", "ticket": "<id>", "received": "<time>", "request": {name, company, contact, details, extra}, "warning": "<untrusted-text notice>"}`.
+   The `warning` string is the paragraph below, carried in the message so the receiving agent cannot miss it.
    The routed agent turns that into a message to its person, for example: *"Hey Kelli, Pat Doe of Hartford Library
    (pat@example.com) just requested a quote for 40 stacking chairs. Ticket 3022fcf8."*
 5. If delivery fails, the watcher is stopped (SIGTERM or Ctrl-C) mid-delivery, or the answer to a claim is lost (no answer, or
@@ -99,7 +101,9 @@ Polling needs nothing more and is the default.
    API answers 406 for the schema and the form shows its error message.
 3. Copy the project's publishable key (not the secret key). Build with it:
    `RHL_QUOTE_KEY=<publishable key> python3 src/build.py`, or put it in `src/data/quote.json`. Only `contact.html` changes.
-   The build accepts only a key that starts `sb_publishable_` or an anon-role JWT, and stops for anything else.
+   The build accepts only a key that starts `sb_publishable_` or an anon-role JWT, and stops for anything else. It also stops
+   if the quote `url` is not this project's REST endpoint (`https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1`); a loopback
+   host is allowed for a local test, so a scratch build cannot reach the page by accident.
 4. Check the live contract: `python3 tools/check_quote_flow.py --url https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1 --anon-key <publishable> --service-key <secret>`.
    It inserts `TEST-CHECK` rows, touches only those, and closes them. It proves the live gateway accepts the key and the
    `Content-Profile` header. It runs outside a browser, so also submit the live form once to prove browser CORS. Always pass
@@ -129,9 +133,11 @@ What v1 already does to make that pass cheap: questions and routing are data (ab
 
 ## Verified locally, and what was not
 
-Run against Supabase's own Postgres 17 and PostgREST images on a scratch pod: the migration applies twice cleanly; the
-access rules above hold (48 checks in `tools/check_quote_flow.py`, which can be re-run and fails when the rules are broken on
-purpose; the flood guard was also tested with 10 parallel bulk requests, which saved 29 rows against a limit of 30); the form in a browser saved a row, showed its error state with the endpoint down or stalled, and retried; a field
+Run against Supabase's own Postgres 17 and PostgREST images on a scratch pod: the migration applied three times cleanly
+(`evidence/quote-migration-idempotency-20261104.log` in this repo); the access rules above hold (48 checks in
+`tools/check_quote_flow.py`, which can be re-run and fails when the rules are broken on purpose; the log of that run is
+`evidence/quote-flow-48-checks-v2.log`); the flood guard refuses one 31-row bulk insert outright (429, nothing saved); the form
+in a browser saved a row, showed its error state with the endpoint down or stalled, and retried; a field
 added by config alone was saved in `extra` and routed by the watcher. Two independent reviews attacked the build; every
 finding they confirmed was fixed and now has a check. **Not tested:** the hosted API gateway
 (keys and CORS), Realtime, and any real messaging.

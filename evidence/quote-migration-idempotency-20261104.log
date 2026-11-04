@@ -1,0 +1,34 @@
+# Quote-form migration applied three times to a fresh Supabase Postgres 17 pod — 4 Nov 2026
+# image: public.ecr.aws/supabase/postgres:17.11.0.006 (carries anon / authenticated / service_role, the roles the migration grants to)
+# why: Nox's hosted step may be retried; 'idempotent' has to mean objects neither fail nor duplicate.
+
+server ready: 17.11
+
+== apply #1: psql exit=0, ERROR lines=0
+== apply #2: psql exit=0, ERROR lines=0
+== apply #3: psql exit=0, ERROR lines=0
+
+== objects after three applications (must not duplicate)
+             k              | v 
+----------------------------+---
+ triggers                   | 1
+ policies                   | 1
+ check constraints          | 7
+ indexes                    | 3
+ service_role select+update | 2
+ anon select columns        | 0
+ anon insert columns        | 5
+(7 rows)
+
+
+== behaviour as role anon (one psql per check, so no label can drift)
+  1 whitespace-only name (expect name_check) -> ERROR:  new row for relation "quote_requests" violates check constraint "quote_requests_name_check" 
+  2 newline-only details (expect details_check) -> ERROR:  new row for relation "quote_requests" violates check constraint "quote_requests_details_check" 
+  3 anon read (expect permission denied) -> ERROR:  permission denied for table quote_requests HINT:  Grant the required privileges to the current role with: GRANT SELECT ON rhl_demo.quote_requests TO anon; 
+  4 anon sets status (expect permission denied) -> ERROR:  permission denied for table quote_requests HINT:  Grant the required privileges to the current role with: GRANT INSERT ON rhl_demo.quote_requests TO anon; 
+  5 real answer (expect INSERT 0 1) -> 
+== the only row present (count, service role)
+1
+
+== teardown
+pod removed

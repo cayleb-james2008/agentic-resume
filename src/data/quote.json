@@ -1,6 +1,6 @@
 {
   "url": "https://yhpjpjeedpuvcgnvfpka.supabase.co/rest/v1",
-  "key": "",
+  "key": "sb_publishable_DVq-Dzr1k6dIQcsWevvJnw_YrYkTMnT",
   "fields": [
     {"id": "name", "column": "name", "type": "text", "label": "Name", "required": true, "max": 120, "autocomplete": "name", "greet": true, "error": "Enter your name."},
     {"id": "company", "column": "company", "type": "text", "label": "Company", "max": 160, "autocomplete": "organization"},

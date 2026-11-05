@@ -1,33 +1,34 @@
 /* The contact footer: one closing line in large type, Get in touch and the address (as text, with a copy
    button), then the site's sections, the projects and elsewhere, and the copyright. */
 
-.contact { border-top: 1px solid var(--line); background: var(--surface); }
+.contact { border-top: 1px solid var(--line); background: var(--bg); }
 .foot-in { padding-top: var(--section); padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
 /* The closing block is set as a receipt (the Kitchen's Receipt Printer pattern, written for this site):
    a bordered card, a dashed tear line above the actions, and a perforated bottom edge, punched through
    to the page ground by a row of circles in the ground's own colour. */
 .ct-main {
   position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 20px;
-  padding: clamp(24px, 4vw, 44px); border: 1px solid var(--line); border-radius: var(--radius);
-  background: var(--surface);
+  padding: clamp(24px, 4vw, 44px); border-radius: 4px; transform: rotate(-1.1deg);
+  background: var(--raw-receipt); color: var(--raw-receipt-ink); box-shadow: 0 30px 60px rgb(0 0 0 / 0.5);
 }
 .ct-main::after {
   content: ""; position: absolute; left: 12px; right: 12px; bottom: -7px; height: 14px; pointer-events: none;
   background-image: radial-gradient(circle 6px at 8px 50%, var(--bg) 6px, transparent 6.5px);
   background-size: 22px 14px; background-repeat: repeat-x;
 }
-.ct-h { max-width: 16ch; font-size: var(--step-4); font-stretch: var(--wide); font-weight: 640; line-height: 1.02; letter-spacing: -0.035em; }
-.ct-blurb { max-width: 46ch; font-size: var(--step-1); line-height: 1.45; color: var(--fg-2); }
+.ct-h { max-width: 16ch; font-size: var(--step-4); font-stretch: var(--wide); font-weight: 820; line-height: 1.02; letter-spacing: -0.015em; text-transform: uppercase; color: var(--raw-receipt-ink); }
+.ct-blurb { max-width: 46ch; font-size: var(--step-1); line-height: 1.45; color: var(--raw-receipt-2); }
 .ct-actions {
   display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 4px;
-  padding-top: 24px; border-top: 2px dashed var(--line); align-self: stretch;
+  padding-top: 24px; border-top: 2px dashed var(--raw-receipt-line); align-self: stretch;
 }
 .ft-mail { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
-.ft-email { font-size: var(--step-1); font-weight: 560; overflow-wrap: anywhere; user-select: all; }
+.ft-email { font-family: var(--mono); font-size: var(--step-0); font-weight: 700; overflow-wrap: anywhere; user-select: all; color: var(--raw-receipt-ink); }
 .copy {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: var(--radius);
-  border: 1px solid var(--line-strong); font-size: var(--step--1); font-weight: 560;
-  transition: border-color var(--ui) ease, transform var(--press) var(--ease-out);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 4px;
+  background: var(--raw-receipt-ink); color: var(--raw-receipt); border: 0;
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400;
+  transition: background-color var(--ui) ease, transform var(--press) var(--ease-out);
 }
 .copy .icon { width: 15px; height: 15px; }
 .copy:active { transform: scale(0.97); }
@@ -52,5 +53,5 @@
 }
 @media (hover: hover) and (pointer: fine) {
   .ft-col a:hover, .contact-nav a:hover { color: var(--fg); }
-  .copy:hover { border-color: var(--fg); }
+  .copy:hover { background: #2a2a33; }
 }

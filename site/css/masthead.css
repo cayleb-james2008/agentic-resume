@@ -15,26 +15,27 @@
 }
 @media (prefers-reduced-transparency: reduce) { .masthead { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 .mh-in { display: flex; align-items: center; gap: 20px; height: var(--masthead-h); }
-.brand { display: inline-flex; align-items: center; min-height: 44px; font-size: 1.125rem; flex: none; }
+.brand { display: inline-flex; align-items: center; min-height: 44px; font-size: 1.125rem; font-weight: 800; letter-spacing: -0.01em; flex: none; }
 
 .nav { margin-left: auto; min-width: 0; }
 .nav ul { display: flex; gap: 2px; }
 .nav a {
-  display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius-pill);
-  font-size: var(--step--1); font-weight: 520; color: var(--fg-2); white-space: nowrap;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px;
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-2); white-space: nowrap;
   transition: color var(--ui) ease, background-color var(--ui) ease;
 }
 .mh-r { display: flex; align-items: center; gap: 8px; flex: none; }
 .nav-ask {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 8px 0 14px; border-radius: var(--radius-pill);
-  border: 1px solid var(--line-strong); background: var(--surface); font-size: var(--step--1); font-weight: 560;
-  transition: border-color var(--ui) ease, transform var(--press) var(--ease-out);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 8px 0 14px; border-radius: 6px;
+  border: 1px solid transparent; background: var(--accent); color: var(--on-accent);
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400;
+  transition: background-color var(--ui) ease, transform var(--press) var(--ease-out);
 }
-.nav-ask .icon { width: 16px; height: 16px; color: var(--accent); }
+.nav-ask .icon { width: 16px; height: 16px; color: var(--on-accent); }
 .nav-ask:active { transform: scale(0.97); }
 .nav-ask kbd {
   display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 6px;
-  background: var(--sunk); color: var(--fg-2); font-size: 0.8125rem; font-weight: 520;
+  background: rgb(23 23 28 / 0.18); color: var(--on-accent); font-size: 0.8125rem; font-weight: 520;
 }
 .menu-btn {
   display: none; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line-strong);
@@ -44,7 +45,7 @@
 .menu-btn:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) {
   .nav a:hover { color: var(--fg); background: var(--sunk); }
-  .nav-ask:hover { border-color: var(--fg); }
+  .nav-ask:hover { background: var(--accent-press); }
 }
 /* The shortcut means nothing without a keyboard. */
 @media not all and (pointer: fine) { .nav-ask kbd { display: none; } }

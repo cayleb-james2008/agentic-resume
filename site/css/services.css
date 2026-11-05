@@ -1,38 +1,43 @@
-/* Work with me: how it goes, as a track of four steps (a real sequence, so numbered; the last, where the team
-   takes over and a person approves, in signature violet), then what gets built and one way to start. */
+/* Work with me — the procedure: how it goes, as four step cards in a row (a real sequence, so numbered;
+   the number stands behind each card as a ghost outline, and the last step, where the team takes over
+   and a person approves, is outlined in signature violet). Then what gets built, as ruled rows, and one
+   way to start. */
 
-.services { padding-block: var(--section); border-top: 1px solid var(--line); background: var(--surface); }
+.services { padding-block: var(--section); border-top: 1px solid var(--line); background: var(--bg); }
 
-.steps { position: relative; display: grid; gap: 28px; }
-.steps::before { content: ""; position: absolute; top: 18px; bottom: 18px; left: 17.5px; width: 1px; background: var(--line-strong); }
-.step { position: relative; padding-left: 60px; }
+.steps { display: grid; gap: 18px; counter-reset: step; }
+.step {
+  counter-increment: step;
+  position: relative; overflow: hidden; min-width: 0;
+  padding: 26px 24px 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+}
+.step::before {
+  content: "STEP — " counter(step, decimal-leading-zero);
+  position: relative; display: block; margin-bottom: 14px;
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent);
+}
 .step-n {
-  position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
-  background: var(--fg); color: var(--bg); font-size: var(--step--1); font-weight: 640;
+  position: absolute; right: 6px; top: -18px; font-size: 6.5rem; font-weight: 850; font-stretch: 125%; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.5px rgb(167 139 250 / 0.28); pointer-events: none;
 }
-.step:last-child .step-n { background: var(--accent); color: var(--on-accent); }
-.step-h { padding-top: 4px; font-size: var(--step-2); font-stretch: var(--wide); font-weight: 640; letter-spacing: -0.02em; }
-.step p { margin-top: 8px; max-width: 34ch; color: var(--fg-2); }
-@media (min-width: 900px) {
-  .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
-  .steps::before { top: 17.5px; bottom: auto; left: 18px; right: 0; width: auto; height: 1px; }
-  .step { padding: 60px 0 0; }
-  .step-h { padding-top: 0; }
-}
+.step:last-child .step-n { -webkit-text-stroke-color: rgb(167 139 250 / 0.55); }
+.step-h { position: relative; font-size: var(--step-1); font-stretch: var(--wide); font-weight: 750; letter-spacing: -0.01em; text-transform: uppercase; }
+.step p { position: relative; margin-top: 10px; max-width: 34ch; color: var(--fg-2); }
+@media (min-width: 900px) { .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 640px) and (max-width: 899.98px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .offers-wrap {
   display: grid; gap: 28px; margin-top: clamp(56px, 7vw, 104px); padding-top: clamp(32px, 4vw, 48px); border-top: 1px solid var(--line);
 }
-.offers-h { font-size: var(--step-2); font-stretch: var(--wide); font-weight: 640; letter-spacing: -0.02em; }
-.offers { display: grid; gap: 28px 48px; }
-.offers dt { font-size: var(--step-1); font-weight: 620; }
+.offers-h { font-size: var(--step-2); font-stretch: var(--wide); font-weight: 800; letter-spacing: -0.01em; text-transform: uppercase; }
+.offers { display: grid; }
+.offers > div { padding: 20px 4px; border-bottom: 1px solid var(--line); }
+.offers dt { font-size: var(--step-1); font-weight: 700; font-stretch: var(--wide); }
 .offers dd { margin: 6px 0 0; max-width: 40ch; color: var(--fg-2); }
 .offers-foot {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
-  padding: 20px 20px 20px 28px; border-radius: var(--radius); background: var(--accent-wash);
 }
-.offers-foot p { font-size: var(--step-1); font-weight: 560; }
-@media (min-width: 640px) { .offers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.offers-foot p { font-size: var(--step-1); font-weight: 650; }
 @media (min-width: 1024px) {
   .offers-wrap { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 48px; }
   .offers-h { grid-row: 1 / span 2; }

@@ -1,9 +1,12 @@
-/* Design tokens: the house standard (2026-11-05 overhaul). Raw values appear only here; everything else
-   reads roles. The grammar is Square UI's: zero-chroma neutrals, hairline borders instead of shadows,
-   10px card radius, colour only where it means something. One family (Mona Sans, variable width and
-   weight). One accent: a synthwave violet, used where a person decides (primary actions, links, the
-   Person step on Ergon's ladder) and nowhere else; green and amber survive only as real status.
-   Light by default, dark when the system asks, with every role re-pointed in one place. */
+/* Design tokens: Night Lab (2026-11-05 redesign, Direction A). Raw values appear only here; everything
+   else reads roles. The grammar is Square UI's: zero-chroma neutrals, hairline borders instead of
+   shadows, 10px card radius, colour only where it means something. One family (Mona Sans, variable
+   width and weight). One accent: an electric synthwave violet, used where a person decides (primary
+   actions, links, the Person step on Ergon's ladder) and nowhere else; green and amber survive only
+   as real status. Night Lab is a single night theme: the deep-neutral ground is the page, by day and
+   by night alike, so every role points at the night values in one place (the dark block below simply
+   re-points the same roles, keeping the one-place rule). The one paper surface is the receipt: the
+   track record and the contact card print on paper stock, ink and all. */
 
 @font-face {
   font-family: "Mona Sans"; font-style: normal; font-weight: 200 900; font-stretch: 75% 125%; font-display: swap;
@@ -12,76 +15,84 @@
 }
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  /* Raw colour, light: zero-chroma neutrals */
-  --raw-paper: #ffffff;          /* the ground */
-  --raw-white: #ffffff;          /* raised: the Ask panel, the résumé sheet, fields */
-  --raw-sunk: #f4f4f5;           /* chips, tags, quiet fills */
-  --raw-midnight: #16161a;       /* text */
-  --raw-graphite: #65656b;       /* secondary text, 5.8:1 on paper */
-  --raw-hairline: #e8e8ea;       /* dividers */
-  --raw-control: #8a8a91;        /* field and control borders, 3.4:1 on paper */
-  --raw-violet: #6d28d9;         /* the accent: 7.1:1 on paper, white under it 7.1:1 */
-  --raw-violet-press: #5b21b6;
-  --raw-violet-wash: #f0eafd;    /* a selected chip, a working card */
-  --raw-amber-ink: #8a4f00;      /* pending status text */
-  --raw-amber-wash: #fcefd9;
-  --raw-green-ink: #11683f;      /* fixed status text */
-  --raw-green-wash: #dff3e8;
+  /* Raw colour: the night ramp (zero-chroma neutrals, lit by the accent) */
+  --raw-paper: #0a0a0d;          /* the ground */
+  --raw-white: #101016;          /* raised: panels, cards, the Ask bar, fields */
+  --raw-sunk: #17171f;           /* chips, tags, quiet fills */
+  --raw-midnight: #f4f4f6;       /* text: 17.3:1 on the ground */
+  --raw-graphite: #a9a9b4;       /* secondary text: 8.6:1 on the ground */
+  --raw-hairline: #232329;       /* dividers (the comp's line at rest) */
+  --raw-control: #8b8b96;        /* field and control borders: 5.9:1 on the ground */
+  --raw-violet: #a78bfa;         /* the accent: 7.9:1 on the ground, coal under it 7.9:1 */
+  --raw-violet-press: #c4b5fd;
+  --raw-violet-wash: #292040;    /* a selected chip, a working card */
+  --raw-violet-deep: #8b5cf6;    /* the glow's heart, borders on the hub */
+  --raw-amber-ink: #f2b45a;      /* pending status text */
+  --raw-amber-wash: #3a2a12;
+  --raw-green-ink: #72d3a2;      /* fixed status text */
+  --raw-green-wash: #12301f;
 
-  /* Raw colour, dark */
-  --raw-night: #131316;
-  --raw-night-raised: #1e1e22;
-  --raw-night-sunk: #0e0e11;
+  /* Raw colour, dark (the same night, named for the one-place re-point below) */
+  --raw-night: #0a0a0d;
+  --raw-night-raised: #101016;
+  --raw-night-sunk: #17171f;
   --raw-mist: #f4f4f6;
-  --raw-mist-2: #a6a6ae;         /* 7.7:1 on night */
-  --raw-night-line: #26262c;
-  --raw-night-control: #77777f;  /* 4.0:1 on night */
-  --raw-violet-night: #a78bfa;   /* the accent at night: 6.0:1, coal under it 6.0:1 */
+  --raw-mist-2: #a9a9b4;         /* 8.6:1 on night */
+  --raw-night-line: #232329;
+  --raw-night-control: #8b8b96;  /* 5.9:1 on night */
+  --raw-violet-night: #a78bfa;   /* the accent at night: 7.9:1, coal under it 7.9:1 */
   --raw-violet-night-press: #c4b5fd;
   --raw-night-wash: #292040;
   --raw-amber-night: #f2b45a;
   --raw-amber-night-wash: #3a2a12;
   --raw-green-night: #72d3a2;
   --raw-green-night-wash: #12301f;
-  --raw-coal: #17171c;           /* text on the night accent */
+  --raw-coal: #17171c;           /* text on the accent */
 
-  /* The hero band: a deep neutral panel in both schemes, lit by the accent. Its text is the dark
-     scheme's mist, which reads 17:1 on the band. */
-  --raw-band: #101014;
-  --raw-band-deep: #0a0a0d;
-  --raw-band-2: #a8a8b3;         /* secondary text on the band, 8.1:1 */
+  /* The hero band: the ground itself, deepened, with the dreamscape glow and the halftone over it.
+     Its text is the mist, which reads 17:1 on the band. */
+  --raw-band: #0d0d12;
+  --raw-band-deep: #08080b;
+  --raw-band-2: #a9a9b4;         /* secondary text on the band, 8.6:1 */
   --raw-band-line: #2c2c34;      /* control borders on the band */
 
-  /* Roles */
-  --bg: var(--raw-paper);
-  --surface: var(--raw-white);
-  --sunk: var(--raw-sunk);
-  --fg: var(--raw-midnight);
-  --fg-2: var(--raw-graphite);
-  --line: var(--raw-hairline);
-  --line-strong: var(--raw-control);
-  --accent: var(--raw-violet);
-  --accent-press: var(--raw-violet-press);
-  --on-accent: var(--raw-white);
-  --accent-wash: var(--raw-violet-wash);
-  --warn: var(--raw-amber-ink);
-  --warn-wash: var(--raw-amber-wash);
-  --ok: var(--raw-green-ink);
-  --ok-wash: var(--raw-green-wash);
-  --shadow: 0 1px 2px rgb(22 22 26 / 0.05), 0 12px 32px -12px rgb(22 22 26 / 0.14);
+  /* The receipt: paper stock, printed in ink. The only light surface on the page. */
+  --raw-receipt: #f2f0ea;
+  --raw-receipt-ink: #17171c;
+  --raw-receipt-2: #44444c;      /* secondary print: 8.9:1 on the paper */
+  --raw-receipt-3: #5b5b63;      /* quiet print: 6.5:1 on the paper */
+  --raw-receipt-line: #b9b6ac;   /* the dashed tear line */
 
-  /* Type: one family; display text runs wide, body text at normal width */
+  /* Roles */
+  --bg: var(--raw-night);
+  --surface: var(--raw-night-raised);
+  --sunk: var(--raw-night-sunk);
+  --fg: var(--raw-mist);
+  --fg-2: var(--raw-mist-2);
+  --line: var(--raw-night-line);
+  --line-strong: var(--raw-night-control);
+  --accent: var(--raw-violet-night);
+  --accent-press: var(--raw-violet-night-press);
+  --on-accent: var(--raw-coal);
+  --accent-wash: var(--raw-night-wash);
+  --warn: var(--raw-amber-night);
+  --warn-wash: var(--raw-amber-night-wash);
+  --ok: var(--raw-green-night);
+  --ok-wash: var(--raw-green-night-wash);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 16px 40px -16px rgb(0 0 0 / 0.55);
+
+  /* Type: one family; display text runs wide and loud, body text at normal width */
   --font: "Mona Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* code in the kept project pages only */
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* the lab's labels, counts and print */
   --wide: 118%;
   --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);   /* 13-14px: labels, meta */
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);         /* 16-18px: body */
   --step-1: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);     /* 19-22px: leads, card titles */
   --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);            /* 24-32px: sub-heads */
-  --step-3: clamp(2rem, 1.55rem + 2vw, 3.25rem);            /* 32-52px: section heads */
-  --step-4: clamp(2.375rem, 1.6rem + 3.6vw, 4.75rem);       /* 38-76px: the headline */
+  --step-3: clamp(2.1rem, 1.55rem + 2.2vw, 3.5rem);         /* 34-56px: section heads */
+  --step-4: clamp(2.85rem, 1.6rem + 5.4vw, 6.1rem);         /* 46-98px: the headline */
 
   /* Space, shape, layers */
   --gutter: clamp(16px, 4vw, 40px);

@@ -6,15 +6,15 @@ title, description and address.
 """
 from markup import attr
 
-# The browser chrome follows the page: white by day, near-black by night (site/css/tokens.css).
-THEME_LIGHT = "#ffffff"
-THEME_DARK = "#131316"
+# The browser chrome follows the page: Night Lab is one night theme, so both schemes get the ground.
+THEME_LIGHT = "#0a0a0d"
+THEME_DARK = "#0a0a0d"
 
 
 def theme() -> str:
     """Colour-scheme support and the two theme colours, for every page's head."""
     return (
-        '<meta name="color-scheme" content="light dark">'
+        '<meta name="color-scheme" content="dark">'
         f'<meta name="theme-color" media="(prefers-color-scheme: light)" content="{THEME_LIGHT}">'
         f'<meta name="theme-color" media="(prefers-color-scheme: dark)" content="{THEME_DARK}">'
     )

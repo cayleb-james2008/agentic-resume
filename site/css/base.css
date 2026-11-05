@@ -48,7 +48,7 @@ kbd { font: inherit; }
   padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
   padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
 }
-.sec-h { font-size: var(--step-3); font-stretch: var(--wide); font-weight: 620; letter-spacing: -0.025em; line-height: 1.04; }
+.sec-h { font-size: var(--step-3); font-stretch: var(--wide); font-weight: 800; letter-spacing: -0.01em; line-height: 1.04; text-transform: uppercase; }
 .sec-lead { margin-top: 16px; max-width: 58ch; color: var(--fg-2); font-size: var(--step-1); line-height: 1.45; }
 
 /* --- The wordmark: Cayleb.AJ, its full stop in signature violet --------------- */
@@ -58,7 +58,7 @@ kbd { font: inherit; }
 /* --- Buttons --------------------------------------------------------------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 22px;
-  border-radius: var(--radius); border: 1px solid transparent; font-size: var(--step--1); font-weight: 560;
+  border-radius: 6px; border: 1px solid transparent; font-size: var(--step--1); font-weight: 560;
   line-height: 1.2; white-space: nowrap; cursor: pointer;
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease, border-color var(--ui) ease, color var(--ui) ease;
 }
@@ -76,12 +76,13 @@ kbd { font: inherit; }
   .btn--ghost:hover { border-color: var(--fg); }
 }
 
-/* --- Status chip: a real state, never decoration ----------------------------- */
+/* --- Status chip: a real state, never decoration — set as a rubber stamp in Night Lab ----------------------------- */
 .status {
-  display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 6px 12px; border-radius: var(--radius-pill);
-  background: var(--warn-wash); color: var(--warn); font-size: var(--step--1); font-weight: 520; line-height: 1.3;
+  display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 7px 12px; border-radius: 4px;
+  border: 1.5px solid currentColor; background: transparent; transform: rotate(-2deg);
+  color: var(--warn); font-family: var(--mono); font-size: 0.75rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.55;
 }
-.status::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .icon { width: 1em; height: 1em; flex: none; }
 
 /* --- Scroll reveals: a section rises gently as it arrives (the Motion Primitives InView pattern, written

@@ -12,19 +12,21 @@ const css = Object.fromEntries(
     .map((f) => [f, read(`site/css/${f}`)]),
 );
 
-// The palette, verbatim: one family of zero-chroma neutrals and one accent, a synthwave violet, by day and by night.
+// The palette, verbatim (Night Lab, 2026-11-05 redesign): one family of zero-chroma neutrals and one
+// accent, an electric synthwave violet. Night Lab is a single night theme, so the day names carry the
+// night values too.
 const RAW = {
-  '--raw-paper': '#ffffff',
-  '--raw-white': '#ffffff',
-  '--raw-midnight': '#16161a',
-  '--raw-graphite': '#65656b',
-  '--raw-hairline': '#e8e8ea',
-  '--raw-control': '#8a8a91',
-  '--raw-violet': '#6d28d9',
-  '--raw-night': '#131316',
-  '--raw-night-raised': '#1e1e22',
+  '--raw-paper': '#0a0a0d',
+  '--raw-white': '#101016',
+  '--raw-midnight': '#f4f4f6',
+  '--raw-graphite': '#a9a9b4',
+  '--raw-hairline': '#232329',
+  '--raw-control': '#8b8b96',
+  '--raw-violet': '#a78bfa',
+  '--raw-night': '#0a0a0d',
+  '--raw-night-raised': '#101016',
   '--raw-mist': '#f4f4f6',
-  '--raw-mist-2': '#a6a6ae',
+  '--raw-mist-2': '#a9a9b4',
   '--raw-violet-night': '#a78bfa',
 };
 
@@ -71,7 +73,7 @@ test('no keyframes: motion is transitions and the Web Animations API, so it can 
   for (const [file, text] of Object.entries(css)) assert.doesNotMatch(text, /@keyframes/, file);
 });
 
-test('the head is shell.py\'s: no import map, Mona Sans preloaded, light and dark theme colours', () => {
+test('the head is shell.py\'s: no import map, Mona Sans preloaded, the night theme colours', () => {
   const blocks = ['masthead', 'hero', 'built', 'services', 'ergon', 'resume_half', 'contact', 'menu', 'modal'];
   const shell = execFileSync('python3', ['-c', [
     'import json, sys',
@@ -85,9 +87,9 @@ test('the head is shell.py\'s: no import map, Mona Sans preloaded, light and dar
   assert.equal(shell.slice(0, shell.indexOf('</head>')), head, 'index.html has the head shell.py renders');
   assert.doesNotMatch(head, /importmap|three|modulepreload|assets\/hero/);
   assert.ok(head.includes('<link rel="preload" href="assets/fonts/mona-sans-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>'));
-  assert.ok(head.includes('<meta name="color-scheme" content="light dark">'));
-  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">'));
-  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131316">'));
+  assert.ok(head.includes('<meta name="color-scheme" content="dark">'));
+  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#0a0a0d">'));
+  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0d">'));
   assert.ok(head.indexOf('<script>') < head.indexOf('<script type="module" src="site/js/main.js">'));
   for (const [, href] of head.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)) assert.doesNotThrow(() => read(href), href);
 });

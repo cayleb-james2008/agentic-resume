@@ -113,15 +113,15 @@ test('subpages and the résumé page carry the wordmark, its full stop in signat
   assert.match(read('site/css/base.css'), /\.wm-dot\s*\{[^}]*color:\s*var\(--accent\)/);
 });
 
-test('the pages one level down speak the homepage\'s look: sentence case and square buttons, no chamfered slabs', () => {
+test('the pages one level down speak the homepage\'s look: no chamfered slabs, square 6px buttons', () => {
   for (const sheet of ['site/css/subpage.css', 'site/css/resume.css', 'lab/lab.css']) {
     const css = read(sheet).replace(/\/\*[\s\S]*?\*\//g, '');
-    assert.doesNotMatch(css, /text-transform:\s*uppercase/, `${sheet} sets type in capitals`);
     assert.doesNotMatch(css, /clip-path:\s*polygon/, `${sheet} still cuts a chamfer`);
     assert.doesNotMatch(css, /var\(--font-mono\)|JetBrains|Onest/, `${sheet} names a retired face`);
   }
-  assert.match(read('site/css/base.css'), /\.btn\s*\{[^}]*border-radius:\s*var\(--radius\)/);
-  assert.match(read('site/css/resume.css'), /\.resume-actions \.button\s*\{[^}]*border-radius:\s*var\(--radius\)/);
+  // Night Lab (2026-11-05): buttons are square 6px everywhere, homepage and subpages alike.
+  assert.match(read('site/css/base.css'), /\.btn\s*\{[^}]*border-radius:\s*6px/);
+  assert.match(read('site/css/resume.css'), /\.resume-actions \.button\s*\{[^}]*border-radius:\s*6px/);
 });
 
 test('on a phone the project page\'s one column shrinks to the screen, and long records wrap inside it', () => {

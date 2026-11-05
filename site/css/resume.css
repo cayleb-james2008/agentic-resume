@@ -83,7 +83,7 @@
 /* Downloads: one action button, the rest quiet links. */
 .resume-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-top: 24px; border-top: 1px solid var(--line); }
 .resume-actions .button {
-  display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: var(--radius);
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 6px;
   background: var(--accent); color: var(--on-accent); font-size: var(--step--1); font-weight: 560;
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease;
 }

@@ -1,57 +1,80 @@
-/* Built and tested: Ergon featured, its checklist beside it; then the index of the other four. Each row shows
-   its own real screenshot (or, for Asmodeus, its checklist). From 1024px, with the script, the rows stand on
-   the left and one preview frame on the right follows the row you point at or tab to (site/js/home/work.js). */
+/* Built and tested — the lab bench: every system is a numbered specimen in a card, Ergon first and wide,
+   with its checklist beside it; then the other four. Each specimen shows its own real screenshot (or, for
+   Asmodeus, its checklist) and its count set big in mono, in the accent. From 1024px, with the script,
+   the rows stand on the left and one preview frame on the right follows the row you point at or tab to
+   (site/js/home/work.js). The specimen numbers are the bench's own furniture (CSS counters), never
+   content. */
 
-.built { padding-block: var(--section); border-top: 1px solid var(--line); }
+.built { padding-block: var(--section); border-top: 1px solid var(--line); counter-reset: spec; }
 .sec-head { max-width: 46rem; margin-bottom: clamp(32px, 4vw, 56px); }
 
-.count { font-weight: 640; }
+.count { font-family: var(--mono); font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
 
-/* Checklists: Ergon's features and Asmodeus's rules. Plain rows, no rules between them. */
+/* Checklists: Ergon's features and Asmodeus's rules. A plain accent tick, no badge. */
 .checks { display: grid; gap: 12px; }
 .checks li { display: flex; align-items: flex-start; gap: 12px; font-size: var(--step-0); line-height: 1.4; }
-.checks .icon { width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--ok-wash); color: var(--ok); }
+.checks .icon { width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: transparent; color: var(--accent); }
 
-/* --- Ergon, featured ----------------------------------------------------------- */
+/* --- Ergon, featured: specimen 01, wide ------------------------------------------------ */
 .feature {
+  counter-increment: spec;
   display: grid; gap: 28px; padding: clamp(22px, 3vw, 40px);
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  transition: border-color var(--ui) ease, transform var(--ui) var(--ease-out);
 }
-.feature-cat, .row-cat { font-size: var(--step--1); color: var(--fg-2); }
-.feature-h { margin-top: 6px; font-size: var(--step-3); font-stretch: var(--wide); font-weight: 640; letter-spacing: -0.03em; }
+.feature-text::before, .row-text::before {
+  content: "SPECIMEN — " counter(spec, decimal-leading-zero);
+  display: block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em; color: var(--fg-2);
+}
+.feature-cat, .row-cat {
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-2);
+}
+.feature-h { margin-top: 6px; font-size: var(--step-3); font-stretch: var(--wide); font-weight: 800; letter-spacing: -0.01em; }
 .feature-p { margin-top: 12px; max-width: 46ch; font-size: var(--step-1); line-height: 1.45; color: var(--fg-2); }
 .feature .status { margin-top: 20px; }
 .feature-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 24px; }
+.feature-foot .count { font-size: var(--step-2); }
 .checks--feature { align-content: start; padding: clamp(20px, 2.4vw, 28px); border-radius: calc(var(--radius) - 4px); background: var(--sunk); }
 @media (min-width: 900px) { .feature { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; gap: 48px; } }
+@media (hover: hover) and (pointer: fine) { .feature:hover { border-color: var(--line-strong); transform: translateY(-3px); } }
 
-/* --- The index ------------------------------------------------------------------- */
+/* --- The bench: the other four specimens -------------------------------------------------- */
 .index { margin-top: clamp(40px, 5vw, 72px); }
-.index-rows { display: grid; gap: 56px; }
-.row-in { display: flex; flex-direction: column; gap: 20px; }
-.row-shot {
-  order: -1; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--sunk);
+.index-rows { display: grid; gap: 18px; }
+.row { counter-increment: spec; min-width: 0; }
+.row-in {
+  display: flex; flex-direction: column; gap: 20px; height: 100%;
+  padding: clamp(22px, 3vw, 30px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  transition: border-color var(--ui) ease, transform var(--ui) var(--ease-out);
 }
-.row-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.row-shot {
+  order: 2; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); border-radius: calc(var(--radius) - 4px); background: var(--sunk);
+}
+.row-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; filter: saturate(0.82) contrast(1.03); }
 .row-shot--checks { display: flex; align-items: center; padding: clamp(24px, 4vw, 48px); }
-.row-h { font-size: var(--step-2); font-stretch: var(--wide); font-weight: 640; letter-spacing: -0.025em; }
-.row-cat { margin-top: 4px; }
+.row-h { font-size: var(--step-2); font-stretch: var(--wide); font-weight: 800; letter-spacing: -0.01em; }
+.row-cat { margin-top: 6px; }
 .row-p { margin-top: 10px; max-width: 48ch; color: var(--fg-2); }
 .row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; }
+.row-meta .count { font-size: var(--step-1); }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tags li { padding: 3px 10px; border-radius: var(--radius-pill); background: var(--sunk); font-size: var(--step--1); color: var(--fg-2); }
+.tags li {
+  padding: 5px 12px; border-radius: var(--radius-pill); border: 1px solid var(--line-strong); background: transparent;
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--fg-2);
+}
 .row-code {
   display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 4px;
-  font-size: var(--step--1); font-weight: 580; color: var(--accent);
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; color: var(--fg);
+  text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; align-self: flex-start;
 }
-.row-code .icon { width: 14px; height: 14px; }
+.row-code .icon { width: 14px; height: 14px; color: var(--accent); }
 .feature-h a, .row-link { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 0.18em; transition: text-decoration-color var(--ui) ease; }
 
 @media (min-width: 640px) and (max-width: 1023.98px) {
-  .index-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 28px; }
+  .index-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 }
 
-/* Wide screens, scripted: list and preview. */
+/* Wide screens, scripted: list and preview. The bench cards flatten into a list beside the frame. */
 .index--preview { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; }
 .index--preview .index-rows { gap: 4px; }
 .index:not(.index--preview) > .index-preview { display: none; }
@@ -61,7 +84,7 @@
   position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
 }
 .index--preview .row-in { position: relative; }
-.index--preview .row-in { padding: 22px 24px; border-radius: var(--radius); transition: background-color var(--ui) ease, box-shadow var(--ui) ease; }
+.index--preview .row-in { padding: 22px 24px; border-color: transparent; background: transparent; transform: none; }
 .index--preview .row.on .row-in { background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
 .index-preview {
   position: sticky; top: calc(var(--masthead-h) + 24px); aspect-ratio: 16 / 10; overflow: hidden;
@@ -72,5 +95,6 @@
 
 @media (hover: hover) and (pointer: fine) {
   .feature-h a:hover, .row-link:hover { text-decoration-color: currentColor; }
-  .row-code:hover span { text-decoration: underline; text-underline-offset: 0.18em; }
+  .row-code:hover { color: var(--accent); }
+  .index:not(.index--preview) .row-in:hover { border-color: var(--line-strong); transform: translateY(-3px); }
 }

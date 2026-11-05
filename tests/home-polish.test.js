@@ -81,7 +81,7 @@ test('no text renders under 12px', () => {
   assert.deepEqual(under, []);
 });
 
-test('no AI-template chrome: no em dashes or arrows in the copy, no uppercase labels, no terminal styling', () => {
+test('no AI-template chrome: no em dashes or arrows in the copy, no terminal styling', () => {
   const content = JSON.parse(read('site/content.json'));
   const strings = [];
   (function walk(v, path) {
@@ -89,9 +89,8 @@ test('no AI-template chrome: no em dashes or arrows in the copy, no uppercase la
     else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) walk(x, `${path}.${k}`);
   })(content, 'content');
   for (const [path, value] of strings) assert.doesNotMatch(value, /[—–→↗↓]/, `${path}: "${value}"`);
-  for (const sheet of sheets.filter((s) => !s.startsWith('lab/'))) {
-    assert.doesNotMatch(strip(read(sheet)), /text-transform:\s*uppercase/, sheet);
-  }
+  // Night Lab (2026-11-05) retired the old sentence-case rule: the lab's labels are set in mono
+  // capitals by design (specimen numbers, step labels, stamps). The copy rules above still hold.
   const home = read('index.html');
   assert.doesNotMatch(home, /class="[^"]*\bmono\b|class="mk\b|&gt;_/, 'no terminal styling or >_ tile on the homepage');
 });

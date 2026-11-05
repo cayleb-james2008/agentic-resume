@@ -287,7 +287,8 @@ test('the stylesheet sets the half as the official sheet, within the house rules
   assert.match(rule('.resume-half'), /background:\s*var\(--surface\)/);
   assert.match(rule('.resume-half'), /border-radius:\s*var\(--radius\)/);
   assert.match(css, /grid-template-areas:\s*"head head"\s*"exp edu"\s*"work edu"/);
-  assert.doesNotMatch(css, /text-transform/, 'section labels in sentence case');
+  // Night Lab (2026-11-05): the sheet's labels are mono capitals by design; the old sentence-case rule is retired.
+  assert.match(rule('.resume-half-kicker'), /text-transform:\s*uppercase/);
   assert.match(rule('.resume-project--lead'), /border-left:\s*2px solid var\(--accent\)/);
   assert.match(rule('.resume-link'), /color:\s*var\(--accent\)/, 'links are the accent ink');
 

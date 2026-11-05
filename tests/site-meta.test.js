@@ -107,14 +107,14 @@ test('the old title is gone from every served page and résumé export', () => {
   for (const file of served) assert.doesNotMatch(read(file), /workflow integrator/i, file);
 });
 
-test('every page sets the same light and dark theme colours, once each', () => {
+test('every page sets the same night theme colours, once each', () => {
   const pages = ['index.html', 'resume.html', '404.html', 'lab/index.html',
     ...readdirSync(new URL('../projects/', import.meta.url)).filter((f) => f.endsWith('.html')).map((f) => `projects/${f}`)];
   for (const page of pages) {
     const html = read(page);
     assert.equal((html.match(/<meta name="theme-color"/g) || []).length, 2, page);
-    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">'), page);
-    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131316">'), page);
-    assert.equal((html.match(/<meta name="color-scheme" content="light dark">/g) || []).length, 1, page);
+    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#0a0a0d">'), page);
+    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0d">'), page);
+    assert.equal((html.match(/<meta name="color-scheme" content="dark">/g) || []).length, 1, page);
   }
 });

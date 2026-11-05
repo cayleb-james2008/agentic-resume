@@ -1,44 +1,76 @@
-/* The hero: a deep neutral band across the top of the page (the "night band"), its surface broken by a
-   halftone dot texture, the headline in two lines across it, then the plain sentence and the two doors on
-   the left and the Ask bar on the right, raised off the band. On phones it stacks: words, doors, then Ask.
-   Its one entrance: each piece rises 12px and fades in, in order. It is set here, under motion allowed only,
-   and started by the head script (.is-in); without the script, after the failsafe, or with motion reduced,
-   it never hides anything. The eyebrow (his title) resolves through a scramble when scripts run, a nod to
-   the Kitchen's Scramble Text, written for this site: the real words are what is served, and the effect
-   only ever re-presents them. */
+/* The hero: the lab after dark. The band is the ground deepened, lit by the dreamscape glow (two violet
+   blooms, top right and low left) and broken by a halftone dot texture that fades as it falls. The
+   headline stands in two lines, oversized and uppercase, the second line in the accent; the eyebrow
+   above it is set as a lab label in mono. Then the plain sentence and the two doors on the left — the
+   doors are admit-one tickets, perforated stub and all — and the Ask bar on the right, raised off the
+   band. On phones it stacks: words, doors, then Ask.
+   Its one entrance: each piece rises 12px and fades in, in order. It is set here, under motion allowed
+   only, and started by the head script (.is-in); without the script, after the failsafe, or with motion
+   reduced, it never hides anything. The eyebrow (his title) resolves through a scramble when scripts
+   run, a nod to the Kitchen's Scramble Text, written for this site: the real words are what is served,
+   and the effect only ever re-presents them. */
 
 .hero {
-  position: relative; background: var(--raw-band); color: var(--raw-mist);
-  padding-block: clamp(36px, 5.5vw, 88px) clamp(64px, 8vw, 120px);
+  position: relative; background: var(--raw-band); color: var(--raw-mist); overflow: clip;
+  padding-block: clamp(48px, 6vw, 96px) clamp(64px, 8vw, 120px);
 }
-.hero::before {
+.hero::before { /* the dreamscape glow */
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: radial-gradient(rgb(244 244 246 / 0.06) 1px, transparent 1.4px);
+  background:
+    radial-gradient(720px 460px at 82% -6%, rgb(139 92 246 / 0.30), transparent 62%),
+    radial-gradient(560px 380px at 6% 108%, rgb(167 139 250 / 0.13), transparent 60%);
+}
+.hero::after { /* halftone dots, fading down */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgb(167 139 250 / 0.20) 1.1px, transparent 1.4px);
   background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
 }
 @media (prefers-color-scheme: dark) {
   .hero { background: var(--raw-band-deep); }
 }
-.hero-in { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-.hero-eyebrow { font-size: var(--step--1); font-weight: 560; color: var(--raw-band-2); }
+.hero-in { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--accent);
+}
+.hero-eyebrow::before { content: ""; flex: none; width: 34px; height: 1px; background: var(--accent); }
 .hero-h {
-  font-size: var(--step-4); font-stretch: var(--wide); font-weight: 640; line-height: 1.02; letter-spacing: -0.03em;
-  text-wrap: balance;
+  font-size: var(--step-4); font-stretch: 120%; font-weight: 820; line-height: 0.99; letter-spacing: -0.015em;
+  text-transform: uppercase; text-wrap: balance;
 }
 .hero-h .hl { display: block; }
+.hero-h .hl + .hl { color: var(--accent); }
 .hero-side { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; margin-top: 8px; }
 .hero-lead { max-width: 34ch; font-size: var(--step-1); line-height: 1.45; color: var(--raw-band-2); }
-.doors { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* The doors in are tickets: a perforated stub on the left, punched with the one word tickets carry. */
+.doors { display: flex; flex-wrap: wrap; gap: 16px; }
 .door {
-  display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 20px 0 24px; border-radius: var(--radius);
-  border: 1px solid var(--raw-band-line); color: var(--raw-mist); font-size: var(--step-0); font-weight: 580; white-space: nowrap;
+  position: relative; display: inline-flex; align-items: center; gap: 12px; min-height: 52px;
+  padding: 0 20px 0 78px; border-radius: 6px;
+  border: 1px solid var(--raw-band-line); background: var(--surface); color: var(--raw-mist);
+  font-size: var(--step-0); font-weight: 580; white-space: nowrap;
   transition: transform var(--press) var(--ease-out), border-color var(--ui) ease, background-color var(--ui) ease;
+}
+.door::before {
+  content: ""; position: absolute; top: 8px; bottom: 8px; left: 54px;
+  border-left: 1.5px dashed rgb(167 139 250 / 0.45);
+}
+.door::after {
+  content: "ADMIT"; position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; color: var(--accent);
 }
 .door .icon { width: 18px; height: 18px; color: var(--raw-violet-night); }
 .door:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) {
-  .door:hover { border-color: var(--raw-mist-2); background: var(--raw-night-raised); }
+  .door:hover { border-color: var(--accent); background: var(--sunk); transform: translateY(-2px); }
 }
+
+/* The Ask bar, raised off the band. */
+.hero .ask { border-color: var(--raw-band-line); }
 
 @media (min-width: 1024px) {
   .hero-in { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; row-gap: 20px; }

@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 
 const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf8');
 const content = JSON.parse(read('site/content.json'));
-const SITE = 'https://cayleb-james2008.github.io/agentic-resume/';
+const SITE = 'https://cayleb-portfolio.vercel.app/';
 const projects = readdirSync(new URL('../projects/', import.meta.url)).filter((f) => f.endsWith('.html')).sort();
 const PAGES = { 'index.html': '', 'resume.html': 'resume.html', 'lab/index.html': 'lab/', ...Object.fromEntries(projects.map((p) => [`projects/${p}`, `projects/${p}`])) };
 const unescape = (v) => v?.replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');

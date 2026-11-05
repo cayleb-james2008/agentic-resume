@@ -1,6 +1,6 @@
 # Cayleb Alvarez-James — résumé site
 
-Canonical website: https://cayleb-james2008.github.io/agentic-resume/
+Canonical website: https://cayleb-portfolio.vercel.app/
 
 The role Cayleb is going for is Forward Thinking Engineer: he comes into a business, learns how the team works, and builds AI around it — AI employees, workflows and automations on the apps they already use. Ergon, one of his builds, gives each employee a personal assistant, managed remotely. The homepage gives its price as about $100 a person a month.
 

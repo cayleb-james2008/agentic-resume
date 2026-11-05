@@ -1,5 +1,5 @@
 /* Pages one level down (the project write-ups, the lab, 404) in the homepage's language: the same ground and
-   type, the wordmark with its blue full stop, pill buttons, plain sentence case. Each page's own content is
+   type, the wordmark with its violet full stop, square buttons, plain sentence case. Each page's own content is
    kept exactly as written; only its frame and its look change. */
 
 body { --g: max(var(--gutter), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)); }
@@ -97,7 +97,7 @@ body { --g: max(var(--gutter), env(safe-area-inset-left, 0px), env(safe-area-ins
 .project-content ul { list-style: disc; padding-left: 1.2rem; color: var(--fg-2); }
 .project-content p, .project-content ul { max-width: 62ch; }
 .project-content li + li { margin-top: 6px; }
-.project-limit { margin-top: 16px; padding: 16px 20px; border-radius: 12px; background: var(--warn-wash); color: var(--fg); font-size: var(--step--1); }
+.project-limit { margin-top: 16px; padding: 16px 20px; border-radius: var(--radius); background: var(--warn-wash); color: var(--fg); font-size: var(--step--1); }
 .project-code-link { font-weight: 600; }
 
 .project-rail, .project-aside { display: flex; flex-direction: column; gap: 32px; }

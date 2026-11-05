@@ -63,7 +63,7 @@
 .resume-company { font-weight: 620; }
 .resume-role, .resume-org { color: var(--fg-2); }
 
-/* --- Projects: one list, Ergon first, marked by a rule in signature blue ---------------------- */
+/* --- Projects: one list, Ergon first, marked by a rule in signature violet ---------------------- */
 .resume-projects { display: flex; flex-direction: column; }
 .resume-project { display: flex; flex-direction: column; min-width: 0; padding-block: 18px; border-top: 1px solid var(--line); }
 .resume-project:first-child { padding-top: 0; border-top: 0; }

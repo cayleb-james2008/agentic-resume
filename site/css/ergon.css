@@ -1,6 +1,6 @@
 /* Ergon: the copy, price and ladder beside the team graph. From 768px the people stand in a row under the hub;
    below that they stack, fed by a bus that runs down from the hub's mark. The graph's states are real states:
-   a working assistant in blue wash, a ticket in amber, a fix in green. */
+   a working assistant in violet wash, a ticket in amber, a fix in green. */
 
 .ergon { padding-block: var(--section); border-top: 1px solid var(--line); }
 .ergon-in { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }

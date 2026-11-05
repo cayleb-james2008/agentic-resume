@@ -58,7 +58,7 @@ kbd { font: inherit; }
 /* --- Buttons --------------------------------------------------------------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 22px;
-  border-radius: var(--radius-pill); border: 1px solid transparent; font-size: var(--step--1); font-weight: 560;
+  border-radius: var(--radius); border: 1px solid transparent; font-size: var(--step--1); font-weight: 560;
   line-height: 1.2; white-space: nowrap; cursor: pointer;
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease, border-color var(--ui) ease, color var(--ui) ease;
 }
@@ -83,6 +83,14 @@ kbd { font: inherit; }
 }
 .status::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .icon { width: 1em; height: 1em; flex: none; }
+
+/* --- Scroll reveals: a section rises gently as it arrives (the Motion Primitives InView pattern, written
+   for this site). Set under motion allowed only; hidden only while scripts run, and the head script's
+   failsafe (.reveal-failsafe) shows everything regardless. main.js adds .in as each block arrives. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] { transition: opacity var(--intro) var(--ease-out), transform var(--intro) var(--ease-out); }
+  .js:not(.reveal-failsafe) [data-reveal]:not(.in) { opacity: 0; transform: translateY(14px); }
+}
 
 /* --- Motion off --------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {

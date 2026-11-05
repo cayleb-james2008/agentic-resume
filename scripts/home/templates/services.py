@@ -13,7 +13,7 @@ def render(content: dict) -> str:
     )
     offers = "".join(f'<div><dt>{text(r["title"])}</dt><dd>{text(r["text"])}</dd></div>' for r in s["rows"])
     return (
-        '<section class="services" id="services" aria-labelledby="services-title"><div class="shell">'
+        '<section class="services" id="services" aria-labelledby="services-title"><div class="shell" data-reveal>'
         f'<div class="sec-head"><h2 class="sec-h" id="services-title">{text(s["headline"])}</h2>'
         f'<p class="sec-lead">{text(s["lead"])}</p></div>'
         f'<ol class="steps" aria-label="{attr(s["stepsLabel"])}">{steps}</ol>'

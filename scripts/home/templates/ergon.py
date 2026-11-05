@@ -38,7 +38,7 @@ def render(content: dict) -> str:
     people = "".join(person(p, f) for p in e["teams"][team]["people"])
     log = "".join(f"<p>{text(line)}</p>" for line in f["log"])
     return (
-        '<section class="ergon" id="team" aria-labelledby="ergon-title"><div class="shell ergon-in">'
+        '<section class="ergon" id="team" aria-labelledby="ergon-title"><div class="shell ergon-in" data-reveal>'
         '<div class="eg-copy">'
         f'<h2 class="sec-h" id="ergon-title">{text(e["headline"])}</h2>'
         f'<p class="eg-p">{text(e["body"])}</p>'

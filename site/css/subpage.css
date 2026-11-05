@@ -28,7 +28,7 @@ body { --g: max(var(--gutter), env(safe-area-inset-left, 0px), env(safe-area-ins
   transition: color var(--ui) ease, background-color var(--ui) ease;
 }
 .sub-ask, .sub-resume {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: var(--radius);
   font-size: var(--step--1); font-weight: 560; white-space: nowrap;
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease, border-color var(--ui) ease;
 }

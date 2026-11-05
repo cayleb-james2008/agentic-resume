@@ -17,14 +17,14 @@
   font-size: var(--step--1); font-weight: 520; color: var(--fg-2); white-space: nowrap; transition: color var(--ui) ease, background-color var(--ui) ease;
 }
 .resume-ask {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: var(--radius);
   border: 1px solid var(--line-strong); background: var(--surface); font-size: var(--step--1); font-weight: 560; white-space: nowrap;
   transition: transform var(--press) var(--ease-out), border-color var(--ui) ease;
 }
 .resume-ask .icon { width: 16px; height: 16px; color: var(--accent); }
 .resume-ask:active { transform: scale(0.97); }
 .resume-download {
-  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: var(--radius);
   background: var(--accent); color: var(--on-accent); font-size: var(--step--1); font-weight: 560; white-space: nowrap;
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease;
 }
@@ -80,10 +80,10 @@
 .resume-jobs p { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: 0; color: var(--fg); }
 .resume-jobs span { color: var(--fg-2); font-size: var(--step--1); white-space: nowrap; }
 
-/* Downloads: one pill, the rest quiet links. */
+/* Downloads: one action button, the rest quiet links. */
 .resume-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-top: 24px; border-top: 1px solid var(--line); }
 .resume-actions .button {
-  display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: var(--radius);
   background: var(--accent); color: var(--on-accent); font-size: var(--step--1); font-weight: 560;
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease;
 }

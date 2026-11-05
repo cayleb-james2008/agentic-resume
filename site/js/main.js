@@ -9,6 +9,23 @@ import { mount as mountAsk } from './ask/ask.js';
 import { mount as mountErgon } from './home/ergon.js';
 import { createScrollLock, mountActions, mountMenu, mountModal } from './home/overlays.js';
 import { mount as mountWork } from './home/work.js';
+import { mountScramble } from './home/scramble.js';
+
+/* Scroll reveals: a block gets .in as it arrives; with motion reduced, or no observer to ask, every
+   block is simply in. The CSS half lives in base.css and hides a block only while scripts run. */
+function mountReveals(scope, { reduced }) {
+  const blocks = scope.querySelectorAll('[data-reveal]');
+  if (reduced || !('IntersectionObserver' in window)) {
+    blocks.forEach((b) => b.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.1 });
+  blocks.forEach((b) => io.observe(b));
+}
 
 function boot() {
   const reduced = prefersReducedMotion();
@@ -29,6 +46,9 @@ function boot() {
   const ergon = document.querySelector('[data-ergon]');
   if (ergon) mountErgon(ergon, ctx);
   mountActions(document, ctx, { menu, modal, ask });
+  const eyebrow = document.querySelector('[data-scramble]');
+  if (eyebrow) mountScramble(eyebrow, ctx);
+  mountReveals(document, ctx);
   // Pages one level down link to index.html#ask: arrive with the field focused. The browser's own jump to the
   // fragment resets focus (its target box is not focusable), so focus the field once that jump is done.
   if (location.hash === '#ask' && ask) {

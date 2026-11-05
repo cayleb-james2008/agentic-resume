@@ -6,9 +6,9 @@ title, description and address.
 """
 from markup import attr
 
-# The browser chrome follows the page: paper by day, midnight by night (site/css/tokens.css).
-THEME_LIGHT = "#f5f6f8"
-THEME_DARK = "#121a2b"
+# The browser chrome follows the page: white by day, near-black by night (site/css/tokens.css).
+THEME_LIGHT = "#ffffff"
+THEME_DARK = "#131316"
 
 
 def theme() -> str:

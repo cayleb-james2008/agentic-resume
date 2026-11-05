@@ -17,7 +17,7 @@ def render(content: dict) -> str:
     columns = "".join(_column(col["title"], col["links"]) for col in c["columns"])
     return (
         '<section class="contact" id="contact" aria-labelledby="contact-title"><div class="shell foot-in">'
-        '<div class="ct-main">'
+        '<div class="ct-main" data-reveal>'
         f'<h2 class="ct-h" id="contact-title">{text(c["headline"])}</h2>'
         f'<p class="ct-blurb">{text(c["blurb"])}</p>'
         '<div class="ct-actions">'

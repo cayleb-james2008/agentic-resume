@@ -113,8 +113,8 @@ test('every page sets the same light and dark theme colours, once each', () => {
   for (const page of pages) {
     const html = read(page);
     assert.equal((html.match(/<meta name="theme-color"/g) || []).length, 2, page);
-    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f6f8">'), page);
-    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121a2b">'), page);
+    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">'), page);
+    assert.ok(html.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131316">'), page);
     assert.equal((html.match(/<meta name="color-scheme" content="light dark">/g) || []).length, 1, page);
   }
 });

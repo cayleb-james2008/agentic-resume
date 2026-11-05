@@ -12,20 +12,20 @@ const css = Object.fromEntries(
     .map((f) => [f, read(`site/css/${f}`)]),
 );
 
-// The palette, verbatim: one family of cool neutrals and one accent, the blue of signature ink, by day and by night.
+// The palette, verbatim: one family of zero-chroma neutrals and one accent, a synthwave violet, by day and by night.
 const RAW = {
-  '--raw-paper': '#f5f6f8',
+  '--raw-paper': '#ffffff',
   '--raw-white': '#ffffff',
-  '--raw-midnight': '#121a2b',
-  '--raw-graphite': '#4a5468',
-  '--raw-hairline': '#dce0e7',
-  '--raw-control': '#7c8598',
-  '--raw-ink-blue': '#2340d8',
-  '--raw-night': '#121a2b',
-  '--raw-night-raised': '#1a2338',
-  '--raw-mist': '#e9ecf2',
-  '--raw-mist-2': '#a7b0c2',
-  '--raw-periwinkle': '#8c9bff',
+  '--raw-midnight': '#16161a',
+  '--raw-graphite': '#65656b',
+  '--raw-hairline': '#e8e8ea',
+  '--raw-control': '#8a8a91',
+  '--raw-violet': '#6d28d9',
+  '--raw-night': '#131316',
+  '--raw-night-raised': '#1e1e22',
+  '--raw-mist': '#f4f4f6',
+  '--raw-mist-2': '#a6a6ae',
+  '--raw-violet-night': '#a78bfa',
 };
 
 test('the palette is verbatim, and every role is re-pointed for dark mode in one place', () => {
@@ -86,8 +86,8 @@ test('the head is shell.py\'s: no import map, Mona Sans preloaded, light and dar
   assert.doesNotMatch(head, /importmap|three|modulepreload|assets\/hero/);
   assert.ok(head.includes('<link rel="preload" href="assets/fonts/mona-sans-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>'));
   assert.ok(head.includes('<meta name="color-scheme" content="light dark">'));
-  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f6f8">'));
-  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121a2b">'));
+  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">'));
+  assert.ok(head.includes('<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131316">'));
   assert.ok(head.indexOf('<script>') < head.indexOf('<script type="module" src="site/js/main.js">'));
   for (const [, href] of head.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)) assert.doesNotThrow(() => read(href), href);
 });

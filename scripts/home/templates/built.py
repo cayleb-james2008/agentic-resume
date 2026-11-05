@@ -65,7 +65,7 @@ def render(content: dict) -> str:
     first, rest = b["cards"][0], b["cards"][1:]
     rows = "".join(row(c, b) for c in rest)
     return (
-        '<section class="built" id="built" aria-labelledby="built-title"><div class="shell">'
+        '<section class="built" id="built" aria-labelledby="built-title"><div class="shell" data-reveal>'
         f'<div class="sec-head"><h2 class="sec-h" id="built-title">{text(b["headline"])}</h2>'
         f'<p class="sec-lead">{text(b["lead"])}</p></div>'
         f"{feature(first, b, status)}"

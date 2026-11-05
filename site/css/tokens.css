@@ -1,7 +1,9 @@
-/* Design tokens: the "Sign-off" look (2026-10-16). Raw values appear only here; everything else reads roles.
-   One family (Mona Sans, variable width and weight), one accent: the blue of signature ink, used where a
-   person decides (primary actions, links, the Person step on Ergon's ladder). Light by default, dark when the
-   system asks, with every role re-pointed in one place. */
+/* Design tokens: the house standard (2026-11-05 overhaul). Raw values appear only here; everything else
+   reads roles. The grammar is Square UI's: zero-chroma neutrals, hairline borders instead of shadows,
+   10px card radius, colour only where it means something. One family (Mona Sans, variable width and
+   weight). One accent: a synthwave violet, used where a person decides (primary actions, links, the
+   Person step on Ergon's ladder) and nowhere else; green and amber survive only as real status.
+   Light by default, dark when the system asks, with every role re-pointed in one place. */
 
 @font-face {
   font-family: "Mona Sans"; font-style: normal; font-weight: 200 900; font-stretch: 75% 125%; font-display: swap;
@@ -12,37 +14,45 @@
 :root {
   color-scheme: light dark;
 
-  /* Raw colour, light */
-  --raw-paper: #f5f6f8;          /* the ground */
+  /* Raw colour, light: zero-chroma neutrals */
+  --raw-paper: #ffffff;          /* the ground */
   --raw-white: #ffffff;          /* raised: the Ask panel, the résumé sheet, fields */
-  --raw-sunk: #eceef2;           /* chips, tags, quiet fills */
-  --raw-midnight: #121a2b;       /* text */
-  --raw-graphite: #4a5468;       /* secondary text, 7.0:1 on paper */
-  --raw-hairline: #dce0e7;       /* dividers */
-  --raw-control: #7c8598;        /* field and control borders, 3.4:1 on paper */
-  --raw-ink-blue: #2340d8;       /* the accent: 6.9:1 on paper, 7.5:1 under white text */
-  --raw-ink-blue-press: #1b33b8;
-  --raw-ink-wash: #e6eafd;       /* a selected chip, a working card */
+  --raw-sunk: #f4f4f5;           /* chips, tags, quiet fills */
+  --raw-midnight: #16161a;       /* text */
+  --raw-graphite: #65656b;       /* secondary text, 5.8:1 on paper */
+  --raw-hairline: #e8e8ea;       /* dividers */
+  --raw-control: #8a8a91;        /* field and control borders, 3.4:1 on paper */
+  --raw-violet: #6d28d9;         /* the accent: 7.1:1 on paper, white under it 7.1:1 */
+  --raw-violet-press: #5b21b6;
+  --raw-violet-wash: #f0eafd;    /* a selected chip, a working card */
   --raw-amber-ink: #8a4f00;      /* pending status text */
   --raw-amber-wash: #fcefd9;
   --raw-green-ink: #11683f;      /* fixed status text */
   --raw-green-wash: #dff3e8;
 
   /* Raw colour, dark */
-  --raw-night: #121a2b;
-  --raw-night-raised: #1a2338;
-  --raw-night-sunk: #0e1422;
-  --raw-mist: #e9ecf2;
-  --raw-mist-2: #a7b0c2;         /* 8.0:1 on night */
-  --raw-night-line: #2a3550;
-  --raw-night-control: #66728f;  /* 3.6:1 on night */
-  --raw-periwinkle: #8c9bff;     /* the accent at night: 6.8:1, and under night text */
-  --raw-periwinkle-press: #a6b2ff;
-  --raw-night-wash: #232d55;
+  --raw-night: #131316;
+  --raw-night-raised: #1e1e22;
+  --raw-night-sunk: #0e0e11;
+  --raw-mist: #f4f4f6;
+  --raw-mist-2: #a6a6ae;         /* 7.7:1 on night */
+  --raw-night-line: #26262c;
+  --raw-night-control: #77777f;  /* 4.0:1 on night */
+  --raw-violet-night: #a78bfa;   /* the accent at night: 6.0:1, coal under it 6.0:1 */
+  --raw-violet-night-press: #c4b5fd;
+  --raw-night-wash: #292040;
   --raw-amber-night: #f2b45a;
   --raw-amber-night-wash: #3a2a12;
   --raw-green-night: #72d3a2;
   --raw-green-night-wash: #12301f;
+  --raw-coal: #17171c;           /* text on the night accent */
+
+  /* The hero band: a deep neutral panel in both schemes, lit by the accent. Its text is the dark
+     scheme's mist, which reads 17:1 on the band. */
+  --raw-band: #101014;
+  --raw-band-deep: #0a0a0d;
+  --raw-band-2: #a8a8b3;         /* secondary text on the band, 8.1:1 */
+  --raw-band-line: #2c2c34;      /* control borders on the band */
 
   /* Roles */
   --bg: var(--raw-paper);
@@ -52,15 +62,15 @@
   --fg-2: var(--raw-graphite);
   --line: var(--raw-hairline);
   --line-strong: var(--raw-control);
-  --accent: var(--raw-ink-blue);
-  --accent-press: var(--raw-ink-blue-press);
+  --accent: var(--raw-violet);
+  --accent-press: var(--raw-violet-press);
   --on-accent: var(--raw-white);
-  --accent-wash: var(--raw-ink-wash);
+  --accent-wash: var(--raw-violet-wash);
   --warn: var(--raw-amber-ink);
   --warn-wash: var(--raw-amber-wash);
   --ok: var(--raw-green-ink);
   --ok-wash: var(--raw-green-wash);
-  --shadow: 0 1px 2px rgb(18 26 43 / 0.06), 0 12px 32px -12px rgb(18 26 43 / 0.16);
+  --shadow: 0 1px 2px rgb(22 22 26 / 0.05), 0 12px 32px -12px rgb(22 22 26 / 0.14);
 
   /* Type: one family; display text runs wide, body text at normal width */
   --font: "Mona Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -78,7 +88,7 @@
   --shell: 76rem;
   --masthead-h: 64px;
   --section: clamp(4.5rem, 3rem + 6vw, 8rem);
-  --radius: 16px;
+  --radius: 10px;
   --radius-pill: 999px;
   --z-masthead: 40;
   --z-overlay: 60;
@@ -102,9 +112,9 @@
     --fg-2: var(--raw-mist-2);
     --line: var(--raw-night-line);
     --line-strong: var(--raw-night-control);
-    --accent: var(--raw-periwinkle);
-    --accent-press: var(--raw-periwinkle-press);
-    --on-accent: var(--raw-night);
+    --accent: var(--raw-violet-night);
+    --accent-press: var(--raw-violet-night-press);
+    --on-accent: var(--raw-coal);
     --accent-wash: var(--raw-night-wash);
     --warn: var(--raw-amber-night);
     --warn-wash: var(--raw-amber-night-wash);

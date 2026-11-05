@@ -21,7 +21,7 @@ def render(content: dict) -> str:
     )
     return (
         '<section class="hero" id="home" aria-labelledby="hero-title"><div class="shell hero-in">'
-        f'<p class="hero-eyebrow" data-in style="--i:0">{text(h["eyebrow"])}</p>'
+        f'<p class="hero-eyebrow" data-in style="--i:0" data-scramble>{text(h["eyebrow"])}</p>'
         f'<h1 class="hero-h" id="hero-title">{_lines(h["headline"])}</h1>'
         '<div class="hero-side">'
         f'<p class="hero-lead" data-in style="--i:3">{text(h["lead"])}</p>'

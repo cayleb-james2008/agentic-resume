@@ -33,7 +33,7 @@ def local(url: str, site_url: str) -> str:
 def section(section_id: str, title: str, body: str) -> str:
     title_id = f"resume-{section_id}-title"
     return (
-        f'<section id="{section_id}" aria-labelledby="{title_id}">'
+        f'<section id="{section_id}" aria-labelledby="{title_id}" data-reveal>'
         f'<h2 id="{title_id}">{text(title)}</h2>{body}</section>'
     )
 
@@ -53,7 +53,7 @@ def head(half: dict, resume: dict, rec: dict | None = None) -> str:
         f'<li>{link(d["href"], d["label"], "resume-half-download")}</li>' for d in half["downloads"]
     )
     return (
-        '<header class="resume-half-head">'
+        '<header class="resume-half-head" data-reveal>'
         f'<p class="resume-half-kicker">{text(half["kicker"])}</p>'
         f'<p class="resume-half-title">{text(half["title"])}</p>'
         f'<p class="resume-half-name">{text(resume["full_name"])}</p>'

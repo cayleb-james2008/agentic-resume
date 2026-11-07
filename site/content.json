@@ -245,8 +245,8 @@
     "more": "If it runs on a computer, I can build around it."
   },
   "ergon": {
-    "headline": "One assistant per person. Shaped to your team.",
-    "body": "Ergon gives everyone on your team their own AI assistant, set up around the apps they already use. I manage every computer remotely, and when something breaks, a support agent fixes it right on the machine.",
+    "headline": "Ergon: agents that learn the role themselves.",
+    "body": "After install, the agent observes the employee's recurring work, asks targeted questions and builds a persistent model of the role. It proposes and builds capabilities, and each skill earns its grant only after evaluation and review.",
     "tryLabel": "Try it on a team",
     "teamOrder": [
       "office",
@@ -459,8 +459,8 @@
       "Person"
     ],
     "ladderNote": "Hard tickets move up a step. A person always has the last word.",
-    "price": "About $100",
-    "priceRest": "a person a month.",
+    "price": "No public price",
+    "priceRest": "is listed for Ergon.",
     "status": "In development · RHL a proposed first deployment",
     "figure": {
       "caption": "Sample team: Ergon connects to each person's assistant, and each assistant works in that person's apps.",
@@ -827,7 +827,7 @@
       },
       {
         "q": "What does Ergon cost?",
-        "a": "About $100 a person a month.",
+        "a": "No public price is listed for Ergon. Email is the way to ask about a project.",
         "keywords": [
           "cost",
           "much",

@@ -55,6 +55,8 @@ def render(content: dict, fragment: str) -> str:
         f"{styles}</head><body class=\"resume-page\">"
         '<a class="skip-link" href="#resume">Skip to résumé</a>'
         f"{masthead(content)}"
+        '<p class="resume-portfolio">Portfolio and showcase: '
+        '<a href="https://cayleb-portfolio.vercel.app">cayleb-portfolio.vercel.app</a></p>'
         f'<main class="resume-main">{fragment.strip()}</main>'
         f"{footer(content)}"
         "</body></html>\n"

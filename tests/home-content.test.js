@@ -35,9 +35,9 @@ const select = (value, pattern) => {
   return nodes;
 };
 
-// Cayleb's own figures, the only numbers not traced to the résumé: Ergon's per-person monthly price (2026-10-15),
-// written only as "$100", and his range for a full-time role (2026-10-16), written only as "$130K" and "$200K".
-const OWN_FIGURES = new Set(['$100', '$130K', '$200K']);
+// Cayleb's own figures, the only numbers not traced to the résumé: his range for a full-time role (2026-10-16),
+// written only as "$130K" and "$200K". No Ergon price is listed anywhere (superseded 2026-11-06).
+const OWN_FIGURES = new Set(['$130K', '$200K']);
 
 test('numbers trace to the résumé', () => {
   const allowed = new Set([...resumeText.matchAll(/\d+(?:,\d{3})*/g)].map((m) => m[0]));
@@ -59,7 +59,7 @@ test("the page's parts each have their copy, and the retired ones are gone", () 
   assert.equal(content.navAction, undefined);
   assert.equal(content.wordmark, 'Cayleb.AJ');
   assert.equal(content.hero.headline, "Show me how you work. I'll find where AI fits.");
-  assert.equal(content.hero.eyebrow, 'Forward Thinking Engineer');
+  assert.equal(content.hero.eyebrow, 'AI Agent Systems Engineer');
 });
 
 test('content lengths stay inside their frames', () => {

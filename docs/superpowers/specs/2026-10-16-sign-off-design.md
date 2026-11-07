@@ -35,7 +35,7 @@ Everything else is quiet cool neutrals. The bold move is the headline: wide, hea
 
 ```
 masthead: Cayleb.AJ (blue full stop)    Work  Work with me  Ergon  Résumé  Contact   [Ask /]
-#home      Forward Thinking Engineer
+#home      AI Agent Systems Engineer
            Show me how you work.
            I'll find where AI fits.
            one plain line        ┌ Ask about Cayleb ───────────────┐
@@ -112,8 +112,8 @@ Pending amber and fixed green appear only for real states: Ergon's status, its t
 ## Claims carried over
 
 Unchanged and test-held:
-- "Forward Thinking Engineer" and the headline.
-- About $100 a person a month.
+- "AI Agent Systems Engineer" and the headline.
+- No public price is listed.
 - "Windows pilot · live checks pending", now also beside Ergon's featured claims.
 - Agent → Senior agent → Person, with no model names.
 - No clients, revenue, profit or returns.

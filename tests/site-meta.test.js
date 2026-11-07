@@ -88,16 +88,20 @@ test('the sitemap lists every page by its canonical address', () => {
   assert.deepEqual(locs.sort(), Object.values(PAGES).map((p) => SITE + p).sort());
 });
 
-// The role he is going for, by its exact name (2026-10-13): "Forward Thinking Engineer".
-const TITLE = 'Forward Thinking Engineer';
-test('the headline title is Forward Thinking Engineer on the site, the résumé and the share card', () => {
+// The role he is going for, by its exact name: "AI Agent Systems Engineer".
+const TITLE = 'AI Agent Systems Engineer';
+const HEADLINE = 'AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure';
+test('the headline title is AI Agent Systems Engineer on the site, the résumé and the share card', () => {
   assert.equal(content.meta.title, `Cayleb Alvarez-James · ${TITLE}`);
-  assert.equal(content.hero.eyebrow, 'Forward Thinking Engineer', 'the hero\'s title over the headline');
+  assert.equal(content.hero.eyebrow, 'AI Agent Systems Engineer', 'the hero\'s title over the headline');
   assert.ok(content.meta.shareAlt.includes(TITLE));
-  assert.ok(read('resume.html').includes(`<p>${TITLE} · Connecticut · Remote-only</p>`));
+  assert.ok(read('resume.html').includes(`<p>${HEADLINE.replace(/&/g, '&amp;')} · Middletown, Connecticut, USA</p>`));
   assert.ok(read('scripts/home/make_share_card.py').includes(`"${TITLE}"`));
-  for (const file of ['Cayleb-James-polished-resume.txt', 'Cayleb-James-polished-one-page.txt', 'resume/resume.md', 'resume/one-page.md']) {
-    assert.equal(read(file).split('\n')[2], TITLE, `${file} headline`);
+  for (const file of ['Cayleb-James-polished-resume.txt', 'Cayleb-James-polished-one-page.txt']) {
+    assert.equal(read(file).split('\n')[2], HEADLINE.replace('—', '-'), `${file} headline`);
+  }
+  for (const file of ['resume/resume.md', 'resume/one-page.md']) {
+    assert.equal(read(file).split('\n')[2], HEADLINE, `${file} headline`);
   }
 });
 

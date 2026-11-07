@@ -26,6 +26,9 @@ def render(content: dict) -> str:
         '<div class="hero-side">'
         f'<p class="hero-lead" data-in style="--i:3">{text(h["lead"])}</p>'
         f'<nav class="doors" aria-label="{attr(h["doorsLabel"])}" data-in style="--i:4">{doors}</nav>'
+        f'<p class="hero-resume" data-in style="--i:5"><a href="resume.html">Résumé page</a>'
+        f'<span aria-hidden="true"> · </span>'
+        f'<a href="{attr(content["meta"]["resumePdf"])}" download>Download the plain résumé (PDF)</a></p>'
         "</div>"
         f"{ask.render(content)}"
         "</div></section>"

@@ -16,7 +16,7 @@ Paused 2026-10-15 in a cloud session that couldn't reach Instagram, couldn't gen
 |---|---|
 | Format | A series of **self-contained** episodes. No episode refers to another, and there's no running plot. Start with 2–3 and grow if they perform. |
 | Style | Match **@ink.industries_**: directing, pacing, storytelling, voice. **Not studied yet.** The cloud session couldn't reach Instagram. |
-| Audience | **Owners and hirers.** Stories are set inside small businesses (owners see themselves) and also work as proof for anyone hiring a Forward Thinking Engineer. |
+| Audience | **Owners and hirers.** Stories are set inside small businesses (owners see themselves) and also work as proof for anyone hiring a AI Agent Systems Engineer. |
 | On screen | A **3D character version of Cayleb**, plus a visible on-screen form for the AI so no code or dashboards are needed. **The look isn't locked.** Design the character and the AI's form fresh with Cayleb, guided by the @ink.industries_ style. Don't copy the site's current renders or its glass-droplet agent. |
 | Voice | An **AI clone of Cayleb's own voice**, made in Higgsfield with ElevenLabs. |
 | Budget | Cayleb says he has about 60 credits and will move to the lowest paid plan if needed. **Check this.** On 2026-10-15 the connector saw one private workspace on the free plan with 10 credits, not marked as selected. |
@@ -26,7 +26,7 @@ Paused 2026-10-15 in a cloud session that couldn't reach Instagram, couldn't gen
 
 These cover what he does and how he talks, not how things look.
 
-**Positioning:** Forward Thinking Engineer.
+**Positioning:** AI Agent Systems Engineer.
 - He shadows people for two days.
 - He builds each person an AI agent that fits their day, plus tools for anything digital the company wants automated.
 - He teaches them, then scales it across the company.

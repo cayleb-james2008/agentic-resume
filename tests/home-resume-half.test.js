@@ -91,7 +91,7 @@ test('the résumé half reads like the résumé: name, title, place, both PDFs',
   assert.equal(textOf(one(html, 'p', /class="resume-half-name"/)), resume.full_name);
   assert.equal(
     textOf(one(html, 'p', /class="resume-half-meta"/)),
-    'Forward Thinking Engineer · Connecticut, USA · Remote-only',
+    'AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure · Middletown, Connecticut, USA',
   );
 
   // The two PDFs the page already offers; the labels come from content, the files from meta.

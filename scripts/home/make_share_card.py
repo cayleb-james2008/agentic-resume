@@ -30,7 +30,7 @@ INK_BLUE = (35, 64, 216)     # --raw-ink-blue
 MONA = ROOT / "assets" / "fonts" / "mona-sans-latin-wdth-normal.woff2"
 
 WORDMARK = "Cayleb.AJ"
-TITLE = "Forward Thinking Engineer"
+TITLE = "AI Agent Systems Engineer"
 HEADLINE = "Show me how you work. I'll find where AI fits."
 URL = "cayleb-james2008.github.io/agentic-resume"
 X = 80

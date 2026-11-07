@@ -36,7 +36,7 @@ test('the guide keeps the site\'s claim rules', () => {
   const text = JSON.stringify(guide).replace(STATUS, '');
   assert.doesNotMatch(text, /\bclients?\b|\bcustomers?\b|\bpilots?\b|hedge fund|\brevenue\b|\bprofits?\b|\breturns\b|Robert H\.? Lord|\bRHL\b/i);
   assert.match(guide.questions.find((q) => /Asmodeus/.test(q.q)).a, /private/i);
-  assert.ok(guide.questions.some((q) => q.q === 'What does Ergon cost?' && q.a === 'About $100 a person a month.'));
+  assert.ok(guide.questions.some((q) => q.q === 'What does Ergon cost?' && q.a === 'No public price is listed for Ergon. Email is the way to ask about a project.'));
 });
 
 test('the greeting says where the answers come from, and claims no live model', () => {

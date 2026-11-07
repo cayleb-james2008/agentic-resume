@@ -34,12 +34,12 @@ The official résumé follows, then a way to get in touch.
 6. **The vibe of the mockup is approved.** This spec ports it into the repo's build without changing its look.
 7. **Carried over from earlier rounds:**
    - No pictures of him anywhere.
-   - The exact title "Forward Thinking Engineer".
+   - The exact title "AI Agent Systems Engineer".
    - The headline "Show me how you work. I'll find where AI fits."
    - The other jobs shown under "Work ethic".
    - No certifications.
    - Escalation in plain words, Agent → Senior agent → Person, with no model names.
-   - About $100 a person a month.
+   - No public price is listed.
    - Ergon's status stays honest: "Windows pilot · live checks pending".
    - The official résumé comes at the end.
    - No third-party requests at runtime.
@@ -60,7 +60,7 @@ header.masthead (absolute over the hero)               >_ Cayleb.AJ · Home Ergo
   section#built            "What I've built so far": Ergon (wide, mini terminal), dotz, Sophos,
                            Industry AI Suite (real screenshots), Asmodeus (mini terminal)
   section#services         "AI built around how you work": five hover-fill rows that open the request modal
-  section#stats            black panel: 3,300+ · 5 · 10 · $100/mo with scroll count-up, honest footnote
+  section#stats            black panel: 3,300+ · 5 · 10 · no public price with scroll count-up, honest footnote
   div.resume-half#resume   the official résumé: #experience, #work, #education (markup as today)
 </main>
 footer.site-footer > section.contact#contact    CTA h2 + Get in touch, brand + email (copy), Site / Projects /
@@ -74,15 +74,15 @@ div#menu (full-screen ink overlay) · div#modal (request composer) · aside.guid
 |---|---|---|
 | Loader | `>_ Cayleb.AJ`. The headline as its tagline. Four boot lines (`$ hello --from cayleb`, `› loading the work … ok`, `› loading ergon … ok`, `› ready`). "Loading" and a zero-padded counter. | Counts 0→100 over 1300ms with easeInOutCubic. Each line shows when the count passes it. Then it slides up (0.75s) and the hero reveals start. Scroll is locked meanwhile. The digits come from JS, never content.json. |
 | Header | Wordmark `content.wordmark` ("Cayleb.AJ") after a `>_` tile. Nav from `content.nav`. Clock chip "Connecticut · 4:22pm • 15 October, 2026". Menu button. | Absolute, so it scrolls away. Enters 150ms after the loader. The clock is America/New_York, ticking every second. Contact opens the modal; the rest smooth-scroll. |
-| Hero | Eyebrow "Forward Thinking Engineer". H1 headline. Lead (≤24 words: "I come into your business, learn how your team works, and build AI around it: AI employees, workflows and automations."). Proof chip `✓ 3,300+ automated checks · 5 systems`. CTAs "Let's talk" / "View work". Hint "› move your cursor to see how it's built". Carousel: AI employees, AI workflows, AI automations, AI everything. "Built with" list. Status bar: "Building since Oct 2025 · Remote-only · Connecticut · Scroll to explore". | The liquid reveal (below). A line reveal on the H1. Staggered entrances after the loader. The carousel auto-advances every 4.2s until touched. It is `min-height: 100svh` from 1024px up. |
-| About | Eyebrow "About". Caption "One engineer. Remote-only, based in Connecticut." Statement (h2): "I come into your business and learn how your team really works," then, muted, "then build AI employees, workflows and automations around it, on the apps you already use." Chips for GitHub, Email and Résumé PDF. "Read my résumé". | Word reveal, staggered 35ms. |
+| Hero | Eyebrow "AI Agent Systems Engineer". H1 headline. Lead (≤24 words: "I come into your business, learn how your team works, and build AI around it: AI employees, workflows and automations."). Proof chip `✓ 3,300+ automated checks · 5 systems`. CTAs "Let's talk" / "View work". Hint "› move your cursor to see how it's built". Carousel: AI employees, AI workflows, AI automations, AI everything. "Built with" list. Status bar: "Building since Oct 2025 · Connecticut · Scroll to explore". | The liquid reveal (below). A line reveal on the H1. Staggered entrances after the loader. The carousel auto-advances every 4.2s until touched. It is `min-height: 100svh` from 1024px up. |
+| About | Eyebrow "About". Caption "One engineer. Based in Middletown, Connecticut." Statement (h2): "I come into your business and learn how your team really works," then, muted, "then build AI employees, workflows and automations around it, on the apps you already use." Chips for GitHub, Email and Résumé PDF. "Read my résumé". | Word reveal, staggered 35ms. |
 | Band | Pills: "AI" (light), "built" (cyan), → (ink), "around you" (ghost). | Staggered rise. The tiles scale on hover. |
-| Ergon | Eyebrow "Ergon". H2 "One assistant per person. Shaped to your team." Body. "Try it on a team" with Office / Shop / Trades / Clinic. "When something breaks" with the ladder Agent → Senior agent → Person and the note "Hard tickets move up a step. A person always has the last word." Then "**About $100** a person a month." and the status chip. Figure: a "Sample team" chip, the hub "Ergon · Managed remotely", five person cards (role, `>_` assistant badge, "assistant on", two app chips), "Send a test ticket", "Tap a person to see their assistant." and a mono log. | The team graph (below). |
+| Ergon | Eyebrow "Ergon". H2 "One assistant per person. Shaped to your team." Body. "Try it on a team" with Office / Shop / Trades / Clinic. "When something breaks" with the ladder Agent → Senior agent → Person and the note "Hard tickets move up a step. A person always has the last word." Then "**No public price listed** a person a month." and the status chip. Figure: a "Sample team" chip, the hub "Ergon · Managed remotely", five person cards (role, `>_` assistant badge, "assistant on", two app chips), "Send a test ticket", "Tap a person to see their assistant." and a mono log. | The team graph (below). |
 | Built | Eyebrow "Work". H2 "What I've built so far". Five black cards, each with a category line, an ↗ badge, a name, one sentence, tags and a mono count tag (622 tests, 828+ tests, 1,224 checks, 382 tests, 1,111 tests). Ergon is wide, with a mini `ergon status` terminal and its status chip. dotz, Sophos and the Suite carry real screenshots. Asmodeus has an `asmodeus replay --past-data` terminal. The links are the case studies or repos. | Cards rise in, staggered 90ms. Hover lifts a card 8px and turns its badge 45°. |
 | Services | Eyebrow "What I do". H2 "AI built around how you work". Rows: /employees AI employees, /workflows AI workflows, /automations AI automations, /support Remote support, /everything AI everything, each with one line. | Hover fills the row and slides its badge. A click opens the modal with that topic. |
-| Stats | Eyebrow "Track record". H2 "Tested before it ships." 3,300+ "Automated checks across my systems". 5 "Systems built and tested". 10 "Recorded demos in the lab". $100/mo "Ergon, about a person a month". Footnote: "Counts come from each project's own test runs. Ergon's live checks are still pending, and it hasn't had a paid rollout yet." | Count-up driven by scroll: from the element's top at the viewport bottom to its centre at the viewport centre. The HTML carries the final values. |
+| Stats | Eyebrow "Track record". H2 "Tested before it ships." 3,300+ "Automated checks across my systems". 5 "Systems built and tested". 10 "Recorded demos in the lab". no public price "Ergon, about a person a month". Footnote: "Counts come from each project's own test runs. Ergon's live checks are still pending, and it hasn't had a paid rollout yet." | Count-up driven by scroll: from the element's top at the viewport bottom to its centre at the viewport centre. The HTML carries the final values. |
 | Résumé | Today's `resume_half.py` markup and content: kicker, name, meta, downloads, then `#experience` (with Work ethic), `#work` (Ergon first, status, case studies, lab link) and `#education` (with skills). The header gains the line "The official version". | Restyled as the mockup's sheet: a cool-grey card, small uppercase section labels and two columns from 1024px. No motion beyond colour on hover. |
-| Footer | H2 "Show me how your team works." with "Get in touch". The brand line and "Forward Thinking Engineer. I build AI employees, workflows and automations around the way your team already works." The email shown as text with a Copy button. The Site / Projects / Elsewhere columns. "© 2026 Cayleb Alvarez-James." and "Remote-only · Connecticut, USA". A 5% CAYLEB watermark. | Links nudge 4px on hover. |
+| Footer | H2 "Show me how your team works." with "Get in touch". The brand line and "AI Agent Systems Engineer. I build AI employees, workflows and automations around the way your team already works." The email shown as text with a Copy button. The Site / Projects / Elsewhere columns. "© 2026 Cayleb Alvarez-James." and "Connecticut, USA". A 5% CAYLEB watermark. | Links nudge 4px on hover. |
 | Menu | Full-screen ink overlay: brand, Close, items with mono route labels (`/`, `/ergon`, `/work`, `/build`, `/resume`, `/contact`), "Connecticut — time", "Start a project →". | Fades in, then the items stagger in (45ms each, plus 80ms). Escape and Close shut it. Focus is trapped and handed back on close. |
 | Modal | "Start a project" (or "About: <topic>"). H2 "Tell me how your team works." Fields: Name, Email, Your team. "I read every message myself." "Write the email". | Inline validation that says how to fix each field. On submit it composes a `mailto:` to his address. Then it shows: "Your email app should open with this message. If it didn't, copy it and send it to caylebalvarezjames@gmail.com." with "Copy message". It never says a message was sent. |
 | Ask my agent | The guide's questions as buttons. Each answer is printed under a `$ <cmd>` echo (whoami, ergon --about, ergon --price, tools --list, history --rollouts, safety --check, asmodeus --about, contact). | A floating pill appears once the hero is mostly out of view. The panel types each answer (3 characters per 16ms). Escape closes it. |
@@ -141,12 +141,12 @@ div#menu (full-screen ink overlay) · div#modal (request composer) · aside.guid
 
 - **Keys.** `content.json` drops `story` and gains `hero`, `about`, `band`, `ergon` (including `teams` and `ladder`), `built`, `services`, `stats` and `modal`.
   - `resumeHalf` gains `title: "The official version"`.
-  - `guide` drops `lines` and gains a `cmd` per question, plus the question "What does Ergon cost?" with the answer "About $100 a person a month."
+  - `guide` drops `lines` and gains a `cmd` per question, plus the question "What does Ergon cost?" with the answer "No public price is listed."
   - `contact` gains its columns.
   - `wordmark` becomes "Cayleb.AJ"; the `>_` tile is markup.
 - **Numbers.**
   - Every digit run in `content.json` must appear in `resume/resume-content.json`.
-  - The only exception is `100` written as `$100`, which is Cayleb's documented 2026-10-15 price.
+  - The only exception is `100` written as `no public price`, which is Cayleb's documented 2026-10-15 price.
   - Loader digits and the clock come from JS.
 - **Jargon.** The existing ban stays for all copy, except keys holding the Built with list (`hero.builtWith`) or terminal text (`terminal`, `cmd`).
   - A new test requires every Built with name to appear in `resume-content.json` (stacks or skills).
@@ -177,7 +177,7 @@ div#menu (full-screen ink overlay) · div#modal (request composer) · aside.guid
   - Onest 600 and 400 are preloaded.
   - Oswald and Space Grotesk leave once nothing loads them; the share card moves to Onest.
 - **Share card.** `assets/og/card.png` is redrawn as 1200×630, under 400KB and deterministic, with no "alpha" in the script.
-  - Cool grey ground, the `>_` tile and Cayleb.AJ, the headline in Onest 600, "Forward Thinking Engineer", and a dark proof chip.
+  - Cool grey ground, the `>_` tile and Cayleb.AJ, the headline in Onest 600, "AI Agent Systems Engineer", and a dark proof chip.
 - **theme-color** is `#090a0b` on every page.
 
 ## Subpages
@@ -227,7 +227,7 @@ All of these keep their intent; only the page they describe changes.
     - the failsafe, the hiding guard and the keyframe ban stay.
   - `home-content`:
     - the new keys exist;
-    - numbers trace, with the `$100` exception;
+    - numbers trace, with the `no public price` exception;
     - every limit pattern matches;
     - the claim bans stay.
   - `home-few-words`:
@@ -240,7 +240,7 @@ All of these keep their intent; only the page they describe changes.
   - `home-worth`:
     - the hours/pay/people guard over all copy;
     - visible text >3000 characters;
-    - the price line `About $100 a person a month.` in the Ergon section;
+    - the price line `No public price is listed.` in the Ergon section;
     - the ladder deep-equals `['Agent','Senior agent','Person']`;
     - no model names.
   - `home-guide`:
@@ -263,7 +263,7 @@ All of these keep their intent; only the page they describe changes.
     - Lenis present, three absent.
   - `site-meta`:
     - the card checks;
-    - the script includes `content.hero.headline` and "Forward Thinking Engineer";
+    - the script includes `content.hero.headline` and "AI Agent Systems Engineer";
     - the title and subpage social tags as today;
     - theme-color.
   - `subpages`: the new wordmark markup; the nav from `content.nav`.

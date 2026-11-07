@@ -29,6 +29,11 @@
   transition: transform var(--press) var(--ease-out), background-color var(--ui) ease;
 }
 .resume-download:active { transform: scale(0.97); }
+.resume-portfolio {
+  padding: 10px max(var(--gutter), env(safe-area-inset-right, 0px)) 10px max(var(--gutter), env(safe-area-inset-left, 0px));
+  border-bottom: 1px solid var(--line); font-size: var(--step--1); font-weight: 560; color: var(--fg-2);
+}
+.resume-portfolio a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 899px) {
   .resume-masthead nav { order: 3; flex-basis: 100%; min-width: 0; margin-left: 0; }
   .resume-ask { margin-left: auto; }

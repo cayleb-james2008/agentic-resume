@@ -21,7 +21,7 @@
 - Everything else answers the visitor: answers stream a few characters a tick (a hidden copy of the full answer sizes the box first, so nothing shifts; the live region hears it once); the work preview wipes in on point or focus; buttons press to 97%; the Ergon graph plays once on screen and then on request.
 - Transitions and the Web Animations API, no keyframes. Hover only under a fine pointer. With motion reduced or scripts off, nothing moves and nothing hides.
 
-**Claims.** Unchanged: the ladder has no model names; the price, about $100 a person a month, is Cayleb's own figure, as is his full-time range of $130K to $200K (the Ask bar's "What does Cayleb charge?"; services are quoted per request); Ergon is a Windows pilot with live checks pending, shown beside its claims; the other jobs are "Work ethic"; no certifications; no clients, hours, pay or people as the source of savings. The tests that hold these are unchanged (`tests/home-content.test.js`, `tests/home-worth.test.js`, `tests/home-guide.test.js`, `tests/recruiter-*.test.js`, `tests/candidate-resume.test.js`).
+**Claims.** Unchanged: the ladder has no model names; no price is listed for Ergon (superseded: an earlier draft named a per-person figure; no figure appears in the résumé, so none is published), and his full-time range of $130K to $200K stands (the Ask bar's "What does Cayleb charge?"; services are quoted per request); Ergon is a Windows pilot with live checks pending, shown beside its claims; the other jobs are "Work ethic"; no certifications; no clients, hours, pay or people as the source of savings. The tests that hold these are unchanged (`tests/home-content.test.js`, `tests/home-worth.test.js`, `tests/home-guide.test.js`, `tests/recruiter-*.test.js`, `tests/candidate-resume.test.js`).
 
 **Removed.** The loader, the liquid canvas and its picture layers, the carousel, the Built with strip, the clock, the About band, the count-up, Lenis, the terminal styling and `>_` tile, the full-screen menu and the floating "Ask my agent" pill. Onest and JetBrains Mono are gone; they exist at `851ba6c`.
 
@@ -46,7 +46,7 @@
 - Text reveals split headings into words and stagger them by line. Counters count up with scroll.
 - With JS off, motion reduced or the 4-second failsafe tripped, everything is visible at rest. Hiding CSS appears only under `.js:not(.reveal-failsafe)`.
 
-**Claims.** Unchanged from the water story: the ladder has no model names; the price, about $100 a person a month, is Cayleb's own figure and the only number not traced to the résumé; Ergon is a Windows pilot with live checks pending; the other jobs are "Work ethic"; no certifications; no clients, hours, pay or people as the source of savings (`tests/home-content.test.js`, `tests/home-worth.test.js`, `tests/home-guide.test.js`).
+**Claims.** Unchanged from the water story: the ladder has no model names; no price is listed for Ergon (superseded: an earlier draft named a per-person figure not traced to the résumé, so it is no longer published); Ergon is a Windows pilot with live checks pending; the other jobs are "Work ethic"; no certifications; no clients, hours, pay or people as the source of savings (`tests/home-content.test.js`, `tests/home-worth.test.js`, `tests/home-guide.test.js`).
 
 ---
 
@@ -79,7 +79,7 @@
 **Claims.** The story is the offer; the résumé half is the record.
 - The story says what he builds in the present tense, in few plain words. No client is named, no hours are claimed, and money never comes from anyone's hours, pay or people.
 - The ticket ladder is Agent → Senior agent → Person. No model names, because the routing may change.
-- The price, about $100 a person a month, is Cayleb's own 2026-10-15 figure, sized per company.
+- No price is listed for Ergon. (Superseded: a 2026-10-15 draft named a per-person figure; it appears nowhere in the résumé and is no longer published.)
 - The résumé half carries the verified status: Ergon is a Windows pilot with live checks pending. The other jobs are labelled "Work ethic". There is no certifications section.
 - These claim limits are held by tests: no clients, returns, profit or revenue in the homepage copy, and EvoHedge and Maki never named (`tests/home-content.test.js`); the guide names no clients, customers or company pilots, and never RHL (`tests/home-guide.test.js`); the homepage describes the lab as recorded demos (`tests/recruiter-truth-and-resume.test.js`).
 - One more limit is kept by hand, with no test behind it: RHL appears only as the moving-crew job in the résumé half.

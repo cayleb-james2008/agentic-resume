@@ -26,7 +26,7 @@ See the spec's "Decisions" list. These are the ones that bind the code:
 - No images of him.
 - The story replaces "How I work" and "Worth it".
 - Escalation shown as "Agent → Senior agent → Person".
-- "About $100 a person a month".
+- "No public price is listed".
 - Faceless guide.
 - Tilt only where no permission prompt is needed.
 - The other jobs are shown as **work ethic**, under that label. **No certifications** section: anyone can have an agent earn one.
@@ -46,7 +46,7 @@ See the spec's "Decisions" list. These are the ones that bind the code:
   - none of `hedge fund|returns?|profit|revenue|clients?`;
   - no savings from hours, pay or people;
   - no model names.
-- **"Forward Thinking Engineer"** is the exact title. `meta.title` is "Cayleb Alvarez-James · Forward Thinking Engineer".
+- **"AI Agent Systems Engineer"** is the exact title. `meta.title` is "Cayleb Alvarez-James · AI Agent Systems Engineer".
 - **URLs:** every local URL is relative, with no leading `/`.
 - **Structure:** exactly one `<h1>` (the name), and `index.html` contains no `<img>`.
 - **Untouched:** `resume/*`, the PDFs, `.txt` exports, `resume.html` content, `lab/` and the project page bodies. `scripts/build-subpages.py` reruns because nav anchors change.
@@ -396,17 +396,17 @@ git commit -m "feat(story): water shader renderer and scroll mount"
 
 ```json
 "story": {
-  "intro": { "nameWords": ["Cayleb", "Alvarez-", "James"], "title": "Forward Thinking Engineer", "cue": "Scroll" },
+  "intro": { "nameWords": ["Cayleb", "Alvarez-", "James"], "title": "AI Agent Systems Engineer", "cue": "Scroll" },
   "beats": [
     { "id": "hero", "headline": "Show me how you work. I'll find where AI fits.",
-      "line": "Forward Thinking Engineer. I learn the job first, then build AI and automation into it. Saves time and raises quality, in any field." },
+      "line": "AI Agent Systems Engineer. I learn the job first, then build AI and automation into it. Saves time and raises quality, in any field." },
     { "id": "shape", "headline": "Every team works differently.", "line": "I build to fit yours.", "labels": ["Moving crew", "Office", "Shop"] },
     { "id": "team", "headline": "Everyone gets their own assistant.", "line": "Built around the apps they already use.", "tag": "Ergon",
       "roles": ["Owner", "Dispatch", "Front desk", "Books", "Crew lead", "Sales"] },
     { "id": "tickets", "headline": "Problems fix themselves.", "line": "Right on the computer. Hard ones go up. A person has the last word.",
       "ladder": ["Agent", "Senior agent", "Person"] },
-    { "id": "worth", "headline": "About $100 a person a month.", "line": "Time back to take on more work.",
-      "price": "$100 / mo", "more": "+ more work" }
+    { "id": "worth", "headline": "No public price is listed.", "line": "Time back to take on more work.",
+      "price": "no public price", "more": "+ more work" }
   ]
 }
 ```
@@ -416,7 +416,7 @@ git commit -m "feat(story): water shader renderer and scroll mount"
 ```js
 test('the story holds the one h1: the name for assistive tech, the words split for motion', () => {
   // exactly one <h1 …id="story-name"> containing <span class="sr-only">Cayleb Alvarez-James</span> and aria-hidden reveal units
-  // the h1's sibling title reads "Forward Thinking Engineer"; the cue reads "Scroll" and is aria-hidden
+  // the h1's sibling title reads "AI Agent Systems Engineer"; the cue reads "Scroll" and is aria-hidden
 });
 test('each beat has one h2 caption, its line, and a static drawing', () => {
   // for each fixture beat id: one [data-caption="<id>"] containing exactly one <h2> with the headline and a <p> with the line,
@@ -424,7 +424,7 @@ test('each beat has one h2 caption, its line, and a static drawing', () => {
 });
 test('overlay labels come from content and are hidden from assistive tech', () => {
   // [data-overlay="team"] is aria-hidden="true", holds 6 [data-overlay-item] with the six roles and app icons; the "Ergon" tag
-  // [data-overlay="tickets"] holds Agent, Senior agent, Person; [data-overlay="worth"] holds "$100 / mo" and "+ more work"
+  // [data-overlay="tickets"] holds Agent, Senior agent, Person; [data-overlay="worth"] holds "no public price" and "+ more work"
   // [data-overlay="shape"] holds the three labels
 });
 test('the water canvas is decorative and never blocks a vertical swipe', () => {
@@ -533,7 +533,7 @@ git commit -m "feat(story): story and masthead markup, static fallbacks and runw
 
 ```js
 test('the résumé half reads like the résumé: name, title, place, both PDFs', () => {
-  // contains resume.full_name, "Forward Thinking Engineer · Connecticut, USA · Remote-only", href="<pdf>" download for both PDFs
+  // contains resume.full_name, "AI Agent Systems Engineer · Connecticut, USA", href="<pdf>" download for both PDFs
 });
 test('experience lists the main role, then the other jobs as work ethic', () => {
   // resume.experience.title with "&" escaped and its dates
@@ -680,7 +680,7 @@ git commit -m "feat: faceless guide bead; contact footer without the figure"
     - keep "project-page anchors resolve", "résumés, repositories and primary nav", "visible text has no racing…", "build is reproducible" and "served code carries no names…";
     - add "no `<img>` on the homepage".
   - **`home-content`:**
-    - in "numbers trace to the résumé", also allow `100` from `content.story.beats` worth (`/\$100/`), with a comment: "Cayleb's stated per-person monthly price, 2026-10-15";
+    - in "numbers trace to the résumé", also allow `100` from `content.story.beats` worth (`/\no public price/`), with a comment: "Cayleb's stated per-person monthly price, 2026-10-15";
     - remove "computed stats match", "employers match" and "generated imagery…";
     - "name renders as three words" now uses `content.story.intro.nameWords`;
     - "content lengths stay inside their frames" drops the hero and experience hard-codes;
@@ -695,7 +695,7 @@ git commit -m "feat: faceless guide bead; contact footer without the figure"
     - the jargon test stays as it is.
   - **`home-worth.test.js`** (new):
     - the hours, pay and people regex from the old `home-value` test, applied to `JSON.stringify(content.story) + JSON.stringify(content.guide) + content.meta.description`;
-    - the worth beat headline matches `/\$100 a person a month/`;
+    - the worth beat headline matches `/\no public price listed/`;
     - the tickets ladder deep-equals `['Agent', 'Senior agent', 'Person']`;
     - no `Haiku|Sonnet|Opus` anywhere in `content.json`.
   - **`home-shell`:** the `allowed` list drops `\.stack-shade` and `\.asset-banner\[hidden\]`. There are no new exceptions: every story hiding rule starts with `.js:not(.reveal-failsafe)`.
@@ -715,7 +715,7 @@ Expected: FAIL in `home-structure`, `home-content`, `home-few-words`, `home-wort
 - [ ] **Step 3: Update `content.json`.**
   - Remove `hero`, `approach`, `experience`, `projects`, `value` and `loading`.
   - Add `story` (Task 3) and `resumeHalf` (Task 4).
-  - Set `meta.description` to "Cayleb Alvarez-James, Forward Thinking Engineer. Learns how you work, builds AI into it."
+  - Set `meta.description` to "Cayleb Alvarez-James, AI Agent Systems Engineer. Learns how you work, builds AI into it."
   - Set `nav` to `[Experience #experience, Projects #work, Lab lab/, Contact #contact]`.
   - Set `contact.copyright` to "© 2026 Cayleb Alvarez-James." and remove `contact.figure`.
   - Set `guide.lines` to:
@@ -792,7 +792,7 @@ git commit -m "feat: homepage becomes the water story and the official résumé;
 
 **Interfaces:**
 - Consumes: the fonts `assets/fonts/oswald-latin-700-normal.woff2` and `space-grotesk-latin-500-normal.woff2` (the script already loads these with `ImageFont.truetype`).
-- Produces: `assets/og/card.png`, 1200×630 and under 400KB. `meta.shareAlt` is "Share card: Cayleb Alvarez-James, Forward Thinking Engineer, above a line of ink water."
+- Produces: `assets/og/card.png`, 1200×630 and under 400KB. `meta.shareAlt` is "Share card: Cayleb Alvarez-James, AI Agent Systems Engineer, above a line of ink water."
 
 - [ ] **Step 1: Update the tests.** In `site-meta.test.js`, both `/^Illustration:/` assertions (the content check and the per-page `og:image:alt`) become `/^Share card:/`. Add an assertion that `make_share_card.py` does not match `/person-|alpha|droplet/`.
 
@@ -801,7 +801,7 @@ git commit -m "feat: homepage becomes the water story and the official résumé;
 Run: `node --test tests/site-meta.test.js`
 Expected: FAIL on `^Share card:`.
 
-- [ ] **Step 3: Rewrite `make_share_card.py`.** Keep the `NAME`, `TITLE` (`"Forward Thinking Engineer"`), `URL`, `INK`, `MUTED` constants and the text layout.
+- [ ] **Step 3: Rewrite `make_share_card.py`.** Keep the `NAME`, `TITLE` (`"AI Agent Systems Engineer"`), `URL`, `INK`, `MUTED` constants and the text layout.
   - Remove `numpy` use if it is unused, along with every person-map or droplet read.
   - Draw ice `#f7fafb`, then an ink `#0e0f14` water polygon whose top edge is `y = 470 + 14·sin(x/95) + 6·sin(x/37)`, with a 3px `#02d2e3` polyline along that edge.
   - Put the headline "Show me how you work. I'll find where AI fits." in Space Grotesk 500 at 34px, under the title row.

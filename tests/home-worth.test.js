@@ -1,4 +1,4 @@
-// What it is worth (2026-10-15): one plain price per person in the Ergon section, and hard tickets that climb
+// What it is worth: no public price is listed in the Ergon section (superseded 2026-11-06), and hard tickets that climb
 // to a person. The money never comes from anyone's hours, pay or job, and no AI model is named.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -43,12 +43,12 @@ test('no clients, revenue, profit or returns anywhere a visitor reads on the hom
   for (const value of visible) assert.doesNotMatch(value, /\b(clients?|revenue|profits?|returns?)\b/i);
 });
 
-test('the Ergon section names the price per person, and the page shows it', () => {
-  assert.equal(content.ergon.price, 'About $100');
-  assert.equal(content.ergon.priceRest, 'a person a month.');
+test('the Ergon section lists no public price, and the page shows it', () => {
+  assert.equal(content.ergon.price, 'No public price');
+  assert.equal(content.ergon.priceRest, 'is listed for Ergon.');
   const at = home.indexOf('<section class="ergon" id="team"');
   const ergon = home.slice(at, home.indexOf('</section>', at));
-  assert.ok(ergon.includes('<b>About $100</b> a person a month.'), 'the price line is in the Ergon section');
+  assert.ok(ergon.includes('<b>No public price</b> is listed for Ergon.'), 'the no-price line is in the Ergon section');
 });
 
 test('hard tickets go up the ladder to a person', () => {

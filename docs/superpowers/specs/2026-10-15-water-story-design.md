@@ -4,7 +4,7 @@
 
 ## Intent
 
-Cayleb wants the résumé homepage to stop leading with an illustrated character and instead **show, visually and with very few words, what he provides and why a Forward Thinking Engineer is worth it to any business**, then hand off to an official, professional résumé.
+Cayleb wants the résumé homepage to stop leading with an illustrated character and instead **show, visually and with very few words, what he provides and why a AI Agent Systems Engineer is worth it to any business**, then hand off to an official, professional résumé.
 
 Today the hero is a Pixar-style 3D portrait plus a glass-droplet agent (three.js, `site/js/hero/scene.js`, 1,345 lines). Illustrated versions of him also appear in the projects and contact figures, in seven experience plates and on the share card. The middle of the page is made of text-heavy sections ("How I work", "Worth it" receipts).
 
@@ -14,18 +14,18 @@ The new homepage has two halves:
 
 ## Decisions from Cayleb (2026-10-15)
 
-1. **Positioning.** He sells himself, the adaptable engineer: he learns how a role really works, then always finds where AI and automation save a lot of time and raise quality, in any field and on anything technical. The exact title stays "Forward Thinking Engineer".
+1. **Positioning.** He sells himself, the adaptable engineer: he learns how a role really works, then always finds where AI and automation save a lot of time and raise quality, in any field and on anything technical. The exact title stays "AI Agent Systems Engineer".
 2. **Headline.** "Show me how you work. I'll find where AI fits."
-   - **Support line:** "Forward Thinking Engineer. I learn the job first, then build AI and automation into it. Saves time and raises quality, in any field."
+   - **Support line:** "AI Agent Systems Engineer. I learn the job first, then build AI and automation into it. Saves time and raises quality, in any field."
 3. **Metaphor: water takes any shape.** No pouring or sloshing. One calm body of water flows into each team's shape, then branches out to every employee. That network is the agent graph. You can touch and ripple the water.
 4. **Intro: driven by scroll, about 1.5 screens.** The page fades in on his name. Scrolling animates the name, a drop falls and becomes the water, and the headline lands.
 5. **Look: ink on light.** Near-black water with a thin cyan rim on the ice page. The headline flips from dark to light where the water passes behind it.
 6. **No pictures of him anywhere.** The character and every illustration are scrapped.
 7. **The story replaces "How I work" and "Worth it".** Both text sections leave the homepage. They stay recoverable in git.
 8. **Ergon is the centerpiece of the story.**
-   - What it is: a personal assistant per employee, built around the apps they already use; remote management of every computer; support tickets fixed by an agent with full remote screen control.
+   - What it is: a self-configuring employee agent, built around the apps they already use; remote management of every computer; support tickets fixed by an agent with ticket-scoped remote repair.
    - Escalation is shown in plain words: **Agent → Senior agent → Person**. No model names, because the repo currently routes Haiku 5.5 → Opus 5.5 → a person and that may change.
-   - Price: **about $100 a person a month**, sized per company.
+   - Price: **no public price is listed**, sized per company.
 9. **The résumé half holds:** experience; projects with Ergon first; education; skills plus downloads.
    - The other jobs (Dunkin', Tommy's Pizza, moving crew, plaster) are there to show **work ethic**, and are labelled that way.
    - **No certifications** (Cayleb, 2026-10-15): anyone can have an agent earn one, so they prove nothing. The section is not built.
@@ -38,11 +38,11 @@ The new homepage has two halves:
 masthead (fixed, slim; fades in at the end of the intro)  CAYLEB.AJ · Experience · Projects · Lab · Contact · [Résumé →] · burger
 <section.story#home data-story>  tall scroll runway with a sticky 100svh stage
    canvas[data-water]: one fullscreen shader, the water
-   name block: the page's only <h1> (sr-only full name + aria-hidden word spans), "Forward Thinking Engineer", scroll cue
+   name block: the page's only <h1> (sr-only full name + aria-hidden word spans), "AI Agent Systems Engineer", scroll cue
    beat captions, top-left: one <h2> + one short line each
    overlay labels (DOM, placed from the same layout math as the shader)
    static SVG per beat: shown only with no JS, reduced motion or no WebGL
-<div.resume-half#resume>  "Résumé" kicker + name, title, Remote-only, Connecticut
+<div.resume-half#resume>  "Résumé" kicker + name, title, Connecticut, Connecticut
    <section#experience>  official experience + additional experience
    <section#work>        projects, Ergon first: name, stack, bullets, status, case study / repo links, lab link
    <section#education>   education, skills, downloads (no certifications)
@@ -61,7 +61,7 @@ The runway is about 7 screens. Each beat is a pure function of scroll progress, 
 | 2 Shape | 1.0 | The pool lifts and flows into three silhouettes in turn (moving truck → office desk and screen → shop counter) and fills each exactly. | **Every team works differently.** I build to fit yours. | none |
 | 3 Team (Ergon) | 1.25 | The water gathers into a source node and branches as channels to 6 employee nodes (4 on phones). Each fills, then wraps a thin rim around 2–3 app tiles. | **Everyone gets their own assistant.** Built around the apps they already use. | role labels (Owner, Dispatch, Front desk, Books, Crew lead, Sales), app glyphs, small "Ergon" tag |
 | 4 Tickets | 1.0 | One node sends ticket drops. Most stop at the first gate with a check. One climbs to the second gate, and one reaches the person. Before the gates, a drop enters a screen outline to show the fix happens on the computer. | **Problems fix themselves.** Right on the computer. Hard ones go up. A person has the last word. | Agent → Senior agent → Person |
-| 5 Worth it | 1.0 | Each node becomes a column with a low "$100/mo" mark. The water rises above it (time back) and spills into a new container. | **About $100 a person a month.** Time back to take on more work. | "$100 / mo", "+ more work" |
+| 5 Worth it | 1.0 | Each node becomes a column with a low "no public price" mark. The water rises above it (time back) and spills into a new container. | **No public price is listed.** Time back to take on more work. | "no public price", "+ more work" |
 | 6 Drain | 0.5 | Everything drains into one waterline, which becomes the top rule of the résumé half. | none | none |
 
 Copy follows the site's voice rules: few words, plain words, no jargon. The story describes the offer in present tense, as "Worth it" did. The résumé half carries the verified status, for example Ergon's pilot still pending live checks. No real company is named as a client, no hours are claimed, and the money never comes from anyone's hours or pay.
@@ -120,8 +120,8 @@ The PDFs and `resume/*` files are untouched. The jargon ban in `home-few-words` 
   - `guide.js`: drops its `droplet-shape.js` import and only appears once `#resume` is in view.
   - Lines are keyed to experience, work, education and contact.
   - The "What does Cayleb do?" answer is rewritten for the new positioning, and a "What's Ergon?" question is added (≤7 words per question, ≤32 per answer).
-- **Share card:** `make_share_card.py` is redrawn at 1200×630 and under 400KB. It shows the name in Oswald 700, "Forward Thinking Engineer", the headline and an ink wave with a cyan rim. Then regenerate `assets/og/card.png`. The new `meta.shareAlt` starts "Share card:".
-- **Meta description:** "Cayleb Alvarez-James, Forward Thinking Engineer. Learns how you work, builds AI into it." (13 words).
+- **Share card:** `make_share_card.py` is redrawn at 1200×630 and under 400KB. It shows the name in Oswald 700, "AI Agent Systems Engineer", the headline and an ink wave with a cyan rim. Then regenerate `assets/og/card.png`. The new `meta.shareAlt` starts "Share card:".
+- **Meta description:** "Cayleb Alvarez-James, AI Agent Systems Engineer. Learns how you work, builds AI into it." (13 words).
 
 ## What gets removed
 
@@ -151,7 +151,7 @@ The PDFs and `resume/*` files are untouched. The jargon ban in `home-few-words` 
   - `home-engine`: drop the `recede` and `VEIL` pins if those are removed.
   - `home-guide`: no eyes element; appears only in the résumé half.
   - `home-contact`: no figure.
-  - `site-meta`: `shareAlt` starts "Share card:"; card size unchanged; "Forward Thinking Engineer" in the intro, `shareAlt` and `make_share_card.py`.
+  - `site-meta`: `shareAlt` starts "Share card:"; card size unchanged; "AI Agent Systems Engineer" in the intro, `shareAlt` and `make_share_card.py`.
   - Also check `recruiter-*.test.js`, `subpages.test.js` and `hosted-lab-uncertainty.test.js` for removed homepage keys or copy.
 - **Add:**
   - `home-story-math.test.js`:

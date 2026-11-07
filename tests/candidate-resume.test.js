@@ -4,7 +4,7 @@ import test from 'node:test';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
 const source=JSON.parse(read('resume/resume-content.json'));
 test('candidate copy preserves factual scope, attribution and dated boundaries',()=>{
- assert.match(source.summary,/^Forward Thinking Engineer\. Focus: /);
+ assert.match(source.summary,/^AI agent systems engineer and technical founder\./);
  assert.match(source.summary,/AI-assisted/);
  assert.deepEqual(source.projects.map(p=>p.slug),['ergon','suite','dotz','sophos','asmodeus']);
  for(const project of source.projects)assert.ok(read('resume/candidate-fragment.html').includes(project.short));
@@ -45,9 +45,9 @@ test('the homepage reaches the résumé page and both candidate PDFs',()=>{
  assert.ok(home.includes('href="resume.html"'));
  for(const pdf of ['Cayleb-James-polished-resume.pdf','Cayleb-James-polished-one-page.pdf'])assert.ok(home.includes(`href="${pdf}" download`),pdf);
 });
-test('headline is the target role, Forward Thinking Engineer',()=>{
- assert.equal(source.headline,'Forward Thinking Engineer');
- assert.equal(source.summary,"Forward Thinking Engineer. Focus: integrate AI, custom-built around each company's tools, workflows and needs; shadow employees, build agents and tools for any digital task, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.");
+test('headline is the target role, AI Agent Systems Engineer',()=>{
+ assert.equal(source.headline,'AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure');
+ assert.match(source.summary,/^AI agent systems engineer and technical founder\./);
  assert.doesNotMatch(source.summary,/clients?|customers?|deployed/i);
 });
 test('the résumé page is a real page carrying the candidate fragment, and its links resolve',()=>{

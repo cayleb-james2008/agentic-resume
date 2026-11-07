@@ -31,7 +31,7 @@ MONA = ROOT / "assets" / "fonts" / "mona-sans-latin-wdth-normal.woff2"
 
 WORDMARK = "Cayleb.AJ"
 TITLE = "AI Agent Systems Engineer"
-HEADLINE = "Show me how you work. I'll find where AI fits."
+HEADLINE = "Technical founder. AI agents, checked for real."
 URL = "cayleb-james2008.github.io/agentic-resume"
 X = 80
 

@@ -71,7 +71,7 @@
         "slug": "ergon",
         "category": "AI agents · Windows",
         "title": "Ergon",
-        "text": "A personal AI agent for every employee, built around the apps they already use. Piloted inside RHL, where the warehouse board runs daily.",
+        "text": "A self-configuring AI agent for every employee: it learns the role by observing the work, asking questions and building its own capabilities.",
         "tags": [
           "Signed installer",
           "Remote repair",
@@ -94,7 +94,7 @@
         "slug": "dsh-fleet",
         "category": "Multi-agent harness · Python, TypeScript",
         "title": "DSH Fleet",
-        "text": "Ticket-driven harness: each goal spins up a dynamic swarm that decomposes it, spawns sub-agents, researches, verifies and dissolves.",
+        "text": "Distributed, recursively self-improving agent infrastructure: dynamic swarms that revise the fleet's own workflows from measured outcomes.",
         "tags": [
           "Dynamic swarms",
           "Tickets",
@@ -114,7 +114,7 @@
         "slug": "openbell",
         "category": "Trading house · Kalshi, futures, meme",
         "title": "OpenBell",
-        "text": "All my trading under one house: Kalshi, futures and meme desks on parallel strategy slots and hand-authored weight-space models.",
+        "text": "A trading house built on weight-space training: hand-authored tiny specialist models, proven on live Kalshi, futures and meme desks.",
         "tags": [
           "Slot method",
           "Weight-space",
@@ -757,7 +757,7 @@
       },
       {
         "q": "What's Ergon?",
-        "a": "A personal AI agent for every employee, built around their apps. Tickets get fixed by an agent right on the computer; hard ones go up to a person. Piloted inside RHL, where the warehouse board runs daily.",
+        "a": "A self-configuring AI agent for every employee: after install it observes their recurring work, asks targeted questions and builds its own model of the role. Piloted inside RHL, where the warehouse board runs daily.",
         "keywords": [
           "ergon",
           "assistant",
@@ -1237,7 +1237,7 @@
       },
       {
         "q": "What's the DSH Fleet?",
-        "a": "A ticket-driven multi-agent harness with no standing bench: each ticket or goal spins up a dynamic swarm shaped to the task — decomposing, researching, spawning sub-agents, verifying — then it dissolves. In active development.",
+        "a": "Distributed, recursively self-improving agent infrastructure. Each ticket or goal spins up a dynamic swarm that decomposes, researches, verifies and dissolves — and swarms revise the fleet's own workflows from measured outcomes.",
         "keywords": [
           "dsh",
           "fleet",
@@ -1261,7 +1261,7 @@
       },
       {
         "q": "What's OpenBell?",
-        "a": "His live trading house: Kalshi, futures and meme desks on one architecture of parallel strategy slots, plus hand-authored weight-space models. Small real capital, reconciled books, pre-registered kill conditions.",
+        "a": "His live trading house, built on weight-space training: hand-authoring tiny specialist models and judging them under strict evidence rules. The Kalshi, futures and meme desks are their proving ground — small real capital, reconciled books.",
         "keywords": [
           "openbell",
           "trading",

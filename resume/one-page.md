@@ -20,15 +20,15 @@ Created Ergon, piloted inside RHL; built and run the DSH Fleet harness and OpenB
 
 ### Ergon (Node.js, C#, Python, SQLite)
 
-- One AI agent per employee, with approval gates and undo. Piloted at RHL; 622 tests pass.
+- Self-configuring agent that learns each employee's role on its own. Piloted at RHL; 622 tests pass.
 
 ### DSH Fleet (Python, TypeScript)
 
-- Ticket-driven harness of dynamic swarms that decompose, research and verify. In active development.
+- Distributed, self-improving agent infrastructure of dynamic swarms. In active development.
 
 ### OpenBell (Python, Rust)
 
-- Live trading house: three desks, strategy slots, hand-authored weight-space models.
+- Built on weight-space training: hand-authored tiny specialist models, strict evidence rules.
 
 ### Sophos (React, TypeScript, Tauri)
 

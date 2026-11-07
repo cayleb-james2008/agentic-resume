@@ -43,7 +43,7 @@ def records(data, short=False):
 def validate_source(data):
     assert data['headline'] == 'AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure'
     assert [p['slug'] for p in data['projects']] == ['ergon', 'dsh-fleet', 'openbell', 'sophos', 'dotz', 'asmodeus', 'suite']
-    assert data['summary'].startswith('AI agent systems engineer and technical founder with a year in agentic systems')
+    assert data['summary'].startswith('AI agent systems engineer and technical founder. I have spent the past year')
     assert not re.search(r'\b(clients?|customers?|deployed)\b', data['summary'], re.I)
     assert len(data['additional_experience']) == 4
     assert data['education']['school'] == 'Portland High School'

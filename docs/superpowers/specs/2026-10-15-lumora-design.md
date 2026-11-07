@@ -27,7 +27,7 @@ The official résumé follows, then a way to get in touch.
    - We use none of its names, copy, logo mark, partner names, ratings, stats or images.
 2. **Feel.** "A softer tech vibe where… you know the tech is there… but it's easy to intake." Professional, minimal, "tech CEO-esque".
    - Monospace appears only where the machine speaks: loader, proof chip, terminals, the Ergon log and route labels.
-3. **Main focus.** "I can go into your business and I can build AIs around you and what you need. AI employees, AI workflows, AI automations, AI everything. Forward thinking engineer."
+3. **Main focus.** "I can go into your business and I can build AIs around you and what you need. AI employees, AI workflows, AI automations, AI everything. AI agent systems engineer."
 4. **Ergon graph.** "Some kind of graph showing Ergon managing the employees… focusing on how adaptable my workflows are and how they can be applied to you."
    - This becomes a live team graph with a team switch.
 5. **Tech names are allowed** in the "Built with" list and in terminal text. Headings and body copy stay plain.

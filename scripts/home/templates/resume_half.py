@@ -48,7 +48,7 @@ def record(rec: dict | None) -> str:
 
 
 def head(half: dict, resume: dict, rec: dict | None = None) -> str:
-    place = " · ".join((resume["headline"], resume["location"], resume["work_preference"]))
+    place = " · ".join(x for x in (resume["headline"], resume["location"], resume["work_preference"]) if x)
     downloads = "".join(
         f'<li>{link(d["href"], d["label"], "resume-half-download")}</li>' for d in half["downloads"]
     )

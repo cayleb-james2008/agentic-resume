@@ -21,7 +21,7 @@ def plain(value):
 
 def records(data, short=False):
     rows = [('title', data['full_name']), ('body', data['headline']),
-            ('body', f"{data['location']} | {data['work_preference']} | {data['email']}"),
+            ('body', ' | '.join(x for x in (data['location'], data['work_preference'], data['email']) if x)),
             ('links', list(data['links'].values())), ('h2', 'Summary'), ('body', data['summary']),
             ('h2', 'Experience'), ('h3', f"{data['experience']['title']} | {data['experience']['dates']}"),
             ('body', data['experience']['intro']), ('h2', 'Selected Projects')]
@@ -41,15 +41,15 @@ def records(data, short=False):
 
 
 def validate_source(data):
-    assert data['headline'] == 'Forward Thinking Engineer'
-    assert [p['slug'] for p in data['projects']] == ['ergon', 'suite', 'dotz', 'sophos', 'asmodeus']
-    assert data['summary'].startswith('Forward Thinking Engineer. Focus: ')
+    assert data['headline'] == 'AI Agent Systems Engineer — Claude Code & Coding-Agent Tooling'
+    assert [p['slug'] for p in data['projects']] == ['ergon', 'dsh-fleet', 'openbell', 'sophos', 'dotz', 'asmodeus', 'suite']
+    assert data['summary'].startswith('Technical founder who builds with Claude Code every day')
     assert not re.search(r'\b(clients?|customers?|deployed)\b', data['summary'], re.I)
     assert len(data['additional_experience']) == 4
     assert data['education']['school'] == 'Portland High School'
     for link in [*data['links'].values(), *(l for p in data['projects'] for l in p['links'])]:
         parsed = urlparse(link['url'])
-        assert parsed.scheme == 'https' and parsed.netloc in {'github.com', 'cayleb-james2008.github.io'}
+        assert parsed.scheme == 'https' and parsed.netloc in {'github.com', 'cayleb-james2008.github.io', 'www.linkedin.com'}
     assert not re.search(r'TO BE SUPPLIED|PLACEHOLDER', json.dumps(data))
 
 
@@ -84,7 +84,7 @@ def short_fragment(data):
         nonlocal template
         template, count = re.subn(pattern, lambda _: value, template, count=1)
         assert count == 1, pattern
-    replace(r'<p>AI workflow developer · Connecticut</p>', f'<p>{html.escape(data["headline"])} · Connecticut · {data["work_preference"]}</p>')
+    replace(r'<p>AI workflow developer · Connecticut</p>', '<p>' + ' · '.join(html.escape(x) for x in (data["headline"], data["location"], data["work_preference"]) if x) + '</p>')
     replace(r'(<div class="resume-summary"><h2>Summary</h2>)<p>.*?</p>', '<div class="resume-summary"><h2>Summary</h2><p>' + html.escape(data['summary']) + '</p>')
     replace(r'<h3>Independent project development</h3><p class="resume-date">2026</p><p>.*?</p>',
             '<h3>' + html.escape(data['experience']['title'].replace(' - ', ' · ')) + '</h3><p class="resume-date">' + data['experience']['dates'] + '</p><p>' + html.escape(data['experience']['intro']) + '</p>')

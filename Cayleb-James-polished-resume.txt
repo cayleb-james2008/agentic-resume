@@ -1,52 +1,52 @@
 Cayleb Alvarez-James
 
-Forward Thinking Engineer
+AI Agent Systems Engineer - Claude Code & Coding-Agent Tooling
 
-Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
+Middletown, Connecticut, USA | caylebalvarezjames@gmail.com
 
-github.com/cayleb-james2008: https://github.com/cayleb-james2008 | cayleb-james2008.github.io/agentic-resume/: https://cayleb-james2008.github.io/agentic-resume/
+github.com/cayleb-james2008: https://github.com/cayleb-james2008 | linkedin.com/in/cayleb-alvarez-james-99850531b: https://www.linkedin.com/in/cayleb-alvarez-james-99850531b | cayleb-james2008.github.io/agentic-resume/: https://cayleb-james2008.github.io/agentic-resume/
 
 Summary
 
-Forward Thinking Engineer. Focus: integrate AI, custom-built around each company's tools, workflows and needs; shadow employees, build agents and tools for any digital task, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.
+Technical founder who builds with Claude Code every day. I run fleets of AI agents - dynamic swarms that write, check and ship real software under rules I designed, where a job counts as done only when an independent check passes on the real thing. I have put agents to work inside a real company (RHL, a furniture importer) and run a live trading house where every strategy earns its place on measured results. Built all of this while working as a furniture installer. 1,200+ GitHub contributions in the last year; 4,000+ automated tests across five shipped systems.
 
 Experience
 
-Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025-present
+Founder - Independent AI Agent Systems | Oct 2025-present
 
-Builds and tests local AI agents, desktop software and app connections; 3,300+ automated checks across 5 systems.
+Created Ergon, piloted inside RHL; built and run the DSH Fleet harness and OpenBell, a live automated trading house. Harness changes ship only when a fresh checker measures them beating the current version on a fixed scorecard.
 
 Selected Projects
 
-Ergon - Personal Work Assistants & Remote Support
+Ergon - Personal AI Agents for Companies
 
-OpenClaw, Node.js, C#, Windows, SQLite
+Node.js, C#, Python, SQLite
 
 Ergon case study: https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html
 
-- Built a signed Windows installer, taskbar setup app and live update feed for employee AI assistants; user data survives updates.
+- Standalone product (own installer): one personal AI agent per employee, built around each company's own tools, with human approval gates and undo on anything that matters.
 
-- Built ticket-scoped remote repair and automatic connectors to existing company apps, with approval gates, undo steps and 622 passing tests.
+- Piloted inside a real company: the warehouse operations board built for RHL runs on-site in daily use. Signed Windows installer and taskbar app; ticket-scoped remote repair and connectors to existing company apps. 622 automated tests pass.
 
-Industry AI Suite - Source-Checked Review Tools
+DSH Fleet Harness - Multi-Agent Orchestration & Verification
 
-Python, local AI models, web APIs
+Python, TypeScript
 
-github.com/cayleb-james2008/industry-ai-suite: https://github.com/cayleb-james2008/industry-ai-suite | Review history implementation: https://github.com/cayleb-james2008/industry-ai-suite/pull/6
+github.com/cayleb-james2008/dsh-fleet-genesis: https://github.com/cayleb-james2008/dsh-fleet-genesis
 
-- Built 10 local tools that review finance, research, security and operations files; every finding shows its source and a person decides.
+- Ticket-driven harness with no standing bench: each ticket or goal spins up a dynamic swarm shaped to the task - it decomposes the goal, spawns its own sub-agents, does research, authors or reuses skills, verifies the work and dissolves.
 
-- Added optional local AI drafts that halt if sources are missing, plus review history, export and delete (382 Python and 19 browser tests).
+- Guided by a harness-engineering research base rather than any one pattern, with human approval gates and a self-improvement loop gated by measured results: a change ships only when a fresh checker measures it beating the current version on a fixed scorecard. In active development.
 
-dotz - AI Coding Agent Dashboard
+OpenBell - Live Trading House: Slot Method & Weight-Space Models
 
-Rust, Tauri, JavaScript, SQLite
+Python, Rust
 
-github.com/cayleb-james2008/dotz: https://github.com/cayleb-james2008/dotz
+OpenBell case study: https://cayleb-james2008.github.io/agentic-resume/projects/openbell.html
 
-- Built a desktop app that runs and supervises AI coding agents, with model choice, process-tree cleanup and clear local failure states.
+- All of my trading and finance work under one house: Kalshi prediction markets, a futures desk and a meme-coin desk, run on one architecture - parallel strategy slots splitting the equity evenly, each slot iterating on measured results and getting wiped and replaced when it fails.
 
-- Verified across Windows (828), macOS (831) and Linux (839) core automated tests; all 6 hosted check jobs pass.
+- Weight-space programme: instead of training black-box models, I hand-author tiny model weights directly (linear specialists), freeze the prediction in writing before scoring, and judge on strict rules - no money test until the training win rate clears the breakeven for its exit shape. Conventional distillation failed on both test instruments; the hand-authored weights passed, and the best configuration was net-positive on historical data. Live desks run small real capital with reconciled accounting and pre-registered kill conditions.
 
 Sophos - Coding-Agent Desktop App
 
@@ -54,31 +54,47 @@ React, TypeScript, Tauri
 
 github.com/cayleb-james2008/sophos: https://github.com/cayleb-james2008/sophos
 
-- Connected saved agent profiles and local AI models to a Windows coding-agent desktop app, with sessions and transcripts that survive restarts.
+- Desktop app that runs coding agents from saved profiles, with sessions and transcripts that survive restarts and clear errors when a provider fails.
 
-- Context summaries use the agent service and provider failures keep saved settings; 1,224 interface, 82 Node and 56/56 Windows checks pass.
+- 1,224 interface tests, 82 Node tests and 56/56 Windows checks pass; merged after full hosted CI.
+
+dotz - AI Coding Agent Dashboard
+
+Rust, Tauri, JavaScript, SQLite
+
+github.com/cayleb-james2008/dotz: https://github.com/cayleb-james2008/dotz
+
+- Desktop app that runs and supervises AI coding agents, with model choice and safe process-tree cleanup.
+
+- 828+ core tests pass on each of Windows, macOS and Linux; all 6 hosted check jobs pass; merged.
 
 Asmodeus - Trading Research on Past Data
 
-Rust, historical market data, local AI models
+Rust
 
 Asmodeus case study: https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html
 
-- Built a private research tool that tests trading ideas on real past market data in strict time order, with fees and no real money.
+- Tests trading ideas on real historical data in strict time order, with fees and safeguards against peeking at future data; rejected ideas are logged, not quietly dropped. 1,111 Rust tests pass. Research only - no real money.
 
-- Added safeguards against peeking at future data, restart recovery and rejected-idea logs; 1,111 Rust and 33 Python tests pass.
+Industry AI Suite - Source-Checked Review Tools
+
+Python
+
+github.com/cayleb-james2008/industry-ai-suite: https://github.com/cayleb-james2008/industry-ai-suite | Review history implementation: https://github.com/cayleb-james2008/industry-ai-suite/pull/6
+
+- Ten local tools that review finance, research, security and operations files; every finding shows its source and a person decides. Drafts halt when sources are missing. 382 Python tests pass.
 
 Skills
 
-Languages: Python, Rust, TypeScript, JavaScript, HTML/CSS
+AI & agents: Claude Code (daily, primary tool), LLM agents, multi-agent orchestration, evaluation and verification design, human approval gates, adversarial testing of agent output
 
-Apps & data: React, Tauri, SQLite, web APIs
+Languages: Python, TypeScript, JavaScript, Rust, HTML/CSS
 
-AI & testing: AI agents and automation, local AI models, source-checked review, automated testing, Git/GitHub, Linux
+Apps & data: React, Tauri, SQLite, web APIs, Git/GitHub, Linux
 
 Additional Experience
 
-Robert H. Lord Company - Moving Crew | Summer 2025; 2026-present
+Robert H. Lord Company - Installer & AI Integration | Sep 2026-present
 
 David Cooke Plaster Co. - Plaster Work | Summer 2026
 
@@ -88,6 +104,6 @@ Tommy's Pizza | Summer 2024
 
 Education
 
-Portland High School | Portland, Connecticut | 2022-2026 | Graduated
+Portland High School | Portland, Connecticut | Graduated 2026
 
 Coursework: Cybersecurity; AP Computer Science

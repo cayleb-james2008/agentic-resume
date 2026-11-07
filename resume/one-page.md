@@ -1,54 +1,60 @@
 # Cayleb Alvarez-James
 
-Forward Thinking Engineer
+AI Agent Systems Engineer — Claude Code & Coding-Agent Tooling
 
-Connecticut, USA | Remote-only | caylebalvarezjames@gmail.com
+Middletown, Connecticut, USA | caylebalvarezjames@gmail.com
 
-[github.com/cayleb-james2008](https://github.com/cayleb-james2008) | [cayleb-james2008.github.io/agentic-resume/](https://cayleb-james2008.github.io/agentic-resume/)
+[github.com/cayleb-james2008](https://github.com/cayleb-james2008) | [linkedin.com/in/cayleb-alvarez-james-99850531b](https://www.linkedin.com/in/cayleb-alvarez-james-99850531b) | [cayleb-james2008.github.io/agentic-resume/](https://cayleb-james2008.github.io/agentic-resume/)
 
 ## Summary
 
-Forward Thinking Engineer. Focus: integrate AI, custom-built around each company's tools, workflows and needs; shadow employees, build agents and tools for any digital task, teach, scale. Goal: lower costs, no cuts to people. Independent, AI-assisted developer.
+Technical founder who builds with Claude Code every day. I run fleets of AI agents — dynamic swarms that write, check and ship real software under rules I designed, where a job counts as done only when an independent check passes on the real thing. I have put agents to work inside a real company (RHL, a furniture importer) and run a live trading house where every strategy earns its place on measured results. Built all of this while working as a furniture installer. 1,200+ GitHub contributions in the last year; 4,000+ automated tests across five shipped systems.
 
 ## Experience
 
-### Independent Project Development - AI-Assisted Software & Evaluation | Oct 2025–present
+### Founder - Independent AI Agent Systems | Oct 2025–present
 
-Builds and tests local AI agents, desktop software and app connections; 3,300+ automated checks across 5 systems.
+Created Ergon, piloted inside RHL; built and run the DSH Fleet harness and OpenBell, a live automated trading house. Harness changes ship only when a fresh checker measures them beating the current version on a fixed scorecard.
 
 ## Selected Projects
 
-### Ergon (OpenClaw, Node.js, C#, Windows, SQLite)
+### Ergon (Node.js, C#, Python, SQLite)
 
-- Built a signed Windows installer for employee AI assistants, remote repair and approval-gated app connections; 622 tests pass.
+- One AI agent per employee, with approval gates and undo. Piloted at RHL; 622 tests pass.
 
-### Industry AI Suite (Python, local AI models, web APIs)
+### DSH Fleet (Python, TypeScript)
 
-- Built 10 local review tools where every finding shows its source and a person decides; 382 Python tests pass.
+- Ticket-driven harness of dynamic swarms that decompose, research and verify. In active development.
 
-### dotz (Rust, Tauri, JavaScript, SQLite)
+### OpenBell (Python, Rust)
 
-- Built a desktop app supervising AI coding agents with safe cleanup; 828+ core tests pass on Windows, macOS and Linux.
+- Live trading house: three desks, strategy slots, hand-authored weight-space models.
 
 ### Sophos (React, TypeScript, Tauri)
 
-- Connected saved agent profiles and local AI models to a coding-agent app; 1,224 interface and 56/56 Windows checks pass.
+- Coding-agent desktop app; sessions survive restarts. 1,224 interface tests; merged after full CI.
 
-### Asmodeus (Rust, historical market data, local AI models)
+### dotz (Rust, Tauri, JavaScript, SQLite)
 
-- Built a research tool testing trading ideas on past market data in time order with no real money; 1,111 checks.
+- Runs and supervises AI coding agents. 828+ core tests per platform; all 6 hosted jobs pass; merged.
+
+### Asmodeus (Rust)
+
+- Tests trading ideas on past data in time order; no peeking, no real money. 1,111 Rust tests pass.
+
+### Industry AI Suite (Python)
+
+- Ten local review tools; every finding shows its source and a person decides. 382 Python tests pass.
 
 ## Skills
 
-Python · TypeScript · JavaScript · Rust
+Claude Code · LLM agents · multi-agent orchestration · evaluation design
 
-AI agents · automation · desktop and web apps
-
-Automated testing · Git · Linux
+Python · TypeScript · JavaScript · Rust · React · Tauri · SQLite · Git/GitHub · Linux
 
 ## Additional Experience
 
-Robert H. Lord Company — Moving Crew | Summer 2025; 2026–present
+Robert H. Lord Company — Installer & AI Integration | Sep 2026–present
 
 David Cooke Plaster Co. — Plaster Work | Summer 2026
 
@@ -58,6 +64,6 @@ Tommy's Pizza | Summer 2024
 
 ## Education
 
-Portland High School | Portland, Connecticut | 2022–2026 · Graduated
+Portland High School | Portland, Connecticut | Graduated 2026
 
 Coursework: Cybersecurity; AP Computer Science

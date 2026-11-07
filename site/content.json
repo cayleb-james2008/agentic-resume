@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · AI Agent Systems Engineer",
-    "description": "AI Agent Systems Engineer — Claude Code & Coding-Agent Tooling. Technical founder: personal agents inside a real company, a multi-agent fleet, and a live trading house.",
+    "description": "AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure. Technical founder: self-configuring agents, dynamic-swarm infrastructure, and weight-space trading research.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
@@ -48,7 +48,7 @@
   "hero": {
     "eyebrow": "AI Agent Systems Engineer",
     "headline": "Technical founder. AI agents, checked for real.",
-    "lead": "I build with Claude Code every day, and built all of this while working as a furniture installer.",
+    "lead": "A year in agentic systems, across every major harness — centre: Muse, Claude Duet and the DSH Fleet.",
     "doorsLabel": "Where to start",
     "doors": [
       {
@@ -102,7 +102,6 @@
         ],
         "count": "In development",
         "href": "projects/dsh-fleet.html",
-        "code": "https://github.com/cayleb-james2008/dsh-fleet-genesis",
         "checks": [
           "Dynamic swarms",
           "No standing bench",
@@ -462,7 +461,7 @@
     "ladderNote": "Hard tickets move up a step. A person always has the last word.",
     "price": "About $100",
     "priceRest": "a person a month.",
-    "status": "Piloted at RHL · warehouse board in daily use",
+    "status": "In development · RHL a proposed first deployment",
     "figure": {
       "caption": "Sample team: Ergon connects to each person's assistant, and each assistant works in that person's apps.",
       "sample": "Sample team",
@@ -509,7 +508,7 @@
         "label": "Recorded demos in the lab"
       }
     ],
-    "note": "Counts come from each project's own test runs and the résumé. Ergon is piloted inside RHL; its full end-to-end testing programme runs next."
+    "note": "Counts come from each project's own test runs and the résumé. Ergon is in development; RHL is a proposed first deployment only — nothing is implemented there."
   },
   "resumeHalf": {
     "kicker": "Résumé",
@@ -520,11 +519,11 @@
     "skills": "Skills",
     "caseStudy": "Case study",
     "workEthic": {
-      "title": "Work ethic",
-      "line": "Real jobs, real hours. Where I learned how teams actually work."
+      "title": "Background",
+      "line": "The RHL concept discussion and demo, plus earlier roles."
     },
     "status": {
-      "ergon": "Piloted at RHL · warehouse board in daily use"
+      "ergon": "In development · RHL a proposed first deployment"
     },
     "lab": {
       "label": "See the lab",
@@ -757,7 +756,7 @@
       },
       {
         "q": "What's Ergon?",
-        "a": "A self-configuring AI agent for every employee: after install it observes their recurring work, asks targeted questions and builds its own model of the role. Piloted inside RHL, where the warehouse board runs daily.",
+        "a": "A self-configuring AI agent for every employee: after install it observes their recurring work, asks targeted questions and builds its own model of the role. RHL is a proposed first deployment; nothing is implemented there.",
         "keywords": [
           "ergon",
           "assistant",
@@ -803,7 +802,7 @@
       },
       {
         "q": "What does Cayleb do?",
-        "a": "Technical founder and AI agent systems engineer. He builds with Claude Code every day: personal agents for companies, a multi-agent fleet and a live trading house — all built while working as a furniture installer.",
+        "a": "Technical founder and AI agent systems engineer: self-configuring personal agents for companies, a distributed dynamic-swarm fleet, and a live trading house built on weight-space training.",
         "keywords": [
           "background",
           "overview",
@@ -941,7 +940,7 @@
       },
       {
         "q": "Done this for a company?",
-        "a": "Yes — Ergon is piloted inside RHL, a furniture importer, where the warehouse operations board he built runs on-site in daily use. He leads RHL's AI integration and also works there as an installer.",
+        "a": "Not as a deployment. He discussed the Ergon concept at RHL and it drew interest; at Roy's request he built a standalone warehouse-board demo there as a non-AI showcase. RHL has not authorised or implemented an AI integration.",
         "keywords": [
           "company",
           "job",
@@ -1032,7 +1031,7 @@
       },
       {
         "q": "Does he use AI to code?",
-        "a": "Yes — Claude Code is his primary tool, daily. He builds tools for coding agents too: dotz and Sophos run them, and the DSH Fleet routes agent work as tickets to dynamic swarms.",
+        "a": "Yes — he works across many agent harnesses (OpenCode/DeepSeek Harness, Gemini Antigravity, Claude Code, Claude Desktop, Codex) and routes work by available usage and fit. dotz and Sophos run coding agents; the DSH Fleet routes work as tickets to dynamic swarms.",
         "keywords": [
           "coding",
           "ai to code",
@@ -1058,7 +1057,7 @@
       },
       {
         "q": "What does he build with?",
-        "a": "Claude Code, Python, TypeScript, JavaScript and Rust, with React, Tauri and SQLite. The skills list in his résumé names everything he works in.",
+        "a": "Agent harnesses across vendors — OpenCode/DeepSeek Harness, Claude Desktop and Duet, Gemini Antigravity, Freebuff, ChatGPT Codex, Claude Code — plus Python, TypeScript, JavaScript and Rust.",
         "keywords": [
           "stack",
           "built with",

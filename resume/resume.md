@@ -1,6 +1,6 @@
 # Cayleb Alvarez-James
 
-AI Agent Systems Engineer — Claude Code & Coding-Agent Tooling
+AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure
 
 Middletown, Connecticut, USA | caylebalvarezjames@gmail.com
 
@@ -8,45 +8,51 @@ Middletown, Connecticut, USA | caylebalvarezjames@gmail.com
 
 ## Summary
 
-Technical founder who builds with Claude Code every day. I run fleets of AI agents — dynamic swarms that write, check and ship real software under rules I designed, where a job counts as done only when an independent check passes on the real thing. I have put agents to work inside a real company (RHL, a furniture importer) and run a live trading house where every strategy earns its place on measured results. Built all of this while working as a furniture installer. 1,200+ GitHub contributions in the last year; 4,000+ automated tests across five shipped systems.
+AI agent systems engineer and technical founder with a year in agentic systems and harness engineering, beginning while finishing high school. I work across several harnesses instead of just one: OpenCode/DeepSeek Harness, Claude Desktop and Duet, Gemini Antigravity, Freebuff, ChatGPT Codex and Claude Code — routing work by available usage and fit; the current centre is Muse, Claude Duet and the DSH Fleet I am finishing. Three systems define the work: Ergon (self-configuring employee agents), the DSH Fleet (distributed, self-improving dynamic-swarm orchestration) and OpenBell (tiny models built and evaluated in weight space). 1,200+ GitHub contributions in the last year; 4,000+ automated tests across five shipped systems.
 
 ## Experience
 
 ### Founder - Independent AI Agent Systems | Oct 2025–present
 
-Created Ergon, piloted inside RHL; built and run the DSH Fleet harness and OpenBell, a live automated trading house. Harness changes ship only when a fresh checker measures them beating the current version on a fixed scorecard.
+Architected Ergon, the DSH Fleet and OpenBell: self-configuring agents, dynamic-swarm infrastructure, weight-space model evaluation.
 
 ## Selected Projects
 
-### Ergon - Personal AI Agents for Companies
+### Ergon - Self-Configuring Employee Agents & Autonomous Role Learning
 
 Node.js, C#, Python, SQLite
 
 [Ergon case study](https://cayleb-james2008.github.io/agentic-resume/projects/ergon.html)
 
-- Self-configuring, autonomous role-learning agent: after install it observes the employee's recurring work, proactively asks targeted questions, builds its own model of the role, and iteratively proposes, builds and vets capabilities — the deployer does not manually monitor, adapt, configure or pre-map the employee's job. One personal AI agent per employee, built around each company's own tools, with human approval gates and undo on anything that matters.
+- Core loop: install, observe recurring work and tools, ask targeted questions, build a persistent role/task model, propose and build a capability, evaluate and review, earn the grant. Personalisation is a harness primitive: per-employee memory, persona, skills and tools evolve with the job.
 
-- Piloted inside a real company: the warehouse operations board built for RHL runs on-site in daily use. Signed Windows installer and taskbar app; ticket-scoped remote repair and connectors to existing company apps. 622 automated tests pass.
+- Proven skills enter a shared library others earn through the same gate; permissions stay reversible.
 
-### DSH Fleet Harness - Multi-Agent Orchestration & Verification
+- Standalone product in development: signed Windows installer and taskbar app, demo connectors and ticket-scoped remote repair. RHL: a proposed first deployment — planned, not implemented. 622 tests pass.
+
+### DSH Fleet - Distributed, Self-Improving Agent Infrastructure
 
 Python, TypeScript
 
-[github.com/cayleb-james2008/dsh-fleet-genesis](https://github.com/cayleb-james2008/dsh-fleet-genesis)
+[DSH Fleet case study](https://cayleb-james2008.github.io/agentic-resume/projects/dsh-fleet.html)
 
-- Ticket-driven harness with no standing bench: each ticket or goal spins up a dynamic swarm shaped to the task — it decomposes the goal, spawns its own sub-agents, does research, authors or reuses skills, verifies the work and dissolves.
+- Agent control plane spanning desktop, Windows VM, phone VM and browser surfaces. Slack is the open coordination layer: my agents and bring-your-own external agents share one ticket/context/outcome protocol. A lead forms a task-shaped swarm per objective — no standing bench — dissolving after one auditable outcome.
 
-- Distributed, recursively self-improving infrastructure: swarms revise the fleet's own workflows, plugin behaviour, Omni Loop and skill library from measured job outcomes. It spans desktop, Windows VM, phone VM and browser execution surfaces, with Slack as its bring-your-own-agent coordination layer for outside agents. Guided by a harness-engineering research base, with human approval gates and a self-improvement loop gated by measured results. In active development.
+- The Omni Loop — my recursive self-improvement architecture — is every swarm's iteration engine (attempt, measure, rewrite; 3 iterations max per approach, then wiped and replaced) and is applied to itself after every ticket, gated: a candidate ships only on a fresh checker's measured win on a fixed scorecard (checker-pass rate, cost per checker-passed task, frozen regression set); any regression rejects it; improvements are versioned, reversible; it never edits its own gates.
 
-### OpenBell - Live Trading House: Slot Method & Weight-Space Models
+- Ladder inside every swarm: harness preferences first; where none covers an area, a skill created or updated within the last 30 days is sourced before acting; raw model knowledge last; reusable work packaged back into skills. Design is guided by multi-agent research (Anthropic/OpenAI systems work, MAST failure taxonomy, Elephant-Goldfish spec review, good-views verification, cost-per-passed-task) — guidance, not a cage. The fleet has caught its own swarms filing false 'done' reports, each found by re-checking the primary source.
+
+### OpenBell - Weight-Space Training & Evaluation for Trading Models
 
 Python, Rust
 
 [OpenBell case study](https://cayleb-james2008.github.io/agentic-resume/projects/openbell.html)
 
-- Weight-space programme: instead of training black-box models, I directly construct and author tiny model weights (linear specialists), freeze the prediction in writing before scoring, and evaluate under strict chronological, cost-aware, kill-gated evidence rules — no money test until the training win rate clears the breakeven for its exit shape. Conventional distillation failed on both test instruments; the hand-authored weights passed, and the best configuration was net-positive on historical data.
+- Direct weight-space construction: low-dimensional weights for tiny specialist models, not prompted strategies. Weights and predictions are frozen before scoring: inspectable, falsifiable.
 
-- All of my trading and finance work under one house: Kalshi prediction markets, a futures desk and a meme-coin desk — the controlled proving ground for the weight-space work, run on one architecture of parallel strategy slots splitting the equity evenly, each slot iterating on measured results and getting wiped and replaced when it fails. Live desks run small real capital with reconciled accounting and pre-registered kill conditions.
+- Evaluation is deliberately adversarial: chronological splits, transaction costs, negative results retained, pre-registered kill rules, no money test until training clears the exit-geometry breakeven. Conventional distillation failed on both benchmark instruments; directly authored weights produced the strongest results, including one Nasdaq configuration net-positive on historical data.
+
+- Kalshi, futures and meme desks provide live, capital-isolated proving grounds: parallel slots and 2x ladder runs under reconciled real-market accounting, one experiment never contaminating another.
 
 ### Sophos - Coding-Agent Desktop App
 
@@ -54,7 +60,7 @@ React, TypeScript, Tauri
 
 [github.com/cayleb-james2008/sophos](https://github.com/cayleb-james2008/sophos)
 
-- Desktop app that runs coding agents from saved profiles, with sessions and transcripts that survive restarts and clear errors when a provider fails.
+- Coding-agent desktop app from saved profiles; sessions and transcripts survive restarts.
 
 - 1,224 interface tests, 82 Node tests and 56/56 Windows checks pass; merged after full hosted CI.
 
@@ -64,7 +70,7 @@ Rust, Tauri, JavaScript, SQLite
 
 [github.com/cayleb-james2008/dotz](https://github.com/cayleb-james2008/dotz)
 
-- Desktop app that runs and supervises AI coding agents, with model choice and safe process-tree cleanup.
+- Desktop app running and supervising AI coding agents: model choice, safe process-tree cleanup.
 
 - 828+ core tests pass on each of Windows, macOS and Linux; all 6 hosted check jobs pass; merged.
 
@@ -74,7 +80,7 @@ Rust
 
 [Asmodeus case study](https://cayleb-james2008.github.io/agentic-resume/projects/asmodeus.html)
 
-- Tests trading ideas on real historical data in strict time order, with fees and safeguards against peeking at future data; rejected ideas are logged, not quietly dropped. 1,111 Rust tests pass. Research only — no real money.
+- Tests trading ideas on historical data in strict time order, with fees and safeguards against peeking ahead; rejected ideas are logged. 1,111 Rust tests pass. Research only — no real money.
 
 ### Industry AI Suite - Source-Checked Review Tools
 
@@ -82,19 +88,19 @@ Python
 
 [github.com/cayleb-james2008/industry-ai-suite](https://github.com/cayleb-james2008/industry-ai-suite) | [Review history implementation](https://github.com/cayleb-james2008/industry-ai-suite/pull/6)
 
-- Ten local tools that review finance, research, security and operations files; every finding shows its source and a person decides. Drafts halt when sources are missing. 382 Python tests pass.
+- Ten review tools; every finding shows its source and a person decides. 382 Python tests pass.
 
 ## Skills
 
-AI & agents: Claude Code (daily, primary tool), LLM agents, multi-agent orchestration, evaluation and verification design, human approval gates, adversarial testing of agent output
+AI & agents: Multi-harness agent operations (OpenCode/DeepSeek Harness, Claude Desktop and Duet, Gemini Antigravity, Freebuff, ChatGPT Codex, Claude Code), autonomous role learning, dynamic-swarm orchestration, recursive self-improvement systems (the Omni Loop), evaluation design, earned permissions and approval gates
 
 Languages: Python, TypeScript, JavaScript, Rust, HTML/CSS
 
-Apps & data: React, Tauri, SQLite, web APIs, Git/GitHub, Linux
+Models & data: Weight-space model construction, linear/LDA specialists, chronological backtesting, experiment design, React, Tauri, SQLite, web APIs, Git/GitHub, Linux
 
 ## Additional Experience
 
-Robert H. Lord Company — Installer & AI Integration | Sep 2026–present
+Robert H. Lord Company (RHL) — AI Concept Discussion & Warehouse-Board Demo | Sep 2026–present
 
 David Cooke Plaster Co. — Plaster Work | Summer 2026
 

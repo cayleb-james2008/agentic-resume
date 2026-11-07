@@ -1,6 +1,6 @@
 # Cayleb Alvarez-James
 
-AI Agent Systems Engineer — Claude Code & Coding-Agent Tooling
+AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure
 
 Middletown, Connecticut, USA | caylebalvarezjames@gmail.com
 
@@ -8,27 +8,27 @@ Middletown, Connecticut, USA | caylebalvarezjames@gmail.com
 
 ## Summary
 
-Technical founder who builds with Claude Code every day. I run fleets of AI agents — dynamic swarms that write, check and ship real software under rules I designed, where a job counts as done only when an independent check passes on the real thing. I have put agents to work inside a real company (RHL, a furniture importer) and run a live trading house where every strategy earns its place on measured results. Built all of this while working as a furniture installer. 1,200+ GitHub contributions in the last year; 4,000+ automated tests across five shipped systems.
+AI agent systems engineer and technical founder with a year in agentic systems and harness engineering, beginning while finishing high school. I work across several harnesses instead of just one: OpenCode/DeepSeek Harness, Claude Desktop and Duet, Gemini Antigravity, Freebuff, ChatGPT Codex and Claude Code — routing work by available usage and fit; the current centre is Muse, Claude Duet and the DSH Fleet I am finishing. Three systems define the work: Ergon (self-configuring employee agents), the DSH Fleet (distributed, self-improving dynamic-swarm orchestration) and OpenBell (tiny models built and evaluated in weight space). 1,200+ GitHub contributions in the last year; 4,000+ automated tests across five shipped systems.
 
 ## Experience
 
 ### Founder - Independent AI Agent Systems | Oct 2025–present
 
-Created Ergon, piloted inside RHL; built and run the DSH Fleet harness and OpenBell, a live automated trading house. Harness changes ship only when a fresh checker measures them beating the current version on a fixed scorecard.
+Architected Ergon, the DSH Fleet and OpenBell: self-configuring agents, dynamic-swarm infrastructure, weight-space model evaluation.
 
 ## Selected Projects
 
 ### Ergon (Node.js, C#, Python, SQLite)
 
-- Self-configuring agent that learns each employee's role on its own. Piloted at RHL; 622 tests pass.
+- Self-configuring agent that learns each employee's role on its own. In development; 622 tests pass.
 
 ### DSH Fleet (Python, TypeScript)
 
-- Distributed, self-improving agent infrastructure of dynamic swarms. In active development.
+- Distributed, self-improving infrastructure: dynamic swarms plus the Omni Loop.
 
 ### OpenBell (Python, Rust)
 
-- Built on weight-space training: hand-authored tiny specialist models, strict evidence rules.
+- Weight-space training: directly authored tiny specialist models, frozen before scoring.
 
 ### Sophos (React, TypeScript, Tauri)
 
@@ -48,13 +48,13 @@ Created Ergon, piloted inside RHL; built and run the DSH Fleet harness and OpenB
 
 ## Skills
 
-Claude Code · LLM agents · multi-agent orchestration · evaluation design
+Multi-harness agent operations · dynamic-swarm orchestration · the Omni Loop
 
-Python · TypeScript · JavaScript · Rust · React · Tauri · SQLite · Git/GitHub · Linux
+Python · TypeScript · JavaScript · Rust · weight-space models · React · Tauri · SQLite
 
 ## Additional Experience
 
-Robert H. Lord Company — Installer & AI Integration | Sep 2026–present
+Robert H. Lord Company (RHL) — AI Concept Discussion & Warehouse-Board Demo | Sep 2026–present
 
 David Cooke Plaster Co. — Plaster Work | Summer 2026
 

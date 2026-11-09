@@ -240,11 +240,15 @@ body.project-page .project-aside__more a { display: inline-flex; align-items: ce
 
 /* --- 5. the record body: one column, like the staged build ---------------- */
 body.project-page .project-layout {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 19rem;
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: start;
   width: 100%;
-  padding-top: clamp(28px, 3.4vw, 40px);
+  padding-top: clamp(20px, 2.6vw, 32px);
   padding-bottom: clamp(40px, 5vw, 64px);
 }
+body.project-page .project-aside { position: sticky; top: 24px; }
 body.project-page .project-content { display: block; max-width: none; }
 
 /* the contents index: the staged build's inline mono index, real anchor links */
@@ -273,7 +277,8 @@ body.project-page .project-content { display: block; max-width: none; }
 }
 
 /* --- 6. the visual-first band: the figure plates --------------------------- */
-.project-figures { margin: var(--rj-space-4) 0 var(--rj-space-5); }
+.project-top { position: relative; }
+.project-figures { margin: var(--rj-space-3) 0 var(--rj-space-5); }
 .vis-kicker {
   margin: 0 0 var(--rj-space-2);
   font-family: var(--font-mono);
@@ -329,7 +334,10 @@ body.project-page .project-content { display: block; max-width: none; }
   overflow-wrap: anywhere;
 }
 .viz__media { position: relative; display: flex; align-items: center; justify-content: center; border-bottom: var(--rj-hairline) solid var(--rj-line); background: var(--rj-well); }
-.viz__media img { display: block; width: 100%; height: auto; max-height: 620px; object-fit: contain; background: var(--rj-well); }
+.viz__head--shot { padding: var(--rj-space-2) var(--rj-space-3); border-bottom: var(--rj-hairline) solid var(--rj-line); }
+.viz__media img { display: block; width: 100%; height: auto; max-height: 860px; object-fit: contain; background: var(--rj-well); }
+.viz__action { margin-top: 6px; }
+.viz__open { white-space: nowrap; font-family: var(--font-mono); font-size: 0.75rem; }
 .viz__live {
   position: absolute;
   left: 10px;
@@ -361,25 +369,25 @@ body.project-page .project-content { display: block; max-width: none; }
 .flow__node {
   position: absolute;
   left: 0;
-  top: -4px;
-  width: 9px;
-  height: 9px;
+  top: -11px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
   border: 1px solid var(--rj-action);
   border-radius: 50%;
   background: var(--rj-ground);
 }
-.flow__step:last-child .flow__node { background: var(--rj-action); }
 /* the Ticket 091 gate cue: a sage ring and the word, never colour alone */
 .flow__step--gate .flow__node { box-shadow: 0 0 0 3px var(--rj-ground), 0 0 0 4px var(--rj-state-line); background: var(--rj-ground); }
-.flow__step--gate.flow__step:last-child .flow__node { background: var(--rj-action); }
 .flow__tag { display: inline-block; margin-left: 4px; padding: 0 5px; border: 1px solid var(--rj-state-line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; line-height: 1.5; color: var(--rj-ink-muted); vertical-align: 1px; }
 .flow__num {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   line-height: 1;
   color: var(--rj-ink-faint);
-  margin-bottom: 6px;
+  margin: 0;
 }
 .flow__label { display: block; font-size: 0.84rem; font-weight: 500; line-height: 1.35; color: var(--rj-ink); }
 .flow__detail { display: block; margin-top: 5px; font-size: 0.78rem; line-height: 1.5; color: var(--rj-ink-muted); }
@@ -392,7 +400,7 @@ body.project-page .project-content { display: block; max-width: none; }
 .chart-table { margin: 0; }
 
 /* --- 9. the prose sections, under the visuals ----------------------------- */
-.project-prose { display: block; max-width: 920px; margin-inline: auto; }
+.project-prose { display: block; max-width: none; margin-inline: 0; }
 .project-prose > section {
   display: grid;
   grid-template-columns: 9.4rem minmax(0, 1fr);
@@ -412,7 +420,7 @@ body.project-page .project-content { display: block; max-width: none; }
   color: var(--rj-ink-faint);
 }
 .project-prose__body { min-width: 0; }
-.project-prose__body p { max-width: 62ch; color: var(--rj-ink-muted); line-height: 1.62; }
+.project-prose__body p { max-width: 78ch; color: var(--rj-ink-muted); line-height: 1.62; }
 .project-prose__body p + p { margin-top: 10px; }
 .project-prose__body strong { color: var(--rj-ink); font-weight: 500; }
 .project-prose__body code {
@@ -425,7 +433,7 @@ body.project-page .project-content { display: block; max-width: none; }
   overflow-wrap: anywhere;
 }
 .project-prose__body ul { margin: 10px 0 0; }
-.project-prose__body li { position: relative; padding-left: 16px; margin-bottom: 7px; max-width: 62ch; color: var(--rj-ink-muted); font-size: 0.9rem; line-height: 1.6; }
+.project-prose__body li { position: relative; padding-left: 16px; margin-bottom: 7px; max-width: 78ch; color: var(--rj-ink-muted); font-size: 0.9rem; line-height: 1.6; }
 .project-prose__body li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 6px; height: 1px; background: var(--rj-line-strong); }
 .project-prose__body a { text-decoration: underline; }
 
@@ -457,14 +465,26 @@ body.project-page .project-content { display: block; max-width: none; }
 @media (max-width: 899px) {
   body.project-page .project-hero { grid-template-columns: minmax(0, 1fr); gap: var(--rj-space-4); }
   body.project-page .case-hero__title { font-size: clamp(2.1rem, 9.4vw, 2.9rem); }
-  body.project-page .project-aside { margin-top: var(--rj-space-1); }
-  body.project-page .project-layout { padding-top: 24px; }
+  body.project-page .project-aside { margin-top: var(--rj-space-1); position: static; }
+  body.project-page .project-layout { grid-template-columns: minmax(0, 1fr); padding-top: 24px; }
 }
 @media (max-width: 639px) {
-  .project-index { flex-wrap: wrap; overflow: visible; gap: 0; }
-  .project-index a { white-space: nowrap; min-height: 40px; }
+  /* the visual still leads the phone screen; the index is one swipeable line above it */
+  body.project-page .project-top { display: flex; flex-direction: column; }
+  body.project-page .project-figures { margin-top: 2px; }
+  .project-index { flex-wrap: wrap; overflow: visible; gap: 0 14px; font-size: 0.75rem; padding: 8px 0 4px; }
+  .project-index a { white-space: nowrap; min-height: 30px; }
+  .project-index a:not(:last-child)::after { content: none; }
+  body.project-page .case-hero__meta { display: none; }
+  body.project-page .project-verdict-note { display: none; }
   body.project-page { --gutter: 18px; }
-  body.project-page .project-hero { padding-top: 28px; }
+  body.project-page .project-hero { padding-top: 18px; padding-bottom: 16px; }
+  body.project-page .case-hero__title { margin-bottom: 8px; }
+  body.project-page .case-hero__out { font-size: 0.94rem; }
+  body.project-page .project-status { margin-top: 12px; }
+  .vis-kicker { margin-bottom: 6px; }
+  .viz__body { padding: 12px 14px 8px; }
+  .flow { margin-top: 10px; }
   body.project-page .case-hero__out { font-size: 0.98rem; }
   body.project-page .sub-masthead nav a { padding: 0 9px; }
   body.project-page .sub-ask { min-height: 40px; width: 40px; padding: 0; justify-content: center; }
@@ -474,24 +494,23 @@ body.project-page .project-content { display: block; max-width: none; }
   .flow { grid-template-columns: minmax(0, 1fr); }
   .flow__step {
     display: grid;
-    grid-template-columns: 10px minmax(0, 1fr);
-    column-gap: var(--rj-space-2);
-    padding: 0 0 0 0;
+    grid-template-columns: 22px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 0;
   }
   .flow__rail {
     grid-column: 1;
-    grid-row: 1 / span 4;
+    grid-row: 1 / span 3;
     width: 1px;
     height: auto;
-    margin: 6px 0 0 4px;
+    margin: 11px 0 0 11px;
     background: var(--rj-line-strong);
   }
   .flow__step:last-child .flow__rail { background: transparent; }
-  .flow__node { position: absolute; left: 0; top: 4px; }
-  .flow__num, .flow__label, .flow__detail { grid-column: 2; }
-  .flow__num { grid-row: 1; margin-bottom: 2px; }
-  .flow__label { grid-row: 2; }
-  .flow__detail { grid-row: 3; margin-top: 2px; }
+  .flow__node { position: absolute; left: -11px; top: 0; }
+  .flow__label, .flow__detail { grid-column: 2; }
+  .flow__label { grid-row: 1; }
+  .flow__detail { grid-row: 2; margin-top: 2px; }
   .flow__step + .flow__step { margin-top: var(--rj-space-3); }
 
   .project-prose > section { grid-template-columns: minmax(0, 1fr); gap: 6px; }

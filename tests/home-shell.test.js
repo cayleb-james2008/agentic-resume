@@ -8,7 +8,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf8');
 const css = Object.fromEntries(
   readdirSync(new URL('../site/css/', import.meta.url))
-    .filter((f) => f.endsWith('.css'))
+    .filter((f) => f.endsWith('.css') && !f.startsWith('project'))
     .map((f) => [f, read(`site/css/${f}`)]),
 );
 

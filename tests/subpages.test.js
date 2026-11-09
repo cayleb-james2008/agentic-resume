@@ -8,14 +8,14 @@ const projectPages = readdirSync(new URL('../projects/', import.meta.url)).filte
 const escape = (s) => s.replace(/&/g, '&amp;');
 
 test('the suite workflows and five featured projects have case pages', () => {
-  assert.equal(projectPages.length, 15);
+  assert.equal(projectPages.length, 17);
   for (const name of ['industry-ai-suite.html', 'dotz.html', 'sophos.html', 'ergon.html', 'asmodeus.html', 'ledgerbridge.html']) assert.ok(projectPages.includes(name), name);
 });
 
 test('every project page wears the new look and nothing from the old one', () => {
   for (const name of projectPages) {
     const page = read(`projects/${name}`);
-    for (const css of ['tokens', 'base', 'subpage']) assert.ok(page.includes(`href="../site/css/${css}.css"`), `${name} ${css}.css`);
+    for (const css of ['tokens', 'base', 'subpage', 'project-tokens', 'project']) assert.ok(page.includes(`href="../site/css/${css}.css"`), `${name} ${css}.css`);
     assert.doesNotMatch(page, /href="\.\.\/css\/|src="\.\.\/js\//, `${name} still loads the old styles or scripts`);
     assert.match(page, /<header class="sub-masthead">/, name);
     assert.match(page, /<a class="sub-wordmark" href="\.\.\/index\.html"/, name);
@@ -44,6 +44,31 @@ test('project pages keep the site\'s claim rules', () => {
     const text = read(`projects/${name}`).replace(/<[^>]+>/g, ' ');
     assert.doesNotMatch(text, /hedge fund|working workflows|10 working/i, name);
     if(name==='ergon.html')assert.match(text,/live checks|require live checks/);
+  }
+});
+
+test('every project page leads with the real visual layer and keeps the explanation underneath', () => {
+  for (const name of projectPages) {
+    const page = read(`projects/${name}`);
+    const main = page.match(/<main id="main">([\s\S]*?)<\/main>/)[1];
+    // The visual summary comes before the prose, and the prose is present underneath it.
+    const fig = main.indexOf('class="project-figures"');
+    const prose = main.indexOf('class="project-prose"');
+    assert.ok(fig > 0, `${name}: no at-a-glance figures`);
+    assert.ok(prose > fig, `${name}: explanation is not under the figures`);
+    // A how-it-works diagram is mandatory and is an authored figure, not a chart.
+    assert.match(main, /class="viz viz--flow"/, `${name}: no how-it-works figure`);
+    const steps = [...main.matchAll(/class="flow__step"/g)].length;
+    assert.ok(steps >= 3 && steps <= 5, `${name}: ${steps} flow steps (expected 3-5)`);
+    // Every number drawn in a chart is also stated in the page and in a screen-reader table.
+    const charts = [...main.matchAll(/class="chart-data">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    for (const chart of charts) {
+      assert.ok(chart.series.length >= 2, `${name}: a chart with fewer than two values`);
+      for (const s of chart.series) assert.ok(main.includes(`>${s.display}<`) || main.includes(s.display), `${name}: chart value ${s.display} is not stated`);
+      assert.match(main, /class="sr-only chart-table"/, `${name}: no accessible table for the chart`);
+    }
+    // The visuals read the shared dark layer's tokens, never a page-local colour.
+    assert.match(main, /Source:/, `${name}: a figure has no source line`);
   }
 });
 

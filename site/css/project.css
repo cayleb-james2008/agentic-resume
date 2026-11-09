@@ -1,0 +1,489 @@
+/* project.css — the dark project-page layer.
+   Reads the --rj-* token names from project-tokens.css only (one source of truth); the site's own
+   role tokens (--bg, --fg, --line, --accent, …) are re-pointed at them for body.project-page, so the
+   page shell that comes from base.css / subpage.css renders in the same dark language as the staged
+   résumé build without those shared files being edited. No colour literal below; the only px
+   literals are named in build/TOKEN-MAP.md with their reason. */
+
+/* --- 1. the site's roles, re-pointed on this surface ------------------------ */
+html:has(> body.project-page) { background: var(--rj-ground); }
+
+body.project-page {
+  --bg: var(--rj-ground);
+  --surface: var(--rj-panel);
+  --sunk: var(--rj-well);
+  --fg: var(--rj-ink);
+  --fg-2: var(--rj-ink-muted);
+  --line: var(--rj-line);
+  --line-strong: var(--rj-line-strong);
+  --accent: var(--rj-action);
+  --on-accent: var(--rj-on-action);
+  --accent-press: var(--rj-action-press);
+  --accent-wash: var(--rj-wash);
+  --ok: var(--rj-state);
+  --ok-wash: var(--rj-raise);
+  --warn: var(--rj-accent);
+  --warn-wash: var(--rj-wash);
+  --font: var(--font-sans);
+  --mono: var(--font-mono);
+  --radius: var(--rj-radius-panel);
+
+  /* chart colours handed to the real Recharts bundle at runtime (site/js/charts.js reads these) */
+  --chart-bar: var(--rj-action);
+  --chart-line: var(--rj-action);
+  --chart-grid: var(--rj-line);
+  --chart-axis: var(--rj-ink-faint);
+  --chart-readout: var(--rj-ink);
+  --chart-plate: var(--rj-raise);
+
+  color-scheme: dark;
+  background: var(--rj-ground);
+  color: var(--rj-ink);
+  font-family: var(--font-sans);
+  font-size: var(--rj-text-body);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.project-page ::selection { background: var(--rj-wash); color: var(--rj-ink); }
+body.project-page :focus-visible { outline: 2px solid var(--rj-accent); outline-offset: 3px; border-radius: 2px; }
+body.project-page a { color: var(--rj-accent); text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+
+/* The shell keeps the site's geometry; only its finish becomes the staged build's. */
+body.project-page .sub-masthead { border-bottom-color: var(--rj-line); }
+body.project-page .sub-masthead nav a { color: var(--rj-ink-muted); }
+body.project-page .sub-wordmark { color: var(--rj-ink); font-stretch: normal; letter-spacing: -0.022em; }
+body.project-page .wm-dot { color: var(--rj-accent); }
+
+/* The two shell controls take the staged build's action face: sand fill, ground ink, 6px control
+   radius, no pill. This is the component-feel transfer, not a page-level reinvention. */
+body.project-page .sub-ask,
+body.project-page .sub-resume {
+  border-radius: var(--rj-radius-control);
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-height: 40px;
+  transition: background-color var(--rj-motion-tap) var(--rj-ease), border-color var(--rj-motion-tap) var(--rj-ease);
+}
+body.project-page .sub-ask { border-color: var(--rj-line-strong); background: var(--rj-panel); color: var(--rj-ink); }
+body.project-page .sub-ask .icon { color: var(--rj-accent); }
+body.project-page .sub-resume { background: var(--rj-action); color: var(--rj-on-action); }
+body.project-page .sub-resume:active { background: var(--rj-action-press); }
+body.project-page .sub-footer { background: var(--rj-panel); border-top-color: var(--rj-line); color: var(--rj-ink-faint); }
+body.project-page .sub-footer a { color: var(--rj-ink-muted); }
+
+/* --- 2. the width: one measured record column ------------------------------ */
+body.project-page .wrap {
+  width: 100%;
+  max-width: calc(var(--shell) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+/* --- 3. the hero: the focal object, two-part like the staged masthead ------ */
+body.project-page .project-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(16rem, 1fr);
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+  padding: clamp(40px, 5.2vw, 64px) 0 clamp(28px, 3.4vw, 40px);
+  border-bottom: var(--rj-hairline) solid var(--rj-line);
+}
+body.project-page .project-hero__main { min-width: 0; }
+body.project-page .case-hero__meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--rj-ink-faint);
+  margin-bottom: 16px;
+}
+body.project-page .case-hero__title {
+  max-width: 18ch;
+  margin: 0 0 14px;
+  font-size: var(--rj-text-display);
+  font-weight: 600;
+  letter-spacing: -0.032em;
+  line-height: 1;
+  color: var(--rj-ink);
+  text-wrap: balance;
+}
+body.project-page .case-hero__out {
+  max-width: 44ch;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--rj-ink-muted);
+  text-wrap: pretty;
+}
+body.project-page .project-status { display: flex; flex-wrap: wrap; gap: var(--rj-space-1); margin-top: 22px; }
+body.project-page .project-status li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border: var(--rj-hairline) solid var(--rj-line);
+  border-radius: var(--rj-radius-control);
+  background: transparent;
+  color: var(--rj-ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+body.project-page .project-status .checked-dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rj-state);
+}
+
+/* --- 4. the evidence plate (the staged build's right-hand panel, copied) --- */
+body.project-page .project-aside {
+  display: block;
+  padding: var(--rj-space-3) var(--rj-space-3) var(--rj-space-2);
+  border: var(--rj-hairline) solid var(--rj-line);
+  border-radius: var(--rj-radius-panel);
+  background: var(--rj-panel);
+  align-self: start;
+}
+body.project-page .project-aside h2 {
+  margin: 0 0 var(--rj-space-2);
+  padding-bottom: var(--rj-space-2);
+  border-bottom: var(--rj-hairline) solid var(--rj-line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--rj-ink-faint);
+}
+body.project-page .repo-facts { margin: 0; }
+body.project-page .repo-facts__row {
+  display: grid;
+  grid-template-columns: 6.4rem minmax(0, 1fr);
+  gap: var(--rj-space-2);
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: var(--rj-hairline) solid var(--rj-line);
+}
+body.project-page .repo-facts__row:last-child { border-bottom: 0; }
+body.project-page .repo-facts dt {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--rj-ink-faint);
+}
+body.project-page .repo-facts dd {
+  margin: 0;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--rj-ink-muted);
+  overflow-wrap: anywhere;
+}
+body.project-page .repo-facts dd a { color: var(--rj-accent); }
+body.project-page .repo-facts dd b { font-weight: 400; color: var(--rj-ink); }
+body.project-page .project-aside__more {
+  margin-top: var(--rj-space-2);
+  padding-top: var(--rj-space-2);
+  border-top: var(--rj-hairline) solid var(--rj-line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+body.project-page .project-aside__more a { display: inline-flex; align-items: center; min-height: 32px; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: var(--rj-hairline) solid var(--rj-line-strong);
+  border-radius: var(--rj-radius-control);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--rj-ink);
+}
+.chip::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.chip--current { border-color: var(--rj-state-line); color: var(--rj-state); }
+.chip--changed { border-color: var(--rj-accent); color: var(--rj-accent); }
+.chip--retired { border-color: var(--rj-line-strong); color: var(--rj-ink-faint); }
+.chip--retired::before { display: none; }
+
+/* A retired page says so before it explains anything. */
+.project-retired {
+  margin: 0 0 var(--rj-space-5);
+  padding: var(--rj-space-3) var(--rj-space-4);
+  border: var(--rj-hairline) solid var(--rj-line-strong);
+  border-left: 2px solid var(--rj-ink-faint);
+  border-radius: var(--rj-radius-panel);
+  background: var(--rj-raise);
+}
+.project-retired b {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--rj-ink-muted);
+}
+.project-retired p { max-width: 68ch; color: var(--rj-ink-muted); font-size: 0.9rem; line-height: 1.55; }
+
+/* --- 5. the record body: one column, like the staged build ---------------- */
+body.project-page .project-layout {
+  display: block;
+  width: 100%;
+  padding-top: clamp(28px, 3.4vw, 40px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+body.project-page .project-content { display: block; max-width: none; }
+
+/* the contents index: the staged build's inline mono index, real anchor links */
+.project-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  padding: 10px 0;
+  border-bottom: var(--rj-hairline) solid var(--rj-line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--rj-ink-faint);
+}
+.project-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: var(--rj-ink-faint);
+  text-decoration: none;
+}
+
+/* --- 6. the visual-first band: the figure plates --------------------------- */
+.project-figures { margin: var(--rj-space-4) 0 var(--rj-space-5); }
+.vis-kicker {
+  margin: 0 0 var(--rj-space-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--rj-ink-faint);
+}
+.figure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--rj-space-3);
+  align-items: stretch;
+}
+.viz {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: var(--rj-hairline) solid var(--rj-line);
+  border-radius: var(--rj-radius-plate);
+  background: var(--rj-panel);
+  overflow: hidden;
+}
+.viz--flow { grid-column: 1 / -1; }
+.viz__body { padding: var(--rj-space-3) var(--rj-space-3) var(--rj-space-2); flex: 1; }
+.viz__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--rj-space-2);
+  padding-bottom: var(--rj-space-2);
+  border-bottom: var(--rj-hairline) solid var(--rj-line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--rj-ink-faint);
+}
+.viz__title { font-size: 0.86rem; font-weight: 500; color: var(--rj-ink); }
+.viz__note { font-family: var(--font-mono); font-size: 0.75rem; color: var(--rj-ink-faint); white-space: nowrap; }
+.viz__cap {
+  padding: var(--rj-space-2) var(--rj-space-3) var(--rj-space-3);
+  border-top: var(--rj-hairline) solid var(--rj-line);
+}
+.viz__caption { font-size: 0.82rem; line-height: 1.5; color: var(--rj-ink-muted); }
+.viz__source {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--rj-ink-faint);
+  overflow-wrap: anywhere;
+}
+.viz__media { position: relative; border-bottom: var(--rj-hairline) solid var(--rj-line); background: var(--rj-well); }
+.viz__media img { display: block; width: 100%; height: auto; }
+.viz__live {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border-radius: var(--rj-radius-control);
+  background: var(--rj-well);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--rj-ink-muted);
+}
+.viz__live::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--rj-state); }
+
+/* --- 7. the authored how-it-works flow ------------------------------------ */
+/* Not a chart: the product's own flow, authored. Numbers give the order, the spine gives the
+   direction, the last node is filled because it is the payoff. */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(var(--steps, 4), minmax(0, 1fr));
+  gap: 0;
+  margin: var(--rj-space-4) 0 var(--rj-space-2);
+}
+.flow__step { position: relative; min-width: 0; padding-right: var(--rj-space-3); }
+.flow__rail { position: relative; display: block; height: 1px; margin: 5px 0 var(--rj-space-2); background: var(--rj-line-strong); }
+.flow__step:last-child .flow__rail { background: transparent; }
+.flow__node {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--rj-action);
+  border-radius: 50%;
+  background: var(--rj-ground);
+}
+.flow__step:last-child .flow__node { background: var(--rj-action); }
+.flow__num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--rj-ink-faint);
+  margin-bottom: 6px;
+}
+.flow__label { display: block; font-size: 0.84rem; font-weight: 500; line-height: 1.35; color: var(--rj-ink); }
+.flow__detail { display: block; margin-top: 5px; font-size: 0.78rem; line-height: 1.5; color: var(--rj-ink-muted); }
+
+/* --- 8. the chart plate ---------------------------------------------------- */
+.viz--chart .viz__body { padding-bottom: var(--rj-space-3); }
+.chart { width: 100%; height: 232px; }
+.chart svg { display: block; overflow: visible; }
+.chart:empty { background: linear-gradient(var(--rj-raise), var(--rj-raise)); }
+.chart-table { margin: 0; }
+
+/* --- 9. the prose sections, under the visuals ----------------------------- */
+.project-prose { display: block; }
+.project-prose > section {
+  display: grid;
+  grid-template-columns: 9.4rem minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+  padding: var(--rj-space-3) 0;
+  border-top: var(--rj-hairline) solid var(--rj-line);
+}
+.project-prose > section:first-child { border-top: 0; }
+.project-prose h2 {
+  margin: 0;
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: var(--rj-ink-faint);
+}
+.project-prose__body { min-width: 0; }
+.project-prose__body p { max-width: 62ch; color: var(--rj-ink-muted); line-height: 1.62; }
+.project-prose__body p + p { margin-top: 10px; }
+.project-prose__body strong { color: var(--rj-ink); font-weight: 500; }
+.project-prose__body code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  padding: 0.08em 0.36em;
+  border-radius: 4px;
+  background: var(--rj-raise);
+  color: var(--rj-ink);
+  overflow-wrap: anywhere;
+}
+.project-prose__body ul { margin: 10px 0 0; }
+.project-prose__body li { position: relative; padding-left: 16px; margin-bottom: 7px; max-width: 62ch; color: var(--rj-ink-muted); font-size: 0.9rem; line-height: 1.6; }
+.project-prose__body li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 6px; height: 1px; background: var(--rj-line-strong); }
+.project-prose__body a { text-decoration: underline; }
+
+/* the honest boundaries, at the end of the record */
+.project-limits { margin-top: var(--rj-space-4); padding: var(--rj-space-3) var(--rj-space-4); border: var(--rj-hairline) solid var(--rj-line); border-radius: var(--rj-radius-panel); background: var(--rj-well); }
+.project-limits h2 { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.02em; color: var(--rj-ink-faint); margin-bottom: var(--rj-space-2); }
+.project-limits ul { display: grid; gap: 6px; }
+.project-limits li { position: relative; padding-left: 14px; font-size: 0.82rem; line-height: 1.55; color: var(--rj-ink-muted); }
+.project-limits li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 5px; height: 1px; background: var(--rj-line-strong); }
+.project-limits b { font-weight: 400; color: var(--rj-ink); }
+
+/* --- 10. entrance: one settle, never a loop, off under reduced motion ----- */
+@media (prefers-reduced-motion: no-preference) {
+  .viz, .project-prose > section {
+    animation: record-enter var(--rj-motion-enter) var(--rj-ease) both;
+  }
+  .viz--flow { animation-delay: 40ms; }
+  .viz--chart { animation-delay: 80ms; }
+  .viz--shot { animation-delay: 120ms; }
+}
+@keyframes record-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* --- 11. the phone: one column, nothing clipped -------------------------- */
+@media (max-width: 899px) {
+  body.project-page .project-hero { grid-template-columns: minmax(0, 1fr); gap: var(--rj-space-4); }
+  body.project-page .case-hero__title { font-size: clamp(2.1rem, 9.4vw, 2.9rem); }
+  body.project-page .project-aside { margin-top: var(--rj-space-1); }
+  body.project-page .project-layout { padding-top: 24px; }
+}
+@media (max-width: 639px) {
+  body.project-page { --gutter: 18px; }
+  body.project-page .project-hero { padding-top: 28px; }
+  body.project-page .case-hero__out { font-size: 0.98rem; }
+  body.project-page .sub-masthead nav a { padding: 0 9px; }
+  body.project-page .sub-ask { min-height: 40px; width: 40px; padding: 0; justify-content: center; }
+  body.project-page .sub-resume { padding: 0 12px; }
+
+  /* the authored flow turns on its side: a vertical spine, not a squeezed row */
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .flow__step {
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1fr);
+    column-gap: var(--rj-space-2);
+    padding: 0 0 0 0;
+  }
+  .flow__rail {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    width: 1px;
+    height: auto;
+    margin: 6px 0 0 4px;
+    background: var(--rj-line-strong);
+  }
+  .flow__step:last-child .flow__rail { background: transparent; }
+  .flow__node { position: absolute; left: 0; top: 4px; }
+  .flow__num, .flow__label, .flow__detail { grid-column: 2; }
+  .flow__num { grid-row: 1; margin-bottom: 2px; }
+  .flow__label { grid-row: 2; }
+  .flow__detail { grid-row: 3; margin-top: 2px; }
+  .flow__step + .flow__step { margin-top: var(--rj-space-3); }
+
+  .project-prose > section { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .project-prose h2 { padding-top: 0; }
+  .chart { height: 196px; }
+  .viz__head { flex-wrap: wrap; }
+}
+
+/* --- 12. hoverable affordances only where a fine pointer exists ----------- */
+@media (hover: hover) and (pointer: fine) {
+  body.project-page a:hover { text-decoration: underline; }
+  body.project-page .sub-masthead nav a:hover { color: var(--rj-ink); background: var(--rj-raise); }
+  body.project-page .sub-ask:hover { border-color: var(--rj-ink-muted); }
+  body.project-page .sub-resume:hover { background: var(--rj-action-hover); }
+  body.project-page .sub-footer a:hover { color: var(--rj-ink); }
+  .project-index a:hover { color: var(--rj-accent); }
+  .viz { transition: border-color var(--rj-motion-swap) var(--rj-ease); }
+  .viz:hover { border-color: var(--rj-line-strong); }
+}

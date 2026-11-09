@@ -8,6 +8,9 @@ const read = (file) => readFileSync(new URL('../' + file, import.meta.url), 'utf
 const strip = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '');
 const tokensCss = strip(read('site/css/tokens.css'));
 const sheets = [...readdirSync(new URL('../site/css/', import.meta.url)).filter((f) => f.endsWith('.css')).map((f) => `site/css/${f}`), 'lab/lab.css'];
+// The project-page layer is the staged build's documented design (Geist + its own dark tokens);
+// it is judged by its own token map and visual tests, while the homepage layer keeps Mona Sans.
+const homeSheets = sheets.filter((s) => !/site\/css\/project/.test(s));
 
 // --- Colour maths (WCAG 2.x) -------------------------------------------------
 const darkAt = tokensCss.indexOf('@media (prefers-color-scheme: dark)');
@@ -50,10 +53,14 @@ for (const [mode, tokens] of [['light', LIGHT], ['dark', DARK]]) {
   });
 }
 
-test('one family: Mona Sans, with the system monospace kept for code in the project pages', () => {
+test('one family per surface: Mona Sans on the homepage, Geist on the staged-build project pages', () => {
   assert.match(LIGHT['--font'], /^"Mona Sans"/);
   assert.match(LIGHT['--mono'], /^ui-monospace/);
-  for (const sheet of sheets) assert.doesNotMatch(read(sheet), /Onest|JetBrains|IBM Plex|Bricolage|--font-mono/, sheet);
+  for (const sheet of homeSheets) assert.doesNotMatch(read(sheet), /Onest|JetBrains|IBM Plex|Bricolage|--font-mono/, sheet);
+  // The project layer follows the staged résumé build's own documented family (Ticket 086/091).
+  const project = strip(read('site/css/project-tokens.css'));
+  assert.match(project, /--font-sans:\s*'Geist'/);
+  assert.match(project, /--font-mono:\s*'Geist Mono'/);
 });
 
 test('hover only where a mouse can hover', () => {

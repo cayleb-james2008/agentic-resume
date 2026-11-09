@@ -131,7 +131,12 @@ test('the record shows its figures as text, in the résumé\'s head', () => {
 test('scripts load nothing from another origin, and scroll and pointer listeners never block scrolling', async () => {
   const { readdirSync, statSync } = await import('node:fs');
   const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(`${dir}/${n}`).isDirectory() ? walk(`${dir}/${n}`) : [`${dir}/${n}`]));
-  const files = walk(new URL('../site/js', import.meta.url).pathname).filter((f) => f.endsWith('.js'));
+  // charts.js is a vendored third-party bundle (Recharts 3.10.1 + React 19.3.1); its licence
+  // headers name upstream URLs, so it is checked separately for network calls.
+  const files = walk(new URL('../site/js', import.meta.url).pathname).filter((f) => f.endsWith('.js') && !f.endsWith('/charts.js'));
+  const vendor = readFileSync(new URL('../site/js/charts.js', import.meta.url), 'utf8');
+  assert.match(vendor, /Recharts|recharts/, 'the vendored chart bundle names its library');
+  assert.doesNotMatch(vendor, /fetch\(|XMLHttpRequest|sendBeacon/, 'the vendored chart bundle makes no network calls');
   for (const file of files) {
     const js = readFileSync(file, 'utf8');
     // XML namespaces (the SVG one) are names, not requests.

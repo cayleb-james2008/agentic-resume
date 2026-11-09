@@ -1,0 +1,99 @@
+/* project-tokens.css — the shared dark token layer for the project pages.
+   Source: the staged résumé build (Ticket 086/091), m-0206/work/site-src/src/styles/tokens.css,
+   token-for-token. Raw values appear only here; every other rule in this surface reads a name.
+   Scoped to body.project-page so the rest of the site keeps its own look. Map: build/TOKEN-MAP.md. */
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../../assets/projects/fonts/Geist-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('../../assets/projects/fonts/Geist-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('../../assets/projects/fonts/Geist-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../../assets/projects/fonts/GeistMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../../assets/projects/fonts/GeistMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ground + surfaces */
+  --rj-ground: #100c0d;
+  --rj-well: #0c0909;
+  --rj-panel: #1c1615;
+  --rj-raise: #201a18;
+  --rj-wash: #221a16;
+
+  /* ink */
+  --rj-ink: #ede4d9;
+  --rj-ink-muted: #a79a8c;
+  --rj-ink-faint: #8c8073;
+
+  /* hairlines — 1px only; no shadow token exists */
+  --rj-line: #342b26;
+  --rj-line-strong: #4d3f36;
+
+  /* the action face */
+  --rj-action: #dab696;
+  --rj-on-action: #100c0d;
+  --rj-action-hover: #e3c6ac;
+  --rj-action-press: #cda382;
+
+  /* the sand at text weight */
+  --rj-accent: #dab696;
+
+  /* state — sage, state only */
+  --rj-state: #606456;
+  --rj-state-line: #606456;
+
+  --font-sans: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --rj-text-caption: 0.78rem;
+  --rj-text-body: 0.94rem;
+  --rj-text-head: 1.32rem;
+  --rj-text-display: clamp(2.35rem, 4.3vw, 3.35rem);
+
+  --rj-radius-control: 6px;
+  --rj-radius-panel: 8px;
+  --rj-radius-plate: 10px;
+
+  --rj-space-1: 8px;
+  --rj-space-2: 12px;
+  --rj-space-3: 16px;
+  --rj-space-4: 24px;
+  --rj-space-5: 32px;
+  --rj-space-6: 48px;
+
+  --rj-hairline: 1px;
+
+  --rj-motion-tap: 120ms;
+  --rj-motion-swap: 200ms;
+  --rj-motion-enter: 250ms;
+  --rj-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

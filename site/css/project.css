@@ -288,10 +288,8 @@ body.project-page .project-content { display: block; max-width: none; }
   gap: var(--rj-space-3);
   align-items: start;
 }
-/* two captures sit side by side, each half the band; one capture takes the whole band */
-.figure-grid:has(.viz--shot + .viz--shot) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.figure-grid:has(.viz--shot + .viz--shot) .viz--flow,
-.figure-grid:has(.viz--shot + .viz--shot) .viz--chart { grid-column: 1 / -1; }
+/* every figure takes the whole band; captures are evidence, not thumbnails */
+.figure-grid { grid-template-columns: minmax(0, 1fr); }
 .viz {
   margin: 0;
   display: flex;
@@ -331,7 +329,7 @@ body.project-page .project-content { display: block; max-width: none; }
   overflow-wrap: anywhere;
 }
 .viz__media { position: relative; display: flex; align-items: center; justify-content: center; border-bottom: var(--rj-hairline) solid var(--rj-line); background: var(--rj-well); }
-.viz__media img { display: block; width: 100%; height: auto; }
+.viz__media img { display: block; width: 100%; height: auto; max-height: 620px; object-fit: contain; background: var(--rj-well); }
 .viz__live {
   position: absolute;
   left: 10px;
@@ -371,6 +369,10 @@ body.project-page .project-content { display: block; max-width: none; }
   background: var(--rj-ground);
 }
 .flow__step:last-child .flow__node { background: var(--rj-action); }
+/* the Ticket 091 gate cue: a sage ring and the word, never colour alone */
+.flow__step--gate .flow__node { box-shadow: 0 0 0 3px var(--rj-ground), 0 0 0 4px var(--rj-state-line); background: var(--rj-ground); }
+.flow__step--gate.flow__step:last-child .flow__node { background: var(--rj-action); }
+.flow__tag { display: inline-block; margin-left: 4px; padding: 0 5px; border: 1px solid var(--rj-state-line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; line-height: 1.5; color: var(--rj-ink-muted); vertical-align: 1px; }
 .flow__num {
   display: block;
   font-family: var(--font-mono);
@@ -390,7 +392,7 @@ body.project-page .project-content { display: block; max-width: none; }
 .chart-table { margin: 0; }
 
 /* --- 9. the prose sections, under the visuals ----------------------------- */
-.project-prose { display: block; }
+.project-prose { display: block; max-width: 920px; margin-inline: auto; }
 .project-prose > section {
   display: grid;
   grid-template-columns: 9.4rem minmax(0, 1fr);
@@ -428,6 +430,8 @@ body.project-page .project-content { display: block; max-width: none; }
 .project-prose__body a { text-decoration: underline; }
 
 /* the honest boundaries, at the end of the record */
+.project-evidence { margin-top: var(--rj-space-4); }
+.project-evidence .project-aside { margin: 0; }
 .project-limits { margin-top: var(--rj-space-4); padding: var(--rj-space-3) var(--rj-space-4); border: var(--rj-hairline) solid var(--rj-line); border-radius: var(--rj-radius-panel); background: var(--rj-well); }
 .project-limits h2 { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.02em; color: var(--rj-ink-faint); margin-bottom: var(--rj-space-2); }
 .project-limits ul { display: grid; gap: 6px; }
@@ -457,8 +461,7 @@ body.project-page .project-content { display: block; max-width: none; }
   body.project-page .project-layout { padding-top: 24px; }
 }
 @media (max-width: 639px) {
-  .project-index { flex-wrap: nowrap; overflow-x: auto; gap: 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .project-index::-webkit-scrollbar { display: none; }
+  .project-index { flex-wrap: wrap; overflow: visible; gap: 0; }
   .project-index a { white-space: nowrap; min-height: 40px; }
   body.project-page { --gutter: 18px; }
   body.project-page .project-hero { padding-top: 28px; }
@@ -495,6 +498,9 @@ body.project-page .project-content { display: block; max-width: none; }
   .project-prose h2 { padding-top: 0; }
   .chart { height: 196px; }
   .viz__head { flex-wrap: wrap; }
+  .viz__media img { max-height: 420px; }
+  .project-figures { margin-top: 12px; }
+  .project-evidence { margin-top: 8px; }
 }
 
 /* --- 12. hoverable affordances only where a fine pointer exists ----------- */

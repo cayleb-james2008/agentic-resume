@@ -9,7 +9,7 @@ test('suite examples retain synthetic and unverified scope without production cl
  assert.doesNotMatch(home,/working workflows|10 working/i);
  assert.match(home,/recorded demos/i);
  assert.match(read('projects/industry-ai-suite.html'),/organization workflows remain UNVERIFIED/);
- assert.match(read('projects/ergon.html'),/Windows installation, enrollment, actual screen control/);
+ assert.match(read('projects/ergon.html'),/Windows installation, enrollment, reboot reconnection/);
  assert.match(read('projects/ergon.html'),/RHL is the proposed first deployment/);
  assert.match(read('projects/ergon.html'),/No Ergon deployment exists anywhere yet/);
  assert.match(read('projects/ergon.html'),/Outis, the former management layer, was retired on 1 November 2026/);

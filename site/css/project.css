@@ -129,6 +129,14 @@ body.project-page .project-status li {
   font-size: 0.75rem;
   line-height: 1.35;
 }
+.project-verdict-note {
+  max-width: 74ch;
+  margin: 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--rj-ink-faint);
+}
 body.project-page .project-status .checked-dot {
   flex: none;
   width: 6px;
@@ -243,19 +251,25 @@ body.project-page .project-content { display: block; max-width: none; }
 .project-index {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
+  gap: 4px 0;
   padding: 10px 0;
   border-bottom: var(--rj-hairline) solid var(--rj-line);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--rj-ink-faint);
 }
 .project-index a {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
-  color: var(--rj-ink-faint);
+  min-height: 32px;
+  color: var(--rj-ink-muted);
   text-decoration: none;
+}
+/* a real separator and a little air, so the index reads as a bar, not as prose */
+.project-index a:not(:last-child)::after {
+  content: "·";
+  margin: 0 12px;
+  color: var(--rj-line-strong);
 }
 
 /* --- 6. the visual-first band: the figure plates --------------------------- */
@@ -270,10 +284,14 @@ body.project-page .project-content { display: block; max-width: none; }
 }
 .figure-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--rj-space-3);
   align-items: start;
 }
+/* two captures sit side by side, each half the band; one capture takes the whole band */
+.figure-grid:has(.viz--shot + .viz--shot) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.figure-grid:has(.viz--shot + .viz--shot) .viz--flow,
+.figure-grid:has(.viz--shot + .viz--shot) .viz--chart { grid-column: 1 / -1; }
 .viz {
   margin: 0;
   display: flex;
@@ -284,9 +302,7 @@ body.project-page .project-content { display: block; max-width: none; }
   background: var(--rj-panel);
   overflow: hidden;
 }
-.viz--flow { grid-column: 1 / -1; }
-/* A chart alone has no plate beside it: let it use the full figure width. */
-.figure-grid:not(:has(.viz--shot)) .viz--chart { grid-column: 1 / -1; }
+.viz--flow { width: 100%; }
 .viz__body { padding: var(--rj-space-3) var(--rj-space-3) var(--rj-space-2); flex: 1; }
 .viz__head {
   display: flex;
@@ -314,7 +330,7 @@ body.project-page .project-content { display: block; max-width: none; }
   color: var(--rj-ink-faint);
   overflow-wrap: anywhere;
 }
-.viz__media { position: relative; border-bottom: var(--rj-hairline) solid var(--rj-line); background: var(--rj-well); }
+.viz__media { position: relative; display: flex; align-items: center; justify-content: center; border-bottom: var(--rj-hairline) solid var(--rj-line); background: var(--rj-well); }
 .viz__media img { display: block; width: 100%; height: auto; }
 .viz__live {
   position: absolute;
@@ -441,6 +457,9 @@ body.project-page .project-content { display: block; max-width: none; }
   body.project-page .project-layout { padding-top: 24px; }
 }
 @media (max-width: 639px) {
+  .project-index { flex-wrap: nowrap; overflow-x: auto; gap: 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .project-index::-webkit-scrollbar { display: none; }
+  .project-index a { white-space: nowrap; min-height: 40px; }
   body.project-page { --gutter: 18px; }
   body.project-page .project-hero { padding-top: 28px; }
   body.project-page .case-hero__out { font-size: 0.98rem; }

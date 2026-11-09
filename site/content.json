@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cayleb Alvarez-James · AI Agent Systems Engineer",
-    "description": "AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure. Technical founder: self-configuring agents, dynamic-swarm infrastructure, and weight-space trading research.",
+    "description": "AI Agent Systems Engineer — Autonomous Agents, Agent Harnesses & Self-Improving Infrastructure. Technical founder: a formula for company-wide personalised agents, ticket-driven agent fleets, and evidence-checked systems.",
     "resumePdf": "Cayleb-James-polished-resume.pdf",
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
@@ -730,7 +730,7 @@
       },
       {
         "q": "What has he built?",
-        "a": "Seven systems: Ergon (622 tests), the DSH Fleet (in active development), OpenBell (live trading desks), Sophos (1,224 checks), dotz (828+), Asmodeus (1,111) and the Industry AI Suite (382).",
+        "a": "Seven systems: Ergon (in development), the DSH Fleet (in development), OpenBell (two desks), Sophos (1,224 source tests), dotz (six hosted jobs), Asmodeus (1,111 tests) and the Industry AI Suite (382 tests).",
         "keywords": [
           "built",
           "projects",
@@ -800,7 +800,7 @@
       },
       {
         "q": "What does Cayleb do?",
-        "a": "Technical founder and AI agent systems engineer: self-configuring personal agents for companies, a distributed dynamic-swarm fleet, and a live trading house built on weight-space training.",
+        "a": "Technical founder and AI agent systems engineer: a formula for company-wide personalised agents (Ergon), a ticket-driven agent fleet (DSH Fleet), and evidence-checked trading research (OpenBell and Asmodeus).",
         "keywords": [
           "background",
           "overview",
@@ -992,7 +992,7 @@
       },
       {
         "q": "What's Asmodeus?",
-        "a": "A private research project that tests trading ideas on past market data. No real money, and no performance claims.",
+        "a": "A strategy research system that tests ideas on real past data and replays them on paper. Live capital needs an explicit operator switch, and no performance claims are made.",
         "keywords": [
           "asmodeus",
           "trading",
@@ -1029,7 +1029,7 @@
       },
       {
         "q": "Does he use AI to code?",
-        "a": "Yes — he works across many agent harnesses (OpenCode/DeepSeek Harness, Gemini Antigravity, Claude Code, Claude Desktop, Codex) and routes work by available usage and fit. dotz and Sophos run coding agents; the DSH Fleet routes work as tickets to dynamic swarms.",
+        "a": "Yes — he works across many agent harnesses (OpenCode/DeepSeek Harness, Gemini Antigravity, Claude Code, Claude Desktop, Codex) and routes work by available usage and fit. dotz and Sophos run coding agents; the DSH Fleet runs ticket-driven lanes with a fresh checker.",
         "keywords": [
           "coding",
           "ai to code",
@@ -1234,7 +1234,7 @@
       },
       {
         "q": "What's the DSH Fleet?",
-        "a": "Distributed, recursively self-improving agent infrastructure. Each ticket or goal spins up a dynamic swarm that decomposes, researches, verifies and dissolves — and swarms revise the fleet's own workflows from measured outcomes.",
+        "a": "A ticket-driven harness for AI agent teams. Lanes build the work, a separate checker grades the real artefact, and the board keeps the proof. The earlier dynamic-swarm shape is a named gap in the current tree, not a current feature.",
         "keywords": [
           "dsh",
           "fleet",
@@ -1258,15 +1258,13 @@
       },
       {
         "q": "What's OpenBell?",
-        "a": "His live trading house, built on weight-space training: hand-authoring tiny specialist models and judging them under strict evidence rules. The Kalshi, futures and meme desks are their proving ground — small real capital, reconciled books.",
+        "a": "One app with two trading desks and a game-style dashboard: an MES futures card desk on a FundedNext evaluation account in simulation, and a Solana meme desk. No performance claim is made.",
         "keywords": [
           "openbell",
           "trading",
-          "kalshi",
           "futures",
           "meme",
-          "slots",
-          "weight-space"
+          "slots"
         ],
         "sources": [
           {

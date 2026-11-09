@@ -309,6 +309,7 @@ body.project-page .project-content { display: block; max-width: none; }
 .viz__body { padding: var(--rj-space-3) var(--rj-space-3) var(--rj-space-2); flex: 1; }
 .viz__head {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: var(--rj-space-2);
@@ -318,8 +319,8 @@ body.project-page .project-content { display: block; max-width: none; }
   font-size: 0.75rem;
   color: var(--rj-ink-faint);
 }
-.viz__title { font-size: 0.86rem; font-weight: 500; color: var(--rj-ink); }
-.viz__note { font-family: var(--font-mono); font-size: 0.75rem; color: var(--rj-ink-faint); white-space: nowrap; }
+.viz__title { min-width: 0; font-size: 0.86rem; font-weight: 500; color: var(--rj-ink); }
+.viz__note { font-family: var(--font-mono); font-size: 0.75rem; color: var(--rj-ink-faint); text-align: right; white-space: normal; overflow-wrap: anywhere; }
 .viz__cap {
   padding: var(--rj-space-2) var(--rj-space-3) var(--rj-space-3);
   border-top: var(--rj-hairline) solid var(--rj-line);

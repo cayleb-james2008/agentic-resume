@@ -6,31 +6,27 @@
     "onePagePdf": "Cayleb-James-polished-one-page.pdf",
     "email": "caylebalvarezjames@gmail.com",
     "github": "https://github.com/cayleb-james2008",
-    "siteUrl": "https://cayleb-james2008.github.io/agentic-resume/",
+    "siteUrl": "https://cayleb-james2008.github.io/",
     "shareImage": "assets/og/card.png",
-    "shareAlt": "Share card: Cayleb.AJ, AI Agent Systems Engineer, with the headline Technical founder. AI agents, checked for real. and an Ask bar with suggested questions."
+    "shareAlt": "Share card: Cayleb Alvarez-James, AI Agent Systems Engineer."
   },
   "wordmark": "Cayleb.AJ",
   "nav": [
     {
-      "label": "Work",
-      "href": "#built"
-    },
-    {
-      "label": "Work with me",
-      "href": "#services"
-    },
-    {
-      "label": "Ergon",
-      "href": "#team"
-    },
-    {
       "label": "Résumé",
-      "href": "#resume"
+      "href": "#summary"
     },
     {
-      "label": "Contact",
-      "href": "#contact"
+      "label": "Experience",
+      "href": "#experience"
+    },
+    {
+      "label": "Projects",
+      "href": "#projects"
+    },
+    {
+      "label": "Live demos",
+      "href": "#live-demos"
     }
   ],
   "masthead": {

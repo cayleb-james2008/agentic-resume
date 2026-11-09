@@ -69,24 +69,22 @@
     "cards": [
       {
         "slug": "ergon",
-        "category": "AI agents · Windows",
+        "category": "AI agents · company formula",
         "title": "Ergon",
-        "text": "A self-configuring AI agent for every employee: it learns the role by observing the work, asking questions and building its own capabilities.",
+        "text": "A formula for company-wide personalised AI agents: a template and creation blueprints, with a separate private suite for each company.",
         "tags": [
-          "Signed installer",
-          "Remote repair",
-          "Approval gates"
+          "Formula",
+          "Per-company suite",
+          "Simulation runs"
         ],
-        "count": "622 tests",
+        "count": "In development",
         "href": "projects/ergon.html",
         "checks": [
-          "Signed installer",
-          "Live update feed",
-          "Your data kept on update",
-          "Connects to the apps you use",
-          "Repairs scoped to a ticket",
-          "Undo for every step",
-          "A person signs off"
+          "One formula, many suites",
+          "Separate repo per company",
+          "Staging-to-promotion check",
+          "RHL proposed, not deployed",
+          "No Ergon deployment yet"
         ],
         "status": true
       },
@@ -94,38 +92,38 @@
         "slug": "dsh-fleet",
         "category": "Multi-agent harness · Python, TypeScript",
         "title": "DSH Fleet",
-        "text": "Distributed, recursively self-improving agent infrastructure: dynamic swarms that revise the fleet's own workflows from measured outcomes.",
+        "text": "A ticket-driven harness for AI agent teams: lanes build the work, a separate checker grades the real artefact, and the board keeps the proof.",
         "tags": [
-          "Dynamic swarms",
           "Tickets",
-          "Research-guided"
+          "Fresh checker",
+          "Omni Loop"
         ],
         "count": "In development",
         "href": "projects/dsh-fleet.html",
         "checks": [
-          "Dynamic swarms",
-          "No standing bench",
-          "Approval gates",
-          "Measured improvement"
+          "Ticket-driven lanes",
+          "A fresh checker grades",
+          "Three-round cap",
+          "Dynamic-swarm shape is a gap"
         ]
       },
       {
         "slug": "openbell",
-        "category": "Trading house · Kalshi, futures, meme",
+        "category": "Trading house · MES futures, Solana meme",
         "title": "OpenBell",
-        "text": "A trading house built on weight-space training: hand-authored tiny specialist models, proven on live Kalshi, futures and meme desks.",
+        "text": "One app with two trading desks and a game-style dashboard: an MES futures card desk in evaluation simulation, and a Solana meme desk.",
         "tags": [
-          "Slot method",
-          "Weight-space",
-          "Live capital"
+          "MES futures",
+          "Solana meme",
+          "One dashboard"
         ],
-        "count": "Live desks",
+        "count": "2 desks",
         "href": "projects/openbell.html",
         "checks": [
-          "Three desks, one house",
-          "Slots wiped on failure",
-          "Predictions frozen first",
-          "Kill conditions set"
+          "Two desks, one app",
+          "Fixed risk rails",
+          "Three iterations per strategy",
+          "No performance claim"
         ]
       },
       {
@@ -137,7 +135,7 @@
           "TypeScript",
           "Tauri"
         ],
-        "count": "1,224 checks",
+        "count": "1,224 tests",
         "href": "projects/sophos.html",
         "code": "https://github.com/cayleb-james2008/sophos",
         "image": {
@@ -155,7 +153,7 @@
           "Tauri",
           "SQLite"
         ],
-        "count": "828+ tests",
+        "count": "6 hosted jobs",
         "href": "projects/dotz.html",
         "code": "https://github.com/cayleb-james2008/dotz",
         "image": {
@@ -167,7 +165,7 @@
         "slug": "asmodeus",
         "category": "Research tool · past data",
         "title": "Asmodeus",
-        "text": "A private research tool that tests trading ideas on real past market data, in strict time order, with no real money.",
+        "text": "A research tool that tests trading ideas on real past data and replays them on paper, with live money behind an explicit operator switch.",
         "tags": [
           "Rust",
           "Past data"
@@ -178,8 +176,8 @@
           "Strict time order",
           "No peeking ahead",
           "Fees included",
-          "No real money",
-          "Recovers from restarts"
+          "Paper by default",
+          "Live needs an operator switch"
         ]
       },
       {

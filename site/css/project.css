@@ -262,6 +262,15 @@ body.project-page .project-content { display: block; max-width: none; }
   font-size: 0.8125rem;
   color: var(--rj-ink-faint);
 }
+.project-index::before {
+  content: "On this page";
+  align-self: center;
+  margin-right: 12px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rj-ink-faint);
+}
 .project-index a {
   display: inline-flex;
   align-items: center;
@@ -338,11 +347,9 @@ body.project-page .project-content { display: block; max-width: none; }
 .viz__head--shot { padding: var(--rj-space-2) var(--rj-space-3); border-bottom: var(--rj-hairline) solid var(--rj-line); }
 .viz__media img { display: block; width: 100%; height: auto; max-height: 860px; object-fit: contain; background: var(--rj-well); }
 .viz__action { margin-top: 6px; }
+.viz__panhint { display: none; }
 .viz__open { white-space: nowrap; font-family: var(--font-mono); font-size: 0.75rem; }
 .viz__live {
-  position: absolute;
-  left: 10px;
-  top: 10px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -354,6 +361,7 @@ body.project-page .project-content { display: block; max-width: none; }
   color: var(--rj-ink-muted);
 }
 .viz__live::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--rj-state); }
+.viz__head--shot .viz__live { margin-right: auto; }
 
 /* --- 7. the authored how-it-works flow ------------------------------------ */
 /* Not a chart: the product's own flow, authored. Numbers give the order, the spine gives the
@@ -444,7 +452,7 @@ body.project-page .project-content { display: block; max-width: none; }
 .project-limits { margin-top: var(--rj-space-4); padding: var(--rj-space-3) var(--rj-space-4); border: var(--rj-hairline) solid var(--rj-line); border-radius: var(--rj-radius-panel); background: var(--rj-well); }
 .project-limits h2 { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.02em; color: var(--rj-ink-faint); margin-bottom: var(--rj-space-2); }
 .project-limits ul { display: grid; gap: 6px; }
-.project-limits li { position: relative; padding-left: 14px; font-size: 0.82rem; line-height: 1.55; color: var(--rj-ink-muted); }
+.project-limits li { position: relative; list-style: none; padding-left: 14px; font-size: 0.82rem; line-height: 1.55; color: var(--rj-ink-muted); }
 .project-limits li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 5px; height: 1px; background: var(--rj-line-strong); }
 .project-limits b { font-weight: 400; color: var(--rj-ink); }
 
@@ -473,8 +481,9 @@ body.project-page .project-content { display: block; max-width: none; }
   /* the visual still leads the phone screen; the index is one swipeable line above it */
   body.project-page .project-top { display: flex; flex-direction: column; }
   body.project-page .project-figures { margin-top: 2px; }
-  .project-index { flex-wrap: wrap; overflow: visible; gap: 0 14px; font-size: 0.75rem; padding: 8px 0 4px; }
-  .project-index a { white-space: nowrap; min-height: 30px; }
+  .project-index { flex-wrap: nowrap; overflow-x: auto; gap: 0 14px; font-size: 0.75rem; padding: 8px 0 4px; scrollbar-width: thin; }
+  .project-index::before { position: sticky; left: 0; flex: 0 0 auto; background: var(--rj-ground); }
+  .project-index a { flex: 0 0 auto; white-space: nowrap; min-height: 30px; }
   .project-index a:not(:last-child)::after { content: none; }
   body.project-page .case-hero__meta { display: none; }
   body.project-page .project-verdict-note { display: none; }
@@ -518,7 +527,9 @@ body.project-page .project-content { display: block; max-width: none; }
   .project-prose h2 { padding-top: 0; }
   .chart { height: 196px; }
   .viz__head { flex-wrap: wrap; }
-  .viz__media img { max-height: 420px; }
+  .viz__media { overflow: auto; max-height: 360px; align-items: flex-start; justify-content: flex-start; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .viz__media img { width: auto; max-width: none; max-height: none; height: auto; }
+  .viz__panhint { display: inline; font-family: var(--font-mono); font-size: 0.72rem; color: var(--rj-ink-faint); }
   .project-figures { margin-top: 12px; }
   .project-evidence { margin-top: 8px; }
 }

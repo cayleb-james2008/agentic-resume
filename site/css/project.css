@@ -91,6 +91,20 @@ body.project-page .project-hero {
   border-bottom: var(--rj-hairline) solid var(--rj-line);
 }
 body.project-page .project-hero__main { min-width: 0; }
+/* a way back to the list of project pages (UX review F1): a quiet mono link above the meta line, a 44px touch target */
+body.project-page .project-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0 0 4px -2px;
+  padding: 0 2px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--rj-ink-muted);
+  text-decoration: none;
+}
+body.project-page .project-back:focus-visible { outline: 2px solid var(--rj-accent); outline-offset: 2px; }
 body.project-page .case-hero__meta {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -485,10 +499,11 @@ body.project-page .project-content { display: block; max-width: none; }
   .project-index::before { position: sticky; left: 0; flex: 0 0 auto; background: var(--rj-ground); }
   .project-index a { flex: 0 0 auto; white-space: nowrap; min-height: 30px; }
   .project-index a:not(:last-child)::after { content: none; }
+  .project-index { padding-right: 36px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent); }
   body.project-page .case-hero__meta { display: none; }
   body.project-page .project-verdict-note { display: none; }
   body.project-page { --gutter: 18px; }
-  body.project-page .project-hero { padding-top: 18px; padding-bottom: 16px; }
+  body.project-page .project-hero { padding-top: 2px; padding-bottom: 16px; }
   body.project-page .case-hero__title { margin-bottom: 8px; }
   body.project-page .case-hero__out { font-size: 0.94rem; }
   body.project-page .project-status { margin-top: 12px; }
@@ -527,7 +542,7 @@ body.project-page .project-content { display: block; max-width: none; }
   .project-prose h2 { padding-top: 0; }
   .chart { height: 196px; }
   .viz__head { flex-wrap: wrap; }
-  .viz__media { overflow: auto; max-height: 360px; align-items: flex-start; justify-content: flex-start; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .viz__media { overflow: auto; max-height: 360px; align-items: flex-start; justify-content: flex-start; -webkit-overflow-scrolling: touch; overscroll-behavior: auto; }
   .viz__media img { width: auto; max-width: none; max-height: none; height: auto; }
   .viz__panhint { display: inline; font-family: var(--font-mono); font-size: 0.72rem; color: var(--rj-ink-faint); }
   .project-figures { margin-top: 12px; }
